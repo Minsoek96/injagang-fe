@@ -3,8 +3,8 @@ import React from "react";
 import ManualItems from "./ManualItems";
 
 import goodInterView from "@/public/assets/main.jpg";
-import interViewScreen from "@/public/assets/면접.png";
-import communityScreen from "@/public/assets/커뮤니티.png";
+import interViewScreen from "@/public/assets/interview.png";
+import communityScreen from "@/public/assets/commu.png";
 
 const manualData = [
   {
