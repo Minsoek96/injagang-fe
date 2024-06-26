@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = process.env.BACKEND_SERVER_API;
 export enum METHOD {
   GET = "get",
   POST = "post",
