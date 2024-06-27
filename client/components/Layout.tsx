@@ -13,6 +13,7 @@ import { Reset } from "styled-reset";
 
 import useThemeToggler from "@/hooks/useThemeToggler";
 import useToast from "@/hooks/useToast";
+import RQProvider from "@/services/RQprovider";
 
 const LayoutStyle = styled.div`
   display: flex;
@@ -58,7 +59,9 @@ const Layout = ({ children }: LayoutProps) => {
         <Sidebar>
           <NavBar toggleTheme={ChangeDarkMode} mode={isDarkMode} />
         </Sidebar>
-        <Content>{children}</Content>
+        <RQProvider>
+          <Content>{children}</Content>
+        </RQProvider>
       </LayoutStyle>
       <RenderToast />
     </ThemeProvider>
