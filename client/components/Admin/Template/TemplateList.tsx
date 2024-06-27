@@ -1,4 +1,3 @@
-import React, { Suspense } from "react";
 import styled from "styled-components";
 import { ColBox, StyleCard, MainTitleContainer } from "@/styles/GlobalStyle";
 import { v } from "@/styles/variables";

@@ -24,7 +24,7 @@ const BoardListLayout = () => {
     <BoardListViewStyle>
       <BoardListHead headItem={HEAD_ITEM} />
       <BoardList
-        boardInfos={boardInfos.reverse() ?? []}
+        boardInfos={boardInfos ?? []}
         idKey={ID_KEY}
         displayKeys={["id", "title", "nickname"]}
         route={ROUTE_TEMPLATE}

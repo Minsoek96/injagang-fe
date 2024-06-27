@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 
 import styled from "styled-components";
 
-import { useDispatch } from "react-redux";
-
 import CoverLetterDetail from "@/components/QNA/Question/CoverLetterDetail";
 import useCoverLetterManager from "@/components/CoverLetter/hooks/useCoverLetterManager";
 import ControlMenu from "@/components/UI/ControlMenu";
@@ -17,17 +15,18 @@ import {
   StyleInput as QuestionTitle,
   StyleTextArea,
 } from "@/styles/GlobalStyle";
+import { useWriteBoard } from "@/api/QnABoard/mutaions";
 
-import { writeBoard } from "@/components/redux/QnA/actions";
 
 const QuestionComposer = () => {
   const [coverLetterTitle, setCoverLetterTitle] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [essayId, setEssayId] = useState<number>(0);
-  const dispatch = useDispatch();
   const router = useRouter();
   const { essayList } = useCoverLetterManager();
+
+  const {mutate: writeBoard} = useWriteBoard();
 
   const navigateToList = () => router.push("/qna/list");
 
@@ -44,8 +43,8 @@ const QuestionComposer = () => {
       essayId,
     };
     //TOME :: QNA MANAGER 생성시 대처
-    dispatch(writeBoard(data));
-    // navigateToList();
+    writeBoard(data);
+    navigateToList();
   };
 
   return (

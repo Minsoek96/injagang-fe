@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios, { AxiosError } from "axios";
 import MockAdapter from "axios-mock-adapter";

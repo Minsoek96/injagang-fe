@@ -19,9 +19,7 @@ const PageNation = () => {
   } = usePageNation([totalPage, 8]);
 
   useEffect(() => {
-    //API가 오랜순 정렬
-    const revercePage = totalPage + 1 - curPageNum;
-    dispatchGetBoardList(revercePage, boardType, boardSearch);
+    dispatchGetBoardList(curPageNum, boardType, boardSearch);
   }, [curPageNum, isUpdated, totalPage, boardSearch]);
 
   return (

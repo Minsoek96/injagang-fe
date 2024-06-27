@@ -2,18 +2,20 @@ import { useCallback } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { deleteBoard, getBoardList } from "@/components/redux/QnA/actions";
+import { getBoardList } from "@/components/redux/QnA/actions";
 import { RootReducerType } from "@/components/redux/store";
+import { useDeleteBoard } from "@/api/QnABoard/mutaions";
 
 const useQnaManager = () => {
   const dispatch = useDispatch();
+  const {mutate: deleteBoard} = useDeleteBoard();
   const { qnaIdList, boardList, boardInFoList, isUpdated } = useSelector(
     (state: RootReducerType) => state.board,
   );
 
   //AnswerDetail
   const dispatchRemoveBoard = useCallback((targetId: number) => {
-    dispatch(deleteBoard(targetId));
+    deleteBoard(targetId)
   }, []);
 
   const dispatchGetBoardList = useCallback(

@@ -1,14 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 import { BiPlus, BiRedo, BiCheck, BiX } from "react-icons/bi";
 
 import styled from "styled-components";
 
-import {
-  ColBox,
-  ScrollBar,
-  StyledInput,
-} from "@/styles/GlobalStyle";
+import { ColBox, ScrollBar, StyledInput } from "@/styles/GlobalStyle";
 
 import TQustionItem from "../TQustionItem";
 
