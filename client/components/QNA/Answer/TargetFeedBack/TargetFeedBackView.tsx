@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+
 import styled from "styled-components";
 import { ColBox } from "@/styles/GlobalStyle";
+
+import TargetFeedBackItems from "./TargetFeedBackItems";
+
 import userQnaManager from "../../hooks/userQnaManager";
 import useFeedManager from "../../hooks/useFeedManager";
-import TargetFeedBackItems from "./TargetFeedBackItems";
 
 const TargetFeedBackView = () => {
   const {

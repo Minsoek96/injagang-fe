@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import {memo, useRef, useEffect } from "react";
 
 import { BiPlus, BiRedo, BiCheck, BiX } from "react-icons/bi";
 
@@ -40,7 +40,7 @@ const AddTemplate = ({ onClose }: AddTemplateProps) => {
     { icon: <BiCheck onClick={confirmTemplateCreation} />, text: "확정하기" },
   ];
 
-  const ControllerBtns = React.memo(() => (
+  const ControllerBtns = memo(() => (
     <Controller>
       {ControllerData.map((info, idx) => (
         <IconButton key={idx}>

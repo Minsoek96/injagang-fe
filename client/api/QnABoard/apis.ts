@@ -1,14 +1,18 @@
 import { BOARD_APIS } from "../config";
 import { fetcher, METHOD } from "../client";
 
-import { IReviseQnaBoard, IWriteQnaBoard } from "@/types/qnaBoard/QnaBoardType";
-import { BOARDLIST } from "@/components/redux/QnA/types";
+import {
+  IGetDetailQnaBoard,
+  IGetQnaBoardList,
+  IReviseQnaBoard,
+  IWriteQnaBoard,
+} from "@/types/qnaBoard/QnaBoardType";
 
-const getQnaBoardList = async (
+const getBoardList = async (
   queryString?: number,
   type?: string,
   search?: string,
-) => {
+): Promise<IGetQnaBoardList> => {
   return fetcher(
     METHOD.GET,
     `${BOARD_APIS.GET_API}?page=${queryString}&type=${type}&content=${search}`,
@@ -17,7 +21,9 @@ const getQnaBoardList = async (
     .catch(error => console.error(error));
 };
 
-const getDetailBoard = async (targetId: number): Promise<BOARDLIST> => {
+const getDetailBoard = async (
+  targetId: number,
+): Promise<IGetDetailQnaBoard> => {
   return fetcher(METHOD.GET, `${BOARD_APIS.READ_API}${targetId}`)
     .then(res => res.data)
     .catch(error => console.error(error));
@@ -36,9 +42,9 @@ const writeQnaBoard = async (boardPayload: IWriteQnaBoard) => {
 };
 
 export {
-    getQnaBoardList,
-    getDetailBoard,
-    deleteQnaBoard,
-    reviseQnaBoard,
-    writeQnaBoard,
-}
+  getBoardList,
+  getDetailBoard,
+  deleteQnaBoard,
+  reviseQnaBoard,
+  writeQnaBoard,
+};

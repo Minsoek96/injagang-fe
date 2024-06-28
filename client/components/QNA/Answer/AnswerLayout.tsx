@@ -1,6 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 import { ColBox } from "@/styles/GlobalStyle";
+
 import TargetFeedBackView from "@/components/QNA/Answer/TargetFeedBack/TargetFeedBackView";
 import AnswerDetailView from "./AnswerDetail/AnswerDetailView";
 import FeedBackComposer from "./FeedBack/FeedBackComposer";

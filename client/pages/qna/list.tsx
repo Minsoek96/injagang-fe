@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { useRouter } from "next/router";
 
 import styled from "styled-components";
-
-import { useDispatch } from "react-redux";
-import { initBoardSearch } from "@/components/redux/QnA/user/actions";
 
 import BoardListView from "@/components/Board/BoardListLayout";
 import PageNation from "@/components/QNA/PageNation";
@@ -13,13 +10,31 @@ import BoardSearch from "@/components/QNA/BoardSearch";
 
 import { ColBox, StyleButton } from "@/styles/GlobalStyle";
 import { MdOutlineModeEditOutline } from "react-icons/md";
+import { useBoardStore } from "@/store/qna";
+import { GetServerSideProps } from "next";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { board } from "@/api/QnABoard/queryKeys";
+import { getBoardList } from "@/api/QnABoard/apis";
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: board.lists(1, "", ""),
+    queryFn: () => getBoardList(1, "", ""),
+  });
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
 
 const list = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const { initBoardSearch } = useBoardStore();
   useEffect(() => {
     return () => {
-      dispatch(initBoardSearch());
+      initBoardSearch();
     };
   }, []);
 
@@ -45,7 +60,6 @@ export default list;
 const ListStyle = styled.div`
   ${ColBox}
   width: 80vw;
-  height: 100dvh;
 
   .edit_btn {
     display: flex;

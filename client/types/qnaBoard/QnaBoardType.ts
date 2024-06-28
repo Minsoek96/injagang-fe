@@ -8,7 +8,7 @@ interface IBoardList {
 
 export interface IGetQnaBoardList {
   totalPage: number;
-  boardLis: IBoardList[];
+  boardInfos: IBoardList[];
   isFirst: boolean;
   isLast: boolean;
 }
@@ -19,6 +19,12 @@ export interface IWriteQnaBoard {
   essayId: number;
 }
 
+export interface IQnaList {
+  question: string;
+  answer: string;
+  qnaId: number;
+}
+
 export interface IGetDetailQnaBoard {
   boardId: number;
   title: string;
@@ -27,7 +33,7 @@ export interface IGetDetailQnaBoard {
   nickname: string;
   owner: boolean;
   essayTitle: string;
-  qnaList: IReadQnaList;
+  qnaList: IQnaList[];
 }
 
 export interface IReviseQnaBoard {

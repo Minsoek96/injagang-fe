@@ -7,19 +7,22 @@ import { v4 as uuid4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { addEssay } from "@/components/redux/Essay/server/actions";
 
-
 import { moveCoverLetterMainPage } from "../new/CoverLetterCreator";
 
 import useModal from "@/hooks/useModal";
 
-import { IReadQnaList } from "@/types/essay/EssayType";
-
 import { runValidationChecks } from "@/util/runValidationChecks";
 import { ERROR_MESSAGES } from "@/constants";
 
+type QnaListType = {
+  question: string;
+  answer: string;
+  qnaId: string | number;
+};
+
 const useCoverLetterCreatorLogic = () => {
   const [coverLetterTitle, setCoverLetterTitle] = useState<string>("");
-  const [qnaList, setQnAList] = useState<IReadQnaList[]>([]);
+  const [qnaList, setQnAList] = useState<QnaListType[]>([]);
   const { setModal, Modal } = useModal();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -38,7 +41,7 @@ const useCoverLetterCreatorLogic = () => {
           content: `질문문항은 최대 ${MAX_QUESTIONS}개 제한입니다.`,
         },
       });
-      return
+      return;
     }
     const newID = uuid4();
     setQnAList(prev => [...prev, { question: "", answer: "", qnaId: newID }]);
@@ -56,7 +59,7 @@ const useCoverLetterCreatorLogic = () => {
   const changeQnAList = useCallback(
     (targetID: string | number, newQuestion: string, newAnswer: string) => {
       setQnAList(prev =>
-        prev.map((qna) =>
+        prev.map(qna =>
           qna.qnaId === targetID
             ? { ...qna, question: newQuestion, answer: newAnswer }
             : { ...qna },

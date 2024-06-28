@@ -1,4 +1,3 @@
-import { IGetTemplate } from "../template/TemplateType";
 
 interface IQnaList {
   question: string;

@@ -1,15 +1,17 @@
-import React, { useState } from "react";
 import styled from "styled-components";
-import { Card, ScrollBar, StyleTextArea } from "@/styles/GlobalStyle"
+
 import CorrectionView from "./CorrectionView";
-import userQnaManager from "../../hooks/userQnaManager";
+import { Card, ScrollBar, StyleTextArea } from "@/styles/GlobalStyle";
 import FeedBackFooter from "./FeedBackFooter";
-import useQnaManager from "../../hooks/useQnaManager";
+
 import useFeedBackLogic from "../../hooks/useFeedBackLogic";
+import userQnaManager from "../../hooks/userQnaManager";
+
+import { useBoardStore } from "@/store/qna";
 
 const FeedBackComposer = () => {
   const { dispatchChangeFeed, targetFeed } = userQnaManager();
-  const { qnaIdList } = useQnaManager();
+  const { questionList } = useBoardStore();
   const {
     textRef,
     correctionText,
@@ -38,7 +40,7 @@ const FeedBackComposer = () => {
         handleFeedBackIndex={dispatchChangeFeed}
         handleSubmit={handleSubmit}
         handleClear={handleClear}
-        qnaIdList={qnaIdList}
+        qnaIdList={questionList}
         feedBackIndex={targetFeed}
       />
       <Modal />

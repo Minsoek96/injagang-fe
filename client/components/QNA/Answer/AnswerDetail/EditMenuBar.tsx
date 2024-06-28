@@ -6,8 +6,8 @@ import styled from "styled-components";
 
 import { BiDotsHorizontal, BiTrash, BiMessageAltEdit } from "react-icons/bi";
 
-import useQnaManager from "../../hooks/useQnaManager";
 import useModal from "@/hooks/useModal";
+import { useDeleteBoard } from "@/api/QnABoard/mutaions";
 
 type EditMenuBarProps = {
   boardID: number;
@@ -15,7 +15,7 @@ type EditMenuBarProps = {
 const EditMenuBar = ({ boardID }: EditMenuBarProps) => {
   const [tagPosition, setTagPosition] = useState(false);
   const { Modal, setModal } = useModal();
-  const { dispatchRemoveBoard } = useQnaManager();
+  const {mutate: delteBoard} = useDeleteBoard();
   const router = useRouter();
 
   const navigateToList = () => {
@@ -27,7 +27,7 @@ const EditMenuBar = ({ boardID }: EditMenuBarProps) => {
   };
 
   const handleRemoveBoard = () => {
-    dispatchRemoveBoard(boardID);
+    delteBoard(boardID);
     navigateToList();
   };
 

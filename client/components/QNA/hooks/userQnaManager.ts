@@ -1,51 +1,42 @@
 import { useCallback } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-
 import { CorrectionItem } from "../Answer/AnswerLayout";
 
-import { RootReducerType } from "@/components/redux/store";
-import {
-  changeBoardSearch,
-  changeBoardType,
-  changeCorrection,
-  changeTargetFeed,
-  initCorrection,
-  initTargetFeed,
-} from "@/components/redux/QnA/user/actions";
+import { useBoardStore, useCorrectionStore, useFeedStore } from "@/store/qna";
 
 const userQnaManager = () => {
-  const dispatch = useDispatch();
-  const { selectedCorrection, targetFeed, boardSearch, boardType } =
-    useSelector((state: RootReducerType) => state.userBoard);
+  const { correction, setCorrection, initCorrection } = useCorrectionStore();
+  const { boardSearch, boardType, setBoardSearch, setBoardType, totalPage } =
+    useBoardStore();
+  const { targetFeed, setTargetFeed, initTargetFeed } = useFeedStore();
 
   const dispatchChangeCorrection = useCallback((correction: CorrectionItem) => {
-    dispatch(changeCorrection(correction));
+    setCorrection(correction);
   }, []);
 
   const dispatchInitCorrection = useCallback(() => {
-    dispatch(initCorrection());
+    initCorrection();
   }, []);
 
   const dispatchChangeFeed = useCallback((targetFeed: number) => {
-    dispatch(changeTargetFeed(targetFeed));
+    setTargetFeed(targetFeed);
   }, []);
 
   const dispatchClearTargetFeed = useCallback(() => {
-    dispatch(initTargetFeed());
+    initTargetFeed();
   }, []);
 
   const dispatchChangeSearch = useCallback((newSearch: string) => {
-    dispatch(changeBoardSearch(newSearch));
+    setBoardSearch(newSearch);
   }, []);
 
   const dispatchChangeType = useCallback((type: string) => {
-    dispatch(changeBoardType(type));
+    setBoardType(type);
   }, []);
 
   return {
     dispatchChangeCorrection,
-    selectedCorrection,
+    selectedCorrection: correction,
     dispatchInitCorrection,
     targetFeed,
     dispatchChangeFeed,
@@ -54,6 +45,7 @@ const userQnaManager = () => {
     dispatchChangeSearch,
     boardSearch,
     boardType,
+    totalPage,
   };
 };
 

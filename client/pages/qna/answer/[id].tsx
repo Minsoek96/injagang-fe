@@ -8,9 +8,7 @@ import { ColBox } from "@/styles/GlobalStyle";
 
 import { useDispatch } from "react-redux";
 import { initFeedBack } from "@/components/redux/FeedBack/action";
-import { initTargetFeed } from "@/components/redux/QnA/user/actions";
-
-
+import { useFeedStore } from "@/store/qna";
 
 const ViewStyle = styled.div`
   ${ColBox}
@@ -20,12 +18,12 @@ const ViewStyle = styled.div`
 
 const answer = () => {
   const dispatch = useDispatch();
+  const { initTargetFeed } = useFeedStore();
   useEffect(() => {
-
     return () => {
-      dispatch(initFeedBack())
-      dispatch(initTargetFeed())
-    }
+      dispatch(initFeedBack());
+      initTargetFeed();
+    };
   }, []);
 
   return (

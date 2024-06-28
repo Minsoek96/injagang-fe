@@ -1,3 +1,6 @@
+import { useState } from "react";
+
+import styled from "styled-components";
 import {
   Card,
   ColBox,
@@ -5,8 +8,7 @@ import {
   StyleButton,
   StyleTextArea,
 } from "@/styles/GlobalStyle";
-import React, { useState } from "react";
-import styled from "styled-components";
+
 import useModal from "@/hooks/useModal";
 
 type FeedBackItemsProps = {
@@ -74,7 +76,7 @@ const FeedBackItems = ({
                 {isReadOnly ? "편집" : "수정완료"}
               </StyleButton>
               <StyleButton
-                onClick={(e)=> console.log("e")}
+                onClick={e => console.log("e")}
                 Size={{ width: "150px", font: "15px" }}
               >
                 삭제

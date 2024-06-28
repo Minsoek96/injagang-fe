@@ -1,18 +1,16 @@
+import { useBoardStore } from "@/store/qna";
 import { useState, useCallback } from "react";
 type usePageNationProps = [number, number?];
 
-const usePageNation = ([
-  totalPage = 1,
-  visiblePage = 8,
-]: usePageNationProps) => {
-  const [curPageNum, setCurPageNum] = useState<number>(1);
+const usePageNation = ([visiblePage = 8]: usePageNationProps) => {
+  const { setCurPageNum, curPageNum, totalPage } = useBoardStore();
   const [minPageNumLimit, setMinPageNumLimit] = useState<number>(0);
-  const [maxPageNumLimit, setMaxPageNumLimit] =
-    useState<number>(visiblePage);
+  const [maxPageNumLimit, setMaxPageNumLimit] = useState<number>(visiblePage);
+
   const MIN_PAGE = 1;
 
   const handlePageClick = useCallback((pageNum: number) => {
-    setCurPageNum(pageNum);
+    setCurPageNum(() => pageNum);
   }, []);
 
   const handlePrevClick = useCallback(() => {
