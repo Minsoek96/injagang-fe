@@ -14,12 +14,9 @@ import {
 } from "./types";
 import { PROFILE_INIT, profileDispatchType } from "../MyProfile/types";
 
-import { METHOD } from "@/util/fecher";
-import fetcher from "@/util/fecher";
-
 import { checkOutAPI, loginAPI } from "@/api/AUTH/authAPI";
 import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from "@/constants";
-
+import { METHOD, fetcher } from "@/api/client";
 
 type AuthenTicate = {
   loginId: string;

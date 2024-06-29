@@ -7,9 +7,8 @@ import {
   SIGNUP_CLEAR,
   signupDispatchType,
 } from "./types";
+import { METHOD, fetcher } from "@/api/client";
 
-import { METHOD } from "@/util/fecher";
-import fetcher from "@/util/fecher";
 
 
 type MembershipRequest = {
