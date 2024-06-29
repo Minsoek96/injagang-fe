@@ -12,8 +12,10 @@ import { useBoardStore } from "@/store/qna";
 
 const AnswerDetailView = () => {
   const router = useRouter();
-  const { setQuestions } = useBoardStore();
   const boardId = router.query;
+
+  const { setQuestions } = useBoardStore();
+  
   const {
     data: boardList,
     isLoading,
@@ -21,14 +23,13 @@ const AnswerDetailView = () => {
   } = useFetchBoardDetail(Number(boardId.id));
 
   useEffect(() => {
-    console.log("et", boardList);
     if (boardList) {
       const questions = boardList.qnaList.map(item => item.qnaId);
       setQuestions(questions);
     }
   }, [boardList]);
 
-  if (isLoading) return <p>유저의 질문을 받아오는중입니다.</p>;
+  if (isLoading) return <p>게시글을 받아오는중입니다.</p>;
 
   if (isError || !boardList) return <p>오류가 발생했습니다.</p>;
   return (

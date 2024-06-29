@@ -11,12 +11,6 @@ import {
 
 import QuestionComposer from "@/components/QNA/Question/QuestionComposer";
 
-const WirteStyle = styled.div`
-  ${ColBox}
-  height: 100vh;
-  width: 100%;
-`;
-
 const question = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,3 +28,9 @@ const question = () => {
 };
 
 export default question;
+
+const WirteStyle = styled.div`
+  ${ColBox}
+  height: 100vh;
+  width: 100%;
+`;

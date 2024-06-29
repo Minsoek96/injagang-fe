@@ -10,13 +10,14 @@ import {
 } from "@/styles/GlobalStyle";
 
 import useModal from "@/hooks/useModal";
+import { IReviseFeedBack } from "@/types/feedback/FeedBackType";
 
 type FeedBackItemsProps = {
   target: string;
   content: string;
   feedbackId: number;
   owner: boolean;
-  handleUpdateFeedBack: (feedbackId: number, content: string) => void;
+  handleUpdateFeedBack: (feedback: IReviseFeedBack) => void;
 };
 
 const FeedBackItems = ({
@@ -31,7 +32,11 @@ const FeedBackItems = ({
   const { Modal, setModal } = useModal();
 
   const handleUpdate = () => {
-    if (content !== text) handleUpdateFeedBack(feedbackId, text);
+    if (content !== text)
+      handleUpdateFeedBack({
+        feedbackId,
+        reviseContent: text,
+      });
     closeReadOnly();
   };
 

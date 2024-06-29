@@ -16,7 +16,6 @@ const BoardListLayout = () => {
   const { data } = useFetchBoardList(curPageNum, boardType, boardSearch);
 
   useEffect(() => {
-    console.log(data, 'et')
     if (data?.boardInfos) {
       const total = data.totalPage;
       setTotalPage(total);

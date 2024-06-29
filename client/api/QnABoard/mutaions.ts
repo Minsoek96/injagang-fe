@@ -49,7 +49,7 @@ const useWriteBoard = () => {
     mutationFn: (newBoard: IWriteQnaBoard) => writeQnaBoard(newBoard),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: board.lists()})
+      queryClient.invalidateQueries({ queryKey: board.all})
       
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.ADDED_QUESTION);
     },

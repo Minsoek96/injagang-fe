@@ -1,8 +1,8 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 
 import useModal from "@/hooks/useModal";
-import useFeedManager from "../hooks/useFeedManager";
-import { useCorrectionStore } from "@/store/qna";
+import { useCorrectionStore, useFeedStore } from "@/store/qna";
+import { useWriteFeed } from "@/api/FEEDBACK/mutation";
 
 const useFeedBackLogic = () => {
   const [correctionText, setCorrectionText] = useState<string>("");
@@ -12,8 +12,9 @@ const useFeedBackLogic = () => {
   const { setModal, Modal } = useModal();
 
   const { correction, initCorrection } = useCorrectionStore();
+  const { targetFeed } = useFeedStore();
 
-  const { dispatchWriteFeedBack } = useFeedManager();
+  const { mutate: writeFeedBack } = useWriteFeed(targetFeed);
   const CORRECTION_MIN = correctionText.length < 30;
   const EMPTY_CORRECTION = correction.targetAnswer === "";
 
@@ -62,7 +63,7 @@ const useFeedBackLogic = () => {
       feedbackTarget: correction.targetAnswer,
       feedbackContent: correctionText,
     };
-    dispatchWriteFeedBack(formatData);
+    writeFeedBack(formatData);
     initCorrection();
     handleClear();
   }, [CORRECTION_MIN, EMPTY_CORRECTION, correction, correctionText]);

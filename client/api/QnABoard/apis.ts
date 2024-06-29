@@ -7,6 +7,7 @@ import {
   IReviseQnaBoard,
   IWriteQnaBoard,
 } from "@/types/qnaBoard/QnaBoardType";
+import { AxiosRequestConfig } from "axios";
 
 const getBoardList = async (
   queryString?: number,
@@ -23,8 +24,17 @@ const getBoardList = async (
 
 const getDetailBoard = async (
   targetId: number,
+  authToken?: string,
 ): Promise<IGetDetailQnaBoard> => {
-  return fetcher(METHOD.GET, `${BOARD_APIS.READ_API}${targetId}`)
+  const config: AxiosRequestConfig = authToken
+    ? {
+        headers: {
+          Authorization: `${authToken}`,
+        },
+      }
+    : {};
+
+  return fetcher(METHOD.GET, `${BOARD_APIS.READ_API}${targetId}`, config)
     .then(res => res.data)
     .catch(error => console.error(error));
 };

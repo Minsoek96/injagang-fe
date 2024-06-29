@@ -22,7 +22,7 @@ const useBoardStore = create<State & Action>(set => ({
   boardSearch: "",
   boardType: "",
   curPageNum: 1,
-  totalPage: 0,
+  totalPage: 1,
 
   setQuestions: (list: number[]) => set({ questionList: list }),
   setBoardSearch: (search: string) => set({ boardSearch: search }),

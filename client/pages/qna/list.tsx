@@ -1,20 +1,38 @@
+import { GetServerSideProps } from "next";
+
 import { useEffect } from "react";
 
 import { useRouter } from "next/router";
 
 import styled from "styled-components";
 
-import BoardListView from "@/components/Board/BoardListLayout";
-import PageNation from "@/components/QNA/PageNation";
-import BoardSearch from "@/components/QNA/BoardSearch";
-
 import { ColBox, StyleButton } from "@/styles/GlobalStyle";
 import { MdOutlineModeEditOutline } from "react-icons/md";
-import { useBoardStore } from "@/store/qna";
-import { GetServerSideProps } from "next";
-import { QueryClient, dehydrate } from "@tanstack/react-query";
+
+import {
+  DehydratedState,
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
 import { board } from "@/api/QnABoard/queryKeys";
 import { getBoardList } from "@/api/QnABoard/apis";
+
+import { useBoardStore } from "@/store/qna";
+import dynamic from "next/dynamic";
+
+const BoardListView = dynamic(
+  () => import("@/components/Board/BoardListLayout"),
+  { ssr: false },
+);
+
+const PageNation = dynamic(() => import("@/components/QNA/PageNation"), {
+  ssr: false,
+});
+
+const BoardSearch = dynamic(() => import("@/components/QNA/BoardSearch"), {
+  ssr: false,
+});
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
@@ -29,7 +47,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-const list = () => {
+type ListProps = {
+  dehydratedState: DehydratedState;
+};
+
+const list = ({ dehydratedState }: ListProps) => {
   const router = useRouter();
   const { initBoardSearch } = useBoardStore();
   useEffect(() => {
@@ -48,9 +70,11 @@ const list = () => {
         <MdOutlineModeEditOutline />
         {" 글쓰기"}
       </StyleButton>
-      <BoardListView />
-      <PageNation />
-      <BoardSearch />
+      <HydrationBoundary state={dehydratedState}>
+        <BoardListView />
+        <PageNation />
+        <BoardSearch />
+      </HydrationBoundary>
     </ListStyle>
   );
 };
