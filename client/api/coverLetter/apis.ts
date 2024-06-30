@@ -2,13 +2,13 @@ import { ESSAY_APIS } from "../config";
 import { fetcher, METHOD } from "../client";
 
 import {
-  IGetEssayList,
-  IReadEssayList,
-  IReviseEssayList,
-  IWriteEssayList,
-} from "@/types/essay/EssayType";
+  ICoverLetters,
+  ICoverLetterDetail,
+  IReviseCoverLetter,
+  IWriteCoverLetter,
+} from "@/types/coverLetter/CoverLetterType";
 
-const getCoverLetter = async (targetId: number): Promise<IGetEssayList[]> => {
+const getCoverLetter = async (targetId: number): Promise<ICoverLetters[]> => {
   return fetcher(METHOD.GET, `${ESSAY_APIS.GET_API}${targetId}`)
     .then(res => res.data)
     .catch(error => console.error(error));
@@ -16,19 +16,19 @@ const getCoverLetter = async (targetId: number): Promise<IGetEssayList[]> => {
 
 const getDetailCoverLetter = async (
   targetId: number,
-): Promise<IReadEssayList> => {
+): Promise<ICoverLetterDetail> => {
   return fetcher(METHOD.GET, `${ESSAY_APIS.READ_API}${targetId}`)
     .then(res => res.data)
     .catch(error => console.error(error));
 };
 
-const addCoverLetter = async (essayPayload: IWriteEssayList) => {
+const addCoverLetter = async (essayPayload: IWriteCoverLetter) => {
   return fetcher(METHOD.POST, ESSAY_APIS.WRITE_API, essayPayload);
 };
 
 const reviseCoverLetter = async (
   targetId: number,
-  essayPayload: IReviseEssayList,
+  essayPayload: IReviseCoverLetter,
 ) => {
   return fetcher(
     METHOD.PATCH,

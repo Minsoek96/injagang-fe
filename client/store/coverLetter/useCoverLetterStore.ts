@@ -1,12 +1,12 @@
-import { IGetEssayList } from "@/types/essay/EssayType";
+import { ICoverLetters } from "@/types/coverLetter/CoverLetterType";
 import { create } from "zustand";
 
 interface InitiaState {
-  selectedEssayList: IGetEssayList;
+  selectedCoverLetter: ICoverLetters;
 }
 
 const initialState: InitiaState = {
-  selectedEssayList: {
+  selectedCoverLetter: {
     essayId: 0,
     title: "",
     owner: false,
@@ -15,23 +15,23 @@ const initialState: InitiaState = {
 };
 
 type State = {
-  selectedCoverLetter: IGetEssayList;
+  selectedCoverLetter: ICoverLetters;
 };
 
 type Action = {
-  setCoverLetter: (data: IGetEssayList) => void;
+  setCoverLetter: (data: ICoverLetters) => void;
   initCoverLetter: () => void;
 };
 
 const useCoverLetterStore = create<State & Action>(set => ({
-  selectedCoverLetter: initialState.selectedEssayList,
-  setCoverLetter: (data: IGetEssayList) =>
+  selectedCoverLetter: initialState.selectedCoverLetter,
+  setCoverLetter: (data: ICoverLetters) =>
     set({
       selectedCoverLetter: data,
     }),
   initCoverLetter: () =>
     set({
-      selectedCoverLetter: initialState.selectedEssayList,
+      selectedCoverLetter: initialState.selectedCoverLetter,
     }),
 }));
 

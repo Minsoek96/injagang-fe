@@ -7,7 +7,7 @@ import { BiX } from "react-icons/bi";
 import { ColBox, ScrollBar } from "@/styles/GlobalStyle";
 import { v } from "@/styles/variables";
 
-import { IReadQnaList } from "@/types/essay/EssayType";
+import { IReadQnaList } from "@/types/coverLetter/CoverLetterType";
 
 interface CoverLetterQuestionItemsProps {
   item: IReadQnaList;

@@ -1,7 +1,7 @@
 import useToast from "@/hooks/useToast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addCoverLetter, deleteCoverLetter, reviseCoverLetter } from "./apis";
-import { IReviseEssayList, IWriteEssayList } from "@/types/essay/EssayType";
+import { IReviseCoverLetter, IWriteCoverLetter } from "@/types/coverLetter/CoverLetterType";
 import coverLetter from "./querykeys";
 import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from "@/constants";
 
@@ -9,7 +9,7 @@ const useWriteCoverLetter = () => {
   const [showToast] = useToast();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: IWriteEssayList) => addCoverLetter(data),
+    mutationFn: (data: IWriteCoverLetter) => addCoverLetter(data),
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: coverLetter.all });
@@ -43,7 +43,7 @@ const useReviseCoverLetter = () => {
   const [showToast] = useToast();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, data }: { id: number; data: IReviseEssayList }) =>
+    mutationFn: ({ id, data }: { id: number; data: IReviseCoverLetter }) =>
       reviseCoverLetter(id, data),
 
     onSuccess: () => {

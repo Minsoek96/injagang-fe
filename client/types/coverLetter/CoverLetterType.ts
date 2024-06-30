@@ -8,31 +8,31 @@ export interface IReadQnaList extends IQnaList {
   qnaId: number | string;
 }
 
-interface IEssayBase {
+interface ICoverLetterBase {
   title: string;
   owner: boolean;
 }
 
-export interface IWriteEssayList extends IEssayBase {
+export interface IWriteCoverLetter extends ICoverLetterBase {
   qnaList: IQnaList[];
 }
 
-export interface IReadEssayList extends IEssayBase {
+export interface ICoverLetterDetail extends ICoverLetterBase {
   essayId: number;
   qnaList: IReadQnaList[];
 }
 
-export interface IGetEssayList extends IEssayBase {
+export interface ICoverLetters extends ICoverLetterBase {
   essayId: number;
   questions: string[];
 }
 
-export interface IReviseEssayList {
+export interface IReviseCoverLetter {
   title: string;
   qnaList: IQnaList[];
 }
 
-export interface IEssayList {
+export interface ICoverLetter {
   essayId: number;
   title: string;
   owner: boolean;

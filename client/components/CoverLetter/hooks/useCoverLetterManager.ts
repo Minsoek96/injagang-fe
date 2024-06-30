@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { moveCoverLetterMainPage } from "../new/CoverLetterCreator";
 
-import { IGetEssayList, IReadQnaList } from "@/types/essay/EssayType";
+import { ICoverLetters, IReadQnaList } from "@/types/coverLetter/CoverLetterType";
 import useCoverLetterStore from "@/store/coverLetter/useCoverLetterStore";
 import {
   useDeleteCoverLetter,
@@ -20,7 +20,7 @@ const useCoverLetterManager = () => {
   const { mutate: removeCoverLetter } = useDeleteCoverLetter();
 
   /** 유저가 선택한 자소서 미리보기 반영 */
-  const changeSeleted = (newList: IGetEssayList) => {
+  const changeSeleted = (newList: ICoverLetters) => {
     if (newList === selectedCoverLetter) return;
     setCoverLetter(newList);
   };
