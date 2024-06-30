@@ -3,10 +3,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import styled from "styled-components";
-
-import CoverLetterDetail from "@/components/QNA/Question/CoverLetterDetail";
-import useCoverLetterManager from "@/components/CoverLetter/hooks/useCoverLetterManager";
-import ControlMenu from "@/components/UI/ControlMenu";
 import {
   Card,
   ColBox,
@@ -15,24 +11,28 @@ import {
   StyleInput as QuestionTitle,
   StyleTextArea,
 } from "@/styles/GlobalStyle";
-import { useWriteBoard } from "@/api/QnABoard/mutaions";
 
+import ControlMenu from "@/components/UI/ControlMenu";
+import CoverLetterDetail from "@/components/QNA/Question/CoverLetterDetail";
+
+import { useWriteBoard } from "@/api/QnABoard/mutaions";
+import { useFetchCoverLetter } from "@/api/coverLetter/queries";
 
 const QuestionComposer = () => {
+  const router = useRouter();
+  const { data: coverLtters = [] } = useFetchCoverLetter();
+  const { mutate: writeBoard } = useWriteBoard();
+
   const [coverLetterTitle, setCoverLetterTitle] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [essayId, setEssayId] = useState<number>(0);
-  const router = useRouter();
-  const { essayList } = useCoverLetterManager();
-
-  const {mutate: writeBoard} = useWriteBoard();
 
   const navigateToList = () => router.push("/qna/list");
 
   const changeCoverLetter = (title: string) => {
     setCoverLetterTitle(title);
-    const findEssay = essayList.find(list => list.title === title);
+    const findEssay = coverLtters?.find(list => list.title === title);
     if (findEssay) setEssayId(findEssay?.essayId);
   };
 
@@ -59,7 +59,7 @@ const QuestionComposer = () => {
             Size={{ width: "100%", height: "40px" }}
             value={coverLetterTitle}
             onChange={e => changeCoverLetter(e)}
-            optionList={essayList}
+            optionList={coverLtters}
           ></ControlMenu>
           <StyleTextArea
             value={content}

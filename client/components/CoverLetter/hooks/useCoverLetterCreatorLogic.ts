@@ -4,15 +4,13 @@ import { useRouter } from "next/router";
 
 import { v4 as uuid4 } from "uuid";
 
-import { useDispatch } from "react-redux";
-import { addEssay } from "@/components/redux/Essay/server/actions";
-
 import { moveCoverLetterMainPage } from "../new/CoverLetterCreator";
 
 import useModal from "@/hooks/useModal";
 
 import { runValidationChecks } from "@/util/runValidationChecks";
 import { ERROR_MESSAGES } from "@/constants";
+import { useWriteCoverLetter } from "@/api/coverLetter/mutations";
 
 type QnaListType = {
   question: string;
@@ -20,12 +18,14 @@ type QnaListType = {
   qnaId: string | number;
 };
 
+/** 자소서를 생성와 관련된 로직 */
+
 const useCoverLetterCreatorLogic = () => {
+  const { mutate: writeCoverLetter } = useWriteCoverLetter();
   const [coverLetterTitle, setCoverLetterTitle] = useState<string>("");
   const [qnaList, setQnAList] = useState<QnaListType[]>([]);
   const { setModal, Modal } = useModal();
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const MIN_QUESTIONS = 1;
   const MAX_QUESTIONS = 5;
@@ -33,6 +33,7 @@ const useCoverLetterCreatorLogic = () => {
   const coverLetterMinLength = qnaList.length <= MIN_QUESTIONS;
   const coverLetterMaxLength = qnaList.length >= MAX_QUESTIONS;
 
+  /** 유저가 폼을 추가하는 룰을 관리 */
   const addQnAList = useCallback(() => {
     if (coverLetterMaxLength) {
       setModal({
@@ -47,6 +48,7 @@ const useCoverLetterCreatorLogic = () => {
     setQnAList(prev => [...prev, { question: "", answer: "", qnaId: newID }]);
   }, [qnaList]);
 
+  /** 유저가 추가 폼을 삭제시 관리 */
   const deleteQnAList = useCallback(
     (targetID: string | number) => {
       if (coverLetterMinLength) return;
@@ -56,6 +58,7 @@ const useCoverLetterCreatorLogic = () => {
     [qnaList],
   );
 
+  /** 유저가 변경하는 폼을 체크 */
   const changeQnAList = useCallback(
     (targetID: string | number, newQuestion: string, newAnswer: string) => {
       setQnAList(prev =>
@@ -84,6 +87,7 @@ const useCoverLetterCreatorLogic = () => {
     },
   ];
 
+  /** 최종 관리자 룰을 검증 후 자기소개서 추가 요청 */
   const handleDispatch = useCallback(() => {
     const isWarringMsg = runValidationChecks(자기소개서작성규칙);
     if (isWarringMsg) {
@@ -107,7 +111,7 @@ const useCoverLetterCreatorLogic = () => {
       qnaList: formatQnAList,
     };
 
-    dispatch(addEssay(qnaListForSubmission));
+    writeCoverLetter(qnaListForSubmission);
     router.push(moveCoverLetterMainPage);
   }, [qnaList, coverLetterTitle]);
 

@@ -1,31 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import styled from "styled-components";
 import { ColBox, ScrollBar } from "@/styles/GlobalStyle";
 import { v } from "@/styles/variables";
 
-import { useDispatch } from "react-redux";
-import { getEssayList } from "../redux/Essay/server/actions";
-
 import useCoverLetterManager from "./hooks/useCoverLetterManager";
-
+import { useFetchCoverLetter } from "@/api/coverLetter/queries";
 
 const CoverLetterItems = React.lazy(() => import("./CoverLetterItems"));
 
 const CoverLetterList = () => {
-  const dispatch = useDispatch();
-  const { essayList, selectedEssayList } = useCoverLetterManager();
-  useEffect(() => {
-    dispatch(getEssayList());
-  }, []);
+  const { selectedCoverLetter } = useCoverLetterManager();
+
+  const { data: coverLetters } = useFetchCoverLetter();
 
   return (
     <CoverLetterListContainer>
-      {essayList.map(item => (
+      {coverLetters?.map(item => (
         <CoverLetterItems
           key={item.essayId}
           item={item}
-          selectedId={selectedEssayList.essayId}
+          selectedId={selectedCoverLetter.essayId}
         />
       ))}
     </CoverLetterListContainer>
@@ -44,11 +39,4 @@ export const CoverLetterListContainer = styled.div`
   margin: 15px auto;
   overflow-x: hidden;
   box-shadow: ${v.boxShadow2};
-`;
-
-const SuspenseStyle = styled.p`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  font-size: 1.8rem;
 `;

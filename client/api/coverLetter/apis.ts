@@ -8,14 +8,16 @@ import {
   IWriteEssayList,
 } from "@/types/essay/EssayType";
 
-const getCoverLetter = async (targetId: number) => {
-  return fetcher(METHOD.GET, `${ESSAY_APIS.READ_API}${targetId}`);
+const getCoverLetter = async (targetId: number): Promise<IGetEssayList[]> => {
+  return fetcher(METHOD.GET, `${ESSAY_APIS.GET_API}${targetId}`)
+    .then(res => res.data)
+    .catch(error => console.error(error));
 };
 
 const getDetailCoverLetter = async (
   targetId: number,
-): Promise<IGetEssayList[]> => {
-  return fetcher(METHOD.GET, `${ESSAY_APIS.GET_API}${targetId}`)
+): Promise<IReadEssayList> => {
+  return fetcher(METHOD.GET, `${ESSAY_APIS.READ_API}${targetId}`)
     .then(res => res.data)
     .catch(error => console.error(error));
 };

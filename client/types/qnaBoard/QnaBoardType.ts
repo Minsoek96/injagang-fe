@@ -1,5 +1,3 @@
-import { IReadQnaList } from "../essay/EssayType";
-
 interface IBoardList {
   id: number;
   title: string;

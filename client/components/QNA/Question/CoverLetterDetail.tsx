@@ -5,32 +5,27 @@ import styled from "styled-components";
 import { ScrollBar } from "@/styles/GlobalStyle";
 import CoverLetterItem from "./CoverLetterItem";
 
-import useCoverLetterManager from "@/components/CoverLetter/hooks/useCoverLetterManager";
+import { useFetchDetailCoverLetter } from "@/api/coverLetter/queries";
 
 interface CoverLetterProps {
   essayId: number;
 }
 
 const CoverLetterDetail = ({ essayId = 0 }: CoverLetterProps) => {
-  const { readEssayList, getDetailEssayList } = useCoverLetterManager();
-  useEffect(() => {
-    if (essayId > 0) {
-      getDetailEssayList(essayId);
-    }
-  }, [essayId]);
+  const { data: coverLetterDetail } = useFetchDetailCoverLetter(essayId);
 
   return (
     <CoverLetterDetailStyle>
-      {readEssayList?.map(essayList => (
-        <CoverLetterContainer key={essayList.essayId}>
-          <h2 className="essay_title">{essayList.title}</h2>
+      {coverLetterDetail && (
+        <CoverLetterContainer key={coverLetterDetail.essayId}>
+          <h2 className="essay_title">{coverLetterDetail.title}</h2>
           <>
-            {essayList.qnaList.map(qna => (
-              <CoverLetterItem  key={qna.qnaId} {...qna} />
+            {coverLetterDetail.qnaList.map(qna => (
+              <CoverLetterItem key={qna.qnaId} {...qna} />
             ))}
           </>
         </CoverLetterContainer>
-      ))}
+      )}
     </CoverLetterDetailStyle>
   );
 };

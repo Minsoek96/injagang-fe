@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import coverLetter from "./querykeys";
 import { getCoverLetter, getDetailCoverLetter } from "./apis";
+import Cookies from "js-cookie";
 
-const useFetchCoverLetter = (id: number) => {
+const useFetchCoverLetter = () => {
+  const userId = Number(Cookies.get("userId"))
   return useQuery({
-    queryKey: coverLetter.list(id),
-    queryFn: () => getCoverLetter(id),
+    queryKey: coverLetter.list(userId),
+    queryFn: () => getCoverLetter(userId),
   });
 };
 
