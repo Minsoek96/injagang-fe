@@ -1,10 +1,7 @@
 import { useState, useCallback } from "react";
 
-import { useDispatch } from "react-redux";
-
-import { addTemplate } from "@/components/redux/Template/server/actions";
-
-import useUserTemplateManager from "./useUserTemplateManager";
+import useTemplateStoreManager from "./useTemplateStoreManager";
+import useTemplateManager from "./useTemplateManager";
 
 interface IAddTemplateList {
   templateTitle: string;
@@ -21,8 +18,8 @@ const INITIAL_TEMPLATE = {
 const useAddTemplateLogic = () => {
   const [templateList, setTemplateList] =
     useState<IAddTemplateList>(INITIAL_TEMPLATE);
-  const { setIsAddTemplate } = useUserTemplateManager();
-  const dispatch = useDispatch();
+  const { setIsAddTemplate } = useTemplateStoreManager();
+  const { addTemplate } = useTemplateManager();
   const templateMinLength =
     templateList.templateQuestion.length <= MIN_QUESTIONS;
   const templateMaxLength =
@@ -59,9 +56,8 @@ const useAddTemplateLogic = () => {
 
   const confirmTemplateCreation = useCallback(() => {
     const { templateTitle, templateQuestion } = templateList;
-    dispatch(
-      addTemplate({ title: templateTitle, questions: templateQuestion }),
-    );
+
+    addTemplate({ title: templateTitle, questions: templateQuestion }),
     resetTemplateList();
     setIsAddTemplate(false);
   }, [templateList, setIsAddTemplate]);

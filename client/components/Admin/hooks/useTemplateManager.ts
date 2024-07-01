@@ -1,25 +1,12 @@
 import { useCallback } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-
-import { RootReducerType } from "@/components/redux/store";
-
-import {
-  getTemplate,
-  removeTemplate,
-} from "@/components/redux/Template/server/actions";
-import { setCurTemplateList } from "@/components/redux/Template/user/actions";
-
+import { useTemplateStore } from "@/store/template";
+import { useAddTemplate, useDeleteTemplate } from "@/api/TEMPLATE/mutations";
 
 const useTemplateManager = () => {
-  const dispatch = useDispatch();
-  const { templateList, loading, error } = useSelector(
-    (state: RootReducerType) => state.template,
-  );
-
-  const getTemplateList = () => {
-    dispatch(getTemplate());
-  };
+  const { setSelectedTemplate } = useTemplateStore();
+  const { mutate: removeTemplate } = useDeleteTemplate();
+  const { mutate: addTemplate}  = useAddTemplate();
 
   const removeTemplateItem = useCallback((index: number) => {
     const resetCurTemplate = {
@@ -27,16 +14,13 @@ const useTemplateManager = () => {
       questions: [],
       title: "",
     };
-    dispatch(removeTemplate(index));
-    dispatch(setCurTemplateList(resetCurTemplate));
+    removeTemplate(index);
+    setSelectedTemplate(resetCurTemplate);
   }, []);
 
   return {
-    templateList,
     removeTemplateItem,
-    getTemplateList,
-    loading,
-    error,
+    addTemplate,
   };
 };
 

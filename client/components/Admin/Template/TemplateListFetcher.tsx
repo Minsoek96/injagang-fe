@@ -1,27 +1,21 @@
-import React, { useEffect } from "react";
-import useTemplateManager from "../hooks/useTemplateManager";
+import React from "react";
 import Spinner from "@/components/Spinner";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { getTemplate } from "@/components/redux/Template/server/actions";
+import { useFetchTemplate } from "@/api/TEMPLATE/queries";
 
 interface TemplateListFetcherProps {
-  children: React.ReactNode;
+  children: (data: any) => React.ReactNode;
 }
+
 const TemplateListFetcher = ({ children }: TemplateListFetcherProps) => {
-  const { error, loading, getTemplateList } = useTemplateManager();
+  const { data: templateList, isLoading, isError } = useFetchTemplate();
 
-  useEffect(() => {
-    getTemplateList();
-  }, []);
+  if (isLoading) return <Spinner />;
 
-  if (loading) return <Spinner />;
-
-  if (error) {
-     throw <p>데이터를 불러오지 못했습니다.</p>;
+  if (isError) {
+    return <p>데이터를 불러오지 못했습니다.</p>;
   }
 
-  return <>{children}</>;
+  return <>{children(templateList)}</>;
 };
 
 export default TemplateListFetcher;

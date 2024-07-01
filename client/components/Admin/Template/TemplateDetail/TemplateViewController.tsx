@@ -8,11 +8,11 @@ import AddTemplate from "./AddTemplate";
 import TemplateDetail from "./TemplateDetail";
 import Spinner from "@/components/Spinner";
 
-import useUserTemplateManager from "../../hooks/useUserTemplateManager";
+import useTemplateStoreManager from "../../hooks/useTemplateStoreManager";
 
 
 const TemplateViewController = () => {
-  const { isAddTemplate, setIsAddTemplate } = useUserTemplateManager();
+  const { isAddTemplate, setIsAddTemplate } = useTemplateStoreManager();
   return (
     <TemplateViewStyle>
       {isAddTemplate ? (

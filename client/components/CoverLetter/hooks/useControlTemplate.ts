@@ -1,24 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-import { useSelector } from "react-redux";
+import useTemplateStoreManager from "@/components/Admin/hooks/useTemplateStoreManager";
 
-import useTemplateManager from "@/components/Admin/hooks/useTemplateManager";
-import useUserTemplateManager from "@/components/Admin/hooks/useUserTemplateManager";
-
-import { RootReducerType } from "@/components/redux/store";
-
+import { useFetchTemplate } from "@/api/TEMPLATE/queries";
 
 const useControlTemplate = () => {
+  const { data: templateList = []} = useFetchTemplate()
   const [selectedTemplateTitle, setSelectedTemplateTitle] =
     useState<string>("");
-  const { selectedTemplateList, setItemInfo } = useUserTemplateManager();
-  const { getTemplateList } = useTemplateManager();
-  const { templateList } = useSelector(
-    (state: RootReducerType) => state.template,
-  );
+  const { selectedTemplate, setItemInfo } = useTemplateStoreManager();
 
   const changeSelectedTemplate = (seleted: string) => {
-    const searchTemplate = templateList.find(item => item.title === seleted);
+    const searchTemplate = templateList?.find(item => item.title === seleted);
     const initTemplate = {
       templateId: 100001,
       title: seleted,
@@ -39,9 +32,8 @@ const useControlTemplate = () => {
   return {
     selectedTemplateTitle,
     changeSelectedTemplate,
-    selectedTemplateList,
+    selectedTemplate,
     templateTitles,
-    getTemplateList,
   };
 };
 

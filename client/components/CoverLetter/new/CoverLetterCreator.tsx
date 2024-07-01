@@ -38,23 +38,18 @@ const CoverLetterCreator = () => {
   const {
     selectedTemplateTitle,
     changeSelectedTemplate,
-    selectedTemplateList,
+    selectedTemplate,
     templateTitles,
-    getTemplateList,
   } = useControlTemplate();
 
   useEffect(() => {
-    getTemplateList();
-  }, []);
-
-  useEffect(() => {
-    const resetSelectedTemplateList = selectedTemplateList.questions.map(a => ({
+    const resetSelectedTemplateList = selectedTemplate.questions.map(a => ({
       qnaId: uuid4(),
       question: a,
       answer: "",
     }));
     setQnAList(resetSelectedTemplateList);
-  }, [selectedTemplateList]);
+  }, [selectedTemplate]);
 
   return (
     <CoverLetterCreatorContainer>

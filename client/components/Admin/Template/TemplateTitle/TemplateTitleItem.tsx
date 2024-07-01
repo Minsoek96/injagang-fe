@@ -1,6 +1,6 @@
 import { IGetTemplate } from "@/types/template/TemplateType";
 import React from "react";
-import useUserTemplateManager from "../../hooks/useUserTemplateManager";
+import useTemplateStoreManager from "../../hooks/useTemplateStoreManager";
 import styled from "styled-components";
 
 interface TemplateItemProps {
@@ -8,8 +8,8 @@ interface TemplateItemProps {
 }
 
 const TemplateItem = ({ list }: TemplateItemProps) => {
-  const { setItemInfo, selectedTemplateList } = useUserTemplateManager();
-  const isSelected = list.templateId === selectedTemplateList.templateId;
+  const { setItemInfo, selectedTemplate } = useTemplateStoreManager();
+  const isSelected = list.templateId === selectedTemplate.templateId;
 
   return (
     <TemplateTitle onClick={() => setItemInfo(list)} isSelected={isSelected}>
