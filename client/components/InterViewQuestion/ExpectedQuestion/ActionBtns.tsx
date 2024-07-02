@@ -3,8 +3,7 @@ import React from "react";
 import useMyProfileManager from "@/components/MyProfile/hooks/useMyProfileManager";
 
 import { StyleButton } from "@/styles/GlobalStyle";
-
-import { InterviewQuestionList } from "@/components/redux/InterViewQuestion/types";
+import { IQuestion } from "@/types/InterViewQuestion/InterViewQuestionType";
 
 
 interface ActionBtnProps {
@@ -13,8 +12,8 @@ interface ActionBtnProps {
   onRemove: (checkList: number[], selectedType: string) => void;
   onToggleAll: () => void;
   isAllChecked: boolean;
-  onAdd: (questions: InterviewQuestionList[], checkList: number[]) => void;
-  questions: InterviewQuestionList[];
+  onAdd: (questions: IQuestion[], checkList: number[]) => void;
+  questions: IQuestion[];
 }
 
 const ActionBtns = ({

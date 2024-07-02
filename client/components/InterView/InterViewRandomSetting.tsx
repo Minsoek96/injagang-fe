@@ -2,14 +2,12 @@ import React, { useState } from "react";
 
 import styled from "styled-components";
 
-import { useDispatch } from "react-redux";
-import { getRandomList } from "../redux/InterViewQuestion/action";
-
 import { ColBox } from "@/styles/GlobalStyle";
 
 import useModal from "@/hooks/useModal";
 
 import { QuestionType } from "@/types/InterViewQuestion/InterViewQuestionType";
+import { useFetchRandomQuestion } from "@/api/INTERVIEWQUESTION/mutations";
 
 const InterViewSettingStyle = styled.div`
   ${ColBox}
@@ -55,18 +53,18 @@ const Button = styled.button`
 `;
 
 const InterViewRandomSetting = () => {
-  const [rendomSetting, setRendomSetting] = useState({
+  const [randomSetting, setRandomSetting] = useState({
     cs: 0,
     situation: 0,
     job: 0,
     personality: 0,
   });
-  const dispatch = useDispatch();
+  const { mutate: getRandomQustions } = useFetchRandomQuestion();
   const { setModal, Modal } = useModal();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setRendomSetting(cur => ({
+    setRandomSetting(cur => ({
       ...cur,
       [name]: value,
     }));
@@ -75,17 +73,17 @@ const InterViewRandomSetting = () => {
   const handleSubmit = () => {
     event?.preventDefault();
     const data = [
-      { size: rendomSetting.cs, questionType: QuestionType.CS },
-      { size: rendomSetting.situation, questionType: QuestionType.SITUATION },
-      { size: rendomSetting.job, questionType: QuestionType.JOB },
+      { size: randomSetting.cs, questionType: QuestionType.CS },
+      { size: randomSetting.situation, questionType: QuestionType.SITUATION },
+      { size: randomSetting.job, questionType: QuestionType.JOB },
       {
-        size: rendomSetting.personality,
+        size: randomSetting.personality,
         questionType: QuestionType.PERSONALITY,
       },
     ];
 
-    dispatch(getRandomList(data));
-    const sumAllQuestions = Object.values(rendomSetting).reduce(
+    getRandomQustions(data);
+    const sumAllQuestions = Object.values(randomSetting).reduce(
       (pre, cur) => pre + Number(cur),
       0,
     );
@@ -104,28 +102,28 @@ const InterViewRandomSetting = () => {
         <Input
           type="number"
           name="cs"
-          value={rendomSetting.cs}
+          value={randomSetting.cs}
           onChange={handleChange}
         />
         <Label>상황 질문</Label>
         <Input
           type="number"
           name="situation"
-          value={rendomSetting.situation}
+          value={randomSetting.situation}
           onChange={handleChange}
         />
         <Label>성격 질문</Label>
         <Input
           type="number"
           name="personality"
-          value={rendomSetting.personality}
+          value={randomSetting.personality}
           onChange={handleChange}
         />
         <Label>직업 질문</Label>
         <Input
           type="number"
           name="job"
-          value={rendomSetting.job}
+          value={randomSetting.job}
           onChange={handleChange}
         />
         <Button type="submit">셋팅완료</Button>

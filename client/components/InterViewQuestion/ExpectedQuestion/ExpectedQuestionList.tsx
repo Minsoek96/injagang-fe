@@ -4,12 +4,11 @@ import styled from "styled-components";
 
 import ExpectedQuestionListItem from "./ExpectedQuestionListItem";
 
-import { InterviewQuestionList } from "@/components/redux/InterViewQuestion/types";
-
 import { ScrollBar } from "@/styles/GlobalStyle";
+import { IQuestion } from "@/types/InterViewQuestion/InterViewQuestionType";
 
 interface ExpectedQuestionListProps {
-  questions: InterviewQuestionList[];
+  questions: IQuestion[];
   isAllCheck: boolean;
   handleCheckList: (id: number, isCheck: boolean) => void;
 }

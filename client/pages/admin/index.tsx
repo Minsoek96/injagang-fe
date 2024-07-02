@@ -9,6 +9,7 @@ import { ColBox } from "@/styles/GlobalStyle";
 
 import { RootReducerType } from "@/components/redux/store";
 
+//TODO : ErrorBoundary 테스트 하기 
 const AdminPage = () => {
   const { role } = useSelector((state: RootReducerType) => state.profile);
   return role === "ADMIN" ? (

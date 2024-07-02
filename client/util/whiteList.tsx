@@ -1,4 +1,3 @@
-// whiteList.js
 export const whiteList = [
   "/join",
   "/login",
@@ -6,4 +5,5 @@ export const whiteList = [
   "/qna/list",
   "/search",
   "/praticed",
+  '/admin',
 ];
