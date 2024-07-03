@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { fadeIn, fadeOut, slideIn, progressBar } from "@/styles/animations";
 
-import { IToast } from "./useToast";
-import { TOAST_MODE } from "./useToast";
+import { IToast } from "../useToast";
+import { TOAST_MODE } from "../useToast";
 
 const FIXED_DURATION = 3000;
 
