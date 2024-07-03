@@ -1,7 +1,6 @@
 import type { AppProps } from "next/app";
 
 import Layout from "@/components/Layout";
-import wrapper from "@/components/redux/store";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -10,4 +9,4 @@ const App = ({ Component, pageProps }: AppProps) => {
     </Layout>
   );
 };
-export default wrapper.withRedux(App);
+export default App;
