@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 import usePwCheck from "@/hooks/usePwCheck";
-import useSignUpManager from "../hooks/useSignUpManager";
 
 import { hasEmptyFields } from "@/util/hasEmpty";
 import { ERROR_MESSAGES } from "@/constants";
+import { useFetchSignup } from "@/api/AUTH/mutations";
 
 interface joinInfoType {
   [key: string]: string;
@@ -25,13 +25,7 @@ const useSignUpLogic = () => {
   });
   const [userMsg, setUserMsg] = useState<string | null>("");
   const { isValid, errorMessage } = usePwCheck({ password: joinInfo.password });
-  const { confirmSignUp, error } = useSignUpManager();
-
-  useEffect(() => {
-    if(error) {
-      setUserMsg(error);
-    }
-  },[error])
+  const { mutate: confirmSignUp } = useFetchSignup();
 
   const validation = [
     {

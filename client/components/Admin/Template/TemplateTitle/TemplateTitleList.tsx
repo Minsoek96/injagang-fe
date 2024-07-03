@@ -1,17 +1,20 @@
-import React from "react";
 import styled from "styled-components";
-import useTemplateManager from "../../hooks/useTemplateManager";
-import useUserTemplateManager from "../../hooks/useUserTemplateManager";
-import TemplateItem from "./TemplateTitleItem";
-import { BiPlus } from "react-icons/bi";
 import { ColBox } from "@/styles/GlobalStyle";
+import { BiPlus } from "react-icons/bi";
+
+import TemplateItem from "./TemplateTitleItem";
+
+import useTemplateStoreManager from "../../hooks/useTemplateStoreManager";
+import { useFetchTemplate } from "@/api/TEMPLATE/queries";
 
 const TemplateTitleList = () => {
-  const { templateList } = useTemplateManager();
-  const { isAddTemplate, setIsAddTemplate } = useUserTemplateManager();
+  const { data: templateList } = useFetchTemplate();
+
+  const { isAddTemplate, setIsAddTemplate } = useTemplateStoreManager();
+
   return (
     <TemplateTtileContainer>
-      {templateList.map(item => (
+      {templateList?.map(item => (
         <TemplateItem key={item.templateId} list={item} />
       ))}
       {!isAddTemplate && (

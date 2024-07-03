@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import AnswerDragView from "./AnswerDragView";
 import BoardItem from "./BoardItem";
 import EditMenuBar from "./EditMenuBar";
 
-import useQnaManager from "../../hooks/useQnaManager";
-
 import { Card, ColBox, ScrollBar } from "@/styles/GlobalStyle";
 import styled from "styled-components";
-
+import { useFetchBoardDetail } from "@/api/QnABoard/queries";
+import { useRouter } from "next/router";
+import { useBoardStore } from "@/store/qna";
 
 const AnswerDetailView = () => {
-  const { boardList, isUpdated } = useQnaManager();
-  if (isUpdated) return <p>유저의 질문을 받아오는중입니다.</p>;
+  const router = useRouter();
+  const boardId = router.query;
+
+  const { setQuestions } = useBoardStore();
+  
+  const {
+    data: boardList,
+    isLoading,
+    isError,
+  } = useFetchBoardDetail(Number(boardId.id));
+
+  useEffect(() => {
+    if (boardList) {
+      const questions = boardList.qnaList.map(item => item.qnaId);
+      setQuestions(questions);
+    }
+  }, [boardList]);
+
+  if (isLoading) return <p>게시글을 받아오는중입니다.</p>;
+
+  if (isError || !boardList) return <p>오류가 발생했습니다.</p>;
   return (
     <Card size={{ width: "80%", height: "45vh", flex: "row" }}>
       <SwitchContainer>
@@ -20,10 +39,10 @@ const AnswerDetailView = () => {
           <BoardItem {...boardList} />
         </LeftContainer>
         <RigthContainer>
-          <AnswerDragView />
+          <AnswerDragView boardId={Number(boardId.id)} />
         </RigthContainer>
       </SwitchContainer>
-      {boardList.owner && <EditMenuBar boardID={boardList.boardId} />}
+      {boardList?.owner && <EditMenuBar boardID={boardList.boardId} />}
     </Card>
   );
 };

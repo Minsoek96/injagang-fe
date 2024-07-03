@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 import styled from "styled-components";
 
 import TemplateView from "@/components/Admin/Template/TemplateList";
@@ -7,10 +5,11 @@ import ExpectedQuestionView from "@/components/InterViewQuestion/ExpectedQuestio
 
 import { ColBox } from "@/styles/GlobalStyle";
 
-import { RootReducerType } from "@/components/redux/store";
+import useAuthStore from "@/store/auth/useAuthStore";
 
+//TODO : ErrorBoundary 테스트 하기
 const AdminPage = () => {
-  const { role } = useSelector((state: RootReducerType) => state.profile);
+  const { role } = useAuthStore();
   return role === "ADMIN" ? (
     <AdminPageStyle>
       <TemplateView />

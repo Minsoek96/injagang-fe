@@ -1,14 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import { memo, useRef, useEffect } from "react";
 
 import { BiPlus, BiRedo, BiCheck, BiX } from "react-icons/bi";
 
 import styled from "styled-components";
 
-import {
-  ColBox,
-  ScrollBar,
-  StyledInput,
-} from "@/styles/GlobalStyle";
+import { ColBox, ScrollBar, StyledInput } from "@/styles/GlobalStyle";
 
 import TQustionItem from "../TQustionItem";
 
@@ -44,7 +40,7 @@ const AddTemplate = ({ onClose }: AddTemplateProps) => {
     { icon: <BiCheck onClick={confirmTemplateCreation} />, text: "확정하기" },
   ];
 
-  const ControllerBtns = React.memo(() => (
+  const ControllerBtns = memo(() => (
     <Controller>
       {ControllerData.map((info, idx) => (
         <IconButton key={idx}>

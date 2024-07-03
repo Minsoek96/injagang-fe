@@ -15,9 +15,11 @@ import Spinner from "../Spinner";
 
 
 const CoverLetter = () => {
+
   const router = useRouter();
   const headerTitle = "나의 자소서 목록";
   const moveCreationPage = "/coverLetter/new";
+  
   return (
     <CoverLetterContainer>
       <CoverLetterPreView />

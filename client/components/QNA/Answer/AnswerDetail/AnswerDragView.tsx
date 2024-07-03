@@ -6,15 +6,19 @@ import { ScrollBar } from "@/styles/GlobalStyle";
 import AnswerDragItem from "./AnswerDragItem";
 
 import useDragCorrection from "../../hooks/useDragCorrection";
-import userQnaManager from "../../hooks/userQnaManager";
-import useQnaManager from "../../hooks/useQnaManager";
+import { useFetchBoardDetail } from "@/api/QnABoard/queries";
+import { useCorrectionStore } from "@/store/qna";
 
 /**드래그 첨삭 기능을 가진 자소서 View */
-const AnswerDragView = () => {
+type AnswerProps = {
+  boardId: number;
+};
+
+const AnswerDragView = ({ boardId }: AnswerProps) => {
   const { handleCorrection, selectedText, removeCorrection, Modal } =
     useDragCorrection();
-  const { dispatchChangeCorrection } = userQnaManager();
-  const { boardList } = useQnaManager();
+  const { setCorrection } = useCorrectionStore();
+  const { data: boardList } = useFetchBoardDetail(boardId);
 
   useEffect(() => {
     handleApply();
@@ -22,7 +26,7 @@ const AnswerDragView = () => {
 
   /**드래그 첨삭 적용 */
   const handleApply = () => {
-    dispatchChangeCorrection({
+    setCorrection({
       targetQuestion: selectedText.dragTitleId,
       targetAnswer: selectedText.selectedText,
       targetQuestionIndex: selectedText.targetId,

@@ -6,13 +6,14 @@ import useEUserQuestionManager from "../hooks/useEUserQuestionManager";
 import useModal from "@/hooks/useModal";
 
 import { ERROR_MESSAGES, MODAL_MESSAGES } from "@/constants";
+import useAuthStore from "@/store/auth/useAuthStore";
 
 const useExpetedPlayListLogic = () => {
   const { selectedType, selectedQuestions, dispatchClearSelectedQuestions } =
     useEUserQuestionManager({ typeCheckCallback: () => {} });
   const { dispatchAddQuestions, dispatchAddInterViewList } =
     useExpectedQuestionManager();
-  const { role } = useMyProfileManager();
+  const { role } = useAuthStore();
   const { setModal, Modal } = useModal();
   const [userQuestion, setUserQuestion] = useState<string[]>([]);
 

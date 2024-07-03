@@ -4,16 +4,15 @@ import styled from "styled-components";
 
 import ColorPicker from "./ColorPicker";
 
-import { qnaList } from "@/components/redux/QnA/types";
-
 import { ISelectedText } from "../../hooks/useDragCorrection";
+import { IQnaList } from "@/types/qnaBoard/QnaBoardType";
 
 
 interface AnswerDragItemProps {
   onSelect: (dragTitleId: number, targetId: number) => void;
   onRemove: () => void;
   selectedText: ISelectedText;
-  list: qnaList;
+  list: IQnaList;
   index: number;
 }
 

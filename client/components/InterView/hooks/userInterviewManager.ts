@@ -1,13 +1,8 @@
-import { useSelector } from "react-redux";
-
-import { RootReducerType } from "@/components/redux/store";
-
+import { useInterViewStore } from "@/store/interview";
 
 const userInterviewManager = () => {
-  const { interViewList } = useSelector(
-    (state: RootReducerType) => state.userInterViewList,
-  );
-  return { interViewList };
+  const { confirmQuestions } = useInterViewStore();
+  return { confirmQuestions };
 };
 
 export default userInterviewManager;

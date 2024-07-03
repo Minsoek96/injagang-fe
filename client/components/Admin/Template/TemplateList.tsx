@@ -1,31 +1,33 @@
-import React, { Suspense } from "react";
+import dynamic from "next/dynamic";
+
 import styled from "styled-components";
 import { ColBox, StyleCard, MainTitleContainer } from "@/styles/GlobalStyle";
 import { v } from "@/styles/variables";
+
 import TemplateViewController from "./TemplateDetail/TemplateViewController";
-import TemplateListFetcher from "./TemplateListFetcher";
-import dynamic from "next/dynamic";
+
 import Spinner from "@/components/Spinner";
+
 import APIErrorBoundary from "@/components/APIErrorBoundary";
+import { Suspense } from "react";
 
 const TemplateTitleList = dynamic(
   () => import("./TemplateTitle/TemplateTitleList"),
   {
-    loading: () => <Spinner />,
+    suspense: true,
   },
 );
 
 const TemplateList = () => {
-
   return (
     <TemplateStlyed>
       <MainTitleContainer>템플릿 만들기</MainTitleContainer>
       <TemplateContainer>
         <Card size={{ width: `${v.xlItemWidth}`, height: "350px" }}>
           <APIErrorBoundary>
-            <TemplateListFetcher>
+            <Suspense fallback={<Spinner />}>
               <TemplateTitleList />
-            </TemplateListFetcher>
+            </Suspense>
           </APIErrorBoundary>
         </Card>
         <Card size={{ width: `${v.xlItemWidth}`, height: "350px" }}>

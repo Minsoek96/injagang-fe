@@ -1,28 +1,19 @@
 import React from "react";
 
 import styled from "styled-components";
-
-import { useSelector } from "react-redux";
-import { RootReducerType } from "../redux/store";
-
 import { ColBox, ScrollBar } from "@/styles/GlobalStyle";
 import { v } from "@/styles/variables";
 
-const CoverLetterPreViewItem = ({
-  idx,
-  question,
-}: {
-  idx: number;
-  question: string;
-}) => <CoverLetterTitle>{idx+1}. {question}</CoverLetterTitle>;
+import CoverLetterPreViewItem from "./preview/CoverLetterPreViewItem";
+
+import useCoverLetterStore from "@/store/coverLetter/useCoverLetterStore";
 
 const CoverLetterPreView = () => {
-  const { selectedEssayList } = useSelector(
-    (state: RootReducerType) => state.userEssayList,
-  );
+  const { selectedCoverLetter } = useCoverLetterStore();
+
   return (
     <CoverLetterPreViewContainer>
-      {selectedEssayList.questions.map((question, idx) => (
+      {selectedCoverLetter.questions.map((question, idx) => (
         <CoverLetterPreViewItem key={idx} question={question} idx={idx} />
       ))}
     </CoverLetterPreViewContainer>
@@ -43,7 +34,3 @@ const CoverLetterPreViewContainer = styled.div`
   overflow-x: hidden;
   box-shadow: ${v.boxShadow2};
 `;
-
-const CoverLetterTitle = styled.h2`
-  margin-top: 11px;
-`

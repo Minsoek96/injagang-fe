@@ -17,41 +17,32 @@ import { v } from "@/styles/variables";
 
 import APIErrorBoundary from "@/components/APIErrorBoundary";
 import Spinner from "@/components/Spinner";
+import { useFetchDetailCoverLetter } from "@/api/coverLetter/queries";
 
-// 생각해보기
-// const CoverLetterQuestionItems = React.lazy(
-//   () => import("../new/CoverLetterQuestionItems"),
-// );
+
 const CoverLetterEdit = () => {
   const [coverLetterTitle, setCoverLetterTitle] = useState<string>("");
   const router = useRouter();
   const moveCoverLetterMainPage = "/coverLetter";
   const { id } = router.query;
+  const {data: coverLetter, isLoading} = useFetchDetailCoverLetter(Number(id));
 
   const { qnaList, setQnAList, deleteQnAList, changeQnAList, addQnAList } =
     useCoverLetterCreatorLogic();
 
   const {
-    loading,
-    targetQnAData,
-    getDetailEssayList,
-    coverLetterMainTitle,
     changeCoverLetter,
     deleteCoverLetter,
   } = useCoverLetterManager();
 
   useEffect(() => {
-    getDetailEssayList(Number(id));
-  }, []);
-
-  useEffect(() => {
-    if (!loading) {
-      setQnAList(targetQnAData);
-      setCoverLetterTitle(coverLetterMainTitle);
+    if (coverLetter && !isLoading) {
+      setQnAList(coverLetter?.qnaList ?? []);
+      setCoverLetterTitle(coverLetter?.title ?? '');
     }
-  }, [targetQnAData]);
+  }, [coverLetter]);
 
-  if (loading) return <Spinner></Spinner>;
+  if (isLoading) return <Spinner></Spinner>;
 
   return (
     <APIErrorBoundary>

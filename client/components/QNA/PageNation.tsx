@@ -1,28 +1,18 @@
-import React, { useEffect } from "react";
+import { memo } from "react";
 
-import useQnaManager from "./hooks/useQnaManager";
 import usePageNation from "@/hooks/usePageNation";
 
 import { StyleButton } from "@/styles/GlobalStyle";
-import userQnaManager from "./hooks/userQnaManager";
 
+//TODO : 너무 복잡한 의존성으로 엮여있음 끊어내기 로직 변경
 const PageNation = () => {
-  const { boardInFoList, isUpdated, dispatchGetBoardList } = useQnaManager();
-  const { boardSearch, boardType } = userQnaManager();
-  const totalPage = boardInFoList.totalPage;
   const {
     curPageNum,
     handlePageClick,
     handlePrevClick,
     handleNextClick,
     visiblePageNumbers,
-  } = usePageNation([totalPage, 8]);
-
-  useEffect(() => {
-    //API가 오랜순 정렬
-    const revercePage = totalPage + 1 - curPageNum;
-    dispatchGetBoardList(revercePage, boardType, boardSearch);
-  }, [curPageNum, isUpdated, totalPage, boardSearch]);
+  } = usePageNation([8]);
 
   return (
     <div>
@@ -61,4 +51,4 @@ const NavigationButton = ({
   </StyleButton>
 );
 
-export default React.memo(PageNation);
+export default memo(PageNation);

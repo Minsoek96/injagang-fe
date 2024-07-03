@@ -6,12 +6,12 @@ import styled from "styled-components";
 import { ColBox, ScrollBar } from "@/styles/GlobalStyle";
 
 import useTemplateManager from "../../hooks/useTemplateManager";
-import useUserTemplateManager from "../../hooks/useUserTemplateManager";
+import useTemplateStoreManager from "../../hooks/useTemplateStoreManager";
 
 const TemplateDetail = () => {
   const { removeTemplateItem } = useTemplateManager();
-  const { selectedTemplateList } = useUserTemplateManager();
-  const isTemplateSelected = selectedTemplateList.questions.length < 1;
+  const { selectedTemplate } = useTemplateStoreManager();
+  const isTemplateSelected = selectedTemplate.questions.length < 1;
   const NoTemplateSelected = () => {
     return <WarringMsg>현재 선택된 리스트가 없습니다.</WarringMsg>;
   };
@@ -21,7 +21,7 @@ const TemplateDetail = () => {
   return (
     <TemplateDetailStyled>
       <Container>
-        {selectedTemplateList.questions.map((question, index) => (
+        {selectedTemplate.questions.map((question, index) => (
           <QuestionStyle key={index}>
             {" "}
             {index + 1}. {question}
@@ -29,7 +29,7 @@ const TemplateDetail = () => {
         ))}
       </Container>
       <TrashIcon
-        onClick={() => removeTemplateItem(selectedTemplateList.templateId)}
+        onClick={() => removeTemplateItem(selectedTemplate.templateId)}
       />
     </TemplateDetailStyled>
   );

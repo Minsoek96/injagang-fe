@@ -17,6 +17,7 @@ import { v } from "@/styles/variables";
 import { ColBox, FlexBox, StyleButton } from "@/styles/GlobalStyle";
 
 import interViewin from "../../assets/images/interviewIn.svg";
+import { useInterViewStore } from "@/store/interview";
 
 const InterviewRecord = () => {
   const [curIndex, setCurIndex] = useState<number>(0);
@@ -24,8 +25,7 @@ const InterviewRecord = () => {
   const [isResult, setIsResult] = useState<boolean>(false);
   const [videoIndex, setVideoIndex] = useState<number>(0);
 
-  const { interViewList } = userInterviewManager();
-  const { randomList } = useExpectedQuestionManager();
+  const { confirmQuestions } = useInterViewStore();
 
   const { setSpeechData, readingTheScript, speechData } = useWebSpeech(
     2000,
@@ -33,8 +33,8 @@ const InterviewRecord = () => {
   );
 
   useEffect(() => {
-    setSpeechData([...randomList.map(a => a.questions), ...interViewList]);
-  }, [interViewList, randomList]);
+    setSpeechData([...confirmQuestions]);
+  }, [confirmQuestions]);
 
   const {
     videoRef,

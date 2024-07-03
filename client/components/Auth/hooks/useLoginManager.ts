@@ -1,47 +1,20 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-
-import { useRouter } from "next/router";
-
-import { checkOut, clearAuthError } from "@/components/redux/Auth/actions";
-import { getProfile } from "@/components/redux/MyProfile/actions";
-
-import { RootReducerType } from "@/components/redux/store";
-
-import { ERROR_MESSAGES } from "@/constants";
+import { useFetchCheckOut, useFetchUserInfo } from "@/api/AUTH/mutations";
 
 const useLoginManager = () => {
-  const dispatch = useDispatch();
-  const [userMsg, setUserMsg] = useState<string>("");
-  const { error, success } = useSelector(
-    (state: RootReducerType) => state.auth,
-  );
-  const router = useRouter();
+  const { mutate: getProfile } = useFetchUserInfo();
+  const { mutate: checkOut } = useFetchCheckOut();
 
   const dispatchGetProfile = useCallback(() => {
-    dispatch(getProfile);
+    getProfile();
   }, []);
 
   const dispatchCheckOut = useCallback(() => {
-    dispatch(checkOut());
+    checkOut();
   }, []);
 
-  useEffect(() => {
-    if (success) {
-      dispatch(getProfile());
-      dispatch(clearAuthError());
-      router.replace("/");
-      return () => {
-        setUserMsg('')
-      };
-    }
-    if (error) {
-      setUserMsg(ERROR_MESSAGES.DOESN_T_MATCH);
-    }
-  }, [error, success]);
-
-  return { userMsg, dispatchGetProfile, dispatchCheckOut };
+  return { dispatchGetProfile, dispatchCheckOut };
 };
 
 export default useLoginManager;

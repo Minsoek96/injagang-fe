@@ -5,20 +5,17 @@ import { ColBox } from "@/styles/GlobalStyle";
 
 import CoverLetter from "@/components/CoverLetter/CoverLetter";
 
-import { useDispatch } from "react-redux";
-import { setInitCurEssayList } from "@/components/redux/Essay/user/actions";
-import { setClearReadEssay } from "@/components/redux/Essay/server/actions";
+import useCoverLetterStore from "@/store/coverLetter/useCoverLetterStore";
 
 const CoverLetterPage = () => {
+  const { initCoverLetter } = useCoverLetterStore();
 
-  const dispatch = useDispatch();
   useEffect(() => {
     return () => {
-      dispatch(setInitCurEssayList());
-      dispatch(setClearReadEssay());
+      initCoverLetter()
     };
   }, []);
-  
+
   return (
     <CoverLetterStyle>
       <CoverLetter />

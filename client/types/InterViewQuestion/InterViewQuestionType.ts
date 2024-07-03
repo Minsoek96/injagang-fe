@@ -23,3 +23,13 @@ export interface IRandomQuestions {
 export interface IDeleteQuestions {
   ids: number[];
 }
+
+export interface IResponseRandom {
+  id: number;
+  questions: QuestionType;
+}
+
+export interface IQuestion {
+  id: number;
+  questions: string;
+}

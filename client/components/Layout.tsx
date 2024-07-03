@@ -13,6 +13,7 @@ import { Reset } from "styled-reset";
 
 import useThemeToggler from "@/hooks/useThemeToggler";
 import useToast from "@/hooks/useToast";
+import RQProvider from "@/services/RQprovider";
 
 const LayoutStyle = styled.div`
   display: flex;
@@ -55,14 +56,16 @@ const Layout = ({ children }: LayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutStyle>
-        <Sidebar>
-          <NavBar toggleTheme={ChangeDarkMode} mode={isDarkMode} />
-        </Sidebar>
-        <Content>{children}</Content>
+        <RQProvider>
+          <Sidebar>
+            <NavBar toggleTheme={ChangeDarkMode} mode={isDarkMode} />
+          </Sidebar>
+          <Content>{children}</Content>
+        </RQProvider>
       </LayoutStyle>
       <RenderToast />
     </ThemeProvider>
   );
 };
 
-export default WithAuth(Layout);
+export default Layout;

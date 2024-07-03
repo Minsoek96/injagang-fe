@@ -7,11 +7,11 @@ import { FlexBox } from "@/styles/GlobalStyle";
 
 import useUserCoverLetterManager from "./hooks/useCoverLetterManager";
 
-import { IGetEssayList } from "@/types/essay/EssayType";
+import { ICoverLetters } from "@/types/coverLetter/CoverLetterType";
 
 
 interface CoverLetterItemsProps {
-  item: IGetEssayList;
+  item: ICoverLetters;
   selectedId: number;
 }
 

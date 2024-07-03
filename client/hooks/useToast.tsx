@@ -1,18 +1,14 @@
 import React, { useCallback } from "react";
 
+import { v4 as uuid4 } from "uuid";
+
 import styled from "styled-components";
 
+import ToastItem from "./toast/ToastItem";
 
-import ToastItem from "./ToastItem";
+import { TOAST_MODE } from "@/constants";
 
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { showToastAction } from "@/components/redux/Toast/actions";
-
-import { TOAST_MODE } from "@/constants"; 
-
-import { RootReducerType } from "@/components/redux/store";
-
+import useToastStore from "@/store/toast/useToastStore";
 
 export interface IToast {
   id: string;
@@ -25,12 +21,25 @@ export interface IToast {
 export type TOAST_MODE = (typeof TOAST_MODE)[keyof typeof TOAST_MODE];
 
 const useToast = (duration: number = 3000) => {
-  const { toastList } = useSelector((state: RootReducerType) => state.toast);
-  const dispatch = useDispatch();
+  const { toastList, showToastAction, hideToastAction } = useToastStore();
 
   const showToast = useCallback(
     (mode: TOAST_MODE = "Info", message: string) => {
-      dispatch(showToastAction(mode, message, duration));
+      const id = uuid4();
+      const startTime = Date.now();
+      const newToastList = { id, mode, message, duration, startTime };
+      showToastAction(newToastList);
+      hideToast(id);
+    },
+    [],
+  );
+
+  const hideToast = useCallback(
+    (id: string) => {
+      const timeoutId = setTimeout(() => {
+        hideToastAction(id);
+      }, duration);
+      return () => clearTimeout(timeoutId);
     },
     [],
   );

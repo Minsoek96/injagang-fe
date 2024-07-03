@@ -1,63 +1,38 @@
-import { useCallback, useMemo} from "react";
+import { useCallback } from "react";
 
 import { useRouter } from "next/router";
 
-import { useDispatch,useSelector } from "react-redux";
-
-import { RootReducerType } from "@/components/redux/store";
-
-import { setCurEssayList } from "../../redux/Essay/user/actions";
-import {
-  deleteEssayList,
-  getDetailEssay,
-  updateEssay,
-} from "@/components/redux/Essay/server/actions";
-
-
 import { moveCoverLetterMainPage } from "../new/CoverLetterCreator";
 
-import { IGetEssayList, IReadQnaList } from "@/types/essay/EssayType";
+import { ICoverLetters, IReadQnaList } from "@/types/coverLetter/CoverLetterType";
+import useCoverLetterStore from "@/store/coverLetter/useCoverLetterStore";
+import {
+  useDeleteCoverLetter,
+  useReviseCoverLetter,
+} from "@/api/coverLetter/mutations";
 
 const useCoverLetterManager = () => {
-  const { readEssayList, loading, essayList, error } = useSelector(
-    (state: RootReducerType) => state.essay,
-  );
-  const { selectedEssayList } = useSelector(
-    (state: RootReducerType) => state.userEssayList,
-  );
-  const coverLetterMainTitle = readEssayList[0]?.title;
-  const dispatch = useDispatch();
   const router = useRouter();
 
-  //CoverLetterItems
-  const changeSeleted = (newList: IGetEssayList) => {
-    if (newList === selectedEssayList) return;
-    dispatch(setCurEssayList(newList));
+  const { selectedCoverLetter, setCoverLetter } = useCoverLetterStore();
+
+  const { mutate: reviseCoverLetter } = useReviseCoverLetter();
+  const { mutate: removeCoverLetter } = useDeleteCoverLetter();
+
+  /** 유저가 선택한 자소서 미리보기 반영 */
+  const changeSeleted = (newList: ICoverLetters) => {
+    if (newList === selectedCoverLetter) return;
+    setCoverLetter(newList);
   };
 
+  /** 자소서 수정 페이지 이동 */
   const moveEditPage = (essayId: number) => {
     router.push({
       pathname: `/coverLetter/${essayId}/edit`,
     });
   };
 
-  //CoverLetterEdit
-  const getDetailEssayList = useCallback((id: number) => {
-    if (id) {
-      dispatch(getDetailEssay(id));
-    }
-  }, []);
-
-  const targetQnAData = useMemo(() => {
-    return readEssayList.length > 0
-      ? readEssayList[0].qnaList.map(a => ({
-          qnaId: a.qnaId,
-          question: a.question,
-          answer: a.answer,
-        }))
-      : [];
-  }, [readEssayList]);
-
+  /** 자소서 업데이트 반영 */
   const changeCoverLetter = useCallback(
     (essayId: number, title: string, qnaList: IReadQnaList[]) => {
       const resetData = {
@@ -67,30 +42,24 @@ const useCoverLetterManager = () => {
           answer: qna.answer,
         })),
       };
-      dispatch(updateEssay(essayId, resetData));
+      reviseCoverLetter({ id: essayId, data: resetData });
       router.push(moveCoverLetterMainPage);
     },
     [],
   );
 
+  /** 자소서 삭제 반영 */
   const deleteCoverLetter = useCallback((targetID: number) => {
-    dispatch(deleteEssayList(targetID));
+    removeCoverLetter(targetID);
     router.push(moveCoverLetterMainPage);
   }, []);
 
   return {
     changeSeleted,
     moveEditPage,
-    essayList,
-    readEssayList,
-    loading,
-    getDetailEssayList,
-    coverLetterMainTitle,
-    targetQnAData,
     changeCoverLetter,
     deleteCoverLetter,
-    selectedEssayList,
-    error,
+    selectedCoverLetter,
   };
 };
 

@@ -1,27 +1,20 @@
-import { useDispatch , useSelector} from "react-redux";
-import { RootReducerType } from "../../redux/store";
-
-import {
-  getInterViewQnaList,
-  handleAddQuestion,
-  handleDeleteInterViewQnaList,
-} from "@/components/redux/InterViewQuestion/action";
-import { addInterViewList } from "@/components/redux/InterViewList/action";
 
 import {
   IAddQuestions,
   QuestionType,
 } from "@/types/InterViewQuestion/InterViewQuestionType";
+import { useInterViewStore } from "@/store/interview";
+import { useFetchQuestions } from "@/api/INTERVIEWQUESTION/queries";
+import { useAddInterViewQ, useDeleteInterViewQ } from "@/api/INTERVIEWQUESTION/mutations";
 
 const useExpectedQuestionManager = () => {
-  const dispatch = useDispatch();
-  const { list, randomList } = useSelector(
-    (state: RootReducerType) => state.interViewQuestion,
-  );
+  const {selectedType } = useInterViewStore()
+  const {data: interViewQuestionList =[]} = useFetchQuestions(selectedType)
+  const {mutate: deleteQuestions} = useDeleteInterViewQ()
+  const {mutate: addQuestions} = useAddInterViewQ()
 
-  const dispatchGetInterViewQnaList = (slectType: QuestionType | string) => {
-    dispatch(getInterViewQnaList(slectType));
-  };
+
+  const { setConfirmQuestions} = useInterViewStore()
 
   const dispatchRemoveQuestions = (
     targetIds: number[],
@@ -30,26 +23,23 @@ const useExpectedQuestionManager = () => {
     const formmatData = {
       ids: targetIds,
     };
-    dispatch(handleDeleteInterViewQnaList(formmatData, type));
+    deleteQuestions(formmatData);
   };
 
   const dispatchAddQuestions = (newList: IAddQuestions) => {
-    dispatch(handleAddQuestion(newList));
+    addQuestions(newList);
   };
 
   //TODO : 추후에 InterView관련 작업 할때 옮기기를 고려
   const dispatchAddInterViewList = (confirmedData: string[]) => {
-    dispatch(addInterViewList(confirmedData));
+    setConfirmQuestions(confirmedData);
   };
 
-  const interViewQuestionList = list;
   return {
     interViewQuestionList,
-    dispatchGetInterViewQnaList,
     dispatchRemoveQuestions,
     dispatchAddQuestions,
     dispatchAddInterViewList,
-    randomList,
   };
 };
 

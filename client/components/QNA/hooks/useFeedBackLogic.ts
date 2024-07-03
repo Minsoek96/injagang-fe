@@ -1,8 +1,8 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 
 import useModal from "@/hooks/useModal";
-import userQnaManager from "../hooks/userQnaManager";
-import useFeedManager from "../hooks/useFeedManager";
+import { useCorrectionStore, useFeedStore } from "@/store/qna";
+import { useWriteFeed } from "@/api/FEEDBACK/mutation";
 
 const useFeedBackLogic = () => {
   const [correctionText, setCorrectionText] = useState<string>("");
@@ -10,11 +10,13 @@ const useFeedBackLogic = () => {
   const [isViolation, setIsViolation] = useState<boolean>(false);
   const textRef = useRef<HTMLTextAreaElement>(null);
   const { setModal, Modal } = useModal();
-  const { selectedCorrection, dispatchInitCorrection } = userQnaManager();
 
-  const { dispatchWriteFeedBack } = useFeedManager();
+  const { correction, initCorrection } = useCorrectionStore();
+  const { targetFeed } = useFeedStore();
+
+  const { mutate: writeFeedBack } = useWriteFeed(targetFeed);
   const CORRECTION_MIN = correctionText.length < 30;
-  const EMPTY_CORRECTION = selectedCorrection.targetAnswer === "";
+  const EMPTY_CORRECTION = correction.targetAnswer === "";
 
   const handleWarring = useCallback(() => {
     setModal({
@@ -57,14 +59,14 @@ const useFeedBackLogic = () => {
       return;
     }
     const formatData = {
-      qnaId: selectedCorrection.targetQuestionIndex,
-      feedbackTarget: selectedCorrection.targetAnswer,
+      qnaId: correction.targetQuestionIndex,
+      feedbackTarget: correction.targetAnswer,
       feedbackContent: correctionText,
     };
-    dispatchWriteFeedBack(formatData);
-    dispatchInitCorrection();
+    writeFeedBack(formatData);
+    initCorrection();
     handleClear();
-  }, [CORRECTION_MIN, EMPTY_CORRECTION, selectedCorrection, correctionText]);
+  }, [CORRECTION_MIN, EMPTY_CORRECTION, correction, correctionText]);
 
   const handleChangeFeedBack = useCallback((feedBackText: string) => {
     setCorrectionText(feedBackText);
@@ -73,7 +75,7 @@ const useFeedBackLogic = () => {
   return {
     textRef,
     correctionText,
-    selectedCorrection,
+    selectedCorrection: correction,
     handleChangeFeedBack,
     handleSubmit,
     handleClear,

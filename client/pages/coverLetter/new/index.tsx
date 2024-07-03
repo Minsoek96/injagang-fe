@@ -2,18 +2,16 @@ import React, { useEffect } from "react";
 
 import APIErrorBoundary from "@/components/APIErrorBoundary";
 import CoverLetterCreator from "@/components/CoverLetter/new/CoverLetterCreator";
-import { useDispatch } from "react-redux";
-
-import { clearCurTemplateList } from "@/components/redux/Template/user/actions";
+import useTemplateStoreManager from "@/components/Admin/hooks/useTemplateStoreManager";
 
 const CoverLetterEditorPage = () => {
-  const dispatch = useDispatch();
+  const { clearCurTemplate } = useTemplateStoreManager();
 
   useEffect(() => {
     return () => {
-      dispatch(clearCurTemplateList())
-    }
-  },[])
+      clearCurTemplate();
+    };
+  }, []);
   return (
     <APIErrorBoundary>
       <CoverLetterCreator />

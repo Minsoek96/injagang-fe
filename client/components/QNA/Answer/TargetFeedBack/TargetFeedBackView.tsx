@@ -1,31 +1,23 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import { ColBox } from "@/styles/GlobalStyle";
-import userQnaManager from "../../hooks/userQnaManager";
-import useFeedManager from "../../hooks/useFeedManager";
+
 import TargetFeedBackItems from "./TargetFeedBackItems";
 
-const TargetFeedBackView = () => {
-  const {
-    feedbackList,
-    isUpdated,
-    dispatchGetFeedList,
-    dispatchUpdateFeedBack,
-  } = useFeedManager();
-  const { targetFeed } = userQnaManager();
+import userQnaManager from "../../hooks/userQnaManager";
+import { useFetchFeedBackList } from "@/api/FEEDBACK/queries";
+import { useReviseFeed } from "@/api/FEEDBACK/mutation";
 
-  useEffect(() => {
-    if (targetFeed !== 0) {
-      dispatchGetFeedList(targetFeed);
-    }
-  }, [targetFeed, isUpdated]);
+const TargetFeedBackView = () => {
+  const { targetFeed } = userQnaManager();
+  const { data: feedbackList } = useFetchFeedBackList(targetFeed);
+  const { mutate: updateFeed } = useReviseFeed(targetFeed);
 
   return (
     <FeedBackViewStyle>
       {feedbackList?.map(feedback => (
         <TargetFeedBackItems
           key={feedback.feedbackId}
-          handleUpdateFeedBack={dispatchUpdateFeedBack}
+          handleUpdateFeedBack={updateFeed}
           {...feedback}
         ></TargetFeedBackItems>
       ))}

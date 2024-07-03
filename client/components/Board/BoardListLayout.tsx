@@ -1,30 +1,32 @@
-import React from "react";
-
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
 
 import styled from "styled-components";
 
-import { RootReducerType } from "../redux/store";
-
-
 import BoardList from "./BoardList";
 import BoardListHead from "./BoardListHead";
-
-
+import { useFetchBoardList } from "@/api/QnABoard/queries";
+import { useBoardStore } from "@/store/qna";
 
 const HEAD_ITEM = ["번호", "제목", "닉네임"];
 const ID_KEY = "id";
 const ROUTE_TEMPLATE = "/qna/answer";
 
 const BoardListLayout = () => {
-  const { boardInfos } = useSelector(
-    (state: RootReducerType) => state.board.boardInFoList,
-  );
+  const { curPageNum, boardType, boardSearch, setTotalPage } = useBoardStore();
+  const { data } = useFetchBoardList(curPageNum, boardType, boardSearch);
+
+  useEffect(() => {
+    if (data?.boardInfos) {
+      const total = data.totalPage;
+      setTotalPage(total);
+    }
+  }, [data]);
+
   return (
     <BoardListViewStyle>
       <BoardListHead headItem={HEAD_ITEM} />
       <BoardList
-        boardInfos={boardInfos.reverse() ?? []}
+        boardInfos={data?.boardInfos ?? []}
         idKey={ID_KEY}
         displayKeys={["id", "title", "nickname"]}
         route={ROUTE_TEMPLATE}

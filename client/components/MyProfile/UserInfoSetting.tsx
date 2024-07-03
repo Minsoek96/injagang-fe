@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { RxAvatar } from "react-icons/rx";
 
 import styled from "styled-components";
 
 import useMyProfileManager from "./hooks/useMyProfileManager";
-import useMyProfileLogic from "./hooks/useMyProfileLogic";
 import { StyleButton } from "@/styles/GlobalStyle";
 
 import { SessionStorageManager } from "@/util/sessionStorageManager";
+import useAuthStore from "@/store/auth/useAuthStore";
 
 const UserInfoSetting = () => {
+  const { nickName : confirmNick } =  useAuthStore();
+  const [nickName, setNickName] = useState(confirmNick??'')
   const myInfo = new SessionStorageManager("info");
-  const { nickName, setNickName } = useMyProfileLogic();
   const { dispatchNickNameChange, Modal } = useMyProfileManager();
   const mainTitle = "닉네임 변경";
 
