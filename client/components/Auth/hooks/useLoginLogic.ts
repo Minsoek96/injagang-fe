@@ -1,15 +1,12 @@
 import { useState, useCallback, useRef } from "react";
 
-import { useDispatch } from "react-redux";
-
-import { authenTicate } from "@/components/redux/Auth/actions";
-
 import { hasEmptyFieldKey } from "@/util/hasEmpty";
 
 import { ERROR_MESSAGES } from "@/constants";
+import { useFetchSignin } from "@/api/AUTH/mutations";
 
 const useLoginLogic = () => {
-  const dispatch = useDispatch();
+  const { mutate: authenTicate, errorMsg: loginErrorMsg } = useFetchSignin();
   const [loginInfo, setLoginInfo] = useState({
     loginId: "",
     password: "",
@@ -32,7 +29,7 @@ const useLoginLogic = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    runValidationCheck() && dispatch(authenTicate(loginInfo));
+    runValidationCheck() && authenTicate(loginInfo);
     setUserLogicMsg("");
   };
 
@@ -55,6 +52,7 @@ const useLoginLogic = () => {
     handleSubmit,
     loginIdRef,
     passwordRef,
+    loginErrorMsg,
   };
 };
 

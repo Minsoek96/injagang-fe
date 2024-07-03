@@ -6,11 +6,9 @@ import styled, { css, keyframes } from "styled-components";
 
 import InputField from "@/components/UI/InputField";
 
-import useLoginManager from "./hooks/useLoginManager";
 import useLoginLogic from "./hooks/useLoginLogic";
 
 const Login = () => {
-  const { userMsg } = useLoginManager();
   const {
     loginInfo,
     handleChange,
@@ -18,18 +16,19 @@ const Login = () => {
     userLogicMsg,
     loginIdRef,
     passwordRef,
+    loginErrorMsg,
   } = useLoginLogic();
   const [shakeTrigger, setShakeTrigger] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
-    if (userMsg !== "") {
+    if (loginErrorMsg !== "") {
       setShakeTrigger(false);
       setTimeout(() => {
         setShakeTrigger(true);
       }, 50);
     }
-  }, [userMsg, userLogicMsg]);
+  }, [loginErrorMsg, userLogicMsg]);
 
   return (
     <Form shakeTrigger={shakeTrigger} onSubmit={handleSubmit}>
@@ -49,9 +48,12 @@ const Login = () => {
         value={loginInfo.password}
         onChange={handleChange}
       />
-      {userLogicMsg || (userMsg && <ERROR> {userLogicMsg || userMsg} </ERROR>)}
+      {userLogicMsg ||
+        (loginErrorMsg && <ERROR> {userLogicMsg || loginErrorMsg} </ERROR>)}
       <Button type="submit">로그인</Button>
-      <Button type="button" onClick={() => router.replace("/join")}>회원가입</Button>
+      <Button type="button" onClick={() => router.replace("/join")}>
+        회원가입
+      </Button>
     </Form>
   );
 };

@@ -1,9 +1,8 @@
 import React from "react";
 
-import useMyProfileManager from "@/components/MyProfile/hooks/useMyProfileManager";
-
 import { StyleButton } from "@/styles/GlobalStyle";
 import { IQuestion } from "@/types/InterViewQuestion/InterViewQuestionType";
+import useAuthStore from "@/store/auth/useAuthStore";
 
 
 interface ActionBtnProps {
@@ -25,7 +24,7 @@ const ActionBtns = ({
   onAdd,
   questions,
 }: ActionBtnProps) => {
-  const { role } = useMyProfileManager();
+  const { role } = useAuthStore();
   const isAdmin = role === "ADMIN" ? "ADMIN" : "USER";
 
   const handleRemove = () => {

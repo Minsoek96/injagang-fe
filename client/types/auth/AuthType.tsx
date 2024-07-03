@@ -15,7 +15,7 @@ export type ChangeNick = {
 export interface IChangePw {
   nowPassword: string;
   changePassword: string;
-  chagnePasswordCheck: string;
+  changePasswordCheck: string;
 }
 
 export interface ISignup {
@@ -24,4 +24,17 @@ export interface ISignup {
   passwordCheck: string;
   email: string;
   nickname: string;
+}
+
+export interface IResponseSignin {
+  userId: string;
+  access: string;
+  refresh: string;
+}
+
+export type RoleType = 'USER' | 'ADMIN'
+
+export interface IUserInfo {
+  nickname: string;
+  role: RoleType;
 }

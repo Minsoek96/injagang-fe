@@ -1,18 +1,13 @@
 import { useCallback } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-
-import { passWordChange } from "@/components/redux/Auth/actions";
-import { nicknameChange } from "@/components/redux/MyProfile/actions";
-
 import useModal from "@/hooks/useModal";
 
-import { RootReducerType } from "@/components/redux/store";
 import { IPassWordInfo } from "./useMyProfileLogic";
 
 import { runValidationChecks } from "@/util/runValidationChecks";
 import { hasEmptyFields } from "@/util/hasEmpty";
 import { ERROR_MESSAGES, MODAL_MESSAGES } from "@/constants";
+import { useChangeNick, useChangePassWord } from "@/api/AUTH/mutations";
 
 const validation = {
   password: ({
@@ -39,8 +34,9 @@ const validation = {
 };
 
 const useMyProfileManager = () => {
-  const dispatch = useDispatch();
-  const { role } = useSelector((state: RootReducerType) => state.profile);
+  const { mutate: changeNickname } = useChangeNick();
+  const { mutate: confirmChangePw } = useChangePassWord();
+
   const { Modal, setModal } = useModal();
 
   //PASSWORD DOMAIN
@@ -88,9 +84,7 @@ const useMyProfileManager = () => {
     changePassword,
     changePasswordCheck,
   }: IPassWordInfo) => {
-    dispatch(
-      passWordChange({ nowPassword, changePassword, changePasswordCheck }),
-    );
+    confirmChangePw({ nowPassword, changePassword, changePasswordCheck });
   };
 
   //NICKNAME DOMAIN
@@ -112,7 +106,7 @@ const useMyProfileManager = () => {
   }, []);
 
   const nicknameValidationSuccess = (nickName: string) => {
-    dispatch(nicknameChange(nickName));
+    changeNickname(nickName);
   };
 
   const commonValidationFailure = (errorMsg: string) => {
@@ -128,7 +122,6 @@ const useMyProfileManager = () => {
     dispatchPasswordChange,
     dispatchNickNameChange,
     Modal,
-    role,
   };
 };
 

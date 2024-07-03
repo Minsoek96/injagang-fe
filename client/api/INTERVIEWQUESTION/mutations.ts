@@ -19,7 +19,8 @@ const useFetchRandomQuestion = () => {
   const [showToast] = useToast();
   const { setConfirmQuestions } = useInterViewStore();
 
-  return useMutation({
+  return useMutation(
+    {
     mutationFn: (random: IRandomQuestions[]) =>
       getRandomQuestions(random).then(res => res.data),
 

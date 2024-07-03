@@ -12,7 +12,6 @@ const useMyProfileLogic = () => {
     changePassword: "",
     changePasswordCheck: "",
   });
-  const [nickName, setNickName] = useState<string>("");
 
   const handleInfoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -22,7 +21,7 @@ const useMyProfileLogic = () => {
     }));
   };
 
-  return { passWordInfo, handleInfoChange, setNickName, nickName };
+  return { passWordInfo, handleInfoChange};
 };
 
 export default useMyProfileLogic;

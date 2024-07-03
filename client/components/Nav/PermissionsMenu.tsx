@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import styled from "styled-components";
 
@@ -10,18 +10,28 @@ import { AdminMenu, NavContainer } from "./MenuItems";
 
 import { ModalProps } from "@/hooks/useModal";
 import useLoginManager from "../Auth/hooks/useLoginManager";
-import useMyProfileManager from "../MyProfile/hooks/useMyProfileManager";
 
 import { FlexBox } from "@/styles/GlobalStyle";
+import useAuthStore from "@/store/auth/useAuthStore";
+import { useFetchUserInfo } from "@/api/AUTH/mutations";
+import Cookies from "js-cookie";
 
 interface PermissionMenuProps {
   setModal: (modalProps: ModalProps) => void;
 }
 
 const PermissionsMenu = ({ setModal }: PermissionMenuProps) => {
-  const { role } = useMyProfileManager();
+  const { userId, role } = useAuthStore();
   const { dispatchCheckOut } = useLoginManager();
   const router = useRouter();
+  const { mutate: getProfile } = useFetchUserInfo();
+
+  useEffect(() => {
+    if (Cookies.get("userId")) {
+      getProfile();
+    }
+    return;
+  }, [userId]);
 
   return (
     <Container>
