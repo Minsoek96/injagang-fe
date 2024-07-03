@@ -56,10 +56,10 @@ const Layout = ({ children }: LayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutStyle>
-        <Sidebar>
-          <NavBar toggleTheme={ChangeDarkMode} mode={isDarkMode} />
-        </Sidebar>
         <RQProvider>
+          <Sidebar>
+            <NavBar toggleTheme={ChangeDarkMode} mode={isDarkMode} />
+          </Sidebar>
           <Content>{children}</Content>
         </RQProvider>
       </LayoutStyle>
@@ -68,4 +68,4 @@ const Layout = ({ children }: LayoutProps) => {
   );
 };
 
-export default WithAuth(Layout);
+export default Layout;
