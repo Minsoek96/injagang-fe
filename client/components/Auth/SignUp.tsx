@@ -1,17 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import InputField from "@/components/UI/InputField";
+import InputField from '@/components/UI/InputField';
 
-import useSignUpLogic from "./hooks/useSignUpLogic";
+import { ERROR_MESSAGES } from '@/constants';
+import useSignUpLogic from './hooks/useSignUpLogic';
 
-import { ERROR_MESSAGES } from "@/constants";
-
-const SignUp = () => {
+function SignUp() {
   const passwordCheck = useRef<HTMLInputElement | null>(null);
   const confirmPasswordCheck = useRef<HTMLInputElement | null>(null);
-  const { handleSubmit, handleValueChange, userMsg, joinInfo } = useSignUpLogic(); 
+  const {
+    handleSubmit, handleValueChange, userMsg, joinInfo,
+  } = useSignUpLogic();
 
   useEffect(() => {
     if (userMsg === ERROR_MESSAGES.CHECK_PASSWORD) {
@@ -62,7 +63,7 @@ const SignUp = () => {
       <Button type="submit">회원가입</Button>
     </Form>
   );
-};
+}
 
 export default SignUp;
 const Form = styled.form`

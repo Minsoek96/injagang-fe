@@ -1,6 +1,5 @@
-import React from "react";
-
-import styled from "styled-components";
+import keys from '@/util/keys';
+import styled from 'styled-components';
 // import { QuestionType } from "../redux/InterViewQuestion/action";
 
 interface SelectProps {
@@ -11,8 +10,8 @@ interface SelectProps {
 }
 
 const ControlMenuSelect = styled.select<SelectProps>`
-  width: ${({ Size }) => Size.width || "100%"};
-  height: ${({ Size }) => Size.height || "100%"};
+  width: ${({ Size }) => Size.width || '100%'};
+  height: ${({ Size }) => Size.height || '100%'};
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
@@ -21,18 +20,15 @@ const ControlMenuSelect = styled.select<SelectProps>`
 interface ControlMenuProps {
   value: string;
   onChange: (
-    selected: string,
+    selected: string
   ) => void | React.Dispatch<React.SetStateAction<string>>;
   optionList: { title: string }[];
   Size: { width: string; height: string };
 }
 
-const ControlMenu = ({
-  value,
-  onChange,
-  optionList,
-  Size,
-}: ControlMenuProps) => {
+function ControlMenu({
+  value, onChange, optionList, Size,
+}: ControlMenuProps) {
   return (
     <div>
       <label htmlFor="controlMenuSelect" className="sr-only">
@@ -42,19 +38,19 @@ const ControlMenu = ({
         id="controlMenuSelect"
         Size={Size}
         value={value}
-        onChange={e => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
       >
         <option value="" disabled>
           Please select
         </option>
         {optionList.map((option, index) => (
-          <option key={index} value={option.title}>
+          <option key={keys(option.title, index)} value={option.title}>
             {option.title}
           </option>
         ))}
       </ControlMenuSelect>
     </div>
   );
-};
+}
 
 export default ControlMenu;

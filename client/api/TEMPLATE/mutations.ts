@@ -1,19 +1,18 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import template from "./queryKeys";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { addTemplate, deleteTemplate } from "./apis";
+import useToast from '@/hooks/useToast';
 
-import useToast from "@/hooks/useToast";
+import { IAddTemplate } from '@/types/template/TemplateType';
 
-import { IAddTemplate } from "@/types/template/TemplateType";
-
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from "@/constants";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/constants';
+import { addTemplate, deleteTemplate } from './apis';
+import template from './queryKeys';
 
 const useAddTemplate = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (template: IAddTemplate) => addTemplate(template),
+    mutationFn: (newTemplate: IAddTemplate) => addTemplate(newTemplate),
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: template.all });
@@ -27,7 +26,7 @@ const useAddTemplate = () => {
 };
 
 const useDeleteTemplate = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: number) => deleteTemplate(id),

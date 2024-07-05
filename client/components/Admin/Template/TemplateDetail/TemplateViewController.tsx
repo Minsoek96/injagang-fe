@@ -1,17 +1,16 @@
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { ColBox } from "@/styles/GlobalStyle";
+import { ColBox } from '@/styles/GlobalStyle';
 
-import AddTemplate from "./AddTemplate";
-import TemplateDetail from "./TemplateDetail";
-import Spinner from "@/components/Spinner";
+import Spinner from '@/components/Spinner';
+import AddTemplate from './AddTemplate';
+import TemplateDetail from './TemplateDetail';
 
-import useTemplateStoreManager from "../../hooks/useTemplateStoreManager";
+import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
 
-
-const TemplateViewController = () => {
+function TemplateViewController() {
   const { isAddTemplate, setIsAddTemplate } = useTemplateStoreManager();
   return (
     <TemplateViewStyle>
@@ -24,7 +23,7 @@ const TemplateViewController = () => {
       )}
     </TemplateViewStyle>
   );
-};
+}
 
 export default TemplateViewController;
 

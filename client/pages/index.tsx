@@ -1,19 +1,19 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Manual from "@/components/Manual/Manual";
+import Manual from '@/components/Manual/Manual';
 
-import { ColBox } from "@/styles/GlobalStyle";
+import { ColBox } from '@/styles/GlobalStyle';
 
 const HomeStyle = styled.div`
   ${ColBox}
   width: 80vw;
 `;
 
-const Home = () => {
+function Home() {
   return (
     <HomeStyle>
       <Manual />
     </HomeStyle>
   );
-};
+}
 export default Home;

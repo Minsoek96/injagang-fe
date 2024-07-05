@@ -1,5 +1,5 @@
-import { CorrectionItem } from "@/components/QNA/Answer/AnswerLayout";
-import { create } from "zustand";
+import { CorrectionItem } from '@/types/feedback/FeedBackType';
+import { create } from 'zustand';
 
 type State = {
   correction: CorrectionItem;
@@ -10,9 +10,9 @@ type Action = {
   initCorrection: () => void;
 };
 
-const useCorrectionStore = create<State & Action>(set => ({
+const useCorrectionStore = create<State & Action>((set) => ({
   correction: {
-    targetAnswer: "",
+    targetAnswer: '',
     targetQuestion: 0,
     targetQuestionIndex: 0,
   },
@@ -20,7 +20,7 @@ const useCorrectionStore = create<State & Action>(set => ({
   initCorrection: () =>
     set({
       correction: {
-        targetAnswer: "",
+        targetAnswer: '',
         targetQuestion: 0,
         targetQuestionIndex: 0,
       },

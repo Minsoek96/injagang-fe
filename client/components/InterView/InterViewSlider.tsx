@@ -1,25 +1,23 @@
-import React from "react";
+import styled from 'styled-components';
 
-import styled from "styled-components";
+import { MdOutlineFileDownload } from 'react-icons/md';
 
-import { MdOutlineFileDownload } from "react-icons/md";
-
-import { ColBox, FlexBox, ScrollBar } from "@/styles/GlobalStyle";
-import { saveAs } from "file-saver";
+import { ColBox, FlexBox, ScrollBar } from '@/styles/GlobalStyle';
+import { saveAs } from 'file-saver';
 
 type InterViewSliderProps = {
   video: Blob[];
   question: string[];
   idx: number;
 };
-const InterViewSlider = ({ video, question, idx }: InterViewSliderProps) => {
+function InterViewSlider({ video, question, idx }: InterViewSliderProps) {
   const downloadVideo = () => {
     if (video.length > 0) {
       const url = URL.createObjectURL(video[idx]);
       fetch(url)
-        .then(res => res.blob())
-        .then(blob => {
-          saveAs(blob, "interview_video.mp4");
+        .then((res) => res.blob())
+        .then((blob) => {
+          saveAs(blob, 'interview_video.mp4');
           URL.revokeObjectURL(url);
         });
     }
@@ -27,16 +25,29 @@ const InterViewSlider = ({ video, question, idx }: InterViewSliderProps) => {
   return (
     <InterViewSliderStyle>
       <InterViewInfo>
-        {<h2>질문: {question[idx]} </h2>}
+        <h2>
+          질문:
+          {question[idx]}
+        </h2>
         <h2>나의 대답: </h2>
       </InterViewInfo>
-      <video autoPlay controls src={URL.createObjectURL(video[idx])}></video>
-      <button onClick={downloadVideo}>
-        <MdOutlineFileDownload></MdOutlineFileDownload>DOWNLOAD
+      <video autoPlay controls src={URL.createObjectURL(video[idx])}>
+        <track
+          kind="captions"
+          src="path/to/captions.vtt"
+          srcLang="en"
+          label="English captions"
+          default
+        />
+        Your browser does not support the video tag.
+      </video>
+      <button type="button" onClick={downloadVideo}>
+        <MdOutlineFileDownload />
+        DOWNLOAD
       </button>
     </InterViewSliderStyle>
   );
-};
+}
 
 export default InterViewSlider;
 

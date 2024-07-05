@@ -1,17 +1,15 @@
-import React from "react";
-
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface ColorPickerProps {
   onSelectColor: (color: string) => void;
 }
 
-const colors = ["#ff0000b3", "#0c750c9f", "#0000FF", "#e69a0def"];
+const colors = ['#ff0000b3', '#0c750c9f', '#0000FF', '#e69a0def'];
 
-const ColorPicker = ({ onSelectColor }: ColorPickerProps) => {
+function ColorPicker({ onSelectColor }: ColorPickerProps) {
   return (
     <ColorPickerContainer>
-      {colors.map(color => (
+      {colors.map((color) => (
         <ColorBox
           key={color}
           color={color}
@@ -20,7 +18,7 @@ const ColorPicker = ({ onSelectColor }: ColorPickerProps) => {
       ))}
     </ColorPickerContainer>
   );
-};
+}
 
 const ColorPickerContainer = styled.div`
   display: flex;
@@ -30,7 +28,7 @@ const ColorPickerContainer = styled.div`
 const ColorBox = styled.div<{ color: string }>`
   width: 20px;
   height: 20px;
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
   cursor: pointer;
 `;
 

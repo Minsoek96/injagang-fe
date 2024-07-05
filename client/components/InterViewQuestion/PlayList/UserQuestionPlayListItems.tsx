@@ -1,9 +1,8 @@
-import React from "react";
+import { memo } from 'react';
 
-import { BiTrash } from "react-icons/bi";
+import { BiTrash } from 'react-icons/bi';
 
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 const AddQuestionItemStyle = styled.div`
   display: flex;
@@ -25,17 +24,17 @@ type AddQuestionItemProps = {
   handleRemoveText: (index: number) => void;
 };
 
-const UserQuestionPlayListItems = ({
+function UserQuestionPlayListItems({
   item,
   index,
   handleRemoveText,
-}: AddQuestionItemProps) => {
+}: AddQuestionItemProps) {
   return (
     <AddQuestionItemStyle>
       {item}
       <BiTrash onClick={() => handleRemoveText(index)} />
     </AddQuestionItemStyle>
   );
-};
+}
 
-export default React.memo(UserQuestionPlayListItems);
+export default memo(UserQuestionPlayListItems);

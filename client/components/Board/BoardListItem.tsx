@@ -1,10 +1,8 @@
-import React from "react";
+import { useRouter } from 'next/router';
 
-import { useRouter } from "next/router";
+import styled from 'styled-components';
 
-import styled from "styled-components";
-
-import { v4 as uuid4 } from "uuid";
+import { v4 as uuid4 } from 'uuid';
 
 interface BoardListItemProps<T> {
   item: T;
@@ -13,12 +11,12 @@ interface BoardListItemProps<T> {
   route?: string;
 }
 
-const BoardListItem = <T,>({
+function BoardListItem<T>({
   item,
   idKey,
   displayKeys,
-  route,
-}: BoardListItemProps<T>) => {
+  route = '',
+}: BoardListItemProps<T>) {
   const router = useRouter();
 
   const navigateToDetail = () => {
@@ -27,12 +25,10 @@ const BoardListItem = <T,>({
 
   return (
     <BoardListItemRow onClick={navigateToDetail}>
-      {displayKeys?.map(key => (
-        <td key={uuid4()}>{String(item[key])}</td>
-      ))}
+      {displayKeys?.map((key) => <td key={uuid4()}>{String(item[key])}</td>)}
     </BoardListItemRow>
   );
-};
+}
 
 export default BoardListItem;
 

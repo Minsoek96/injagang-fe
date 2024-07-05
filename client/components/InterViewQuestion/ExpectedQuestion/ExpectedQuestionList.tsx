@@ -1,36 +1,33 @@
-import React from "react";
+import styled from 'styled-components';
 
-import styled from "styled-components";
-
-import ExpectedQuestionListItem from "./ExpectedQuestionListItem";
-
-import { ScrollBar } from "@/styles/GlobalStyle";
-import { IQuestion } from "@/types/InterViewQuestion/InterViewQuestionType";
+import { ScrollBar } from '@/styles/GlobalStyle';
+import { IQuestion } from '@/types/InterViewQuestion/InterViewQuestionType';
+import ExpectedQuestionListItem from './ExpectedQuestionListItem';
 
 interface ExpectedQuestionListProps {
   questions: IQuestion[];
   isAllCheck: boolean;
   handleCheckList: (id: number, isCheck: boolean) => void;
 }
-const ExpectedQuestionList = ({
+function ExpectedQuestionList({
   questions,
   isAllCheck,
   handleCheckList,
-}: ExpectedQuestionListProps) => {
+}: ExpectedQuestionListProps) {
   return (
     <Container>
-      {questions &&
-        questions.map((question, i) => (
+      {questions
+        && questions.map((question) => (
           <ExpectedQuestionListItem
             key={question.id}
             allCheck={isAllCheck}
             onChange={handleCheckList}
             {...question}
-          ></ExpectedQuestionListItem>
+          />
         ))}
     </Container>
   );
-};
+}
 
 export default ExpectedQuestionList;
 

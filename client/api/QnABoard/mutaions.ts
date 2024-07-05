@@ -1,12 +1,12 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteQnaBoard, reviseQnaBoard, writeQnaBoard } from "./apis";
-import { board } from "./queryKeys";
-import { IReviseQnaBoard, IWriteQnaBoard } from "@/types/qnaBoard/QnaBoardType";
-import useToast from "@/hooks/useToast";
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from "@/constants";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { IReviseQnaBoard, IWriteQnaBoard } from '@/types/qnaBoard/QnaBoardType';
+import useToast from '@/hooks/useToast';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/constants';
+import { board } from './queryKeys';
+import { deleteQnaBoard, reviseQnaBoard, writeQnaBoard } from './apis';
 
 const useDeleteBoard = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -24,7 +24,7 @@ const useDeleteBoard = () => {
 };
 
 const useReviseBoard = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -42,15 +42,15 @@ const useReviseBoard = () => {
 };
 
 const useWriteBoard = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (newBoard: IWriteQnaBoard) => writeQnaBoard(newBoard),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: board.all})
-      
+      queryClient.invalidateQueries({ queryKey: board.all });
+
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.ADDED_QUESTION);
     },
 

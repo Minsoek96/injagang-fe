@@ -1,6 +1,4 @@
-import React from "react";
-
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const SwitchSliderStyle = styled.label`
   position: relative;
@@ -22,17 +20,17 @@ const Slider = styled.span<{ isToggle: boolean }>`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${props => (props.isToggle ? "#2196f3" : "#ccc")};
+  background-color: ${(props) => (props.isToggle ? '#2196f3' : '#ccc')};
   border-radius: 17px;
   transition: background-color 0.4s;
 
   &:before {
     position: absolute;
-    content: "";
+    content: '';
     height: 26px;
     width: 26px;
-    transform: ${props =>
-      props.isToggle ? "translateX(30px)" : "translateX(4px)"};
+    transform: ${(props) =>
+    (props.isToggle ? 'translateX(30px)' : 'translateX(4px)')};
     bottom: 4px;
     background-color: white;
     border-radius: 50%;
@@ -42,7 +40,7 @@ const Slider = styled.span<{ isToggle: boolean }>`
 
 const Crater = styled.span<{ isToggle: boolean }>`
   position: absolute;
-  visibility: ${props => (props.isToggle ? "visible" : "hidden")};
+  visibility: ${(props) => (props.isToggle ? 'visible' : 'hidden')};
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 50%;
   transition: visibility 0.5ms ease-in-out;
@@ -83,11 +81,11 @@ type SwitchSliderProps = {
   onClick: () => void;
 };
 
-const SwitchSlider = ({ isToggle, onClick }: SwitchSliderProps) => {
+function SwitchSlider({ isToggle, onClick }: SwitchSliderProps) {
   const Craters = [
-    { className: "crater__1", isToggle },
-    { className: "crater__2", isToggle },
-    { className: "crater__3", isToggle },
+    { className: 'crater__1', isToggle },
+    { className: 'crater__2', isToggle },
+    { className: 'crater__3', isToggle },
   ];
   return (
     <SwitchSliderStyle>
@@ -102,12 +100,12 @@ const SwitchSlider = ({ isToggle, onClick }: SwitchSliderProps) => {
         aria-label="토글버튼"
       />
       <Slider isToggle={isToggle}>
-        {Craters.map((el, i) => (
-          <Crater key={i} {...el}></Crater>
+        {Craters.map((el) => (
+          <Crater key={el.className} {...el} />
         ))}
       </Slider>
     </SwitchSliderStyle>
   );
-};
+}
 
 export default SwitchSlider;

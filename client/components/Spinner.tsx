@@ -1,20 +1,18 @@
-import React from "react";
+import styled, { keyframes } from 'styled-components';
+import { ColBox } from '@/styles/GlobalStyle';
 
-import styled, { keyframes } from "styled-components";
-import { ColBox } from "@/styles/GlobalStyle";
-
-const Spinner = ({
-  message = "데이터를 불러오는중입니다.",
+function Spinner({
+  message = '데이터를 불러오는중입니다.',
 }: {
   message?: string;
-}) => {
+}) {
   return (
     <SpinnerWrapper>
       <p>{message}</p>
       <SpinnerImg />
     </SpinnerWrapper>
   );
-};
+}
 
 export default Spinner;
 const SpinnerWrapper = styled.div`

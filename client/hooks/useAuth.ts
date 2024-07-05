@@ -1,15 +1,15 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 
-import { useFetchUserInfo } from "@/api/AUTH/mutations";
+import { useFetchUserInfo } from '@/api/AUTH/mutations';
 
-//인증을 위한 훅
-export const useAuth = () => {
+// 인증을 위한 훅
+const useAuth = () => {
   const { mutate: getProfile, isSuccess } = useFetchUserInfo();
 
   useEffect(() => {
-    const accessToken = Cookies.get("accessToken");
+    const accessToken = Cookies.get('accessToken');
     if (!accessToken) {
       return;
     }
@@ -18,3 +18,5 @@ export const useAuth = () => {
 
   return isSuccess;
 };
+
+export default useAuth;

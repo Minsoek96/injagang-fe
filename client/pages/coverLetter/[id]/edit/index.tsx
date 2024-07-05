@@ -1,19 +1,16 @@
-import React from "react";
+import styled from 'styled-components';
 
-import styled from "styled-components";
+import CoverLetterEdit from '@/components/CoverLetter/edit/CoverLetterEdit';
 
-import CoverLetterEdit from "@/components/CoverLetter/edit/CoverLetterEdit";
+import { ColBox } from '@/styles/GlobalStyle';
 
-import { ColBox } from "@/styles/GlobalStyle";
-
-
-const CoverLetterEditorPage = () => {
+function CoverLetterEditorPage() {
   return (
     <CoverLetterStyle>
-      <CoverLetterEdit></CoverLetterEdit>
+      <CoverLetterEdit />
     </CoverLetterStyle>
   );
-};
+}
 
 export default CoverLetterEditorPage;
 

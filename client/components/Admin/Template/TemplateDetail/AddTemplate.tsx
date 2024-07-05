@@ -1,20 +1,23 @@
-import { memo, useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
 
-import { BiPlus, BiRedo, BiCheck, BiX } from "react-icons/bi";
+import {
+  BiPlus, BiRedo, BiCheck, BiX,
+} from 'react-icons/bi';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { ColBox, ScrollBar, StyledInput } from "@/styles/GlobalStyle";
+import { ColBox, ScrollBar, StyledInput } from '@/styles/GlobalStyle';
 
-import TQustionItem from "../TQustionItem";
+import keys from '@/util/keys';
+import TQustionItem from '../TQustionItem';
 
-import useAddTemplateLogic from "../../hooks/useAddTemplateLogic";
+import useAddTemplateLogic from '../../hooks/useAddTemplateLogic';
 
 interface AddTemplateProps {
   onClose: (isClose: boolean) => void;
 }
 
-const AddTemplate = ({ onClose }: AddTemplateProps) => {
+function AddTemplate({ onClose }: AddTemplateProps) {
   const {
     templateList,
     setTemplateList,
@@ -35,21 +38,10 @@ const AddTemplate = ({ onClose }: AddTemplateProps) => {
   }, []);
 
   const ControllerData = [
-    { icon: <BiPlus onClick={addQuestion} />, text: "질문추가" },
-    { icon: <BiRedo onClick={removeLastQuestion} />, text: "되돌리기" },
-    { icon: <BiCheck onClick={confirmTemplateCreation} />, text: "확정하기" },
+    { icon: <BiPlus onClick={addQuestion} />, text: '질문추가' },
+    { icon: <BiRedo onClick={removeLastQuestion} />, text: '되돌리기' },
+    { icon: <BiCheck onClick={confirmTemplateCreation} />, text: '확정하기' },
   ];
-
-  const ControllerBtns = memo(() => (
-    <Controller>
-      {ControllerData.map((info, idx) => (
-        <IconButton key={idx}>
-          {info.icon}
-          <IconLabel>{info.text}</IconLabel>
-        </IconButton>
-      ))}
-    </Controller>
-  ));
 
   return (
     <TemplateAddStyled>
@@ -60,18 +52,17 @@ const AddTemplate = ({ onClose }: AddTemplateProps) => {
         ref={titleRef}
         type="text"
         value={templateList.templateTitle}
-        onChange={e =>
-          setTemplateList(prev => ({
+        onChange={(e) =>
+          setTemplateList((prev) => ({
             ...prev,
             templateTitle: e.target.value,
-          }))
-        }
+          }))}
         placeholder="제목을 입력해주세요"
       />
       <QuestionContainer>
         {templateList.templateQuestion.map((question, index) => (
           <TQustionItem
-            key={`question-${index}`}
+            key={keys(question, index)}
             index={index}
             question={question}
             onChange={handleQuestionChange}
@@ -79,10 +70,17 @@ const AddTemplate = ({ onClose }: AddTemplateProps) => {
           />
         ))}
       </QuestionContainer>
-      <ControllerBtns />
+      <Controller>
+        {ControllerData.map((info, idx) => (
+          <IconButton key={keys(info.text, idx)}>
+            {info.icon}
+            <IconLabel>{info.text}</IconLabel>
+          </IconButton>
+        ))}
+      </Controller>
     </TemplateAddStyled>
   );
-};
+}
 
 export default AddTemplate;
 

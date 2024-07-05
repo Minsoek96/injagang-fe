@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { memo, useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { BiX } from "react-icons/bi";
+import { BiX } from 'react-icons/bi';
 
-import { ColBox, ScrollBar } from "@/styles/GlobalStyle";
-import { v } from "@/styles/variables";
+import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
+import V from '@/styles/variables';
 
-import { IReadQnaList } from "@/types/coverLetter/CoverLetterType";
+import { IReadQnaList } from '@/types/coverLetter/CoverLetterType';
 
 interface CoverLetterQuestionItemsProps {
   item: IReadQnaList;
@@ -19,11 +19,11 @@ interface CoverLetterQuestionItemsProps {
   ) => void;
 }
 
-const CoverLetterQuestionItems = ({
+function CoverLetterQuestionItems({
   item,
   onDelete,
   onUpdate,
-}: CoverLetterQuestionItemsProps) => {
+}: CoverLetterQuestionItemsProps) {
   const [question, setQuestion] = useState(item.question);
   const [answer, setAnswer] = useState(item.answer);
 
@@ -34,19 +34,19 @@ const CoverLetterQuestionItems = ({
       </CLQHeader>
       <QuestionTextArea
         value={question}
-        onChange={e => setQuestion(e.target.value)}
+        onChange={(e) => setQuestion(e.target.value)}
       />
       <AnswerTextArea
         value={answer}
-        onChange={e => setAnswer(e.target.value)}
+        onChange={(e) => setAnswer(e.target.value)}
         onBlur={() => onUpdate(item.qnaId, question, answer)}
       />
       {`글자수 : ${answer.length}/500`}
     </CoverLetterQuestionItemsContainer>
   );
-};
+}
 
-export default React.memo(CoverLetterQuestionItems);
+export default memo(CoverLetterQuestionItems);
 
 const CoverLetterQuestionItemsContainer = styled.div`
   ${ColBox}
@@ -56,7 +56,7 @@ const CoverLetterQuestionItemsContainer = styled.div`
   width: 60%;
   min-height: 250px;
   border-radius: 8px;
-  box-shadow: ${v.boxShadow3};
+  box-shadow: ${V.boxShadow3};
   margin: 25px auto;
 `;
 
@@ -67,7 +67,7 @@ const CLQHeader = styled.div`
 `;
 
 const QuestionTextArea = styled.textarea`
-  font-family: "Nanum Pen Script";
+  font-family: 'Nanum Pen Script';
   font-size: 15px;
 
   box-sizing: border-box;
@@ -86,7 +86,7 @@ const QuestionTextArea = styled.textarea`
 
 const AnswerTextArea = styled.textarea`
   resize: vertical;
-  font-family: "Nanum Pen Script";
+  font-family: 'Nanum Pen Script';
   font-weight: normal;
   width: 90%;
   line-height: 2;

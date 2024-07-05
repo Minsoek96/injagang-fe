@@ -1,17 +1,18 @@
-import { NextPage } from "next";
+import { NextPage } from 'next';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { ColBox } from "@/styles/GlobalStyle";
+import { ColBox } from '@/styles/GlobalStyle';
 
-const Custom404: NextPage = () => {
-  const TITLE = {
-    main: "404-Page Not Found",
-    sub: "찾으시는 페이지는 존재하지 않습니다.",
-    link: "홈 화면"
-  }
+const TITLE = {
+  main: '404-Page Not Found',
+  sub: '찾으시는 페이지는 존재하지 않습니다.',
+  link: '홈 화면',
+};
+
+const Custom404: NextPage = function Custom404() {
   return (
     <Container>
       <Title>{TITLE.main}</Title>

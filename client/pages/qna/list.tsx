@@ -1,44 +1,44 @@
-import { GetServerSideProps } from "next";
+import { GetServerSideProps } from 'next';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { ColBox, StyleButton } from "@/styles/GlobalStyle";
-import { MdOutlineModeEditOutline } from "react-icons/md";
+import { ColBox, StyleButton } from '@/styles/GlobalStyle';
+import { MdOutlineModeEditOutline } from 'react-icons/md';
 
 import {
   DehydratedState,
   HydrationBoundary,
   QueryClient,
   dehydrate,
-} from "@tanstack/react-query";
-import { board } from "@/api/QnABoard/queryKeys";
-import { getBoardList } from "@/api/QnABoard/apis";
+} from '@tanstack/react-query';
+import { board } from '@/api/QnABoard/queryKeys';
+import { getBoardList } from '@/api/QnABoard/apis';
 
-import { useBoardStore } from "@/store/qna";
-import dynamic from "next/dynamic";
+import { useBoardStore } from '@/store/qna';
+import dynamic from 'next/dynamic';
 
 const BoardListView = dynamic(
-  () => import("@/components/Board/BoardListLayout"),
+  () => import('@/components/Board/BoardListLayout'),
   { ssr: false },
 );
 
-const PageNation = dynamic(() => import("@/components/QNA/PageNation"), {
+const PageNation = dynamic(() => import('@/components/QNA/PageNation'), {
   ssr: false,
 });
 
-const BoardSearch = dynamic(() => import("@/components/QNA/BoardSearch"), {
+const BoardSearch = dynamic(() => import('@/components/QNA/BoardSearch'), {
   ssr: false,
 });
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: board.lists(1, "", ""),
-    queryFn: () => getBoardList(1, "", ""),
+    queryKey: board.lists(1, '', ''),
+    queryFn: () => getBoardList(1, '', ''),
   });
   return {
     props: {
@@ -51,24 +51,25 @@ type ListProps = {
   dehydratedState: DehydratedState;
 };
 
-const list = ({ dehydratedState }: ListProps) => {
+function List({ dehydratedState }: ListProps) {
   const router = useRouter();
   const { initBoardSearch } = useBoardStore();
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       initBoardSearch();
-    };
-  }, []);
+    },
+    [],
+  );
 
   return (
     <ListStyle>
       <StyleButton
         className="edit_btn"
-        Size={{ width: "600px", font: "15px" }}
-        onClick={() => router.push("/qna/question")}
+        Size={{ width: '600px', font: '15px' }}
+        onClick={() => router.push('/qna/question')}
       >
         <MdOutlineModeEditOutline />
-        {" 글쓰기"}
+        {' 글쓰기'}
       </StyleButton>
       <HydrationBoundary state={dehydratedState}>
         <BoardListView />
@@ -77,9 +78,9 @@ const list = ({ dehydratedState }: ListProps) => {
       </HydrationBoundary>
     </ListStyle>
   );
-};
+}
 
-export default list;
+export default List;
 
 const ListStyle = styled.div`
   ${ColBox}

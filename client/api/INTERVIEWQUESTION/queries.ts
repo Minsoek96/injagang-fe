@@ -1,13 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import interview from "./queryKeys";
-import { QuestionType } from "@/types/InterViewQuestion/InterViewQuestionType";
-import { getInterViewQuestionList } from "./apis";
+import { useQuery } from '@tanstack/react-query';
+import { QuestionType } from '@/types/InterViewQuestion/InterViewQuestionType';
+import interview from './queryKeys';
+import { getInterViewQuestionList } from './apis';
 
-const useFetchQuestions = (type: QuestionType | string) => {
-  return useQuery({
+const useFetchQuestions = (type: QuestionType | string) =>
+  useQuery({
     queryKey: interview.list(type),
     queryFn: () => getInterViewQuestionList(type),
   });
-};
 
 export { useFetchQuestions };

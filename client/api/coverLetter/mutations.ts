@@ -1,12 +1,15 @@
-import useToast from "@/hooks/useToast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addCoverLetter, deleteCoverLetter, reviseCoverLetter } from "./apis";
-import { IReviseCoverLetter, IWriteCoverLetter } from "@/types/coverLetter/CoverLetterType";
-import coverLetter from "./querykeys";
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from "@/constants";
+import useToast from '@/hooks/useToast';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  IReviseCoverLetter,
+  IWriteCoverLetter,
+} from '@/types/coverLetter/CoverLetterType';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/constants';
+import { addCoverLetter, deleteCoverLetter, reviseCoverLetter } from './apis';
+import coverLetter from './querykeys';
 
 const useWriteCoverLetter = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: IWriteCoverLetter) => addCoverLetter(data),
@@ -23,7 +26,7 @@ const useWriteCoverLetter = () => {
 };
 
 const useDeleteCoverLetter = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: number) => deleteCoverLetter(id),
@@ -40,7 +43,7 @@ const useDeleteCoverLetter = () => {
 };
 
 const useReviseCoverLetter = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id, data }: { id: number; data: IReviseCoverLetter }) =>
@@ -57,8 +60,4 @@ const useReviseCoverLetter = () => {
   });
 };
 
-export {
-    useWriteCoverLetter,
-    useDeleteCoverLetter,
-    useReviseCoverLetter
-}
+export { useWriteCoverLetter, useDeleteCoverLetter, useReviseCoverLetter };

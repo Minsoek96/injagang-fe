@@ -15,3 +15,9 @@ export interface IGetFeedBack {
   content: string;
   owner: boolean;
 }
+
+export type CorrectionItem = {
+  targetQuestion: number;
+  targetAnswer: string;
+  targetQuestionIndex: number;
+};

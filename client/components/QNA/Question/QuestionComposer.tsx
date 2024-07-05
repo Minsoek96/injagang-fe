@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 
-import { useRouter } from "next/router";
-
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   Card,
   ColBox,
@@ -10,29 +8,26 @@ import {
   StyleButton,
   StyleInput as QuestionTitle,
   StyleTextArea,
-} from "@/styles/GlobalStyle";
+} from '@/styles/GlobalStyle';
 
-import ControlMenu from "@/components/UI/ControlMenu";
-import CoverLetterDetail from "@/components/QNA/Question/CoverLetterDetail";
+import ControlMenu from '@/components/UI/ControlMenu';
+import CoverLetterDetail from '@/components/QNA/Question/CoverLetterDetail';
 
-import { useWriteBoard } from "@/api/QnABoard/mutaions";
-import { useFetchCoverLetter } from "@/api/coverLetter/queries";
+import { useWriteBoard } from '@/api/QnABoard/mutaions';
+import { useFetchCoverLetter } from '@/api/coverLetter/queries';
 
-const QuestionComposer = () => {
-  const router = useRouter();
+function QuestionComposer() {
   const { data: coverLtters = [] } = useFetchCoverLetter();
   const { mutate: writeBoard } = useWriteBoard();
 
-  const [coverLetterTitle, setCoverLetterTitle] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const [coverLetterTitle, setCoverLetterTitle] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
   const [essayId, setEssayId] = useState<number>(0);
 
-  const navigateToList = () => router.push("/qna/list");
-
-  const changeCoverLetter = (title: string) => {
-    setCoverLetterTitle(title);
-    const findEssay = coverLtters?.find(list => list.title === title);
+  const changeCoverLetter = (changeTitle: string) => {
+    setCoverLetterTitle(changeTitle);
+    const findEssay = coverLtters?.find((list) => list.title === changeTitle);
     if (findEssay) setEssayId(findEssay?.essayId);
   };
 
@@ -42,31 +37,31 @@ const QuestionComposer = () => {
       content,
       essayId,
     };
-    //TOME :: QNA MANAGER 생성시 대처
+    // TOME :: QNA MANAGER 생성시 대처
     writeBoard(data);
     // navigateToList();
   };
 
   return (
-    <Card size={{ width: "80%", height: "80%", flex: "row" }}>
+    <Card size={{ width: '80%', height: '80%', flex: 'row' }}>
       <SwitchContainer>
         <LeftContainer>
           <QuestionTitle
             value={title}
-            onChange={e => setTitle(e.target.value)}
-          ></QuestionTitle>
+            onChange={(e) => setTitle(e.target.value)}
+          />
           <ControlMenu
-            Size={{ width: "100%", height: "40px" }}
+            Size={{ width: '100%', height: '40px' }}
             value={coverLetterTitle}
-            onChange={e => changeCoverLetter(e)}
+            onChange={(e) => changeCoverLetter(e)}
             optionList={coverLtters}
-          ></ControlMenu>
+          />
           <StyleTextArea
             value={content}
-            onChange={e => setContent(e.target.value)}
+            onChange={(e) => setContent(e.target.value)}
           />
           <StyleButton
-            Size={{ width: "100%", font: "15px" }}
+            Size={{ width: '100%', font: '15px' }}
             onClick={handleSubmit}
           >
             작성완료
@@ -78,7 +73,7 @@ const QuestionComposer = () => {
       </SwitchContainer>
     </Card>
   );
-};
+}
 
 export default QuestionComposer;
 const SwitchContainer = styled.div`

@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
 
-import { getFeedBackList } from "./apis";
+import { useFeedStore } from '@/store/qna';
+import { getFeedBackList } from './apis';
 
-import { feedback } from "./queryKeys";
-import { useFeedStore } from "@/store/qna";
+import { feedback } from './queryKeys';
 
 const useFetchFeedBackList = (id: number) => {
   const { targetFeed } = useFeedStore();

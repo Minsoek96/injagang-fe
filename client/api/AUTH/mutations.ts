@@ -1,19 +1,10 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation } from '@tanstack/react-query';
 
-import Cookies from "js-cookie";
-
-import {
-  authInfo,
-  checkOut,
-  login,
-  nickChange,
-  passwordChange,
-  signup,
-} from "./apis";
+import Cookies from 'js-cookie';
 
 import {
   IChangePw,
@@ -21,25 +12,34 @@ import {
   ISignin,
   ISignup,
   IUserInfo,
-} from "@/types/auth/AuthType";
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from "@/constants";
-import useToast from "@/hooks/useToast";
-import useAuthStore from "@/store/auth/useAuthStore";
+} from '@/types/auth/AuthType';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/constants';
+import useToast from '@/hooks/useToast';
+import useAuthStore from '@/store/auth/useAuthStore';
+import {
+  authInfo,
+  checkOut,
+  login,
+  nickChange,
+  passwordChange,
+  signup,
+} from './apis';
 
 const useFetchSignin = () => {
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
   const { setUserId } = useAuthStore();
   const router = useRouter();
   const mutate = useMutation({
-    mutationFn: (loginData: ISignin) => login(loginData).then(res => res.data),
+    mutationFn: (loginData: ISignin) =>
+      login(loginData).then((res) => res.data),
 
     onSuccess: (data: IResponseSignin) => {
       const { access, refresh, userId } = data;
-      Cookies.set("accessToken", access, { expires: 1 });
-      Cookies.set("refreshToken", refresh, { expires: 1 });
-      Cookies.set("userId", userId, { expires: 1 });
+      Cookies.set('accessToken', access, { expires: 1 });
+      Cookies.set('refreshToken', refresh, { expires: 1 });
+      Cookies.set('userId', userId, { expires: 1 });
       setUserId(userId);
-      router.replace("/");
+      router.replace('/');
     },
     onError: () => {
       setErrorMsg(ERROR_MESSAGES.DOESN_T_MATCH);
@@ -49,18 +49,18 @@ const useFetchSignin = () => {
 };
 
 const useFetchCheckOut = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const { nickName, initCurrentUser } = useAuthStore();
 
   const currentToken = {
-    access: Cookies.get("accessToken"),
-    refresh: Cookies.get("refreshToken"),
+    access: Cookies.get('accessToken'),
+    refresh: Cookies.get('refreshToken'),
   };
 
   const removeToken = () => {
-    Cookies.remove("accessToken");
-    Cookies.remove("refreshToken");
-    Cookies.remove("userId");
+    Cookies.remove('accessToken');
+    Cookies.remove('refreshToken');
+    Cookies.remove('userId');
   };
 
   return useMutation({
@@ -69,7 +69,7 @@ const useFetchCheckOut = () => {
     onSuccess: () => {
       showToast(
         TOAST_MODE.SUCCESS,
-        SUCCESS_MESSAGES.CHECK_OUT(nickName ?? "게스트"),
+        SUCCESS_MESSAGES.CHECK_OUT(nickName ?? '게스트'),
       );
       removeToken();
       initCurrentUser();
@@ -82,7 +82,7 @@ const useFetchCheckOut = () => {
 };
 
 const useFetchUserInfo = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const { setUserInfo } = useAuthStore();
   return useMutation({
     mutationFn: () => authInfo(),
@@ -100,7 +100,7 @@ const useFetchUserInfo = () => {
 };
 
 const useChangeNick = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const { setUserInfo, role } = useAuthStore();
   return useMutation({
     mutationFn: (changeNickname: string) =>
@@ -108,7 +108,7 @@ const useChangeNick = () => {
 
     onSuccess: (_, newNick) => {
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.CHANGE_NICK);
-      setUserInfo(newNick, role ?? "USER");
+      setUserInfo(newNick, role ?? 'USER');
     },
 
     onError: () => {},
@@ -116,7 +116,7 @@ const useChangeNick = () => {
 };
 
 const useChangePassWord = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   return useMutation({
     mutationFn: (newPw: IChangePw) => passwordChange(newPw),
 
@@ -132,18 +132,18 @@ const useChangePassWord = () => {
 
 const useFetchSignup = () => {
   const router = useRouter();
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   return useMutation({
     mutationFn: (joinData: ISignup) => signup(joinData),
 
     onSuccess: () => {
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.ADDED_USER);
-      router.replace('login')
+      router.replace('login');
     },
 
     onError: () => {
-      showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.ADDED_USER)
-    }
+      showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.ADDED_USER);
+    },
   });
 };
 export {
@@ -152,5 +152,5 @@ export {
   useFetchUserInfo,
   useChangeNick,
   useChangePassWord,
-  useFetchSignup
+  useFetchSignup,
 };

@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from 'styled-components';
 
-import InputField from "@/components/UI/InputField";
+import InputField from '@/components/UI/InputField';
 
-import useLoginLogic from "./hooks/useLoginLogic";
+import useLoginLogic from './hooks/useLoginLogic';
 
-const Login = () => {
+function Login() {
   const {
     loginInfo,
     handleChange,
@@ -22,7 +22,7 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (loginErrorMsg !== "") {
+    if (loginErrorMsg !== '') {
       setShakeTrigger(false);
       setTimeout(() => {
         setShakeTrigger(true);
@@ -48,15 +48,21 @@ const Login = () => {
         value={loginInfo.password}
         onChange={handleChange}
       />
-      {userLogicMsg ||
-        (loginErrorMsg && <ERROR> {userLogicMsg || loginErrorMsg} </ERROR>)}
+      {userLogicMsg
+        || (loginErrorMsg && (
+          <ERROR>
+            {' '}
+            {userLogicMsg || loginErrorMsg}
+            {' '}
+          </ERROR>
+        ))}
       <Button type="submit">로그인</Button>
-      <Button type="button" onClick={() => router.replace("/join")}>
+      <Button type="button" onClick={() => router.replace('/join')}>
         회원가입
       </Button>
     </Form>
   );
-};
+}
 
 export default Login;
 
@@ -106,8 +112,8 @@ const Form = styled.form<{ shakeTrigger: boolean }>`
   background-color: #15202b;
   box-shadow: 0 4px 8px rgba(14, 13, 13, 0.2);
   ${({ shakeTrigger }) =>
-    shakeTrigger &&
-    css`
+    shakeTrigger
+    && css`
       animation: ${shakeAnimation} 0.5s;
     `}
 `;

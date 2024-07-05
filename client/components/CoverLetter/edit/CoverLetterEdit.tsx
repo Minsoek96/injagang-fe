@@ -1,39 +1,36 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { BiPlus } from "react-icons/bi";
+import { BiPlus } from 'react-icons/bi';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { ColBox, StyleButton } from "@/styles/GlobalStyle";
+import { ColBox, StyleButton } from '@/styles/GlobalStyle';
 
-import CoverLetterQuestionItems from "../new/CoverLetterQuestionItems";
+import V from '@/styles/variables';
 
-import useCoverLetterCreatorLogic from "../hooks/useCoverLetterCreatorLogic";
-import useCoverLetterManager from "../hooks/useCoverLetterManager";
+import APIErrorBoundary from '@/components/APIErrorBoundary';
+import Spinner from '@/components/Spinner';
+import { useFetchDetailCoverLetter } from '@/api/coverLetter/queries';
+import useCoverLetterManager from '../hooks/useCoverLetterManager';
+import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
+import CoverLetterQuestionItems from '../new/CoverLetterQuestionItems';
 
-import { v } from "@/styles/variables";
-
-import APIErrorBoundary from "@/components/APIErrorBoundary";
-import Spinner from "@/components/Spinner";
-import { useFetchDetailCoverLetter } from "@/api/coverLetter/queries";
-
-
-const CoverLetterEdit = () => {
-  const [coverLetterTitle, setCoverLetterTitle] = useState<string>("");
+function CoverLetterEdit() {
+  const [coverLetterTitle, setCoverLetterTitle] = useState<string>('');
   const router = useRouter();
-  const moveCoverLetterMainPage = "/coverLetter";
+  const moveCoverLetterMainPage = '/coverLetter';
   const { id } = router.query;
-  const {data: coverLetter, isLoading} = useFetchDetailCoverLetter(Number(id));
-
-  const { qnaList, setQnAList, deleteQnAList, changeQnAList, addQnAList } =
-    useCoverLetterCreatorLogic();
+  const { data: coverLetter, isLoading } = useFetchDetailCoverLetter(
+    Number(id),
+  );
 
   const {
-    changeCoverLetter,
-    deleteCoverLetter,
-  } = useCoverLetterManager();
+    qnaList, setQnAList, deleteQnAList, changeQnAList, addQnAList,
+  } = useCoverLetterCreatorLogic();
+
+  const { changeCoverLetter, deleteCoverLetter } = useCoverLetterManager();
 
   useEffect(() => {
     if (coverLetter && !isLoading) {
@@ -42,7 +39,7 @@ const CoverLetterEdit = () => {
     }
   }, [coverLetter]);
 
-  if (isLoading) return <Spinner></Spinner>;
+  if (isLoading) return <Spinner />;
 
   return (
     <APIErrorBoundary>
@@ -50,36 +47,35 @@ const CoverLetterEdit = () => {
         <MainTitle>자소서 수정하기</MainTitle>
         <CoverLetterTitle
           value={coverLetterTitle}
-          onChange={e => setCoverLetterTitle(e.target.value)}
+          onChange={(e) => setCoverLetterTitle(e.target.value)}
           placeholder="자소서 제목"
-        ></CoverLetterTitle>
-        {qnaList.map((qna, i) => (
+        />
+        {qnaList.map((qna) => (
           <CoverLetterQuestionItems
             key={qna.qnaId}
             item={qna}
             onDelete={deleteQnAList}
             onUpdate={changeQnAList}
-          ></CoverLetterQuestionItems>
+          />
         ))}
-        <BiPlusStyled onClick={addQnAList}></BiPlusStyled>
+        <BiPlusStyled onClick={addQnAList} />
         <ControllerBtns>
           <StyleButton
-            Size={{ width: "150px", font: "20px" }}
+            Size={{ width: '150px', font: '20px' }}
             onClick={() => router.push(moveCoverLetterMainPage)}
           >
             뒤로가기
           </StyleButton>
           <StyleButton
-            Size={{ width: "150px", font: "20px" }}
+            Size={{ width: '150px', font: '20px' }}
             onClick={() => deleteCoverLetter(Number(id))}
           >
             삭제하기
           </StyleButton>
           <StyleButton
-            Size={{ width: "150px", font: "20px" }}
+            Size={{ width: '150px', font: '20px' }}
             onClick={() =>
-              changeCoverLetter(Number(id), coverLetterTitle, qnaList)
-            }
+              changeCoverLetter(Number(id), coverLetterTitle, qnaList)}
           >
             수정완료
           </StyleButton>
@@ -87,7 +83,7 @@ const CoverLetterEdit = () => {
       </CoverLetterCreatorContainer>
     </APIErrorBoundary>
   );
-};
+}
 
 export default CoverLetterEdit;
 const CoverLetterCreatorContainer = styled.div`
@@ -102,7 +98,7 @@ const MainTitle = styled.h2`
 `;
 
 const CoverLetterTitle = styled.input`
-  width: ${v.xlItemWidth};
+  width: ${V.xlItemWidth};
   height: 40px;
   border-radius: 5px;
   border-color: black;
@@ -115,7 +111,7 @@ const CoverLetterTitle = styled.input`
 const ControllerBtns = styled.div`
   display: flex;
   justify-content: space-between;
-  width: ${v.xlItemWidth};
+  width: ${V.xlItemWidth};
 `;
 
 const BiPlusStyled = styled(BiPlus)`

@@ -1,8 +1,11 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { IQuestion, QuestionType } from "@/types/InterViewQuestion/InterViewQuestionType";
+import {
+  IQuestion,
+  QuestionType,
+} from '@/types/InterViewQuestion/InterViewQuestionType';
 
-import { useInterViewStore } from "@/store/interview";
+import { useInterViewStore } from '@/store/interview';
 
 type ManagerProps = {
   typeCheckCallback: () => void; // 타입 선택시 전체 체크 상태 해제
@@ -31,10 +34,9 @@ const useEUserQuestionManager = ({
 
   const dispatchSelectedQuestions = useCallback(
     (questions: IQuestion[], checkList: number[]) => {
-      const filterItem = questions.filter((question, i) =>
-        checkList.includes(question.id),
-      );
-      const questionList = filterItem.map((item, i) => item.questions);
+      const filterItem = questions.filter((question) =>
+        checkList.includes(question.id));
+      const questionList = filterItem.map((item) => item.questions);
       setUserPlayList(questionList);
     },
     [],

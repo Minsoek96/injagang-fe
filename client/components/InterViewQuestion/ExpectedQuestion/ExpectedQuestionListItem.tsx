@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, memo } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 type InterViewListItemProps = {
   questions: string;
@@ -9,22 +9,26 @@ type InterViewListItemProps = {
   onChange: (id: number, isCheck: boolean) => void;
 };
 
-const ExpectedQuestionListItem = ({
+function ExpectedQuestionListItem({
   onChange,
   questions,
   allCheck,
   id,
-}: InterViewListItemProps) => {
+}: InterViewListItemProps) {
   const [isCheck, setIsCheck] = useState<boolean>(false);
 
   useEffect(() => {
-    allCheck ? setIsCheck(true) : setIsCheck(false);
+    if (allCheck) {
+      setIsCheck(true);
+    } else {
+      setIsCheck(false);
+    }
   }, [allCheck]);
 
-  /**현재 리스트의 체크리스트 변경하고 핸들러를 통해 id값과 체크 상태를 전달 */
+  /** 현재 리스트의 체크리스트 변경하고 핸들러를 통해 id값과 체크 상태를 전달 */
   const handleCheckList = () => {
     onChange(id, isCheck);
-    setIsCheck(isCheck => !isCheck);
+    setIsCheck((check) => !check);
   };
 
   return (
@@ -33,9 +37,9 @@ const ExpectedQuestionListItem = ({
       <label htmlFor={questions}>{questions}</label>
     </InterViewListItemStyle>
   );
-};
+}
 
-export default React.memo(ExpectedQuestionListItem);
+export default memo(ExpectedQuestionListItem);
 
 const InterViewListItemStyle = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
-import { RoleType } from "@/types/auth/AuthType";
-import { create } from "zustand";
+import { RoleType } from '@/types/auth/AuthType';
+import { create } from 'zustand';
 
 type State = {
   userId: string | null;
@@ -13,7 +13,7 @@ type Action = {
   initCurrentUser: () => void;
 };
 
-const useAuthStore = create<State & Action>(set => ({
+const useAuthStore = create<State & Action>((set) => ({
   userId: null,
   nickName: null,
   role: null,

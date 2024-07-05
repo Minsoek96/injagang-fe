@@ -1,7 +1,7 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { IGetTemplate } from "@/types/template/TemplateType";
-import { useTemplateStore } from "@/store/template";
+import { IGetTemplate } from '@/types/template/TemplateType';
+import { useTemplateStore } from '@/store/template';
 
 const useTemplateStoreManager = () => {
   const {

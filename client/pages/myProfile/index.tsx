@@ -1,20 +1,14 @@
-import React from "react";
+import styled from 'styled-components';
 
-import styled from "styled-components";
+import CheckMyInFo from '@/components/MyProfile/CheckMyInFo';
 
-import CheckMyInFo from "@/components/MyProfile/CheckMyInFo";
+import { ColBox } from '@/styles/GlobalStyle';
 
-import { ColBox } from "@/styles/GlobalStyle";
-
-
-
-const myProfile = () => {
-  return (
-    <MyPageStyle>
-      <CheckMyInFo />
-    </MyPageStyle>
-  );
-};
+const myProfile = () => (
+  <MyPageStyle>
+    <CheckMyInFo />
+  </MyPageStyle>
+);
 
 export default myProfile;
 

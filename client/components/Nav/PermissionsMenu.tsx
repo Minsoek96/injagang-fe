@@ -1,45 +1,43 @@
-import React, { useEffect } from "react";
+import { useEffect } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { BiLogOut, BiLogIn } from "react-icons/bi";
+import { BiLogOut, BiLogIn } from 'react-icons/bi';
 
-import { AdminMenu, NavContainer } from "./MenuItems";
+import { ModalProps } from '@/hooks/useModal';
 
-import { ModalProps } from "@/hooks/useModal";
-import useLoginManager from "../Auth/hooks/useLoginManager";
-
-import { FlexBox } from "@/styles/GlobalStyle";
-import useAuthStore from "@/store/auth/useAuthStore";
-import { useFetchUserInfo } from "@/api/AUTH/mutations";
-import Cookies from "js-cookie";
+import { FlexBox } from '@/styles/GlobalStyle';
+import useAuthStore from '@/store/auth/useAuthStore';
+import { useFetchUserInfo } from '@/api/AUTH/mutations';
+import Cookies from 'js-cookie';
+import useLoginManager from '../Auth/hooks/useLoginManager';
+import { AdminMenu, NavContainer } from './MenuItems';
 
 interface PermissionMenuProps {
   setModal: (modalProps: ModalProps) => void;
 }
 
-const PermissionsMenu = ({ setModal }: PermissionMenuProps) => {
+function PermissionsMenu({ setModal }: PermissionMenuProps) {
   const { userId, role } = useAuthStore();
   const { dispatchCheckOut } = useLoginManager();
   const router = useRouter();
   const { mutate: getProfile } = useFetchUserInfo();
 
   useEffect(() => {
-    if (Cookies.get("userId")) {
+    if (Cookies.get('userId')) {
       getProfile();
     }
-    return;
   }, [userId]);
 
   return (
     <Container>
-      {role === "ADMIN" && <AdminMenu />}
+      {role === 'ADMIN' && <AdminMenu />}
       <NavContainer>
         {role === null ? (
           <LogMenu>
-            <BiLogIn onClick={() => router.push("/login")} />
+            <BiLogIn onClick={() => router.push('/login')} />
             <span className="navitem_title">Login</span>
           </LogMenu>
         ) : (
@@ -49,11 +47,10 @@ const PermissionsMenu = ({ setModal }: PermissionMenuProps) => {
                 setModal({
                   onAction: dispatchCheckOut,
                   contents: {
-                    title: "Message",
-                    content: "정말 로그아웃을 원하시나요?",
+                    title: 'Message',
+                    content: '정말 로그아웃을 원하시나요?',
                   },
-                })
-              }
+                })}
             />
             <span className="navitem_title">LogOut</span>
           </LogMenu>
@@ -61,7 +58,7 @@ const PermissionsMenu = ({ setModal }: PermissionMenuProps) => {
       </NavContainer>
     </Container>
   );
-};
+}
 
 export default PermissionsMenu;
 const Container = styled.div``;

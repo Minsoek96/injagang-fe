@@ -1,8 +1,9 @@
+// eslint-disable-next-line no-shadow
 export enum QuestionType {
-  CS = "CS",
-  SITUATION = "SITUATION",
-  JOB = "JOB",
-  PERSONALITY = "PERSONALITY",
+  CS = 'CS',
+  SITUATION = 'SITUATION',
+  JOB = 'JOB',
+  PERSONALITY = 'PERSONALITY',
 }
 
 export interface IAddQuestions {

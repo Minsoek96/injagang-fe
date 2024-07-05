@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 type State = {
   confirmQuestions: string[];
@@ -13,13 +13,13 @@ type Action = {
   initUserPlayList: () => void;
 };
 
-const useInterViewStore = create<State & Action>(set => ({
+const useInterViewStore = create<State & Action>((set) => ({
   userPlayList: [],
   confirmQuestions: [],
-  selectedType: "",
+  selectedType: '',
 
   setConfirmQuestions: (lists: string[]) => {
-    set(state => ({
+    set((state) => ({
       confirmQuestions: [...state.confirmQuestions, ...lists],
     }));
   },

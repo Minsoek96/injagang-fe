@@ -1,5 +1,6 @@
-import { useBoardStore } from "@/store/qna";
-import { useState, useCallback } from "react";
+import { useBoardStore } from '@/store/qna';
+import { useState, useCallback } from 'react';
+
 type usePageNationProps = [number, number?];
 
 const usePageNation = ([visiblePage = 8]: usePageNationProps) => {
@@ -15,27 +16,29 @@ const usePageNation = ([visiblePage = 8]: usePageNationProps) => {
 
   const handlePrevClick = useCallback(() => {
     if (curPageNum > MIN_PAGE) {
-      setCurPageNum(prev => prev - 1);
+      setCurPageNum((prev) => prev - 1);
       if (curPageNum === minPageNumLimit + 1) {
-        setMinPageNumLimit(prev => prev - visiblePage);
-        setMaxPageNumLimit(prev => prev - visiblePage);
+        setMinPageNumLimit((prev) => prev - visiblePage);
+        setMaxPageNumLimit((prev) => prev - visiblePage);
       }
     }
   }, [curPageNum, minPageNumLimit, maxPageNumLimit]);
 
   const handleNextClick = useCallback(() => {
     if (curPageNum < totalPage) {
-      setCurPageNum(prev => prev + 1);
+      setCurPageNum((prev) => prev + 1);
       if (curPageNum === maxPageNumLimit) {
-        setMinPageNumLimit(prev => prev + visiblePage);
-        setMaxPageNumLimit(prev => prev + visiblePage);
+        setMinPageNumLimit((prev) => prev + visiblePage);
+        setMaxPageNumLimit((prev) => prev + visiblePage);
       }
     }
   }, [curPageNum, minPageNumLimit, maxPageNumLimit]);
 
   const visiblePageNumbers = Array.from({ length: totalPage })
     .map((_, idx) => idx + 1)
-    .filter(pageNum => pageNum > minPageNumLimit && pageNum <= maxPageNumLimit);
+    .filter(
+      (pageNum) => pageNum > minPageNumLimit && pageNum <= maxPageNumLimit,
+    );
 
   return {
     curPageNum,

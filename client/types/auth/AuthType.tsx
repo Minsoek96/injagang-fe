@@ -32,7 +32,7 @@ export interface IResponseSignin {
   refresh: string;
 }
 
-export type RoleType = 'USER' | 'ADMIN'
+export type RoleType = 'USER' | 'ADMIN';
 
 export interface IUserInfo {
   nickname: string;

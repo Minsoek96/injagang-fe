@@ -1,18 +1,20 @@
-import React, { useEffect } from "react";
+import { useEffect } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import BoardList from "./BoardList";
-import BoardListHead from "./BoardListHead";
-import { useFetchBoardList } from "@/api/QnABoard/queries";
-import { useBoardStore } from "@/store/qna";
+import { useFetchBoardList } from '@/api/QnABoard/queries';
+import { useBoardStore } from '@/store/qna';
+import BoardList from './BoardList';
+import BoardListHead from './BoardListHead';
 
-const HEAD_ITEM = ["번호", "제목", "닉네임"];
-const ID_KEY = "id";
-const ROUTE_TEMPLATE = "/qna/answer";
+const HEAD_ITEM = ['번호', '제목', '닉네임'];
+const ID_KEY = 'id';
+const ROUTE_TEMPLATE = '/qna/answer';
 
-const BoardListLayout = () => {
-  const { curPageNum, boardType, boardSearch, setTotalPage } = useBoardStore();
+function BoardListLayout() {
+  const {
+    curPageNum, boardType, boardSearch, setTotalPage,
+  } = useBoardStore();
   const { data } = useFetchBoardList(curPageNum, boardType, boardSearch);
 
   useEffect(() => {
@@ -28,12 +30,12 @@ const BoardListLayout = () => {
       <BoardList
         boardInfos={data?.boardInfos ?? []}
         idKey={ID_KEY}
-        displayKeys={["id", "title", "nickname"]}
+        displayKeys={['id', 'title', 'nickname']}
         route={ROUTE_TEMPLATE}
       />
     </BoardListViewStyle>
   );
-};
+}
 
 export default BoardListLayout;
 

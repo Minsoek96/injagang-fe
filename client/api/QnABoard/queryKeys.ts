@@ -1,5 +1,5 @@
 const board = {
-  all: ["board"],
+  all: ['board'],
   lists: (page?: number, type?: string, search?: string) => [
     ...board.all,
     page,
@@ -9,6 +9,4 @@ const board = {
   detail: (id: number) => [...board.all, id],
 };
 
-export {
-    board
-}
+export { board };

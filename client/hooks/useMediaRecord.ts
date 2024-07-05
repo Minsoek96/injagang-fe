@@ -1,4 +1,6 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import {
+  useRef, useState, useEffect, useCallback,
+} from 'react';
 
 const useMediaRecord = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -7,7 +9,7 @@ const useMediaRecord = () => {
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
 
-  /**유저에게 권한을 요청함(캠여부) */
+  /** 유저에게 권한을 요청함(캠여부) */
   const getUserAccess = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -19,21 +21,23 @@ const useMediaRecord = () => {
       }
       return stream;
     } catch (error) {
-      throw error;
+      return undefined;
     }
   }, []);
 
   const handleDataAvailable = useCallback((e: BlobEvent) => {
     if (e.data.size > 0) {
-      setRecordedChunks(prev => [...prev, e.data]);
+      setRecordedChunks((prev) => [...prev, e.data]);
     }
   }, []);
 
-  /**녹화촬영을 시작한다. */
+  /** 녹화촬영을 시작한다. */
   const handleRecord = useCallback(async () => {
-    const stream = await getUserAccess();
+    alert('영상촬영');
+    const stream = (await getUserAccess()) as MediaStream;
+
     const mediaRecorder = new MediaRecorder(stream, {
-      mimeType: "video/webm",
+      mimeType: 'video/webm',
     });
     mediaRecorderRef.current = mediaRecorder;
     mediaRecorder.ondataavailable = handleDataAvailable;
@@ -42,11 +46,11 @@ const useMediaRecord = () => {
   }, [getUserAccess, handleDataAvailable]);
 
   const stopMediaTracks = useCallback((stream: MediaStream) => {
-    stream.getAudioTracks().forEach(track => track.stop());
-    stream.getVideoTracks().forEach(track => track.stop());
+    stream.getAudioTracks().forEach((track) => track.stop());
+    stream.getVideoTracks().forEach((track) => track.stop());
   }, []);
 
-  /**녹화를 중지한다. */
+  /** 녹화를 중지한다. */
   const handleRecordRemove = useCallback(() => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
@@ -57,13 +61,13 @@ const useMediaRecord = () => {
     }
   }, [stopMediaTracks]);
 
-  /**녹화를 일시정지한다. */
+  /** 녹화를 일시정지한다. */
   const handlePauseRecord = useCallback(() => {
     mediaRecorderRef.current?.pause();
     setIsPaused(true);
   }, []);
 
-  /**녹화를 재개한다. */
+  /** 녹화를 재개한다. */
   const handleResumeRecord = useCallback(() => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.resume();
@@ -71,16 +75,17 @@ const useMediaRecord = () => {
     }
   }, []);
 
-  /**렌더링이 종료되면 모든녹화를 정리한다. */
-  useEffect(() => {
-    return () => {
+  /** 렌더링이 종료되면 모든녹화를 정리한다. */
+  useEffect(
+    () => () => {
       if (mediaRecorderRef.current) {
         mediaRecorderRef.current.stop();
         const stream = videoRef.current?.srcObject as MediaStream;
         stopMediaTracks(stream);
       }
-    };
-  }, [stopMediaTracks]);
+    },
+    [stopMediaTracks],
+  );
 
   return {
     videoRef,

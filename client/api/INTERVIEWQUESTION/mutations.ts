@@ -1,31 +1,30 @@
-import useToast from "@/hooks/useToast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  addInterViewQuestion,
-  deleteInterViewQuestion,
-  getRandomQuestions,
-} from "./apis";
+import useToast from '@/hooks/useToast';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   IAddQuestions,
   IDeleteQuestions,
   IRandomQuestions,
   IResponseRandom,
-} from "@/types/InterViewQuestion/InterViewQuestionType";
-import { useInterViewStore } from "@/store/interview";
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from "@/constants";
-import interview from "./queryKeys";
+} from '@/types/InterViewQuestion/InterViewQuestionType';
+import { useInterViewStore } from '@/store/interview';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/constants';
+import {
+  addInterViewQuestion,
+  deleteInterViewQuestion,
+  getRandomQuestions,
+} from './apis';
+import interview from './queryKeys';
 
 const useFetchRandomQuestion = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const { setConfirmQuestions } = useInterViewStore();
 
-  return useMutation(
-    {
+  return useMutation({
     mutationFn: (random: IRandomQuestions[]) =>
-      getRandomQuestions(random).then(res => res.data),
+      getRandomQuestions(random).then((res) => res.data),
 
     onSuccess: (data: IResponseRandom[]) => {
-      const filterQuestion = data.map(item => item.questions);
+      const filterQuestion = data.map((item) => item.questions);
       setConfirmQuestions(filterQuestion);
 
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.GET_RANDOMQUESTION);
@@ -38,7 +37,7 @@ const useFetchRandomQuestion = () => {
 };
 
 const useDeleteInterViewQ = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (ids: IDeleteQuestions) => deleteInterViewQuestion(ids),
@@ -58,7 +57,7 @@ const useDeleteInterViewQ = () => {
 };
 
 const useAddInterViewQ = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({

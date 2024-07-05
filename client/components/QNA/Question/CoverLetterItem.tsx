@@ -1,26 +1,29 @@
-import React from "react";
-
-import styled from "styled-components";
+import styled from 'styled-components';
 
 type CoverLetterDetailItemsProps = {
   answer: string;
   question: string;
 };
 
-const CoverLetterItem = ({ answer, question }: CoverLetterDetailItemsProps) => {
+function CoverLetterItem({ answer, question }: CoverLetterDetailItemsProps) {
   return (
     <CoverLetterDetailItemsStyle>
       <CoverLetterQuestionContainer>
         <h4 className="coverletter_question">
-          <span>질문:</span> {question}
+          <span>질문:</span>
+          {' '}
+          {question}
         </h4>
       </CoverLetterQuestionContainer>
       <CoverLetterAnswerContainer>
-        <p>답변:</p> {answer}{" "}
+        <p>답변:</p>
+        {' '}
+        {answer}
+        {' '}
       </CoverLetterAnswerContainer>
     </CoverLetterDetailItemsStyle>
   );
-};
+}
 
 export default CoverLetterItem;
 

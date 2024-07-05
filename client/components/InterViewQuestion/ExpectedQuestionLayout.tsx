@@ -1,13 +1,10 @@
-import React from "react";
+import styled from 'styled-components';
 
-import styled from "styled-components";
+import { ColBox, FlexBox } from '@/styles/GlobalStyle';
+import UserQuestionPlayList from './PlayList/UserQuestionPlayList';
+import ExpectedQuestionSelector from './ExpectedQuestion/ExpectedQuestionSelector';
 
-import UserQuestionPlayList from "./PlayList/UserQuestionPlayList";
-import ExpectedQuestionSelector from "./ExpectedQuestion/ExpectedQuestionSelector";
-
-import { ColBox, FlexBox, ScrollBar } from "@/styles/GlobalStyle";
-
-const ExplanationContent = () => {
+function ExplanationContent() {
   return (
     <Explanation>
       <h2>자신만의 면접 질문 리스트를 만들어주세요.</h2>
@@ -19,9 +16,9 @@ const ExplanationContent = () => {
       </p>
     </Explanation>
   );
-};
+}
 
-const ExpectedQuestionLayout = () => {
+function ExpectedQuestionLayout() {
   return (
     <InterViewListViewStyle>
       <ExplanationContent />
@@ -33,7 +30,7 @@ const ExpectedQuestionLayout = () => {
       </SwitchContainer>
     </InterViewListViewStyle>
   );
-};
+}
 
 export default ExpectedQuestionLayout;
 
@@ -61,13 +58,6 @@ const LeftContainer = styled.div`
   @media screen and (max-width: 1200px) {
     width: 100%;
   }
-`;
-
-const Container = styled.div`
-  ${ScrollBar}
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
 `;
 
 const Explanation = styled.div`

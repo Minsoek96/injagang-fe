@@ -1,22 +1,23 @@
-import React, { useEffect } from "react";
+import { useEffect } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { ScrollBar } from "@/styles/GlobalStyle";
-import AnswerDragItem from "./AnswerDragItem";
+import { ScrollBar } from '@/styles/GlobalStyle';
+import { useFetchBoardDetail } from '@/api/QnABoard/queries';
+import { useCorrectionStore } from '@/store/qna';
+import AnswerDragItem from './AnswerDragItem';
 
-import useDragCorrection from "../../hooks/useDragCorrection";
-import { useFetchBoardDetail } from "@/api/QnABoard/queries";
-import { useCorrectionStore } from "@/store/qna";
+import useDragCorrection from '../../hooks/useDragCorrection';
 
-/**드래그 첨삭 기능을 가진 자소서 View */
+/** 드래그 첨삭 기능을 가진 자소서 View */
 type AnswerProps = {
   boardId: number;
 };
 
-const AnswerDragView = ({ boardId }: AnswerProps) => {
-  const { handleCorrection, selectedText, removeCorrection, Modal } =
-    useDragCorrection();
+function AnswerDragView({ boardId }: AnswerProps) {
+  const {
+    handleCorrection, selectedText, removeCorrection, Modal,
+  } = useDragCorrection();
   const { setCorrection } = useCorrectionStore();
   const { data: boardList } = useFetchBoardDetail(boardId);
 
@@ -24,7 +25,7 @@ const AnswerDragView = ({ boardId }: AnswerProps) => {
     handleApply();
   }, [selectedText]);
 
-  /**드래그 첨삭 적용 */
+  /** 드래그 첨삭 적용 */
   const handleApply = () => {
     setCorrection({
       targetQuestion: selectedText.dragTitleId,
@@ -36,8 +37,8 @@ const AnswerDragView = ({ boardId }: AnswerProps) => {
   return (
     <AnswerDragStyle>
       <h2 className="essay_title">{boardList?.essayTitle}</h2>
-      {boardList?.qnaList &&
-        boardList.qnaList.map((list, idx) => (
+      {boardList?.qnaList
+        && boardList.qnaList.map((list, idx) => (
           <AnswerDragItem
             key={list.qnaId}
             onSelect={handleCorrection}
@@ -50,7 +51,7 @@ const AnswerDragView = ({ boardId }: AnswerProps) => {
       <Modal />
     </AnswerDragStyle>
   );
-};
+}
 
 export default AnswerDragView;
 

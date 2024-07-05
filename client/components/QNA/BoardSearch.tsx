@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import styled from "styled-components";
-import { StyleInput } from "@/styles/GlobalStyle";
+import styled from 'styled-components';
+import { StyleInput } from '@/styles/GlobalStyle';
 
-import ControlMenu from "../UI/ControlMenu";
+import useDebounce from '@/hooks/useDebounce';
+import ControlMenu from '../UI/ControlMenu';
 
-import userQnaManager from "./hooks/userQnaManager";
-import useDebounce from "@/hooks/useDebounce";
+import userQnaManager from './hooks/userQnaManager';
 
 const typeList = [
-  { title: "제목", en: "title" },
-  { title: "작성자", en: "writer" },
+  { title: '제목', en: 'title' },
+  { title: '작성자', en: 'writer' },
 ];
 
-const BoardSearch = () => {
+function BoardSearch() {
   const { dispatchChangeType, dispatchChangeSearch } = userQnaManager();
-  const [search, setSearch] = useState("");
-  const [type, setType] = useState("");
+  const [search, setSearch] = useState('');
+  const [type, setType] = useState('');
   const debounceSearch = useDebounce(search);
 
   useEffect(() => {
@@ -30,33 +30,35 @@ const BoardSearch = () => {
   };
 
   const changeType = (newType: string) => {
-    const findType = typeList.find(item => item.title === newType);
+    const findType = typeList.find((item) => item.title === newType);
     setType(newType);
     if (findType) {
       dispatchChangeType(findType.en);
-      dispatchChangeSearch("");
+      dispatchChangeSearch('');
     }
-    setSearch("");
+    setSearch('');
   };
 
   return (
     <Container>
       <ControlMenu
-        Size={{ width: "150px", height: "40px" }}
+        Size={{ width: '150px', height: '40px' }}
         value={type}
         optionList={typeList}
         onChange={changeType}
       />
-      <Label htmlFor="searchInput" className="sr-only">검색 :</Label>
+      <Label htmlFor="searchInput" className="sr-only">
+        검색 :
+      </Label>
       <InputStyle
         type="text"
         id="searchInput"
         value={search}
         onChange={changeSearch}
-      ></InputStyle>
+      />
     </Container>
   );
-};
+}
 
 export default BoardSearch;
 
@@ -72,5 +74,4 @@ const InputStyle = styled(StyleInput)`
   margin-top: 16.4px;
 `;
 
-const Label = styled.label`
-`;
+const Label = styled.label``;

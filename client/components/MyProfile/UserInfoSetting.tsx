@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { RxAvatar } from "react-icons/rx";
+import { RxAvatar } from 'react-icons/rx';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import useMyProfileManager from "./hooks/useMyProfileManager";
-import { StyleButton } from "@/styles/GlobalStyle";
+import { StyleButton } from '@/styles/GlobalStyle';
 
-import { SessionStorageManager } from "@/util/sessionStorageManager";
-import useAuthStore from "@/store/auth/useAuthStore";
+import SessionStorageManager from '@/util/sessionStorageManager';
+import useAuthStore from '@/store/auth/useAuthStore';
+import useMyProfileManager from './hooks/useMyProfileManager';
 
-const UserInfoSetting = () => {
-  const { nickName : confirmNick } =  useAuthStore();
-  const [nickName, setNickName] = useState(confirmNick??'')
-  const myInfo = new SessionStorageManager("info");
+function UserInfoSetting() {
+  const { nickName: confirmNick } = useAuthStore();
+  const [nickName, setNickName] = useState(confirmNick ?? '');
+  const myInfo = new SessionStorageManager('info');
   const { dispatchNickNameChange, Modal } = useMyProfileManager();
-  const mainTitle = "닉네임 변경";
+  const mainTitle = '닉네임 변경';
 
   useEffect(() => {
     const getMyNick = myInfo.get();
@@ -29,10 +29,10 @@ const UserInfoSetting = () => {
         <Input
           value={nickName}
           name="changeNickname"
-          onChange={e => setNickName(e.target.value)}
-        ></Input>
+          onChange={(e) => setNickName(e.target.value)}
+        />
         <StyleButton
-          Size={{ width: "80%", font: "15px" }}
+          Size={{ width: '80%', font: '15px' }}
           onClick={() => dispatchNickNameChange(nickName)}
         >
           변경
@@ -42,7 +42,7 @@ const UserInfoSetting = () => {
       <Modal />
     </UserInfoStyle>
   );
-};
+}
 
 export default UserInfoSetting;
 
