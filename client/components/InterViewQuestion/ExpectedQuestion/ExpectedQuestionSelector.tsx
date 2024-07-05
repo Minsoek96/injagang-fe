@@ -35,7 +35,6 @@ function ExpectedQuestionSelector() {
       <ActionBtns
         checkList={checkList}
         onAdd={dispatchSelectedQuestions}
-        selectedType={selectedType}
         isAllChecked={isAllCheck}
         onRemove={dispatchRemoveQuestions}
         onToggleAll={handleAllCheck}

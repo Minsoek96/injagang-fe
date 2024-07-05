@@ -49,7 +49,7 @@ const useFetchSignin = () => {
 };
 
 const useFetchCheckOut = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const { nickName, initCurrentUser } = useAuthStore();
 
   const currentToken = {
@@ -82,7 +82,7 @@ const useFetchCheckOut = () => {
 };
 
 const useFetchUserInfo = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const { setUserInfo } = useAuthStore();
   return useMutation({
     mutationFn: () => authInfo(),
@@ -100,7 +100,7 @@ const useFetchUserInfo = () => {
 };
 
 const useChangeNick = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const { setUserInfo, role } = useAuthStore();
   return useMutation({
     mutationFn: (changeNickname: string) =>
@@ -116,7 +116,7 @@ const useChangeNick = () => {
 };
 
 const useChangePassWord = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   return useMutation({
     mutationFn: (newPw: IChangePw) => passwordChange(newPw),
 
@@ -132,7 +132,7 @@ const useChangePassWord = () => {
 
 const useFetchSignup = () => {
   const router = useRouter();
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   return useMutation({
     mutationFn: (joinData: ISignup) => signup(joinData),
 

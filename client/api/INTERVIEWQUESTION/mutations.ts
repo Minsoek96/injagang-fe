@@ -16,7 +16,7 @@ import {
 import interview from './queryKeys';
 
 const useFetchRandomQuestion = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const { setConfirmQuestions } = useInterViewStore();
 
   return useMutation({
@@ -37,7 +37,7 @@ const useFetchRandomQuestion = () => {
 };
 
 const useDeleteInterViewQ = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (ids: IDeleteQuestions) => deleteInterViewQuestion(ids),
@@ -57,7 +57,7 @@ const useDeleteInterViewQ = () => {
 };
 
 const useAddInterViewQ = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({

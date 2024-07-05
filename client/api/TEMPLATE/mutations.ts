@@ -9,7 +9,7 @@ import { addTemplate, deleteTemplate } from './apis';
 import template from './queryKeys';
 
 const useAddTemplate = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (newTemplate: IAddTemplate) => addTemplate(newTemplate),
@@ -26,7 +26,7 @@ const useAddTemplate = () => {
 };
 
 const useDeleteTemplate = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: number) => deleteTemplate(id),

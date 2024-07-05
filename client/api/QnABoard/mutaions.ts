@@ -6,7 +6,7 @@ import { board } from './queryKeys';
 import { deleteQnaBoard, reviseQnaBoard, writeQnaBoard } from './apis';
 
 const useDeleteBoard = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -24,7 +24,7 @@ const useDeleteBoard = () => {
 };
 
 const useReviseBoard = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -42,7 +42,7 @@ const useReviseBoard = () => {
 };
 
 const useWriteBoard = () => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({

@@ -6,7 +6,7 @@ import { feedback } from './queryKeys';
 import { reviseFeedBack, writeFeedBack } from './apis';
 
 const useReviseFeed = (targetId: number) => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -25,7 +25,7 @@ const useReviseFeed = (targetId: number) => {
 };
 
 const useWriteFeed = (targetId: number) => {
-  const [showToast] = useToast();
+  const { showToast } = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({
