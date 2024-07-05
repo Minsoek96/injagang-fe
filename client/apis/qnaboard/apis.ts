@@ -17,8 +17,7 @@ const getBoardList = async (
     METHOD.GET,
     `${BOARD_APIS.GET_API}?page=${queryString}&type=${type}&content=${search}`,
   )
-    .then((res) => res.data)
-    .catch((error) => console.error(error));
+    .then((res) => res.data);
 
 const getDetailBoard = async (
   targetId: number,
@@ -33,8 +32,7 @@ const getDetailBoard = async (
     : {};
 
   return fetcher(METHOD.GET, `${BOARD_APIS.READ_API}${targetId}`, config)
-    .then((res) => res.data)
-    .catch((error) => console.error(error));
+    .then((res) => res.data);
 };
 
 const deleteQnaBoard = async (targetId: number) =>

@@ -30,6 +30,9 @@ API.interceptors.request.use(
 API.interceptors.response.use(
   (response) => response,
   async (error) => {
+    if (!error.response) {
+      throw serverDisconnected(error.message);
+    }
     const originRequest = error.response;
     const { status, config } = originRequest;
     const errorMessage = originRequest.data.message;
@@ -51,10 +54,10 @@ const unauthorized = () => {
   Router.replace('/login');
 };
 
-// const serverDisconnected = (message: string) =>
-//   (message === 'Network Error'
-//     ? new Error('서버와 연결이 끊겼습니다. 잠시후 다시시도해주세요.')
-//     : new Error('원인 파악이 불명한 에러가 발생했습니다.'));
+const serverDisconnected = (message: string) =>
+  (message === 'Network Error'
+    ? new Error('서버와 연결이 끊겼습니다. 잠시후 다시시도해주세요.')
+    : new Error('원인 파악이 불명한 에러가 발생했습니다.'));
 
 const jwtExpired = async (
   originRequest: AxiosRequestConfig,
