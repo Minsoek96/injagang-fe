@@ -1,8 +1,8 @@
-import { ERROR_MESSAGES, MODAL_MESSAGES } from "@/constants";
+import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/constants';
 
-import useModal from "@/hooks/useModal";
+import useModal from '@/hooks/useModal';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export interface ISelectedText {
   dragTitleId: number;
@@ -18,23 +18,27 @@ const useDragCorrection = () => {
   const [selectedText, setSelectedText] = useState<ISelectedText>({
     dragTitleId: 0,
     targetId: 0,
-    selectedText: "",
+    selectedText: '',
     start: 0,
     end: 0,
     added: false,
   });
 
+  // TODO :  연속적인 if 제거
   const handleCorrection = (dragTitleId: number, targetId: number) => {
     const selected = window.getSelection()?.toString();
-    const isSelected = selected !== "" && selectedText.added;
-    if (selected)
-      isSelected
-        ? showWarring()
-        : changeCorrection(selected, dragTitleId, targetId);
+    const isSelected = selected !== '' && selectedText.added;
+    if (selected) {
+      if (isSelected) {
+        showWarring();
+      } else {
+        changeCorrection(selected, dragTitleId, targetId);
+      }
+    }
   };
 
   const changeCorrection = (
-    selectedText: string,
+    newSelectedText: string,
     dragTitleId: number,
     targetId: number,
   ) => {
@@ -45,12 +49,11 @@ const useDragCorrection = () => {
     setSelectedText({
       dragTitleId,
       targetId,
-      selectedText,
+      selectedText: newSelectedText,
       start,
       end,
       added: true,
     });
-    return;
   };
 
   const showWarring = () => {
@@ -66,14 +69,20 @@ const useDragCorrection = () => {
     setSelectedText({
       dragTitleId: 0,
       targetId: 0,
-      selectedText: "",
+      selectedText: '',
       start: 0,
       end: 0,
       added: false,
     });
   };
 
-  return { handleCorrection, removeCorrection, selectedText, Modal, setModal };
+  return {
+    handleCorrection,
+    removeCorrection,
+    selectedText,
+    Modal,
+    setModal,
+  };
 };
 
 export default useDragCorrection;

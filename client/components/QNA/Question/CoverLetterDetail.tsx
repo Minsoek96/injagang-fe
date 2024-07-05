@@ -1,17 +1,15 @@
-import React, { useEffect } from "react";
+import styled from 'styled-components';
 
-import styled from "styled-components";
-
-import { ScrollBar } from "@/styles/GlobalStyle";
-import CoverLetterItem from "./CoverLetterItem";
-
-import { useFetchDetailCoverLetter } from "@/api/coverLetter/queries";
+import { ScrollBar } from '@/styles/GlobalStyle';
+import { useFetchDetailCoverLetter } from '@/api/coverLetter/queries';
+import { memo } from 'react';
+import CoverLetterItem from './CoverLetterItem';
 
 interface CoverLetterProps {
   essayId: number;
 }
 
-const CoverLetterDetail = ({ essayId = 0 }: CoverLetterProps) => {
+function CoverLetterDetail({ essayId = 0 }: CoverLetterProps) {
   const { data: coverLetterDetail } = useFetchDetailCoverLetter(essayId);
 
   return (
@@ -20,7 +18,7 @@ const CoverLetterDetail = ({ essayId = 0 }: CoverLetterProps) => {
         <CoverLetterContainer key={coverLetterDetail.essayId}>
           <h2 className="essay_title">{coverLetterDetail.title}</h2>
           <>
-            {coverLetterDetail.qnaList.map(qna => (
+            {coverLetterDetail.qnaList.map((qna) => (
               <CoverLetterItem key={qna.qnaId} {...qna} />
             ))}
           </>
@@ -28,9 +26,9 @@ const CoverLetterDetail = ({ essayId = 0 }: CoverLetterProps) => {
       )}
     </CoverLetterDetailStyle>
   );
-};
+}
 
-export default React.memo(CoverLetterDetail);
+export default memo(CoverLetterDetail);
 
 const CoverLetterDetailStyle = styled.div`
   ${ScrollBar}

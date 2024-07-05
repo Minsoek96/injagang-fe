@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { ColBox } from "@/styles/GlobalStyle";
+import { ColBox } from '@/styles/GlobalStyle';
 
-import useModal from "@/hooks/useModal";
+import useModal from '@/hooks/useModal';
 
-import { QuestionType } from "@/types/InterViewQuestion/InterViewQuestionType";
-import { useFetchRandomQuestion } from "@/api/INTERVIEWQUESTION/mutations";
+import { QuestionType } from '@/types/InterViewQuestion/InterViewQuestionType';
+import { useFetchRandomQuestion } from '@/api/INTERVIEWQUESTION/mutations';
 
 const InterViewSettingStyle = styled.div`
   ${ColBox}
@@ -52,7 +52,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const InterViewRandomSetting = () => {
+function InterViewRandomSetting() {
   const [randomSetting, setRandomSetting] = useState({
     cs: 0,
     situation: 0,
@@ -64,13 +64,13 @@ const InterViewRandomSetting = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setRandomSetting(cur => ({
+    setRandomSetting((cur) => ({
       ...cur,
       [name]: value,
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     const data = [
       { size: randomSetting.cs, questionType: QuestionType.CS },
@@ -89,7 +89,7 @@ const InterViewRandomSetting = () => {
     );
     setModal({
       contents: {
-        title: "Success",
+        title: 'Success',
         content: `${sumAllQuestions}개의 랜덤 질문을 셋팅 하였습니다.`,
       },
     });
@@ -131,6 +131,6 @@ const InterViewRandomSetting = () => {
       <Modal />
     </InterViewSettingStyle>
   );
-};
+}
 
 export default InterViewRandomSetting;

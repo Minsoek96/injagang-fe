@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 
 export interface IPassWordInfo {
   nowPassword: string;
@@ -8,20 +8,20 @@ export interface IPassWordInfo {
 
 const useMyProfileLogic = () => {
   const [passWordInfo, setPassWordInfo] = useState<IPassWordInfo>({
-    nowPassword: "",
-    changePassword: "",
-    changePasswordCheck: "",
+    nowPassword: '',
+    changePassword: '',
+    changePasswordCheck: '',
   });
 
   const handleInfoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setPassWordInfo(cur => ({
+    setPassWordInfo((cur) => ({
       ...cur,
       [name]: value,
     }));
   };
 
-  return { passWordInfo, handleInfoChange};
+  return { passWordInfo, handleInfoChange };
 };
 
 export default useMyProfileLogic;

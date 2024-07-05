@@ -1,18 +1,18 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { useTemplateStore } from "@/store/template";
-import { useAddTemplate, useDeleteTemplate } from "@/api/TEMPLATE/mutations";
+import { useTemplateStore } from '@/store/template';
+import { useAddTemplate, useDeleteTemplate } from '@/api/TEMPLATE/mutations';
 
 const useTemplateManager = () => {
   const { setSelectedTemplate } = useTemplateStore();
   const { mutate: removeTemplate } = useDeleteTemplate();
-  const { mutate: addTemplate}  = useAddTemplate();
+  const { mutate: addTemplate } = useAddTemplate();
 
   const removeTemplateItem = useCallback((index: number) => {
     const resetCurTemplate = {
       templateId: 0,
       questions: [],
-      title: "",
+      title: '',
     };
     removeTemplate(index);
     setSelectedTemplate(resetCurTemplate);

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import ColorPicker from "./ColorPicker";
+import { IQnaList } from '@/types/qnaBoard/QnaBoardType';
+import ColorPicker from './ColorPicker';
 
-import { ISelectedText } from "../../hooks/useDragCorrection";
-import { IQnaList } from "@/types/qnaBoard/QnaBoardType";
-
+import { ISelectedText } from '../../hooks/useDragCorrection';
+import DraggedAnswer from './DraggedAnswer';
 
 interface AnswerDragItemProps {
   onSelect: (dragTitleId: number, targetId: number) => void;
@@ -16,14 +17,14 @@ interface AnswerDragItemProps {
   index: number;
 }
 
-const AnswerDragItem = ({
+function AnswerDragItem({
   list,
   onSelect,
   onRemove,
   selectedText,
   index,
-}: AnswerDragItemProps) => {
-  const [selectedColor, setSelectedColor] = useState("#e69a0def");
+}: AnswerDragItemProps) {
+  const [selectedColor, setSelectedColor] = useState('#e69a0def');
   const { selectedText: preSelectedText } = selectedText;
   const { qnaId, question, answer } = list;
 
@@ -34,23 +35,13 @@ const AnswerDragItem = ({
     answer.length,
   );
 
-  const DraggedAnswer = () => {
-    return (
-      <>
-        {시작점부터타겟까지문장}
-        <span style={{ backgroundColor: selectedColor }} onClick={onRemove}>
-          {preSelectedText}
-        </span>
-        {타겟부터끝나는지점문장}
-      </>
-    );
-  };
-
   return (
     <EssayDragItems>
       <EssayQuestionContainer>
         <h4 className="essay_question">
-          <span>질문:</span> {question}
+          <span>질문:</span>
+          {' '}
+          {question}
         </h4>
       </EssayQuestionContainer>
       <EssayAnswerContainer>
@@ -59,17 +50,27 @@ const AnswerDragItem = ({
           className="essay_answer"
           onMouseUp={() => onSelect(index + 1, qnaId)}
         >
-          {isSelected ? <DraggedAnswer /> : answer}
+          {isSelected ? (
+            <DraggedAnswer
+              startText={시작점부터타겟까지문장}
+              selectedText={preSelectedText}
+              endText={타겟부터끝나는지점문장}
+              selectedColor={selectedColor}
+              onRemove={onRemove}
+            />
+          ) : (
+            answer
+          )}
         </p>
       </EssayAnswerContainer>
       <ColorPicker
-        onSelectColor={color => {
+        onSelectColor={(color) => {
           setSelectedColor(color);
         }}
       />
     </EssayDragItems>
   );
-};
+}
 
 export default AnswerDragItem;
 

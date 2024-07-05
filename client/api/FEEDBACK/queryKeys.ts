@@ -1,5 +1,4 @@
 export const feedback = {
-    all : ['feedback'],
-    list : (id:number) => [...feedback.all, id],
-}
-
+  all: ['feedback'],
+  list: (id: number) => [...feedback.all, id],
+};

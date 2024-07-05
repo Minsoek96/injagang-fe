@@ -1,19 +1,18 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from 'styled-components';
 
-import Head from "next/head";
-import NavBar from "../components/Nav/NavBar";
-import WithAuth from "./WithAuth";
+import Head from 'next/head';
 
-import { GlobalStyle } from "../styles/GlobalStyle";
-import defaultTheme from "@/styles/defaultTheme";
-import darkTheme from "@/styles/darkTheme";
-import { Reset } from "styled-reset";
+import defaultTheme from '@/styles/defaultTheme';
+import darkTheme from '@/styles/darkTheme';
+import { Reset } from 'styled-reset';
 
-import useThemeToggler from "@/hooks/useThemeToggler";
-import useToast from "@/hooks/useToast";
-import RQProvider from "@/services/RQprovider";
+import useThemeToggler from '@/hooks/useThemeToggler';
+import useToast from '@/hooks/useToast';
+import RQProvider from '@/services/RQprovider';
+import NavBar from './Nav/NavBar';
+import { GlobalStyle } from '../styles/GlobalStyle';
 
 const LayoutStyle = styled.div`
   display: flex;
@@ -39,9 +38,9 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-/**컴포넌트와 navbar의 영역을 분할하고, 전체 컴포넌트의 렌더링을 통제하기 위한 역할*/
-const Layout = ({ children }: LayoutProps) => {
-  const [sgowToast, RenderToast] = useToast();
+/** 컴포넌트와 navbar의 영역을 분할하고, 전체 컴포넌트의 렌더링을 통제하기 위한 역할 */
+function Layout({ children }: LayoutProps) {
+  const [, RenderToast] = useToast();
   const [isDarkMode, ChangeDarkMode] = useThemeToggler(false);
   const theme = isDarkMode ? darkTheme : defaultTheme;
 
@@ -66,6 +65,6 @@ const Layout = ({ children }: LayoutProps) => {
       <RenderToast />
     </ThemeProvider>
   );
-};
+}
 
 export default Layout;

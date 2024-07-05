@@ -1,2 +1,5 @@
-import useToastStore from "./useToastStore";
-export { useToastStore };
+import useToastStore from './useToastStore';
+
+const empty = {};
+
+export { useToastStore, empty };

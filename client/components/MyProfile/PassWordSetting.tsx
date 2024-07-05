@@ -1,11 +1,8 @@
-import React from "react";
+import styled from 'styled-components';
 
-import styled from "styled-components";
-
-import useMyProfileManager from "./hooks/useMyProfileManager";
-import useMyProfileLogic, { IPassWordInfo } from "./hooks/useMyProfileLogic";
-
-import { ColBox, FlexBox, StyleButton } from "@/styles/GlobalStyle";
+import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
+import useMyProfileManager from './hooks/useMyProfileManager';
+import useMyProfileLogic, { IPassWordInfo } from './hooks/useMyProfileLogic';
 
 interface PasswordInputProps {
   title: string;
@@ -14,33 +11,33 @@ interface PasswordInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const PasswordInputItem = ({
+function PasswordInputItem({
   title,
   name,
   value,
   onChange,
-}: PasswordInputProps) => {
+}: PasswordInputProps) {
   return (
     <Container>
       <h3>{title}</h3>
       <Input value={value} type="password" name={name} onChange={onChange} />
     </Container>
   );
-};
+}
 
-const PassWordSetting = () => {
+function PassWordSetting() {
   const { dispatchPasswordChange, Modal } = useMyProfileManager();
   const { passWordInfo, handleInfoChange } = useMyProfileLogic();
 
   const labels = {
-    nowPassword: "현재비밀번호",
-    changePassword: "변경 비밀번호",
-    changePasswordCheck: "비밀번호 확인",
+    nowPassword: '현재비밀번호',
+    changePassword: '변경 비밀번호',
+    changePasswordCheck: '비밀번호 확인',
   };
 
   return (
     <PassWordContainer>
-      {Object.keys(passWordInfo).map(key => (
+      {Object.keys(passWordInfo).map((key) => (
         <PasswordInputItem
           key={key}
           name={key}
@@ -50,7 +47,7 @@ const PassWordSetting = () => {
         />
       ))}
       <StyleButton
-        Size={{ width: "95%", font: "15px" }}
+        Size={{ width: '95%', font: '15px' }}
         onClick={() => dispatchPasswordChange(passWordInfo)}
       >
         변경
@@ -58,7 +55,7 @@ const PassWordSetting = () => {
       <Modal />
     </PassWordContainer>
   );
-};
+}
 
 export default PassWordSetting;
 

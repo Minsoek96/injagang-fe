@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-import InterViewSlider from "./InterViewSlider";
-import VideoController from "./Video/VideoController";
-import RenderVideoInfo from "./Video/RenderVideoInfo";
-import useExpectedQuestionManager from "../InterViewQuestion/hooks/useExpectedQuestionManager";
-import userInterviewManager from "./hooks/userInterviewManager";
+import useMediaRecord from '@/hooks/useMediaRecord';
+import useWebSpeech from '@/hooks/useWebSpeech';
+import V from '@/styles/variables';
+import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
+import { useInterViewStore } from '@/store/interview';
+import InterViewSlider from './InterViewSlider';
+import VideoController from './Video/VideoController';
+import RenderVideoInfo from './Video/RenderVideoInfo';
 
-import useMediaRecord from "@/hooks/useMediaRecord";
-import useWebSpeech from "@/hooks/useWebSpeech";
+import interViewin from '../../assets/images/interviewIn.svg';
+import { RecordMainBtn } from './Video/RecordMainButton';
 
-import { v } from "@/styles/variables";
-import { ColBox, FlexBox, StyleButton } from "@/styles/GlobalStyle";
-
-import interViewin from "../../assets/images/interviewIn.svg";
-import { useInterViewStore } from "@/store/interview";
-
-const InterviewRecord = () => {
+function InterviewRecord() {
   const [curIndex, setCurIndex] = useState<number>(0);
   const [changeImg, setChangeImg] = useState<boolean>(false);
   const [isResult, setIsResult] = useState<boolean>(false);
@@ -28,8 +25,8 @@ const InterviewRecord = () => {
   const { confirmQuestions } = useInterViewStore();
 
   const { setSpeechData, readingTheScript, speechData } = useWebSpeech(
-    2000,
     [],
+    2000,
   );
 
   useEffect(() => {
@@ -62,19 +59,13 @@ const InterviewRecord = () => {
     }
   };
 
-  const RecordMainBtn = () => (
-    <button className={"record_btn"} onClick={handleSpeak}>
-      {!isRecord && "I'm ready to record"}
-    </button>
-  );
-
   return (
     <RecordStyle>
       <RecordContainer isResult={isResult}>
-        <Image className={"interView_img"} src={interViewin} alt="interView" />
+        <Image className="interView_img" src={interViewin} alt="interView" />
         <Camera>
           {!isResult ? (
-            <video autoPlay muted ref={videoRef}></video>
+            <video autoPlay muted ref={videoRef} />
           ) : (
             recordedChunks.length > 0 && (
               <InterViewSlider
@@ -92,14 +83,13 @@ const InterviewRecord = () => {
               handleSpeak={handleSpeak}
             />
           ) : (
-            <RecordMainBtn />
+            <RecordMainBtn handleSpeak={handleSpeak} isRecord={isRecord} />
           )}
         </Camera>
       </RecordContainer>
       <Result>
         {speechData.length > 0 && (
           <RenderVideoInfo
-            videoIdx={videoIndex}
             numQuestions={speechData.length}
             curIndex={curIndex}
           />
@@ -108,27 +98,23 @@ const InterviewRecord = () => {
           <ResultContainer>
             <StyleButton
               onClick={() =>
-                setVideoIndex(prevIndex =>
-                  prevIndex <= 1 ? 0 : videoIndex - 1,
-                )
-              }
-              Size={{ width: "150px", font: "15px" }}
+                setVideoIndex((prevIndex) =>
+                  (prevIndex <= 1 ? 0 : videoIndex - 1))}
+              Size={{ width: '150px', font: '15px' }}
             >
               이전영상
             </StyleButton>
             <StyleButton
               onClick={() => setIsResult(!isResult)}
-              Size={{ width: "150px", font: "15px" }}
+              Size={{ width: '150px', font: '15px' }}
             >
               결과확인
             </StyleButton>
             <StyleButton
               onClick={() =>
-                setVideoIndex(prevIndex =>
-                  prevIndex >= recordedChunks.length - 1 ? 0 : videoIndex + 1,
-                )
-              }
-              Size={{ width: "150px", font: "15px" }}
+                setVideoIndex((prevIndex) =>
+                  (prevIndex >= recordedChunks.length - 1 ? 0 : videoIndex + 1))}
+              Size={{ width: '150px', font: '15px' }}
             >
               다음영상
             </StyleButton>
@@ -137,7 +123,7 @@ const InterviewRecord = () => {
       </Result>
     </RecordStyle>
   );
-};
+}
 
 export default InterviewRecord;
 const RecordStyle = styled.div`
@@ -152,14 +138,14 @@ const RecordContainer = styled.div<{ isResult: boolean }>`
   position: relative;
   display: flex;
   flex-grow: 1;
-  width: ${v.lgItemWidth};
+  width: ${V.lgItemWidth};
   height: 60%;
-  border: ${({ isResult }) => !isResult && "2px solid #e0e0e0"};
+  border: ${({ isResult }) => !isResult && '2px solid #e0e0e0'};
   border-radius: 15px;
   overflow: hidden;
 
   .interView_img {
-    display: ${({ isResult }) => (isResult ? "none" : "block")};
+    display: ${({ isResult }) => (isResult ? 'none' : 'block')};
     position: absolute;
     top: 50%;
     left: 50%;
@@ -171,14 +157,14 @@ const RecordContainer = styled.div<{ isResult: boolean }>`
 
   video {
     width: 100%;
-    height: ${({ isResult }) => (isResult ? "75%" : "100%")};
+    height: ${({ isResult }) => (isResult ? '75%' : '100%')};
     object-fit: cover;
   }
 
   @media screen and (max-width: 800px) {
-    width: ${v.smItemWidth};
+    width: ${V.smItemWidth};
     video {
-      height: ${({ isResult }) => (isResult ? "65%" : "100%")};
+      height: ${({ isResult }) => (isResult ? '65%' : '100%')};
     }
   }
 `;

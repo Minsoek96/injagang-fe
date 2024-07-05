@@ -1,25 +1,21 @@
-import { ScrollBar } from "@/styles/GlobalStyle";
-import React from "react";
-import styled from "styled-components";
-ScrollBar;
+import { ScrollBar } from '@/styles/GlobalStyle';
+import styled from 'styled-components';
 
 interface CorrectionViewProps {
   targetQuestion: number;
   targetAnswer: string;
 }
-const CorrectionView = ({
-  targetQuestion,
-  targetAnswer,
-}: CorrectionViewProps) => {
+function CorrectionView({ targetQuestion, targetAnswer }: CorrectionViewProps) {
   return (
     <CorrectionContainer>
       <span className="correction_title">
-        현재 선택된 문장: {targetQuestion !== 0 ?? ""}
+        현재 선택된 문장:
+        {targetQuestion !== 0 ?? ''}
       </span>
       <h4 className="correction_sentence">{targetAnswer}</h4>
     </CorrectionContainer>
   );
-};
+}
 
 export default CorrectionView;
 

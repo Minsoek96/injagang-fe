@@ -1,13 +1,15 @@
-import React, { InputHTMLAttributes, forwardRef } from "react";
+import { InputHTMLAttributes, forwardRef } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ label, type, name, value, onChange }, ref) => (
+  ({
+    label, type, name, value, onChange,
+  }, ref) => (
     <InputFieldStyle>
       <Label>{label}</Label>
       <Input
@@ -21,12 +23,14 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
   ),
 );
 
+InputField.displayName = 'InputField';
+
 export default InputField;
 
 const InputFieldStyle = styled.div`
-    display: flex;
-    flex-direction: column;
-`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Label = styled.label`
   font-size: 18px;

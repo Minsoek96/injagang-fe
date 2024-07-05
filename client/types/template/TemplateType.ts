@@ -12,4 +12,3 @@ export interface IGetTemplate extends IBaseTemplate {
 export interface IDeleteTemplate {
   templateId: number;
 }
-

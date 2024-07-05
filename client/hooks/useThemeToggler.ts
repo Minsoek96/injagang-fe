@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
-import { LocalStorageManager } from "@/util/localStorageManager";
+import LocalStorageManager from '@/util/localStorageManager';
 
 const useThemeToggler = (defaultValue: boolean): [boolean, () => void] => {
   const [toggle, setToggle] = useState<boolean>(defaultValue);
-  const storage = new LocalStorageManager("theme");
+  const storage = new LocalStorageManager('theme');
 
   const ChangeToggleTheme = useCallback(() => {
     const currentMode = !toggle;

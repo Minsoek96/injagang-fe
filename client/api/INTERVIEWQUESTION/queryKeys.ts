@@ -1,7 +1,7 @@
-import { QuestionType } from "@/types/InterViewQuestion/InterViewQuestionType";
+import { QuestionType } from '@/types/InterViewQuestion/InterViewQuestionType';
 
 const interview = {
-  all: ["interview"],
+  all: ['interview'],
   list: (type: QuestionType | string) => [...interview.all, type],
 };
 

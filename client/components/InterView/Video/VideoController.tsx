@@ -1,9 +1,6 @@
-import React from "react";
+import { MdPlayArrow, MdPause, MdStop } from 'react-icons/md';
 
-import { MdPlayArrow, MdPause, MdStop } from "react-icons/md";
-
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 interface VideoControllerProps {
   isPaused: boolean;
@@ -12,12 +9,12 @@ interface VideoControllerProps {
   handleSpeak: () => Promise<void>;
 }
 
-const VideoController = ({
+function VideoController({
   isPaused,
   handleResumeRecord,
   handlePauseRecord,
   handleSpeak,
-}: VideoControllerProps) => {
+}: VideoControllerProps) {
   return (
     <RecordSvgContainer>
       {isPaused ? (
@@ -25,10 +22,10 @@ const VideoController = ({
       ) : (
         <MdPause onClick={handlePauseRecord} />
       )}
-      <MdStop onClick={handleSpeak}></MdStop>
+      <MdStop onClick={handleSpeak} />
     </RecordSvgContainer>
   );
-};
+}
 
 export default VideoController;
 const RecordSvgContainer = styled.div`

@@ -1,5 +1,5 @@
-import { IGetTemplate } from "@/types/template/TemplateType";
-import { create } from "zustand";
+import { IGetTemplate } from '@/types/template/TemplateType';
+import { create } from 'zustand';
 
 interface InitiaState {
   selectedTemplateList: IGetTemplate;
@@ -8,7 +8,7 @@ interface InitiaState {
 const initialState: InitiaState = {
   selectedTemplateList: {
     templateId: 0,
-    title: "",
+    title: '',
     questions: [],
   },
 };
@@ -24,7 +24,7 @@ type Action = {
   clearCurTemplate: () => void;
 };
 
-const useTemplateStore = create<State & Action>(set => ({
+const useTemplateStore = create<State & Action>((set) => ({
   isAddTemplate: false,
   selectedTemplate: initialState.selectedTemplateList,
 

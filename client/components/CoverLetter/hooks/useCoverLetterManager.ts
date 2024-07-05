@@ -1,15 +1,16 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { moveCoverLetterMainPage } from "../new/CoverLetterCreator";
-
-import { ICoverLetters, IReadQnaList } from "@/types/coverLetter/CoverLetterType";
-import useCoverLetterStore from "@/store/coverLetter/useCoverLetterStore";
+import {
+  ICoverLetters,
+  IReadQnaList,
+} from '@/types/coverLetter/CoverLetterType';
+import useCoverLetterStore from '@/store/coverLetter/useCoverLetterStore';
 import {
   useDeleteCoverLetter,
   useReviseCoverLetter,
-} from "@/api/coverLetter/mutations";
+} from '@/api/coverLetter/mutations';
 
 const useCoverLetterManager = () => {
   const router = useRouter();
@@ -37,13 +38,13 @@ const useCoverLetterManager = () => {
     (essayId: number, title: string, qnaList: IReadQnaList[]) => {
       const resetData = {
         title,
-        qnaList: qnaList.map(qna => ({
+        qnaList: qnaList.map((qna) => ({
           question: qna.question,
           answer: qna.answer,
         })),
       };
       reviseCoverLetter({ id: essayId, data: resetData });
-      router.push(moveCoverLetterMainPage);
+      router.push('/coverLetter');
     },
     [],
   );
@@ -51,7 +52,7 @@ const useCoverLetterManager = () => {
   /** 자소서 삭제 반영 */
   const deleteCoverLetter = useCallback((targetID: number) => {
     removeCoverLetter(targetID);
-    router.push(moveCoverLetterMainPage);
+    router.push('/coverLetter');
   }, []);
 
   return {

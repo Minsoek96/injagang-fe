@@ -1,16 +1,16 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { reviseFeedBack, writeFeedBack } from "./apis";
-import { IReviseFeedBack, IWriteFeedBack } from "@/types/feedback/FeedBackType";
-import useToast from "@/hooks/useToast";
-import { feedback } from "./queryKeys";
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from "@/constants";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { IReviseFeedBack, IWriteFeedBack } from '@/types/feedback/FeedBackType';
+import useToast from '@/hooks/useToast';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/constants';
+import { feedback } from './queryKeys';
+import { reviseFeedBack, writeFeedBack } from './apis';
 
 const useReviseFeed = (targetId: number) => {
   const [showToast] = useToast();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (feedback: IReviseFeedBack) => reviseFeedBack(feedback),
+    mutationFn: (feed: IReviseFeedBack) => reviseFeedBack(feed),
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: feedback.list(targetId) });
@@ -29,7 +29,7 @@ const useWriteFeed = (targetId: number) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (feedback: IWriteFeedBack) => writeFeedBack(feedback),
+    mutationFn: (feed: IWriteFeedBack) => writeFeedBack(feed),
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: feedback.list(targetId) });

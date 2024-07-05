@@ -1,25 +1,28 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { CorrectionItem } from "../Answer/AnswerLayout";
+import { useBoardStore, useCorrectionStore, useFeedStore } from '@/store/qna';
+import { CorrectionItem } from '@/types/feedback/FeedBackType';
 
-import { useBoardStore, useCorrectionStore, useFeedStore } from "@/store/qna";
-
-const userQnaManager = () => {
+const useQnaManagerStore = () => {
   const { correction, setCorrection, initCorrection } = useCorrectionStore();
-  const { boardSearch, boardType, setBoardSearch, setBoardType, totalPage } =
-    useBoardStore();
+  const {
+    boardSearch, boardType, setBoardSearch, setBoardType, totalPage,
+  } = useBoardStore();
   const { targetFeed, setTargetFeed, initTargetFeed } = useFeedStore();
 
-  const dispatchChangeCorrection = useCallback((correction: CorrectionItem) => {
-    setCorrection(correction);
-  }, []);
+  const dispatchChangeCorrection = useCallback(
+    (newCorrection: CorrectionItem) => {
+      setCorrection(newCorrection);
+    },
+    [],
+  );
 
   const dispatchInitCorrection = useCallback(() => {
     initCorrection();
   }, []);
 
-  const dispatchChangeFeed = useCallback((targetFeed: number) => {
-    setTargetFeed(targetFeed);
+  const dispatchChangeFeed = useCallback((feed: number) => {
+    setTargetFeed(feed);
   }, []);
 
   const dispatchClearTargetFeed = useCallback(() => {
@@ -49,4 +52,5 @@ const userQnaManager = () => {
   };
 };
 
-export default userQnaManager;
+export default useQnaManagerStore;
+// userQnaManager;

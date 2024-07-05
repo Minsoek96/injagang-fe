@@ -1,17 +1,17 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef } from 'react';
 
-import { hasEmptyFieldKey } from "@/util/hasEmpty";
+import { hasEmptyFieldKey } from '@/util/hasEmpty';
 
-import { ERROR_MESSAGES } from "@/constants";
-import { useFetchSignin } from "@/api/AUTH/mutations";
+import { ERROR_MESSAGES } from '@/constants';
+import { useFetchSignin } from '@/api/AUTH/mutations';
 
 const useLoginLogic = () => {
   const { mutate: authenTicate, errorMsg: loginErrorMsg } = useFetchSignin();
   const [loginInfo, setLoginInfo] = useState({
-    loginId: "",
-    password: "",
+    loginId: '',
+    password: '',
   });
-  const [userLogicMsg, setUserLogicMsg] = useState("");
+  const [userLogicMsg, setUserLogicMsg] = useState('');
   const refs: { [key: string]: React.RefObject<HTMLInputElement> } = {
     loginIdRef: useRef<HTMLInputElement>(null),
     passwordRef: useRef<HTMLInputElement>(null),
@@ -22,7 +22,7 @@ const useLoginLogic = () => {
     if (emptyfield) {
       refs[`${emptyfield}Ref`].current?.focus();
       setUserLogicMsg(ERROR_MESSAGES.FILL_BLANKS);
-      return;
+      return false;
     }
     return true;
   };
@@ -30,13 +30,13 @@ const useLoginLogic = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     runValidationCheck() && authenTicate(loginInfo);
-    setUserLogicMsg("");
+    setUserLogicMsg('');
   };
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
-      setLoginInfo(cur => ({
+      setLoginInfo((cur) => ({
         ...cur,
         [name]: value,
       }));

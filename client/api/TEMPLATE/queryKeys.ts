@@ -1,6 +1,6 @@
 const template = {
-  all: ["template"],
-  list: () => [...template.all, "list"],
+  all: ['template'],
+  list: () => [...template.all, 'list'],
 };
 
-export default template
+export default template;

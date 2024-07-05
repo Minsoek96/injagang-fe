@@ -1,16 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import TemplateView from "@/components/Admin/Template/TemplateList";
-import ExpectedQuestionView from "@/components/InterViewQuestion/ExpectedQuestionLayout";
+import TemplateView from '@/components/Admin/Template/TemplateList';
+import ExpectedQuestionView from '@/components/InterViewQuestion/ExpectedQuestionLayout';
 
-import { ColBox } from "@/styles/GlobalStyle";
+import { ColBox } from '@/styles/GlobalStyle';
 
-import useAuthStore from "@/store/auth/useAuthStore";
+import useAuthStore from '@/store/auth/useAuthStore';
 
-//TODO : ErrorBoundary 테스트 하기
-const AdminPage = () => {
+// TODO : ErrorBoundary 테스트 하기
+function AdminPage() {
   const { role } = useAuthStore();
-  return role === "ADMIN" ? (
+  return role === 'ADMIN' ? (
     <AdminPageStyle>
       <TemplateView />
       <ExpectedQuestionView />
@@ -18,7 +18,7 @@ const AdminPage = () => {
   ) : (
     <div>당신은 관리자가 아닙니다.</div>
   );
-};
+}
 
 export default AdminPage;
 

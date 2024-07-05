@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { BiDotsHorizontal, BiTrash, BiMessageAltEdit } from "react-icons/bi";
+import { BiDotsHorizontal, BiTrash, BiMessageAltEdit } from 'react-icons/bi';
 
-import useModal from "@/hooks/useModal";
-import { useDeleteBoard } from "@/api/QnABoard/mutaions";
+import useModal from '@/hooks/useModal';
+import { useDeleteBoard } from '@/api/QnABoard/mutaions';
 
 type EditMenuBarProps = {
   boardID: number;
 };
-const EditMenuBar = ({ boardID }: EditMenuBarProps) => {
+function EditMenuBar({ boardID }: EditMenuBarProps) {
   const [tagPosition, setTagPosition] = useState(false);
   const { Modal, setModal } = useModal();
-  const {mutate: delteBoard} = useDeleteBoard();
+  const { mutate: delteBoard } = useDeleteBoard();
   const router = useRouter();
 
   const navigateToList = () => {
-    router.replace("/qna/list");
+    router.replace('/qna/list');
   };
 
   const handleElementClick = () => {
@@ -34,7 +34,7 @@ const EditMenuBar = ({ boardID }: EditMenuBarProps) => {
   const userConfirm = () => {
     setModal({
       onAction: handleRemoveBoard,
-      contents: { title: "경고", content: "정말 삭제하시겠습니까?" },
+      contents: { title: '경고', content: '정말 삭제하시겠습니까?' },
     });
   };
 
@@ -50,7 +50,7 @@ const EditMenuBar = ({ boardID }: EditMenuBarProps) => {
       <Modal />
     </MycomponetStyle>
   );
-};
+}
 
 export default EditMenuBar;
 

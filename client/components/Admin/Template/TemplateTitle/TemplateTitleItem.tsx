@@ -1,13 +1,12 @@
-import { IGetTemplate } from "@/types/template/TemplateType";
-import React from "react";
-import useTemplateStoreManager from "../../hooks/useTemplateStoreManager";
-import styled from "styled-components";
+import { IGetTemplate } from '@/types/template/TemplateType';
+import styled from 'styled-components';
+import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
 
 interface TemplateItemProps {
   list: IGetTemplate;
 }
 
-const TemplateItem = ({ list }: TemplateItemProps) => {
+function TemplateItem({ list }: TemplateItemProps) {
   const { setItemInfo, selectedTemplate } = useTemplateStoreManager();
   const isSelected = list.templateId === selectedTemplate.templateId;
 
@@ -16,12 +15,12 @@ const TemplateItem = ({ list }: TemplateItemProps) => {
       {list.title}
     </TemplateTitle>
   );
-};
+}
 
 export default TemplateItem;
 
 const TemplateTitle = styled.div<{ isSelected: boolean }>`
-  font-size: ${({ isSelected }) => (isSelected ? "1.4rem" : "1.2rem")};
+  font-size: ${({ isSelected }) => (isSelected ? '1.4rem' : '1.2rem')};
   font-weight: bold;
   opacity: ${({ isSelected }) => (isSelected ? 1 : 0.2)};
   border-radius: 12px;

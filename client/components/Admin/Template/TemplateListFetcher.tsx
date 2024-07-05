@@ -1,12 +1,11 @@
-import React from "react";
-import Spinner from "@/components/Spinner";
-import { useFetchTemplate } from "@/api/TEMPLATE/queries";
+import Spinner from '@/components/Spinner';
+import { useFetchTemplate } from '@/api/TEMPLATE/queries';
 
 interface TemplateListFetcherProps {
-  children: (data: any) => React.ReactNode;
+  children: (data: unknown) => React.ReactNode;
 }
 
-const TemplateListFetcher = ({ children }: TemplateListFetcherProps) => {
+function TemplateListFetcher({ children }: TemplateListFetcherProps) {
   const { data: templateList, isLoading, isError } = useFetchTemplate();
 
   if (isLoading) return <Spinner />;
@@ -16,6 +15,6 @@ const TemplateListFetcher = ({ children }: TemplateListFetcherProps) => {
   }
 
   return <>{children(templateList)}</>;
-};
+}
 
 export default TemplateListFetcher;

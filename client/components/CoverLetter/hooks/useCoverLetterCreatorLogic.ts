@@ -1,16 +1,14 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { v4 as uuid4 } from "uuid";
+import { v4 as uuid4 } from 'uuid';
 
-import { moveCoverLetterMainPage } from "../new/CoverLetterCreator";
+import useModal from '@/hooks/useModal';
 
-import useModal from "@/hooks/useModal";
-
-import { runValidationChecks } from "@/util/runValidationChecks";
-import { ERROR_MESSAGES } from "@/constants";
-import { useWriteCoverLetter } from "@/api/coverLetter/mutations";
+import runValidationChecks from '@/util/runValidationChecks';
+import { ERROR_MESSAGES } from '@/constants';
+import { useWriteCoverLetter } from '@/api/coverLetter/mutations';
 
 type QnaListType = {
   question: string;
@@ -22,7 +20,7 @@ type QnaListType = {
 
 const useCoverLetterCreatorLogic = () => {
   const { mutate: writeCoverLetter } = useWriteCoverLetter();
-  const [coverLetterTitle, setCoverLetterTitle] = useState<string>("");
+  const [coverLetterTitle, setCoverLetterTitle] = useState<string>('');
   const [qnaList, setQnAList] = useState<QnaListType[]>([]);
   const { setModal, Modal } = useModal();
   const router = useRouter();
@@ -38,21 +36,21 @@ const useCoverLetterCreatorLogic = () => {
     if (coverLetterMaxLength) {
       setModal({
         contents: {
-          title: "Warring",
+          title: 'Warring',
           content: `질문문항은 최대 ${MAX_QUESTIONS}개 제한입니다.`,
         },
       });
       return;
     }
     const newID = uuid4();
-    setQnAList(prev => [...prev, { question: "", answer: "", qnaId: newID }]);
+    setQnAList((prev) => [...prev, { question: '', answer: '', qnaId: newID }]);
   }, [qnaList]);
 
   /** 유저가 추가 폼을 삭제시 관리 */
   const deleteQnAList = useCallback(
     (targetID: string | number) => {
       if (coverLetterMinLength) return;
-      const filterItem = qnaList.filter(qna => qna.qnaId !== targetID);
+      const filterItem = qnaList.filter((qna) => qna.qnaId !== targetID);
       setQnAList(filterItem);
     },
     [qnaList],
@@ -61,20 +59,18 @@ const useCoverLetterCreatorLogic = () => {
   /** 유저가 변경하는 폼을 체크 */
   const changeQnAList = useCallback(
     (targetID: string | number, newQuestion: string, newAnswer: string) => {
-      setQnAList(prev =>
-        prev.map(qna =>
-          qna.qnaId === targetID
+      setQnAList((prev) =>
+        prev.map((qna) =>
+          (qna.qnaId === targetID
             ? { ...qna, question: newQuestion, answer: newAnswer }
-            : { ...qna },
-        ),
-      );
+            : { ...qna })));
     },
     [qnaList],
   );
 
   const 자기소개서작성규칙 = [
     {
-      check: () => coverLetterTitle === "",
+      check: () => coverLetterTitle === '',
       message: ERROR_MESSAGES.EMPTY_TITLE,
     },
     {
@@ -82,7 +78,7 @@ const useCoverLetterCreatorLogic = () => {
       message: ERROR_MESSAGES.MINIMUM_QNA,
     },
     {
-      check: () => qnaList.some(q => q.answer === ""),
+      check: () => qnaList.some((q) => q.answer === ''),
       message: ERROR_MESSAGES.EMPTY_ANSWER,
     },
   ];
@@ -93,14 +89,14 @@ const useCoverLetterCreatorLogic = () => {
     if (isWarringMsg) {
       setModal({
         contents: {
-          title: "Warring",
+          title: 'Warring',
           content: isWarringMsg,
         },
       });
       return;
     }
 
-    const formatQnAList = qnaList.map(qna => ({
+    const formatQnAList = qnaList.map((qna) => ({
       question: qna.question,
       answer: qna.answer,
     }));
@@ -112,7 +108,7 @@ const useCoverLetterCreatorLogic = () => {
     };
 
     writeCoverLetter(qnaListForSubmission);
-    router.push(moveCoverLetterMainPage);
+    router.push('/coverLetter');
   }, [qnaList, coverLetterTitle]);
 
   return {

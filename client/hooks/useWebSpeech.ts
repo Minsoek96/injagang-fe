@@ -1,32 +1,29 @@
-import { useState } from "react";
+/* eslint-disable no-param-reassign */
+import { useState } from 'react';
 
-const useWebSpeech = (waitTime = 1000, speechList: string[]) => {
+const useWebSpeech = (speechList: string[], waitTime = 1000) => {
   const [speechData, setSpeechData] = useState<string[]>([...speechList]);
 
-  const wait = (duration: number): Promise<void> => {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, duration);
-    });
-  };
+  const wait = (duration: number): Promise<void> => new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, duration);
+  });
 
   const waitSpeechEnd = (
     utterance: SpeechSynthesisUtterance,
-  ): Promise<void> => {
-    return new Promise(resolve => {
-      utterance.onend = () => {
-        resolve();
-      };
-    });
-  };
+  ): Promise<void> => new Promise((resolve) => {
+    utterance.onend = () => {
+      resolve();
+    };
+  });
 
   const readingTheScript = async (curIndex: number): Promise<void> => {
     if (curIndex < 0 || curIndex >= speechData.length) {
-      throw new Error("Invalid index provided");
+      throw new Error('Invalid index provided');
     }
     const utterance = new SpeechSynthesisUtterance(speechData[curIndex]);
-    await wait(2000);
+    await wait(waitTime);
     window.speechSynthesis.speak(utterance);
     await waitSpeechEnd(utterance);
   };

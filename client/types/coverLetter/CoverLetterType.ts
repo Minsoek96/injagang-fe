@@ -1,4 +1,3 @@
-
 interface IQnaList {
   question: string;
   answer: string;

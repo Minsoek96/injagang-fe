@@ -1,27 +1,28 @@
-import React, { useEffect } from "react";
+import { useEffect } from 'react';
 
-import styled from "styled-components";
-import { ColBox } from "@/styles/GlobalStyle";
+import styled from 'styled-components';
+import { ColBox } from '@/styles/GlobalStyle';
 
-import CoverLetter from "@/components/CoverLetter/CoverLetter";
+import CoverLetter from '@/components/CoverLetter/CoverLetter';
 
-import useCoverLetterStore from "@/store/coverLetter/useCoverLetterStore";
+import useCoverLetterStore from '@/store/coverLetter/useCoverLetterStore';
 
-const CoverLetterPage = () => {
+function CoverLetterPage() {
   const { initCoverLetter } = useCoverLetterStore();
 
-  useEffect(() => {
-    return () => {
-      initCoverLetter()
-    };
-  }, []);
+  useEffect(
+    () => () => {
+      initCoverLetter();
+    },
+    [],
+  );
 
   return (
     <CoverLetterStyle>
       <CoverLetter />
     </CoverLetterStyle>
   );
-};
+}
 
 export default CoverLetterPage;
 

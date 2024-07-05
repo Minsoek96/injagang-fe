@@ -1,25 +1,23 @@
-import React, { Suspense } from "react";
+import { Suspense } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { BiPlus } from "react-icons/bi";
+import { BiPlus } from 'react-icons/bi';
 
-import styled from "styled-components";
-import { v } from "@/styles/variables";
-import { ColBox } from "@/styles/GlobalStyle";
+import styled from 'styled-components';
+import V from '@/styles/variables';
+import { ColBox } from '@/styles/GlobalStyle';
 
-import CoverLetterPreView from "./CoverLetterPreView";
-import CoverLetterList from "./CoverLetterList";
-import APIErrorBoundary from "../APIErrorBoundary";
-import Spinner from "../Spinner";
+import CoverLetterPreView from './CoverLetterPreView';
+import CoverLetterList from './CoverLetterList';
+import APIErrorBoundary from '../APIErrorBoundary';
+import Spinner from '../Spinner';
 
-
-const CoverLetter = () => {
-
+function CoverLetter() {
   const router = useRouter();
-  const headerTitle = "나의 자소서 목록";
-  const moveCreationPage = "/coverLetter/new";
-  
+  const headerTitle = '나의 자소서 목록';
+  const moveCreationPage = '/coverLetter/new';
+
   return (
     <CoverLetterContainer>
       <CoverLetterPreView />
@@ -34,19 +32,19 @@ const CoverLetter = () => {
       </CoverLetterControllers>
     </CoverLetterContainer>
   );
-};
+}
 
 export default CoverLetter;
 
 const CoverLetterContainer = styled.div`
-  width: ${v.xlWidth};
+  width: ${V.xlWidth};
   height: 600px;
   ${ColBox}
   @media screen and (max-width: 1300px) {
-    width: ${v.mdWidth};
+    width: ${V.mdWidth};
   }
   @media screen and (max-width: 900px) {
-    width: ${v.smWidth};
+    width: ${V.smWidth};
   }
 `;
 
@@ -64,7 +62,7 @@ const ListHeader = styled.div`
   font-size: 30px;
   font-weight: bold;
   background-color: #302e2e;
-  padding: ${v.xsPadding};
+  padding: ${V.xsPadding};
   border-radius: 5px;
-  box-shadow: ${v.boxShadow2};
+  box-shadow: ${V.boxShadow2};
 `;

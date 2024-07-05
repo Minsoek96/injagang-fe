@@ -1,16 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import SignUp from "@/components/Auth/SignUp";
+import SignUp from '@/components/Auth/SignUp';
 
-import { FlexBox } from "@/styles/GlobalStyle";
+import { FlexBox } from '@/styles/GlobalStyle';
 
-const SignupPage = () => {
+function SignupPage() {
   return (
     <JoinStyle>
       <SignUp />
     </JoinStyle>
   );
-};
+}
 
 export default SignupPage;
 

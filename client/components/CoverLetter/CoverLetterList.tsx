@@ -1,22 +1,21 @@
-import React from "react";
+import styled from 'styled-components';
+import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
+import V from '@/styles/variables';
 
-import styled from "styled-components";
-import { ColBox, ScrollBar } from "@/styles/GlobalStyle";
-import { v } from "@/styles/variables";
+import { useFetchCoverLetter } from '@/api/coverLetter/queries';
+import { lazy } from 'react';
+import useCoverLetterManager from './hooks/useCoverLetterManager';
 
-import useCoverLetterManager from "./hooks/useCoverLetterManager";
-import { useFetchCoverLetter } from "@/api/coverLetter/queries";
+const CoverLetterItems = lazy(() => import('./CoverLetterItems'));
 
-const CoverLetterItems = React.lazy(() => import("./CoverLetterItems"));
-
-const CoverLetterList = () => {
+function CoverLetterList() {
   const { selectedCoverLetter } = useCoverLetterManager();
 
   const { data: coverLetters } = useFetchCoverLetter();
 
   return (
     <CoverLetterListContainer>
-      {coverLetters?.map(item => (
+      {coverLetters?.map((item) => (
         <CoverLetterItems
           key={item.essayId}
           item={item}
@@ -25,7 +24,7 @@ const CoverLetterList = () => {
       ))}
     </CoverLetterListContainer>
   );
-};
+}
 
 export default CoverLetterList;
 
@@ -38,5 +37,5 @@ export const CoverLetterListContainer = styled.div`
   height: 350px;
   margin: 15px auto;
   overflow-x: hidden;
-  box-shadow: ${v.boxShadow2};
+  box-shadow: ${V.boxShadow2};
 `;

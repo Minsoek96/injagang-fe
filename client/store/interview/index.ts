@@ -1,3 +1,3 @@
-import useInterViewStore from "./useInterViewStore";
+import useInterViewStore from './useInterViewStore';
 
 export { useInterViewStore };

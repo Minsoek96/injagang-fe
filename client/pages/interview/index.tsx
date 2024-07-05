@@ -1,46 +1,42 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { BiArrowBack } from "react-icons/bi";
+import { BiArrowBack } from 'react-icons/bi';
 
-import Image from "next/image";
-import interViewimg from "@/assets/images/interView.svg";
+import Image from 'next/image';
+import interViewimg from '@/assets/images/interView.svg';
 
+import InterViewListView from '@/components/InterViewQuestion/ExpectedQuestionLayout';
+import InterViewRandomSetting from '@/components/InterView/InterViewRandomSetting';
+import InterviewRecord from '@/components/InterView/interviewRecord';
+import ArrowAnimation from '@/components/InterView/InterViewMenual';
 
-import InterViewListView from "@/components/InterViewQuestion/ExpectedQuestionLayout";
-import InterViewRandomSetting from "@/components/InterView/InterViewRandomSetting";
-import InterviewRecord from "@/components/InterView/interviewRecord";
-import ArrowAnimation from "@/components/InterView/InterViewMenual";
-
-import { ColBox, FlexBox, StyleButton } from "@/styles/GlobalStyle";
-import { v } from "@/styles/variables";
-
+import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
+import V from '@/styles/variables';
 
 const renderComponent = [
-  { render: null, title: "면접영상촬영시작" },
-  { render: <InterViewListView />, title: "나만의 질문 리스트 셋팅" },
-  { render: <InterViewRandomSetting />, title: "랜덤 배치 리스트 셋팅" },
-  { render: <InterviewRecord />, title: "면접 준비 완료" },
+  { render: null, title: '면접영상촬영시작' },
+  { render: <InterViewListView />, title: '나만의 질문 리스트 셋팅' },
+  { render: <InterViewRandomSetting />, title: '랜덤 배치 리스트 셋팅' },
+  { render: <InterviewRecord />, title: '면접 준비 완료' },
 ];
 
 const START_SCREEN = 0;
 const END_SCREEN = 3;
 const SECOND_SCREEN = 1;
 
-const Interview = () => {
+function Interview() {
   const [curIndex, setCurIndex] = useState<number>(START_SCREEN);
 
   const moveToNextPage = () => {
-    setCurIndex(prevIndex =>
-      prevIndex >= END_SCREEN ? SECOND_SCREEN : prevIndex + 1,
-    );
+    setCurIndex((prevIndex) =>
+      (prevIndex >= END_SCREEN ? SECOND_SCREEN : prevIndex + 1));
   };
 
   const moveToPrevPage = () => {
-    setCurIndex(prevIndex =>
-      prevIndex <= START_SCREEN ? START_SCREEN : prevIndex - 1,
-    );
+    setCurIndex((prevIndex) =>
+      (prevIndex <= START_SCREEN ? START_SCREEN : prevIndex - 1));
   };
 
   return (
@@ -49,7 +45,7 @@ const Interview = () => {
         {curIndex > SECOND_SCREEN && (
           <StyleButton
             onClick={moveToPrevPage}
-            Size={{ width: "50px", font: "22px" }}
+            Size={{ width: '50px', font: '22px' }}
           >
             <BiArrowBack />
           </StyleButton>
@@ -57,7 +53,7 @@ const Interview = () => {
         <StyleButton
           className="Arrow_btn"
           onClick={moveToNextPage}
-          Size={{ width: "90%", font: "20px" }}
+          Size={{ width: '90%', font: '20px' }}
         >
           {renderComponent[curIndex].title}
         </StyleButton>
@@ -73,7 +69,7 @@ const Interview = () => {
       <RecordComponent>{renderComponent[curIndex].render}</RecordComponent>
     </InterViewStyle>
   );
-};
+}
 
 export default Interview;
 
@@ -111,10 +107,10 @@ const Menual = styled.div`
 
 const ControlBtn = styled.div`
   ${FlexBox}
-  width: ${v.lgItemWidth};
+  width: ${V.lgItemWidth};
   gap: 8px;
   @media screen and (max-width: 800px) {
-    width: ${v.smItemWidth};
+    width: ${V.smItemWidth};
   }
 `;
 

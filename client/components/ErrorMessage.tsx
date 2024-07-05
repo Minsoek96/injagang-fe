@@ -1,19 +1,16 @@
-import { useRouter } from "next/router";
+import styled from 'styled-components';
 
-import styled from "styled-components";
+import Image from 'next/image';
+import sorry from '@/public/assets/sorry.png';
 
-import Image from "next/image";
-import sorry from "@/public/assets/sorry.png";
-
-import { fadeIn } from "@/styles/animations";
-import { ColBox } from "@/styles/GlobalStyle";
+import { fadeIn } from '@/styles/animations';
+import { ColBox } from '@/styles/GlobalStyle';
 
 interface ErrorMessageProps {
   message: string;
   onAction: () => void;
 }
-const ErrorMessage = ({ message, onAction }: ErrorMessageProps) => {
-  const router = useRouter();
+function ErrorMessage({ message, onAction }: ErrorMessageProps) {
   const goBack = () => {
     onAction();
   };
@@ -24,7 +21,7 @@ const ErrorMessage = ({ message, onAction }: ErrorMessageProps) => {
         <ErrorContainer>
           <ErrorIcon>⚠️</ErrorIcon>
           <ErrorMessageText>
-            {message || "데이터를 불러오는데 실패 하였습니다."}
+            {message || '데이터를 불러오는데 실패 하였습니다.'}
           </ErrorMessageText>
           <GoBackButton onClick={goBack}>Go Back</GoBackButton>
         </ErrorContainer>
@@ -32,7 +29,7 @@ const ErrorMessage = ({ message, onAction }: ErrorMessageProps) => {
       </ErrorMessageStyle>
     </ErrorBackgroundOverlay>
   );
-};
+}
 
 export default ErrorMessage;
 
@@ -75,7 +72,9 @@ const GoBackButton = styled.button`
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
   &:hover {
     background-color: #2980b9;
     transform: translateY(-2px);

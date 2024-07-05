@@ -1,20 +1,20 @@
-import React from "react";
+import { BiTrash } from 'react-icons/bi';
 
-import { BiTrash } from "react-icons/bi";
+import styled from 'styled-components';
+import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
 
-import styled from "styled-components";
-import { ColBox, ScrollBar } from "@/styles/GlobalStyle";
+import keys from '@/util/keys';
+import useTemplateManager from '../../hooks/useTemplateManager';
+import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
 
-import useTemplateManager from "../../hooks/useTemplateManager";
-import useTemplateStoreManager from "../../hooks/useTemplateStoreManager";
+function NoTemplateSelected() {
+  return <WarringMsg>현재 선택된 리스트가 없습니다.</WarringMsg>;
+}
 
-const TemplateDetail = () => {
+function TemplateDetail() {
   const { removeTemplateItem } = useTemplateManager();
   const { selectedTemplate } = useTemplateStoreManager();
   const isTemplateSelected = selectedTemplate.questions.length < 1;
-  const NoTemplateSelected = () => {
-    return <WarringMsg>현재 선택된 리스트가 없습니다.</WarringMsg>;
-  };
 
   if (isTemplateSelected) return <NoTemplateSelected />;
 
@@ -22,9 +22,11 @@ const TemplateDetail = () => {
     <TemplateDetailStyled>
       <Container>
         {selectedTemplate.questions.map((question, index) => (
-          <QuestionStyle key={index}>
-            {" "}
-            {index + 1}. {question}
+          <QuestionStyle key={keys(question, index)}>
+            {' '}
+            {index + 1}
+            .
+            {question}
           </QuestionStyle>
         ))}
       </Container>
@@ -33,7 +35,7 @@ const TemplateDetail = () => {
       />
     </TemplateDetailStyled>
   );
-};
+}
 
 export default TemplateDetail;
 const TemplateDetailStyled = styled.div`

@@ -1,7 +1,7 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
-import useTemplateStoreManager from "./useTemplateStoreManager";
-import useTemplateManager from "./useTemplateManager";
+import useTemplateStoreManager from './useTemplateStoreManager';
+import useTemplateManager from './useTemplateManager';
 
 interface IAddTemplateList {
   templateTitle: string;
@@ -11,39 +11,35 @@ interface IAddTemplateList {
 const MAX_QUESTIONS = 7;
 const MIN_QUESTIONS = 1;
 const INITIAL_TEMPLATE = {
-  templateTitle: "",
+  templateTitle: '',
   templateQuestion: [],
 };
 
 const useAddTemplateLogic = () => {
-  const [templateList, setTemplateList] =
-    useState<IAddTemplateList>(INITIAL_TEMPLATE);
+  const [templateList, setTemplateList] = useState<IAddTemplateList>(INITIAL_TEMPLATE);
   const { setIsAddTemplate } = useTemplateStoreManager();
   const { addTemplate } = useTemplateManager();
-  const templateMinLength =
-    templateList.templateQuestion.length <= MIN_QUESTIONS;
-  const templateMaxLength =
-    templateList.templateQuestion.length >= MAX_QUESTIONS;
+  const templateMinLength = templateList.templateQuestion.length <= MIN_QUESTIONS;
+  const templateMaxLength = templateList.templateQuestion.length >= MAX_QUESTIONS;
 
   const handleQuestionChange = useCallback((index: number, value: string) => {
-    setTemplateList(prev => ({
+    setTemplateList((prev) => ({
       ...prev,
       templateQuestion: prev.templateQuestion.map((q, i) =>
-        i === index ? value : q,
-      ),
+        (i === index ? value : q)),
     }));
   }, []);
 
   const addQuestion = useCallback(() => {
     if (templateMaxLength) return;
-    setTemplateList(prev => ({
+    setTemplateList((prev) => ({
       ...prev,
-      templateQuestion: [...prev.templateQuestion, ""],
+      templateQuestion: [...prev.templateQuestion, ''],
     }));
   }, [templateMaxLength]);
 
   const removeLastQuestion = useCallback(() => {
-    setTemplateList(prev => ({
+    setTemplateList((prev) => ({
       ...prev,
       templateQuestion: prev.templateQuestion.slice(0, -1),
     }));
@@ -57,7 +53,7 @@ const useAddTemplateLogic = () => {
   const confirmTemplateCreation = useCallback(() => {
     const { templateTitle, templateQuestion } = templateList;
 
-    addTemplate({ title: templateTitle, questions: templateQuestion }),
+    addTemplate({ title: templateTitle, questions: templateQuestion });
     resetTemplateList();
     setIsAddTemplate(false);
   }, [templateList, setIsAddTemplate]);

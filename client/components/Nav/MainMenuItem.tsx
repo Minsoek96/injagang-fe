@@ -1,9 +1,7 @@
-import React from "react";
+import Link from 'next/link';
 
-import Link from "next/link";
-
-import styled from "styled-components";
-import { useRouter } from "next/router";
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 interface MainMenuItemProps {
   title: string;
@@ -11,7 +9,7 @@ interface MainMenuItemProps {
   icon: React.ReactNode;
 }
 
-const MainMenuItem = ({ title, path, icon }: MainMenuItemProps) => {
+function MainMenuItem({ title, path, icon }: MainMenuItemProps) {
   const router = useRouter();
   const isSelected = router.asPath === path;
 
@@ -20,7 +18,7 @@ const MainMenuItem = ({ title, path, icon }: MainMenuItemProps) => {
       <StyledLink
         href={path}
         aria-label={title}
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: 'none' }}
       >
         <NavLink>
           <NavContainer $isSelected={isSelected}>
@@ -31,7 +29,7 @@ const MainMenuItem = ({ title, path, icon }: MainMenuItemProps) => {
       </StyledLink>
     </NavItem>
   );
-};
+}
 
 export default MainMenuItem;
 
@@ -48,7 +46,7 @@ const NavLink = styled.div`
   color: ${({ theme }) => theme.colors.text};
 `;
 
-const NavContainer = styled.div<{$isSelected : boolean}>`
+const NavContainer = styled.div<{ $isSelected: boolean }>`
   display: flex;
   align-items: center;
   width: 230px;
@@ -69,7 +67,7 @@ const NavContainer = styled.div<{$isSelected : boolean}>`
   }
 
   svg {
-    fill: ${props => props.$isSelected ? 'red' : 'white'};
+    fill: ${(props) => (props.$isSelected ? 'red' : 'white')};
   }
 
   @media screen and (max-width: 1200px) {

@@ -1,28 +1,29 @@
-import React from "react";
+import { memo } from 'react';
 
-import QuestionAdder from "./QuestionAdder";
-import UserQuestionPlayListItems from "./UserQuestionPlayListItems";
+import { Card, ScrollBar } from '@/styles/GlobalStyle';
+import styled from 'styled-components';
+import keys from '@/util/keys';
+import QuestionAdder from './QuestionAdder';
+import UserQuestionPlayListItems from './UserQuestionPlayListItems';
 
-import useExpetedPlayListLogic from "../hooks/useExpectedPlayListLogic";
+import useExpetedPlayListLogic from '../hooks/useExpectedPlayListLogic';
 
-import { Card, ScrollBar } from "@/styles/GlobalStyle";
-import styled from "styled-components";
-
-const UserQuestionPlayList = () => {
-  const { userQuestion, handleRemoveText, handleAddText, roleAction, Modal } =
-    useExpetedPlayListLogic();
+function UserQuestionPlayList() {
+  const {
+    userQuestion, handleRemoveText, handleAddText, roleAction, Modal,
+  } = useExpetedPlayListLogic();
   return (
     <AddQuestionListViewStyle>
-      <Card size={{ height: "450px", width: "100%", flex: "Col" }}>
+      <Card size={{ height: '450px', width: '100%', flex: 'Col' }}>
         <Container>
-          {userQuestion &&
-            userQuestion.map((question, idx) => (
+          {userQuestion
+            && userQuestion.map((question, idx) => (
               <UserQuestionPlayListItems
-                key={idx}
+                key={keys(question, idx)}
                 item={question}
                 index={idx}
                 handleRemoveText={handleRemoveText}
-              ></UserQuestionPlayListItems>
+              />
             ))}
         </Container>
         <QuestionAdder
@@ -33,9 +34,9 @@ const UserQuestionPlayList = () => {
       <Modal />
     </AddQuestionListViewStyle>
   );
-};
+}
 
-export default React.memo(UserQuestionPlayList);
+export default memo(UserQuestionPlayList);
 
 const AddQuestionListViewStyle = styled.div`
   width: 45%;

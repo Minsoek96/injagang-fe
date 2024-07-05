@@ -1,28 +1,26 @@
-import styled from "styled-components";
-import { ColBox } from "@/styles/GlobalStyle";
-import { BiPlus } from "react-icons/bi";
+import styled from 'styled-components';
+import { ColBox } from '@/styles/GlobalStyle';
+import { BiPlus } from 'react-icons/bi';
 
-import TemplateItem from "./TemplateTitleItem";
+import { useFetchTemplate } from '@/api/TEMPLATE/queries';
+import TemplateItem from './TemplateTitleItem';
 
-import useTemplateStoreManager from "../../hooks/useTemplateStoreManager";
-import { useFetchTemplate } from "@/api/TEMPLATE/queries";
+import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
 
-const TemplateTitleList = () => {
+function TemplateTitleList() {
   const { data: templateList } = useFetchTemplate();
 
   const { isAddTemplate, setIsAddTemplate } = useTemplateStoreManager();
 
   return (
     <TemplateTtileContainer>
-      {templateList?.map(item => (
+      {templateList?.map((item) => (
         <TemplateItem key={item.templateId} list={item} />
       ))}
-      {!isAddTemplate && (
-        <BiPlus onClick={() => setIsAddTemplate(true)}></BiPlus>
-      )}
+      {!isAddTemplate && <BiPlus onClick={() => setIsAddTemplate(true)} />}
     </TemplateTtileContainer>
   );
-};
+}
 
 export default TemplateTitleList;
 

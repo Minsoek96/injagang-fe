@@ -1,6 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import styled, { css } from "styled-components";
-import { v } from "@/styles/variables";
+import styled, { createGlobalStyle, css } from 'styled-components';
+import V from '@/styles/variables';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -38,7 +37,7 @@ export const FlexBox = css`
   align-items: center;
 `;
 
-/**Colume 설정*/
+/** Colume 설정 */
 export const ColBox = css`
   display: flex;
   flex-direction: column;
@@ -73,12 +72,12 @@ export const Container = styled.div`
 `;
 
 export const Card = styled.div<CardProps>`
-  ${({ size }) => (size.flex === "row" ? FlexBox : ColBox)};
+  ${({ size }) => (size.flex === 'row' ? FlexBox : ColBox)};
   padding: 15px 15px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
-  width: ${({ size }) => size.width || "100%"};
-  height: ${({ size }) => size.height || "100%"};
+  width: ${({ size }) => size.width || '100%'};
+  height: ${({ size }) => size.height || '100%'};
   border-radius: 8px;
   box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.6);
 `;
@@ -88,17 +87,17 @@ export const StyleCard = styled.div<CardProps>`
   padding: 15px 15px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
-  width: ${({ size }) => size.width || "100%"};
-  height: ${({ size }) => size.height || "100%"};
+  width: ${({ size }) => size.width || '100%'};
+  height: ${({ size }) => size.height || '100%'};
   border-radius: 8px;
   box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.6);
 `;
 
 export const StyleButton = styled.button<SelectProps>`
-  width: ${({ Size }) => Size.width || "100%"};
+  width: ${({ Size }) => Size.width || '100%'};
   background-color: ${({ theme }) => theme.colors.button};
   color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ Size }) => Size.font || "16px"};
+  font-size: ${({ Size }) => Size.font || '16px'};
   border: none;
   padding: 10px 15px;
   border-radius: 10px;
@@ -137,7 +136,7 @@ export const StyleTextArea = styled.textarea`
 `;
 
 export const StyleInput = styled.input`
-  width: ${v.lgItemWidth};
+  width: ${V.lgItemWidth};
   height: 40px;
   border-radius: 5px;
   border-color: black;
@@ -146,23 +145,23 @@ export const StyleInput = styled.input`
   box-shadow: 0px 1px 0.5px rgba(0, 0, 0, 09);
   margin-bottom: 15px;
   @media screen and (max-width: 900px) {
-    width: ${v.smItemWidth};
+    width: ${V.smItemWidth};
   }
 `;
 
 export const MainTitleContainer = styled.div`
   text-align: center;
-  background-color: "#151618";
+  background-color: '#151618';
   box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.4);
   font-weight: bold;
   font-size: 1.8rem;
-  width: ${v.xlItemWidth};
+  width: ${V.xlItemWidth};
   border-radius: 8px;
   padding: 8px 20px;
   margin-bottom: 11px;
 
   @media screen and (max-width: 900px) {
-    width: ${v.smItemWidth};
+    width: ${V.smItemWidth};
   }
 `;
 

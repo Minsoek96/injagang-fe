@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
-import styled from "styled-components";
-import { StyleButton } from "@/styles/GlobalStyle";
+import styled from 'styled-components';
+import { StyleButton } from '@/styles/GlobalStyle';
 
 export interface ModalProps {
-  onAction?: (params?: any) => void | null;
+  onAction?: (params?: unknown) => void | null;
   contents: {
     title: string;
     content: string;
@@ -38,7 +38,7 @@ const useModal = () => {
     }, MODAL_CLOSE_DELAY);
   }, [isModalOpen]);
 
-  const Modal = () => {
+  function Modal() {
     if (!isModalOpen || !modalState.modal) {
       return null;
     }
@@ -55,13 +55,13 @@ const useModal = () => {
           {modalState.modal.onAction ? (
             <div className="modal_Controller">
               <StyleButton
-                Size={{ width: "150px", font: "15px" }}
+                Size={{ width: '150px', font: '15px' }}
                 onClick={actionModal}
               >
                 예
               </StyleButton>
               <StyleButton
-                Size={{ width: "150px", font: "15px" }}
+                Size={{ width: '150px', font: '15px' }}
                 onClick={closeModal}
               >
                 아니오
@@ -70,7 +70,7 @@ const useModal = () => {
           ) : (
             <div className="modal_center_btn">
               <StyleButton
-                Size={{ width: "250px", font: "15px" }}
+                Size={{ width: '250px', font: '15px' }}
                 onClick={closeModal}
               >
                 확인
@@ -80,7 +80,7 @@ const useModal = () => {
         </ModalBox>
       </ModalStyle>
     );
-  };
+  }
 
   return {
     isModalOpen,
@@ -97,7 +97,7 @@ interface ModalStyleProps {
 
 const ModalStyle = styled.div<ModalStyleProps>`
   z-index: 1000;
-  display: ${props => (props.isOpen ? "flex" : "none")};
+  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   position: fixed;

@@ -1,21 +1,20 @@
-import React, { useEffect } from "react";
+import { useEffect } from 'react';
 
-import AnswerDragView from "./AnswerDragView";
-import BoardItem from "./BoardItem";
-import EditMenuBar from "./EditMenuBar";
+import { Card, ColBox, ScrollBar } from '@/styles/GlobalStyle';
+import styled from 'styled-components';
+import { useFetchBoardDetail } from '@/api/QnABoard/queries';
+import { useRouter } from 'next/router';
+import { useBoardStore } from '@/store/qna';
+import EditMenuBar from './EditMenuBar';
+import BoardItem from './BoardItem';
+import AnswerDragView from './AnswerDragView';
 
-import { Card, ColBox, ScrollBar } from "@/styles/GlobalStyle";
-import styled from "styled-components";
-import { useFetchBoardDetail } from "@/api/QnABoard/queries";
-import { useRouter } from "next/router";
-import { useBoardStore } from "@/store/qna";
-
-const AnswerDetailView = () => {
+function AnswerDetailView() {
   const router = useRouter();
   const boardId = router.query;
 
   const { setQuestions } = useBoardStore();
-  
+
   const {
     data: boardList,
     isLoading,
@@ -24,7 +23,7 @@ const AnswerDetailView = () => {
 
   useEffect(() => {
     if (boardList) {
-      const questions = boardList.qnaList.map(item => item.qnaId);
+      const questions = boardList.qnaList.map((item) => item.qnaId);
       setQuestions(questions);
     }
   }, [boardList]);
@@ -33,7 +32,7 @@ const AnswerDetailView = () => {
 
   if (isError || !boardList) return <p>오류가 발생했습니다.</p>;
   return (
-    <Card size={{ width: "80%", height: "45vh", flex: "row" }}>
+    <Card size={{ width: '80%', height: '45vh', flex: 'row' }}>
       <SwitchContainer>
         <LeftContainer>
           <BoardItem {...boardList} />
@@ -45,7 +44,7 @@ const AnswerDetailView = () => {
       {boardList?.owner && <EditMenuBar boardID={boardList.boardId} />}
     </Card>
   );
-};
+}
 
 export default AnswerDetailView;
 const LeftContainer = styled.div`

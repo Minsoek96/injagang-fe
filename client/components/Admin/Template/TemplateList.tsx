@@ -1,42 +1,41 @@
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-import styled from "styled-components";
-import { ColBox, StyleCard, MainTitleContainer } from "@/styles/GlobalStyle";
-import { v } from "@/styles/variables";
+import styled from 'styled-components';
+import { ColBox, StyleCard, MainTitleContainer } from '@/styles/GlobalStyle';
+import v from '@/styles/variables';
 
-import TemplateViewController from "./TemplateDetail/TemplateViewController";
+import Spinner from '@/components/Spinner';
 
-import Spinner from "@/components/Spinner";
-
-import APIErrorBoundary from "@/components/APIErrorBoundary";
-import { Suspense } from "react";
+import APIErrorBoundary from '@/components/APIErrorBoundary';
+import { Suspense } from 'react';
+import TemplateViewController from './TemplateDetail/TemplateViewController';
 
 const TemplateTitleList = dynamic(
-  () => import("./TemplateTitle/TemplateTitleList"),
+  () => import('./TemplateTitle/TemplateTitleList'),
   {
     suspense: true,
   },
 );
 
-const TemplateList = () => {
+function TemplateList() {
   return (
     <TemplateStlyed>
       <MainTitleContainer>템플릿 만들기</MainTitleContainer>
       <TemplateContainer>
-        <Card size={{ width: `${v.xlItemWidth}`, height: "350px" }}>
+        <Card size={{ width: `${v.xlItemWidth}`, height: '350px' }}>
           <APIErrorBoundary>
             <Suspense fallback={<Spinner />}>
               <TemplateTitleList />
             </Suspense>
           </APIErrorBoundary>
         </Card>
-        <Card size={{ width: `${v.xlItemWidth}`, height: "350px" }}>
+        <Card size={{ width: `${v.xlItemWidth}`, height: '350px' }}>
           <TemplateViewController />
         </Card>
       </TemplateContainer>
     </TemplateStlyed>
   );
-};
+}
 
 export default TemplateList;
 const TemplateStlyed = styled.div`

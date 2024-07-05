@@ -1,5 +1,4 @@
-import React from "react";
-import BoardListItem from "./BoardListItem";
+import BoardListItem from './BoardListItem';
 
 interface BoardListProps<T> {
   boardInfos: T[];
@@ -8,16 +7,16 @@ interface BoardListProps<T> {
   route?: string;
 }
 
-const BoardList = <T,>({
+function BoardList<T>({
   boardInfos,
   idKey,
   displayKeys,
-  route,
-}: BoardListProps<T>) => {
-
+  route = '',
+}: BoardListProps<T>) {
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {boardInfos?.map(info => (
+      {boardInfos?.map((info) => (
         <BoardListItem
           key={String(info[idKey])}
           item={info}
@@ -28,6 +27,6 @@ const BoardList = <T,>({
       ))}
     </>
   );
-};
+}
 
 export default BoardList;

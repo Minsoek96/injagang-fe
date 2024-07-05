@@ -1,22 +1,19 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-
-import MainMenuItem from "./MainMenuItem";
-import { BrandLogo, MyProfileMenu } from "./MenuItems";
-import PermissionsMenu from "./PermissionsMenu";
-import SwitchSlider from "../UI/SwitchSlider";
-import { ColBox } from "@/styles/GlobalStyle";
-
-import useModal from "@/hooks/useModal";
-
-import { navItems } from "@/constants";
+import { ColBox } from '@/styles/GlobalStyle';
+import useModal from '@/hooks/useModal';
+import { navItems } from '@/constants';
+import MainMenuItem from './MainMenuItem';
+import { BrandLogo, MyProfileMenu } from './MenuItems';
+import PermissionsMenu from './PermissionsMenu';
+import SwitchSlider from '../UI/SwitchSlider';
 
 interface NavbarProps {
   toggleTheme: () => void;
   mode: boolean;
 }
 
-const Navbar = ({ toggleTheme, mode }: NavbarProps) => {
+function Navbar({ toggleTheme, mode }: NavbarProps) {
   const { Modal, setModal } = useModal();
 
   return (
@@ -37,7 +34,7 @@ const Navbar = ({ toggleTheme, mode }: NavbarProps) => {
       <Modal />
     </NavStyle>
   );
-};
+}
 
 export default Navbar;
 
@@ -54,7 +51,7 @@ const NavStyle = styled.nav`
   transition: all 0.5s ease;
   overflow: hidden;
   border-right: 0.5px solid rgba(236, 225, 225, 0.904);
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 
   svg {
     font-size: 2.5rem;

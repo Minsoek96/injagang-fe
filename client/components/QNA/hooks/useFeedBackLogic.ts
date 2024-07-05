@@ -1,11 +1,13 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import {
+  useState, useCallback, useRef, useEffect,
+} from 'react';
 
-import useModal from "@/hooks/useModal";
-import { useCorrectionStore, useFeedStore } from "@/store/qna";
-import { useWriteFeed } from "@/api/FEEDBACK/mutation";
+import useModal from '@/hooks/useModal';
+import { useCorrectionStore, useFeedStore } from '@/store/qna';
+import { useWriteFeed } from '@/api/FEEDBACK/mutation';
 
 const useFeedBackLogic = () => {
-  const [correctionText, setCorrectionText] = useState<string>("");
+  const [correctionText, setCorrectionText] = useState<string>('');
   const [isFeedBackClear, setIsFeedBackClear] = useState<boolean>(false);
   const [isViolation, setIsViolation] = useState<boolean>(false);
   const textRef = useRef<HTMLTextAreaElement>(null);
@@ -16,12 +18,12 @@ const useFeedBackLogic = () => {
 
   const { mutate: writeFeedBack } = useWriteFeed(targetFeed);
   const CORRECTION_MIN = correctionText.length < 30;
-  const EMPTY_CORRECTION = correction.targetAnswer === "";
+  const EMPTY_CORRECTION = correction.targetAnswer === '';
 
   const handleWarring = useCallback(() => {
     setModal({
       contents: {
-        title: "경고",
+        title: '경고',
         content: `Target질문을 선택해주세요.
           피드백은 30자이상 작성하세요. `,
       },
@@ -30,7 +32,7 @@ const useFeedBackLogic = () => {
 
   useEffect(() => {
     if (isFeedBackClear) {
-      setCorrectionText("");
+      setCorrectionText('');
       textRef.current?.focus();
     }
     if (isViolation) {

@@ -1,13 +1,12 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import useModal from "@/hooks/useModal";
+import useModal from '@/hooks/useModal';
 
-import { IPassWordInfo } from "./useMyProfileLogic";
-
-import { runValidationChecks } from "@/util/runValidationChecks";
-import { hasEmptyFields } from "@/util/hasEmpty";
-import { ERROR_MESSAGES, MODAL_MESSAGES } from "@/constants";
-import { useChangeNick, useChangePassWord } from "@/api/AUTH/mutations";
+import runValidationChecks from '@/util/runValidationChecks';
+import { hasEmptyFields } from '@/util/hasEmpty';
+import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/constants';
+import { useChangeNick, useChangePassWord } from '@/api/AUTH/mutations';
+import { IPassWordInfo } from './useMyProfileLogic';
 
 const validation = {
   password: ({
@@ -27,7 +26,7 @@ const validation = {
   ],
   nick: (nickName: string) => [
     {
-      check: () => nickName === "",
+      check: () => nickName === '',
       message: ERROR_MESSAGES.EMPTY_NICK,
     },
   ],
@@ -39,7 +38,7 @@ const useMyProfileManager = () => {
 
   const { Modal, setModal } = useModal();
 
-  //PASSWORD DOMAIN
+  // PASSWORD DOMAIN
   const dispatchPasswordChange = useCallback(
     ({ nowPassword, changePassword, changePasswordCheck }: IPassWordInfo) => {
       setModal({
@@ -51,7 +50,7 @@ const useMyProfileManager = () => {
           }),
         contents: {
           title: MODAL_MESSAGES.MSG,
-          content: `비밀번호 : **** 변경하시겠습니까?`,
+          content: '비밀번호 : **** 변경하시겠습니까?',
         },
       });
     },
@@ -73,10 +72,10 @@ const useMyProfileManager = () => {
     validationErrorMsg
       ? commonValidationFailure(validationErrorMsg)
       : passwordValidationSuccess({
-          nowPassword,
-          changePassword,
-          changePasswordCheck,
-        });
+        nowPassword,
+        changePassword,
+        changePasswordCheck,
+      });
   };
 
   const passwordValidationSuccess = ({
@@ -87,7 +86,7 @@ const useMyProfileManager = () => {
     confirmChangePw({ nowPassword, changePassword, changePasswordCheck });
   };
 
-  //NICKNAME DOMAIN
+  // NICKNAME DOMAIN
   const dispatchNickNameChange = useCallback((nickName: string) => {
     setModal({
       onAction: () => confirmNickNameChange(nickName),

@@ -1,27 +1,24 @@
-import React, { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { BiPlus } from "react-icons/bi";
+import { BiPlus } from 'react-icons/bi';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
+import { v4 as uuid4 } from 'uuid';
 
-import { v4 as uuid4 } from "uuid";
+import ControlMenu from '@/components/UI/ControlMenu';
+import { ColBox, StyleButton } from '@/styles/GlobalStyle';
+import V from '@/styles/variables';
+import CoverLetterQuestionItems from './CoverLetterQuestionItems';
 
-import CoverLetterQuestionItems from "./CoverLetterQuestionItems";
-import ControlMenu from "@/components/UI/ControlMenu";
+import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
+import useControlTemplate from '../hooks/useControlTemplate';
 
-import useCoverLetterCreatorLogic from "../hooks/useCoverLetterCreatorLogic";
-import useControlTemplate from "../hooks/useControlTemplate";
+const moveCoverLetterMainPage = '/coverLetter';
 
-import { ColBox, StyleButton } from "@/styles/GlobalStyle";
-import { v } from "@/styles/variables";
-
-
-export const moveCoverLetterMainPage = "/coverLetter";
-
-const CoverLetterCreator = () => {
+function CoverLetterCreator() {
   const router = useRouter();
   const {
     qnaList,
@@ -43,10 +40,10 @@ const CoverLetterCreator = () => {
   } = useControlTemplate();
 
   useEffect(() => {
-    const resetSelectedTemplateList = selectedTemplate.questions.map(a => ({
+    const resetSelectedTemplateList = selectedTemplate.questions.map((a) => ({
       qnaId: uuid4(),
       question: a,
-      answer: "",
+      answer: '',
     }));
     setQnAList(resetSelectedTemplateList);
   }, [selectedTemplate]);
@@ -57,33 +54,33 @@ const CoverLetterCreator = () => {
       <MainTitle>자소서 작성하기</MainTitle>
       <CoverLetterTitle
         value={coverLetterTitle}
-        onChange={e => setCoverLetterTitle(e.target.value)}
+        onChange={(e) => setCoverLetterTitle(e.target.value)}
         placeholder="자소서 제목"
-      ></CoverLetterTitle>
+      />
       <ControlMenu
-        Size={{ width: `${v.xlItemWidth}`, height: "40px" }}
+        Size={{ width: `${V.xlItemWidth}`, height: '40px' }}
         value={selectedTemplateTitle}
         optionList={templateTitles}
         onChange={changeSelectedTemplate}
       />
-      {qnaList.map((qna, i) => (
+      {qnaList.map((qna) => (
         <CoverLetterQuestionItems
           key={qna.qnaId}
           item={qna}
           onDelete={deleteQnAList}
           onUpdate={changeQnAList}
-        ></CoverLetterQuestionItems>
+        />
       ))}
-      <BiPlusStyled onClick={addQnAList}></BiPlusStyled>
+      <BiPlusStyled onClick={addQnAList} />
       <ControllerBtns>
         <StyleButton
-          Size={{ width: "150px", font: "20px" }}
+          Size={{ width: '150px', font: '20px' }}
           onClick={() => router.push(moveCoverLetterMainPage)}
         >
           뒤로가기
         </StyleButton>
         <StyleButton
-          Size={{ width: "150px", font: "20px" }}
+          Size={{ width: '150px', font: '20px' }}
           onClick={() => handleDispatch()}
         >
           작성완료
@@ -91,7 +88,7 @@ const CoverLetterCreator = () => {
       </ControllerBtns>
     </CoverLetterCreatorContainer>
   );
-};
+}
 
 export default CoverLetterCreator;
 const CoverLetterCreatorContainer = styled.div`
@@ -106,7 +103,7 @@ const MainTitle = styled.h2`
 `;
 
 const CoverLetterTitle = styled.input`
-  width: ${v.xlItemWidth};
+  width: ${V.xlItemWidth};
   height: 40px;
   border-radius: 5px;
   border-color: black;
@@ -119,7 +116,7 @@ const CoverLetterTitle = styled.input`
 const ControllerBtns = styled.div`
   display: flex;
   justify-content: space-between;
-  width: ${v.xlItemWidth};
+  width: ${V.xlItemWidth};
 `;
 
 const BiPlusStyled = styled(BiPlus)`

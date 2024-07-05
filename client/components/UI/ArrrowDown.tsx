@@ -1,16 +1,14 @@
-import React from "react";
+import styled, { keyframes } from 'styled-components';
 
-import styled, { keyframes } from "styled-components";
+import { BsArrowDown } from 'react-icons/bs';
 
-import { BsArrowDown } from "react-icons/bs";
-
-const ArrrowDown = () => {
+function ArrrowDown() {
   return (
     <ArrowContainer>
       <BsArrowDown />
     </ArrowContainer>
   );
-};
+}
 
 export default ArrrowDown;
 

@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
-import usePwCheck from "@/hooks/usePwCheck";
+import usePwCheck from '@/hooks/usePwCheck';
 
-import { hasEmptyFields } from "@/util/hasEmpty";
-import { ERROR_MESSAGES } from "@/constants";
-import { useFetchSignup } from "@/api/AUTH/mutations";
+import { hasEmptyFields } from '@/util/hasEmpty';
+import { ERROR_MESSAGES } from '@/constants';
+import { useFetchSignup } from '@/api/AUTH/mutations';
 
 interface joinInfoType {
   [key: string]: string;
@@ -17,13 +17,13 @@ interface joinInfoType {
 
 const useSignUpLogic = () => {
   const [joinInfo, setJoinInfo] = useState<joinInfoType>({
-    loginId: "",
-    password: "",
-    confirmPassword: "",
-    email: "",
-    nickName: "",
+    loginId: '',
+    password: '',
+    confirmPassword: '',
+    email: '',
+    nickName: '',
   });
-  const [userMsg, setUserMsg] = useState<string | null>("");
+  const [userMsg, setUserMsg] = useState<string | null>('');
   const { isValid, errorMessage } = usePwCheck({ password: joinInfo.password });
   const { mutate: confirmSignUp } = useFetchSignup();
 
@@ -43,7 +43,7 @@ const useSignUpLogic = () => {
   ];
 
   const runValidationChecks = () => {
-    const isValidation = validation.find(item => item.check());
+    const isValidation = validation.find((item) => item.check());
     if (isValidation) {
       setUserMsg(isValidation.message);
       return false;
@@ -71,7 +71,7 @@ const useSignUpLogic = () => {
   const handleValueChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
-      setJoinInfo(cur => ({
+      setJoinInfo((cur) => ({
         ...cur,
         [name]: value,
       }));
@@ -79,7 +79,12 @@ const useSignUpLogic = () => {
     [],
   );
 
-  return { handleSubmit, handleValueChange, userMsg, joinInfo };
+  return {
+    handleSubmit,
+    handleValueChange,
+    userMsg,
+    joinInfo,
+  };
 };
 
 export default useSignUpLogic;

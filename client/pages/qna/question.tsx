@@ -1,16 +1,13 @@
-import styled from "styled-components";
-import { ColBox } from "@/styles/GlobalStyle";
+import styled from 'styled-components';
+import { ColBox } from '@/styles/GlobalStyle';
 
-import QuestionComposer from "@/components/QNA/Question/QuestionComposer";
+import QuestionComposer from '@/components/QNA/Question/QuestionComposer';
 
-const question = () => {
-
-  return (
-    <WirteStyle>
-      <QuestionComposer />
-    </WirteStyle>
-  );
-};
+const question = () => (
+  <WirteStyle>
+    <QuestionComposer />
+  </WirteStyle>
+);
 
 export default question;
 

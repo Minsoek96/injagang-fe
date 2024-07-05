@@ -1,15 +1,12 @@
-import React from "react";
+import styled from 'styled-components';
 
-import styled from "styled-components";
+import { ColBox, FlexBox } from '@/styles/GlobalStyle';
+import V from '@/styles/variables';
+import UserInFo from './UserInfoSetting';
+import PassWordInfo from './PassWordSetting';
 
-import UserInFo from "./UserInfoSetting";
-import PassWordInfo from "./PassWordSetting";
-
-import { ColBox, FlexBox } from "@/styles/GlobalStyle";
-import { v } from "@/styles/variables";
-
-const CheckMyInFo = () => {
-  const headerTitle = "나의 정보";
+function CheckMyInFo() {
+  const headerTitle = '나의 정보';
   return (
     <CheckMyInFoStyle>
       <Container>
@@ -21,7 +18,7 @@ const CheckMyInFo = () => {
       </Container>
     </CheckMyInFoStyle>
   );
-};
+}
 
 export default CheckMyInFo;
 
@@ -31,7 +28,7 @@ const Container = styled.div`
 
 const CheckMyInFoStyle = styled.div`
   ${ColBox}
-  width: ${v.lgWidth};
+  width: ${V.lgWidth};
   height: 400px;
   h3 {
     margin-top: 20px;
@@ -39,7 +36,7 @@ const CheckMyInFoStyle = styled.div`
   }
 
   @media screen and (max-width: 900px) {
-    width: ${v.smWidth};
+    width: ${V.smWidth};
     height: 700px;
   }
 `;

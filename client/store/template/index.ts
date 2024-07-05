@@ -1,3 +1,3 @@
-import useTemplateStore from "./useTemplateStore";
+import useTemplateStore from './useTemplateStore';
 
 export { useTemplateStore };

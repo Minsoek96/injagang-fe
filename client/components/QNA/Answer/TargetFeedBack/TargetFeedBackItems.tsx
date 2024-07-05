@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   Card,
   ColBox,
   ScrollBar,
   StyleButton,
   StyleTextArea,
-} from "@/styles/GlobalStyle";
+} from '@/styles/GlobalStyle';
 
-import useModal from "@/hooks/useModal";
-import { IReviseFeedBack } from "@/types/feedback/FeedBackType";
+import useModal from '@/hooks/useModal';
+import { IReviseFeedBack } from '@/types/feedback/FeedBackType';
 
 type FeedBackItemsProps = {
   target: string;
@@ -20,23 +20,24 @@ type FeedBackItemsProps = {
   handleUpdateFeedBack: (feedback: IReviseFeedBack) => void;
 };
 
-const FeedBackItems = ({
+function FeedBackItems({
   target,
   content,
   feedbackId,
   owner,
   handleUpdateFeedBack,
-}: FeedBackItemsProps) => {
+}: FeedBackItemsProps) {
   const [isReadOnly, setIsReadOnly] = useState<boolean>(true);
   const [text, setText] = useState<string>(content);
   const { Modal, setModal } = useModal();
 
   const handleUpdate = () => {
-    if (content !== text)
+    if (content !== text) {
       handleUpdateFeedBack({
         feedbackId,
         reviseContent: text,
       });
+    }
     closeReadOnly();
   };
 
@@ -52,14 +53,14 @@ const FeedBackItems = ({
     setModal({
       onAction: openReadOnly,
       contents: {
-        title: "경고",
-        content: "정말 피드백 수정을 원하시나요?",
+        title: '경고',
+        content: '정말 피드백 수정을 원하시나요?',
       },
     });
   };
   return (
     <FeedBackItemsStyle>
-      <Card size={{ width: "80%", height: "50vh", flex: "col" }}>
+      <Card size={{ width: '80%', height: '50vh', flex: 'col' }}>
         <CorrectionContainer>
           <span className="correction_title">피드백:</span>
           <h4 className="correction_sentence">{target}</h4>
@@ -67,22 +68,22 @@ const FeedBackItems = ({
         <CommentTop>
           <StyleTextArea
             value={text}
-            onChange={e => setText(e.target.value)}
+            onChange={(e) => setText(e.target.value)}
             readOnly={isReadOnly}
-          ></StyleTextArea>
+          />
         </CommentTop>
         <CommentFooter>
           {owner && (
             <ControlRightButtons>
               <StyleButton
                 onClick={isReadOnly ? userEditConfirm : handleUpdate}
-                Size={{ width: "150px", font: "15px" }}
+                Size={{ width: '150px', font: '15px' }}
               >
-                {isReadOnly ? "편집" : "수정완료"}
+                {isReadOnly ? '편집' : '수정완료'}
               </StyleButton>
               <StyleButton
-                onClick={e => console.log("e")}
-                Size={{ width: "150px", font: "15px" }}
+                onClick={() => {}}
+                Size={{ width: '150px', font: '15px' }}
               >
                 삭제
               </StyleButton>
@@ -93,9 +94,9 @@ const FeedBackItems = ({
       <Modal />
     </FeedBackItemsStyle>
   );
-};
+}
 
-//삭제 API가 없음
+// 삭제 API가 없음
 
 export default FeedBackItems;
 

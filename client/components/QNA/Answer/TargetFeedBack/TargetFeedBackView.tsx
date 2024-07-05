@@ -1,29 +1,32 @@
-import styled from "styled-components";
-import { ColBox } from "@/styles/GlobalStyle";
+import styled from 'styled-components';
+import { ColBox } from '@/styles/GlobalStyle';
 
-import TargetFeedBackItems from "./TargetFeedBackItems";
+import { useFetchFeedBackList } from '@/api/FEEDBACK/queries';
+import { useReviseFeed } from '@/api/FEEDBACK/mutation';
+import TargetFeedBackItems from './TargetFeedBackItems';
 
-import userQnaManager from "../../hooks/userQnaManager";
-import { useFetchFeedBackList } from "@/api/FEEDBACK/queries";
-import { useReviseFeed } from "@/api/FEEDBACK/mutation";
+import userQnaManager from '../../hooks/userQnaManager';
 
-const TargetFeedBackView = () => {
+function TargetFeedBackView() {
   const { targetFeed } = userQnaManager();
   const { data: feedbackList } = useFetchFeedBackList(targetFeed);
   const { mutate: updateFeed } = useReviseFeed(targetFeed);
 
   return (
     <FeedBackViewStyle>
-      {feedbackList?.map(feedback => (
+      {feedbackList?.map((feedback) => (
         <TargetFeedBackItems
           key={feedback.feedbackId}
           handleUpdateFeedBack={updateFeed}
-          {...feedback}
-        ></TargetFeedBackItems>
+          target={feedback.target}
+          owner={feedback.owner}
+          content={feedback.content}
+          feedbackId={feedback.feedbackId}
+        />
       ))}
     </FeedBackViewStyle>
   );
-};
+}
 
 export default TargetFeedBackView;
 

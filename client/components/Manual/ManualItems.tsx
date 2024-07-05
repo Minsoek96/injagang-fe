@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import Image, { StaticImageData } from 'next/image';
 
-import Image, { StaticImageData } from "next/image";
+import styled, { keyframes, css } from 'styled-components';
 
-import styled, { keyframes, css } from "styled-components";
-
-import ArrrowDown from "../UI/ArrrowDown";
-
-import useSectionObsever from "@/hooks/useSectionObsever";
-
+import useSectionObsever from '@/hooks/useSectionObsever';
+import { memo, useState } from 'react';
+import keys from '@/util/keys';
+import ArrrowDown from '../UI/ArrrowDown';
 
 interface MnualItemsProps {
   mainTitle: string;
@@ -16,12 +14,12 @@ interface MnualItemsProps {
   imageList: StaticImageData[];
 }
 
-const ManualItems = ({
+function ManualItems({
   mainTitle,
   subTitle,
   isArrow,
   imageList,
-}: MnualItemsProps) => {
+}: MnualItemsProps) {
   const [isShow, setIsShow] = useState<boolean>(false);
   const { targetItemRef } = useSectionObsever(() => {
     !isShow && setIsShow(true);
@@ -31,23 +29,23 @@ const ManualItems = ({
       <MainTitle isShow={isShow}>{mainTitle}</MainTitle>
       <SubTitle isShow={isShow}>{subTitle}</SubTitle>
       {imageList.map((image, index) => (
-        <ImageContainer key={index}>
+        <ImageContainer key={keys(image.src, index)}>
           <Image
             src={image}
             alt="Interview Image"
             width={700}
             height={600}
             placeholder="blur"
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: 'cover' }}
           />
         </ImageContainer>
       ))}
       {isArrow && <ArrrowDown />}
     </BannerContainer>
   );
-};
+}
 
-export default React.memo(ManualItems);
+export default memo(ManualItems);
 
 const fadeInUp = keyframes`
   from {
@@ -61,18 +59,18 @@ const fadeInUp = keyframes`
 `;
 const fadeInUpOpacity = css<{ isShow: boolean }>`
   opacity: 0;
-  animation: ${props =>
-    props.isShow
+  animation: ${(props) =>
+    (props.isShow
       ? css`
           ${fadeInUp} 0.5s ease forwards
         `
-      : "none"};
+      : 'none')};
 `;
 
 const BannerContainer = styled.div<{ isShow: boolean }>`
   will-change: transform, opacity;
   height: 100vh;
-  display: ${({ isShow }) => (isShow ? "flex" : "visibilty")};
+  display: ${({ isShow }) => (isShow ? 'flex' : 'visibilty')};
   flex-direction: column;
   align-items: center;
   ${fadeInUpOpacity}
@@ -94,7 +92,9 @@ const ImageContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   margin-top: 3rem;
 
   &:hover {

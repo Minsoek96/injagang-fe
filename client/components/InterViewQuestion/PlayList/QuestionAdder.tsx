@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from 'react';
 
-import styled from "styled-components";
-import { StyleButton } from "@/styles/GlobalStyle";
+import styled from 'styled-components';
+import { StyleButton } from '@/styles/GlobalStyle';
 
 const AddTextInputStyle = styled.div`
   display: flex;
@@ -21,15 +21,15 @@ interface AddTextInputProps {
   handleAddQuestion: (title: string) => void;
   handleCancelQuestion: () => void;
 }
-const QuestionAdder = ({
+function QuestionAdder({
   handleAddQuestion,
   handleCancelQuestion,
-}: AddTextInputProps) => {
-  const [title, setTitle] = useState<string>("");
+}: AddTextInputProps) {
+  const [title, setTitle] = useState<string>('');
   const textRef = useRef<HTMLInputElement | null>(null);
   const handleAddText = () => {
     handleAddQuestion(title);
-    setTitle("");
+    setTitle('');
     textRef.current?.focus();
   };
   return (
@@ -39,17 +39,17 @@ const QuestionAdder = ({
         name="addTitle"
         placeholder="제목을 입력해주세요"
         value={title}
-        onChange={e => setTitle(e.target.value)}
-      ></Input>
+        onChange={(e) => setTitle(e.target.value)}
+      />
       <div>
         <StyleButton
-          Size={{ width: "63px", font: "15px" }}
+          Size={{ width: '63px', font: '15px' }}
           onClick={handleAddText}
         >
           확인
         </StyleButton>
         <StyleButton
-          Size={{ width: "63px", font: "15px" }}
+          Size={{ width: '63px', font: '15px' }}
           onClick={handleCancelQuestion}
         >
           확정
@@ -57,6 +57,6 @@ const QuestionAdder = ({
       </div>
     </AddTextInputStyle>
   );
-};
+}
 
 export default QuestionAdder;
