@@ -22,6 +22,12 @@ const nextConfig = {
       },
     ],
   },
+  rewrites: () => [
+    {
+      source: '/api/:path*',
+      destination: `${process.env.BACKEND_SERVER_API}/:path*`,
+    },
+  ],
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
