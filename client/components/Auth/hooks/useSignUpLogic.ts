@@ -4,7 +4,7 @@ import usePwCheck from '@/hooks/usePwCheck';
 
 import { hasEmptyFields } from '@/util/hasEmpty';
 import { ERROR_MESSAGES } from '@/constants';
-import { useFetchSignup } from '@/api/AUTH/mutations';
+import { useFetchSignup } from '@/apis/auth/mutations';
 
 interface joinInfoType {
   [key: string]: string;

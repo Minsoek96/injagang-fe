@@ -6,7 +6,7 @@ import Router from 'next/router';
 import Cookies from 'js-cookie';
 
 import { ERROR_MESSAGES } from '@/constants';
-import { tokenReissue } from './AUTH/apis';
+import { tokenReissue } from './auth/apis';
 import { SERVER } from './config';
 
 export const API = axios.create({

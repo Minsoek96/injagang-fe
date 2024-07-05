@@ -10,7 +10,7 @@ import { ModalProps } from '@/hooks/useModal';
 
 import { FlexBox } from '@/styles/GlobalStyle';
 import useAuthStore from '@/store/auth/useAuthStore';
-import { useFetchUserInfo } from '@/api/AUTH/mutations';
+import { useFetchUserInfo } from '@/apis/auth/mutations';
 import Cookies from 'js-cookie';
 import useLoginManager from '../Auth/hooks/useLoginManager';
 import { AdminMenu, NavContainer } from './MenuItems';

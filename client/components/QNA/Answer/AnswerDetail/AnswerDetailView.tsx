@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { Card, ColBox, ScrollBar } from '@/styles/GlobalStyle';
 import styled from 'styled-components';
-import { useFetchBoardDetail } from '@/api/QnABoard/queries';
+import { useFetchBoardDetail } from '@/apis/qnaboard/queries';
 import { useRouter } from 'next/router';
 import { useBoardStore } from '@/store/qna';
 import EditMenuBar from './EditMenuBar';

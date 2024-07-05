@@ -15,11 +15,11 @@ import {
   QueryClient,
   dehydrate,
 } from '@tanstack/react-query';
-import { board } from '@/api/QnABoard/queryKeys';
-import { getBoardList } from '@/api/QnABoard/apis';
 
 import { useBoardStore } from '@/store/qna';
 import dynamic from 'next/dynamic';
+import { board } from '@/apis/qnaboard/queryKeys';
+import { getBoardList } from '@/apis/qnaboard/apis';
 
 const BoardListView = dynamic(
   () => import('@/components/Board/BoardListLayout'),

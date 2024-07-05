@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { ScrollBar } from '@/styles/GlobalStyle';
-import { useFetchDetailCoverLetter } from '@/api/coverLetter/queries';
+import { useFetchDetailCoverLetter } from '@/apis/coverLetter/queries';
 import { memo } from 'react';
 import CoverLetterItem from './CoverLetterItem';
 

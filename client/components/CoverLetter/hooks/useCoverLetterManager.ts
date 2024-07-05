@@ -10,7 +10,7 @@ import useCoverLetterStore from '@/store/coverLetter/useCoverLetterStore';
 import {
   useDeleteCoverLetter,
   useReviseCoverLetter,
-} from '@/api/coverLetter/mutations';
+} from '@/apis/coverLetter/mutations';
 
 const useCoverLetterManager = () => {
   const router = useRouter();

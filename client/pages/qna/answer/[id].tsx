@@ -18,8 +18,8 @@ import Spinner from '@/components/Spinner';
 
 import { useFeedStore } from '@/store/qna';
 
-import { board } from '@/api/QnABoard/queryKeys';
-import { getDetailBoard } from '@/api/QnABoard/apis';
+import { board } from '@/apis/qnaboard/queryKeys';
+import { getDetailBoard } from '@/apis/qnaboard/apis';
 
 import getServerCookie from '@/util/getServerCookies';
 

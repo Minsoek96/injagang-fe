@@ -7,7 +7,7 @@ import { ColBox } from '@/styles/GlobalStyle';
 import useModal from '@/hooks/useModal';
 
 import { QuestionType } from '@/types/InterViewQuestion/InterViewQuestionType';
-import { useFetchRandomQuestion } from '@/api/INTERVIEWQUESTION/mutations';
+import { useFetchRandomQuestion } from '@/apis/interview_question/mutations';
 
 const InterViewSettingStyle = styled.div`
   ${ColBox}

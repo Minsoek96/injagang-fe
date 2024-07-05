@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
 import V from '@/styles/variables';
 
-import { useFetchCoverLetter } from '@/api/coverLetter/queries';
+import { useFetchCoverLetter } from '@/apis/coverLetter/queries';
 import { lazy } from 'react';
 import useCoverLetterManager from './hooks/useCoverLetterManager';
 

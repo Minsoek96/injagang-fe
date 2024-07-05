@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { ScrollBar } from '@/styles/GlobalStyle';
-import { useFetchBoardDetail } from '@/api/QnABoard/queries';
 import { useCorrectionStore } from '@/store/qna';
+import { useFetchBoardDetail } from '@/apis/qnaboard/queries';
 import AnswerDragItem from './AnswerDragItem';
 
 import useDragCorrection from '../../hooks/useDragCorrection';
