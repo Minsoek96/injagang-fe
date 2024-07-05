@@ -2,11 +2,11 @@ import {
   IAddQuestions,
 } from '@/types/InterViewQuestion/InterViewQuestionType';
 import { useInterViewStore } from '@/store/interview';
-import { useFetchQuestions } from '@/api/INTERVIEWQUESTION/queries';
+import { useFetchQuestions } from '@/apis/interview_question/queries';
 import {
   useAddInterViewQ,
   useDeleteInterViewQ,
-} from '@/api/INTERVIEWQUESTION/mutations';
+} from '@/apis/interview_question/mutations';
 
 const useExpectedQuestionManager = () => {
   const { selectedType } = useInterViewStore();

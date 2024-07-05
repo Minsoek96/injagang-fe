@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import { useFetchBoardList } from '@/api/QnABoard/queries';
+import { useFetchBoardList } from '@/apis/qnaboard/queries';
 import { useBoardStore } from '@/store/qna';
 import BoardList from './BoardList';
 import BoardListHead from './BoardListHead';

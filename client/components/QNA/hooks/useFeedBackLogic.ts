@@ -4,7 +4,7 @@ import {
 
 import useModal from '@/hooks/useModal';
 import { useCorrectionStore, useFeedStore } from '@/store/qna';
-import { useWriteFeed } from '@/api/FEEDBACK/mutation';
+import { useWriteFeed } from '@/apis/feedback/mutation';
 
 const useFeedBackLogic = () => {
   const [correctionText, setCorrectionText] = useState<string>('');

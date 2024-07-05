@@ -5,7 +5,7 @@ import useModal from '@/hooks/useModal';
 import runValidationChecks from '@/util/runValidationChecks';
 import { hasEmptyFields } from '@/util/hasEmpty';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/constants';
-import { useChangeNick, useChangePassWord } from '@/api/AUTH/mutations';
+import { useChangeNick, useChangePassWord } from '@/apis/auth/mutations';
 import { IPassWordInfo } from './useMyProfileLogic';
 
 const validation = {

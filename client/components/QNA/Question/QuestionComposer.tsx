@@ -13,8 +13,8 @@ import {
 import ControlMenu from '@/components/UI/ControlMenu';
 import CoverLetterDetail from '@/components/QNA/Question/CoverLetterDetail';
 
-import { useWriteBoard } from '@/api/QnABoard/mutaions';
-import { useFetchCoverLetter } from '@/api/coverLetter/queries';
+import { useWriteBoard } from '@/apis/qnaboard/mutaions';
+import { useFetchCoverLetter } from '@/apis/coverLetter/queries';
 
 function QuestionComposer() {
   const { data: coverLtters = [] } = useFetchCoverLetter();

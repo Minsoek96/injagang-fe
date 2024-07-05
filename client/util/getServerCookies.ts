@@ -1,4 +1,4 @@
-import { serverCookie } from '@/api/serverCookie';
+import { serverCookie } from '@/apis/serverCookie';
 
 import { GetServerSidePropsContext } from 'next';
 

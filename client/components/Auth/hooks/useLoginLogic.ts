@@ -3,7 +3,7 @@ import { useState, useCallback, useRef } from 'react';
 import { hasEmptyFieldKey } from '@/util/hasEmpty';
 
 import { ERROR_MESSAGES } from '@/constants';
-import { useFetchSignin } from '@/api/AUTH/mutations';
+import { useFetchSignin } from '@/apis/auth/mutations';
 
 const useLoginLogic = () => {
   const { mutate: authenTicate, errorMsg: loginErrorMsg } = useFetchSignin();

@@ -8,7 +8,7 @@ import useModal from '@/hooks/useModal';
 
 import runValidationChecks from '@/util/runValidationChecks';
 import { ERROR_MESSAGES } from '@/constants';
-import { useWriteCoverLetter } from '@/api/coverLetter/mutations';
+import { useWriteCoverLetter } from '@/apis/coverLetter/mutations';
 
 type QnaListType = {
   question: string;

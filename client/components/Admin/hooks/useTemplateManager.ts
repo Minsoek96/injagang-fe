@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { useTemplateStore } from '@/store/template';
-import { useAddTemplate, useDeleteTemplate } from '@/api/TEMPLATE/mutations';
+import { useAddTemplate, useDeleteTemplate } from '@/apis/template/mutations';
 
 const useTemplateManager = () => {
   const { setSelectedTemplate } = useTemplateStore();

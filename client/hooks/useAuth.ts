@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import Cookies from 'js-cookie';
 
-import { useFetchUserInfo } from '@/api/AUTH/mutations';
+import { useFetchUserInfo } from '@/apis/auth/mutations';
 
 // 인증을 위한 훅
 const useAuth = () => {
