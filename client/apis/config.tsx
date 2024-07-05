@@ -1,4 +1,5 @@
-export const SERVER = '/api';
+const isServer = typeof window === 'undefined';
+export const SERVER = isServer ? process.env.BACKEND_SERVER_API : '/api';
 
 export const AUTH_APIS = {
   INFO_API: '/info',
