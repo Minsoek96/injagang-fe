@@ -8,6 +8,7 @@ const nextConfig = {
   reactStrictMode: false,
   env: {
     BACKEND_SERVER_API: process.env.BACKEND_SERVER_API,
+    NEXT_PUBLIC_BACKEND_SERVER_API: process.NEXT_PUBLIC_BACKEND_SERVER_API,
   },
   swcMinify: true,
   compiler: {
@@ -25,7 +26,7 @@ const nextConfig = {
   rewrites: () => [
     {
       source: '/api/:path*',
-      destination: `${process.env.BACKEND_SERVER_API}/:path*`,
+      destination: `${process.env.NEXT_PUBLIC_BACKEND_SERVER_API}/:path*`,
     },
   ],
 };

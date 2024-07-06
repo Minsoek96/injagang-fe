@@ -93,6 +93,5 @@ export const fetcher = async (
   ...rest: { [key: string]: any }[]
 ) => {
   const res = await API[method](url, ...rest);
-  console.log(res, '요청 정보');
   return res;
 };
