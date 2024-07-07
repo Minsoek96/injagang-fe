@@ -26,7 +26,7 @@ function FeedBackComposer() {
   // Corection에 대한 상태 떄문에 props 드릴링이 발생한다. 리덕스로 변경
 
   return (
-    <Card size={{ width: '80%', height: '35vh', flex: 'col' }}>
+    <Card $size={{ width: '80%', height: '35vh', flex: 'col' }}>
       <CorrectionView
         targetAnswer={selectedCorrection.targetAnswer}
         targetQuestion={selectedCorrection.targetQuestion}

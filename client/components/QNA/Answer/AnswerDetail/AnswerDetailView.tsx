@@ -32,7 +32,7 @@ function AnswerDetailView() {
 
   if (isError || !boardList) return <p>오류가 발생했습니다.</p>;
   return (
-    <Card size={{ width: '80%', height: '45vh', flex: 'row' }}>
+    <Card $size={{ width: '80%', height: '45vh', flex: 'row' }}>
       <SwitchContainer>
         <LeftContainer>
           <BoardItem {...boardList} />

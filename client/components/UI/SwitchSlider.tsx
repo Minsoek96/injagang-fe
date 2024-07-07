@@ -1,5 +1,43 @@
 import styled from 'styled-components';
 
+type SwitchSliderProps = {
+  isToggle: boolean;
+  onClick: () => void;
+};
+
+function SwitchSlider({ isToggle, onClick }: SwitchSliderProps) {
+  const Craters = [
+    { className: 'crater__1', isToggle },
+    { className: 'crater__2', isToggle },
+    { className: 'crater__3', isToggle },
+  ];
+  return (
+    <SwitchSliderStyle>
+      <VisuallyHidden>
+        <label htmlFor="toggleBtn">Toggle button</label>
+      </VisuallyHidden>
+      <CheckBox
+        id="toggleBtn"
+        type="checkbox"
+        onClick={onClick}
+        defaultChecked={isToggle}
+        aria-label="토글버튼"
+      />
+      <Slider $isToggle={isToggle}>
+        {Craters.map((el) => (
+          <Crater
+            key={el.className}
+            className={el.className}
+            $isToggle={el.isToggle}
+          />
+        ))}
+      </Slider>
+    </SwitchSliderStyle>
+  );
+}
+
+export default SwitchSlider;
+
 const SwitchSliderStyle = styled.label`
   position: relative;
   display: inline-block;
@@ -13,24 +51,24 @@ const CheckBox = styled.input`
   height: 0;
 `;
 
-const Slider = styled.span<{ isToggle: boolean }>`
+const Slider = styled.span<{ $isToggle: boolean }>`
   position: absolute;
   cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${(props) => (props.isToggle ? '#2196f3' : '#ccc')};
+  background-color: ${(props) => (props.$isToggle ? '#2196f3' : '#ccc')};
   border-radius: 17px;
   transition: background-color 0.4s;
 
   &:before {
     position: absolute;
-    content: '';
+    content: "";
     height: 26px;
     width: 26px;
     transform: ${(props) =>
-    (props.isToggle ? 'translateX(30px)' : 'translateX(4px)')};
+    (props.$isToggle ? 'translateX(30px)' : 'translateX(4px)')};
     bottom: 4px;
     background-color: white;
     border-radius: 50%;
@@ -38,9 +76,9 @@ const Slider = styled.span<{ isToggle: boolean }>`
   }
 `;
 
-const Crater = styled.span<{ isToggle: boolean }>`
+const Crater = styled.span<{ $isToggle: boolean }>`
   position: absolute;
-  visibility: ${(props) => (props.isToggle ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props.$isToggle ? 'visible' : 'hidden')};
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 50%;
   transition: visibility 0.5ms ease-in-out;
@@ -75,37 +113,3 @@ const VisuallyHidden = styled.span`
   white-space: nowrap;
   width: 1px;
 `;
-
-type SwitchSliderProps = {
-  isToggle: boolean;
-  onClick: () => void;
-};
-
-function SwitchSlider({ isToggle, onClick }: SwitchSliderProps) {
-  const Craters = [
-    { className: 'crater__1', isToggle },
-    { className: 'crater__2', isToggle },
-    { className: 'crater__3', isToggle },
-  ];
-  return (
-    <SwitchSliderStyle>
-      <VisuallyHidden>
-        <label htmlFor="toggleBtn">Toggle button</label>
-      </VisuallyHidden>
-      <CheckBox
-        id="toggleBtn"
-        type="checkbox"
-        onClick={onClick}
-        defaultChecked={isToggle}
-        aria-label="토글버튼"
-      />
-      <Slider isToggle={isToggle}>
-        {Craters.map((el) => (
-          <Crater key={el.className} {...el} />
-        ))}
-      </Slider>
-    </SwitchSliderStyle>
-  );
-}
-
-export default SwitchSlider;

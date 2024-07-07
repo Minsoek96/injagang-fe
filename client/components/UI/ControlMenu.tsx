@@ -3,15 +3,15 @@ import styled from 'styled-components';
 // import { QuestionType } from "../redux/InterViewQuestion/action";
 
 interface SelectProps {
-  Size: {
+  $Size: {
     width: string;
     height: string;
   };
 }
 
 const ControlMenuSelect = styled.select<SelectProps>`
-  width: ${({ Size }) => Size.width || '100%'};
-  height: ${({ Size }) => Size.height || '100%'};
+  width: ${({ $Size }) => $Size.width || '100%'};
+  height: ${({ $Size }) => $Size.height || '100%'};
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
@@ -36,7 +36,7 @@ function ControlMenu({
       </label>
       <ControlMenuSelect
         id="controlMenuSelect"
-        Size={Size}
+        $Size={Size}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >

@@ -31,7 +31,7 @@ function Login() {
   }, [loginErrorMsg, userLogicMsg]);
 
   return (
-    <Form shakeTrigger={shakeTrigger} onSubmit={handleSubmit}>
+    <Form $shakeTrigger={shakeTrigger} onSubmit={handleSubmit}>
       <InputField
         label="아이디"
         ref={loginIdRef}
@@ -103,7 +103,7 @@ const shakeAnimation = keyframes`
   }
 `;
 
-const Form = styled.form<{ shakeTrigger: boolean }>`
+const Form = styled.form<{ $shakeTrigger: boolean }>`
   display: flex;
   flex-direction: column;
   width: 300px;
@@ -111,8 +111,8 @@ const Form = styled.form<{ shakeTrigger: boolean }>`
   border-radius: 8px;
   background-color: #15202b;
   box-shadow: 0 4px 8px rgba(14, 13, 13, 0.2);
-  ${({ shakeTrigger }) =>
-    shakeTrigger
+  ${({ $shakeTrigger }) =>
+    $shakeTrigger
     && css`
       animation: ${shakeAnimation} 0.5s;
     `}

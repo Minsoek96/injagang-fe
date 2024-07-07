@@ -32,7 +32,7 @@ function UserInfoSetting() {
           onChange={(e) => setNickName(e.target.value)}
         />
         <StyleButton
-          Size={{ width: '80%', font: '15px' }}
+          $Size={{ width: '80%', font: '15px' }}
           onClick={() => dispatchNickNameChange(nickName)}
         >
           변경

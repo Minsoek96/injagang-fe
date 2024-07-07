@@ -42,13 +42,13 @@ function ActionBtns({
     <div>
       <StyleButton
         onClick={onToggleAll}
-        Size={{ width: '100px', font: '15px' }}
+        $Size={{ width: '100px', font: '15px' }}
       >
         {isAllChecked ? '전체해제' : '전체선택'}
       </StyleButton>
       <StyleButton
         onClick={btnConfig[isAdmin].onClick}
-        Size={{ width: '100px', font: '15px' }}
+        $Size={{ width: '100px', font: '15px' }}
       >
         {btnConfig[isAdmin].text}
       </StyleButton>

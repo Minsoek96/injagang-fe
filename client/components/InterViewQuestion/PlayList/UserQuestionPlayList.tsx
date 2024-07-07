@@ -14,7 +14,7 @@ function UserQuestionPlayList() {
   } = useExpetedPlayListLogic();
   return (
     <AddQuestionListViewStyle>
-      <Card size={{ height: '450px', width: '100%', flex: 'Col' }}>
+      <Card $size={{ height: '450px', width: '100%', flex: 'Col' }}>
         <Container>
           {userQuestion
             && userQuestion.map((question, idx) => (

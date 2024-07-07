@@ -60,7 +60,7 @@ function FeedBackItems({
   };
   return (
     <FeedBackItemsStyle>
-      <Card size={{ width: '80%', height: '50vh', flex: 'col' }}>
+      <Card $size={{ width: '80%', height: '50vh', flex: 'col' }}>
         <CorrectionContainer>
           <span className="correction_title">피드백:</span>
           <h4 className="correction_sentence">{target}</h4>
@@ -77,13 +77,13 @@ function FeedBackItems({
             <ControlRightButtons>
               <StyleButton
                 onClick={isReadOnly ? userEditConfirm : handleUpdate}
-                Size={{ width: '150px', font: '15px' }}
+                $Size={{ width: '150px', font: '15px' }}
               >
                 {isReadOnly ? '편집' : '수정완료'}
               </StyleButton>
               <StyleButton
                 onClick={() => {}}
-                Size={{ width: '150px', font: '15px' }}
+                $Size={{ width: '150px', font: '15px' }}
               >
                 삭제
               </StyleButton>

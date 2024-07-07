@@ -61,19 +61,19 @@ function CoverLetterEdit() {
         <BiPlusStyled onClick={addQnAList} />
         <ControllerBtns>
           <StyleButton
-            Size={{ width: '150px', font: '20px' }}
+            $Size={{ width: '150px', font: '20px' }}
             onClick={() => router.push(moveCoverLetterMainPage)}
           >
             뒤로가기
           </StyleButton>
           <StyleButton
-            Size={{ width: '150px', font: '20px' }}
+            $Size={{ width: '150px', font: '20px' }}
             onClick={() => deleteCoverLetter(Number(id))}
           >
             삭제하기
           </StyleButton>
           <StyleButton
-            Size={{ width: '150px', font: '20px' }}
+            $Size={{ width: '150px', font: '20px' }}
             onClick={() =>
               changeCoverLetter(Number(id), coverLetterTitle, qnaList)}
           >

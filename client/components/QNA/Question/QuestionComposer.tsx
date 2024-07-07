@@ -43,7 +43,7 @@ function QuestionComposer() {
   };
 
   return (
-    <Card size={{ width: '80%', height: '80%', flex: 'row' }}>
+    <Card $size={{ width: '80%', height: '80%', flex: 'row' }}>
       <SwitchContainer>
         <LeftContainer>
           <QuestionTitle
@@ -61,7 +61,7 @@ function QuestionComposer() {
             onChange={(e) => setContent(e.target.value)}
           />
           <StyleButton
-            Size={{ width: '100%', font: '15px' }}
+            $Size={{ width: '100%', font: '15px' }}
             onClick={handleSubmit}
           >
             작성완료

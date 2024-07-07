@@ -74,13 +74,13 @@ function CoverLetterCreator() {
       <BiPlusStyled onClick={addQnAList} />
       <ControllerBtns>
         <StyleButton
-          Size={{ width: '150px', font: '20px' }}
+          $Size={{ width: '150px', font: '20px' }}
           onClick={() => router.push(moveCoverLetterMainPage)}
         >
           뒤로가기
         </StyleButton>
         <StyleButton
-          Size={{ width: '150px', font: '20px' }}
+          $Size={{ width: '150px', font: '20px' }}
           onClick={() => handleDispatch()}
         >
           작성완료

@@ -44,7 +44,7 @@ function NavigationButton({
 }: NavigationButtonProps) {
   return (
     <StyleButton
-      Size={{ width: '40px', font: '15px' }}
+      $Size={{ width: '40px', font: '15px' }}
       className={isActive ? 'active_button' : ''}
       onClick={onClick}
     >
