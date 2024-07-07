@@ -14,8 +14,7 @@ function BoardList<T>({
   route = '',
 }: BoardListProps<T>) {
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
+    <tbody>
       {boardInfos?.map((info) => (
         <BoardListItem
           key={String(info[idKey])}
@@ -25,7 +24,7 @@ function BoardList<T>({
           route={route}
         />
       ))}
-    </>
+    </tbody>
   );
 }
 

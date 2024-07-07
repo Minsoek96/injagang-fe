@@ -22,7 +22,7 @@ function ExpectedQuestionSelector() {
   });
 
   return (
-    <Card size={{ height: '450px', width: '100%', flex: 'Col' }}>
+    <Card $size={{ height: '450px', width: '100%', flex: 'Col' }}>
       <QuestionSelector
         selectedType={selectedType}
         onChange={dispatchSelectedType}

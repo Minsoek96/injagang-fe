@@ -43,13 +43,13 @@ function QuestionAdder({
       />
       <div>
         <StyleButton
-          Size={{ width: '63px', font: '15px' }}
+          $Size={{ width: '63px', font: '15px' }}
           onClick={handleAddText}
         >
           확인
         </StyleButton>
         <StyleButton
-          Size={{ width: '63px', font: '15px' }}
+          $Size={{ width: '63px', font: '15px' }}
           onClick={handleCancelQuestion}
         >
           확정

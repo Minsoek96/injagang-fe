@@ -25,9 +25,9 @@ function ManualItems({
     !isShow && setIsShow(true);
   }, 0.5);
   return (
-    <BannerContainer ref={targetItemRef} isShow={isShow}>
-      <MainTitle isShow={isShow}>{mainTitle}</MainTitle>
-      <SubTitle isShow={isShow}>{subTitle}</SubTitle>
+    <BannerContainer ref={targetItemRef} $isShow={isShow}>
+      <MainTitle $isShow={isShow}>{mainTitle}</MainTitle>
+      <SubTitle $isShow={isShow}>{subTitle}</SubTitle>
       {imageList.map((image, index) => (
         <ImageContainer key={keys(image.src, index)}>
           <Image
@@ -57,32 +57,32 @@ const fadeInUp = keyframes`
     transform: translateY(0);
   }
 `;
-const fadeInUpOpacity = css<{ isShow: boolean }>`
+const fadeInUpOpacity = css<{ $isShow: boolean }>`
   opacity: 0;
   animation: ${(props) =>
-    (props.isShow
+    (props.$isShow
       ? css`
           ${fadeInUp} 0.5s ease forwards
         `
       : 'none')};
 `;
 
-const BannerContainer = styled.div<{ isShow: boolean }>`
+const BannerContainer = styled.div<{ $isShow: boolean }>`
   will-change: transform, opacity;
   height: 100vh;
-  display: ${({ isShow }) => (isShow ? 'flex' : 'visibilty')};
+  display: ${({ $isShow }) => ($isShow ? 'flex' : 'visibilty')};
   flex-direction: column;
   align-items: center;
   ${fadeInUpOpacity}
 `;
 
-const MainTitle = styled.h2<{ isShow: boolean }>`
+const MainTitle = styled.h2<{ $isShow: boolean }>`
   font-size: 2.5rem;
   ${fadeInUpOpacity}
   animation-delay: 0.2s;
 `;
 
-const SubTitle = styled.h3<{ isShow: boolean }>`
+const SubTitle = styled.h3<{ $isShow: boolean }>`
   font-size: 2rem;
   ${fadeInUpOpacity}
   animation-delay: 0.4s;

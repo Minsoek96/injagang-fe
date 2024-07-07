@@ -61,7 +61,7 @@ function InterviewRecord() {
 
   return (
     <RecordStyle>
-      <RecordContainer isResult={isResult}>
+      <RecordContainer $isResult={isResult}>
         <Image className="interView_img" src={interViewin} alt="interView" />
         <Camera>
           {!isResult ? (
@@ -100,13 +100,13 @@ function InterviewRecord() {
               onClick={() =>
                 setVideoIndex((prevIndex) =>
                   (prevIndex <= 1 ? 0 : videoIndex - 1))}
-              Size={{ width: '150px', font: '15px' }}
+              $Size={{ width: '150px', font: '15px' }}
             >
               이전영상
             </StyleButton>
             <StyleButton
               onClick={() => setIsResult(!isResult)}
-              Size={{ width: '150px', font: '15px' }}
+              $Size={{ width: '150px', font: '15px' }}
             >
               결과확인
             </StyleButton>
@@ -114,7 +114,7 @@ function InterviewRecord() {
               onClick={() =>
                 setVideoIndex((prevIndex) =>
                   (prevIndex >= recordedChunks.length - 1 ? 0 : videoIndex + 1))}
-              Size={{ width: '150px', font: '15px' }}
+              $Size={{ width: '150px', font: '15px' }}
             >
               다음영상
             </StyleButton>
@@ -134,18 +134,18 @@ const RecordStyle = styled.div`
   height: 90%;
 `;
 
-const RecordContainer = styled.div<{ isResult: boolean }>`
+const RecordContainer = styled.div<{ $isResult: boolean }>`
   position: relative;
   display: flex;
   flex-grow: 1;
   width: ${V.lgItemWidth};
   height: 60%;
-  border: ${({ isResult }) => !isResult && '2px solid #e0e0e0'};
+  border: ${({ $isResult }) => !$isResult && '2px solid #e0e0e0'};
   border-radius: 15px;
   overflow: hidden;
 
   .interView_img {
-    display: ${({ isResult }) => (isResult ? 'none' : 'block')};
+    display: ${({ $isResult }) => ($isResult ? 'none' : 'block')};
     position: absolute;
     top: 50%;
     left: 50%;
@@ -157,14 +157,14 @@ const RecordContainer = styled.div<{ isResult: boolean }>`
 
   video {
     width: 100%;
-    height: ${({ isResult }) => (isResult ? '75%' : '100%')};
+    height: ${({ $isResult }) => ($isResult ? '75%' : '100%')};
     object-fit: cover;
   }
 
   @media screen and (max-width: 800px) {
     width: ${V.smItemWidth};
     video {
-      height: ${({ isResult }) => (isResult ? '65%' : '100%')};
+      height: ${({ $isResult }) => ($isResult ? '65%' : '100%')};
     }
   }
 `;

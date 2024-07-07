@@ -47,7 +47,7 @@ function PassWordSetting() {
         />
       ))}
       <StyleButton
-        Size={{ width: '95%', font: '15px' }}
+        $Size={{ width: '95%', font: '15px' }}
         onClick={() => dispatchPasswordChange(passWordInfo)}
       >
         변경

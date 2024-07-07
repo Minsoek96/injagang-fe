@@ -46,7 +46,7 @@ const useModal = () => {
     const { title, content } = modalState.modal.contents;
 
     return (
-      <ModalStyle isOpen={isModalOpen}>
+      <ModalStyle $isOpen={isModalOpen}>
         <ModalBox>
           <div className="modal_Contents">
             <h2>{title}</h2>
@@ -55,13 +55,13 @@ const useModal = () => {
           {modalState.modal.onAction ? (
             <div className="modal_Controller">
               <StyleButton
-                Size={{ width: '150px', font: '15px' }}
+                $Size={{ width: '150px', font: '15px' }}
                 onClick={actionModal}
               >
                 예
               </StyleButton>
               <StyleButton
-                Size={{ width: '150px', font: '15px' }}
+                $Size={{ width: '150px', font: '15px' }}
                 onClick={closeModal}
               >
                 아니오
@@ -70,7 +70,7 @@ const useModal = () => {
           ) : (
             <div className="modal_center_btn">
               <StyleButton
-                Size={{ width: '250px', font: '15px' }}
+                $Size={{ width: '250px', font: '15px' }}
                 onClick={closeModal}
               >
                 확인
@@ -92,12 +92,12 @@ const useModal = () => {
 export default useModal;
 
 interface ModalStyleProps {
-  isOpen: boolean;
+  $isOpen: boolean;
 }
 
 const ModalStyle = styled.div<ModalStyleProps>`
   z-index: 1000;
-  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
+  display: ${(props) => (props.$isOpen ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   position: fixed;

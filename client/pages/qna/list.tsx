@@ -65,7 +65,7 @@ function List({ dehydratedState }: ListProps) {
     <ListStyle>
       <StyleButton
         className="edit_btn"
-        Size={{ width: '600px', font: '15px' }}
+        $Size={{ width: '600px', font: '15px' }}
         onClick={() => router.push('/qna/question')}
       >
         <MdOutlineModeEditOutline />

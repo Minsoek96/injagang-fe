@@ -15,7 +15,7 @@ function ToastItem({
   return (
     <ToastMessage mode={mode}>
       {message}
-      <ProgressBar duration={duration} startTime={startTime} />
+      <ProgressBar $duration={duration} $startTime={startTime} />
     </ToastMessage>
   );
 }
@@ -50,12 +50,12 @@ const ToastMessage = styled.div<{ mode: TOAST_MODE }>`
   will-change: opacity;
 `;
 
-const ProgressBar = styled.div<{ duration: number; startTime: number }>`
+const ProgressBar = styled.div<{ $duration: number; $startTime: number }>`
   position: absolute;
   bottom: 0;
   left: 0;
   height: 5px;
   background-color: #f46a6a;
-  animation: ${progressBar} ${(props) => props.duration}ms linear;
-  animation-delay: ${(props) => props.startTime - Date.now()}ms;
+  animation: ${progressBar} ${(props) => props.$duration}ms linear;
+  animation-delay: ${(props) => props.$startTime - Date.now()}ms;
 `;

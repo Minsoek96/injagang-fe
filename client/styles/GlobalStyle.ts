@@ -72,12 +72,12 @@ export const Container = styled.div`
 `;
 
 export const Card = styled.div<CardProps>`
-  ${({ size }) => (size.flex === 'row' ? FlexBox : ColBox)};
+  ${({ $size }) => ($size.flex === 'row' ? FlexBox : ColBox)};
   padding: 15px 15px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
-  width: ${({ size }) => size.width || '100%'};
-  height: ${({ size }) => size.height || '100%'};
+  width: ${({ $size }) => $size.width || '100%'};
+  height: ${({ $size }) => $size.height || '100%'};
   border-radius: 8px;
   box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.6);
 `;
@@ -87,17 +87,17 @@ export const StyleCard = styled.div<CardProps>`
   padding: 15px 15px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
-  width: ${({ size }) => size.width || '100%'};
-  height: ${({ size }) => size.height || '100%'};
+  width: ${({ $size }) => $size.width || '100%'};
+  height: ${({ $size }) => $size.height || '100%'};
   border-radius: 8px;
   box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.6);
 `;
 
 export const StyleButton = styled.button<SelectProps>`
-  width: ${({ Size }) => Size.width || '100%'};
+  width: ${({ $Size }) => $Size.width || '100%'};
   background-color: ${({ theme }) => theme.colors.button};
   color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ Size }) => Size.font || '16px'};
+  font-size: ${({ $Size }) => $Size.font || '16px'};
   border: none;
   padding: 10px 15px;
   border-radius: 10px;
@@ -151,7 +151,7 @@ export const StyleInput = styled.input`
 
 export const MainTitleContainer = styled.div`
   text-align: center;
-  background-color: '#151618';
+  background-color: "#151618";
   box-shadow: 1px 2px 12px rgba(0, 0, 0, 0.4);
   font-weight: bold;
   font-size: 1.8rem;
@@ -186,7 +186,7 @@ export const StyledInput = styled.input`
 `;
 
 interface CardProps {
-  size: {
+  $size: {
     width: string;
     height: string;
     flex?: string;
@@ -194,7 +194,7 @@ interface CardProps {
 }
 
 interface SelectProps {
-  Size: {
+  $Size: {
     width: string;
     font: string;
   };

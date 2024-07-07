@@ -23,7 +23,7 @@ function FeedBackFooter({
         {qnaIdList.map((list, i) => (
           <StyleButton
             className={list === feedBackIndex ? 'active_button' : ' '}
-            Size={{ width: '40px', font: '15px' }}
+            $Size={{ width: '40px', font: '15px' }}
             onClick={() => handleFeedBackIndex(list)}
             key={list}
           >

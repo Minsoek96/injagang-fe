@@ -20,7 +20,7 @@ export default function TextActionBtns({
         <StyleButton
           key={info.id}
           onClick={info.onClick}
-          Size={{ width: '150px', font: '15px' }}
+          $Size={{ width: '150px', font: '15px' }}
         >
           {info.text}
         </StyleButton>

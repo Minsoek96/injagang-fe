@@ -22,14 +22,14 @@ function TemplateList() {
     <TemplateStlyed>
       <MainTitleContainer>템플릿 만들기</MainTitleContainer>
       <TemplateContainer>
-        <Card size={{ width: `${v.xlItemWidth}`, height: '350px' }}>
+        <Card $size={{ width: `${v.xlItemWidth}`, height: '350px' }}>
           <APIErrorBoundary>
             <Suspense fallback={<Spinner />}>
               <TemplateTitleList />
             </Suspense>
           </APIErrorBoundary>
         </Card>
-        <Card size={{ width: `${v.xlItemWidth}`, height: '350px' }}>
+        <Card $size={{ width: `${v.xlItemWidth}`, height: '350px' }}>
           <TemplateViewController />
         </Card>
       </TemplateContainer>

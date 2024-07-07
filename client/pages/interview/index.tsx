@@ -45,7 +45,7 @@ function Interview() {
         {curIndex > SECOND_SCREEN && (
           <StyleButton
             onClick={moveToPrevPage}
-            Size={{ width: '50px', font: '22px' }}
+            $Size={{ width: '50px', font: '22px' }}
           >
             <BiArrowBack />
           </StyleButton>
@@ -53,7 +53,7 @@ function Interview() {
         <StyleButton
           className="Arrow_btn"
           onClick={moveToNextPage}
-          Size={{ width: '90%', font: '20px' }}
+          $Size={{ width: '90%', font: '20px' }}
         >
           {renderComponent[curIndex].title}
         </StyleButton>
