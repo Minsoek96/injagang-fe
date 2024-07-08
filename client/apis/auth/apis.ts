@@ -8,6 +8,7 @@ import {
   IChangePw,
   IUserInfo,
 } from '@/types/auth/AuthType';
+import { TOKEN_KYES } from '@/constants';
 import { fetcher, METHOD } from '../client';
 import { AUTH_APIS } from '../config';
 
@@ -32,8 +33,8 @@ const signup = async (signupData: ISignup) =>
 
 const tokenReissue = async () =>
   fetcher(METHOD.POST, AUTH_APIS.TOKKEN_REISSUE_API, {
-    access: Cookies.get('accessToken'),
-    refresh: Cookies.get('refreshToken'),
+    access: Cookies.get(TOKEN_KYES.ACCESS_TOKEN),
+    refresh: Cookies.get(TOKEN_KYES.REFRESH_TOKEN),
   });
 
 export {

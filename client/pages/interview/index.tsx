@@ -8,12 +8,19 @@ import Image from 'next/image';
 import interViewimg from '@/assets/images/interView.svg';
 
 import InterViewListView from '@/components/InterViewQuestion/ExpectedQuestionLayout';
-import InterViewRandomSetting from '@/components/InterView/InterViewRandomSetting';
-import InterviewRecord from '@/components/InterView/interviewRecord';
 import ArrowAnimation from '@/components/InterView/InterViewMenual';
 
 import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
 import V from '@/styles/variables';
+import dynamic from 'next/dynamic';
+
+const InterViewRandomSetting = dynamic(() => import('@/components/InterView/InterViewRandomSetting'), {
+  ssr: false,
+});
+
+const InterviewRecord = dynamic(() => import('@/components/InterView/interviewRecord'), {
+  ssr: false,
+});
 
 const renderComponent = [
   { render: null, title: '면접영상촬영시작' },

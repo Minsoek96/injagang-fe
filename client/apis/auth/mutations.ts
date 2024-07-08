@@ -13,7 +13,9 @@ import {
   ISignup,
   IUserInfo,
 } from '@/types/auth/AuthType';
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/constants';
+import {
+  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE, TOKEN_KYES,
+} from '@/constants';
 import useToast from '@/hooks/useToast';
 import useAuthStore from '@/store/auth/useAuthStore';
 import {
@@ -35,8 +37,8 @@ const useFetchSignin = () => {
 
     onSuccess: (data: IResponseSignin) => {
       const { access, refresh, userId } = data;
-      Cookies.set('accessToken', access, { expires: 1 });
-      Cookies.set('refreshToken', refresh, { expires: 1 });
+      Cookies.set(TOKEN_KYES.ACCESS_TOKEN, access, { expires: 1 });
+      Cookies.set(TOKEN_KYES.REFRESH_TOKEN, refresh, { expires: 1 });
       Cookies.set('userId', userId, { expires: 1 });
       setUserId(userId);
       router.replace('/');
@@ -53,13 +55,13 @@ const useFetchCheckOut = () => {
   const { nickName, initCurrentUser } = useAuthStore();
 
   const currentToken = {
-    access: Cookies.get('accessToken'),
-    refresh: Cookies.get('refreshToken'),
+    access: Cookies.get(TOKEN_KYES.ACCESS_TOKEN),
+    refresh: Cookies.get(TOKEN_KYES.REFRESH_TOKEN),
   };
 
   const removeToken = () => {
-    Cookies.remove('accessToken');
-    Cookies.remove('refreshToken');
+    Cookies.remove(TOKEN_KYES.ACCESS_TOKEN);
+    Cookies.remove(TOKEN_KYES.REFRESH_TOKEN);
     Cookies.remove('userId');
   };
 

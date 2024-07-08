@@ -121,3 +121,8 @@ export const TOAST_MODE = {
   ERROR: 'ERROR',
   INFO: 'INFO',
 };
+
+export const TOKEN_KYES = {
+  ACCESS_TOKEN: 'accessToken',
+  REFRESH_TOKEN: 'refreshToken',
+};
