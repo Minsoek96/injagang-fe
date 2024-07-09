@@ -1,25 +1,29 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import LocalStorageManager from '@/util/localStorageManager';
+import useThemeStore from '@/store/theme/useThemeStore';
 
-const useThemeToggler = (defaultValue: boolean): [boolean, () => void] => {
-  const [toggle, setToggle] = useState<boolean>(defaultValue);
-  const storage = new LocalStorageManager('theme');
+const storage = new LocalStorageManager('theme');
+
+const useThemeToggler = (): [boolean, () => void] => {
+  const { isDark: currentMode, changeThemeMode } = useThemeStore();
 
   const ChangeToggleTheme = useCallback(() => {
-    const currentMode = !toggle;
-    setToggle(currentMode);
-    storage.save(currentMode);
-  }, [toggle]);
+    const saveValue = !currentMode;
+
+    changeThemeMode(saveValue);
+    storage.save(saveValue);
+  }, [currentMode, changeThemeMode]);
 
   useEffect(() => {
     const currentSaveMode = storage.get();
+
     if (currentSaveMode) {
-      setToggle(currentSaveMode);
+      changeThemeMode(currentSaveMode);
     }
   }, []);
 
-  return [toggle, ChangeToggleTheme];
+  return [currentMode, ChangeToggleTheme];
 };
 
 export default useThemeToggler;

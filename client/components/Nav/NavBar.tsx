@@ -3,17 +3,14 @@ import styled from 'styled-components';
 import { ColBox } from '@/styles/GlobalStyle';
 import useModal from '@/hooks/useModal';
 import { navItems } from '@/constants';
+import useThemeToggler from '@/hooks/useThemeToggler';
 import MainMenuItem from './MainMenuItem';
 import { BrandLogo, MyProfileMenu } from './MenuItems';
 import PermissionsMenu from './PermissionsMenu';
 import SwitchSlider from '../UI/SwitchSlider';
 
-interface NavbarProps {
-  toggleTheme: () => void;
-  mode: boolean;
-}
-
-function Navbar({ toggleTheme, mode }: NavbarProps) {
+function Navbar() {
+  const [mode, toggleTheme] = useThemeToggler();
   const { Modal, setModal } = useModal();
 
   return (
