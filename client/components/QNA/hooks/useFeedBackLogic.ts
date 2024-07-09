@@ -11,7 +11,7 @@ const useFeedBackLogic = () => {
   const [isFeedBackClear, setIsFeedBackClear] = useState<boolean>(false);
   const [isViolation, setIsViolation] = useState<boolean>(false);
   const textRef = useRef<HTMLTextAreaElement>(null);
-  const { setModal, Modal } = useModal();
+  const { setModal } = useModal();
 
   const { correction, initCorrection } = useCorrectionStore();
   const { targetFeed } = useFeedStore();
@@ -24,7 +24,7 @@ const useFeedBackLogic = () => {
     setModal({
       contents: {
         title: '경고',
-        content: `Target질문을 선택해주세요.
+        message: `Target질문을 선택해주세요.
           피드백은 30자이상 작성하세요. `,
       },
     });
@@ -81,7 +81,6 @@ const useFeedBackLogic = () => {
     handleChangeFeedBack,
     handleSubmit,
     handleClear,
-    Modal,
   };
 };
 

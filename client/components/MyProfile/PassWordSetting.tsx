@@ -26,7 +26,7 @@ function PasswordInputItem({
 }
 
 function PassWordSetting() {
-  const { dispatchPasswordChange, Modal } = useMyProfileManager();
+  const { dispatchPasswordChange } = useMyProfileManager();
   const { passWordInfo, handleInfoChange } = useMyProfileLogic();
 
   const labels = {
@@ -52,7 +52,6 @@ function PassWordSetting() {
       >
         변경
       </StyleButton>
-      <Modal />
     </PassWordContainer>
   );
 }

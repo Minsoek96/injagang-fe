@@ -29,7 +29,7 @@ function FeedBackItems({
 }: FeedBackItemsProps) {
   const [isReadOnly, setIsReadOnly] = useState<boolean>(true);
   const [text, setText] = useState<string>(content);
-  const { Modal, setModal } = useModal();
+  const { setModal } = useModal();
 
   const handleUpdate = () => {
     if (content !== text) {
@@ -54,7 +54,7 @@ function FeedBackItems({
       onAction: openReadOnly,
       contents: {
         title: '경고',
-        content: '정말 피드백 수정을 원하시나요?',
+        message: '정말 피드백 수정을 원하시나요?',
       },
     });
   };
@@ -91,7 +91,6 @@ function FeedBackItems({
           )}
         </CommentFooter>
       </Card>
-      <Modal />
     </FeedBackItemsStyle>
   );
 }

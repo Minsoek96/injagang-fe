@@ -36,7 +36,7 @@ const useMyProfileManager = () => {
   const { mutate: changeNickname } = useChangeNick();
   const { mutate: confirmChangePw } = useChangePassWord();
 
-  const { Modal, setModal } = useModal();
+  const { setModal } = useModal();
 
   // PASSWORD DOMAIN
   const dispatchPasswordChange = useCallback(
@@ -50,7 +50,7 @@ const useMyProfileManager = () => {
           }),
         contents: {
           title: MODAL_MESSAGES.MSG,
-          content: '비밀번호 : **** 변경하시겠습니까?',
+          message: '비밀번호 : **** 변경하시겠습니까?',
         },
       });
     },
@@ -92,7 +92,7 @@ const useMyProfileManager = () => {
       onAction: () => confirmNickNameChange(nickName),
       contents: {
         title: MODAL_MESSAGES.MSG,
-        content: `닉네임 : ${nickName} 변경하시겠습니까?`,
+        message: `닉네임 : ${nickName} 변경하시겠습니까?`,
       },
     });
   }, []);
@@ -112,7 +112,7 @@ const useMyProfileManager = () => {
     setModal({
       contents: {
         title: MODAL_MESSAGES.WARNING,
-        content: errorMsg,
+        message: errorMsg,
       },
     });
   };
@@ -120,7 +120,6 @@ const useMyProfileManager = () => {
   return {
     dispatchPasswordChange,
     dispatchNickNameChange,
-    Modal,
   };
 };
 

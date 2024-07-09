@@ -14,7 +14,7 @@ export interface ISelectedText {
 }
 
 const useDragCorrection = () => {
-  const { setModal, Modal } = useModal();
+  const { setModal } = useModal();
   const [selectedText, setSelectedText] = useState<ISelectedText>({
     dragTitleId: 0,
     targetId: 0,
@@ -60,7 +60,7 @@ const useDragCorrection = () => {
     setModal({
       contents: {
         title: MODAL_MESSAGES.WARNING,
-        content: ERROR_MESSAGES.DUPLICATION_TEXT,
+        message: ERROR_MESSAGES.DUPLICATION_TEXT,
       },
     });
   };
@@ -80,7 +80,6 @@ const useDragCorrection = () => {
     handleCorrection,
     removeCorrection,
     selectedText,
-    Modal,
     setModal,
   };
 };

@@ -60,7 +60,7 @@ function InterViewRandomSetting() {
     personality: 0,
   });
   const { mutate: getRandomQustions } = useFetchRandomQuestion();
-  const { setModal, Modal } = useModal();
+  const { setModal } = useModal();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -90,7 +90,7 @@ function InterViewRandomSetting() {
     setModal({
       contents: {
         title: 'Success',
-        content: `${sumAllQuestions}개의 랜덤 질문을 셋팅 하였습니다.`,
+        message: `${sumAllQuestions}개의 랜덤 질문을 셋팅 하였습니다.`,
       },
     });
   };
@@ -128,7 +128,6 @@ function InterViewRandomSetting() {
         />
         <Button type="submit">셋팅완료</Button>
       </Form>
-      <Modal />
     </InterViewSettingStyle>
   );
 }

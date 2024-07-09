@@ -14,7 +14,7 @@ function UserInfoSetting() {
   const { nickName: confirmNick } = useAuthStore();
   const [nickName, setNickName] = useState(confirmNick ?? '');
   const myInfo = new SessionStorageManager('info');
-  const { dispatchNickNameChange, Modal } = useMyProfileManager();
+  const { dispatchNickNameChange } = useMyProfileManager();
   const mainTitle = '닉네임 변경';
 
   useEffect(() => {
@@ -39,7 +39,6 @@ function UserInfoSetting() {
         </StyleButton>
       </UserInfoContainer>
       <RxAvatar />
-      <Modal />
     </UserInfoStyle>
   );
 }

@@ -14,7 +14,7 @@ const useExpetedPlayListLogic = () => {
   } = useEUserQuestionManager({ typeCheckCallback: () => {} });
   const { dispatchAddQuestions, dispatchAddInterViewList } = useExpectedQuestionManager();
   const { role } = useAuthStore();
-  const { setModal, Modal } = useModal();
+  const { setModal } = useModal();
   const [userQuestion, setUserQuestion] = useState<string[]>([]);
 
   // 유저가 추가한 리스트를 입력
@@ -31,7 +31,7 @@ const useExpetedPlayListLogic = () => {
         setModal({
           contents: {
             title: MODAL_MESSAGES.WARNING,
-            content: ERROR_MESSAGES.FILL_BLANKS,
+            message: ERROR_MESSAGES.FILL_BLANKS,
           },
         });
         return;
@@ -57,7 +57,7 @@ const useExpetedPlayListLogic = () => {
       setModal({
         contents: {
           title: MODAL_MESSAGES.WARNING,
-          content: ERROR_MESSAGES.DOESN_T_TYPE,
+          message: ERROR_MESSAGES.DOESN_T_TYPE,
         },
       });
       return;
@@ -77,7 +77,7 @@ const useExpetedPlayListLogic = () => {
       setModal({
         contents: {
           title: MODAL_MESSAGES.WARNING,
-          content: ERROR_MESSAGES.EMPTY_LIST,
+          message: ERROR_MESSAGES.EMPTY_LIST,
         },
       });
       return;
@@ -87,7 +87,7 @@ const useExpetedPlayListLogic = () => {
     setModal({
       contents: {
         title: MODAL_MESSAGES.MSG,
-        content: '리스트 설정이 완료되었습니다.',
+        message: '리스트 설정이 완료되었습니다.',
       },
     });
   }, [userQuestion, setModal]);
@@ -99,7 +99,6 @@ const useExpetedPlayListLogic = () => {
     handleRemoveText,
     handleAddText,
     roleAction,
-    Modal,
   };
 };
 

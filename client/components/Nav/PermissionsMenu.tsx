@@ -6,12 +6,11 @@ import { useRouter } from 'next/router';
 
 import { BiLogOut, BiLogIn } from 'react-icons/bi';
 
-import { ModalProps } from '@/hooks/useModal';
-
 import { FlexBox } from '@/styles/GlobalStyle';
 import useAuthStore from '@/store/auth/useAuthStore';
 import { useFetchUserInfo } from '@/apis/auth/mutations';
 import Cookies from 'js-cookie';
+import { ModalProps } from '@/types/modal/ModalType';
 import useLoginManager from '../Auth/hooks/useLoginManager';
 import { AdminMenu, NavContainer } from './MenuItems';
 
@@ -48,7 +47,7 @@ function PermissionsMenu({ setModal }: PermissionMenuProps) {
                   onAction: dispatchCheckOut,
                   contents: {
                     title: 'Message',
-                    content: '정말 로그아웃을 원하시나요?',
+                    message: '정말 로그아웃을 원하시나요?',
                   },
                 })}
             />
