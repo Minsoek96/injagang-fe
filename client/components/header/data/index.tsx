@@ -6,7 +6,7 @@ import {
 } from 'react-icons/bi';
 
 import { DropItemType } from '@/components/dropbox/types';
-import { MenuItemType } from '@/components/nav/types';
+import { MenuItemType } from '../../nav/types';
 import LogOutMenu from '../LogOutMenu';
 
 /** Navbar에 생성할 리스트를 통제하기 위한 역할 */
