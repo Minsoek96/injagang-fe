@@ -1,22 +1,30 @@
 import styled, { createGlobalStyle, css } from 'styled-components';
+
 import V from '@/styles/variables';
 
 export const GlobalStyle = createGlobalStyle`
-  * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-html {
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
+  html {
+    box-sizing: border-box;
+    font-size: 62.5% !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
   body {
-    margin: 0;
-    padding: 0;
-    background-color: ${({ theme }) => theme.colors.bodyColor};
-    color: ${({ theme }) => theme.colors.text};
+    font-size: 1.6rem;
+    background: ${(props) => props.theme.colors.bodyColor};
+    color: ${(props) => props.theme.colors.text};
     font-family: 'Roboto', sans-serif;
+  }
+
+  :lang(ko) {
+    h1, h2, h3 {
+      word-break: keep-all;
+    }
   }
 
   .sr-only {
@@ -29,6 +37,21 @@ html {
     clip: rect(0, 0, 0, 0);
     border: 0;
   }
+
+  ::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+  }
+
 `;
 
 export const FlexBox = css`
@@ -46,17 +69,17 @@ export const ColBox = css`
 
 export const ScrollBar = css`
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 1rem;
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    border-radius: 0.5rem;
   }
 
   ::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    border-radius: 0.5rem;
   }
 `;
 
