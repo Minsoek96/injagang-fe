@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { TOKEN_KYES } from './constants';
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get('accessToken');
+  const token = req.cookies.get(TOKEN_KYES.ACCESS_TOKEN);
 
   if (!token) {
     return NextResponse.redirect(`${req.nextUrl.origin}/login`);

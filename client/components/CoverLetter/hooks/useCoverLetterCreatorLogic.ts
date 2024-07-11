@@ -4,11 +4,10 @@ import { useRouter } from 'next/router';
 
 import { v4 as uuid4 } from 'uuid';
 
-import useModal from '@/hooks/useModal';
-
 import runValidationChecks from '@/util/runValidationChecks';
 import { ERROR_MESSAGES } from '@/constants';
 import { useWriteCoverLetter } from '@/apis/coverLetter/mutations';
+import useModal from '@/hooks/useModal';
 
 type QnaListType = {
   question: string;
@@ -22,7 +21,7 @@ const useCoverLetterCreatorLogic = () => {
   const { mutate: writeCoverLetter } = useWriteCoverLetter();
   const [coverLetterTitle, setCoverLetterTitle] = useState<string>('');
   const [qnaList, setQnAList] = useState<QnaListType[]>([]);
-  const { setModal, Modal } = useModal();
+  const { setModal } = useModal();
   const router = useRouter();
 
   const MIN_QUESTIONS = 1;
@@ -37,7 +36,7 @@ const useCoverLetterCreatorLogic = () => {
       setModal({
         contents: {
           title: 'Warring',
-          content: `질문문항은 최대 ${MAX_QUESTIONS}개 제한입니다.`,
+          message: `질문문항은 최대 ${MAX_QUESTIONS}개 제한입니다.`,
         },
       });
       return;
@@ -90,7 +89,7 @@ const useCoverLetterCreatorLogic = () => {
       setModal({
         contents: {
           title: 'Warring',
-          content: isWarringMsg,
+          message: isWarringMsg,
         },
       });
       return;
@@ -120,7 +119,6 @@ const useCoverLetterCreatorLogic = () => {
     handleDispatch,
     setCoverLetterTitle,
     coverLetterTitle,
-    Modal,
   };
 };
 

@@ -14,7 +14,7 @@ type EditMenuBarProps = {
 };
 function EditMenuBar({ boardID }: EditMenuBarProps) {
   const [tagPosition, setTagPosition] = useState(false);
-  const { Modal, setModal } = useModal();
+  const { setModal } = useModal();
   const { mutate: delteBoard } = useDeleteBoard();
   const router = useRouter();
 
@@ -34,7 +34,7 @@ function EditMenuBar({ boardID }: EditMenuBarProps) {
   const userConfirm = () => {
     setModal({
       onAction: handleRemoveBoard,
-      contents: { title: '경고', content: '정말 삭제하시겠습니까?' },
+      contents: { title: '경고', message: '정말 삭제하시겠습니까?' },
     });
   };
 
@@ -47,7 +47,6 @@ function EditMenuBar({ boardID }: EditMenuBarProps) {
           <BiMessageAltEdit />
         </ButtonContainer>
       )}
-      <Modal />
     </MycomponetStyle>
   );
 }

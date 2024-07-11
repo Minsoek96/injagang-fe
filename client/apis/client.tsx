@@ -5,7 +5,7 @@ import Router from 'next/router';
 
 import Cookies from 'js-cookie';
 
-import { ERROR_MESSAGES } from '@/constants';
+import { ERROR_MESSAGES, TOKEN_KYES } from '@/constants';
 import { tokenReissue } from './auth/apis';
 import { SERVER } from './config';
 
@@ -18,9 +18,9 @@ export const API = axios.create({
 
 API.interceptors.request.use(
   (config) => {
-    if (Cookies.get('accessToken')) {
+    if (Cookies.get(TOKEN_KYES.ACCESS_TOKEN)) {
       const newConfig = { ...config };
-      newConfig.headers.Authorization = Cookies.get('accessToken');
+      newConfig.headers.Authorization = Cookies.get(TOKEN_KYES.ACCESS_TOKEN);
     }
     return config;
   },
@@ -59,14 +59,12 @@ const serverDisconnected = (message: string) =>
     ? new Error('서버와 연결이 끊겼습니다. 잠시후 다시시도해주세요.')
     : new Error('원인 파악이 불명한 에러가 발생했습니다.'));
 
-const jwtExpired = async (
-  originRequest: AxiosRequestConfig,
-) => {
+const jwtExpired = async (originRequest: AxiosRequestConfig) => {
   try {
     const response = await tokenReissue();
     if (response) {
       const { access } = response.data;
-      Cookies.set('accessToken', access);
+      Cookies.set(TOKEN_KYES.ACCESS_TOKEN, access);
       await reRequest(originRequest);
     }
   } catch (error: any) {
@@ -75,7 +73,8 @@ const jwtExpired = async (
   }
 };
 
-export const reRequest = async (originRequest: AxiosRequestConfig) => API.request(originRequest);
+export const reRequest = async (originRequest: AxiosRequestConfig) =>
+  API.request(originRequest);
 
 // eslint-disable-next-line no-shadow
 export enum METHOD {

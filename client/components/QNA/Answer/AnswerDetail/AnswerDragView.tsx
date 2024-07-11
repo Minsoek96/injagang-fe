@@ -16,7 +16,7 @@ type AnswerProps = {
 
 function AnswerDragView({ boardId }: AnswerProps) {
   const {
-    handleCorrection, selectedText, removeCorrection, Modal,
+    handleCorrection, selectedText, removeCorrection,
   } = useDragCorrection();
   const { setCorrection } = useCorrectionStore();
   const { data: boardList } = useFetchBoardDetail(boardId);
@@ -48,7 +48,6 @@ function AnswerDragView({ boardId }: AnswerProps) {
             list={list}
           />
         ))}
-      <Modal />
     </AnswerDragStyle>
   );
 }

@@ -10,7 +10,7 @@ import useExpetedPlayListLogic from '../hooks/useExpectedPlayListLogic';
 
 function UserQuestionPlayList() {
   const {
-    userQuestion, handleRemoveText, handleAddText, roleAction, Modal,
+    userQuestion, handleRemoveText, handleAddText, roleAction,
   } = useExpetedPlayListLogic();
   return (
     <AddQuestionListViewStyle>
@@ -31,7 +31,6 @@ function UserQuestionPlayList() {
           handleCancelQuestion={roleAction}
         />
       </Card>
-      <Modal />
     </AddQuestionListViewStyle>
   );
 }

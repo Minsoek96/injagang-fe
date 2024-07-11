@@ -29,7 +29,6 @@ function CoverLetterCreator() {
     handleDispatch,
     setCoverLetterTitle,
     coverLetterTitle,
-    Modal,
   } = useCoverLetterCreatorLogic();
 
   const {
@@ -50,7 +49,6 @@ function CoverLetterCreator() {
 
   return (
     <CoverLetterCreatorContainer>
-      <Modal />
       <MainTitle>자소서 작성하기</MainTitle>
       <CoverLetterTitle
         value={coverLetterTitle}
