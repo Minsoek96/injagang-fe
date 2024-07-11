@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import { BRAND } from '@/constants';
-import NavMenuList from '../nav/NavMenuList';
+import NavMenuList from '@/components/nav/NavMenuList';
 import { navList } from './data';
 import UserMenu from './UserMenu';
 import BrandLogo from './BrandLogo';
