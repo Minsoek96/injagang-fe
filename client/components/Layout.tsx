@@ -15,7 +15,7 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-const headerBlockList = ['/login'];
+const headerBlockList = ['/login', '/join'];
 
 /** 페이지 레이아웃  */
 function Layout({ children }: LayoutProps) {

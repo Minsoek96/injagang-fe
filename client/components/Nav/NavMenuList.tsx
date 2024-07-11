@@ -7,6 +7,7 @@ import { MenuItemType } from './types';
 type NavProps = {
   navMenuList: MenuItemType[];
 };
+
 export default function NavMenuList({ navMenuList = [] }: NavProps) {
   if (!navMenuList.length) {
     return <p>Empty</p>;

@@ -10,7 +10,7 @@ interface MainMenuItemProps {
   icon: React.ReactNode;
 }
 
-function NavMenuItem({ title, path, icon }: MainMenuItemProps) {
+export default function NavMenuItem({ title, path, icon }: MainMenuItemProps) {
   const pathname = usePathname();
   const isSelected = pathname === path;
 
@@ -25,8 +25,6 @@ function NavMenuItem({ title, path, icon }: MainMenuItemProps) {
     </Container>
   );
 }
-
-export default NavMenuItem;
 
 const Container = styled.li<{ $isSelected: boolean }>`
   display: flex;
