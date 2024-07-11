@@ -10,7 +10,7 @@ import { MenuItemType } from '@/components/nav/types';
 import LogOutMenu from '../LogOutMenu';
 
 /** Navbar에 생성할 리스트를 통제하기 위한 역할 */
-export const navMenuList: MenuItemType[] = [
+export const navList: MenuItemType[] = [
   {
     title: '자소서작성',
     path: '/coverLetter',

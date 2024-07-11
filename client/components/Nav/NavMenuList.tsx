@@ -5,16 +5,16 @@ import NavMenuItem from './NavMenuItem';
 import { MenuItemType } from './types';
 
 type NavProps = {
-  navMenuList: MenuItemType[];
+  navList: MenuItemType[];
 };
 
-export default function NavMenuList({ navMenuList = [] }: NavProps) {
-  if (!navMenuList.length) {
+export default function NavMenuList({ navList = [] }: NavProps) {
+  if (!navList.length) {
     return <p>Empty</p>;
   }
   return (
     <Container>
-      {navMenuList.map(({ title, path, icon }) => (
+      {navList.map(({ title, path, icon }) => (
         <NavMenuItem key={title} title={title} path={path} icon={icon} />
       ))}
     </Container>

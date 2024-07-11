@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { BRAND } from '@/constants';
 import NavMenuList from '../nav/NavMenuList';
-import { navMenuList } from './data';
+import { navList } from './data';
 import UserMenu from './UserMenu';
 import BrandLogo from './BrandLogo';
 
@@ -10,7 +10,7 @@ export default function Header() {
     <HeaderContainer>
       <Wrapper>
         <BrandLogo title={BRAND.title} path="/" />
-        <NavMenuList navMenuList={navMenuList} />
+        <NavMenuList navList={navList} />
         <UserMenu />
       </Wrapper>
     </HeaderContainer>
