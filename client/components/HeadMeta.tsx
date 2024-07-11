@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function PageHead() {
+export default function HeadMeta() {
   return (
     <Head>
       <title>인자강</title>
