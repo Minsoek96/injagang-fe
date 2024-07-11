@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import Manual from '@/components/Manual/Manual';
 
 import { ColBox } from '@/styles/GlobalStyle';
+import { useFetchUserInfo } from '@/apis/auth/mutations';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 const HomeStyle = styled.div`
   ${ColBox}
@@ -10,6 +13,14 @@ const HomeStyle = styled.div`
 `;
 
 function Home() {
+  const { mutate: getProfile } = useFetchUserInfo();
+
+  useEffect(() => {
+    if (Cookies.get('userId')) {
+      getProfile();
+    }
+  }, [getProfile]);
+
   return (
     <HomeStyle>
       <Manual />

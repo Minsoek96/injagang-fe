@@ -2,28 +2,35 @@ import { ReactNode } from 'react';
 
 import styled from 'styled-components';
 
+import { usePathname } from 'next/navigation';
+
+import ReactQueryProvider from '@/services/ReactQueryProvider';
 import RenderToast from '@/components/toast/RenderToast';
-import ReatQueryProvider from '@/services/ReatQueryProvider';
-import NavBar from './Nav/NavBar';
 import StyledProvider from './StyledProvider';
-import PageHead from './PageHead';
 import RenderModal from './modal/RenderModal';
+import HeadMeta from './HeadMeta';
+import Header from './header/Header';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
+const headerBlockList = ['/login'];
+
 /** 페이지 레이아웃  */
 function Layout({ children }: LayoutProps) {
+  const pathName = usePathname();
+  const isBlockPath = headerBlockList.includes(pathName);
+
   return (
     <StyledProvider>
-      <PageHead />
-      <ReatQueryProvider>
+      <HeadMeta />
+      <ReactQueryProvider>
         <LayoutContainer>
-          <NavBar />
-          <Content>{children}</Content>
+          {!isBlockPath && <Header />}
+          <MainContent>{children}</MainContent>
         </LayoutContainer>
-      </ReatQueryProvider>
+      </ReactQueryProvider>
       <RenderToast />
       <RenderModal />
     </StyledProvider>
@@ -35,12 +42,16 @@ export default Layout;
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
 `;
 
-const Content = styled.div`
-  margin: 4rem auto;
-  width: 80%;
-  min-width: 0;
+const MainContent = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  max-width: 135rem;
+  margin: 10rem auto 0;
+  padding: 2rem;
 `;

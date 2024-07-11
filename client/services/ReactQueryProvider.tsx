@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function ReatQueryProvider({ children }: Props) {
+function ReactQueryProvider({ children }: Props) {
   const [client] = useState(
     new QueryClient({
       defaultOptions: {
@@ -34,4 +34,4 @@ function ReatQueryProvider({ children }: Props) {
   );
 }
 
-export default ReatQueryProvider;
+export default ReactQueryProvider;
