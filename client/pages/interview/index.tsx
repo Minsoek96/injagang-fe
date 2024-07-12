@@ -11,8 +11,8 @@ import InterViewListView from '@/components/InterViewQuestion/ExpectedQuestionLa
 import ArrowAnimation from '@/components/InterView/InterViewMenual';
 
 import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
-import V from '@/styles/variables';
 import dynamic from 'next/dynamic';
+import { V } from '@/src/shared/styles';
 
 const InterViewRandomSetting = dynamic(() => import('@/components/InterView/InterViewRandomSetting'), {
   ssr: false,

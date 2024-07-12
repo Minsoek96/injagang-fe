@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import styled from 'styled-components';
 import { ColBox, StyleCard, MainTitleContainer } from '@/styles/GlobalStyle';
-import v from '@/styles/variables';
+import { V } from '@/src/shared/styles';
 
 import Spinner from '@/components/Spinner';
 
@@ -22,14 +22,14 @@ function TemplateList() {
     <TemplateStlyed>
       <MainTitleContainer>템플릿 만들기</MainTitleContainer>
       <TemplateContainer>
-        <Card $size={{ width: `${v.xlItemWidth}`, height: '350px' }}>
+        <Card $size={{ width: `${V.xlItemWidth}`, height: '350px' }}>
           <APIErrorBoundary>
             <Suspense fallback={<Spinner />}>
               <TemplateTitleList />
             </Suspense>
           </APIErrorBoundary>
         </Card>
-        <Card $size={{ width: `${v.xlItemWidth}`, height: '350px' }}>
+        <Card $size={{ width: `${V.xlItemWidth}`, height: '350px' }}>
           <TemplateViewController />
         </Card>
       </TemplateContainer>
@@ -58,6 +58,6 @@ const Card = styled(StyleCard)`
   @media screen and (max-width: 800px) {
     ${ColBox}
     flex-direction: column-reverse;
-    width: ${v.smItemWidth};
+    width: ${V.smItemWidth};
   }
 `;

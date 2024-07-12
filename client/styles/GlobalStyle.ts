@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle, css } from 'styled-components';
 
-import V from '@/styles/variables';
+import V from '../src/shared/styles/variables';
 
 export const GlobalStyle = createGlobalStyle`
   html {

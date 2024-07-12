@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 import { ColBox, StyleButton } from '@/styles/GlobalStyle';
 
-import V from '@/styles/variables';
+import { V } from '@/src/shared/styles';
 
 import APIErrorBoundary from '@/components/APIErrorBoundary';
 import Spinner from '@/components/Spinner';

@@ -5,9 +5,8 @@ import styled from 'styled-components';
 import { BiX } from 'react-icons/bi';
 
 import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
-import V from '@/styles/variables';
-
 import { IReadQnaList } from '@/types/coverLetter/CoverLetterType';
+import { V } from '@/src/shared/styles';
 
 interface CoverLetterQuestionItemsProps {
   item: IReadQnaList;

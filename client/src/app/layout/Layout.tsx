@@ -1,15 +1,12 @@
 import { ReactNode } from 'react';
-
 import styled from 'styled-components';
-
 import { usePathname } from 'next/navigation';
 
-import ReactQueryProvider from '@/services/ReactQueryProvider';
-import RenderToast from '@/components/toast/RenderToast';
-import StyledProvider from './StyledProvider';
-import RenderModal from './modal/RenderModal';
-import HeadMeta from './HeadMeta';
-import Header from './header/Header';
+import { RenderToast, RenderModal, HeadMeta } from '../components';
+
+import { ReactQueryProvider, StyledProvider } from '../providers';
+
+import { Header } from '../../widgets/header/index';
 
 interface LayoutProps {
   children: ReactNode;
@@ -20,7 +17,7 @@ const headerBlockList = ['/login', '/join'];
 /** 페이지 레이아웃  */
 function Layout({ children }: LayoutProps) {
   const pathName = usePathname();
-  const isBlockPath = headerBlockList.includes(pathName);
+  const isBlockPath = headerBlockList.includes(pathName ?? '');
 
   return (
     <StyledProvider>

@@ -4,8 +4,9 @@ import useAuthStore from '@/store/auth/useAuthStore';
 
 import LoginMenu from './LoginMenu';
 
-import { dropMenuList } from './data';
-import { DropBox } from '../dropbox';
+import { DropBox } from '../../../shared/components/dropbox';
+
+import { dropMenuList } from '../data';
 
 export default function UserMenu() {
   const { role } = useAuthStore();

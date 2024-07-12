@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
-import V from '@/styles/variables';
 
 import { useFetchCoverLetter } from '@/apis/coverLetter/queries';
 import { lazy } from 'react';
+import { V } from '@/src/shared/styles';
 import useCoverLetterManager from './hooks/useCoverLetterManager';
 
 const CoverLetterItems = lazy(() => import('./CoverLetterItems'));

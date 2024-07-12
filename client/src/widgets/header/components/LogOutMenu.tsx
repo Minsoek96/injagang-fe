@@ -1,8 +1,8 @@
+import useLoginManager from '@/components/Auth/hooks/useLoginManager';
+
 import useModal from '@/hooks/useModal';
 
 import { BiLogOut } from 'react-icons/bi';
-
-import useLoginManager from '../Auth/hooks/useLoginManager';
 
 export default function LogoutM() {
   const { setModal } = useModal();

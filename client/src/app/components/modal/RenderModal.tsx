@@ -1,6 +1,8 @@
 import useModalStore from '@/store/modal/useModalStore';
-import { StyleButton } from '@/styles/GlobalStyle';
+
 import { styled } from 'styled-components';
+
+import { StyleButton } from '@/styles/GlobalStyle';
 
 const MODAL_CLOSE_DELAY = 50;
 

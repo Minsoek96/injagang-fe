@@ -10,7 +10,7 @@ import { v4 as uuid4 } from 'uuid';
 
 import ControlMenu from '@/components/UI/ControlMenu';
 import { ColBox, StyleButton } from '@/styles/GlobalStyle';
-import V from '@/styles/variables';
+import { V } from '@/src/shared/styles';
 import CoverLetterQuestionItems from './CoverLetterQuestionItems';
 
 import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';

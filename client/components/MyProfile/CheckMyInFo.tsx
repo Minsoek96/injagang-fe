@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { ColBox, FlexBox } from '@/styles/GlobalStyle';
-import V from '@/styles/variables';
+import { V } from '@/src/shared/styles';
 import UserInFo from './UserInfoSetting';
 import PassWordInfo from './PassWordSetting';
 

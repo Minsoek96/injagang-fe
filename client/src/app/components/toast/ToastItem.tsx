@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import {
  fadeIn, fadeOut, slideIn, progressBar,
-} from '@/styles/animations';
+} from '@/src/shared/styles/animations';
 import { IToast, TOAST_MODE } from '@/types/toast/ToastType';
 
 const FIXED_DURATION = 3000;

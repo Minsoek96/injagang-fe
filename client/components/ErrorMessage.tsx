@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import sorry from '@/public/assets/sorry.png';
 
-import { fadeIn } from '@/styles/animations';
+import { fadeIn } from '@/src/shared/styles/animations';
 import { ColBox } from '@/styles/GlobalStyle';
 
 interface ErrorMessageProps {

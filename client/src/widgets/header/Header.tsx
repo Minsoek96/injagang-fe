@@ -1,9 +1,11 @@
 import { styled } from 'styled-components';
+
 import { BRAND } from '@/constants';
-import NavMenuList from '../nav/NavMenuList';
+
+import { BrandLogo, UserMenu } from './components';
+import { NavMenuList } from '../../shared/components/nav';
+
 import { navList } from './data';
-import UserMenu from './UserMenu';
-import BrandLogo from './BrandLogo';
 
 export default function Header() {
   return (

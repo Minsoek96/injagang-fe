@@ -1,11 +1,9 @@
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from '@/styles/GlobalStyle';
 import { Reset } from 'styled-reset';
-
-import darkTheme from '@/styles/darkTheme';
-import defaultTheme from '@/styles/defaultTheme';
-
 import useThemeToggler from '@/hooks/useThemeToggler';
+import { GlobalStyle } from '@/styles/GlobalStyle';
+
+import { darkTheme, defaultTheme } from '../styles';
 
 type ProviderProps = {
     children: React.ReactNode;

@@ -4,10 +4,11 @@ import styled from 'styled-components';
 
 import Image from 'next/image';
 
+import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
+import { V } from '@/src/shared/styles';
+
 import useMediaRecord from '@/hooks/useMediaRecord';
 import useWebSpeech from '@/hooks/useWebSpeech';
-import V from '@/styles/variables';
-import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
 import { useInterViewStore } from '@/store/interview';
 import InterViewSlider from './InterViewSlider';
 import VideoController from './Video/VideoController';

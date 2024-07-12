@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
-import V from '@/styles/variables';
 
 import useCoverLetterStore from '@/store/coverLetter/useCoverLetterStore';
 import keys from '@/util/keys';
+import { V } from '@/src/shared/styles';
 import CoverLetterPreViewItem from './preview/CoverLetterPreViewItem';
 
 function CoverLetterPreView() {
