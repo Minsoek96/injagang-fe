@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 
 import { Card, ColBox, ScrollBar } from '@/styles/GlobalStyle';
 import styled from 'styled-components';
-import { useFetchBoardDetail } from '@/apis/qnaboard/queries';
+import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 import { useRouter } from 'next/router';
-import { useBoardStore } from '@/store/qna';
 import EditMenuBar from './EditMenuBar';
 import BoardItem from './BoardItem';
 import AnswerDragView from './AnswerDragView';
@@ -19,7 +18,7 @@ function AnswerDetailView() {
     data: boardList,
     isLoading,
     isError,
-  } = useFetchBoardDetail(Number(boardId.id));
+  } = boardQueries.useFetchBoardDetail(Number(boardId.id));
 
   useEffect(() => {
     if (boardList) {

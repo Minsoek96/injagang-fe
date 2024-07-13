@@ -16,10 +16,10 @@ import {
   dehydrate,
 } from '@tanstack/react-query';
 
-import { useBoardStore } from '@/store/qna';
+import { useBoardStore } from '@/src/entities/qnaboard';
 import dynamic from 'next/dynamic';
-import { board } from '@/apis/qnaboard/queryKeys';
-import { getBoardList } from '@/apis/qnaboard/apis';
+import board from '@/src/entities/qnaboard/queryKeys';
+import { getBoardList } from '@/src/entities/qnaboard/apis';
 
 const BoardListView = dynamic(
   () => import('@/components/Board/BoardListLayout'),

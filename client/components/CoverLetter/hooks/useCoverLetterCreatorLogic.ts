@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 
 import { v4 as uuid4 } from 'uuid';
 
-import runValidationChecks from '@/util/runValidationChecks';
-import { ERROR_MESSAGES } from '@/constants';
-import { useWriteCoverLetter } from '@/apis/coverLetter/mutations';
+import { runValidationChecks } from '@/src/shared/utils';
+import { ERROR_MESSAGES } from '@/src/shared/const';
+import { useWriteCoverLetter } from '@/src/entities/coverLetter/mutations';
 import useModal from '@/hooks/useModal';
 
 type QnaListType = {

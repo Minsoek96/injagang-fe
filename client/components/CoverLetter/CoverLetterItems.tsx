@@ -4,12 +4,12 @@ import { BiEdit } from 'react-icons/bi';
 import styled from 'styled-components';
 import { FlexBox } from '@/styles/GlobalStyle';
 
-import { ICoverLetters } from '@/types/coverLetter/CoverLetterType';
 import { memo } from 'react';
+import { coverLetterType } from '@/src/entities/coverLetter';
 import useUserCoverLetterManager from './hooks/useCoverLetterManager';
 
 interface CoverLetterItemsProps {
-  item: ICoverLetters;
+  item: coverLetterType.ICoverLetters;
   selectedId: number;
 }
 

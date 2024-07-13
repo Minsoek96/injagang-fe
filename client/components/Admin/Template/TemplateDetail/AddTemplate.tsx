@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 import { ColBox, ScrollBar, StyledInput } from '@/styles/GlobalStyle';
 
-import keys from '@/util/keys';
+import { keys } from '@/src/shared/utils';
 import TQustionItem from '../TQustionItem';
 
 import useAddTemplateLogic from '../../hooks/useAddTemplateLogic';

@@ -2,10 +2,9 @@ import { useCallback } from 'react';
 
 import useModal from '@/hooks/useModal';
 
-import runValidationChecks from '@/util/runValidationChecks';
-import { hasEmptyFields } from '@/util/hasEmpty';
-import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/constants';
-import { useChangeNick, useChangePassWord } from '@/apis/auth/mutations';
+import { runValidationChecks, hasEmpty } from '@/src/shared/utils';
+import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
+import { useChangeNick, useChangePassWord } from '@/src/entities/auth/mutations';
 import { IPassWordInfo } from './useMyProfileLogic';
 
 const validation = {
@@ -16,7 +15,7 @@ const validation = {
   }: IPassWordInfo) => [
     {
       check: () =>
-        hasEmptyFields({ nowPassword, changePassword, changePasswordCheck }),
+        hasEmpty.fields({ nowPassword, changePassword, changePasswordCheck }),
       message: ERROR_MESSAGES.FILL_BLANKS,
     },
     {

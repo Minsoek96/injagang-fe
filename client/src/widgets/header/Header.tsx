@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import { BRAND } from '@/constants';
+import { BRAND } from '@/src/shared/const';
 
 import { BrandLogo, UserMenu } from './components';
 import { NavMenuList } from '../../shared/components/nav';

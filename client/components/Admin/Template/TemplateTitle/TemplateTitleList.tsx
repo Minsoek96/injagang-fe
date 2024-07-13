@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ColBox } from '@/styles/GlobalStyle';
 import { BiPlus } from 'react-icons/bi';
 
-import { useFetchTemplate } from '@/apis/template/queries';
+import { useFetchTemplate } from '@/src/entities/template/queries';
 import TemplateItem from './TemplateTitleItem';
 
 import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';

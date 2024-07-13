@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { ScrollBar } from '@/styles/GlobalStyle';
-import { useCorrectionStore } from '@/store/qna';
-import { useFetchBoardDetail } from '@/apis/qnaboard/queries';
+import { boardQueries, useCorrectionStore } from '@/src/entities/qnaboard';
 import AnswerDragItem from './AnswerDragItem';
 
 import useDragCorrection from '../../hooks/useDragCorrection';
@@ -19,7 +18,7 @@ function AnswerDragView({ boardId }: AnswerProps) {
     handleCorrection, selectedText, removeCorrection,
   } = useDragCorrection();
   const { setCorrection } = useCorrectionStore();
-  const { data: boardList } = useFetchBoardDetail(boardId);
+  const { data: boardList } = boardQueries.useFetchBoardDetail(boardId);
 
   useEffect(() => {
     handleApply();

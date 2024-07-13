@@ -5,13 +5,13 @@ import styled from 'styled-components';
 import {
  fadeIn, fadeOut, slideIn, progressBar,
 } from '@/src/shared/styles/animations';
-import { IToast, TOAST_MODE } from '@/types/toast/ToastType';
+import { toastType } from '@/src/shared/types';
 
 const FIXED_DURATION = 3000;
 
 function ToastItem({
  message, mode, duration, startTime,
-}: IToast) {
+}: toastType.IToast) {
   return (
     <ToastMessage mode={mode}>
       {message}
@@ -21,7 +21,7 @@ function ToastItem({
 }
 export default memo(ToastItem);
 
-const ToastMessage = styled.div<{ mode: TOAST_MODE }>`
+const ToastMessage = styled.div<{ mode: toastType.TOAST_MODE }>`
   position: relative;
   background-color: ${(props) => {
     switch (props.mode) {

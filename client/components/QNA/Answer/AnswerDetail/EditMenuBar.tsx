@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { BiDotsHorizontal, BiTrash, BiMessageAltEdit } from 'react-icons/bi';
 
 import useModal from '@/hooks/useModal';
-import { useDeleteBoard } from '@/apis/qnaboard/mutaions';
+import { useDeleteBoard } from '@/src/entities/qnaboard/mutaions';
 
 type EditMenuBarProps = {
   boardID: number;

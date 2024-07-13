@@ -1,4 +1,4 @@
-import keys from '@/util/keys';
+import { keys } from '@/src/shared/utils';
 
 interface BoardListHeadProps {
   headItem: string[];

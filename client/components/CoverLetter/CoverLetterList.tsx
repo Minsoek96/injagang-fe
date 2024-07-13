@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
 
-import { useFetchCoverLetter } from '@/apis/coverLetter/queries';
+import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
 import { lazy } from 'react';
 import { V } from '@/src/shared/styles';
 import useCoverLetterManager from './hooks/useCoverLetterManager';

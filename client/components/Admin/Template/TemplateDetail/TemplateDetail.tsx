@@ -3,7 +3,7 @@ import { BiTrash } from 'react-icons/bi';
 import styled from 'styled-components';
 import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
 
-import keys from '@/util/keys';
+import { keys } from '@/src/shared/utils';
 import useTemplateManager from '../../hooks/useTemplateManager';
 import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
 

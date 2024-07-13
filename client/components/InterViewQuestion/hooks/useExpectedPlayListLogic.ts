@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 
 import useModal from '@/hooks/useModal';
 
-import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/constants';
-import useAuthStore from '@/store/auth/useAuthStore';
+import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
+import { useAuthStore } from '@/src/entities/auth';
 import useEUserQuestionManager from './useEUserQuestionManager';
 import useExpectedQuestionManager from './useExpectedQuestionManager';
 

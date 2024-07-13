@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { Card, ScrollBar } from '@/styles/GlobalStyle';
 import styled from 'styled-components';
-import keys from '@/util/keys';
+import { keys } from '@/src/shared/utils';
 import QuestionAdder from './QuestionAdder';
 import UserQuestionPlayListItems from './UserQuestionPlayListItems';
 

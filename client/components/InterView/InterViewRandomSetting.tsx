@@ -6,8 +6,7 @@ import { ColBox } from '@/styles/GlobalStyle';
 
 import useModal from '@/hooks/useModal';
 
-import { QuestionType } from '@/types/InterViewQuestion/InterViewQuestionType';
-import { useFetchRandomQuestion } from '@/apis/interview_question/mutations';
+import { interviewType, interviewMutation } from '@/src/entities/interview_question';
 
 const InterViewSettingStyle = styled.div`
   ${ColBox}
@@ -59,7 +58,7 @@ function InterViewRandomSetting() {
     job: 0,
     personality: 0,
   });
-  const { mutate: getRandomQustions } = useFetchRandomQuestion();
+  const { mutate: getRandomQustions } = interviewMutation.useFetchRandomQuestion();
   const { setModal } = useModal();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,12 +72,12 @@ function InterViewRandomSetting() {
   const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     const data = [
-      { size: randomSetting.cs, questionType: QuestionType.CS },
-      { size: randomSetting.situation, questionType: QuestionType.SITUATION },
-      { size: randomSetting.job, questionType: QuestionType.JOB },
+      { size: randomSetting.cs, questionType: interviewType.QuestionType.CS },
+      { size: randomSetting.situation, questionType: interviewType.QuestionType.SITUATION },
+      { size: randomSetting.job, questionType: interviewType.QuestionType.JOB },
       {
         size: randomSetting.personality,
-        questionType: QuestionType.PERSONALITY,
+        questionType: interviewType.QuestionType.PERSONALITY,
       },
     ];
 

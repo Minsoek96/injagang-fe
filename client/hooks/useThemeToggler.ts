@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
-import LocalStorageManager from '@/util/localStorageManager';
-import useThemeStore from '@/store/theme/useThemeStore';
+import { LocalStorageManager } from '@/src/shared/utils';
+import { useThemeStore } from '@/src/shared/store';
 
 const storage = new LocalStorageManager('theme');
 

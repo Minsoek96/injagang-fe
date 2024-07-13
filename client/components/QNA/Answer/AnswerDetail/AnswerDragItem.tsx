@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
-import { IQnaList } from '@/types/qnaBoard/QnaBoardType';
+import { boardType } from '@/src/entities/qnaboard';
 import ColorPicker from './ColorPicker';
 
 import { ISelectedText } from '../../hooks/useDragCorrection';
@@ -13,7 +13,7 @@ interface AnswerDragItemProps {
   onSelect: (dragTitleId: number, targetId: number) => void;
   onRemove: () => void;
   selectedText: ISelectedText;
-  list: IQnaList;
+  list: boardType.IQnaList;
   index: number;
 }
 

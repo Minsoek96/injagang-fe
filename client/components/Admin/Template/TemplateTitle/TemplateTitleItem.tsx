@@ -1,9 +1,9 @@
-import { IGetTemplate } from '@/types/template/TemplateType';
 import styled from 'styled-components';
+import { templateType } from '@/src/entities/template';
 import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
 
 interface TemplateItemProps {
-  list: IGetTemplate;
+  list: templateType.IGetTemplate;
 }
 
 function TemplateItem({ list }: TemplateItemProps) {

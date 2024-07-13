@@ -2,11 +2,11 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 
+import { Header } from '@/src/widgets/header';
+
 import { RenderToast, RenderModal, HeadMeta } from '../components';
 
 import { ReactQueryProvider, StyledProvider } from '../providers';
-
-import { Header } from '../../widgets/header/index';
 
 interface LayoutProps {
   children: ReactNode;

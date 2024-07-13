@@ -1,4 +1,4 @@
-import { useToastStore } from '@/store/toast';
+import { useToastStore } from '@/src/shared/store';
 import { styled } from 'styled-components';
 import ToastItem from './ToastItem';
 

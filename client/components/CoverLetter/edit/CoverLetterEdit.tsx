@@ -12,7 +12,7 @@ import { V } from '@/src/shared/styles';
 
 import APIErrorBoundary from '@/components/APIErrorBoundary';
 import Spinner from '@/components/Spinner';
-import { useFetchDetailCoverLetter } from '@/apis/coverLetter/queries';
+import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
 import useCoverLetterManager from '../hooks/useCoverLetterManager';
 import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
 import CoverLetterQuestionItems from '../new/CoverLetterQuestionItems';

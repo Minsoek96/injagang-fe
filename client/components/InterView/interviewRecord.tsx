@@ -9,7 +9,7 @@ import { V } from '@/src/shared/styles';
 
 import useMediaRecord from '@/hooks/useMediaRecord';
 import useWebSpeech from '@/hooks/useWebSpeech';
-import { useInterViewStore } from '@/store/interview';
+import { useInterViewStore } from '@/src/entities/interview_question';
 import InterViewSlider from './InterViewSlider';
 import VideoController from './Video/VideoController';
 import RenderVideoInfo from './Video/RenderVideoInfo';

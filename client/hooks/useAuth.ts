@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 
 import Cookies from 'js-cookie';
 
-import { useFetchUserInfo } from '@/apis/auth/mutations';
-import { TOKEN_KYES } from '@/constants';
+import { useFetchUserInfo } from '@/src/entities/auth/mutations';
+import { TOKEN_KYES } from '@/src/shared/const';
 
 // 인증을 위한 훅
 const useAuth = () => {

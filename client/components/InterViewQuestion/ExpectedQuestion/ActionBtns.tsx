@@ -1,14 +1,14 @@
 import { StyleButton } from '@/styles/GlobalStyle';
-import { IQuestion } from '@/types/InterViewQuestion/InterViewQuestionType';
-import useAuthStore from '@/store/auth/useAuthStore';
+import { interviewType } from '@/src/entities/interview_question';
+import { useAuthStore } from '@/src/entities/auth';
 
 interface ActionBtnProps {
   checkList: number[];
   onRemove: (checkList: number[]) => void;
   onToggleAll: () => void;
   isAllChecked: boolean;
-  onAdd: (questions: IQuestion[], checkList: number[]) => void;
-  questions: IQuestion[];
+  onAdd: (questions: interviewType.IQuestion[], checkList: number[]) => void;
+  questions: interviewType.IQuestion[];
 }
 
 function ActionBtns({

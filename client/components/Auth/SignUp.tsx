@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import InputField from '@/components/UI/InputField';
 
-import { ERROR_MESSAGES } from '@/constants';
+import { ERROR_MESSAGES } from '@/src/shared/const';
 import useSignUpLogic from './hooks/useSignUpLogic';
 
 function SignUp() {

@@ -1,4 +1,4 @@
-import keys from '@/util/keys';
+import { keys } from '@/src/shared/utils';
 import styled from 'styled-components';
 // import { QuestionType } from "../redux/InterViewQuestion/action";
 

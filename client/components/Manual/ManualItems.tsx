@@ -4,7 +4,7 @@ import styled, { keyframes, css } from 'styled-components';
 
 import useSectionObsever from '@/hooks/useSectionObsever';
 import { memo, useState } from 'react';
-import keys from '@/util/keys';
+import { keys } from '@/src/shared/utils';
 import ArrrowDown from '../UI/ArrrowDown';
 
 interface MnualItemsProps {

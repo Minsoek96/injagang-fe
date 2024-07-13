@@ -1,4 +1,4 @@
-import useModalStore from '@/store/modal/useModalStore';
+import { useModalStore } from '@/src/shared/store';
 
 import { styled } from 'styled-components';
 

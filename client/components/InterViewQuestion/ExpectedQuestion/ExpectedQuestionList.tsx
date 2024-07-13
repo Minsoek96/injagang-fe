@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 import { ScrollBar } from '@/styles/GlobalStyle';
-import { IQuestion } from '@/types/InterViewQuestion/InterViewQuestionType';
+import { interviewType } from '@/src/entities/interview_question';
 import ExpectedQuestionListItem from './ExpectedQuestionListItem';
 
 interface ExpectedQuestionListProps {
-  questions: IQuestion[];
+  questions: interviewType.IQuestion[];
   isAllCheck: boolean;
   handleCheckList: (id: number, isCheck: boolean) => void;
 }

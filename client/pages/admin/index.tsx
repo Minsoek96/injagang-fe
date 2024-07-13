@@ -5,7 +5,7 @@ import ExpectedQuestionView from '@/components/InterViewQuestion/ExpectedQuestio
 
 import { ColBox } from '@/styles/GlobalStyle';
 
-import useAuthStore from '@/store/auth/useAuthStore';
+import { useAuthStore } from '@/src/entities/auth';
 
 // TODO : ErrorBoundary 테스트 하기
 function AdminPage() {

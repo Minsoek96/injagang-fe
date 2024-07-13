@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { Card, ScrollBar, StyleTextArea } from '@/styles/GlobalStyle';
-import { useBoardStore } from '@/store/qna';
+import { useBoardStore } from '@/src/entities/qnaboard';
 import CorrectionView from './CorrectionView';
 import FeedBackFooter from './FeedBackFooter';
 

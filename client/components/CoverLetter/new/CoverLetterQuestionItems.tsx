@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import { BiX } from 'react-icons/bi';
 
 import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
-import { IReadQnaList } from '@/types/coverLetter/CoverLetterType';
 import { V } from '@/src/shared/styles';
+import { coverLetterType } from '@/src/entities/coverLetter';
 
 interface CoverLetterQuestionItemsProps {
-  item: IReadQnaList;
+  item: coverLetterType.IReadQnaList;
   onDelete: (targetID: string | number) => void;
   onUpdate: (
     targetID: string | number,

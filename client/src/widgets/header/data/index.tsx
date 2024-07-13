@@ -5,10 +5,10 @@ import {
   BiUser,
 } from 'react-icons/bi';
 
-import { LogOutMenu } from '../components';
+import { DropItemType } from '@/src/shared/components/dropbox';
+import { MenuItemType } from '@/src/shared/components/nav';
 
-import { DropItemType } from '../../../shared/components/dropbox';
-import { MenuItemType } from '../../../shared/components/nav';
+import { LogOutMenu } from '../components';
 
 /** Navbar에 생성할 리스트를 통제하기 위한 역할 */
 export const navList: MenuItemType[] = [

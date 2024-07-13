@@ -2,14 +2,14 @@ import { useCallback } from 'react';
 
 import { v4 as uuid4 } from 'uuid';
 
-import useToastStore from '@/store/toast/useToastStore';
-import { TOAST_MODE } from '@/types/toast/ToastType';
+import useToastStore from '@/src/shared/store/useToastStore';
+import { toastType } from '@/src/shared/types';
 
 const useToast = (duration: number = 3000) => {
   const { showToastAction, hideToastAction } = useToastStore();
 
   const showToast = useCallback(
-    (mode: TOAST_MODE = 'Info', message: string = '') => {
+    (mode: toastType.TOAST_MODE = 'Info', message: string = '') => {
       const id = uuid4();
       const startTime = Date.now();
       const newToastList = {

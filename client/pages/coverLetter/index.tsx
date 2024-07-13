@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { ColBox } from '@/styles/GlobalStyle';
 
 import CoverLetter from '@/components/CoverLetter/CoverLetter';
-
-import useCoverLetterStore from '@/store/coverLetter/useCoverLetterStore';
+import { useCoverLetterStore } from '@/src/entities/coverLetter';
 
 function CoverLetterPage() {
   const { initCoverLetter } = useCoverLetterStore();

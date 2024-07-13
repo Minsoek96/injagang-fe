@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 
-import { IGetTemplate } from '@/types/template/TemplateType';
-import { useTemplateStore } from '@/store/template';
+import { templateType, useTemplateStore } from '@/src/entities/template';
 
 const useTemplateStoreManager = () => {
   const {
@@ -12,7 +11,7 @@ const useTemplateStoreManager = () => {
     clearCurTemplate,
   } = useTemplateStore();
 
-  const setItemInfo = useCallback((itemList: IGetTemplate) => {
+  const setItemInfo = useCallback((itemList: templateType.IGetTemplate) => {
     setSelectedTemplate(itemList);
   }, []);
 

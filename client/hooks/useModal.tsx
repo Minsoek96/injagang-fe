@@ -1,4 +1,4 @@
-import useModalStore from '@/store/modal/useModalStore';
+import useModalStore from '@/src/shared/store/useModalStore';
 
 const useModal = () => {
   const { isModalOpen, setModal, closeModal } = useModalStore();

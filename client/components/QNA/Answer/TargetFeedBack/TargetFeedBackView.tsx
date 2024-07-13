@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { ColBox } from '@/styles/GlobalStyle';
 
-import { useFetchFeedBackList } from '@/apis/feedback/queries';
-import { useReviseFeed } from '@/apis/feedback/mutation';
+import { useFetchFeedBackList } from '@/src/entities/feedback/queries';
+import { useReviseFeed } from '@/src/entities/feedback/mutation';
 import TargetFeedBackItems from './TargetFeedBackItems';
 
 import userQnaManager from '../../hooks/userQnaManager';

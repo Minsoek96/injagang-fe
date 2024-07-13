@@ -10,14 +10,14 @@ import {
 } from '@/styles/GlobalStyle';
 
 import useModal from '@/hooks/useModal';
-import { IReviseFeedBack } from '@/types/feedback/FeedBackType';
+import { feedbackType } from '@/src/entities/feedback';
 
 type FeedBackItemsProps = {
   target: string;
   content: string;
   feedbackId: number;
   owner: boolean;
-  handleUpdateFeedBack: (feedback: IReviseFeedBack) => void;
+  handleUpdateFeedBack: (feedback: feedbackType.IReviseFeedBack) => void;
 };
 
 function FeedBackItems({

@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 
 import usePwCheck from '@/hooks/usePwCheck';
 
-import { hasEmptyFields } from '@/util/hasEmpty';
-import { ERROR_MESSAGES } from '@/constants';
-import { useFetchSignup } from '@/apis/auth/mutations';
+import { hasEmpty } from '@/src/shared/utils';
+import { ERROR_MESSAGES } from '@/src/shared/const';
+import { useFetchSignup } from '@/src/entities/auth/mutations';
 
 interface joinInfoType {
   [key: string]: string;
@@ -29,7 +29,7 @@ const useSignUpLogic = () => {
 
   const validation = [
     {
-      check: () => hasEmptyFields(joinInfo),
+      check: () => hasEmpty.fields(joinInfo),
       message: ERROR_MESSAGES.FILL_BLANKS,
     },
     {

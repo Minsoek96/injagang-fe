@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/constants';
+import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
 
 import useModal from '@/hooks/useModal';
 

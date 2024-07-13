@@ -1,4 +1,4 @@
-import { useBoardStore } from '@/store/qna';
+import { useBoardStore } from '@/src/entities/qnaboard';
 import { useState, useCallback } from 'react';
 
 type usePageNationProps = [number, number?];

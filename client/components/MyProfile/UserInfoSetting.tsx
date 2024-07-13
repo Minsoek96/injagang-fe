@@ -6,8 +6,8 @@ import styled from 'styled-components';
 
 import { StyleButton } from '@/styles/GlobalStyle';
 
-import SessionStorageManager from '@/util/sessionStorageManager';
-import useAuthStore from '@/store/auth/useAuthStore';
+import { SessionStorageManager } from '@/src/shared/utils';
+import { useAuthStore } from '@/src/entities/auth';
 import useMyProfileManager from './hooks/useMyProfileManager';
 
 function UserInfoSetting() {

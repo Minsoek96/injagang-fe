@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
 
-import useCoverLetterStore from '@/store/coverLetter/useCoverLetterStore';
-import keys from '@/util/keys';
+import { useCoverLetterStore } from '@/src/entities/coverLetter';
+import { keys } from '@/src/shared/utils';
 import { V } from '@/src/shared/styles';
 import CoverLetterPreViewItem from './preview/CoverLetterPreViewItem';
 
