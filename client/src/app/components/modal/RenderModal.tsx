@@ -2,14 +2,12 @@ import { useModalStore } from '@/src/shared/store';
 
 import { styled } from 'styled-components';
 
-import { StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 
 const MODAL_CLOSE_DELAY = 50;
 
 export default function RenderModal() {
-  const {
-    isModalOpen, modalState, closeModal,
-  } = useModalStore();
+  const { isModalOpen, modalState, closeModal } = useModalStore();
 
   const { contents } = modalState;
 
@@ -34,27 +32,27 @@ export default function RenderModal() {
         </div>
         {modalState.onAction ? (
           <div className="modal_Controller">
-            <StyleButton
+            <BaseButton
               $Size={{ width: '150px', font: '15px' }}
               onClick={actionModal}
             >
               예
-            </StyleButton>
-            <StyleButton
+            </BaseButton>
+            <BaseButton
               $Size={{ width: '150px', font: '15px' }}
               onClick={closeModal}
             >
               아니오
-            </StyleButton>
+            </BaseButton>
           </div>
         ) : (
           <div className="modal_center_btn">
-            <StyleButton
+            <BaseButton
               $Size={{ width: '250px', font: '15px' }}
               onClick={closeModal}
             >
               확인
-            </StyleButton>
+            </BaseButton>
           </div>
         )}
       </ModalBox>
@@ -63,53 +61,53 @@ export default function RenderModal() {
 }
 
 interface ModalStyleProps {
-    $isOpen: boolean;
-  }
+  $isOpen: boolean;
+}
 
 const ModalStyle = styled.div<ModalStyleProps>`
-    z-index: 1000;
-    display: ${(props) => (props.$isOpen ? 'flex' : 'none')};
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(36, 31, 31, 0.5);
-  `;
+  z-index: 1000;
+  display: ${(props) => (props.$isOpen ? 'flex' : 'none')};
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(36, 31, 31, 0.5);
+`;
 
 const ModalBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  width: 500px;
+  border-radius: 15px;
+  background-color: #0a0a0aee;
+  .modal_Contents {
     display: flex;
     flex-direction: column;
-    height: 250px;
-    width: 500px;
-    border-radius: 15px;
-    background-color: #0a0a0aee;
-    .modal_Contents {
-      display: flex;
-      flex-direction: column;
-      height: 200px;
-    }
-    .modal_Contents h2 {
-      color: red;
-      margin: 20px;
-    }
-    .modal_Contents p {
-      margin-top: 20px;
-      text-align: center;
-      color: #e6dfdf;
-    }
-    .modal_Controller {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      padding: 10px;
-    }
-    .modal_center_btn {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      padding: 10px;
-    }
-  `;
+    height: 200px;
+  }
+  .modal_Contents h2 {
+    color: red;
+    margin: 20px;
+  }
+  .modal_Contents p {
+    margin-top: 20px;
+    text-align: center;
+    color: #e6dfdf;
+  }
+  .modal_Controller {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+  }
+  .modal_center_btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+  }
+`;

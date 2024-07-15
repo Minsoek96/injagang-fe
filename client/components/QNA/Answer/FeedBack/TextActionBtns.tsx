@@ -1,4 +1,4 @@
-import { StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 
 import styled from 'styled-components';
 
@@ -17,13 +17,13 @@ export default function TextActionBtns({
   return (
     <ControlRightButtons>
       {btnInfo.map((info) => (
-        <StyleButton
+        <BaseButton
           key={info.id}
           onClick={info.onClick}
           $Size={{ width: '150px', font: '15px' }}
         >
           {info.text}
-        </StyleButton>
+        </BaseButton>
       ))}
     </ControlRightButtons>
   );

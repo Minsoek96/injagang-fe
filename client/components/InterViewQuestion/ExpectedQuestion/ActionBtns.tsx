@@ -1,4 +1,4 @@
-import { StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 import { interviewType } from '@/src/entities/interview_question';
 import { useAuthStore } from '@/src/entities/auth';
 
@@ -40,18 +40,18 @@ function ActionBtns({
 
   return (
     <div>
-      <StyleButton
+      <BaseButton
         onClick={onToggleAll}
         $Size={{ width: '100px', font: '15px' }}
       >
         {isAllChecked ? '전체해제' : '전체선택'}
-      </StyleButton>
-      <StyleButton
+      </BaseButton>
+      <BaseButton
         onClick={btnConfig[isAdmin].onClick}
         $Size={{ width: '100px', font: '15px' }}
       >
         {btnConfig[isAdmin].text}
-      </StyleButton>
+      </BaseButton>
     </div>
   );
 }

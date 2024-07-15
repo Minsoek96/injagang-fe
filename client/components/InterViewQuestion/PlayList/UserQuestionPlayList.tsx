@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Card } from '@/styles/GlobalStyle';
+import { BaseCard } from '@/src/shared/components/card';
 import { styleMixin } from '@/src/shared/styles';
 import styled from 'styled-components';
 import { keys } from '@/src/shared/utils';
@@ -15,7 +15,7 @@ function UserQuestionPlayList() {
   } = useExpetedPlayListLogic();
   return (
     <AddQuestionListViewStyle>
-      <Card $size={{ height: '450px', width: '100%', flex: 'Col' }}>
+      <BaseCard $size={{ height: '450px', width: '100%', flex: 'Col' }}>
         <Container>
           {userQuestion
             && userQuestion.map((question, idx) => (
@@ -31,7 +31,7 @@ function UserQuestionPlayList() {
           handleAddQuestion={handleAddText}
           handleCancelQuestion={roleAction}
         />
-      </Card>
+      </BaseCard>
     </AddQuestionListViewStyle>
   );
 }

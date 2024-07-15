@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 import styled from 'styled-components';
 
-import { StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 import { styleMixin } from '@/src/shared/styles';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
 
@@ -64,14 +64,14 @@ function List({ dehydratedState }: ListProps) {
 
   return (
     <ListStyle>
-      <StyleButton
+      <BaseButton
         className="edit_btn"
         $Size={{ width: '600px', font: '15px' }}
         onClick={() => router.push('/qna/question')}
       >
         <MdOutlineModeEditOutline />
         {' 글쓰기'}
-      </StyleButton>
+      </BaseButton>
       <HydrationBoundary state={dehydratedState}>
         <BoardListView />
         <PageNation />

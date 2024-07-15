@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
-import {
-  Card,
-  StyleButton,
-  StyleInput as QuestionTitle,
-  StyleTextArea,
-} from '@/styles/GlobalStyle';
+import { BaseArea } from '@/src/shared/components/textarea';
+
+import { BaseCard } from '@/src/shared/components/card';
+
+import { BaseButton } from '@/src/shared/components/button';
+
+import { BaseInput as QuestionTitle } from '@/src/shared/components/input';
 
 import { styleMixin } from '@/src/shared/styles';
 
@@ -43,7 +44,7 @@ function QuestionComposer() {
   };
 
   return (
-    <Card $size={{ width: '80%', height: '80%', flex: 'row' }}>
+    <BaseCard $size={{ width: '80%', height: '80%', flex: 'row' }}>
       <SwitchContainer>
         <LeftContainer>
           <QuestionTitle
@@ -56,22 +57,22 @@ function QuestionComposer() {
             onChange={(e) => changeCoverLetter(e)}
             optionList={coverLtters}
           />
-          <StyleTextArea
+          <BaseArea
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          <StyleButton
+          <BaseButton
             $Size={{ width: '100%', font: '15px' }}
             onClick={handleSubmit}
           >
             작성완료
-          </StyleButton>
+          </BaseButton>
         </LeftContainer>
         <RigthContainer>
           <CoverLetterDetail essayId={essayId} />
         </RigthContainer>
       </SwitchContainer>
-    </Card>
+    </BaseCard>
   );
 }
 

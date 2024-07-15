@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 
 import { styleMixin } from '@/src/shared/styles';
 import useMyProfileManager from './hooks/useMyProfileManager';
@@ -48,12 +47,12 @@ function PassWordSetting() {
           onChange={handleInfoChange}
         />
       ))}
-      <StyleButton
+      <BaseButton
         $Size={{ width: '95%', font: '15px' }}
         onClick={() => dispatchPasswordChange(passWordInfo)}
       >
         변경
-      </StyleButton>
+      </BaseButton>
     </PassWordContainer>
   );
 }

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-import { Card, StyleTextArea } from '@/styles/GlobalStyle';
+import { BaseArea } from '@/src/shared/components/textarea';
+
+import { BaseCard } from '@/src/shared/components/card';
 import { styleMixin } from '@/src/shared/styles';
 import { useBoardStore } from '@/src/entities/qnaboard';
 import CorrectionView from './CorrectionView';
@@ -26,13 +28,13 @@ function FeedBackComposer() {
   // Corection에 대한 상태 떄문에 props 드릴링이 발생한다. 리덕스로 변경
 
   return (
-    <Card $size={{ width: '80%', height: '35vh', flex: 'col' }}>
+    <BaseCard $size={{ width: '80%', height: '35vh', flex: 'col' }}>
       <CorrectionView
         targetAnswer={selectedCorrection.targetAnswer}
         targetQuestion={selectedCorrection.targetQuestion}
       />
       <CommentTop>
-        <StyleTextArea
+        <BaseArea
           value={correctionText}
           ref={textRef}
           onChange={(e) => handleChangeFeedBack(e.target.value)}
@@ -45,7 +47,7 @@ function FeedBackComposer() {
         qnaIdList={questionList}
         feedBackIndex={targetFeed}
       />
-    </Card>
+    </BaseCard>
   );
 }
 

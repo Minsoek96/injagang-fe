@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import { StyleButton } from '@/styles/GlobalStyle';
+
+import { BaseButton } from '@/src/shared/components/button';
 
 import useMediaRecord from '@/hooks/useMediaRecord';
 import useWebSpeech from '@/hooks/useWebSpeech';
@@ -97,28 +98,28 @@ function InterviewRecord() {
         )}
         {recordedChunks.length > 0 && (
           <ResultContainer>
-            <StyleButton
+            <BaseButton
               onClick={() =>
                 setVideoIndex((prevIndex) =>
                   (prevIndex <= 1 ? 0 : videoIndex - 1))}
               $Size={{ width: '150px', font: '15px' }}
             >
               이전영상
-            </StyleButton>
-            <StyleButton
+            </BaseButton>
+            <BaseButton
               onClick={() => setIsResult(!isResult)}
               $Size={{ width: '150px', font: '15px' }}
             >
               결과확인
-            </StyleButton>
-            <StyleButton
+            </BaseButton>
+            <BaseButton
               onClick={() =>
                 setVideoIndex((prevIndex) =>
                   (prevIndex >= recordedChunks.length - 1 ? 0 : videoIndex + 1))}
               $Size={{ width: '150px', font: '15px' }}
             >
               다음영상
-            </StyleButton>
+            </BaseButton>
           </ResultContainer>
         )}
       </Result>

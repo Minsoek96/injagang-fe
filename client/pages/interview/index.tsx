@@ -10,7 +10,7 @@ import interViewimg from '@/assets/images/interView.svg';
 import InterViewListView from '@/components/InterViewQuestion/ExpectedQuestionLayout';
 import ArrowAnimation from '@/components/InterView/InterViewMenual';
 
-import { StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 import dynamic from 'next/dynamic';
 import { V, styleMixin } from '@/src/shared/styles';
 
@@ -56,20 +56,20 @@ function Interview() {
     <InterViewStyle>
       <ControlBtn>
         {curIndex > SECOND_SCREEN && (
-          <StyleButton
+          <BaseButton
             onClick={moveToPrevPage}
             $Size={{ width: '50px', font: '22px' }}
           >
             <BiArrowBack />
-          </StyleButton>
+          </BaseButton>
         )}
-        <StyleButton
+        <BaseButton
           className="Arrow_btn"
           onClick={moveToNextPage}
           $Size={{ width: '90%', font: '20px' }}
         >
           {renderComponent[curIndex].title}
-        </StyleButton>
+        </BaseButton>
       </ControlBtn>
       {curIndex === START_SCREEN && (
         <Menual>

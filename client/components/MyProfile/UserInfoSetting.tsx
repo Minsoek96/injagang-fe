@@ -4,7 +4,7 @@ import { RxAvatar } from 'react-icons/rx';
 
 import styled from 'styled-components';
 
-import { StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 
 import { SessionStorageManager } from '@/src/shared/utils';
 import { useAuthStore } from '@/src/entities/auth';
@@ -31,12 +31,12 @@ function UserInfoSetting() {
           name="changeNickname"
           onChange={(e) => setNickName(e.target.value)}
         />
-        <StyleButton
+        <BaseButton
           $Size={{ width: '80%', font: '15px' }}
           onClick={() => dispatchNickNameChange(nickName)}
         >
           변경
-        </StyleButton>
+        </BaseButton>
       </UserInfoContainer>
       <RxAvatar />
     </UserInfoStyle>

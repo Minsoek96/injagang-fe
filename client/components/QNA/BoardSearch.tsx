@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
-import { StyleInput } from '@/styles/GlobalStyle';
+import { BaseInput } from '@/src/shared/components/input';
 
 import useDebounce from '@/hooks/useDebounce';
 import ControlMenu from '../UI/ControlMenu';
@@ -69,7 +69,7 @@ const Container = styled.div`
   gap: 3px;
 `;
 
-const InputStyle = styled(StyleInput)`
+const InputStyle = styled(BaseInput)`
   width: 350px;
   margin-top: 16.4px;
 `;

@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
 
 import styled from 'styled-components';
-import { StyleCard, MainTitleContainer } from '@/styles/GlobalStyle';
+import { BaseTitle as MainTitleContainer } from '@/src/shared/components/title';
 import { V, styleMixin } from '@/src/shared/styles';
+import { BaseCard } from '@/src/shared/components/card';
 
 import Spinner from '@/components/Spinner';
 
@@ -22,16 +23,16 @@ function TemplateList() {
     <TemplateStlyed>
       <MainTitleContainer>템플릿 만들기</MainTitleContainer>
       <TemplateContainer>
-        <Card $size={{ width: `${V.xlItemWidth}`, height: '350px' }}>
+        <TemplateCard $size={{ width: `${V.xlItemWidth}`, height: '350px' }}>
           <APIErrorBoundary>
             <Suspense fallback={<Spinner />}>
               <TemplateTitleList />
             </Suspense>
           </APIErrorBoundary>
-        </Card>
-        <Card $size={{ width: `${V.xlItemWidth}`, height: '350px' }}>
+        </TemplateCard>
+        <TemplateCard $size={{ width: `${V.xlItemWidth}`, height: '350px' }}>
           <TemplateViewController />
-        </Card>
+        </TemplateCard>
       </TemplateContainer>
     </TemplateStlyed>
   );
@@ -48,12 +49,13 @@ const TemplateStlyed = styled.div`
 
 const TemplateContainer = styled.div`
   display: flex;
+  gap: 2rem;
   @media screen and (max-width: 1200px) {
     ${styleMixin.Column()}
   }
 `;
 
-const Card = styled(StyleCard)`
+const TemplateCard = styled(BaseCard)`
   margin-bottom: 8px;
   @media screen and (max-width: 800px) {
     ${styleMixin.Column()}

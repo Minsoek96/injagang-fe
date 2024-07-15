@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
-import { Card, StyleButton, StyleTextArea } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
+import { BaseCard } from '@/src/shared/components/card';
+
+import { BaseArea } from '@/src/shared/components/textarea';
 
 import { styleMixin } from '@/src/shared/styles';
 
@@ -56,13 +59,13 @@ function FeedBackItems({
   };
   return (
     <FeedBackItemsStyle>
-      <Card $size={{ width: '80%', height: '50vh', flex: 'col' }}>
+      <BaseCard $size={{ width: '80%', height: '50vh', flex: 'col' }}>
         <CorrectionContainer>
           <span className="correction_title">피드백:</span>
           <h4 className="correction_sentence">{target}</h4>
         </CorrectionContainer>
         <CommentTop>
-          <StyleTextArea
+          <BaseArea
             value={text}
             onChange={(e) => setText(e.target.value)}
             readOnly={isReadOnly}
@@ -71,22 +74,22 @@ function FeedBackItems({
         <CommentFooter>
           {owner && (
             <ControlRightButtons>
-              <StyleButton
+              <BaseButton
                 onClick={isReadOnly ? userEditConfirm : handleUpdate}
                 $Size={{ width: '150px', font: '15px' }}
               >
                 {isReadOnly ? '편집' : '수정완료'}
-              </StyleButton>
-              <StyleButton
+              </BaseButton>
+              <BaseButton
                 onClick={() => {}}
                 $Size={{ width: '150px', font: '15px' }}
               >
                 삭제
-              </StyleButton>
+              </BaseButton>
             </ControlRightButtons>
           )}
         </CommentFooter>
-      </Card>
+      </BaseCard>
     </FeedBackItemsStyle>
   );
 }

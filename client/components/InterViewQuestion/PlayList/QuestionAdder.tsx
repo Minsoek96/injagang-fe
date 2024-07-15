@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 
 import styled from 'styled-components';
-import { StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 
 const AddTextInputStyle = styled.div`
   display: flex;
@@ -42,18 +42,18 @@ function QuestionAdder({
         onChange={(e) => setTitle(e.target.value)}
       />
       <div>
-        <StyleButton
+        <BaseButton
           $Size={{ width: '63px', font: '15px' }}
           onClick={handleAddText}
         >
           확인
-        </StyleButton>
-        <StyleButton
+        </BaseButton>
+        <BaseButton
           $Size={{ width: '63px', font: '15px' }}
           onClick={handleCancelQuestion}
         >
           확정
-        </StyleButton>
+        </BaseButton>
       </div>
     </AddTextInputStyle>
   );

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Card } from '@/styles/GlobalStyle';
+import { BaseCard } from '@/src/shared/components/card';
 import { styleMixin } from '@/src/shared/styles';
 
 import styled from 'styled-components';
@@ -33,7 +33,7 @@ function AnswerDetailView() {
 
   if (isError || !boardList) return <p>오류가 발생했습니다.</p>;
   return (
-    <Card $size={{ width: '80%', height: '45vh', flex: 'row' }}>
+    <BaseCard $size={{ width: '80%', height: '45vh', flex: 'row' }}>
       <SwitchContainer>
         <LeftContainer>
           <BoardItem {...boardList} />
@@ -43,7 +43,7 @@ function AnswerDetailView() {
         </RigthContainer>
       </SwitchContainer>
       {boardList?.owner && <EditMenuBar boardID={boardList.boardId} />}
-    </Card>
+    </BaseCard>
   );
 }
 

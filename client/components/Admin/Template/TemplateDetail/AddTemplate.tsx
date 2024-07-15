@@ -8,8 +8,6 @@ import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 
-import { StyledInput } from '@/styles/GlobalStyle';
-
 import { keys } from '@/src/shared/utils';
 import TQustionItem from '../TQustionItem';
 
@@ -99,11 +97,28 @@ const TopMenu = styled.div`
   right: 0px;
 `;
 
-const QuestionInput = styled(StyledInput)`
+const QuestionInput = styled.input`
   position: absolute;
   top: 0px;
   margin-top: 15px;
-  width: 70%;
+  width: 100%;
+
+  padding: 2px 8px;
+  border: 1px solid #e1e1e1;
+  background-color: #ffffff;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.2s ease-in-out;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
 `;
 
 const QuestionContainer = styled.div`

@@ -1,0 +1,1 @@
+export { BaseArea } from './TextArea';

@@ -9,7 +9,8 @@ import styled from 'styled-components';
 import { v4 as uuid4 } from 'uuid';
 
 import ControlMenu from '@/components/UI/ControlMenu';
-import { StyleButton } from '@/styles/GlobalStyle';
+
+import { BaseButton } from '@/src/shared/components/button';
 import { V, styleMixin } from '@/src/shared/styles';
 import CoverLetterQuestionItems from './CoverLetterQuestionItems';
 
@@ -71,18 +72,18 @@ function CoverLetterCreator() {
       ))}
       <BiPlusStyled onClick={addQnAList} />
       <ControllerBtns>
-        <StyleButton
+        <BaseButton
           $Size={{ width: '150px', font: '20px' }}
           onClick={() => router.push(moveCoverLetterMainPage)}
         >
           뒤로가기
-        </StyleButton>
-        <StyleButton
+        </BaseButton>
+        <BaseButton
           $Size={{ width: '150px', font: '20px' }}
           onClick={() => handleDispatch()}
         >
           작성완료
-        </StyleButton>
+        </BaseButton>
       </ControllerBtns>
     </CoverLetterCreatorContainer>
   );
