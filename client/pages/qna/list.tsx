@@ -6,7 +6,8 @@ import { useRouter } from 'next/router';
 
 import styled from 'styled-components';
 
-import { ColBox, StyleButton } from '@/styles/GlobalStyle';
+import { StyleButton } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
 
 import {
@@ -83,7 +84,7 @@ function List({ dehydratedState }: ListProps) {
 export default List;
 
 const ListStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 80vw;
 
   .edit_btn {

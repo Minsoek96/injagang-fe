@@ -4,8 +4,7 @@ import styled from 'styled-components';
 
 import { BiX } from 'react-icons/bi';
 
-import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
-import { V } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 import { coverLetterType } from '@/src/entities/coverLetter';
 
 interface CoverLetterQuestionItemsProps {
@@ -48,7 +47,7 @@ function CoverLetterQuestionItems({
 export default memo(CoverLetterQuestionItems);
 
 const CoverLetterQuestionItemsContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   padding: 15px 15px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
@@ -80,7 +79,7 @@ const QuestionTextArea = styled.textarea`
   color: white;
 
   padding: 15px;
-  ${ScrollBar};
+  ${styleMixin.ScrollBar};
 `;
 
 const AnswerTextArea = styled.textarea`
@@ -95,5 +94,5 @@ const AnswerTextArea = styled.textarea`
   padding: 20px;
   color: white;
   background-color: #444654;
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
 `;

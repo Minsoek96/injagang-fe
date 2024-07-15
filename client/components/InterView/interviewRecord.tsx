@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import Image from 'next/image';
 
-import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
-import { V } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
+import { StyleButton } from '@/styles/GlobalStyle';
 
 import useMediaRecord from '@/hooks/useMediaRecord';
 import useWebSpeech from '@/hooks/useWebSpeech';
@@ -128,7 +128,7 @@ function InterviewRecord() {
 
 export default InterviewRecord;
 const RecordStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Flex()}
   margin: 20px;
   gap: 20px;
   width: 90%;
@@ -171,7 +171,7 @@ const RecordContainer = styled.div<{ $isResult: boolean }>`
 `;
 
 const Camera = styled.div`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   position: absolute;
   width: 100%;
   height: 100%;
@@ -199,7 +199,7 @@ const Camera = styled.div`
 `;
 
 const Result = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   align-items: flex-start;
   gap: 15px;
   width: 100%;

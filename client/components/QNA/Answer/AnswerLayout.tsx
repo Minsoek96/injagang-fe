@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { ColBox } from '@/styles/GlobalStyle';
+
+import { styleMixin } from '@/src/shared/styles';
 
 import TargetFeedBackView from '@/components/QNA/Answer/TargetFeedBack/TargetFeedBackView';
 import AnswerDetailView from './AnswerDetail/AnswerDetailView';
@@ -18,7 +19,7 @@ function AnswerLayout() {
 export default AnswerLayout;
 
 const AnswerWirteStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   height: 90%;
   gap: 30px;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { ColBox } from '@/styles/GlobalStyle';
-
+import { styleMixin } from '@/src/shared/styles';
 import { useFetchFeedBackList } from '@/src/entities/feedback/queries';
 import { useReviseFeed } from '@/src/entities/feedback/mutation';
 import TargetFeedBackItems from './TargetFeedBackItems';
@@ -31,7 +30,7 @@ function TargetFeedBackView() {
 export default TargetFeedBackView;
 
 const FeedBackViewStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100%;
   width: 100%;
   margin-top: 5vh;

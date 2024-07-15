@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Login from '@/components/Auth/Login';
 
-import { FlexBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 function LoginPage() {
   return (
@@ -16,7 +16,7 @@ export default LoginPage;
 
 const LoginStyle = styled.div`
   z-index: 1;
-  ${FlexBox};
+  ${styleMixin.Flex()};
   position: absolute;
   top: 0;
   left: 0;

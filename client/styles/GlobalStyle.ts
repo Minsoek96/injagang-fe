@@ -1,35 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
+import { styleMixin } from '@/src/shared/styles';
 import V from '../src/shared/styles/variables';
-
-export const FlexBox = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-/** Colume 설정 */
-export const ColBox = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const ScrollBar = css`
-  ::-webkit-scrollbar {
-    width: 1rem;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 0.5rem;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-  }
-`;
 
 export const Container = styled.div`
   width: 100%;
@@ -43,7 +15,8 @@ export const Container = styled.div`
 `;
 
 export const Card = styled.div<CardProps>`
-  ${({ $size }) => ($size.flex === 'row' ? FlexBox : ColBox)};
+  ${({ $size }) =>
+    ($size.flex === 'row' ? styleMixin.Flex() : styleMixin.Column())};
   padding: 15px 15px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
@@ -54,7 +27,7 @@ export const Card = styled.div<CardProps>`
 `;
 
 export const StyleCard = styled.div<CardProps>`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   padding: 15px 15px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
@@ -91,7 +64,7 @@ export const StyleButton = styled.button<SelectProps>`
 `;
 
 export const StyleTextArea = styled.textarea`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   resize: vertical;
   box-sizing: border-box;
   color: #22272e;

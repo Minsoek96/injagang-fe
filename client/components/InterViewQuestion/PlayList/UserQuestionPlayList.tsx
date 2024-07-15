@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
-import { Card, ScrollBar } from '@/styles/GlobalStyle';
+import { Card } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import styled from 'styled-components';
 import { keys } from '@/src/shared/utils';
 import QuestionAdder from './QuestionAdder';
@@ -48,5 +49,5 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
 `;

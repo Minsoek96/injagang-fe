@@ -6,7 +6,9 @@ import {
 
 import styled from 'styled-components';
 
-import { ColBox, ScrollBar, StyledInput } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
+
+import { StyledInput } from '@/styles/GlobalStyle';
 
 import { keys } from '@/src/shared/utils';
 import TQustionItem from '../TQustionItem';
@@ -85,7 +87,7 @@ function AddTemplate({ onClose }: AddTemplateProps) {
 export default AddTemplate;
 
 const TemplateAddStyled = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100%;
   width: 100%;
   position: relative;
@@ -105,7 +107,7 @@ const QuestionInput = styled(StyledInput)`
 `;
 
 const QuestionContainer = styled.div`
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   overflow-y: auto;
   justify-content: center;
   width: 100%;

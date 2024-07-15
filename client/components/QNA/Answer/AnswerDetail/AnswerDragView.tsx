@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import { ScrollBar } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import { boardQueries, useCorrectionStore } from '@/src/entities/qnaboard';
 import AnswerDragItem from './AnswerDragItem';
 
@@ -54,7 +54,7 @@ function AnswerDragView({ boardId }: AnswerProps) {
 export default AnswerDragView;
 
 const AnswerDragStyle = styled.div`
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   background-color: #191919;
   color: #dad6d1;
   padding: 15px;

@@ -9,8 +9,8 @@ import styled from 'styled-components';
 import { v4 as uuid4 } from 'uuid';
 
 import ControlMenu from '@/components/UI/ControlMenu';
-import { ColBox, StyleButton } from '@/styles/GlobalStyle';
-import { V } from '@/src/shared/styles';
+import { StyleButton } from '@/styles/GlobalStyle';
+import { V, styleMixin } from '@/src/shared/styles';
 import CoverLetterQuestionItems from './CoverLetterQuestionItems';
 
 import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
@@ -90,7 +90,7 @@ function CoverLetterCreator() {
 
 export default CoverLetterCreator;
 const CoverLetterCreatorContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
 `;
 

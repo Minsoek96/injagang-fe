@@ -2,7 +2,7 @@
 import { BiEdit } from 'react-icons/bi';
 
 import styled from 'styled-components';
-import { FlexBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 import { memo } from 'react';
 import { coverLetterType } from '@/src/entities/coverLetter';
@@ -28,7 +28,7 @@ function CoverLetterItems({ item, selectedId }: CoverLetterItemsProps) {
 export default memo(CoverLetterItems);
 
 const CoverLetterItemsContainer = styled.div<{ $isActive: boolean }>`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   gap: 13px;
   margin-top: 15px;
   font-size: ${({ $isActive }) => ($isActive ? '30px' : '20px')};

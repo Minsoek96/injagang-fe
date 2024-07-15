@@ -4,7 +4,7 @@ import Image from 'next/image';
 import sorry from '@/public/assets/sorry.png';
 
 import { fadeIn } from '@/src/shared/styles/animations';
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 interface ErrorMessageProps {
   message: string;
@@ -100,7 +100,7 @@ const ErrorBackgroundOverlay = styled.div`
 
 const ErrorMessageStyle = styled.div`
   position: relative;
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100%;
   justify-content: center;
 `;

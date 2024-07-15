@@ -1,13 +1,9 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
-import {
-  Card,
-  ColBox,
-  ScrollBar,
-  StyleButton,
-  StyleTextArea,
-} from '@/styles/GlobalStyle';
+import { Card, StyleButton, StyleTextArea } from '@/styles/GlobalStyle';
+
+import { styleMixin } from '@/src/shared/styles';
 
 import useModal from '@/hooks/useModal';
 import { feedbackType } from '@/src/entities/feedback';
@@ -100,14 +96,14 @@ function FeedBackItems({
 export default FeedBackItems;
 
 const FeedBackItemsStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   max-height: 500px;
   margin: 20px;
 `;
 
 const CorrectionContainer = styled.div`
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   width: 98%;
   height: 30%;
   color: red;
@@ -131,7 +127,7 @@ const CommentTop = styled.div`
   width: 100%;
   margin: 10px auto;
   textarea {
-    ${ScrollBar}
+    ${styleMixin.ScrollBar}
     width: 100%;
     padding: 15px;
     line-height: 1.5;

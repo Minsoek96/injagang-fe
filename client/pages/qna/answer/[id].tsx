@@ -12,7 +12,7 @@ import {
 } from '@tanstack/react-query';
 
 import styled from 'styled-components';
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 import Spinner from '@/components/Spinner';
 
@@ -73,7 +73,7 @@ function Answer({ dehydratedState }: AnswerProps) {
 export default Answer;
 
 const ViewStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   height: 100vh;
 `;

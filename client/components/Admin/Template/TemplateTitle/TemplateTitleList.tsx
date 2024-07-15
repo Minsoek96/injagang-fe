@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import { BiPlus } from 'react-icons/bi';
 
 import { useFetchTemplate } from '@/src/entities/template/queries';
@@ -25,7 +25,7 @@ function TemplateTitleList() {
 export default TemplateTitleList;
 
 const TemplateTtileContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   justify-content: center;
   gap: 8px;
   width: 50%;

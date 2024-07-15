@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
+
+import { styleMixin, V } from '@/src/shared/styles';
 
 import { useCoverLetterStore } from '@/src/entities/coverLetter';
 import { keys } from '@/src/shared/utils';
-import { V } from '@/src/shared/styles';
 import CoverLetterPreViewItem from './preview/CoverLetterPreViewItem';
 
 function CoverLetterPreView() {
@@ -12,7 +12,11 @@ function CoverLetterPreView() {
   return (
     <CoverLetterPreViewContainer>
       {selectedCoverLetter.questions.map((question, idx) => (
-        <CoverLetterPreViewItem key={keys(question, idx)} question={question} idx={idx} />
+        <CoverLetterPreViewItem
+          key={keys(question, idx)}
+          question={question}
+          idx={idx}
+        />
       ))}
     </CoverLetterPreViewContainer>
   );
@@ -21,8 +25,8 @@ function CoverLetterPreView() {
 export default CoverLetterPreView;
 
 const CoverLetterPreViewContainer = styled.div`
-  ${ColBox}
-  ${ScrollBar}
+  ${styleMixin.Column()}
+  ${styleMixin.ScrollBar}
   width: 100%;
   height: 200px;
   border-radius: 5px;

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import styled from 'styled-components';
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 import CoverLetter from '@/components/CoverLetter/CoverLetter';
 import { useCoverLetterStore } from '@/src/entities/coverLetter';
@@ -26,5 +26,5 @@ function CoverLetterPage() {
 export default CoverLetterPage;
 
 const CoverLetterStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
 `;

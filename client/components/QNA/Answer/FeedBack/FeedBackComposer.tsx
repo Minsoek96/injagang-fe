@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { Card, ScrollBar, StyleTextArea } from '@/styles/GlobalStyle';
+import { Card, StyleTextArea } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import { useBoardStore } from '@/src/entities/qnaboard';
 import CorrectionView from './CorrectionView';
 import FeedBackFooter from './FeedBackFooter';
@@ -55,7 +56,7 @@ const CommentTop = styled.div`
   width: 100%;
   margin: 15px auto;
   textarea {
-    ${ScrollBar}
+    ${styleMixin.ScrollBar}
     height: 100%;
     width: 100%;
     border-radius: 15px;

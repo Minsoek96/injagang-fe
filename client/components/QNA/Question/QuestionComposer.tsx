@@ -3,12 +3,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import {
   Card,
-  ColBox,
-  FlexBox,
   StyleButton,
   StyleInput as QuestionTitle,
   StyleTextArea,
 } from '@/styles/GlobalStyle';
+
+import { styleMixin } from '@/src/shared/styles';
 
 import ControlMenu from '@/components/UI/ControlMenu';
 import CoverLetterDetail from '@/components/QNA/Question/CoverLetterDetail';
@@ -77,17 +77,17 @@ function QuestionComposer() {
 
 export default QuestionComposer;
 const SwitchContainer = styled.div`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   width: 100%;
   height: 90%;
   gap: 30px;
   @media screen and (max-width: 1200px) {
-    ${ColBox}
+    ${styleMixin.Column()}
   }
 `;
 
 const LeftContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 50%;
   height: 100%;
   input {
@@ -104,7 +104,7 @@ const LeftContainer = styled.div`
 `;
 
 const RigthContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100%;
   width: 50%;
   @media screen and (max-width: 1200px) {

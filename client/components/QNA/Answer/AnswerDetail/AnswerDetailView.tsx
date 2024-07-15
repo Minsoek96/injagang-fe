@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 
-import { Card, ColBox, ScrollBar } from '@/styles/GlobalStyle';
+import { Card } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
+
 import styled from 'styled-components';
 import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 import { useRouter } from 'next/router';
@@ -47,8 +49,8 @@ function AnswerDetailView() {
 
 export default AnswerDetailView;
 const LeftContainer = styled.div`
-  ${ColBox}
-  ${ScrollBar}
+  ${styleMixin.Column()}
+  ${styleMixin.ScrollBar}
   overflow-x: hidden;
   width: 50%;
   height: 100%;
@@ -60,7 +62,7 @@ const LeftContainer = styled.div`
 `;
 
 const RigthContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100%;
   width: 50%;
   @media screen and (max-width: 1200px) {

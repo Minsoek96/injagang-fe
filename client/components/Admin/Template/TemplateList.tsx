@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
 
 import styled from 'styled-components';
-import { ColBox, StyleCard, MainTitleContainer } from '@/styles/GlobalStyle';
-import { V } from '@/src/shared/styles';
+import { StyleCard, MainTitleContainer } from '@/styles/GlobalStyle';
+import { V, styleMixin } from '@/src/shared/styles';
 
 import Spinner from '@/components/Spinner';
 
@@ -49,14 +49,14 @@ const TemplateStlyed = styled.div`
 const TemplateContainer = styled.div`
   display: flex;
   @media screen and (max-width: 1200px) {
-    ${ColBox}
+    ${styleMixin.Column()}
   }
 `;
 
 const Card = styled(StyleCard)`
   margin-bottom: 8px;
   @media screen and (max-width: 800px) {
-    ${ColBox}
+    ${styleMixin.Column()}
     flex-direction: column-reverse;
     width: ${V.smItemWidth};
   }

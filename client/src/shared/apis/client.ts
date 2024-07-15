@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, isAxiosError } from 'axios';
 
 import Router from 'next/router';
 
@@ -69,9 +69,11 @@ const jwtExpired = async (originRequest: AxiosRequestConfig) => {
       Cookies.set(TOKEN_KYES.ACCESS_TOKEN, access);
       await reRequest(originRequest);
     }
-  } catch (error: any) {
-    const errorMessage = error.response?.data?.message;
-    errorMessage && unauthorized();
+  } catch (error) {
+    if (isAxiosError(error)) {
+      const errorMessage = error.response?.data?.message;
+      errorMessage && unauthorized();
+    }
   }
 };
 

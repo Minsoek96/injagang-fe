@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ColBox, FlexBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import UserQuestionPlayList from './PlayList/UserQuestionPlayList';
 import ExpectedQuestionSelector from './ExpectedQuestion/ExpectedQuestionSelector';
 
@@ -35,7 +35,7 @@ function ExpectedQuestionLayout() {
 export default ExpectedQuestionLayout;
 
 const InterViewListViewStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   height: 90%;
   margin-bottom: 40px;
@@ -45,11 +45,11 @@ const InterViewListViewStyle = styled.div`
 `;
 
 const SwitchContainer = styled.div`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   width: 90%;
   gap: 25px;
   @media screen and (max-width: 1200px) {
-    ${ColBox}
+    ${styleMixin.Column()}
   }
 `;
 

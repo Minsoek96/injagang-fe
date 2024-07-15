@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { MdOutlineFileDownload } from 'react-icons/md';
 
-import { ColBox, FlexBox, ScrollBar } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import { saveAs } from 'file-saver';
 
 type InterViewSliderProps = {
@@ -52,11 +52,11 @@ function InterViewSlider({ video, question, idx }: InterViewSliderProps) {
 export default InterViewSlider;
 
 const InterViewSliderStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   height: 100%;
   overflow-x: auto;
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   gap: 15px;
   font-size: 13px;
   border: 2px solid #ccc;
@@ -73,7 +73,7 @@ const InterViewSliderStyle = styled.div`
     margin-right: 8px;
   }
   button {
-    ${FlexBox}
+    ${styleMixin.Flex()}
     align-items: center;
     background-color: #777;
     opacity: 0.7;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import TemplateView from '@/components/Admin/Template/TemplateList';
 import ExpectedQuestionView from '@/components/InterViewQuestion/ExpectedQuestionLayout';
 
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 import { useAuthStore } from '@/src/entities/auth';
 
@@ -23,6 +23,6 @@ function AdminPage() {
 export default AdminPage;
 
 const AdminPageStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width:100%;
 `;

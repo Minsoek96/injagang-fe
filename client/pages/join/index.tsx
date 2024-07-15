@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import SignUp from '@/components/Auth/SignUp';
 
-import { FlexBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 function SignupPage() {
   return (
@@ -19,7 +19,7 @@ const JoinStyle = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  ${FlexBox};
+  ${styleMixin.Flex()};
   height: 100vh;
   width: 100vw;
   background-color: #31404e;

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
+
+import { styleMixin, V } from '@/src/shared/styles';
 
 import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
 import { lazy } from 'react';
-import { V } from '@/src/shared/styles';
 import useCoverLetterManager from './hooks/useCoverLetterManager';
 
 const CoverLetterItems = lazy(() => import('./CoverLetterItems'));
@@ -29,8 +29,8 @@ function CoverLetterList() {
 export default CoverLetterList;
 
 export const CoverLetterListContainer = styled.div`
-  ${ColBox}
-  ${ScrollBar}
+  ${styleMixin.Column()}
+  ${styleMixin.ScrollBar}
   background-color: #302e2e;
   border-radius: 5px;
   width: 100%;

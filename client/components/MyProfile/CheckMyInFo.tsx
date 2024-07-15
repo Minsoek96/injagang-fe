@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-import { ColBox, FlexBox } from '@/styles/GlobalStyle';
-import { V } from '@/src/shared/styles';
+import { V, styleMixin } from '@/src/shared/styles';
 import UserInFo from './UserInfoSetting';
 import PassWordInfo from './PassWordSetting';
 
@@ -23,11 +22,11 @@ function CheckMyInFo() {
 export default CheckMyInFo;
 
 const Container = styled.div`
-  display: ${ColBox};
+  display: ${styleMixin.Column()};
 `;
 
 const CheckMyInFoStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: ${V.lgWidth};
   height: 400px;
   h3 {
@@ -46,11 +45,11 @@ const MainTitle = styled.h2`
 `;
 
 const SwitchContainer = styled.div`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   gap:15px;
   width: 100%;
   height: 90%;
   @media screen and (max-width: 900px) {
-    ${ColBox}
+    ${styleMixin.Column()}
   }
 `;

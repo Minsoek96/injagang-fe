@@ -6,9 +6,9 @@ import { BiPlus } from 'react-icons/bi';
 
 import styled from 'styled-components';
 
-import { ColBox, StyleButton } from '@/styles/GlobalStyle';
+import { StyleButton } from '@/styles/GlobalStyle';
 
-import { V } from '@/src/shared/styles';
+import { V, styleMixin } from '@/src/shared/styles';
 
 import APIErrorBoundary from '@/components/APIErrorBoundary';
 import Spinner from '@/components/Spinner';
@@ -87,7 +87,7 @@ function CoverLetterEdit() {
 
 export default CoverLetterEdit;
 const CoverLetterCreatorContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
 `;
 

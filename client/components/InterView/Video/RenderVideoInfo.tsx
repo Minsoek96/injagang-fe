@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 interface RenderVideoInfoProps {
   numQuestions: number;
@@ -30,7 +30,7 @@ export default RenderVideoInfo;
 
 const InfoUserList = styled.div`
   width: 100%;
-  ${ColBox}
+  ${styleMixin.Column()}
   text-align: center;
   color: #ffffff;
   h2 {

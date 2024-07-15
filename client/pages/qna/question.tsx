@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 import QuestionComposer from '@/components/QNA/Question/QuestionComposer';
 
@@ -12,7 +12,7 @@ const question = () => (
 export default question;
 
 const WirteStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100vh;
   width: 100%;
 `;

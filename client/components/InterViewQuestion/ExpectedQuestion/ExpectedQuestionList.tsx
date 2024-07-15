@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ScrollBar } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import { interviewType } from '@/src/entities/interview_question';
 import ExpectedQuestionListItem from './ExpectedQuestionListItem';
 
@@ -32,7 +32,7 @@ function ExpectedQuestionList({
 export default ExpectedQuestionList;
 
 const Container = styled.div`
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   width: 100%;
   height: 100%;
   overflow-x: hidden;
