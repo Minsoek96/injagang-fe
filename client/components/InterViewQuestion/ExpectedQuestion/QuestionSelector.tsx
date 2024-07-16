@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import ControlMenu from '@/components/UI/ControlMenu';
+import { ComboBox } from '@/src/shared/components/combobox';
 
 import { interviewType } from '@/src/entities/interview_question';
 import { memo } from 'react';
@@ -21,7 +20,7 @@ interface IQuestionSelectorProps {
 function QuestionSelector({ selectedType, onChange }: IQuestionSelectorProps) {
   return (
     <Container>
-      <ControlMenu
+      <ComboBox
         value={selectedType}
         optionList={InterViewSelectData}
         onChange={onChange}

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { BiArrowBack } from 'react-icons/bi';
 
 import Image from 'next/image';
-import interViewimg from '@/assets/images/interView.svg';
+import roomout from '@/public/assets/roomout.svg';
 
 import InterViewListView from '@/components/InterViewQuestion/ExpectedQuestionLayout';
 import ArrowAnimation from '@/components/InterView/InterViewMenual';
@@ -75,7 +75,7 @@ function Interview() {
         <Menual>
           <ArrowAnimation targetId="Arrow_btn" />
           <div className="interViewImg_box">
-            <Image src={interViewimg} alt="interView" />
+            <Image src={roomout} alt="roomout" />
           </div>
         </Menual>
       )}

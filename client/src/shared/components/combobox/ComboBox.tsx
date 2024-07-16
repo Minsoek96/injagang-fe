@@ -1,6 +1,6 @@
 import { keys } from '@/src/shared/utils';
+import { useId } from 'react';
 import styled from 'styled-components';
-// import { QuestionType } from "../redux/InterViewQuestion/action";
 
 interface SelectProps {
   $Size: {
@@ -9,7 +9,7 @@ interface SelectProps {
   };
 }
 
-const ControlMenuSelect = styled.select<SelectProps>`
+const MenuSelect = styled.select<SelectProps>`
   width: ${({ $Size }) => $Size.width || '100%'};
   height: ${({ $Size }) => $Size.height || '100%'};
   border-radius: 5px;
@@ -26,16 +26,18 @@ interface ControlMenuProps {
   Size: { width: string; height: string };
 }
 
-function ControlMenu({
+function ComboBox({
   value, onChange, optionList, Size,
 }: ControlMenuProps) {
+  const id = useId();
+
   return (
     <div>
-      <label htmlFor="controlMenuSelect" className="sr-only">
+      <label htmlFor={id} className="sr-only">
         옵션 선택 :
       </label>
-      <ControlMenuSelect
-        id="controlMenuSelect"
+      <MenuSelect
+        id={id}
         $Size={Size}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -48,9 +50,9 @@ function ControlMenu({
             {option.title}
           </option>
         ))}
-      </ControlMenuSelect>
+      </MenuSelect>
     </div>
   );
 }
 
-export default ControlMenu;
+export default ComboBox;

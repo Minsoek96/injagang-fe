@@ -11,7 +11,7 @@ import { BaseInput as QuestionTitle } from '@/src/shared/components/input';
 
 import { styleMixin } from '@/src/shared/styles';
 
-import ControlMenu from '@/components/UI/ControlMenu';
+import { ComboBox } from '@/src/shared/components/combobox';
 import CoverLetterDetail from '@/components/QNA/Question/CoverLetterDetail';
 
 import { useWriteBoard } from '@/src/entities/qnaboard/mutaions';
@@ -51,7 +51,7 @@ function QuestionComposer() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <ControlMenu
+          <ComboBox
             Size={{ width: '100%', height: '40px' }}
             value={coverLetterTitle}
             onChange={(e) => changeCoverLetter(e)}

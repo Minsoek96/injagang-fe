@@ -3,7 +3,7 @@ import styled, { keyframes, css } from 'styled-components';
 import Image from 'next/image';
 
 import goodInterView from '@/public/assets/main.jpg';
-import ArrrowDown from '../UI/ArrrowDown';
+import ArrrowDown from './ArrowDown';
 
 function Main() {
   return (

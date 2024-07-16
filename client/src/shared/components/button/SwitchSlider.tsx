@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import styled from 'styled-components';
 
 type SwitchSliderProps = {
@@ -6,6 +7,7 @@ type SwitchSliderProps = {
 };
 
 function SwitchSlider({ isToggle, onClick }: SwitchSliderProps) {
+  const id = useId();
   const Craters = [
     { className: 'crater__1', isToggle },
     { className: 'crater__2', isToggle },
@@ -14,10 +16,10 @@ function SwitchSlider({ isToggle, onClick }: SwitchSliderProps) {
   return (
     <SwitchSliderStyle>
       <VisuallyHidden>
-        <label htmlFor="toggleBtn">Toggle button</label>
+        <label htmlFor={id}>Toggle button</label>
       </VisuallyHidden>
       <CheckBox
-        id="toggleBtn"
+        id={id}
         type="checkbox"
         onClick={onClick}
         defaultChecked={isToggle}

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 
-import InputField from '@/components/UI/InputField';
+import { InputField } from '@/src/shared/components/input';
 
 import { ERROR_MESSAGES } from '@/src/shared/const';
 import useSignUpLogic from './hooks/useSignUpLogic';

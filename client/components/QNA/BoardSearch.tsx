@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BaseInput } from '@/src/shared/components/input';
 
-import useDebounce from '@/hooks/useDebounce';
-import ControlMenu from '../UI/ControlMenu';
+import { useDebounce } from '@/src/shared/hooks';
+import { ComboBox } from '@/src/shared/components/combobox';
 
 import userQnaManager from './hooks/userQnaManager';
 
@@ -41,7 +41,7 @@ function BoardSearch() {
 
   return (
     <Container>
-      <ControlMenu
+      <ComboBox
         Size={{ width: '150px', height: '40px' }}
         value={type}
         optionList={typeList}

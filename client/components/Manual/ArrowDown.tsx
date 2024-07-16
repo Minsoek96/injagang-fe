@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 
 import { BsArrowDown } from 'react-icons/bs';
 
-function ArrrowDown() {
+function ArrowDown() {
   return (
     <ArrowContainer>
       <BsArrowDown />
@@ -10,7 +10,7 @@ function ArrrowDown() {
   );
 }
 
-export default ArrrowDown;
+export default ArrowDown;
 
 const bounce = keyframes`
   0%, 100% {
