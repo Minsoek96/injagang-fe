@@ -1,6 +1,6 @@
 import useLoginManager from '@/components/Auth/hooks/useLoginManager';
 
-import useModal from '@/hooks/useModal';
+import useModal from '@/src/shared/hooks/useModal';
 
 import { BiLogOut } from 'react-icons/bi';
 

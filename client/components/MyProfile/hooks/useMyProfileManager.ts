@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import useModal from '@/hooks/useModal';
+import { useModal } from '@/src/shared/hooks';
 
 import { runValidationChecks, hasEmpty } from '@/src/shared/utils';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';

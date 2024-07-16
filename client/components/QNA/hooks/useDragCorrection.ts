@@ -1,6 +1,6 @@
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
 
-import useModal from '@/hooks/useModal';
+import { useModal } from '@/src/shared/hooks';
 
 import { useState } from 'react';
 

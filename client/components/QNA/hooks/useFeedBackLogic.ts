@@ -2,7 +2,7 @@ import {
   useState, useCallback, useRef, useEffect,
 } from 'react';
 
-import useModal from '@/hooks/useModal';
+import { useModal } from '@/src/shared/hooks';
 import { useWriteFeed } from '@/src/entities/feedback/mutation';
 import { useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
 

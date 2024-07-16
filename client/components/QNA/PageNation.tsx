@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import usePageNation from '@/hooks/usePageNation';
+import { usePageNation } from '@/src/shared/hooks';
 
 import { BaseButton } from '@/src/shared/components/button';
 

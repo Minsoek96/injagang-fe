@@ -1,4 +1,4 @@
-import useToast from '@/hooks/useToast';
+import { useToast } from '@/src/shared/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   IAddQuestions,

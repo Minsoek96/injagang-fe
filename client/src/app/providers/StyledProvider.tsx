@@ -1,7 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset';
 
-import useThemeToggler from '@/hooks/useThemeToggler';
+import { useThemeToggler } from '@/src/shared/hooks';
 
 import { GlobalStyle, darkTheme, defaultTheme } from '../styles';
 

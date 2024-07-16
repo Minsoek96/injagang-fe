@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import useToast from '@/hooks/useToast';
+import { useToast } from '@/src/shared/hooks';
 
 import { IAddTemplate } from '@/src/entities/template/type';
 

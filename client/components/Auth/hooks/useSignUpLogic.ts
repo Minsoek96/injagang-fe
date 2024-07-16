@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import usePwCheck from '@/hooks/usePwCheck';
+import { usePwCheck } from '@/src/shared/hooks';
 
 import { hasEmpty } from '@/src/shared/utils';
 import { ERROR_MESSAGES } from '@/src/shared/const';

@@ -1,4 +1,4 @@
-import useCheckList from '@/hooks/useCheckList';
+import { useCheckList } from '@/src/shared/hooks';
 import { BaseCard } from '@/src/shared/components/card';
 import QuestionSelector from './QuestionSelector';
 import ExpectedQuestionList from './ExpectedQuestionList';

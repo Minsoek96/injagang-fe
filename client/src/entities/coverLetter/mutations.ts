@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/src/shared/const';
 
-import useToast from '@/hooks/useToast';
+import { useToast } from '@/src/shared/hooks';
 import {
   IReviseCoverLetter,
   IWriteCoverLetter,

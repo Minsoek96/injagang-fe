@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import useToast from '@/hooks/useToast';
+import { useToast } from '@/src/shared/hooks';
 
 import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/src/shared/const';
 import { IReviseFeedBack, IWriteFeedBack } from '@/src/entities/feedback/type';

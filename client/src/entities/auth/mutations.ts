@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import Cookies from 'js-cookie';
 
-import useToast from '@/hooks/useToast';
+import { useToast } from '@/src/shared/hooks';
 
 import {
   ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE, TOKEN_KYES,

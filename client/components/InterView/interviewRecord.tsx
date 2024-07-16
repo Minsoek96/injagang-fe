@@ -8,14 +8,13 @@ import { styleMixin, V } from '@/src/shared/styles';
 
 import { BaseButton } from '@/src/shared/components/button';
 
-import useMediaRecord from '@/hooks/useMediaRecord';
-import useWebSpeech from '@/hooks/useWebSpeech';
+import { useMediaRecord, useWebSpeech } from '@/src/shared/hooks';
 import { useInterViewStore } from '@/src/entities/interview_question';
+import room from '@/public/assets/room.svg';
 import InterViewSlider from './InterViewSlider';
 import VideoController from './Video/VideoController';
 import RenderVideoInfo from './Video/RenderVideoInfo';
 
-import interViewin from '../../assets/images/interviewIn.svg';
 import { RecordMainBtn } from './Video/RecordMainButton';
 
 function InterviewRecord() {
@@ -64,7 +63,7 @@ function InterviewRecord() {
   return (
     <RecordStyle>
       <RecordContainer $isResult={isResult}>
-        <Image className="interView_img" src={interViewin} alt="interView" />
+        <Image className="room_img" src={room} alt="interView" />
         <Camera>
           {!isResult ? (
             <video autoPlay muted ref={videoRef} />

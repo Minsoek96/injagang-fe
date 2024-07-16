@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { BiDotsHorizontal, BiTrash, BiMessageAltEdit } from 'react-icons/bi';
 
-import useModal from '@/hooks/useModal';
+import { useModal } from '@/src/shared/hooks';
 import { useDeleteBoard } from '@/src/entities/qnaboard/mutaions';
 
 type EditMenuBarProps = {

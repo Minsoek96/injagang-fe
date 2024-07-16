@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 
-import useModal from '@/hooks/useModal';
+import { useModal } from '@/src/shared/hooks';
 
 import { interviewType, interviewMutation } from '@/src/entities/interview_question';
 

@@ -8,7 +8,7 @@ import { BaseArea } from '@/src/shared/components/textarea';
 
 import { styleMixin } from '@/src/shared/styles';
 
-import useModal from '@/hooks/useModal';
+import { useModal } from '@/src/shared/hooks';
 import { feedbackType } from '@/src/entities/feedback';
 
 type FeedBackItemsProps = {
