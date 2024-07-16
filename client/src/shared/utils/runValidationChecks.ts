@@ -1,7 +1,8 @@
-interface IValid {
+export interface IValid {
   check: () => boolean;
   message: string;
 }
+
 const runValidationChecks = (validation: IValid[]) => {
   const isValidation = validation.find((item) => item.check());
   if (isValidation) {
