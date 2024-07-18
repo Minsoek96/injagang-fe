@@ -4,6 +4,9 @@ module.exports = {
     '@testing-library/jest-dom/extend-expect',
     '<rootDir>/setupTests.ts',
   ],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
+  },
   transform: {
     '^.+\\.(t|j)sx?$': [
       '@swc/jest',

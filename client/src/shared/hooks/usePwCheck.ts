@@ -1,3 +1,4 @@
+import { PASSWORD_ERROR_MESSAGE } from '@/src/shared/const';
 import { useState, useEffect } from 'react';
 
 interface useCheckProps {
@@ -17,21 +18,19 @@ const usePwCheck = ({ password }: useCheckProps) => {
 
       if (password.length < 10) {
         setIsValid(false);
-        setErrorMessage('패스워드 최소 10자 이상이어야 합니다.');
+        setErrorMessage(PASSWORD_ERROR_MESSAGE.LENGTH);
       } else if (!uppercaseRegex.test(password)) {
         setIsValid(false);
-        setErrorMessage('패스워드에는 최소 하나의 대문자가 포함되어야 합니다.');
+        setErrorMessage(PASSWORD_ERROR_MESSAGE.LOWER);
       } else if (!lowercaseRegex.test(password)) {
         setIsValid(false);
-        setErrorMessage('패스워드에는 최소 하나의 소문자가 포함되어야 합니다.');
+        setErrorMessage(PASSWORD_ERROR_MESSAGE.UPPER);
       } else if (!numberRegex.test(password)) {
         setIsValid(false);
-        setErrorMessage('패스워드에는 최소 하나의 숫자가 포함되어야 합니다.');
+        setErrorMessage(PASSWORD_ERROR_MESSAGE.NUMBER);
       } else if (!specialCharRegex.test(password)) {
         setIsValid(false);
-        setErrorMessage(
-          '패스워드에는 최소 하나의 특수문자가 포함되어야 합니다.',
-        );
+        setErrorMessage(PASSWORD_ERROR_MESSAGE.SPECIAL);
       } else {
         setIsValid(true);
         setErrorMessage('');

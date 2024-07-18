@@ -1,16 +1,8 @@
 import { act } from 'react-dom/test-utils';
-import { TOAST_MODE } from '../const';
+import { sampleToast } from '../../../fixutures/shared/index';
 import useToastStore from './useToastStore';
 
 describe('useToastStore 훅', () => {
-  const sampleToast = {
-    id: '테스트',
-    message: '알림',
-    mode: TOAST_MODE.SUCCESS,
-    duration: 100,
-    startTime: Date.now(),
-  } as const;
-
   const resetStore = () => {
     act(() => {
       useToastStore.setState({ toastList: [] });

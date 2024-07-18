@@ -71,6 +71,14 @@ export const SUCCESS_MESSAGES = {
   DELETED_INTERVIEW_QUESTION: '인터뷰 질문을 성공적으로 삭제하였습니다.',
 };
 
+export const PASSWORD_ERROR_MESSAGE = {
+  LENGTH: '패스워드 최소 10자 이상이어야 합니다.',
+  LOWER: '패스워드에는 최소 하나의 대문자가 포함되어야 합니다.',
+  UPPER: '패스워드에는 최소 하나의 소문자가 포함되어야 합니다.',
+  NUMBER: '패스워드에는 최소 하나의 숫자가 포함되어야 합니다.',
+  SPECIAL: '패스워드에는 최소 하나의 특수문자가 포함되어야 합니다.',
+};
+
 export const MODAL_MESSAGES = {
   WARNING: 'Warning',
   MSG: 'Message',

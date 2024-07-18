@@ -6,7 +6,7 @@ import useToastStore from '@/src/shared/store/useToastStore';
 import { toastType } from '@/src/shared/types';
 
 const useToast = (duration: number = 3000) => {
-  const { showToastAction, hideToastAction } = useToastStore();
+  const { showToastAction, hideToastAction, toastList } = useToastStore();
 
   const showToast = useCallback(
     (mode: toastType.TOAST_MODE = 'Info', message: string = '') => {
@@ -32,6 +32,6 @@ const useToast = (duration: number = 3000) => {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  return { showToast };
+  return { showToast, toastList };
 };
 export default useToast;
