@@ -33,7 +33,6 @@ const useMediaRecord = () => {
 
   /** 녹화촬영을 시작한다. */
   const handleRecord = useCallback(async () => {
-    alert('영상촬영');
     const stream = (await getUserAccess()) as MediaStream;
 
     const mediaRecorder = new MediaRecorder(stream, {
