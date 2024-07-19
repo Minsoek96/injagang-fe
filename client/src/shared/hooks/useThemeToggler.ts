@@ -4,7 +4,6 @@ import { LocalStorageManager } from '@/src/shared/utils';
 import { useThemeStore } from '@/src/shared/store';
 
 const storage = new LocalStorageManager('theme');
-
 const useThemeToggler = (): [boolean, () => void] => {
   const { isDark: currentMode, changeThemeMode } = useThemeStore();
 
@@ -17,7 +16,6 @@ const useThemeToggler = (): [boolean, () => void] => {
 
   useEffect(() => {
     const currentSaveMode = storage.get();
-
     if (currentSaveMode) {
       changeThemeMode(currentSaveMode);
     }

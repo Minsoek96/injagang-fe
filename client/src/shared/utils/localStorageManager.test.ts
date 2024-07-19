@@ -1,6 +1,6 @@
 import LocalStorageManager from './localStorageManager';
 
-describe('SessionStorageManager', () => {
+describe('localStorageManager', () => {
   const context = describe;
   const testKey = 'testKey';
   let manager: LocalStorageManager;

@@ -1,29 +1,52 @@
-import useThemeToggler from '@/src/shared/hooks/useThemeToggler';
-import { LocalStorageManager } from '@/src/shared/utils';
-import { renderHook } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { act, renderHook } from '@testing-library/react';
+import useThemeToggler from './useThemeToggler';
+import { LocalStorageManager } from '../utils';
 
-jest.mock('../utils', () => ({
-  LocalStorageManager: jest.fn().mockImplementation(() => ({
-    save: jest.fn(),
-    get: jest.fn(),
-  })),
-}));
+jest.mock('../utils');
 
 describe('useThemeToggeler', () => {
-  it('첫번째 배열은 상태를 나타낸다. 초기값은 false이다.', () => {
+  const context = describe;
+  let getMock: jest.SpyInstance;
+  let saveMock: jest.SpyInstance;
+
+  const renderChangeToggle = () => {
     const { result } = renderHook(() => useThemeToggler());
-    expect(LocalStorageManager).toHaveBeenCalledTimes(1);
     expect(result.current[0]).toBe(true);
+    act(() => result.current[1]());
+    return { result };
+  };
+
+  beforeEach(() => {
+    getMock = jest
+      .spyOn(LocalStorageManager.prototype, 'get')
+      .mockImplementation();
+    saveMock = jest
+      .spyOn(LocalStorageManager.prototype, 'save')
+      .mockImplementation();
   });
 
-  it('두번째 배열은 상태를 반전시킨다.', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('초기 렌더링 시 저장된 테마모드를 설정해야 한다.', () => {
     const { result } = renderHook(() => useThemeToggler());
-    expect(LocalStorageManager).toHaveBeenCalledTimes(1);
-    act(() => {
-      result.current[1]();
+    expect(result.current[0]).toBe(true);
+    getMock.mockReturnValue({ theme: true });
+    expect(getMock).toHaveBeenCalled();
+  });
+
+  context('ChangeToggleTheme를 호출하면', () => {
+    it('currentMode의 상태가 반전된다.', () => {
+      const { result } = renderChangeToggle();
+      expect(result.current[0]).toBe(false);
     });
-    expect(LocalStorageManager).toHaveBeenCalledTimes(1);
-    expect(result.current[0]).toBe(false);
+
+    it('새로운 상태를 로컬스토리지에 저장한다.', () => {
+      const { result } = renderHook(() => useThemeToggler());
+      act(() => result.current[1]());
+
+      expect(saveMock).toHaveBeenCalled();
+    });
   });
 });
