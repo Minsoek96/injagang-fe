@@ -8,21 +8,21 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
   ({
-    label, type, name, value, onChange,
+    label, type = 'text', name, value, onChange,
   }, ref) => (
     <InputFieldStyle>
-      <Label>{label}</Label>
+      <Label htmlFor={name}>{label}</Label>
       <Input
         ref={ref}
         type={type}
         name={name}
         value={value}
         onChange={onChange}
+        id={name}
       />
     </InputFieldStyle>
   ),
 );
-
 InputField.displayName = 'InputField';
 
 export default InputField;
