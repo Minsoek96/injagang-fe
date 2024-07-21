@@ -2,7 +2,7 @@ import Image, { StaticImageData } from 'next/image';
 
 import styled, { keyframes, css } from 'styled-components';
 
-import useSectionObsever from '@/src/shared/hooks/useSectionObsever';
+import { useSectionObserver } from '@/src/shared/hooks';
 import { memo, useState } from 'react';
 import { keys } from '@/src/shared/utils';
 import ArrrowDown from './ArrowDown';
@@ -21,7 +21,7 @@ function ManualItems({
   imageList,
 }: MnualItemsProps) {
   const [isShow, setIsShow] = useState<boolean>(false);
-  const { targetItemRef } = useSectionObsever(() => {
+  const { targetItemRef } = useSectionObserver(() => {
     !isShow && setIsShow(true);
   }, 0.5);
   return (

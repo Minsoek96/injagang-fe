@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 /** 관측대상 아이템을 부여하고 감시하는 훅 */
-const useSectionObsever = (callback: () => void, options: number) => {
+const useSectionObserver = (callback: () => void, options: number) => {
   const targetItemRef = useRef<HTMLDivElement | null>(null);
   const memoCallback = useCallback(callback, []);
   useEffect(() => {
@@ -27,4 +27,4 @@ const useSectionObsever = (callback: () => void, options: number) => {
 
   return { targetItemRef };
 };
-export default useSectionObsever;
+export default useSectionObserver;
