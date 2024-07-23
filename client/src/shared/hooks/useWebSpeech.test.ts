@@ -1,6 +1,8 @@
-import { MockSpeech, MockUtterance } from '@/fixutures/shared/types';
-import useWebSpeech from '@/src/shared/hooks/useWebSpeech';
 import { act, renderHook } from '@testing-library/react';
+
+import useWebSpeech from '@/src/shared/hooks/useWebSpeech';
+
+import { MockSpeech, MockUtterance } from '@/fixutures/shared/types';
 
 jest.useFakeTimers();
 

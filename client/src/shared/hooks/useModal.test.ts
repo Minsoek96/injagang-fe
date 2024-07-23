@@ -1,8 +1,8 @@
-import { sampleModal } from '@/fixutures/shared';
+import { act, renderHook } from '@testing-library/react';
 
 import useModal from '@/src/shared/hooks/useModal';
 
-import { act, renderHook } from '@testing-library/react';
+import { sampleModal } from '@/fixutures/shared';
 
 describe('useModal', () => {
   const context = describe;

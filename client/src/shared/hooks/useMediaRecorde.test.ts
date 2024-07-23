@@ -1,3 +1,7 @@
+import React from 'react';
+
+import { act, renderHook } from '@testing-library/react';
+
 import {
   MockHTMLVideoElement,
   MockMediaRecorder,
@@ -5,9 +9,6 @@ import {
 } from '@/fixutures/shared/types';
 
 import { useMediaRecord } from '@/src/shared/hooks/';
-
-import { act, renderHook } from '@testing-library/react';
-import React from 'react';
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),

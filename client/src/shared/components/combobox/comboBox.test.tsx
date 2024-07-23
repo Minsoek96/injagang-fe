@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import TestProvider from '@/fixutures/TestProvider';
 
 import { sampleOptionList } from '@/fixutures/shared';
+
 import ComboBox from './ComboBox';
 
 describe('ComboBox 컴포넌트', () => {

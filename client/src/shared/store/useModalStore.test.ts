@@ -1,5 +1,7 @@
 import { act } from '@testing-library/react';
+
 import { modalType } from '@/src/shared/types';
+
 import useModalStore from './useModalStore';
 
 describe('useModalStore 훅', () => {

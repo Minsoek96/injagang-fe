@@ -1,6 +1,7 @@
+import { render, screen } from '@testing-library/react';
+
 import TestProvider from '@/fixutures/TestProvider';
 import DropMenuItem from '@/src/shared/components/dropbox/DropMenuItem';
-import { render, screen } from '@testing-library/react';
 
 function MockIcon() {
   return <svg data-testid="mock-icon" />;

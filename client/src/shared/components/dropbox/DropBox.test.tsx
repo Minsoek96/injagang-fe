@@ -1,10 +1,9 @@
-import { sampleDropList } from '@/fixutures/shared';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-
 import DropBox from '@/src/shared/components/dropbox/DropBox';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { sampleDropList } from '@/fixutures/shared';
 
 describe('DropBox 컴포넌트', () => {
   const context = describe;

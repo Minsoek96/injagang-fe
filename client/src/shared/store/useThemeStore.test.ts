@@ -1,4 +1,5 @@
 import { act } from '@testing-library/react';
+
 import useThemeStore from './useThemeStore';
 
 describe('useThemeStore 훅', () => {

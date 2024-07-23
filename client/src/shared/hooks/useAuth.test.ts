@@ -1,5 +1,7 @@
 import { renderHook } from '@testing-library/react';
+
 import Cookies from 'js-cookie';
+
 import { useFetchUserInfo } from '@/src/entities/auth/mutations';
 import useAuth from './useAuth';
 

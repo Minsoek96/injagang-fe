@@ -1,5 +1,7 @@
 import { act } from 'react-dom/test-utils';
+
 import { sampleToast } from '../../../fixutures/shared/index';
+
 import useToastStore from './useToastStore';
 
 describe('useToastStore 훅', () => {

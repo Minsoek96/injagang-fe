@@ -1,4 +1,5 @@
 import { fetcher, METHOD } from './fetcher';
+
 import { API } from '../apis';
 
 jest.mock('../apis', () => ({

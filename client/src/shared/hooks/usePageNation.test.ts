@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
-import usePageNation from '@/src/shared/hooks/usePageNation';
 import { act, renderHook } from '@testing-library/react';
+
+import usePageNation from '@/src/shared/hooks/usePageNation';
+
 import useBoardStore from '@/src/entities/qnaboard/useBoardStore';
 
 jest.mock('@/src/entities/qnaboard/useBoardStore');

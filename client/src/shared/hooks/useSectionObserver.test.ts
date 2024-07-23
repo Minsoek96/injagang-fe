@@ -1,5 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
+
 import React from 'react';
+
 import useSectionObserver from './useSectionObserver';
 
 jest.mock('react', () => ({

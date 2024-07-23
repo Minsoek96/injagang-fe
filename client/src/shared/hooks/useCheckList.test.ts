@@ -1,6 +1,8 @@
-import { sampleCheckList } from '@/fixutures/shared';
-import useCheckList from '@/src/shared/hooks/useCheckList';
 import { act, renderHook } from '@testing-library/react';
+
+import useCheckList from '@/src/shared/hooks/useCheckList';
+
+import { sampleCheckList } from '@/fixutures/shared';
 
 describe('useCheckList', () => {
   const context = describe;

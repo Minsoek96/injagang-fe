@@ -1,6 +1,7 @@
 import {
   renderHook, act,
 } from '@testing-library/react';
+
 import useToast from './useToast';
 
 const uniqueId = 'unique-id';

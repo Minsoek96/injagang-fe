@@ -1,4 +1,5 @@
 import { DropItemType } from '@/src/shared/components/dropbox';
+import { MenuItemType } from '@/src/shared/components/nav';
 import { TOAST_MODE } from '@/src/shared/const';
 
 const sampleToast = {
@@ -70,6 +71,29 @@ const sampleDropList: DropItemType[] = [
     id: 'drop-03',
     type: 'component',
     component: <div>컴포넌트</div>,
+  },
+];
+
+export const sampleNavList: MenuItemType[] = [
+  {
+    title: '테스트',
+    path: '/test1',
+    icon: <i data-testid="mock-icon1" />,
+  },
+  {
+    title: '테스트2',
+    path: '/test2',
+    icon: <i data-testid="mock-icon2" />,
+  },
+  {
+    title: '테스트3',
+    path: '/qna/test3',
+    icon: <i data-testid="mock-icon3" />,
+  },
+  {
+    title: '테스트4',
+    path: '/test4',
+    icon: <i data-testid="mock-icon4" />,
   },
 ];
 
