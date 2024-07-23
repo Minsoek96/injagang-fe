@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { TOKEN_KYES } from './constants';
+import { TOKEN_KYES } from '@/src/shared/const';
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get(TOKEN_KYES.ACCESS_TOKEN);

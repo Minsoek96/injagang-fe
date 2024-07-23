@@ -1,8 +1,9 @@
 import { memo } from 'react';
 
-import { Card, ScrollBar } from '@/styles/GlobalStyle';
+import { BaseCard } from '@/src/shared/components/card';
+import { styleMixin } from '@/src/shared/styles';
 import styled from 'styled-components';
-import keys from '@/util/keys';
+import { keys } from '@/src/shared/utils';
 import QuestionAdder from './QuestionAdder';
 import UserQuestionPlayListItems from './UserQuestionPlayListItems';
 
@@ -14,7 +15,7 @@ function UserQuestionPlayList() {
   } = useExpetedPlayListLogic();
   return (
     <AddQuestionListViewStyle>
-      <Card $size={{ height: '450px', width: '100%', flex: 'Col' }}>
+      <BaseCard $size={{ height: '450px', width: '100%', flex: 'Col' }}>
         <Container>
           {userQuestion
             && userQuestion.map((question, idx) => (
@@ -30,7 +31,7 @@ function UserQuestionPlayList() {
           handleAddQuestion={handleAddText}
           handleCancelQuestion={roleAction}
         />
-      </Card>
+      </BaseCard>
     </AddQuestionListViewStyle>
   );
 }
@@ -48,5 +49,5 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
 `;

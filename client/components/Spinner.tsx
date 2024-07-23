@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 function Spinner({
   message = '데이터를 불러오는중입니다.',
@@ -16,7 +16,7 @@ function Spinner({
 
 export default Spinner;
 const SpinnerWrapper = styled.div`
-  ${ColBox};
+  ${styleMixin.Column()};
   gap: 12px;
 `;
 
@@ -26,7 +26,7 @@ const spin = keyframes`
   }
   100% {
     transform: rotate(360deg);
-  }   
+  }
 `;
 
 const SpinnerImg = styled.div`

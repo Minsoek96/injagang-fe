@@ -1,12 +1,11 @@
 import { useCallback } from 'react';
 
-import { useTemplateStore } from '@/store/template';
-import { useAddTemplate, useDeleteTemplate } from '@/apis/template/mutations';
+import { useTemplateStore, templateMutations } from '@/src/entities/template';
 
 const useTemplateManager = () => {
   const { setSelectedTemplate } = useTemplateStore();
-  const { mutate: removeTemplate } = useDeleteTemplate();
-  const { mutate: addTemplate } = useAddTemplate();
+  const { mutate: removeTemplate } = templateMutations.useDeleteTemplate();
+  const { mutate: addTemplate } = templateMutations.useAddTemplate();
 
   const removeTemplateItem = useCallback((index: number) => {
     const resetCurTemplate = {

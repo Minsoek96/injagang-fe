@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
-import usePageNation from '@/hooks/usePageNation';
+import { usePageNation } from '@/src/shared/hooks';
 
-import { StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 
 // TODO : 너무 복잡한 의존성으로 엮여있음 끊어내기 로직 변경
 function PageNation() {
@@ -43,13 +43,13 @@ function NavigationButton({
   onClick,
 }: NavigationButtonProps) {
   return (
-    <StyleButton
+    <BaseButton
       $Size={{ width: '40px', font: '15px' }}
       className={isActive ? 'active_button' : ''}
       onClick={onClick}
     >
       {text}
-    </StyleButton>
+    </BaseButton>
   );
 }
 

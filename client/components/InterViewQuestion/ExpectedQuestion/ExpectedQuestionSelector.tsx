@@ -1,5 +1,5 @@
-import useCheckList from '@/hooks/useCheckList';
-import { Card } from '@/styles/GlobalStyle';
+import { useCheckList } from '@/src/shared/hooks';
+import { BaseCard } from '@/src/shared/components/card';
 import QuestionSelector from './QuestionSelector';
 import ExpectedQuestionList from './ExpectedQuestionList';
 import ActionBtns from './ActionBtns';
@@ -22,7 +22,7 @@ function ExpectedQuestionSelector() {
   });
 
   return (
-    <Card $size={{ height: '450px', width: '100%', flex: 'Col' }}>
+    <BaseCard $size={{ height: '450px', width: '100%', flex: 'Col' }}>
       <QuestionSelector
         selectedType={selectedType}
         onChange={dispatchSelectedType}
@@ -40,7 +40,7 @@ function ExpectedQuestionSelector() {
         onToggleAll={handleAllCheck}
         questions={interViewQuestionList}
       />
-    </Card>
+    </BaseCard>
   );
 }
 

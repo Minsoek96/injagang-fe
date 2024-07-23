@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import CoverLetterEdit from '@/components/CoverLetter/edit/CoverLetterEdit';
 
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 function CoverLetterEditorPage() {
   return (
@@ -15,5 +15,5 @@ function CoverLetterEditorPage() {
 export default CoverLetterEditorPage;
 
 const CoverLetterStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
 `;

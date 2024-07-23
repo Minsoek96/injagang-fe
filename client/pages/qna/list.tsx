@@ -6,7 +6,8 @@ import { useRouter } from 'next/router';
 
 import styled from 'styled-components';
 
-import { ColBox, StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
+import { styleMixin } from '@/src/shared/styles';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
 
 import {
@@ -16,10 +17,10 @@ import {
   dehydrate,
 } from '@tanstack/react-query';
 
-import { useBoardStore } from '@/store/qna';
+import { useBoardStore } from '@/src/entities/qnaboard';
 import dynamic from 'next/dynamic';
-import { board } from '@/apis/qnaboard/queryKeys';
-import { getBoardList } from '@/apis/qnaboard/apis';
+import board from '@/src/entities/qnaboard/queryKeys';
+import { getBoardList } from '@/src/entities/qnaboard/apis';
 
 const BoardListView = dynamic(
   () => import('@/components/Board/BoardListLayout'),
@@ -63,14 +64,14 @@ function List({ dehydratedState }: ListProps) {
 
   return (
     <ListStyle>
-      <StyleButton
+      <BaseButton
         className="edit_btn"
         $Size={{ width: '600px', font: '15px' }}
         onClick={() => router.push('/qna/question')}
       >
         <MdOutlineModeEditOutline />
         {' 글쓰기'}
-      </StyleButton>
+      </BaseButton>
       <HydrationBoundary state={dehydratedState}>
         <BoardListView />
         <PageNation />
@@ -83,7 +84,7 @@ function List({ dehydratedState }: ListProps) {
 export default List;
 
 const ListStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 80vw;
 
   .edit_btn {

@@ -1,9 +1,8 @@
 import { BiTrash } from 'react-icons/bi';
 
 import styled from 'styled-components';
-import { ColBox, ScrollBar } from '@/styles/GlobalStyle';
-
-import keys from '@/util/keys';
+import { styleMixin } from '@/src/shared/styles';
+import { keys } from '@/src/shared/utils';
 import useTemplateManager from '../../hooks/useTemplateManager';
 import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
 
@@ -46,7 +45,7 @@ const TemplateDetailStyled = styled.div`
 `;
 
 const Container = styled.div`
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   overflow-y: auto;
   height: 100%;
 `;
@@ -73,7 +72,7 @@ const TrashIcon = styled(BiTrash)`
 `;
 
 const WarringMsg = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   justify-content: center;
   width: 100%;
   height: 100%;

@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 
-import { Card, ColBox, ScrollBar } from '@/styles/GlobalStyle';
+import { BaseCard } from '@/src/shared/components/card';
+import { styleMixin } from '@/src/shared/styles';
+
 import styled from 'styled-components';
-import { useFetchBoardDetail } from '@/apis/qnaboard/queries';
+import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 import { useRouter } from 'next/router';
-import { useBoardStore } from '@/store/qna';
 import EditMenuBar from './EditMenuBar';
 import BoardItem from './BoardItem';
 import AnswerDragView from './AnswerDragView';
@@ -19,7 +20,7 @@ function AnswerDetailView() {
     data: boardList,
     isLoading,
     isError,
-  } = useFetchBoardDetail(Number(boardId.id));
+  } = boardQueries.useFetchBoardDetail(Number(boardId.id));
 
   useEffect(() => {
     if (boardList) {
@@ -32,7 +33,7 @@ function AnswerDetailView() {
 
   if (isError || !boardList) return <p>오류가 발생했습니다.</p>;
   return (
-    <Card $size={{ width: '80%', height: '45vh', flex: 'row' }}>
+    <BaseCard $size={{ width: '80%', height: '45vh', flex: 'row' }}>
       <SwitchContainer>
         <LeftContainer>
           <BoardItem {...boardList} />
@@ -42,14 +43,14 @@ function AnswerDetailView() {
         </RigthContainer>
       </SwitchContainer>
       {boardList?.owner && <EditMenuBar boardID={boardList.boardId} />}
-    </Card>
+    </BaseCard>
   );
 }
 
 export default AnswerDetailView;
 const LeftContainer = styled.div`
-  ${ColBox}
-  ${ScrollBar}
+  ${styleMixin.Column()}
+  ${styleMixin.ScrollBar}
   overflow-x: hidden;
   width: 50%;
   height: 100%;
@@ -61,7 +62,7 @@ const LeftContainer = styled.div`
 `;
 
 const RigthContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100%;
   width: 50%;
   @media screen and (max-width: 1200px) {

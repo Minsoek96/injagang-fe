@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import { useFetchBoardList } from '@/apis/qnaboard/queries';
-import { useBoardStore } from '@/store/qna';
+import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 import BoardList from './BoardList';
 import BoardListHead from './BoardListHead';
 
@@ -15,7 +14,11 @@ function BoardListLayout() {
   const {
     curPageNum, boardType, boardSearch, setTotalPage,
   } = useBoardStore();
-  const { data } = useFetchBoardList(curPageNum, boardType, boardSearch);
+  const { data } = boardQueries.useFetchBoardList(
+    curPageNum,
+    boardType,
+    boardSearch,
+  );
 
   useEffect(() => {
     if (data?.boardInfos) {

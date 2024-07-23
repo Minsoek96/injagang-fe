@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { useBoardStore, useCorrectionStore, useFeedStore } from '@/store/qna';
-import { CorrectionItem } from '@/types/feedback/FeedBackType';
+import { useBoardStore, useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
+import { feedbackType } from '@/src/entities/feedback';
 
 const useQnaManagerStore = () => {
   const { correction, setCorrection, initCorrection } = useCorrectionStore();
@@ -11,7 +11,7 @@ const useQnaManagerStore = () => {
   const { targetFeed, setTargetFeed, initTargetFeed } = useFeedStore();
 
   const dispatchChangeCorrection = useCallback(
-    (newCorrection: CorrectionItem) => {
+    (newCorrection: feedbackType.CorrectionItem) => {
       setCorrection(newCorrection);
     },
     [],

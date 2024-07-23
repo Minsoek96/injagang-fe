@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import useTemplateStoreManager from '@/components/Admin/hooks/useTemplateStoreManager';
 
-import { useFetchTemplate } from '@/apis/template/queries';
+import { useFetchTemplate } from '@/src/entities/template/queries';
 
 const useControlTemplate = () => {
   const { data: templateList = [] } = useFetchTemplate();

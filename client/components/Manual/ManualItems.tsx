@@ -2,10 +2,10 @@ import Image, { StaticImageData } from 'next/image';
 
 import styled, { keyframes, css } from 'styled-components';
 
-import useSectionObsever from '@/hooks/useSectionObsever';
+import useSectionObsever from '@/src/shared/hooks/useSectionObsever';
 import { memo, useState } from 'react';
-import keys from '@/util/keys';
-import ArrrowDown from '../UI/ArrrowDown';
+import { keys } from '@/src/shared/utils';
+import ArrrowDown from './ArrowDown';
 
 interface MnualItemsProps {
   mainTitle: string;

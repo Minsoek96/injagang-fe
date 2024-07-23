@@ -1,4 +1,4 @@
-import { ScrollBar } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import styled from 'styled-components';
 
 interface CorrectionViewProps {
@@ -21,7 +21,7 @@ export default CorrectionView;
 
 const CorrectionContainer = styled.div`
   display: inline-block;
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   width: 98%;
   height: 30%;
   color: red;

@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import { ScrollBar } from '@/styles/GlobalStyle';
-import { useCorrectionStore } from '@/store/qna';
-import { useFetchBoardDetail } from '@/apis/qnaboard/queries';
+import { styleMixin } from '@/src/shared/styles';
+import { boardQueries, useCorrectionStore } from '@/src/entities/qnaboard';
 import AnswerDragItem from './AnswerDragItem';
 
 import useDragCorrection from '../../hooks/useDragCorrection';
@@ -19,7 +18,7 @@ function AnswerDragView({ boardId }: AnswerProps) {
     handleCorrection, selectedText, removeCorrection,
   } = useDragCorrection();
   const { setCorrection } = useCorrectionStore();
-  const { data: boardList } = useFetchBoardDetail(boardId);
+  const { data: boardList } = boardQueries.useFetchBoardDetail(boardId);
 
   useEffect(() => {
     handleApply();
@@ -55,7 +54,7 @@ function AnswerDragView({ boardId }: AnswerProps) {
 export default AnswerDragView;
 
 const AnswerDragStyle = styled.div`
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   background-color: #191919;
   color: #dad6d1;
   padding: 15px;

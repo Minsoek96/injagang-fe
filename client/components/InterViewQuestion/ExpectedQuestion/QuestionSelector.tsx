@@ -1,27 +1,26 @@
 import styled from 'styled-components';
+import { ComboBox } from '@/src/shared/components/combobox';
 
-import ControlMenu from '@/components/UI/ControlMenu';
-
-import { QuestionType } from '@/types/InterViewQuestion/InterViewQuestionType';
+import { interviewType } from '@/src/entities/interview_question';
 import { memo } from 'react';
 
 const InterViewSelectData = [
-  { title: QuestionType.CS, id: 1 },
-  { title: QuestionType.SITUATION, id: 2 },
-  { title: QuestionType.JOB, id: 3 },
-  { title: QuestionType.PERSONALITY, id: 4 },
+  { title: interviewType.QuestionType.CS, id: 1 },
+  { title: interviewType.QuestionType.SITUATION, id: 2 },
+  { title: interviewType.QuestionType.JOB, id: 3 },
+  { title: interviewType.QuestionType.PERSONALITY, id: 4 },
   { title: 'ALL', id: 5 },
 ];
 
 interface IQuestionSelectorProps {
-  selectedType: QuestionType | string;
-  onChange: (type: QuestionType | string) => void;
+  selectedType: interviewType.QuestionType | string;
+  onChange: (type: interviewType.QuestionType | string) => void;
 }
 
 function QuestionSelector({ selectedType, onChange }: IQuestionSelectorProps) {
   return (
     <Container>
-      <ControlMenu
+      <ComboBox
         value={selectedType}
         optionList={InterViewSelectData}
         onChange={onChange}

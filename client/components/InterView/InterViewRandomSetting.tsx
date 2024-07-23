@@ -1,56 +1,11 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
+import { styleMixin } from '@/src/shared/styles';
 
-import { ColBox } from '@/styles/GlobalStyle';
+import { useModal } from '@/src/shared/hooks';
 
-import useModal from '@/hooks/useModal';
-
-import { QuestionType } from '@/types/InterViewQuestion/InterViewQuestionType';
-import { useFetchRandomQuestion } from '@/apis/interview_question/mutations';
-
-const InterViewSettingStyle = styled.div`
-  ${ColBox}
-  width: 100%;
-  height: 100%;
-  margin: 30px auto;
-`;
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  box-shadow: 0 4px 8px rgba(14, 13, 13, 0.2);
-  @media screen and (max-width: 800px) {
-    width: 90%;
-  }
-`;
-
-const Label = styled.label`
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 8px;
-`;
-
-const Input = styled.input`
-  padding: 8px;
-  margin-bottom: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-`;
-
-const Button = styled.button`
-  padding: 8px 16px;
-  background-color: #2ecc71;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-`;
+import { interviewType, interviewMutation } from '@/src/entities/interview_question';
 
 function InterViewRandomSetting() {
   const [randomSetting, setRandomSetting] = useState({
@@ -59,7 +14,7 @@ function InterViewRandomSetting() {
     job: 0,
     personality: 0,
   });
-  const { mutate: getRandomQustions } = useFetchRandomQuestion();
+  const { mutate: getRandomQustions } = interviewMutation.useFetchRandomQuestion();
   const { setModal } = useModal();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,12 +28,12 @@ function InterViewRandomSetting() {
   const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     const data = [
-      { size: randomSetting.cs, questionType: QuestionType.CS },
-      { size: randomSetting.situation, questionType: QuestionType.SITUATION },
-      { size: randomSetting.job, questionType: QuestionType.JOB },
+      { size: randomSetting.cs, questionType: interviewType.QuestionType.CS },
+      { size: randomSetting.situation, questionType: interviewType.QuestionType.SITUATION },
+      { size: randomSetting.job, questionType: interviewType.QuestionType.JOB },
       {
         size: randomSetting.personality,
-        questionType: QuestionType.PERSONALITY,
+        questionType: interviewType.QuestionType.PERSONALITY,
       },
     ];
 
@@ -133,3 +88,46 @@ function InterViewRandomSetting() {
 }
 
 export default InterViewRandomSetting;
+
+const InterViewSettingStyle = styled.div`
+  ${styleMixin.Column()}
+  width: 100%;
+  height: 100%;
+  margin: 30px auto;
+`;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.primary};
+  box-shadow: 0 4px 8px rgba(14, 13, 13, 0.2);
+  @media screen and (max-width: 800px) {
+    width: 90%;
+  }
+`;
+
+const Label = styled.label`
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+`;
+
+const Input = styled.input`
+  padding: 8px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+`;
+
+const Button = styled.button`
+  padding: 8px 16px;
+  background-color: #2ecc71;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+`;

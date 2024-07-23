@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-import { ScrollBar } from '@/styles/GlobalStyle';
-import { IQuestion } from '@/types/InterViewQuestion/InterViewQuestionType';
+import { styleMixin } from '@/src/shared/styles';
+import { interviewType } from '@/src/entities/interview_question';
 import ExpectedQuestionListItem from './ExpectedQuestionListItem';
 
 interface ExpectedQuestionListProps {
-  questions: IQuestion[];
+  questions: interviewType.IQuestion[];
   isAllCheck: boolean;
   handleCheckList: (id: number, isCheck: boolean) => void;
 }
@@ -32,7 +32,7 @@ function ExpectedQuestionList({
 export default ExpectedQuestionList;
 
 const Container = styled.div`
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   width: 100%;
   height: 100%;
   overflow-x: hidden;

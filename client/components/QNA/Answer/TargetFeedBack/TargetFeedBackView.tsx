@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { ColBox } from '@/styles/GlobalStyle';
-
-import { useFetchFeedBackList } from '@/apis/feedback/queries';
-import { useReviseFeed } from '@/apis/feedback/mutation';
+import { styleMixin } from '@/src/shared/styles';
+import { useFetchFeedBackList } from '@/src/entities/feedback/queries';
+import { useReviseFeed } from '@/src/entities/feedback/mutation';
 import TargetFeedBackItems from './TargetFeedBackItems';
 
 import userQnaManager from '../../hooks/userQnaManager';
@@ -31,7 +30,7 @@ function TargetFeedBackView() {
 export default TargetFeedBackView;
 
 const FeedBackViewStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100%;
   width: 100%;
   margin-top: 5vh;

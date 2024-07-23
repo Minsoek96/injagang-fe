@@ -1,5 +1,5 @@
 import Spinner from '@/components/Spinner';
-import { useFetchTemplate } from '@/apis/template/queries';
+import { useFetchTemplate } from '@/src/entities/template/queries';
 
 interface TemplateListFetcherProps {
   children: (data: unknown) => React.ReactNode;

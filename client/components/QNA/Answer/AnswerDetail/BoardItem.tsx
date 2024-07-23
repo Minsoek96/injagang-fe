@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import styled from 'styled-components';
 
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 interface BoardItemProps {
   title: string;
@@ -35,7 +35,7 @@ function BoardItem({ title, nickname, content }: BoardItemProps) {
 export default memo(BoardItem);
 
 const BoardItemContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   height: 100%;
   .board_nickname {

@@ -1,23 +1,22 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
-import {
-  Card,
-  ColBox,
-  ScrollBar,
-  StyleButton,
-  StyleTextArea,
-} from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
+import { BaseCard } from '@/src/shared/components/card';
 
-import useModal from '@/hooks/useModal';
-import { IReviseFeedBack } from '@/types/feedback/FeedBackType';
+import { BaseArea } from '@/src/shared/components/textarea';
+
+import { styleMixin } from '@/src/shared/styles';
+
+import { useModal } from '@/src/shared/hooks';
+import { feedbackType } from '@/src/entities/feedback';
 
 type FeedBackItemsProps = {
   target: string;
   content: string;
   feedbackId: number;
   owner: boolean;
-  handleUpdateFeedBack: (feedback: IReviseFeedBack) => void;
+  handleUpdateFeedBack: (feedback: feedbackType.IReviseFeedBack) => void;
 };
 
 function FeedBackItems({
@@ -60,13 +59,13 @@ function FeedBackItems({
   };
   return (
     <FeedBackItemsStyle>
-      <Card $size={{ width: '80%', height: '50vh', flex: 'col' }}>
+      <BaseCard $size={{ width: '80%', height: '50vh', flex: 'col' }}>
         <CorrectionContainer>
           <span className="correction_title">피드백:</span>
           <h4 className="correction_sentence">{target}</h4>
         </CorrectionContainer>
         <CommentTop>
-          <StyleTextArea
+          <BaseArea
             value={text}
             onChange={(e) => setText(e.target.value)}
             readOnly={isReadOnly}
@@ -75,22 +74,22 @@ function FeedBackItems({
         <CommentFooter>
           {owner && (
             <ControlRightButtons>
-              <StyleButton
+              <BaseButton
                 onClick={isReadOnly ? userEditConfirm : handleUpdate}
                 $Size={{ width: '150px', font: '15px' }}
               >
                 {isReadOnly ? '편집' : '수정완료'}
-              </StyleButton>
-              <StyleButton
+              </BaseButton>
+              <BaseButton
                 onClick={() => {}}
                 $Size={{ width: '150px', font: '15px' }}
               >
                 삭제
-              </StyleButton>
+              </BaseButton>
             </ControlRightButtons>
           )}
         </CommentFooter>
-      </Card>
+      </BaseCard>
     </FeedBackItemsStyle>
   );
 }
@@ -100,14 +99,14 @@ function FeedBackItems({
 export default FeedBackItems;
 
 const FeedBackItemsStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   max-height: 500px;
   margin: 20px;
 `;
 
 const CorrectionContainer = styled.div`
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   width: 98%;
   height: 30%;
   color: red;
@@ -131,7 +130,7 @@ const CommentTop = styled.div`
   width: 100%;
   margin: 10px auto;
   textarea {
-    ${ScrollBar}
+    ${styleMixin.ScrollBar}
     width: 100%;
     padding: 15px;
     line-height: 1.5;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { StyleButton } from '@/styles/GlobalStyle';
+
+import { BaseButton } from '@/src/shared/components/button';
 import TextActionBtns from './TextActionBtns';
 
 interface FeedBackFooterProps {
@@ -21,14 +22,14 @@ function FeedBackFooter({
     <CommentFooter>
       <FeedBackViewBtns>
         {qnaIdList.map((list, i) => (
-          <StyleButton
+          <BaseButton
             className={list === feedBackIndex ? 'active_button' : ' '}
             $Size={{ width: '40px', font: '15px' }}
             onClick={() => handleFeedBackIndex(list)}
             key={list}
           >
             {`${i + 1}`}
-          </StyleButton>
+          </BaseButton>
         ))}
       </FeedBackViewBtns>
       <TextActionBtns handleClear={handleClear} handleSubmit={handleSubmit} />

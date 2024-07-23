@@ -5,22 +5,28 @@ import styled from 'styled-components';
 import { BiArrowBack } from 'react-icons/bi';
 
 import Image from 'next/image';
-import interViewimg from '@/assets/images/interView.svg';
+import roomout from '@/public/assets/roomout.svg';
 
 import InterViewListView from '@/components/InterViewQuestion/ExpectedQuestionLayout';
 import ArrowAnimation from '@/components/InterView/InterViewMenual';
 
-import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
-import V from '@/styles/variables';
+import { BaseButton } from '@/src/shared/components/button';
 import dynamic from 'next/dynamic';
+import { V, styleMixin } from '@/src/shared/styles';
 
-const InterViewRandomSetting = dynamic(() => import('@/components/InterView/InterViewRandomSetting'), {
-  ssr: false,
-});
+const InterViewRandomSetting = dynamic(
+  () => import('@/components/InterView/InterViewRandomSetting'),
+  {
+    ssr: false,
+  },
+);
 
-const InterviewRecord = dynamic(() => import('@/components/InterView/interviewRecord'), {
-  ssr: false,
-});
+const InterviewRecord = dynamic(
+  () => import('@/components/InterView/interviewRecord'),
+  {
+    ssr: false,
+  },
+);
 
 const renderComponent = [
   { render: null, title: '면접영상촬영시작' },
@@ -50,26 +56,26 @@ function Interview() {
     <InterViewStyle>
       <ControlBtn>
         {curIndex > SECOND_SCREEN && (
-          <StyleButton
+          <BaseButton
             onClick={moveToPrevPage}
             $Size={{ width: '50px', font: '22px' }}
           >
             <BiArrowBack />
-          </StyleButton>
+          </BaseButton>
         )}
-        <StyleButton
+        <BaseButton
           className="Arrow_btn"
           onClick={moveToNextPage}
           $Size={{ width: '90%', font: '20px' }}
         >
           {renderComponent[curIndex].title}
-        </StyleButton>
+        </BaseButton>
       </ControlBtn>
       {curIndex === START_SCREEN && (
         <Menual>
           <ArrowAnimation targetId="Arrow_btn" />
           <div className="interViewImg_box">
-            <Image src={interViewimg} alt="interView" />
+            <Image src={roomout} alt="roomout" />
           </div>
         </Menual>
       )}
@@ -81,13 +87,13 @@ function Interview() {
 export default Interview;
 
 const InterViewStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100vh;
   width: 80vw;
 `;
 
 const Menual = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   margin:50px;
   width: 100%;
   height: 100%;
@@ -113,7 +119,7 @@ const Menual = styled.div`
 `;
 
 const ControlBtn = styled.div`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   width: ${V.lgItemWidth};
   gap: 8px;
   @media screen and (max-width: 800px) {
@@ -122,7 +128,7 @@ const ControlBtn = styled.div`
 `;
 
 const RecordComponent = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   height: 80%;
 `;

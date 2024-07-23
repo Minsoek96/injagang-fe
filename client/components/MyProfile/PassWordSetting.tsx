@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { BaseButton } from '@/src/shared/components/button';
 
-import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 import useMyProfileManager from './hooks/useMyProfileManager';
 import useMyProfileLogic, { IPassWordInfo } from './hooks/useMyProfileLogic';
 
@@ -46,12 +47,12 @@ function PassWordSetting() {
           onChange={handleInfoChange}
         />
       ))}
-      <StyleButton
+      <BaseButton
         $Size={{ width: '95%', font: '15px' }}
         onClick={() => dispatchPasswordChange(passWordInfo)}
       >
         변경
-      </StyleButton>
+      </BaseButton>
     </PassWordContainer>
   );
 }
@@ -59,7 +60,7 @@ function PassWordSetting() {
 export default PassWordSetting;
 
 const PassWordContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   height: 250px;
   padding: 15px;
@@ -82,12 +83,12 @@ const Input = styled.input`
 `;
 
 const Container = styled.div`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   width: 90%;
   h3 {
     margin: 12px auto;
   }
   @media screen and (max-width: 900px) {
-    ${ColBox}
+    ${styleMixin.Column()}
   }
 `;

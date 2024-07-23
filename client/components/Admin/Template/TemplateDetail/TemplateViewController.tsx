@@ -2,8 +2,7 @@ import { Suspense } from 'react';
 
 import styled from 'styled-components';
 
-import { ColBox } from '@/styles/GlobalStyle';
-
+import { styleMixin } from '@/src/shared/styles';
 import Spinner from '@/components/Spinner';
 import AddTemplate from './AddTemplate';
 import TemplateDetail from './TemplateDetail';
@@ -28,12 +27,12 @@ function TemplateViewController() {
 export default TemplateViewController;
 
 const TemplateViewStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   justify-content: space-between;
   width: 95%;
   height: 100%;
   .endTitle {
-    ${ColBox}
+    ${styleMixin.Column()}
     justify-content: center;
     height: 100%;
   }

@@ -5,8 +5,7 @@ import { useRouter } from 'next/router';
 import { BiPlus } from 'react-icons/bi';
 
 import styled from 'styled-components';
-import V from '@/styles/variables';
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin, V } from '@/src/shared/styles';
 
 import CoverLetterPreView from './CoverLetterPreView';
 import CoverLetterList from './CoverLetterList';
@@ -39,7 +38,7 @@ export default CoverLetter;
 const CoverLetterContainer = styled.div`
   width: ${V.xlWidth};
   height: 600px;
-  ${ColBox}
+  ${styleMixin.Column()}
   @media screen and (max-width: 1300px) {
     width: ${V.mdWidth};
   }

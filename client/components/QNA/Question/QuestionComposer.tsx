@@ -1,20 +1,21 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
-import {
-  Card,
-  ColBox,
-  FlexBox,
-  StyleButton,
-  StyleInput as QuestionTitle,
-  StyleTextArea,
-} from '@/styles/GlobalStyle';
+import { BaseArea } from '@/src/shared/components/textarea';
 
-import ControlMenu from '@/components/UI/ControlMenu';
+import { BaseCard } from '@/src/shared/components/card';
+
+import { BaseButton } from '@/src/shared/components/button';
+
+import { BaseInput as QuestionTitle } from '@/src/shared/components/input';
+
+import { styleMixin } from '@/src/shared/styles';
+
+import { ComboBox } from '@/src/shared/components/combobox';
 import CoverLetterDetail from '@/components/QNA/Question/CoverLetterDetail';
 
-import { useWriteBoard } from '@/apis/qnaboard/mutaions';
-import { useFetchCoverLetter } from '@/apis/coverLetter/queries';
+import { useWriteBoard } from '@/src/entities/qnaboard/mutaions';
+import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
 
 function QuestionComposer() {
   const { data: coverLtters = [] } = useFetchCoverLetter();
@@ -43,51 +44,51 @@ function QuestionComposer() {
   };
 
   return (
-    <Card $size={{ width: '80%', height: '80%', flex: 'row' }}>
+    <BaseCard $size={{ width: '80%', height: '80%', flex: 'row' }}>
       <SwitchContainer>
         <LeftContainer>
           <QuestionTitle
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <ControlMenu
+          <ComboBox
             Size={{ width: '100%', height: '40px' }}
             value={coverLetterTitle}
             onChange={(e) => changeCoverLetter(e)}
             optionList={coverLtters}
           />
-          <StyleTextArea
+          <BaseArea
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          <StyleButton
+          <BaseButton
             $Size={{ width: '100%', font: '15px' }}
             onClick={handleSubmit}
           >
             작성완료
-          </StyleButton>
+          </BaseButton>
         </LeftContainer>
         <RigthContainer>
           <CoverLetterDetail essayId={essayId} />
         </RigthContainer>
       </SwitchContainer>
-    </Card>
+    </BaseCard>
   );
 }
 
 export default QuestionComposer;
 const SwitchContainer = styled.div`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   width: 100%;
   height: 90%;
   gap: 30px;
   @media screen and (max-width: 1200px) {
-    ${ColBox}
+    ${styleMixin.Column()}
   }
 `;
 
 const LeftContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 50%;
   height: 100%;
   input {
@@ -104,7 +105,7 @@ const LeftContainer = styled.div`
 `;
 
 const RigthContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   height: 100%;
   width: 50%;
   @media screen and (max-width: 1200px) {

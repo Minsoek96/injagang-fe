@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import styled, { css, keyframes } from 'styled-components';
 
-import InputField from '@/components/UI/InputField';
+import { InputField } from '@/src/shared/components/input';
 
 import useLoginLogic from './hooks/useLoginLogic';
 

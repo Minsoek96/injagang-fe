@@ -12,17 +12,15 @@ import {
 } from '@tanstack/react-query';
 
 import styled from 'styled-components';
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 import Spinner from '@/components/Spinner';
 
-import { useFeedStore } from '@/store/qna';
+import board from '@/src/entities/qnaboard/queryKeys';
+import { boardApi, useFeedStore } from '@/src/entities/qnaboard';
 
-import { board } from '@/apis/qnaboard/queryKeys';
-import { getDetailBoard } from '@/apis/qnaboard/apis';
-
-import getServerCookie from '@/util/getServerCookies';
-import { TOKEN_KYES } from '@/constants';
+import { getServerCookie } from '@/src/shared/utils';
+import { TOKEN_KYES } from '@/src/shared/const';
 
 const AnswerLayout = dynamic(
   () => import('@/components/QNA/Answer/AnswerLayout'),
@@ -40,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   await queryClient.prefetchQuery({
     queryKey: board.detail(Number(id)),
-    queryFn: () => getDetailBoard(Number(id), authToken),
+    queryFn: () => boardApi.getDetailBoard(Number(id), authToken),
   });
 
   return {
@@ -75,7 +73,7 @@ function Answer({ dehydratedState }: AnswerProps) {
 export default Answer;
 
 const ViewStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   height: 100vh;
 `;

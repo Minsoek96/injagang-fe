@@ -4,16 +4,17 @@ import styled from 'styled-components';
 
 import Image from 'next/image';
 
-import useMediaRecord from '@/hooks/useMediaRecord';
-import useWebSpeech from '@/hooks/useWebSpeech';
-import V from '@/styles/variables';
-import { ColBox, FlexBox, StyleButton } from '@/styles/GlobalStyle';
-import { useInterViewStore } from '@/store/interview';
+import { styleMixin, V } from '@/src/shared/styles';
+
+import { BaseButton } from '@/src/shared/components/button';
+
+import { useMediaRecord, useWebSpeech } from '@/src/shared/hooks';
+import { useInterViewStore } from '@/src/entities/interview_question';
+import room from '@/public/assets/room.svg';
 import InterViewSlider from './InterViewSlider';
 import VideoController from './Video/VideoController';
 import RenderVideoInfo from './Video/RenderVideoInfo';
 
-import interViewin from '../../assets/images/interviewIn.svg';
 import { RecordMainBtn } from './Video/RecordMainButton';
 
 function InterviewRecord() {
@@ -62,7 +63,7 @@ function InterviewRecord() {
   return (
     <RecordStyle>
       <RecordContainer $isResult={isResult}>
-        <Image className="interView_img" src={interViewin} alt="interView" />
+        <Image className="room_img" src={room} alt="interView" />
         <Camera>
           {!isResult ? (
             <video autoPlay muted ref={videoRef} />
@@ -96,28 +97,28 @@ function InterviewRecord() {
         )}
         {recordedChunks.length > 0 && (
           <ResultContainer>
-            <StyleButton
+            <BaseButton
               onClick={() =>
                 setVideoIndex((prevIndex) =>
                   (prevIndex <= 1 ? 0 : videoIndex - 1))}
               $Size={{ width: '150px', font: '15px' }}
             >
               이전영상
-            </StyleButton>
-            <StyleButton
+            </BaseButton>
+            <BaseButton
               onClick={() => setIsResult(!isResult)}
               $Size={{ width: '150px', font: '15px' }}
             >
               결과확인
-            </StyleButton>
-            <StyleButton
+            </BaseButton>
+            <BaseButton
               onClick={() =>
                 setVideoIndex((prevIndex) =>
                   (prevIndex >= recordedChunks.length - 1 ? 0 : videoIndex + 1))}
               $Size={{ width: '150px', font: '15px' }}
             >
               다음영상
-            </StyleButton>
+            </BaseButton>
           </ResultContainer>
         )}
       </Result>
@@ -127,7 +128,7 @@ function InterviewRecord() {
 
 export default InterviewRecord;
 const RecordStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Flex()}
   margin: 20px;
   gap: 20px;
   width: 90%;
@@ -170,7 +171,7 @@ const RecordContainer = styled.div<{ $isResult: boolean }>`
 `;
 
 const Camera = styled.div`
-  ${FlexBox}
+  ${styleMixin.Flex()}
   position: absolute;
   width: 100%;
   height: 100%;
@@ -198,7 +199,7 @@ const Camera = styled.div`
 `;
 
 const Result = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   align-items: flex-start;
   gap: 15px;
   width: 100%;

@@ -8,9 +8,9 @@ import styled from 'styled-components';
 
 import { v4 as uuid4 } from 'uuid';
 
-import ControlMenu from '@/components/UI/ControlMenu';
-import { ColBox, StyleButton } from '@/styles/GlobalStyle';
-import V from '@/styles/variables';
+import { BaseButton } from '@/src/shared/components/button';
+import { V, styleMixin } from '@/src/shared/styles';
+import { ComboBox } from '@/src/shared/components/combobox';
 import CoverLetterQuestionItems from './CoverLetterQuestionItems';
 
 import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
@@ -55,7 +55,7 @@ function CoverLetterCreator() {
         onChange={(e) => setCoverLetterTitle(e.target.value)}
         placeholder="자소서 제목"
       />
-      <ControlMenu
+      <ComboBox
         Size={{ width: `${V.xlItemWidth}`, height: '40px' }}
         value={selectedTemplateTitle}
         optionList={templateTitles}
@@ -71,18 +71,18 @@ function CoverLetterCreator() {
       ))}
       <BiPlusStyled onClick={addQnAList} />
       <ControllerBtns>
-        <StyleButton
+        <BaseButton
           $Size={{ width: '150px', font: '20px' }}
           onClick={() => router.push(moveCoverLetterMainPage)}
         >
           뒤로가기
-        </StyleButton>
-        <StyleButton
+        </BaseButton>
+        <BaseButton
           $Size={{ width: '150px', font: '20px' }}
           onClick={() => handleDispatch()}
         >
           작성완료
-        </StyleButton>
+        </BaseButton>
       </ControllerBtns>
     </CoverLetterCreatorContainer>
   );
@@ -90,7 +90,7 @@ function CoverLetterCreator() {
 
 export default CoverLetterCreator;
 const CoverLetterCreatorContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
 `;
 

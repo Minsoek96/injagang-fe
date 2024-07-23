@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { useFetchCheckOut, useFetchUserInfo } from '@/apis/auth/mutations';
+import { useFetchCheckOut, useFetchUserInfo } from '@/src/entities/auth/mutations';
 
 const useLoginManager = () => {
   const { mutate: getProfile } = useFetchUserInfo();

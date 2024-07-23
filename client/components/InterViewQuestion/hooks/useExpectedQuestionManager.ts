@@ -1,16 +1,16 @@
 import {
-  IAddQuestions,
-} from '@/types/InterViewQuestion/InterViewQuestionType';
-import { useInterViewStore } from '@/store/interview';
-import { useFetchQuestions } from '@/apis/interview_question/queries';
+  interviewType,
+  interviewQueries,
+  useInterViewStore,
+} from '@/src/entities/interview_question';
 import {
   useAddInterViewQ,
   useDeleteInterViewQ,
-} from '@/apis/interview_question/mutations';
+} from '@/src/entities/interview_question/mutations';
 
 const useExpectedQuestionManager = () => {
   const { selectedType } = useInterViewStore();
-  const { data: interViewQuestionList = [] } = useFetchQuestions(selectedType);
+  const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions(selectedType);
   const { mutate: deleteQuestions } = useDeleteInterViewQ();
   const { mutate: addQuestions } = useAddInterViewQ();
 
@@ -23,7 +23,7 @@ const useExpectedQuestionManager = () => {
     deleteQuestions(formmatData);
   };
 
-  const dispatchAddQuestions = (newList: IAddQuestions) => {
+  const dispatchAddQuestions = (newList: interviewType.IAddQuestions) => {
     addQuestions(newList);
   };
 

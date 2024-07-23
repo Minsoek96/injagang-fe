@@ -1,9 +1,9 @@
 import { useState, useCallback, useRef } from 'react';
 
-import { hasEmptyFieldKey } from '@/util/hasEmpty';
+import { hasEmpty } from '@/src/shared/utils';
 
-import { ERROR_MESSAGES } from '@/constants';
-import { useFetchSignin } from '@/apis/auth/mutations';
+import { ERROR_MESSAGES } from '@/src/shared/const';
+import { useFetchSignin } from '@/src/entities/auth/mutations';
 
 const useLoginLogic = () => {
   const { mutate: authenTicate, errorMsg: loginErrorMsg } = useFetchSignin();
@@ -18,7 +18,7 @@ const useLoginLogic = () => {
   };
 
   const runValidationCheck = () => {
-    const emptyfield = hasEmptyFieldKey(loginInfo);
+    const emptyfield = hasEmpty.fieldKey(loginInfo);
     if (emptyfield) {
       refs[`${emptyfield}Ref`].current?.focus();
       setUserLogicMsg(ERROR_MESSAGES.FILL_BLANKS);

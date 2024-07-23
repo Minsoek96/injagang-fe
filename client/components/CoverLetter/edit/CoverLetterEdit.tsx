@@ -6,13 +6,13 @@ import { BiPlus } from 'react-icons/bi';
 
 import styled from 'styled-components';
 
-import { ColBox, StyleButton } from '@/styles/GlobalStyle';
+import { BaseButton } from '@/src/shared/components/button';
 
-import V from '@/styles/variables';
+import { V, styleMixin } from '@/src/shared/styles';
 
 import APIErrorBoundary from '@/components/APIErrorBoundary';
 import Spinner from '@/components/Spinner';
-import { useFetchDetailCoverLetter } from '@/apis/coverLetter/queries';
+import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
 import useCoverLetterManager from '../hooks/useCoverLetterManager';
 import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
 import CoverLetterQuestionItems from '../new/CoverLetterQuestionItems';
@@ -60,25 +60,25 @@ function CoverLetterEdit() {
         ))}
         <BiPlusStyled onClick={addQnAList} />
         <ControllerBtns>
-          <StyleButton
+          <BaseButton
             $Size={{ width: '150px', font: '20px' }}
             onClick={() => router.push(moveCoverLetterMainPage)}
           >
             뒤로가기
-          </StyleButton>
-          <StyleButton
+          </BaseButton>
+          <BaseButton
             $Size={{ width: '150px', font: '20px' }}
             onClick={() => deleteCoverLetter(Number(id))}
           >
             삭제하기
-          </StyleButton>
-          <StyleButton
+          </BaseButton>
+          <BaseButton
             $Size={{ width: '150px', font: '20px' }}
             onClick={() =>
               changeCoverLetter(Number(id), coverLetterTitle, qnaList)}
           >
             수정완료
-          </StyleButton>
+          </BaseButton>
         </ControllerBtns>
       </CoverLetterCreatorContainer>
     </APIErrorBoundary>
@@ -87,7 +87,7 @@ function CoverLetterEdit() {
 
 export default CoverLetterEdit;
 const CoverLetterCreatorContainer = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
 `;
 

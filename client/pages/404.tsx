@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Link from 'next/link';
 
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 const TITLE = {
   main: '404-Page Not Found',
@@ -25,7 +25,7 @@ const Custom404: NextPage = function Custom404() {
 export default Custom404;
 
 const Container = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   justify-content: center;
   height: 100vh;
 `;

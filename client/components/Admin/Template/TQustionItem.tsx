@@ -1,5 +1,7 @@
-import { StyleTextArea } from '@/styles/GlobalStyle';
+import { BaseArea } from '@/src/shared/components/textarea';
+
 import { forwardRef, memo } from 'react';
+
 import styled from 'styled-components';
 
 interface TQuestionItemProps {
@@ -13,7 +15,7 @@ const TQuestionItem = forwardRef<HTMLTextAreaElement, TQuestionItemProps>(
     <QuestionItem>
       {index + 1}
       . 질문:
-      <StyleTextArea
+      <BaseArea
         ref={ref}
         value={question}
         onChange={(e) => onChange(index, e.target.value)}

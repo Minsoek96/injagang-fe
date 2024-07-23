@@ -1,11 +1,9 @@
 import { useCallback } from 'react';
 
 import {
-  IQuestion,
-  QuestionType,
-} from '@/types/InterViewQuestion/InterViewQuestionType';
-
-import { useInterViewStore } from '@/store/interview';
+  interviewType,
+  useInterViewStore,
+} from '@/src/entities/interview_question';
 
 type ManagerProps = {
   typeCheckCallback: () => void; // 타입 선택시 전체 체크 상태 해제
@@ -22,7 +20,7 @@ const useEUserQuestionManager = ({
   } = useInterViewStore();
 
   const dispatchSelectedType = useCallback(
-    (type: QuestionType | string) => {
+    (type: interviewType.QuestionType | string) => {
       setSelectedType(type);
 
       if (typeCheckCallback) {
@@ -33,7 +31,7 @@ const useEUserQuestionManager = ({
   );
 
   const dispatchSelectedQuestions = useCallback(
-    (questions: IQuestion[], checkList: number[]) => {
+    (questions: interviewType.IQuestion[], checkList: number[]) => {
       const filterItem = questions.filter((question) =>
         checkList.includes(question.id));
       const questionList = filterItem.map((item) => item.questions);

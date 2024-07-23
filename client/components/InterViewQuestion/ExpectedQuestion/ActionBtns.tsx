@@ -1,14 +1,14 @@
-import { StyleButton } from '@/styles/GlobalStyle';
-import { IQuestion } from '@/types/InterViewQuestion/InterViewQuestionType';
-import useAuthStore from '@/store/auth/useAuthStore';
+import { BaseButton } from '@/src/shared/components/button';
+import { interviewType } from '@/src/entities/interview_question';
+import { useAuthStore } from '@/src/entities/auth';
 
 interface ActionBtnProps {
   checkList: number[];
   onRemove: (checkList: number[]) => void;
   onToggleAll: () => void;
   isAllChecked: boolean;
-  onAdd: (questions: IQuestion[], checkList: number[]) => void;
-  questions: IQuestion[];
+  onAdd: (questions: interviewType.IQuestion[], checkList: number[]) => void;
+  questions: interviewType.IQuestion[];
 }
 
 function ActionBtns({
@@ -40,18 +40,18 @@ function ActionBtns({
 
   return (
     <div>
-      <StyleButton
+      <BaseButton
         onClick={onToggleAll}
         $Size={{ width: '100px', font: '15px' }}
       >
         {isAllChecked ? '전체해제' : '전체선택'}
-      </StyleButton>
-      <StyleButton
+      </BaseButton>
+      <BaseButton
         onClick={btnConfig[isAdmin].onClick}
         $Size={{ width: '100px', font: '15px' }}
       >
         {btnConfig[isAdmin].text}
-      </StyleButton>
+      </BaseButton>
     </div>
   );
 }

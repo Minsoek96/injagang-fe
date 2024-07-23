@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import { ScrollBar } from '@/styles/GlobalStyle';
-import { useFetchDetailCoverLetter } from '@/apis/coverLetter/queries';
+import { styleMixin } from '@/src/shared/styles';
+
+import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
 import { memo } from 'react';
 import CoverLetterItem from './CoverLetterItem';
 
@@ -31,7 +32,7 @@ function CoverLetterDetail({ essayId = 0 }: CoverLetterProps) {
 export default memo(CoverLetterDetail);
 
 const CoverLetterDetailStyle = styled.div`
-  ${ScrollBar}
+  ${styleMixin.ScrollBar}
   padding: 15px;
   background-color: #191919;
   border-radius: 10.5px;

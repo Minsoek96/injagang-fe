@@ -1,16 +1,14 @@
 import { useCallback } from 'react';
 
 import { useRouter } from 'next/router';
-
 import {
-  ICoverLetters,
-  IReadQnaList,
-} from '@/types/coverLetter/CoverLetterType';
-import useCoverLetterStore from '@/store/coverLetter/useCoverLetterStore';
+  useCoverLetterStore,
+  coverLetterType,
+} from '@/src/entities/coverLetter';
 import {
   useDeleteCoverLetter,
   useReviseCoverLetter,
-} from '@/apis/coverLetter/mutations';
+} from '@/src/entities/coverLetter/mutations';
 
 const useCoverLetterManager = () => {
   const router = useRouter();
@@ -21,7 +19,7 @@ const useCoverLetterManager = () => {
   const { mutate: removeCoverLetter } = useDeleteCoverLetter();
 
   /** 유저가 선택한 자소서 미리보기 반영 */
-  const changeSeleted = (newList: ICoverLetters) => {
+  const changeSeleted = (newList: coverLetterType.ICoverLetters) => {
     if (newList === selectedCoverLetter) return;
     setCoverLetter(newList);
   };
@@ -35,7 +33,7 @@ const useCoverLetterManager = () => {
 
   /** 자소서 업데이트 반영 */
   const changeCoverLetter = useCallback(
-    (essayId: number, title: string, qnaList: IReadQnaList[]) => {
+    (essayId: number, title: string, qnaList: coverLetterType.IReadQnaList[]) => {
       const resetData = {
         title,
         qnaList: qnaList.map((qna) => ({

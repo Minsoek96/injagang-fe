@@ -2,9 +2,9 @@ import {
   useState, useCallback, useRef, useEffect,
 } from 'react';
 
-import useModal from '@/hooks/useModal';
-import { useCorrectionStore, useFeedStore } from '@/store/qna';
-import { useWriteFeed } from '@/apis/feedback/mutation';
+import { useModal } from '@/src/shared/hooks';
+import { useWriteFeed } from '@/src/entities/feedback/mutation';
+import { useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
 
 const useFeedBackLogic = () => {
   const [correctionText, setCorrectionText] = useState<string>('');

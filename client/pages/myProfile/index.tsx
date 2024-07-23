@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import CheckMyInFo from '@/components/MyProfile/CheckMyInFo';
 
-import { ColBox } from '@/styles/GlobalStyle';
+import { styleMixin } from '@/src/shared/styles';
 
 const myProfile = () => (
   <MyPageStyle>
@@ -13,7 +13,7 @@ const myProfile = () => (
 export default myProfile;
 
 const MyPageStyle = styled.div`
-  ${ColBox}
+  ${styleMixin.Column()}
   width: 100%;
   height: 100%;
 `;
