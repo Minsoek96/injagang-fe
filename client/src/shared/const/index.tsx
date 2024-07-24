@@ -91,7 +91,7 @@ export const TOAST_MODE = {
   INFO: 'INFO',
 };
 
-export const TOKEN_KYES = {
+export const TOKEN_KEYS = {
   ACCESS_TOKEN: 'accessToken',
   REFRESH_TOKEN: 'refreshToken',
 };

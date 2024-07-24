@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 import { useToast } from '@/src/shared/hooks';
 
 import {
-  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE, TOKEN_KYES,
+  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE, TOKEN_KEYS,
 } from '@/src/shared/const';
 
 import {
@@ -40,8 +40,8 @@ const useFetchSignin = () => {
 
     onSuccess: (data: IResponseSignin) => {
       const { access, refresh, userId } = data;
-      Cookies.set(TOKEN_KYES.ACCESS_TOKEN, access, { expires: 1 });
-      Cookies.set(TOKEN_KYES.REFRESH_TOKEN, refresh, { expires: 1 });
+      Cookies.set(TOKEN_KEYS.ACCESS_TOKEN, access, { expires: 1 });
+      Cookies.set(TOKEN_KEYS.REFRESH_TOKEN, refresh, { expires: 1 });
       Cookies.set('userId', userId, { expires: 1 });
       setUserId(userId);
       router.replace('/');
@@ -58,13 +58,13 @@ const useFetchCheckOut = () => {
   const { nickName, initCurrentUser } = useAuthStore();
 
   const currentToken = {
-    access: Cookies.get(TOKEN_KYES.ACCESS_TOKEN),
-    refresh: Cookies.get(TOKEN_KYES.REFRESH_TOKEN),
+    access: Cookies.get(TOKEN_KEYS.ACCESS_TOKEN),
+    refresh: Cookies.get(TOKEN_KEYS.REFRESH_TOKEN),
   };
 
   const removeToken = () => {
-    Cookies.remove(TOKEN_KYES.ACCESS_TOKEN);
-    Cookies.remove(TOKEN_KYES.REFRESH_TOKEN);
+    Cookies.remove(TOKEN_KEYS.ACCESS_TOKEN);
+    Cookies.remove(TOKEN_KEYS.REFRESH_TOKEN);
     Cookies.remove('userId');
   };
 

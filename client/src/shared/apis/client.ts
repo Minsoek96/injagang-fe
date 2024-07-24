@@ -5,9 +5,9 @@ import Router from 'next/router';
 
 import Cookies from 'js-cookie';
 
-import { ERROR_MESSAGES, TOKEN_KYES } from '@/src/shared/const';
+import { ERROR_MESSAGES, TOKEN_KEYS } from '@/src/shared/const';
 
-import { tokenReissue } from '../../entities/auth/apis';
+import { tokenReissue } from './tokenReissue';
 
 import { SERVER } from '../config/apis';
 
@@ -20,9 +20,9 @@ export const API = axios.create({
 
 API.interceptors.request.use(
   (config) => {
-    if (Cookies.get(TOKEN_KYES.ACCESS_TOKEN)) {
+    if (Cookies.get(TOKEN_KEYS.ACCESS_TOKEN)) {
       const newConfig = { ...config };
-      newConfig.headers.Authorization = Cookies.get(TOKEN_KYES.ACCESS_TOKEN);
+      newConfig.headers.Authorization = Cookies.get(TOKEN_KEYS.ACCESS_TOKEN);
     }
     return config;
   },
@@ -36,6 +36,7 @@ API.interceptors.response.use(
       throw serverDisconnected(error.message);
     }
     const originRequest = error.response;
+
     const { status, config } = originRequest;
     const errorMessage = originRequest.data.message;
     if (status === 401) {
@@ -66,7 +67,7 @@ const jwtExpired = async (originRequest: AxiosRequestConfig) => {
     const response = await tokenReissue();
     if (response) {
       const { access } = response.data;
-      Cookies.set(TOKEN_KYES.ACCESS_TOKEN, access);
+      Cookies.set(TOKEN_KEYS.ACCESS_TOKEN, access);
       await reRequest(originRequest);
     }
   } catch (error) {
@@ -77,5 +78,18 @@ const jwtExpired = async (originRequest: AxiosRequestConfig) => {
   }
 };
 
-export const reRequest = async (originRequest: AxiosRequestConfig) =>
-  API.request(originRequest);
+export const reRequest = async (
+  originRequest: AxiosRequestConfig & { retryFetch?: number },
+) => {
+  const requestWithRetry = {
+    ...originRequest,
+    retryFetch: originRequest.retryFetch || 0,
+  };
+
+  if (requestWithRetry.retryFetch >= 3) {
+    throw new Error('요청 제한 횟수 초과');
+  }
+
+  requestWithRetry.retryFetch += 1;
+  return API.request(requestWithRetry);
+};
