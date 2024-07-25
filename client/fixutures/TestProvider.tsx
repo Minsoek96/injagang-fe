@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 
 import { defaultTheme } from '@/src/app/styles';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 type ProviderProps = {
     children: React.ReactNode;
@@ -8,10 +9,12 @@ type ProviderProps = {
 
 export default function TestProvider({ children }: ProviderProps) {
   const theme = defaultTheme;
-
+  const queryClient = new QueryClient();
   return (
-    <ThemeProvider theme={theme}>
-      {children}
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        {children}
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
