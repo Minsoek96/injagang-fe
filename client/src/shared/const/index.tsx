@@ -23,6 +23,7 @@ export const ERROR_MESSAGES = {
   CHECK_OUT: '로그아웃에 실패했습니다.',
   GET_PROFILE: '회원정보를 불러오지 못했습니다.',
   ADDED_USER: '회원가입에 실패했습니다.',
+  CHANGE_NICK: '닉네임 변경에 실패했습니다.',
 
   ADDED_ESSAY: '나의 자소서 목록 추가를 실패했습니다.',
   DELETED_ESSAY: '나의 자소서 목록 삭제를 실패했습니다.',

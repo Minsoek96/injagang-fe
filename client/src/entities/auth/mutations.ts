@@ -116,7 +116,9 @@ const useChangeNick = () => {
       setUserInfo(newNick, role ?? 'USER');
     },
 
-    onError: () => {},
+    onError: () => {
+      showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.CHANGE_NICK);
+    },
   });
 };
 
