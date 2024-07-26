@@ -23,6 +23,7 @@ type Action = {
   initCoverLetter: () => void;
 };
 
+/** 유저가 선택한 자기소개서 관리 */
 const useCoverLetterStore = create<State & Action>((set) => ({
   selectedCoverLetter: initialState.selectedCoverLetter,
   setCoverLetter: (data: ICoverLetters) =>

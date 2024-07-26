@@ -7,6 +7,7 @@ type ProviderProps = {
     children: React.ReactNode;
 }
 
+/** 테스트를 위한 프로바이더 모음 */
 export default function TestProvider({ children }: ProviderProps) {
   const theme = defaultTheme;
   const queryClient = new QueryClient();

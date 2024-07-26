@@ -12,6 +12,7 @@ import { addCoverLetter, deleteCoverLetter, reviseCoverLetter } from './apis';
 
 import coverLetter from './querykeys';
 
+/** 자기소개서 작성 */
 const useWriteCoverLetter = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
@@ -29,6 +30,7 @@ const useWriteCoverLetter = () => {
   });
 };
 
+/** 자기소개서 삭제하기 */
 const useDeleteCoverLetter = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
@@ -46,6 +48,7 @@ const useDeleteCoverLetter = () => {
   });
 };
 
+/** 자기소개서 수정 */
 const useReviseCoverLetter = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();

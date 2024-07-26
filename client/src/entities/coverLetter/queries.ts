@@ -6,6 +6,7 @@ import coverLetter from './querykeys';
 
 import { getCoverLetter, getDetailCoverLetter } from './apis';
 
+/** 자기소개서 목록 조회 */
 const useFetchCoverLetter = () => {
   const userId = Number(Cookies.get('userId'));
   return useQuery({
@@ -14,6 +15,7 @@ const useFetchCoverLetter = () => {
   });
 };
 
+/** 자기소개서 상세 조회 */
 const useFetchDetailCoverLetter = (id: number) =>
   useQuery({
     queryKey: coverLetter.detail(id),
