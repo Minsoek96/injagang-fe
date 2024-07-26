@@ -9,6 +9,7 @@ import feedback from './queryKeys';
 
 import { reviseFeedBack, writeFeedBack } from './apis';
 
+/** 댓글 수정 */
 const useReviseFeed = (targetId: number) => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
@@ -28,6 +29,7 @@ const useReviseFeed = (targetId: number) => {
   });
 };
 
+/** 댓글 작성 */
 const useWriteFeed = (targetId: number) => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
