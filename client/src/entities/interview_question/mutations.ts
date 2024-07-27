@@ -20,6 +20,7 @@ import {
 } from './apis';
 import interview from './queryKeys';
 
+/** 랜덤 면접 질문리스트 요청 */
 const useFetchRandomQuestion = () => {
   const { showToast } = useToast();
   const { setConfirmQuestions } = useInterViewStore();
