@@ -9,8 +9,8 @@ import {
   IWriteCoverLetter,
 } from '@/src/entities/coverLetter/type';
 
-const getCoverLetter = async (targetId: number): Promise<ICoverLetters[]> =>
-  fetcher(METHOD.GET, `${ESSAY_APIS.GET_API}${targetId}`).then(
+const getCoverLetter = async (): Promise<ICoverLetters[]> =>
+  fetcher(METHOD.GET, `${ESSAY_APIS.GET_API}`).then(
     (res) => res.data,
   );
 

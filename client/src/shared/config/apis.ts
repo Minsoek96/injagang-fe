@@ -14,7 +14,7 @@ export const AUTH_APIS = {
 export const ESSAY_APIS = {
   WRITE_API: '/essay/write',
   READ_API: '/essay/read/',
-  GET_API: '/essay/',
+  GET_API: '/essay/list',
   DELETE_API: '/essay/delete/',
   REVISE_API: '/essay/revise/',
 };
