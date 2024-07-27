@@ -14,7 +14,7 @@ function AnswerDetailView() {
   const router = useRouter();
   const boardId = router.query;
 
-  const { setQuestions } = useBoardStore();
+  const { setQuestionIds } = useBoardStore();
 
   const {
     data: boardList,
@@ -25,7 +25,7 @@ function AnswerDetailView() {
   useEffect(() => {
     if (boardList) {
       const questions = boardList.qnaList.map((item) => item.qnaId);
-      setQuestions(questions);
+      setQuestionIds(questions);
     }
   }, [boardList]);
 

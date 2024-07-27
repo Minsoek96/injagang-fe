@@ -42,6 +42,7 @@ const useFetchRandomQuestion = () => {
   });
 };
 
+/** 면접 질문 리스트 삭제 */
 const useDeleteInterViewQ = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
@@ -62,6 +63,7 @@ const useDeleteInterViewQ = () => {
   });
 };
 
+/** 면접 질문 리스트 추가 */
 const useAddInterViewQ = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();

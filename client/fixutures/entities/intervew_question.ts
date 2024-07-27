@@ -39,10 +39,27 @@ const sampleAddQuestions: IAddQuestions = {
 
 const sampleType = QuestionType.CS;
 
+const sampleQuestionPlayList = [
+  'testQuestion',
+  'testQuestion1',
+  'testQuestion2',
+  'testQuestion3',
+];
+
+const sampleUserPlayList = [
+  'userPlayList1',
+  'userPlayList2',
+  'userPlayList3',
+  'userPlayList4',
+  'userPlayList5',
+];
+
 export {
   sampleRandomQuestion,
   sampleResponseRandomQ,
   sampleAddQuestions,
   sampleType,
   sampleResponseQuestions,
+  sampleQuestionPlayList,
+  sampleUserPlayList,
 };

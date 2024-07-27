@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 type State = {
-  questionList: number[];
+  questionIds: number[];
   boardSearch: string;
   boardType: string;
   curPageNum: number;
@@ -9,7 +9,7 @@ type State = {
 };
 
 type Action = {
-  setQuestions: (list: number[]) => void;
+  setQuestionIds: (list: number[]) => void;
   setBoardSearch: (search: string) => void;
   initBoardSearch: () => void;
   setBoardType: (type: string) => void;
@@ -17,14 +17,15 @@ type Action = {
   setTotalPage: (page: number) => void;
 };
 
+/** 게시판 조회에 필요한 정보 */
 const useBoardStore = create<State & Action>((set) => ({
-  questionList: [],
+  questionIds: [],
   boardSearch: '',
   boardType: '',
   curPageNum: 1,
   totalPage: 1,
 
-  setQuestions: (list: number[]) => set({ questionList: list }),
+  setQuestionIds: (list: number[]) => set({ questionIds: list }),
   setBoardSearch: (search: string) => set({ boardSearch: search }),
   setBoardType: (type: string) => set({ boardType: type }),
   initBoardSearch: () => set({ boardSearch: '', boardType: '' }),

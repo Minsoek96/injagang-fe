@@ -13,6 +13,7 @@ type Action = {
   initUserPlayList: () => void;
 };
 
+/** 면접 녹화에 필요한 정보조합 */
 const useInterViewStore = create<State & Action>((set) => ({
   userPlayList: [],
   confirmQuestions: [],

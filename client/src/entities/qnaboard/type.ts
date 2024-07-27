@@ -1,4 +1,4 @@
-interface IBoardList {
+export interface IBoardList {
   id: number;
   title: string;
   nickname: string;
