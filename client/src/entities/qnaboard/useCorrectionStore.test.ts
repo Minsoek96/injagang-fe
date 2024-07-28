@@ -2,7 +2,7 @@ import { act } from '@testing-library/react';
 
 import {
   sampleCorrection,
-} from '@/fixutures/entities/board';
+} from '@/fixutures/entities/qnaboard';
 
 import useCorrectionStore from '@/src/entities/qnaboard/useCorrectionStore';
 

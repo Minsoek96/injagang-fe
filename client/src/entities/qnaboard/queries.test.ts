@@ -5,7 +5,7 @@ import TestProvider from '@/fixutures/TestProvider';
 import { useFetchBoardDetail, useFetchBoardList } from '@/src/entities/qnaboard/queries';
 
 import { getBoardList, getDetailBoard } from '@/src/entities/qnaboard/apis';
-import { sampleBoardList, sampleDetailBoard } from '@/fixutures/entities/board';
+import { sampleBoardList, sampleDetailBoard } from '@/fixutures/entities/qnaboard';
 
 jest.mock('./apis');
 

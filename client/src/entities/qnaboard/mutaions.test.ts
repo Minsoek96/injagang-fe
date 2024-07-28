@@ -18,15 +18,15 @@ import {
 } from '@/src/entities/qnaboard/apis';
 
 import {
-  sampleReviseQnaBoard,
-  sampleWriteQnaBoard,
-} from '@/fixutures/entities/board';
-import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
   TOAST_MODE,
 } from '@/src/shared/const';
 import board from '@/src/entities/qnaboard/queryKeys';
+import {
+  sampleReviseQnaBoard,
+  sampleWriteQnaBoard,
+} from '@/fixutures/entities/qnaboard';
 
 /** 목킹 설정 */
 jest.mock('./apis');

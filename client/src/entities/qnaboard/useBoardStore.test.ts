@@ -1,6 +1,6 @@
 import { act } from '@testing-library/react';
 
-import { sampleQuestionIds } from '@/fixutures/entities/board';
+import { sampleQuestionIds } from '@/fixutures/entities/qnaboard';
 
 import useBoardStore from '@/src/entities/qnaboard/useBoardStore';
 
