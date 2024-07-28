@@ -2,7 +2,7 @@ import Image, { StaticImageData } from 'next/image';
 
 import styled, { keyframes, css } from 'styled-components';
 
-import useSectionObsever from '@/src/shared/hooks/useSectionObsever';
+import { useSectionObserver } from '@/src/shared/hooks';
 import { memo, useState } from 'react';
 import { keys } from '@/src/shared/utils';
 import ArrrowDown from './ArrowDown';
@@ -21,7 +21,7 @@ function ManualItems({
   imageList,
 }: MnualItemsProps) {
   const [isShow, setIsShow] = useState<boolean>(false);
-  const { targetItemRef } = useSectionObsever(() => {
+  const { targetItemRef } = useSectionObserver(() => {
     !isShow && setIsShow(true);
   }, 0.5);
   return (
@@ -33,10 +33,10 @@ function ManualItems({
           <Image
             src={image}
             alt="Interview Image"
-            width={700}
-            height={600}
             placeholder="blur"
-            style={{ objectFit: 'cover' }}
+            fill
+            style={{ objectFit: 'fill' }}
+            quality={100}
           />
         </ImageContainer>
       ))}
@@ -88,17 +88,23 @@ const SubTitle = styled.h3<{ $isShow: boolean }>`
   animation-delay: 0.4s;
 `;
 const ImageContainer = styled.div`
+  position: relative;
+  overflow: hidden;
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 10px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-top: 3rem;
+  width: 70rem;
+  height: 60rem;
 
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
   }
 `;

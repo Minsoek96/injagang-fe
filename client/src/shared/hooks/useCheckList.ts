@@ -16,7 +16,7 @@ const useCheckList = <T extends { id: number }>(
     } else {
       unCheckAllItems();
     }
-  }, [isAllCheck, targetList]);
+  }, [isAllCheck]);
 
   const handleAllCheck = useCallback(() => {
     setIsAllCheck((prev) => !prev);

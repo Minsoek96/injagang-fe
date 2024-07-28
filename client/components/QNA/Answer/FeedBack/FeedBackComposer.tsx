@@ -13,7 +13,7 @@ import userQnaManager from '../../hooks/userQnaManager';
 
 function FeedBackComposer() {
   const { dispatchChangeFeed, targetFeed } = userQnaManager();
-  const { questionList } = useBoardStore();
+  const { questionIds } = useBoardStore();
   const {
     textRef,
     correctionText,
@@ -44,7 +44,7 @@ function FeedBackComposer() {
         handleFeedBackIndex={dispatchChangeFeed}
         handleSubmit={handleSubmit}
         handleClear={handleClear}
-        qnaIdList={questionList}
+        qnaIdList={questionIds}
         feedBackIndex={targetFeed}
       />
     </BaseCard>

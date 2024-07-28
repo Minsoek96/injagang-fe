@@ -12,7 +12,7 @@ function PageNation() {
     handlePrevClick,
     handleNextClick,
     visiblePageNumbers,
-  } = usePageNation([8]);
+  } = usePageNation(8);
 
   return (
     <div>

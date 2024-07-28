@@ -5,6 +5,7 @@ import { IReviseQnaBoard, IWriteQnaBoard } from '@/src/entities/qnaboard/type';
 import board from './queryKeys';
 import { deleteQnaBoard, reviseQnaBoard, writeQnaBoard } from './apis';
 
+/** 게시판글 삭제 */
 const useDeleteBoard = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
@@ -23,6 +24,7 @@ const useDeleteBoard = () => {
   });
 };
 
+/** 게시판글 수정 */
 const useReviseBoard = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
@@ -41,6 +43,7 @@ const useReviseBoard = () => {
   });
 };
 
+/** 게시판 글 작성 */
 const useWriteBoard = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();

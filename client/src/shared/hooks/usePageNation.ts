@@ -1,9 +1,7 @@
 import { useBoardStore } from '@/src/entities/qnaboard';
 import { useState, useCallback } from 'react';
 
-type usePageNationProps = [number, number?];
-
-const usePageNation = ([visiblePage = 8]: usePageNationProps) => {
+const usePageNation = (visiblePage : number = 8) => {
   const { setCurPageNum, curPageNum, totalPage } = useBoardStore();
   const [minPageNumLimit, setMinPageNumLimit] = useState<number>(0);
   const [maxPageNumLimit, setMaxPageNumLimit] = useState<number>(visiblePage);

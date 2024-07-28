@@ -27,11 +27,6 @@ export const navList: MenuItemType[] = [
     path: '/qna/list',
     icon: <BiCommentDetail />,
   },
-  {
-    title: 'admin',
-    path: '/admin',
-    icon: <BiEdit />,
-  },
 ];
 
 export const dropMenuList: DropItemType[] = [

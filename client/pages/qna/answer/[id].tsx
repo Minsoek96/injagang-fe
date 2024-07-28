@@ -20,7 +20,7 @@ import board from '@/src/entities/qnaboard/queryKeys';
 import { boardApi, useFeedStore } from '@/src/entities/qnaboard';
 
 import { getServerCookie } from '@/src/shared/utils';
-import { TOKEN_KYES } from '@/src/shared/const';
+import { TOKEN_KEYS } from '@/src/shared/const';
 
 const AnswerLayout = dynamic(
   () => import('@/components/QNA/Answer/AnswerLayout'),
@@ -34,7 +34,7 @@ const AnswerLayout = dynamic(
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as Params;
   const queryClient = new QueryClient();
-  const authToken = getServerCookie(context, TOKEN_KYES.ACCESS_TOKEN);
+  const authToken = getServerCookie(context, TOKEN_KEYS.ACCESS_TOKEN);
 
   await queryClient.prefetchQuery({
     queryKey: board.detail(Number(id)),

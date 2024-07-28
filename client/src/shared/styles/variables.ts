@@ -1,4 +1,9 @@
 const V = {
+  // device
+  mediaMobile: '500px',
+  mediaTablet: '700px',
+  mediaWeb: '1300px',
+
   // Widths
   xsWidth: '20rem',
   smWidth: '30rem',

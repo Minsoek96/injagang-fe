@@ -1,9 +1,9 @@
-import { useToastStore } from '@/src/shared/store';
+import { useToast } from '@/src/shared/hooks';
 import { styled } from 'styled-components';
 import ToastItem from './ToastItem';
 
 export default function RenderToast() {
-  const { toastList } = useToastStore();
+  const { toastList } = useToast();
 
   return (
     <ToastContainer>

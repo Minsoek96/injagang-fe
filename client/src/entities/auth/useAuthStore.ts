@@ -23,7 +23,6 @@ const useAuthStore = create<State & Action>((set) => ({
       userId: id,
     }),
   setUserInfo: (nick: string, role: RoleType) => {
-    console.log(role);
     set({
       nickName: nick,
       role,

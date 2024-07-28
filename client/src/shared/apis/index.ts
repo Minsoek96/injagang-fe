@@ -1,2 +1,2 @@
-export { API, reRequest } from './client';
+export { API } from './client';
 export { serverCookie } from './serverCookie';

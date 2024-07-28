@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie';
-
 import {
   ISignin,
   ISignup,
@@ -8,8 +6,6 @@ import {
   IChangePw,
   IUserInfo,
 } from '@/src/entities/auth/type';
-
-import { TOKEN_KYES } from '@/src/shared/const';
 
 import { fetcher, METHOD } from '@/src/shared/utils';
 
@@ -33,12 +29,6 @@ const passwordChange = async (changePwData: IChangePw) =>
 const signup = async (signupData: ISignup) =>
   fetcher(METHOD.POST, AUTH_APIS.SIGNUP_API, signupData);
 
-const tokenReissue = async () =>
-  fetcher(METHOD.POST, AUTH_APIS.TOKKEN_REISSUE_API, {
-    access: Cookies.get(TOKEN_KYES.ACCESS_TOKEN),
-    refresh: Cookies.get(TOKEN_KYES.REFRESH_TOKEN),
-  });
-
 export {
   authInfo,
   login,
@@ -46,5 +36,4 @@ export {
   nickChange,
   passwordChange,
   signup,
-  tokenReissue,
 };

@@ -1,6 +1,5 @@
 const isServer = typeof window === 'undefined';
 export const SERVER = isServer ? process.env.BACKEND_SERVER_API : '/api';
-
 export const AUTH_APIS = {
   INFO_API: '/info',
   SIGNUP_API: '/signup',
@@ -14,7 +13,7 @@ export const AUTH_APIS = {
 export const ESSAY_APIS = {
   WRITE_API: '/essay/write',
   READ_API: '/essay/read/',
-  GET_API: '/essay/',
+  GET_API: '/essay/list',
   DELETE_API: '/essay/delete/',
   REVISE_API: '/essay/revise/',
 };
@@ -31,6 +30,7 @@ export const FEED_APIS = {
   WRITE_API: '/board/feedback',
   REVISE_API: '/board/feedback/revise',
   GET_API: '/board/feedback/',
+  DELETE_API: '/board/feedback/',
 };
 
 export const QUESTIONS_APIS = {
