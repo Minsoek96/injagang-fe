@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run tests
+cd client && npm run test
+
+# Run Lint
+npx eslint --fix --ext .js,.jsx,.ts,.tsx .
