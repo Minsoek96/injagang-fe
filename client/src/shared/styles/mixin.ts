@@ -14,6 +14,7 @@ export const Column = (justify = 'center', align = 'center') => css`
   justify-content: ${justify};
   align-items: ${align};
 `;
+
 /** 스타일 스크롤바 */
 export const ScrollBar = css`
   ::-webkit-scrollbar {

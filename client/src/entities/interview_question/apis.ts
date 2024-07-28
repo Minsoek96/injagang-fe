@@ -14,7 +14,7 @@ import { QUESTIONS_APIS } from '@/src/shared/config/apis';
 const getInterViewQuestionList = async (
   queryString: QuestionType | string,
 ): Promise<IQuestion[]> =>
-  fetcher(METHOD.GET, `${QUESTIONS_APIS.GET_API}?questionType=${queryString}`)
+  fetcher(METHOD.GET, `${QUESTIONS_APIS.GET_API}?${queryString === 'ALL' ? '' : `questionType=${queryString}`}`)
     .then((res) => res.data)
     .catch((error) => console.error(error));
 

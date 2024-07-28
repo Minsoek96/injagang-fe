@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-shadow
 export enum QuestionType {
+  ALL = 'ALL',
   CS = 'CS',
   SITUATION = 'SITUATION',
   JOB = 'JOB',

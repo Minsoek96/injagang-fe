@@ -1,6 +1,6 @@
 import React from 'react';
 import axios, { AxiosError } from 'axios';
-import { reRequest } from '@/src/shared/apis';
+import { reRequest } from '@/src/shared/apis/errorhandlers';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;

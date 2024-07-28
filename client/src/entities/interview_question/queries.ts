@@ -8,6 +8,7 @@ const useFetchQuestions = (type: QuestionType | string) =>
   useQuery({
     queryKey: interview.list(type),
     queryFn: () => getInterViewQuestionList(type),
+    enabled: Object.values(QuestionType).includes(type as QuestionType),
   });
 
 export { useFetchQuestions };
