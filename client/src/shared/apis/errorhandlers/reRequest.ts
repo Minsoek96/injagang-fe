@@ -1,12 +1,12 @@
 import { API } from '@/src/shared/apis/client';
 
-import { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const RETRY_MAX = 3;
 
 const reRequest = async (
   originRequest: AxiosRequestConfig & { retryFetch?: number },
-) => {
+): Promise<AxiosResponse> => {
   const requestWithRetry = {
     ...originRequest,
     retryFetch: originRequest.retryFetch || 0,
