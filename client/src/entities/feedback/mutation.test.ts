@@ -5,9 +5,9 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import TestProvider from '@/fixutures/TestProvider';
 
 import { useToast } from '@/src/shared/hooks';
-import { useReviseFeed, useWriteFeed } from '@/src/entities/feedback/mutation';
+import { useDeleteFeed, useReviseFeed, useWriteFeed } from '@/src/entities/feedback/mutation';
 
-import { reviseFeedBack, writeFeedBack } from '@/src/entities/feedback/apis';
+import { deleteFeedBack, reviseFeedBack, writeFeedBack } from '@/src/entities/feedback/apis';
 
 import feedback from '@/src/entities/feedback/queryKeys';
 
@@ -77,6 +77,16 @@ const successTestCases = [
     queryKey: feedback.list(sampleTargetId),
     apiMock: reviseFeedBack,
   },
+  {
+    title:
+      '댓글 삭제에 성공하면 해당 피드백키를 초기화하고 토스트 메시지를 등록한다.',
+    hook: useDeleteFeed,
+    mutateArgs: 10001,
+    toastMsg: SUCCESS_MESSAGES.DELETE_FEED,
+    toastMode: TOAST_MODE.SUCCESS,
+    queryKey: feedback.list(sampleTargetId),
+    apiMock: deleteFeedBack,
+  },
 ];
 
 const failureTestCases = [
@@ -95,6 +105,14 @@ const failureTestCases = [
     toastMsg: ERROR_MESSAGES.UPDATED_FEED,
     toastMode: TOAST_MODE.ERROR,
     apiMock: reviseFeedBack,
+  },
+  {
+    title: '댓글 삭제에 실패하면 실패 토스트를 등록한다',
+    hook: useDeleteFeed,
+    mutateArgs: sampleReviseFeed,
+    toastMsg: ERROR_MESSAGES.DELETE_FEED,
+    toastMode: TOAST_MODE.ERROR,
+    apiMock: deleteFeedBack,
   },
 ];
 

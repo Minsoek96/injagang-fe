@@ -7,7 +7,7 @@ import { IReviseFeedBack, IWriteFeedBack } from '@/src/entities/feedback/type';
 
 import feedback from './queryKeys';
 
-import { reviseFeedBack, writeFeedBack } from './apis';
+import { deleteFeedBack, reviseFeedBack, writeFeedBack } from './apis';
 
 /** 댓글 수정 */
 const useReviseFeed = (targetId: number) => {
@@ -49,4 +49,23 @@ const useWriteFeed = (targetId: number) => {
   });
 };
 
-export { useWriteFeed, useReviseFeed };
+/** 댓글 삭제 */
+const useDeleteFeed = (targetId: number) => {
+  const { showToast } = useToast();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (feedId: number) => deleteFeedBack(feedId),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: feedback.list(targetId) });
+      showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.DELETE_FEED);
+    },
+
+    onError: () => {
+      showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.DELETE_FEED);
+    },
+  });
+};
+
+export { useWriteFeed, useReviseFeed, useDeleteFeed };

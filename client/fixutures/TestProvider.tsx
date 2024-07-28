@@ -2,6 +2,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { defaultTheme } from '@/src/app/styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Suspense } from 'react';
 
 type ProviderProps = {
     children: React.ReactNode;
@@ -14,7 +15,9 @@ export default function TestProvider({ children }: ProviderProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        {children}
+        <Suspense fallback={<div>Loading...</div>}>
+          {children}
+        </Suspense>
       </ThemeProvider>
     </QueryClientProvider>
   );

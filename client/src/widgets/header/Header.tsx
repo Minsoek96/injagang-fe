@@ -25,7 +25,7 @@ const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100dvw;
   height: 8rem;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};

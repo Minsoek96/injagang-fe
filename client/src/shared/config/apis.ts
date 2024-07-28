@@ -1,6 +1,5 @@
 const isServer = typeof window === 'undefined';
 export const SERVER = isServer ? process.env.BACKEND_SERVER_API : '/api';
-
 export const AUTH_APIS = {
   INFO_API: '/info',
   SIGNUP_API: '/signup',
@@ -31,6 +30,7 @@ export const FEED_APIS = {
   WRITE_API: '/board/feedback',
   REVISE_API: '/board/feedback/revise',
   GET_API: '/board/feedback/',
+  DELETE_API: '/board/feedback/',
 };
 
 export const QUESTIONS_APIS = {

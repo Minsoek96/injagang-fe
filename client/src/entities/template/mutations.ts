@@ -10,6 +10,7 @@ import { addTemplate, deleteTemplate } from './apis';
 
 import template from './queryKeys';
 
+/** 템플릿 추가 */
 const useAddTemplate = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
@@ -27,6 +28,7 @@ const useAddTemplate = () => {
   });
 };
 
+/** 템플릿 삭제 */
 const useDeleteTemplate = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
