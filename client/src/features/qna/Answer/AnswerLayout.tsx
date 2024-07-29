@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 
-import TargetFeedBackView from '@/components/QNA/Answer/TargetFeedBack/TargetFeedBackView';
+import TargetFeedBackView from '@/src/features/qna/Answer/TargetFeedBack/TargetFeedBackView';
+import { FeedBackComposer } from '@/src/features/feedback';
 import AnswerDetailView from './AnswerDetail/AnswerDetailView';
-import FeedBackComposer from './FeedBack/FeedBackComposer';
 
 function AnswerLayout() {
   return (

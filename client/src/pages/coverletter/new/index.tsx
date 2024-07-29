@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import APIErrorBoundary from '@/components/APIErrorBoundary';
+import { APIErrorBoundary } from '@/src/features/boundary';
 import CoverLetterCreator from '@/src/features/coverletter/new/CoverLetterCreator';
 import useTemplateStoreManager from '@/src/features/template/hooks/useTemplateStoreManager';
 

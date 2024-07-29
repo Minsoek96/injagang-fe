@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
-import Spinner from '@/components/Spinner';
+import { Spinner } from '@/src/shared/components/spinner';
 import AddTemplate from './AddTemplate';
 import TemplateDetail from './TemplateDetail';
 

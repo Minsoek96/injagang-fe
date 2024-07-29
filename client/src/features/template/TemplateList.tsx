@@ -5,9 +5,9 @@ import { BaseTitle as MainTitleContainer } from '@/src/shared/components/title';
 import { V, styleMixin } from '@/src/shared/styles';
 import { BaseCard } from '@/src/shared/components/card';
 
-import Spinner from '@/components/Spinner';
+import { Spinner } from '@/src/shared/components/spinner';
 
-import APIErrorBoundary from '@/components/APIErrorBoundary';
+import { APIErrorBoundary } from '@/src/features/boundary';
 import { Suspense } from 'react';
 import TemplateViewController from './TemplateDetail/TemplateViewController';
 

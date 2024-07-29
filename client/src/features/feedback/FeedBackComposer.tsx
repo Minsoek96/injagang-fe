@@ -5,11 +5,12 @@ import { BaseArea } from '@/src/shared/components/textarea';
 import { BaseCard } from '@/src/shared/components/card';
 import { styleMixin } from '@/src/shared/styles';
 import { useBoardStore } from '@/src/entities/qnaboard';
+
+import userQnaManager from '@/src/features/qna/hooks/userQnaManager';
 import CorrectionView from './CorrectionView';
 import FeedBackFooter from './FeedBackFooter';
 
-import useFeedBackLogic from '../../hooks/useFeedBackLogic';
-import userQnaManager from '../../hooks/userQnaManager';
+import useFeedBackLogic from '../qna/hooks/useFeedBackLogic';
 
 function FeedBackComposer() {
   const { dispatchChangeFeed, targetFeed } = userQnaManager();

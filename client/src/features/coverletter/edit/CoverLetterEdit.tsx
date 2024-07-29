@@ -10,9 +10,9 @@ import { BaseButton } from '@/src/shared/components/button';
 
 import { V, styleMixin } from '@/src/shared/styles';
 
-import APIErrorBoundary from '@/components/APIErrorBoundary';
-import Spinner from '@/components/Spinner';
+import { Spinner } from '@/src/shared/components/spinner';
 import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
+import { APIErrorBoundary } from '@/src/features/boundary';
 import useCoverLetterManager from '../hooks/useCoverLetterManager';
 import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
 import CoverLetterQuestionItems from '../new/CoverLetterQuestionItems';

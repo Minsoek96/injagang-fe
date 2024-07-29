@@ -1,4 +1,4 @@
-import Spinner from '@/components/Spinner';
+import { Spinner } from '@/src/shared/components/spinner';
 import { useFetchTemplate } from '@/src/entities/template/queries';
 
 interface TemplateListFetcherProps {

@@ -28,7 +28,7 @@ export default function DropBox({
       <DropToggleButton onClick={handleDropToggle} title="drop-btn">
         {buttonContent}
       </DropToggleButton>
-      {isOpen && <DropMenuList dropList={dropList} />}
+      {isOpen && <DropMenuList dropList={dropList} offBox={handleDropToggle} />}
     </Container>
   );
 }

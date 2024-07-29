@@ -7,10 +7,10 @@ import { BiPlus } from 'react-icons/bi';
 import styled from 'styled-components';
 import { styleMixin, V } from '@/src/shared/styles';
 
+import { Spinner } from '@/src/shared/components/spinner';
+import { APIErrorBoundary } from '@/src/features/boundary';
 import CoverLetterPreView from './CoverLetterPreView';
 import CoverLetterList from './CoverLetterList';
-import APIErrorBoundary from '../../../components/APIErrorBoundary';
-import Spinner from '../../../components/Spinner';
 
 function CoverLetter() {
   const router = useRouter();
