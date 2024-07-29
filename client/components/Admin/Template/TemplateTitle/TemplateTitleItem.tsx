@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { templateType } from '@/src/entities/template';
-import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
+import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
 
 interface TemplateItemProps {
   list: templateType.IGetTemplate;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useTemplateStoreManager from '@/components/Admin/hooks/useTemplateStoreManager';
+import useTemplateStoreManager from '@/components/Admin/Template/hooks/useTemplateStoreManager';
 
 import { useFetchTemplate } from '@/src/entities/template/queries';
 

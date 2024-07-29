@@ -11,7 +11,7 @@ import { styleMixin } from '@/src/shared/styles';
 import { keys } from '@/src/shared/utils';
 import TQustionItem from '../TQustionItem';
 
-import useAddTemplateLogic from '../../hooks/useAddTemplateLogic';
+import useAddTemplateLogic from '../hooks/useAddTemplateLogic';
 
 interface AddTemplateProps {
   onClose: (isClose: boolean) => void;

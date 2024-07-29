@@ -23,7 +23,7 @@ import board from '@/src/entities/qnaboard/queryKeys';
 import { getBoardList } from '@/src/entities/qnaboard/apis';
 
 const BoardListView = dynamic(
-  () => import('@/components/Board/BoardListLayout'),
+  () => import('@/src/features/board/BoardListLayout'),
   { ssr: false },
 );
 

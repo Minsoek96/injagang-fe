@@ -7,7 +7,7 @@ import Spinner from '@/components/Spinner';
 import AddTemplate from './AddTemplate';
 import TemplateDetail from './TemplateDetail';
 
-import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
+import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
 
 function TemplateViewController() {
   const { isAddTemplate, setIsAddTemplate } = useTemplateStoreManager();

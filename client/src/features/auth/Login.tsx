@@ -67,8 +67,6 @@ function Login() {
 
 export default Login;
 
-// 오류가 발생했을시 흔드는 효과
-
 const Form = styled.form<{ $shakeTrigger: boolean }>`
   display: flex;
   flex-direction: column;

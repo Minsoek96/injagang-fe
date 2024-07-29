@@ -9,8 +9,8 @@ import { styleMixin, V } from '@/src/shared/styles';
 
 import CoverLetterPreView from './CoverLetterPreView';
 import CoverLetterList from './CoverLetterList';
-import APIErrorBoundary from '../APIErrorBoundary';
-import Spinner from '../Spinner';
+import APIErrorBoundary from '../../../components/APIErrorBoundary';
+import Spinner from '../../../components/Spinner';
 
 function CoverLetter() {
   const router = useRouter();

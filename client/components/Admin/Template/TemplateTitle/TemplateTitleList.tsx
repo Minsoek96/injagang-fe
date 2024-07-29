@@ -5,7 +5,7 @@ import { BiPlus } from 'react-icons/bi';
 import { useFetchTemplate } from '@/src/entities/template/queries';
 import TemplateItem from './TemplateTitleItem';
 
-import useTemplateStoreManager from '../../hooks/useTemplateStoreManager';
+import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
 
 function TemplateTitleList() {
   const { data: templateList } = useFetchTemplate();
