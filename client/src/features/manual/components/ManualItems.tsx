@@ -10,6 +10,7 @@ import { useSectionObserver } from '@/src/shared/hooks';
 
 import { keys } from '@/src/shared/utils';
 
+import { V } from '@/src/shared/styles';
 import ImageItem from './ImageItem';
 
 interface MnualItemsProps {
@@ -75,16 +76,24 @@ const BannerContainer = styled.div<{ $isShow: boolean }>`
 `;
 
 const MainTitle = styled.h2<{ $isShow: boolean }>`
+  text-align: center;
   font-size: 3.5rem;
   ${fadeInUpOpacity}
   animation-delay: 0.2s;
+  @media screen and (max-width: ${V.mediaMobile}) {
+    font-size: 2.2rem;
+  }
 `;
 
 const SubTitle = styled.h3<{ $isShow: boolean }>`
+  text-align: center;
   margin-top: 0.5em;
   font-size: 2.5rem;
   ${fadeInUpOpacity}
   animation-delay: 0.4s;
+  @media screen and (max-width: ${V.mediaMobile}) {
+    font-size: 1.8rem;
+  }
 `;
 
 const ItemContainer = styled.div`

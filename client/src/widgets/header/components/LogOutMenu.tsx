@@ -1,4 +1,4 @@
-import useLoginManager from '@/components/Auth/hooks/useLoginManager';
+import useLoginManager from '@/src/features/auth/hooks/useLoginManager';
 
 import useModal from '@/src/shared/hooks/useModal';
 
