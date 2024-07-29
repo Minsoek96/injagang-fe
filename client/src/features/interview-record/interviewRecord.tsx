@@ -12,10 +12,10 @@ import { useMediaRecord, useWebSpeech } from '@/src/shared/hooks';
 import { useInterViewStore } from '@/src/entities/interview_question';
 import room from '@/public/assets/room.svg';
 import InterViewSlider from './InterViewSlider';
-import VideoController from './Video/VideoController';
-import RenderVideoInfo from './Video/RenderVideoInfo';
+import VideoController from './video/VideoController';
+import RenderVideoInfo from './video/RenderVideoInfo';
 
-import { RecordMainBtn } from './Video/RecordMainButton';
+import { RecordMainBtn } from './video/RecordMainButton';
 
 function InterviewRecord() {
   const [curIndex, setCurIndex] = useState<number>(0);
