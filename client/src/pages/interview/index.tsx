@@ -7,7 +7,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import Image from 'next/image';
 import roomout from '@/public/assets/roomout.svg';
 
-import InterViewListView from '@/components/InterViewQuestion/ExpectedQuestionLayout';
+import InterViewListView from '@/src/features/interview-question/ExpectedQuestionLayout';
 
 import { BaseButton } from '@/src/shared/components/button';
 import dynamic from 'next/dynamic';

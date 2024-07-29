@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { TemplateList } from '@/src/features/template';
-import ExpectedQuestionView from '@/components/InterViewQuestion/ExpectedQuestionLayout';
+import { ExpectedQuestionLayout } from '@/src/features/interview-question';
 
 import { styleMixin } from '@/src/shared/styles';
 
@@ -15,7 +15,7 @@ function AdminPage() {
   return role === 'ADMIN' ? (
     <AdminPageStyle>
       <TemplateList />
-      <ExpectedQuestionView />
+      <ExpectedQuestionLayout />
     </AdminPageStyle>
   ) : (
     <div>당신은 관리자가 아닙니다.</div>

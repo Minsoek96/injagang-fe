@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
-import UserQuestionPlayList from './PlayList/UserQuestionPlayList';
-import ExpectedQuestionSelector from './ExpectedQuestion/ExpectedQuestionSelector';
+import { UserQuestionPlayList } from './playlist';
+import { ExpectedQuestionSelector } from './expected-question';
 
 function ExplanationContent() {
   return (
