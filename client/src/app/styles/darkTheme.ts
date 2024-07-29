@@ -11,10 +11,12 @@ const darkTheme: Theme = {
     highlight: '#b32eb3',
     black: '#000000',
     white: '#ffffff',
+    //
     svgColor: '#ffffff',
     mainLine: '#393A3B',
     subColor: '#0866FF',
     mainHover: 'rgba(0,0,0,15)',
+    textArea: '#444654',
   },
 };
 

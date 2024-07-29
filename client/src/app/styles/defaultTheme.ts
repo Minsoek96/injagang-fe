@@ -14,6 +14,7 @@ const defaultTheme = {
     mainLine: 'RGB(219, 220, 223)',
     subColor: 'blue',
     mainHover: 'rgba(0,0,0,15)',
+    textArea: '#444654',
   },
 };
 export default defaultTheme;
