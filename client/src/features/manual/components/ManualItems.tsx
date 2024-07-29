@@ -1,11 +1,16 @@
-import Image, { StaticImageData } from 'next/image';
+import { memo, useState } from 'react';
+
+import { StaticImageData } from 'next/image';
 
 import styled, { keyframes, css } from 'styled-components';
 
+import { ArrowDown } from '@/src/shared/components/arrow';
+
 import { useSectionObserver } from '@/src/shared/hooks';
-import { memo, useState } from 'react';
+
 import { keys } from '@/src/shared/utils';
-import ArrrowDown from './ArrowDown';
+
+import ImageItem from './ImageItem';
 
 interface MnualItemsProps {
   mainTitle: string;
@@ -29,18 +34,11 @@ function ManualItems({
       <MainTitle $isShow={isShow}>{mainTitle}</MainTitle>
       <SubTitle $isShow={isShow}>{subTitle}</SubTitle>
       {imageList.map((image, index) => (
-        <ImageContainer key={keys(image.src, index)}>
-          <Image
-            src={image}
-            alt="Interview Image"
-            placeholder="blur"
-            fill
-            style={{ objectFit: 'fill' }}
-            quality={100}
-          />
-        </ImageContainer>
+        <ItemContainer key={keys(image.src, index)}>
+          <ImageItem image={image} />
+          {isArrow && <ArrowDown />}
+        </ItemContainer>
       ))}
-      {isArrow && <ArrrowDown />}
     </BannerContainer>
   );
 }
@@ -77,34 +75,18 @@ const BannerContainer = styled.div<{ $isShow: boolean }>`
 `;
 
 const MainTitle = styled.h2<{ $isShow: boolean }>`
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   ${fadeInUpOpacity}
   animation-delay: 0.2s;
 `;
 
 const SubTitle = styled.h3<{ $isShow: boolean }>`
-  font-size: 2rem;
+  margin-top: 0.5em;
+  font-size: 2.5rem;
   ${fadeInUpOpacity}
   animation-delay: 0.4s;
 `;
-const ImageContainer = styled.div`
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-top: 3rem;
-  width: 70rem;
-  height: 60rem;
 
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  @media screen and (max-width: 600px) {
-    width: 100%;
-  }
+const ItemContainer = styled.div`
+  width: 100%;
 `;
