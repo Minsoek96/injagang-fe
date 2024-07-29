@@ -12,7 +12,7 @@ import { BaseInput as QuestionTitle } from '@/src/shared/components/input';
 import { styleMixin } from '@/src/shared/styles';
 
 import { ComboBox } from '@/src/shared/components/combobox';
-import CoverLetterDetail from '@/components/QNA/Question/CoverLetterDetail';
+import CoverLetterDetail from '@/src/features/question-composer/CoverLetterDetail';
 
 import { useWriteBoard } from '@/src/entities/qnaboard/mutaions';
 import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
