@@ -7,12 +7,13 @@ import { render, screen } from '@testing-library/react';
 
 describe('DropMenuList 컴포넌트', () => {
   const context = describe;
+  const mockAction = jest.fn();
 
   context('리스트가 비어있으면', () => {
     it('Empty가 출력된다.', () => {
       render(
         <TestProvider>
-          <DropMenuList dropList={[]} />
+          <DropMenuList dropList={[]} offBox={mockAction} />
         </TestProvider>,
       );
 
@@ -25,7 +26,7 @@ describe('DropMenuList 컴포넌트', () => {
     it('리스트 아이템이 렌더링 된다.', () => {
       render(
         <TestProvider>
-          <DropMenuList dropList={sampleDropList} />
+          <DropMenuList dropList={sampleDropList} offBox={mockAction} />
         </TestProvider>,
       );
 

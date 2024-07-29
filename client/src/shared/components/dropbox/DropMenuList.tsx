@@ -6,9 +6,10 @@ import { DropItemType } from './types';
 
 type Props = {
   dropList: DropItemType[];
+  offBox: () => void;
 };
 
-export default function DropMenuList({ dropList = [] }: Props) {
+export default function DropMenuList({ dropList = [], offBox }: Props) {
   if (!dropList.length) {
     return (
       <p>Empty</p>
@@ -18,7 +19,7 @@ export default function DropMenuList({ dropList = [] }: Props) {
   return (
     <Container>
       {dropList.map((item) => (
-        <DropMenuItem key={item.id} menuItem={item} />
+        <DropMenuItem key={item.id} menuItem={item} offBox={offBox} />
       ))}
     </Container>
   );

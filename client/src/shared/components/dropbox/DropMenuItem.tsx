@@ -6,13 +6,14 @@ import { DropItemType } from './types';
 
 type Props = {
   menuItem: DropItemType;
+  offBox: ()=> void;
 }
 
-export default function DropMenuItem({ menuItem }: Props) {
+export default function DropMenuItem({ menuItem, offBox }: Props) {
   if (menuItem.type === 'link') {
     const { link } = menuItem;
     return (
-      <Container>
+      <Container onClick={offBox}>
         <StyledLink href={link.path} aria-label={link.label}>
           <ItemWrapper>
             {link.icon}
@@ -26,7 +27,7 @@ export default function DropMenuItem({ menuItem }: Props) {
   if (menuItem.type === 'component') {
     const { component } = menuItem;
     return (
-      <Container>
+      <Container onClick={offBox}>
         <ItemWrapper>
           {component}
         </ItemWrapper>
