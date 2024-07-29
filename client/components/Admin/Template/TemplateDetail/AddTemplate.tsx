@@ -101,7 +101,7 @@ const QuestionInput = styled.input`
   position: absolute;
   top: 0px;
   margin-top: 15px;
-  width: 100%;
+  width: 80%;
 
   padding: 2px 8px;
   border: 1px solid #e1e1e1;
