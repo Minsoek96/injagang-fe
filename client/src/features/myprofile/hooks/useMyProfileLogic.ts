@@ -1,13 +1,9 @@
 import { useState } from 'react';
 
-export interface IPassWordInfo {
-  nowPassword: string;
-  changePassword: string;
-  changePasswordCheck: string;
-}
+import { authType } from '@/src/entities/auth';
 
 const useMyProfileLogic = () => {
-  const [passWordInfo, setPassWordInfo] = useState<IPassWordInfo>({
+  const [passWordInfo, setPassWordInfo] = useState<authType.IChangePw>({
     nowPassword: '',
     changePassword: '',
     changePasswordCheck: '',

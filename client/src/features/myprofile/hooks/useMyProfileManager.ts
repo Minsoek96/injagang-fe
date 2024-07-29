@@ -5,14 +5,14 @@ import { useModal } from '@/src/shared/hooks';
 import { runValidationChecks, hasEmpty } from '@/src/shared/utils';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
 import { useChangeNick, useChangePassWord } from '@/src/entities/auth/mutations';
-import { IPassWordInfo } from './useMyProfileLogic';
+import { authType } from '@/src/entities/auth';
 
 const validation = {
   password: ({
     nowPassword,
     changePassword,
     changePasswordCheck,
-  }: IPassWordInfo) => [
+  }: authType.IChangePw) => [
     {
       check: () =>
         hasEmpty.fields({ nowPassword, changePassword, changePasswordCheck }),
@@ -39,7 +39,7 @@ const useMyProfileManager = () => {
 
   // PASSWORD DOMAIN
   const dispatchPasswordChange = useCallback(
-    ({ nowPassword, changePassword, changePasswordCheck }: IPassWordInfo) => {
+    ({ nowPassword, changePassword, changePasswordCheck }: authType.IChangePw) => {
       setModal({
         onAction: () =>
           confirmPassWordChange({
@@ -60,7 +60,7 @@ const useMyProfileManager = () => {
     nowPassword,
     changePassword,
     changePasswordCheck,
-  }: IPassWordInfo) => {
+  }: authType.IChangePw) => {
     const validationErrorMsg = runValidationChecks(
       validation.password({
         nowPassword,
@@ -81,7 +81,7 @@ const useMyProfileManager = () => {
     nowPassword,
     changePassword,
     changePasswordCheck,
-  }: IPassWordInfo) => {
+  }: authType.IChangePw) => {
     confirmChangePw({ nowPassword, changePassword, changePasswordCheck });
   };
 

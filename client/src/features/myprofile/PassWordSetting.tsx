@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { BaseButton } from '@/src/shared/components/button';
 
 import { styleMixin } from '@/src/shared/styles';
-import useMyProfileManager from './hooks/useMyProfileManager';
-import useMyProfileLogic, { IPassWordInfo } from './hooks/useMyProfileLogic';
+import { authType } from '@/src/entities/auth';
+
+import { useMyProfileManager, useMyProfileLogic } from './hooks';
 
 interface PasswordInputProps {
   title: string;
@@ -42,8 +43,8 @@ function PassWordSetting() {
         <PasswordInputItem
           key={key}
           name={key}
-          value={passWordInfo[key as keyof IPassWordInfo]}
-          title={labels[key as keyof IPassWordInfo]}
+          value={passWordInfo[key as keyof authType.IChangePw]}
+          title={labels[key as keyof authType.IChangePw]}
           onChange={handleInfoChange}
         />
       ))}
