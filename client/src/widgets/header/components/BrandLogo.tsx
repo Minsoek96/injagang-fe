@@ -18,4 +18,5 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: RGB(255,0,0);
   font-size: 3.2rem;
+  font-weight: 500;
 `;

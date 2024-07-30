@@ -57,7 +57,7 @@ const ItemWrapper = styled.div`
   padding-inline: 1.2rem;
   padding-block: 0.8rem;
   gap: 1.2rem;
-  > span {
+  span {
     font-size: 1.8rem;
     color: ${(props) => props.theme.colors.text}
   }

@@ -4,7 +4,7 @@ import useModal from '@/src/shared/hooks/useModal';
 
 import { BiLogOut } from 'react-icons/bi';
 
-export default function LogoutM() {
+export default function LogoutMenu() {
   const { setModal } = useModal();
   const { dispatchCheckOut } = useLoginManager();
 
