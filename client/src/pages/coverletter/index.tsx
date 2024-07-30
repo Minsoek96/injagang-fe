@@ -4,10 +4,13 @@ import styled from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 
 import CoverLetter from '@/src/features/coverletter/CoverLetter';
+
 import { useCoverLetterStore } from '@/src/entities/coverLetter';
+import { useAuthStore } from '@/src/entities/auth';
 
 function CoverLetterPage() {
   const { initCoverLetter } = useCoverLetterStore();
+  const { role } = useAuthStore();
 
   useEffect(
     () => () => {
@@ -18,7 +21,7 @@ function CoverLetterPage() {
 
   return (
     <CoverLetterStyle>
-      <CoverLetter />
+      {role && <CoverLetter />}
     </CoverLetterStyle>
   );
 }

@@ -1,5 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'reflect-metadata';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'jest-styled-components';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

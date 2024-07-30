@@ -63,7 +63,6 @@ describe('NavMenuItem 컴포넌트', () => {
 
         const container = screen.getByText(mockTitle).closest('li');
         const titleSpan = screen.getByText(mockTitle).closest('span');
-
         if (container) {
           fireEvent.mouseOver(container);
           expect(titleSpan).toBeVisible();

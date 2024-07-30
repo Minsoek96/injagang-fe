@@ -4,11 +4,19 @@ import { styleMixin, V } from '@/src/shared/styles';
 
 import { useCoverLetterStore } from '@/src/entities/coverLetter';
 import { keys } from '@/src/shared/utils';
-import CoverLetterPreViewItem from './preview/CoverLetterPreViewItem';
+import CoverLetterPreViewItem from './CoverLetterPreViewItem';
 
 function CoverLetterPreView() {
   const { selectedCoverLetter } = useCoverLetterStore();
 
+  if (!selectedCoverLetter.questions.length) {
+    return (
+      <CoverLetterPreViewContainer>
+        <p>선택된 리스트가 없습니다.</p>
+        <p>리스트를 선택해주세요.</p>
+      </CoverLetterPreViewContainer>
+    );
+  }
   return (
     <CoverLetterPreViewContainer>
       {selectedCoverLetter.questions.map((question, idx) => (
@@ -25,14 +33,19 @@ function CoverLetterPreView() {
 export default CoverLetterPreView;
 
 const CoverLetterPreViewContainer = styled.div`
-  ${styleMixin.Column()}
+  ${styleMixin.Column('center', 'flex-start')}
   ${styleMixin.ScrollBar}
+  font-size: 1.8rem;
   width: 100%;
-  height: 200px;
+  height: 25rem;
   border-radius: 5px;
-  padding: 15px 25px;
-  margin: 15px auto;
-  background-color: #1d1b1b;
+  padding: ${V.lgPadding};
+  margin: 1.5rem auto;
   overflow-x: hidden;
-  box-shadow: ${V.boxShadow2};
+  border: 1px solid ${(props) => props.theme.colors.mainLine};
+  box-shadow: ${V.boxShadow1};
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    font-size: 1.6rem;
+  }
 `;

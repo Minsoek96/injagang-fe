@@ -3,15 +3,12 @@ import styled from 'styled-components';
 import { styleMixin, V } from '@/src/shared/styles';
 
 import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
-import { lazy } from 'react';
-import useCoverLetterManager from './hooks/useCoverLetterManager';
-
-const CoverLetterItems = lazy(() => import('./CoverLetterItems'));
+import CoverLetterItems from '@/src/features/coverletter/list/CoverLetterItems';
+import useCoverLetterManager from '../hooks/useCoverLetterManager';
 
 function CoverLetterList() {
-  const { selectedCoverLetter } = useCoverLetterManager();
-
   const { data: coverLetters } = useFetchCoverLetter();
+  const { selectedCoverLetter } = useCoverLetterManager();
 
   return (
     <CoverLetterListContainer>
@@ -31,11 +28,11 @@ export default CoverLetterList;
 export const CoverLetterListContainer = styled.div`
   ${styleMixin.Column()}
   ${styleMixin.ScrollBar}
-  background-color: #302e2e;
-  border-radius: 5px;
   width: 100%;
+  background-color: ${(props) => props.theme.colors.secondary};
+  border-radius: 5px;
   height: 350px;
-  margin: 15px auto;
+  margin: 0.5rem auto;
   overflow-x: hidden;
   box-shadow: ${V.boxShadow2};
 `;

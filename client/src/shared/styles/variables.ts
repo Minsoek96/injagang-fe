@@ -32,16 +32,15 @@ const V = {
   // Margins
   xsMargin: '0.5rem',
   smMargin: '1rem',
-  mdMargin: '2rem',
+  mdMargin: '1.5rem',
   lgMargin: '2.5rem',
   xlMargin: '3rem',
 
   // Paddings
-
   xsPadding: '0.5rem',
-  smPadding: '1rem',
-  mdPadding: '1.5rem',
-  lgPadding: '2rem',
+  smPadding: '0.4em 0.8em',
+  mdPadding: '0.8em 1.6em',
+  lgPadding: '1.6em',
   xlPadding: '2.5rem',
 
   // Border Radii

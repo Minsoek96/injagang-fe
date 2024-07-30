@@ -2,11 +2,11 @@
 import { BiEdit } from 'react-icons/bi';
 
 import styled from 'styled-components';
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 import { memo } from 'react';
 import { coverLetterType } from '@/src/entities/coverLetter';
-import useUserCoverLetterManager from './hooks/useCoverLetterManager';
+import useUserCoverLetterManager from '../hooks/useCoverLetterManager';
 
 interface CoverLetterItemsProps {
   item: coverLetterType.ICoverLetters;
@@ -20,7 +20,10 @@ function CoverLetterItems({ item, selectedId }: CoverLetterItemsProps) {
   return (
     <CoverLetterItemsContainer $isActive={isSelectedItem}>
       <p onClick={() => changeSeleted(item)}>{item.title}</p>
-      <BiEdit onClick={() => moveEditPage(item.essayId)} />
+      <HideSvg onClick={() => moveEditPage(item.essayId)}>
+        <BiEdit />
+        <span>상세보기</span>
+      </HideSvg>
     </CoverLetterItemsContainer>
   );
 }
@@ -29,13 +32,31 @@ export default memo(CoverLetterItems);
 
 const CoverLetterItemsContainer = styled.div<{ $isActive: boolean }>`
   ${styleMixin.Flex()}
-  gap: 13px;
-  margin-top: 15px;
-  font-size: ${({ $isActive }) => ($isActive ? '30px' : '20px')};
-  background-color: ${({ $isActive }) => ($isActive ? '#e78f29' : '')};
+  gap: 1.3rem;
+  margin-top: ${V.mdMargin};
+  font-size: 2rem;
+  font-weight: 600;
+  scale: ${({ $isActive }) => ($isActive ? '1.5' : '1')};
   transition: all ease-in 0.2s;
-  width: 95%;
+  width: 100%;
   opacity: ${({ $isActive }) => ($isActive ? '1' : '0.2')};
   border-radius: 8px;
   cursor: pointer;
+  @media screen and (max-width: ${V.mediaMobile}) {
+    font-size: 1.5rem;
+  }
+`;
+
+const HideSvg = styled.div`
+  ${styleMixin.Flex()}
+  color: ${(props) => props.theme.colors.button};
+  span {
+    display: none;
+  }
+  &:hover {
+    span {
+      display: block;
+      font-size: 1.6rem;
+    }
+  }
 `;
