@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import Image, { StaticImageData } from 'next/image';
+import { V } from '@/src/shared/styles';
 
 type ImageItemProps = {
     image: StaticImageData
@@ -29,15 +30,16 @@ const ImageContainer = styled.div`
   border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-top: 3rem;
-  width: 70rem;
+  width: 100%;
   height: 60rem;
+  min-height: 30rem;
 
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   }
 
-  @media screen and (max-width: 600px) {
-    width: 100%;
+  @media screen and (max-width: ${V.mediaMobile}){
+    height: 100%;
   }
   `;

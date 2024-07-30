@@ -2,9 +2,7 @@ import Theme from './theme';
 
 const darkTheme: Theme = {
   colors: {
-    primary: '#242526',
-    secondary: '##242526',
-    bodyColor: 'RGB(24, 25, 26)',
+    secondary: '#242526',
     button: '#f39214f2',
     logo: '#ffffff',
     text: '#fff',
@@ -12,9 +10,11 @@ const darkTheme: Theme = {
     black: '#000000',
     white: '#ffffff',
     //
+    bodyColor: 'RGB(24, 25, 26)',
+    primary: '#242526',
     svgColor: '#ffffff',
+    svgOnColor: '#007FFF',
     mainLine: '#393A3B',
-    subColor: '#0866FF',
     mainHover: 'rgba(0,0,0,15)',
     textArea: '#444654',
   },

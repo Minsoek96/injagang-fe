@@ -1,8 +1,12 @@
 const V = {
   // device
   mediaMobile: '500px',
-  mediaTablet: '700px',
+  mediaTablet: '800px',
   mediaWeb: '1300px',
+
+  // Box Widths
+  mdBoxWidth: '80rem',
+  smBoxWidth: '20rem',
 
   // Widths
   xsWidth: '20rem',
@@ -33,6 +37,7 @@ const V = {
   xlMargin: '3rem',
 
   // Paddings
+
   xsPadding: '0.5rem',
   smPadding: '1rem',
   mdPadding: '1.5rem',

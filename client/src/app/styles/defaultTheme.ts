@@ -1,8 +1,8 @@
 const defaultTheme = {
   colors: {
-    primary: '#fff',
-    secondary: '#3399FF',
-    bodyColor: '#F7F8FA',
+    primary: '#FCFCFC',
+    secondary: '#FCFCFC',
+    bodyColor: '#F0F2F5',
     button: '#f39214f2',
     logo: '#000000',
     text: '#000000',
@@ -10,9 +10,9 @@ const defaultTheme = {
     black: '#000000',
     white: '#ffffff',
 
-    svgColor: '#000000',
-    mainLine: 'RGB(219, 220, 223)',
-    subColor: 'blue',
+    svgColor: '#007FFF',
+    svgOnColor: '#005FCC',
+    mainLine: 'rgb(219, 220, 223)',
     mainHover: 'rgba(0,0,0,15)',
     textArea: '#444654',
   },
