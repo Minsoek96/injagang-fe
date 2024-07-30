@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 
 import { Header } from '@/src/widgets';
 
+import AuthProvider from '@/src/app/providers/AuthProvider';
 import { RenderToast, RenderModal, HeadMeta } from '../components';
 
 import { ReactQueryProvider, StyledProvider } from '../providers';
@@ -20,16 +21,19 @@ function Layout({ children }: LayoutProps) {
   const isBlockPath = headerBlockList.includes(pathName ?? '');
 
   return (
+
     <StyledProvider>
       <HeadMeta />
       <ReactQueryProvider>
-        <LayoutContainer>
-          {!isBlockPath && <Header />}
-          <MainContent>{children}</MainContent>
-        </LayoutContainer>
+        <AuthProvider>
+          <LayoutContainer>
+            {!isBlockPath && <Header />}
+            <MainContent>{children}</MainContent>
+          </LayoutContainer>
+        </AuthProvider>
+        <RenderToast />
+        <RenderModal />
       </ReactQueryProvider>
-      <RenderToast />
-      <RenderModal />
     </StyledProvider>
   );
 }

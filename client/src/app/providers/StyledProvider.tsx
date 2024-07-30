@@ -15,8 +15,8 @@ export default function StyledProvider({ children }: ProviderProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
       <Reset />
+      <GlobalStyle />
       {children}
     </ThemeProvider>
   );
