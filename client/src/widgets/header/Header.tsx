@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 
 import { BRAND } from '@/src/shared/const';
 
+import { styleMixin, V } from '@/src/shared/styles';
 import { BrandLogo, UserMenu } from './components';
 import { NavMenuList } from '../../shared/components/nav';
 
@@ -22,11 +23,9 @@ export default function Header() {
 const HeaderContainer = styled.header`
  z-index: 9999;
   position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100dvw;
-  height: 8rem;
+  ${styleMixin.Flex()}
+  width: calc(100% + 5px);
+  height: 6.5rem;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
   border-right: 0.5px solid rgba(236, 225, 225, 0.904);
@@ -39,14 +38,12 @@ const HeaderContainer = styled.header`
 `;
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  ${styleMixin.Flex('space-between')}
   flex: 1;
   height: 100%;
   max-width: 100rem;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: ${V.mediaTablet}) {
     > a:first-child {
       display: none;
     }

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 
-import { Header } from '@/src/widgets/header';
+import { Header } from '@/src/widgets';
 
 import { RenderToast, RenderModal, HeadMeta } from '../components';
 
@@ -44,8 +44,6 @@ const LayoutContainer = styled.div`
 
 const MainContent = styled.main`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex: 1;
   width: 100%;
   max-width: 135rem;

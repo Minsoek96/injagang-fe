@@ -9,6 +9,7 @@ import { styleMixin, V } from '@/src/shared/styles';
 
 import { Spinner } from '@/src/shared/components/spinner';
 import { APIErrorBoundary } from '@/src/features/boundary';
+import { Container } from '@/src/shared/components/container';
 import CoverLetterPreView from './CoverLetterPreView';
 import CoverLetterList from './CoverLetterList';
 
@@ -35,16 +36,9 @@ function CoverLetter() {
 
 export default CoverLetter;
 
-const CoverLetterContainer = styled.div`
-  width: ${V.xlWidth};
+const CoverLetterContainer = styled(Container.ItemBase)`
   height: 600px;
   ${styleMixin.Column()}
-  @media screen and (max-width: 1300px) {
-    width: ${V.mdWidth};
-  }
-  @media screen and (max-width: 900px) {
-    width: ${V.smWidth};
-  }
 `;
 
 const CoverLetterControllers = styled.div`

@@ -50,8 +50,8 @@ describe('NavMenuItem 컴포넌트', () => {
         renderNavMenuItem();
 
         const container = screen.getByText(mockTitle).closest('li');
-        expect(container).toHaveStyle(`border-bottom: 1px solid ${defaultTheme.colors.subColor}`);
-        expect(screen.getByTestId('mock-icon')).toHaveStyle(`fill: ${defaultTheme.colors.subColor}`);
+        expect(container).toHaveStyle(`border-bottom: 1px solid ${defaultTheme.colors.svgOnColor}`);
+        expect(screen.getByTestId('mock-icon')).toHaveStyle(`fill: ${defaultTheme.colors.svgOnColor}`);
       });
     });
   });

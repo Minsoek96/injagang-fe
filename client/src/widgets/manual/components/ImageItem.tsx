@@ -26,8 +26,8 @@ const ImageContainer = styled.div`
   overflow: hidden;
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  border-radius: 10px;
+  padding: 1em;
+  border-radius: 1rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-top: 3rem;
   width: 100%;

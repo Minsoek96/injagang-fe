@@ -13,6 +13,7 @@ import { V, styleMixin } from '@/src/shared/styles';
 import { Spinner } from '@/src/shared/components/spinner';
 import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
 import { APIErrorBoundary } from '@/src/features/boundary';
+import { Container } from '@/src/shared/components/container';
 import useCoverLetterManager from '../hooks/useCoverLetterManager';
 import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
 import CoverLetterQuestionItems from '../new/CoverLetterQuestionItems';
@@ -86,26 +87,25 @@ function CoverLetterEdit() {
 }
 
 export default CoverLetterEdit;
-const CoverLetterCreatorContainer = styled.div`
+const CoverLetterCreatorContainer = styled(Container.ItemBase)`
   ${styleMixin.Column()}
-  width: 100%;
 `;
 
 const MainTitle = styled.h2`
-  font-size: 1.7rem;
-  margin-bottom: 30px;
+  font-size: 2rem;
+  margin-bottom: 1.5em;
   text-decoration-line: underline;
 `;
 
 const CoverLetterTitle = styled.input`
   width: ${V.xlItemWidth};
-  height: 40px;
+  height: 4rem;
   border-radius: 5px;
   border-color: black;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
   box-shadow: 0px 1px 0.5px rgba(0, 0, 0, 09);
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 `;
 
 const ControllerBtns = styled.div`
@@ -115,7 +115,7 @@ const ControllerBtns = styled.div`
 `;
 
 const BiPlusStyled = styled(BiPlus)`
-  margin: 40px auto;
+  margin: 4rem auto;
   font-size: 3rem;
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;

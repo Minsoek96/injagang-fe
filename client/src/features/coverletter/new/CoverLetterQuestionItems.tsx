@@ -48,10 +48,10 @@ export default memo(CoverLetterQuestionItems);
 
 const CoverLetterQuestionItemsContainer = styled.div`
   ${styleMixin.Column()}
+  width: 100%;
   padding: 15px 15px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
-  width: 60%;
   min-height: 250px;
   border-radius: 8px;
   box-shadow: ${V.boxShadow3};

@@ -16,4 +16,5 @@ export default CoverLetterEditorPage;
 
 const CoverLetterStyle = styled.div`
   ${styleMixin.Column()}
+  width: 100%;
 `;
