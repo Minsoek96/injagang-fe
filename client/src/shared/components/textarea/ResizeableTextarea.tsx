@@ -1,8 +1,9 @@
+/* eslint-disable react/require-default-props */
 import React, {
   useRef, useEffect, forwardRef, ForwardedRef,
 } from 'react';
 
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 
@@ -11,12 +12,17 @@ type ResizableTextareaProps = {
   setText: (text: string) => void;
   placeholder: string;
   maxSize: number;
+  sx?:CSSProperties;
 };
 
 const ResizableTextarea = forwardRef(
   (
     {
-      text, setText, placeholder, maxSize = 30,
+      text,
+      setText,
+      placeholder,
+      maxSize = 30,
+      sx = {},
     }: ResizableTextareaProps,
     fwRef?: ForwardedRef<HTMLTextAreaElement>,
   ) => {
@@ -28,7 +34,7 @@ const ResizableTextarea = forwardRef(
         const textarea = (combinedRef as React.RefObject<HTMLTextAreaElement>)
           .current!;
         const maxRemSize = maxSize * 10;
-        textarea.style.height = 'inherit';
+        textarea.style.height = '0px';
         const newHeight = Math.min(textarea.scrollHeight, maxRemSize);
         textarea.style.height = `${newHeight}px`;
         textarea.style.overflowY = newHeight >= maxRemSize ? 'auto' : 'hidden';
@@ -43,6 +49,7 @@ const ResizableTextarea = forwardRef(
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder={placeholder}
+        style={sx}
       />
     );
   },
@@ -54,18 +61,19 @@ export default ResizableTextarea;
 
 const StyledTextarea = styled.textarea`
   ${styleMixin.ScrollBar}
-  width: 100%;
-  padding: 0.8em;
-  border: none;
-  border-radius: 5px;
   resize: none;
-  height: auto;
-  font-weight: normal;
   font-family: "Malgun Gothic", sans-serif;
+  font-weight: normal;
+  line-height: 2;
+
+  width: 100%;
+  padding-block: 0.7em;
+  padding-inline: 1em;
+
+  border-radius: 5px;
+
+  height: auto;
   background-color: ${(props) => props.theme.colors.textArea};
   color: ${(props) => props.theme.colors.text};
-
-  &:focus-visible {
-    outline: none;
-  }
+  margin: 0.8rem auto;
 `;
