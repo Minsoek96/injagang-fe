@@ -6,6 +6,7 @@ import { BiX } from 'react-icons/bi';
 
 import { styleMixin, V } from '@/src/shared/styles';
 import { coverLetterType } from '@/src/entities/coverLetter';
+import { HideSvg } from '@/src/shared/components';
 
 interface CoverLetterQuestionItemsProps {
   item: coverLetterType.IReadQnaList;
@@ -13,7 +14,7 @@ interface CoverLetterQuestionItemsProps {
   onUpdate: (
     targetID: string | number,
     newQuestion: string,
-    newAnswer: string,
+    newAnswer: string
   ) => void;
 }
 
@@ -27,9 +28,17 @@ function CoverLetterQuestionItems({
 
   return (
     <CoverLetterQuestionItemsContainer>
-      <CLQHeader>
-        <BiX onClick={() => onDelete(item.qnaId)} />
-      </CLQHeader>
+      <HideSvg
+        label="삭제"
+        Logo={<BiX />}
+        onClick={() => onDelete(item.qnaId)}
+        sx={{
+          position: 'absolute',
+          right: 2,
+          top: 2,
+          fontSize: '2em',
+        }}
+      />
       <QuestionTextArea
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
@@ -48,51 +57,46 @@ export default memo(CoverLetterQuestionItems);
 
 const CoverLetterQuestionItemsContainer = styled.div`
   ${styleMixin.Column()}
+  position: relative;
   width: 100%;
-  padding: 15px 15px;
+  padding: 2.5em .8em 1em .8em;
   background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.text};
-  min-height: 250px;
+  color: ${(props) => props.theme.colors.text};
+  min-height: 25rem;
   border-radius: 8px;
   box-shadow: ${V.boxShadow3};
-  margin: 25px auto;
-`;
-
-const CLQHeader = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
+  margin: 2.5rem auto;
 `;
 
 const QuestionTextArea = styled.textarea`
-  font-family: 'Nanum Pen Script';
-  font-size: 15px;
+  font-size: 1.5rem;
 
   box-sizing: border-box;
-  width: 90%;
-  min-height: 30px;
-  max-height: 200px;
+  width: 100%;
+  min-height: 3rem;
+  max-height: 20rem;
   resize: vertical;
 
   border-radius: 5px;
-  background-color: #444654;
-  color: white;
+  background-color: ${(props) => props.theme.colors.textArea};
+  color: ${(props) => props.theme.colors.text};
 
-  padding: 15px;
+  padding: ${V.mdPadding};
   ${styleMixin.ScrollBar};
 `;
 
 const AnswerTextArea = styled.textarea`
   resize: vertical;
-  font-family: 'Nanum Pen Script';
+  font-family: "Malgun Gothic", sans-serif;
   font-weight: normal;
-  width: 90%;
+  width: 100%;
   line-height: 2;
-  height: 300px;
+  height: 30rem;
   border-radius: 5px;
-  margin: 8px auto;
-  padding: 20px;
-  color: white;
-  background-color: #444654;
+  margin: 0.8rem auto;
+  padding-block: .7em;
+  padding-inline: 1em;
+  background-color: ${(props) => props.theme.colors.textArea};
+  color: ${(props) => props.theme.colors.text};
   ${styleMixin.ScrollBar}
 `;

@@ -44,6 +44,7 @@ const CoverLetterPreViewContainer = styled.div`
   overflow-x: hidden;
   border: 1px solid ${(props) => props.theme.colors.mainLine};
   box-shadow: ${V.boxShadow1};
+  line-height: 1.4;
 
   @media screen and (max-width: ${V.mediaMobile}) {
     font-size: 1.6rem;

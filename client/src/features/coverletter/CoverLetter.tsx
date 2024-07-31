@@ -10,6 +10,7 @@ import { Suspense } from 'react';
 import CoverLetterList from './list/CoverLetterList';
 import CoverLetterPreView from './preview/CoverLetterPreView';
 
+/** 메인 자소서 */
 function CoverLetter() {
   const router = useRouter();
   const headerTitle = '나의 자소서 목록';

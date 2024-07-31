@@ -1,34 +1,34 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { BiPlus } from 'react-icons/bi';
-
-import styled from 'styled-components';
-
-import { BaseButton } from '@/src/shared/components/button';
-
-import { V, styleMixin } from '@/src/shared/styles';
+import { BtnType } from '@/src/shared/components';
 
 import { Spinner } from '@/src/shared/components/spinner';
 import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
-import { APIErrorBoundary } from '@/src/features/boundary';
-import { Container } from '@/src/shared/components/container';
+
+import { CoverLetterTemplate } from '@/src/features/coverletter/common';
 import useCoverLetterManager from '../hooks/useCoverLetterManager';
 import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
-import CoverLetterQuestionItems from '../new/CoverLetterQuestionItems';
 
+/** 자소서 수정 메인 컴포넌트 */
 function CoverLetterEdit() {
-  const [coverLetterTitle, setCoverLetterTitle] = useState<string>('');
   const router = useRouter();
   const moveCoverLetterMainPage = '/coverLetter';
+
   const { id } = router.query;
   const { data: coverLetter, isLoading } = useFetchDetailCoverLetter(
     Number(id),
   );
 
   const {
-    qnaList, setQnAList, deleteQnAList, changeQnAList, addQnAList,
+    qnaList,
+    setQnAList,
+    deleteQnAList,
+    changeQnAList,
+    addQnAList,
+    coverLetterTitle,
+    setCoverLetterTitle,
   } = useCoverLetterCreatorLogic();
 
   const { changeCoverLetter, deleteCoverLetter } = useCoverLetterManager();
@@ -40,88 +40,43 @@ function CoverLetterEdit() {
     }
   }, [coverLetter]);
 
+  const actionButtons: BtnType.BaseProps[] = [
+    {
+      id: 'back-01',
+      label: '뒤로가기',
+      onAction: () => router.push(moveCoverLetterMainPage),
+      sx: { fontSize: '2em' },
+    },
+    {
+      id: 'delete-02',
+      label: '삭제하기',
+      onAction: () => deleteCoverLetter(Number(id)),
+      sx: { fontSize: '2em' },
+    },
+    {
+      id: 'change-03',
+      label: '수정완료',
+      onAction: () => changeCoverLetter(Number(id), coverLetterTitle, qnaList),
+      sx: { fontSize: '2em' },
+    },
+  ];
+
   if (isLoading) return <Spinner />;
 
   return (
-    <APIErrorBoundary>
-      <CoverLetterCreatorContainer>
-        <MainTitle>자소서 수정하기</MainTitle>
-        <CoverLetterTitle
-          value={coverLetterTitle}
-          onChange={(e) => setCoverLetterTitle(e.target.value)}
-          placeholder="자소서 제목"
-        />
-        {qnaList.map((qna) => (
-          <CoverLetterQuestionItems
-            key={qna.qnaId}
-            item={qna}
-            onDelete={deleteQnAList}
-            onUpdate={changeQnAList}
-          />
-        ))}
-        <BiPlusStyled onClick={addQnAList} />
-        <ControllerBtns>
-          <BaseButton
-            $Size={{ width: '150px', font: '20px' }}
-            onClick={() => router.push(moveCoverLetterMainPage)}
-          >
-            뒤로가기
-          </BaseButton>
-          <BaseButton
-            $Size={{ width: '150px', font: '20px' }}
-            onClick={() => deleteCoverLetter(Number(id))}
-          >
-            삭제하기
-          </BaseButton>
-          <BaseButton
-            $Size={{ width: '150px', font: '20px' }}
-            onClick={() =>
-              changeCoverLetter(Number(id), coverLetterTitle, qnaList)}
-          >
-            수정완료
-          </BaseButton>
-        </ControllerBtns>
-      </CoverLetterCreatorContainer>
-    </APIErrorBoundary>
+    <CoverLetterTemplate
+      mainTitle="자소서 수정하기"
+      coverLetterTitle={coverLetterTitle}
+      setCoverLetterTitle={setCoverLetterTitle}
+      qnaList={qnaList}
+      deleteQnAList={deleteQnAList}
+      changeQnAList={changeQnAList}
+      addQnAList={addQnAList}
+      actionButtons={actionButtons}
+      isLoading={isLoading}
+      isTemplate={false}
+    />
   );
 }
 
 export default CoverLetterEdit;
-const CoverLetterCreatorContainer = styled(Container.ItemBase)`
-  ${styleMixin.Column()}
-`;
-
-const MainTitle = styled.h2`
-  font-size: 2rem;
-  margin-bottom: 1.5em;
-  text-decoration-line: underline;
-`;
-
-const CoverLetterTitle = styled.input`
-  width: ${V.xlItemWidth};
-  height: 4rem;
-  border-radius: 5px;
-  border-color: black;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.text};
-  box-shadow: 0px 1px 0.5px rgba(0, 0, 0, 09);
-  margin-bottom: 1.5rem;
-`;
-
-const ControllerBtns = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: ${V.xlItemWidth};
-`;
-
-const BiPlusStyled = styled(BiPlus)`
-  margin: 4rem auto;
-  font-size: 3rem;
-  color: ${({ theme }) => theme.colors.text};
-  cursor: pointer;
-  transition: color 0.3s;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.text};
-  }
-`;

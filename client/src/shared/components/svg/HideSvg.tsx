@@ -22,6 +22,7 @@ export default function HideSvg<T>({
 }
 
 const HideContainer = styled.div`
+  cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;

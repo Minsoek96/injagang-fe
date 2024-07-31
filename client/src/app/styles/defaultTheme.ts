@@ -14,7 +14,7 @@ const defaultTheme = {
     svgOnColor: '#005FCC',
     mainLine: 'rgb(219, 220, 223)',
     mainHover: 'rgba(0,0,0,15)',
-    textArea: '#444654',
+    textArea: '#F0F2F5',
     dropBoxColor: '#2e2e2e',
   },
 };

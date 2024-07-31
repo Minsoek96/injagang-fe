@@ -31,7 +31,7 @@ export const CoverLetterListContainer = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.colors.secondary};
   border-radius: 5px;
-  height: 350px;
+  height: 35rem;
   margin: 0.5rem auto;
   overflow-x: hidden;
   box-shadow: ${V.boxShadow2};

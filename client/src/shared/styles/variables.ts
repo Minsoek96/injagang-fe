@@ -37,7 +37,7 @@ const V = {
   xlMargin: '3rem',
 
   // Paddings
-  xsPadding: '0.5rem',
+  xsPadding: '0.5em',
   smPadding: '0.4em 0.8em',
   mdPadding: '0.8em 1.6em',
   lgPadding: '1.6em',

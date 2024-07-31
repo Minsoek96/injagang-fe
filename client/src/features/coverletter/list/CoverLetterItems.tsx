@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { BiEdit } from 'react-icons/bi';
 
 import styled from 'styled-components';
@@ -19,7 +18,7 @@ function CoverLetterItems({ item, selectedId }: CoverLetterItemsProps) {
 
   return (
     <CoverLetterItemsContainer $isActive={isSelectedItem}>
-      <p onClick={() => changeSeleted(item)}>{item.title}</p>
+      <div onClick={() => changeSeleted(item)}>{item.title}</div>
       <HideSvg onClick={() => moveEditPage(item.essayId)}>
         <BiEdit />
         <span>상세보기</span>
@@ -56,7 +55,7 @@ const HideSvg = styled.div`
   &:hover {
     span {
       display: block;
-      font-size: 1.6rem;
+      font-size: 1rem;
     }
   }
 `;
