@@ -11,7 +11,7 @@ import { MdOutlineModeEditOutline } from 'react-icons/md';
 
 import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 
-import { BaseButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/components/button';
 import { styleMixin } from '@/src/shared/styles';
 
 import {
@@ -20,6 +20,7 @@ import {
   ROUTE_TEMPLATE,
   TABLE_KEYS,
 } from '@/src/pages/qna/list/const';
+import { Container } from '@/src/shared/components';
 
 const BoardListView = dynamic(
   () => import('@/src/widgets/board/BoardListLayout'),
@@ -48,27 +49,42 @@ function List({ dehydratedState }: ListProps) {
       const total = data.totalPage;
       setTotalPage(total);
     }
-    return () => initBoardSearch();
   }, [data]);
+
+  useEffect(
+    () => () => {
+      initBoardSearch();
+    },
+    [],
+  );
 
   return (
     <ListStyle>
-      <BaseButton
-        className="edit_btn"
-        $Size={{ width: '600px', font: '15px' }}
-        onClick={() => router.push('/qna/question')}
-      >
-        <MdOutlineModeEditOutline />
-        {' 글쓰기'}
-      </BaseButton>
-      <HydrationBoundary state={dehydratedState}>
-        <BoardListView
-          boardInfos={data?.boardInfos || []}
-          idKey={ID_KEY}
-          headItem={HEAD_ITEM}
-          tableKey={TABLE_KEYS}
-          route={ROUTE_TEMPLATE}
+      <BoardHeader>
+        <MainButton
+          label={(
+            <span>
+              <MdOutlineModeEditOutline />
+              글쓰기
+            </span>
+          )}
+          onAction={() => router.push('/qna/question')}
+          sx={{
+            fontSize: '1.5rem',
+            padding: '1rem 2rem',
+          }}
         />
+      </BoardHeader>
+      <HydrationBoundary state={dehydratedState}>
+        {data?.boardInfos.length && (
+          <BoardListView
+            boardInfos={data?.boardInfos || []}
+            idKey={ID_KEY}
+            headItem={HEAD_ITEM}
+            tableKey={TABLE_KEYS}
+            route={ROUTE_TEMPLATE}
+          />
+        )}
         <PageNation />
         <BoardSearch />
       </HydrationBoundary>
@@ -80,18 +96,14 @@ export default List;
 
 const ListStyle = styled.div`
   ${styleMixin.Column('flex-start')}
-  width: 100%;
-
-  .edit_btn {
+  > button {
     display: flex;
-    padding: 8px;
-    svg {
-      font-size: 20px;
-    }
+    flex-direction: flex-end;
   }
-  @media screen and (max-width: 800px) {
-    .edit_btn {
-      width: 300px;
-    }
-  }
+  width: 100%;
+`;
+
+const BoardHeader = styled(Container.ItemBase)`
+${styleMixin.Flex('flex-end')}
+  max-width: 100%;
 `;

@@ -10,9 +10,11 @@ const useFetchBoardList = () => {
   const {
     curPageNum, boardType, boardSearch,
   } = useBoardStore();
+
   return useQuery({
     queryKey: board.lists(curPageNum, boardType, boardSearch),
     queryFn: () => getBoardList(curPageNum, boardType, boardSearch),
+    placeholderData: (previousData) => previousData,
   });
 };
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
+import { Container } from '@/src/shared/components';
 import BoardList from './BoardList';
-import BoardListHead from './BoardListHead';
 
 type Props<T> = {
   boardInfos: T[]
@@ -16,8 +16,8 @@ function BoardListLayout<T>({
 }:Props<T>) {
   return (
     <BoardListViewStyle>
-      <BoardListHead headItem={headItem} />
       <BoardList
+        headItem={headItem}
         boardInfos={boardInfos ?? []}
         idKey={idKey as keyof T}
         displayKeys={tableKey as (keyof T)[]}
@@ -29,17 +29,8 @@ function BoardListLayout<T>({
 
 export default BoardListLayout;
 
-const BoardListViewStyle = styled.table`
-  border: 1px solid #0a0a0a;
+const BoardListViewStyle = styled(Container.ItemBase)`
+  max-width: 100%;
   margin: 30px auto;
-  width: 80%;
-  thead th {
-    font-weight: bold;
-    font-size: 18px;
-    border: none;
-    background-color: #ffa600e4;
-  }
-  thead th:first-child {
-    width: 10%;
-  }
+
 `;

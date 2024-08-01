@@ -5,7 +5,7 @@ const V = {
   mediaWeb: '1300px',
 
   // Box Widths
-  mdBoxWidth: '80rem',
+  mdBoxWidth: '100rem',
   smBoxWidth: '20rem',
 
   // Widths

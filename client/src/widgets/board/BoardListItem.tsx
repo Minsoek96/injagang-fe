@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
 
-import styled from 'styled-components';
-
 import { v4 as uuid4 } from 'uuid';
 
 interface BoardListItemProps<T> {
@@ -24,22 +22,12 @@ function BoardListItem<T>({
   };
 
   return (
-    <BoardListItemRow onClick={navigateToDetail}>
-      {displayKeys?.map((key) => <td key={uuid4()}>{String(item[key])}</td>)}
-    </BoardListItemRow>
+    <tr onClick={navigateToDetail}>
+      {displayKeys?.map((key) => (
+        <td key={uuid4()}>{String(item[key])}</td>
+      ))}
+    </tr>
   );
 }
 
 export default BoardListItem;
-
-const BoardListItemRow = styled.tr`
-  text-align: center;
-  td {
-    padding-block: 12px;
-    border: 1px solid #0a0a0a;
-    height: 35px;
-  }
-  &:hover {
-    cursor: pointer;
-  }
-`;
