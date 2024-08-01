@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useReducer } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -8,27 +8,28 @@ import { runValidationChecks } from '@/src/shared/utils';
 import { ERROR_MESSAGES } from '@/src/shared/const';
 import { useWriteCoverLetter } from '@/src/entities/coverLetter/mutations';
 import { useModal } from '@/src/shared/hooks';
-
-type QnaListType = {
-  question: string;
-  answer: string;
-  qnaId: string | number;
-};
+import {
+  qnaReducer,
+  ADD_QNA,
+  CHANGE_QNA,
+  DELETE_QNA,
+  initialState,
+  QnaItem,
+} from '@/src/features/coverletter/common';
 
 /** 자소서를 생성와 관련된 로직 */
 
 const useCoverLetterCreatorLogic = () => {
-  const { mutate: writeCoverLetter } = useWriteCoverLetter();
-  const [coverLetterTitle, setCoverLetterTitle] = useState<string>('');
-  const [qnaList, setQnAList] = useState<QnaListType[]>([]);
-  const { setModal } = useModal();
   const router = useRouter();
+  const { mutate: writeCoverLetter } = useWriteCoverLetter();
+  const [state, dispatch] = useReducer(qnaReducer, initialState);
+  const { setModal } = useModal();
 
   const MIN_QUESTIONS = 1;
   const MAX_QUESTIONS = 5;
 
-  const coverLetterMinLength = qnaList.length <= MIN_QUESTIONS;
-  const coverLetterMaxLength = qnaList.length >= MAX_QUESTIONS;
+  const coverLetterMinLength = state.qnaList.length <= MIN_QUESTIONS;
+  const coverLetterMaxLength = state.qnaList.length >= MAX_QUESTIONS;
 
   /** 유저가 폼을 추가하는 룰을 관리 */
   const addQnAList = useCallback(() => {
@@ -42,42 +43,43 @@ const useCoverLetterCreatorLogic = () => {
       return;
     }
     const newID = uuid4();
-    setQnAList((prev) => [...prev, { question: '', answer: '', qnaId: newID }]);
-  }, [qnaList]);
+    dispatch({
+      type: ADD_QNA,
+      payload: { question: '', answer: '', qnaId: newID },
+    });
+  }, [state.qnaList]);
 
   /** 유저가 추가 폼을 삭제시 관리 */
   const deleteQnAList = useCallback(
     (targetID: string | number) => {
       if (coverLetterMinLength) return;
-      const filterItem = qnaList.filter((qna) => qna.qnaId !== targetID);
-      setQnAList(filterItem);
+      dispatch({ type: DELETE_QNA, payload: targetID });
     },
-    [qnaList],
+    [state.qnaList],
   );
 
   /** 유저가 변경하는 폼을 체크 */
   const changeQnAList = useCallback(
     (targetID: string | number, newQuestion: string, newAnswer: string) => {
-      setQnAList((prev) =>
-        prev.map((qna) =>
-          (qna.qnaId === targetID
-            ? { ...qna, question: newQuestion, answer: newAnswer }
-            : { ...qna })));
+      dispatch({
+        type: CHANGE_QNA,
+        payload: { qnaId: targetID, question: newQuestion, answer: newAnswer },
+      });
     },
-    [qnaList],
+    [state.qnaList],
   );
 
   const 자기소개서작성규칙 = [
     {
-      check: () => coverLetterTitle === '',
+      check: () => state.coverLetterTitle === '',
       message: ERROR_MESSAGES.EMPTY_TITLE,
     },
     {
-      check: () => qnaList.length < 1,
+      check: () => state.qnaList.length < 1,
       message: ERROR_MESSAGES.MINIMUM_QNA,
     },
     {
-      check: () => qnaList.some((q) => q.answer === ''),
+      check: () => state.qnaList.some((q) => q.answer === ''),
       message: ERROR_MESSAGES.EMPTY_ANSWER,
     },
   ];
@@ -95,30 +97,32 @@ const useCoverLetterCreatorLogic = () => {
       return;
     }
 
-    const formatQnAList = qnaList.map((qna) => ({
+    const formatQnAList = state.qnaList.map((qna) => ({
       question: qna.question,
       answer: qna.answer,
     }));
 
     const qnaListForSubmission = {
-      title: coverLetterTitle,
+      title: state.coverLetterTitle,
       owner: true,
       qnaList: formatQnAList,
     };
 
     writeCoverLetter(qnaListForSubmission);
     router.push('/coverLetter');
-  }, [qnaList, coverLetterTitle]);
+  }, [state]);
 
   return {
-    setQnAList,
-    qnaList,
+    setCoverLetterTitle: (title: string) =>
+      dispatch({ type: 'SET_TITLE', payload: title }),
+    setQnAList: (list: QnaItem[]) =>
+      dispatch({ type: 'SET_QNA_LIST', payload: list }),
+    qnaList: state.qnaList,
     addQnAList,
     changeQnAList,
     deleteQnAList,
     handleDispatch,
-    setCoverLetterTitle,
-    coverLetterTitle,
+    coverLetterTitle: state.coverLetterTitle,
   };
 };
 

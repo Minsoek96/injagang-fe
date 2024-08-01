@@ -10,6 +10,7 @@ import {
   useReviseCoverLetter,
 } from '@/src/entities/coverLetter/mutations';
 
+/** 유저가 선택한 자소서의 상태를 반영하고 업데이트를 위한 함수 */
 const useCoverLetterManager = () => {
   const router = useRouter();
 

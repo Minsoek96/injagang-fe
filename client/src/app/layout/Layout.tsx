@@ -2,8 +2,9 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 
-import { Header } from '@/src/widgets/header';
+import { Header } from '@/src/widgets';
 
+import AuthProvider from '@/src/app/providers/AuthProvider';
 import { RenderToast, RenderModal, HeadMeta } from '../components';
 
 import { ReactQueryProvider, StyledProvider } from '../providers';
@@ -20,16 +21,19 @@ function Layout({ children }: LayoutProps) {
   const isBlockPath = headerBlockList.includes(pathName ?? '');
 
   return (
+
     <StyledProvider>
       <HeadMeta />
       <ReactQueryProvider>
-        <LayoutContainer>
-          {!isBlockPath && <Header />}
-          <MainContent>{children}</MainContent>
-        </LayoutContainer>
+        <AuthProvider>
+          <LayoutContainer>
+            {!isBlockPath && <Header />}
+            <MainContent>{children}</MainContent>
+          </LayoutContainer>
+        </AuthProvider>
+        <RenderToast />
+        <RenderModal />
       </ReactQueryProvider>
-      <RenderToast />
-      <RenderModal />
     </StyledProvider>
   );
 }
@@ -44,8 +48,6 @@ const LayoutContainer = styled.div`
 
 const MainContent = styled.main`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex: 1;
   width: 100%;
   max-width: 135rem;

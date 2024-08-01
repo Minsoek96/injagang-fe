@@ -19,5 +19,6 @@ function CoverLetterPreViewItem({
 export default CoverLetterPreViewItem;
 
 const CoverLetterTitle = styled.h2`
-  margin-top: 11px;
+  margin-top: 1.2rem;
+  line-height: 1.4;
 `;

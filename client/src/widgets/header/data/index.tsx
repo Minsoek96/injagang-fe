@@ -8,7 +8,7 @@ import {
 import { DropItemType } from '@/src/shared/components/dropbox';
 import { MenuItemType } from '@/src/shared/components/nav';
 
-import { LogOutMenu } from '../components';
+import { LogOutMenu, ThemeToggle } from '../components';
 
 /** Navbar에 생성할 리스트를 통제하기 위한 역할 */
 export const navList: MenuItemType[] = [
@@ -42,13 +42,8 @@ export const dropMenuList: DropItemType[] = [
   },
   {
     id: 'drop-02',
-    type: 'link',
-    link: {
-      path: 'action',
-      label: 'action',
-      icon: <BiUser />,
-      title: '테마',
-    },
+    type: 'component',
+    component: <ThemeToggle />,
   },
   {
     id: 'drop-03',

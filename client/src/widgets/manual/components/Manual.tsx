@@ -1,6 +1,11 @@
+import { styled } from 'styled-components';
+
+import { Container } from '@/src/shared/components/container';
+
 import goodInterView from '@/public/assets/main.jpg';
 import interViewScreen from '@/public/assets/interview.png';
 import communityScreen from '@/public/assets/commu.png';
+
 import ManualItems from './ManualItems';
 
 const manualData = [
@@ -27,7 +32,7 @@ const manualData = [
 function Manual() {
   const lastSection = manualData.length - 1;
   return (
-    <div>
+    <ManualContainer>
       {manualData.map((item, index) => (
         <ManualItems
           key={item.id}
@@ -37,8 +42,13 @@ function Manual() {
           imageList={item.imageList}
         />
       ))}
-    </div>
+    </ManualContainer>
   );
 }
 
 export default Manual;
+
+const ManualContainer = styled(Container.ItemBase)`
+  max-width: 70rem;
+  width: 100%;
+`;

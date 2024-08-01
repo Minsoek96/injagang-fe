@@ -15,7 +15,19 @@ export default function BrandLogo({ title, path }: Props) {
 }
 
 const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: RGB(255,0,0);
+  color: rgb(255,0,0);
   font-size: 3.2rem;
+  font-weight: 600;
+  transition: color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .navLogo_title {
+    margin-left: 1rem;
+  }
 `;

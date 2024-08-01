@@ -45,6 +45,10 @@ const Container = styled.li`
   &:hover {
     background-color: rgba(0, 0, 0, 0.15);
   }
+
+  svg {
+    color : ${(props) => props.theme.colors.dropBoxColor};
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -57,8 +61,9 @@ const ItemWrapper = styled.div`
   padding-inline: 1.2rem;
   padding-block: 0.8rem;
   gap: 1.2rem;
-  > span {
+  span {
     font-size: 1.8rem;
-    color: ${(props) => props.theme.colors.text}
+    font-weight: bold;
+    color: ${(props) => props.theme.colors.dropBoxColor}
   }
 `;

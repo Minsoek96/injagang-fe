@@ -35,9 +35,9 @@ const Container = styled.li<{ $isSelected: boolean }>`
   list-style: none;
   opacity: 0.8;
   border-bottom: 1px solid
-    ${(props) => (props.$isSelected ? props.theme.colors.subColor : 'none')};
+    ${(props) => (props.$isSelected ? props.theme.colors.svgOnColor : 'none')};
   svg {
-    fill: ${(props) => (props.$isSelected ? props.theme.colors.subColor : props.theme.colors.svgColor)};
+    fill: ${(props) => (props.$isSelected ? props.theme.colors.svgOnColor : props.theme.colors.svgColor)};
   }
 `;
 

@@ -56,6 +56,7 @@ const fadeInUp = keyframes`
     transform: translateY(0);
   }
 `;
+
 const fadeInUpOpacity = css<{ $isShow: boolean }>`
   opacity: 0;
   animation: ${(props) =>
@@ -78,6 +79,7 @@ const BannerContainer = styled.div<{ $isShow: boolean }>`
 const MainTitle = styled.h2<{ $isShow: boolean }>`
   text-align: center;
   font-size: 3.5rem;
+  font-weight: 700;
   ${fadeInUpOpacity}
   animation-delay: 0.2s;
   @media screen and (max-width: ${V.mediaMobile}) {
@@ -89,11 +91,24 @@ const SubTitle = styled.h3<{ $isShow: boolean }>`
   text-align: center;
   margin-top: 0.5em;
   font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   ${fadeInUpOpacity}
   animation-delay: 0.4s;
+
+
+  &::before, &::after {
+    content: 'V';
+    display: inline-block;
+    margin: 0 0.5em;
+    opacity: 0.7;
+    transform: translateY(-2px);
+  }
+
   @media screen and (max-width: ${V.mediaMobile}) {
     font-size: 1.8rem;
-  }
+    letter-spacing: 0.04em;
+}
 `;
 
 const ItemContainer = styled.div`

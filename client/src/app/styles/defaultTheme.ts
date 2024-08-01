@@ -1,20 +1,21 @@
 const defaultTheme = {
   colors: {
-    primary: '#fff',
-    secondary: '#3399FF',
-    bodyColor: '#F7F8FA',
-    button: '#f39214f2',
-    logo: '#000000',
-    text: '#000000',
-    highlight: '#fff',
+    primary: '#FCFCFC',
+    secondary: '#FCFCFC',
     black: '#000000',
     white: '#ffffff',
+    bodyColor: '#F0F2F5',
+    button: '#f39214f2',
+    logo: '#000000',
+    text: '#0f1419',
+    highlight: '#fff',
 
-    svgColor: '#000000',
-    mainLine: 'RGB(219, 220, 223)',
-    subColor: 'blue',
+    svgColor: '#007FFF',
+    svgOnColor: '#005FCC',
+    mainLine: 'rgb(219, 220, 223)',
     mainHover: 'rgba(0,0,0,15)',
-    textArea: '#444654',
+    textArea: '#F0F2F5',
+    dropBoxColor: '#2e2e2e',
   },
 };
 export default defaultTheme;

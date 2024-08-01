@@ -15,5 +15,6 @@ function CoverLetterEditorPage() {
 export default CoverLetterEditorPage;
 
 const CoverLetterStyle = styled.div`
-  ${styleMixin.Column()}
+  ${styleMixin.Column('flex-start')}
+  width: 100%;
 `;
