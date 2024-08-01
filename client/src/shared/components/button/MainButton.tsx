@@ -6,37 +6,39 @@ export default function MainButton({
   onAction,
   label,
   sx = {},
+  isActive = false,
 }: BaseProps) {
   return (
-    <CustomBtn onClick={onAction} style={sx}>
+    <CustomBtn onClick={onAction} style={sx} $isActive={isActive}>
       {label}
     </CustomBtn>
   );
 }
 
+interface CustomProps {
+  $isActive: boolean;
+}
+
 const CustomBtn = styled.button.attrs({
   type: 'button',
   role: 'button',
-})`
-  background-color: ${({ theme }) => theme.colors.button};
+})<CustomProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) =>
+    (props.$isActive
+      ? props.theme.colors.brandColor
+      : props.theme.colors.button)};
   color: ${({ theme }) => theme.colors.text};
-  border: none;
+  border: 0.1em solid ${(props) => props.theme.colors.mainLine};
   padding: ${V.smPadding};
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   font-weight: bold;
-  box-shadow: 0 1.5px 2px rgba(0, 0, 0, 09);
   cursor: pointer;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #777;
-  }
-
-  &:active {
-    background-color: red;
-  }
-
-  &.active_button {
-    background-color: red;
+    background-color: ${(props) => props.theme.colors.mainHover}
   }
 `;

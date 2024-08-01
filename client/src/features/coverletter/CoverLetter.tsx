@@ -37,6 +37,7 @@ export default CoverLetter;
 
 const CoverLetterContainer = styled(Container.ItemBase)`
   ${styleMixin.Column('flex-start')}
+  max-width: 100%;
   color: ${(props) => props.theme.colors.text};
   height: 100%;
 `;

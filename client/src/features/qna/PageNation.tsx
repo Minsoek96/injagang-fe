@@ -1,8 +1,11 @@
 import { memo } from 'react';
 
+import styled from 'styled-components';
+
 import { usePageNation } from '@/src/shared/hooks';
 
-import { BaseButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/components/button';
+import { styleMixin } from '@/src/shared/styles';
 
 // TODO : 너무 복잡한 의존성으로 엮여있음 끊어내기 로직 변경
 function PageNation() {
@@ -15,42 +18,27 @@ function PageNation() {
   } = usePageNation(8);
 
   return (
-    <div>
-      <NavigationButton text="<" onClick={handlePrevClick} />
+    <Container>
+      <MainButton label="<" onAction={handlePrevClick} />
       {visiblePageNumbers.map((pageNum) => (
-        <NavigationButton
+        <MainButton
           key={pageNum}
-          text={`${pageNum}`}
+          label={`${pageNum}`}
           isActive={pageNum === curPageNum}
-          onClick={() => handlePageClick(pageNum)}
+          onAction={() => handlePageClick(pageNum)}
+          sx={{ marginInline: '.2rem' }}
         />
       ))}
-      <NavigationButton text=">" onClick={handleNextClick} />
-    </div>
-  );
-}
-
-// TODO :: 스타일 리팩토링 작업시 정리 할 것!!
-interface NavigationButtonProps {
-  text: string;
-  isActive?: boolean;
-  onClick: () => void;
-}
-
-function NavigationButton({
-  text,
-  isActive = false,
-  onClick,
-}: NavigationButtonProps) {
-  return (
-    <BaseButton
-      $Size={{ width: '40px', font: '15px' }}
-      className={isActive ? 'active_button' : ''}
-      onClick={onClick}
-    >
-      {text}
-    </BaseButton>
+      <MainButton label=">" onAction={handleNextClick} />
+    </Container>
   );
 }
 
 export default memo(PageNation);
+
+const Container = styled.div`
+ ${styleMixin.Flex()}
+ button {
+  font-size: 1.8rem;
+ }
+`;
