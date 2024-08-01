@@ -18,7 +18,7 @@ describe('queries', () => {
     (getBoardList as jest.Mock).mockResolvedValue({
       data: sampleBoardList,
     });
-    const { result } = renderHook(() => useFetchBoardList(10001, '', ''), {
+    const { result } = renderHook(() => useFetchBoardList(), {
       wrapper: TestProvider,
     });
 

@@ -72,29 +72,29 @@ const ModalStyle = styled.div<ModalStyleProps>`
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100dvw;
   background-color: rgba(36, 31, 31, 0.5);
 `;
 
 const ModalBox = styled.div`
   display: flex;
   flex-direction: column;
-  height: 250px;
-  width: 500px;
-  border-radius: 15px;
+  height: 25rem;
+  width: 50rem;
+  border-radius: 1.5rem;
   background-color: #0a0a0aee;
   .modal_Contents {
     display: flex;
     flex-direction: column;
-    height: 200px;
+    height: 20rem;
   }
   .modal_Contents h2 {
     color: red;
-    margin: 20px;
+    margin: 2rem;
   }
   .modal_Contents p {
-    margin-top: 20px;
+    margin-top: 2rem;
     text-align: center;
     color: #e6dfdf;
   }
@@ -102,12 +102,12 @@ const ModalBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 10px;
+    padding: .5em;
   }
   .modal_center_btn {
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 10px;
+    padding: .5em;
   }
 `;
