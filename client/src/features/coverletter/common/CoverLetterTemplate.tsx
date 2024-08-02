@@ -9,6 +9,7 @@ import {
   MainButton,
   Spinner,
   Container,
+  MainInput,
 } from '@/src/shared/components';
 
 import { V, styleMixin } from '@/src/shared/styles';
@@ -58,14 +59,15 @@ export default function CoverLetterTeamplte({
   return (
     <CoverLetterCreatorContainer>
       <MainTitle>{mainTitle}</MainTitle>
-      <CoverLetterTitle
+      <MainInput
         value={coverLetterTitle}
-        onChange={(e) => setCoverLetterTitle(e.target.value)}
+        onChange={setCoverLetterTitle}
         placeholder="자소서 제목"
+        sx={{ width: '100%', marginBottom: '1.5rem' }}
       />
       {isTemplate && (
         <ComboBox
-          sx={{ maxWidth: `${V.xlItemWidth}`, height: '4rem' }}
+          sx={{ maxWidth: '100%', height: '4rem' }}
           value={selectedTemplateTitle}
           optionList={templateTitles}
           onChange={changeSelectedTemplate}
@@ -106,20 +108,14 @@ const CoverLetterCreatorContainer = styled(Container.ItemBase)`
 `;
 
 const MainTitle = styled.h2`
+  ${styleMixin.Flex('flex-start', 'flex-start')}
+  width: 100%;
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 3rem;
-  text-decoration-line: underline;
-`;
-
-const CoverLetterTitle = styled.input`
-  width: 100%;
-  max-width: ${V.xlItemWidth};
-  height: 4rem;
-  border-radius: 0.5rem;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.text};
-  margin-bottom: 1.5rem;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-underline-offset: 0;
 `;
 
 const ControllerBtns = styled.div`
