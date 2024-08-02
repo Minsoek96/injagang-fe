@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
-import { BaseArea } from '@/src/shared/components/textarea';
-
 import { BaseCard } from '@/src/shared/components/card';
 import { styleMixin } from '@/src/shared/styles';
 import { useBoardStore } from '@/src/entities/qnaboard';
 
 import userQnaManager from '@/src/features/qna/hooks/userQnaManager';
+import { MainTextArea } from '@/src/shared/components';
 import CorrectionView from './CorrectionView';
 import FeedBackFooter from './FeedBackFooter';
 
@@ -35,10 +34,11 @@ function FeedBackComposer() {
         targetQuestion={selectedCorrection.targetQuestion}
       />
       <CommentTop>
-        <BaseArea
-          value={correctionText}
+        <MainTextArea
+          placeholder="피드백을 작성해주세요."
+          text={correctionText}
+          setText={handleChangeFeedBack}
           ref={textRef}
-          onChange={(e) => handleChangeFeedBack(e.target.value)}
         />
       </CommentTop>
       <FeedBackFooter

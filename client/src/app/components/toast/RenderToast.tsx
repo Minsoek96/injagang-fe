@@ -14,7 +14,7 @@ export default function RenderToast() {
 }
 const ToastContainer = styled.div`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 2rem;
+  right: 2rem;
   z-index: 1000;
 `;

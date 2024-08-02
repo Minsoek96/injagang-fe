@@ -37,6 +37,7 @@ export default CoverLetter;
 
 const CoverLetterContainer = styled(Container.ItemBase)`
   ${styleMixin.Column('flex-start')}
+  max-width: 100%;
   color: ${(props) => props.theme.colors.text};
   height: 100%;
 `;
@@ -47,7 +48,7 @@ const ListHeader = styled.div`
   font-size: 2.5rem;
   opacity: 0.8;
   font-weight: bold;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
   padding: ${V.smPadding};
   border-radius: 5px;
   box-shadow: ${V.boxShadow1};

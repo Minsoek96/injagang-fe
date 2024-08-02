@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
-import { BaseArea } from '@/src/shared/components/textarea';
 
-import { BaseCard } from '@/src/shared/components/card';
-
-import { BaseButton } from '@/src/shared/components/button';
-
-import { BaseInput as QuestionTitle } from '@/src/shared/components/input';
+import {
+  MainButton,
+  BaseCard,
+  MainInput,
+  ComboBox,
+  MainTextArea,
+} from '@/src/shared/components';
 
 import { styleMixin } from '@/src/shared/styles';
 
-import { ComboBox } from '@/src/shared/components/combobox';
 import CoverLetterDetail from '@/src/features/question-composer/CoverLetterDetail';
 
 import { useWriteBoard } from '@/src/entities/qnaboard/mutaions';
@@ -47,26 +47,29 @@ function QuestionComposer() {
     <BaseCard $size={{ width: '80%', height: '80%', flex: 'row' }}>
       <SwitchContainer>
         <LeftContainer>
-          <QuestionTitle
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+          <MainInput value={title} onChange={setTitle} />
           <ComboBox
-            Size={{ width: '100%', height: '40px' }}
+            Size={{ width: '100%', height: '4rem' }}
             value={coverLetterTitle}
             onChange={(e) => changeCoverLetter(e)}
             optionList={coverLtters}
           />
-          <BaseArea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+          <MainTextArea
+            text={content}
+            setText={setContent}
+            placeholder="질문을 작성해주세요."
+            sx={{ height: '50rem', minHeight: '50rem' }}
           />
-          <BaseButton
-            $Size={{ width: '100%', font: '15px' }}
-            onClick={handleSubmit}
-          >
-            작성완료
-          </BaseButton>
+          <MainButton
+            label="작성완료"
+            onAction={handleSubmit}
+            sx={{
+              width: '100%',
+              minHeight: '4rem',
+              fontSize: '1.6rem',
+              backgroundColor: 'red',
+            }}
+          />
         </LeftContainer>
         <RigthContainer>
           <CoverLetterDetail essayId={essayId} />

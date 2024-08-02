@@ -3,9 +3,9 @@ import {
 } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-import ResizeableTextarea from './ResizeableTextarea';
+import MainTextarea from './MainTextarea';
 
-describe('ResizeableTextarea', () => {
+describe('MainTextarea', () => {
   let initialText = '';
   const context = describe;
   const placeHolderText = '텍스트를입력하세요.';
@@ -16,11 +16,10 @@ describe('ResizeableTextarea', () => {
 
   const renderResizeableTextarea = () => render(
     <TestProvider>
-      <ResizeableTextarea
+      <MainTextarea
         text={initialText}
         setText={mockSetText}
         placeholder={placeHolderText}
-        maxSize={10}
       />
     </TestProvider>,
   );
@@ -43,18 +42,11 @@ describe('ResizeableTextarea', () => {
       renderResizeableTextarea();
 
       const textarea = screen.getByPlaceholderText(placeHolderText) as HTMLTextAreaElement;
-      const newText = '높이가 조정되어야한다.높이가 조정되어야한다.';
+      const newText = '텍스트가 변경되어야 한다.';
 
       fireEvent.change(textarea, { target: { value: newText.repeat(5) } });
 
       expect(mockSetText).toHaveBeenCalledWith(newText.repeat(5));
     });
-  });
-
-  it('기본적으로 오버플로우가 숨겨져있다.', () => {
-    renderResizeableTextarea();
-    const textarea = screen.getByPlaceholderText(placeHolderText) as HTMLTextAreaElement;
-
-    expect(textarea).toHaveStyle('overflow-y: hidden');
   });
 });

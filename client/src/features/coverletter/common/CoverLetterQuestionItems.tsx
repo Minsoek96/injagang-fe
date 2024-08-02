@@ -35,7 +35,7 @@ function CoverLetterQuestionItems({
   const deAnswer = useDebounce(answer, 300);
 
   useEffect(() => {
-    if (questionRef.current) {
+    if (questionRef.current && !question) {
       questionRef.current.focus();
     }
   }, []);

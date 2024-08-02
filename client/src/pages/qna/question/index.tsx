@@ -12,7 +12,7 @@ const question = () => (
 export default question;
 
 const WirteStyle = styled.div`
-  ${styleMixin.Column()}
+  ${styleMixin.Column('flex-start')}
   height: 100vh;
   width: 100%;
 `;

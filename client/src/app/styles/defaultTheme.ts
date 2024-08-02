@@ -1,21 +1,20 @@
 const defaultTheme = {
   colors: {
-    primary: '#FCFCFC',
-    secondary: '#FCFCFC',
-    black: '#000000',
-    white: '#ffffff',
     bodyColor: '#F0F2F5',
-    button: '#f39214f2',
+    primary: '#FDFDFD',
+    button: '#FDFDFD',
     logo: '#000000',
     text: '#0f1419',
     highlight: '#fff',
 
-    svgColor: '#007FFF',
+    svgColor: '#27282b',
     svgOnColor: '#005FCC',
     mainLine: 'rgb(219, 220, 223)',
-    mainHover: 'rgba(0,0,0,15)',
+    mainHover: 'rgba(0, 0, 0, 0.1)',
     textArea: '#F0F2F5',
+
     dropBoxColor: '#2e2e2e',
+    brandColor: '#e00000',
   },
 };
 export default defaultTheme;

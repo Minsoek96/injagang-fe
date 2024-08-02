@@ -2,7 +2,7 @@ import { useModalStore } from '@/src/shared/store';
 
 import { styled } from 'styled-components';
 
-import { BaseButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/components/button';
 
 const MODAL_CLOSE_DELAY = 50;
 
@@ -32,27 +32,24 @@ export default function RenderModal() {
         </div>
         {modalState.onAction ? (
           <div className="modal_Controller">
-            <BaseButton
-              $Size={{ width: '150px', font: '15px' }}
-              onClick={actionModal}
-            >
-              예
-            </BaseButton>
-            <BaseButton
-              $Size={{ width: '150px', font: '15px' }}
-              onClick={closeModal}
-            >
-              아니오
-            </BaseButton>
+            <MainButton
+              label="예"
+              onAction={actionModal}
+              sx={{ width: '150px', fontSize: '15px' }}
+            />
+            <MainButton
+              label="아니요"
+              onAction={closeModal}
+              sx={{ width: '150px', fontSize: '15px' }}
+            />
           </div>
         ) : (
           <div className="modal_center_btn">
-            <BaseButton
-              $Size={{ width: '250px', font: '15px' }}
-              onClick={closeModal}
-            >
-              확인
-            </BaseButton>
+            <MainButton
+              label="확인"
+              onAction={closeModal}
+              sx={{ width: '150px', fontSize: '15px' }}
+            />
           </div>
         )}
       </ModalBox>
@@ -72,29 +69,29 @@ const ModalStyle = styled.div<ModalStyleProps>`
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100dvw;
   background-color: rgba(36, 31, 31, 0.5);
 `;
 
 const ModalBox = styled.div`
   display: flex;
   flex-direction: column;
-  height: 250px;
-  width: 500px;
-  border-radius: 15px;
+  height: 25rem;
+  width: 50rem;
+  border-radius: 1.5rem;
   background-color: #0a0a0aee;
   .modal_Contents {
     display: flex;
     flex-direction: column;
-    height: 200px;
+    height: 20rem;
   }
   .modal_Contents h2 {
     color: red;
-    margin: 20px;
+    margin: 2rem;
   }
   .modal_Contents p {
-    margin-top: 20px;
+    margin-top: 2rem;
     text-align: center;
     color: #e6dfdf;
   }
@@ -102,12 +99,12 @@ const ModalBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 10px;
+    padding: 0.5em;
   }
   .modal_center_btn {
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 10px;
+    padding: 0.5em;
   }
 `;

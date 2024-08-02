@@ -37,7 +37,7 @@ const ToastMessage = styled.div<{ mode: toastType.TOAST_MODE }>`
     }
   }};
   color: black;
-  font-size: 1.2rem;
+  font-size: 2rem;
   padding: 10px 20px;
   margin-top: 10px;
   border-radius: 5px;

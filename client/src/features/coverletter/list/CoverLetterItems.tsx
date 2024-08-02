@@ -48,7 +48,7 @@ const CoverLetterItemsContainer = styled.div<{ $isActive: boolean }>`
 
 const HideSvg = styled.div`
   ${styleMixin.Flex()}
-  color: ${(props) => props.theme.colors.button};
+  color: ${(props) => props.theme.colors.brandColor};
   span {
     display: none;
   }

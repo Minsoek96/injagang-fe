@@ -5,6 +5,7 @@ type BaseProps = {
     onAction: () => void;
     label: string | React.ReactNode;
     sx?: CSSProperties;
+    isActive? :boolean;
   };
 
 export {
