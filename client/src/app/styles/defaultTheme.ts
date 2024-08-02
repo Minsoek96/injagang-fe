@@ -1,11 +1,8 @@
 const defaultTheme = {
   colors: {
-    primary: '#FCFCFC',
-    secondary: '#FCFCFC',
-    black: '#000000',
-    white: '#ffffff',
     bodyColor: '#F0F2F5',
-    button: '#fffffff',
+    primary: '#FDFDFD',
+    button: '#FDFDFD',
     logo: '#000000',
     text: '#0f1419',
     highlight: '#fff',

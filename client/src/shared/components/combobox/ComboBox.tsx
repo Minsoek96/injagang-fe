@@ -68,4 +68,5 @@ const MenuSelect = styled.select<SelectProps>`
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
+  border: .1em solid ${({ theme }) => theme.colors.mainLine}
 `;

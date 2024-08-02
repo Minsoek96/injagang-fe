@@ -29,7 +29,7 @@ export const CoverLetterListContainer = styled.div`
   ${styleMixin.Column()}
   ${styleMixin.ScrollBar}
   width: 100%;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
   border-radius: 5px;
   height: 35rem;
   margin: 0.5rem auto;

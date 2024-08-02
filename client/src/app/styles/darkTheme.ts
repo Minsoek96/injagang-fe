@@ -2,15 +2,12 @@ import Theme from './theme';
 
 const darkTheme: Theme = {
   colors: {
-    secondary: '#242526',
+    bodyColor: 'RGB(24, 25, 26)',
     primary: '#242526',
     button: '#444',
     logo: '#ffffff',
     text: '#fff',
     highlight: '#b32eb3',
-    black: '#000000',
-    white: '#ffffff',
-    bodyColor: 'RGB(24, 25, 26)',
 
     svgColor: '#ffffff',
     svgOnColor: '#007FFF',

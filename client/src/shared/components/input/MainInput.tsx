@@ -31,7 +31,7 @@ const Input = styled.input`
   height: 4rem;
   border-radius: 0.8rem;
   border: 0.1em solid ${(props) => props.theme.colors.mainLine};
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.text};
   padding: 0.8em 0.16em;
 `;

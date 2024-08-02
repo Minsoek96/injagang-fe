@@ -76,15 +76,13 @@ function List({ dehydratedState }: ListProps) {
         />
       </BoardHeader>
       <HydrationBoundary state={dehydratedState}>
-        {data?.boardInfos.length && (
-          <BoardListView
-            boardInfos={data?.boardInfos || []}
-            idKey={ID_KEY}
-            headItem={HEAD_ITEM}
-            tableKey={TABLE_KEYS}
-            route={ROUTE_TEMPLATE}
-          />
-        )}
+        <BoardListView
+          boardInfos={data?.boardInfos || []}
+          idKey={ID_KEY}
+          headItem={HEAD_ITEM}
+          tableKey={TABLE_KEYS}
+          route={ROUTE_TEMPLATE}
+        />
         <PageNation />
         <BoardSearch />
       </HydrationBoundary>
@@ -96,14 +94,10 @@ export default List;
 
 const ListStyle = styled.div`
   ${styleMixin.Column('flex-start')}
-  > button {
-    display: flex;
-    flex-direction: flex-end;
-  }
   width: 100%;
 `;
 
 const BoardHeader = styled(Container.ItemBase)`
-${styleMixin.Flex('flex-end')}
-  max-width: 100%;
+  ${styleMixin.Flex('flex-end')}
+  width: 100%;
 `;

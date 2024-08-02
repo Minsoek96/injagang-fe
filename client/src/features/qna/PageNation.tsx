@@ -5,9 +5,8 @@ import styled from 'styled-components';
 import { usePageNation } from '@/src/shared/hooks';
 
 import { MainButton } from '@/src/shared/components/button';
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
-// TODO : 너무 복잡한 의존성으로 엮여있음 끊어내기 로직 변경
 function PageNation() {
   const {
     curPageNum,
@@ -20,15 +19,17 @@ function PageNation() {
   return (
     <Container>
       <MainButton label="<" onAction={handlePrevClick} />
-      {visiblePageNumbers.map((pageNum) => (
-        <MainButton
-          key={pageNum}
-          label={`${pageNum}`}
-          isActive={pageNum === curPageNum}
-          onAction={() => handlePageClick(pageNum)}
-          sx={{ marginInline: '.2rem' }}
-        />
-      ))}
+      <PageButtonContainer>
+        {visiblePageNumbers.map((pageNum) => (
+          <MainButton
+            key={pageNum}
+            label={`${pageNum}`}
+            isActive={pageNum === curPageNum}
+            onAction={() => handlePageClick(pageNum)}
+            sx={{ marginInline: '.2rem' }}
+          />
+        ))}
+      </PageButtonContainer>
       <MainButton label=">" onAction={handleNextClick} />
     </Container>
   );
@@ -38,7 +39,21 @@ export default memo(PageNation);
 
 const Container = styled.div`
  ${styleMixin.Flex()}
+
  button {
   font-size: 1.8rem;
+ }
+
+ @media screen and (max-width: ${V.mediaMobile}){
+  ${styleMixin.Flex('space-between')}
+  width: 100%;
+ }
+`;
+
+const PageButtonContainer = styled.div`
+ ${styleMixin.Flex()}
+
+ @media screen and (max-width: ${V.mediaMobile}){
+    display:none;
  }
 `;

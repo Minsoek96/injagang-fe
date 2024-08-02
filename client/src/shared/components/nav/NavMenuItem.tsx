@@ -49,7 +49,7 @@ const MenuWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  color: ${({ theme }) => theme.colors.white};
+  color: white;
 
 
   > i {

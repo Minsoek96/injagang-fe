@@ -2,7 +2,7 @@ import { useModalStore } from '@/src/shared/store';
 
 import { styled } from 'styled-components';
 
-import { BaseButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/components/button';
 
 const MODAL_CLOSE_DELAY = 50;
 
@@ -32,27 +32,24 @@ export default function RenderModal() {
         </div>
         {modalState.onAction ? (
           <div className="modal_Controller">
-            <BaseButton
-              $Size={{ width: '150px', font: '15px' }}
-              onClick={actionModal}
-            >
-              예
-            </BaseButton>
-            <BaseButton
-              $Size={{ width: '150px', font: '15px' }}
-              onClick={closeModal}
-            >
-              아니오
-            </BaseButton>
+            <MainButton
+              label="예"
+              onAction={actionModal}
+              sx={{ width: '150px', fontSize: '15px' }}
+            />
+            <MainButton
+              label="아니요"
+              onAction={closeModal}
+              sx={{ width: '150px', fontSize: '15px' }}
+            />
           </div>
         ) : (
           <div className="modal_center_btn">
-            <BaseButton
-              $Size={{ width: '250px', font: '15px' }}
-              onClick={closeModal}
-            >
-              확인
-            </BaseButton>
+            <MainButton
+              label="확인"
+              onAction={closeModal}
+              sx={{ width: '150px', fontSize: '15px' }}
+            />
           </div>
         )}
       </ModalBox>
@@ -102,12 +99,12 @@ const ModalBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: .5em;
+    padding: 0.5em;
   }
   .modal_center_btn {
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: .5em;
+    padding: 0.5em;
   }
 `;

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
-import { BaseInput } from '@/src/shared/components/input';
+import { MainInput } from '@/src/shared/components/input';
 
 import { useDebounce } from '@/src/shared/hooks';
 import { ComboBox } from '@/src/shared/components/combobox';
 
+import { styleMixin } from '@/src/shared/styles';
 import userQnaManager from './hooks/userQnaManager';
 
 const typeList = [
@@ -25,10 +26,6 @@ function BoardSearch() {
     }
   }, [debounceSearch]);
 
-  const changeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
-
   const changeType = (newType: string) => {
     const findType = typeList.find((item) => item.title === newType);
     setType(newType);
@@ -42,20 +39,15 @@ function BoardSearch() {
   return (
     <Container>
       <ComboBox
-        Size={{ width: '150px', height: '40px' }}
         value={type}
         optionList={typeList}
         onChange={changeType}
+        sx={{ height: '4rem' }}
       />
-      <Label htmlFor="searchInput" className="sr-only">
+      <label htmlFor="searchInput" className="sr-only">
         검색 :
-      </Label>
-      <InputStyle
-        type="text"
-        id="searchInput"
-        value={search}
-        onChange={changeSearch}
-      />
+      </label>
+      <MainInput id="searchInput" value={search} onChange={setSearch} />
     </Container>
   );
 }
@@ -63,15 +55,7 @@ function BoardSearch() {
 export default BoardSearch;
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${styleMixin.Flex()}
   gap: 3px;
+  margin: 1.2rem;
 `;
-
-const InputStyle = styled(BaseInput)`
-  width: 350px;
-  margin-top: 16.4px;
-`;
-
-const Label = styled.label``;

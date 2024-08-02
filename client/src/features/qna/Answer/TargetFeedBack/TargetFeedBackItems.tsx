@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { BaseButton } from '@/src/shared/components/button';
 import { BaseCard } from '@/src/shared/components/card';
 
-import { BaseArea } from '@/src/shared/components/textarea';
+import { MainTextArea } from '@/src/shared/components/textarea';
 
 import { styleMixin } from '@/src/shared/styles';
 
@@ -65,9 +65,10 @@ function FeedBackItems({
           <h4 className="correction_sentence">{target}</h4>
         </CorrectionContainer>
         <CommentTop>
-          <BaseArea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+          <MainTextArea
+            placeholder="피드백을 입력해주세요."
+            text={text}
+            setText={setText}
             readOnly={isReadOnly}
           />
         </CommentTop>

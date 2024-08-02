@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+
 import BoardListHead from '@/src/widgets/board/BoardListHead';
 import BoardListItem from './BoardListItem';
 
@@ -57,7 +58,7 @@ const BoardConatainer = styled.table`
 
 const BoardBody = styled.tbody`
   cursor: pointer;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
 
   tr {
     border-bottom: 0.1em solid ${(props) => props.theme.colors.mainLine};
