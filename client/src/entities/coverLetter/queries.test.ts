@@ -3,6 +3,7 @@ import {
   responseDetailCoverLetter,
 } from '@/fixutures/entities/coverLetter';
 import TestProvider from '@/fixutures/TestProvider';
+import { useAuthStore } from '@/src/entities/auth';
 import {
   getCoverLetter,
   getDetailCoverLetter,
@@ -11,7 +12,7 @@ import {
   useFetchCoverLetter,
   useFetchDetailCoverLetter,
 } from '@/src/entities/coverLetter/queries';
-import { renderHook, waitFor } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 
 jest.mock('./apis');
 
@@ -20,6 +21,8 @@ describe('queries', () => {
     jest.clearAllMocks();
   });
   it('유저의 자기소개서를 가져온다.', async () => {
+    act(() => useAuthStore.getState().setUserId('test'));
+
     (getCoverLetter as jest.Mock).mockResolvedValueOnce({
       data: responseCoverLetters,
     });
