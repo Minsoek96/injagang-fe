@@ -2,6 +2,7 @@ const defaultTheme = {
   colors: {
     bodyColor: '#F0F2F5',
     primary: '#FDFDFD',
+    signatureColor: '#ff8800',
     button: '#FDFDFD',
     logo: '#000000',
     text: '#0f1419',

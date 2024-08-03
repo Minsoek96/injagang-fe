@@ -43,7 +43,6 @@ export default Layout;
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 `;
 
 const MainContent = styled.main`
@@ -51,6 +50,6 @@ const MainContent = styled.main`
   flex: 1;
   width: 100%;
   max-width: 135rem;
-  margin: 10rem auto 0;
-  padding: 2rem;
+  padding: 3rem;
+  margin: 0 auto;
 `;

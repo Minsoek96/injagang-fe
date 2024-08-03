@@ -30,7 +30,6 @@ function BoardListLayout<T>({
 export default BoardListLayout;
 
 const BoardListViewStyle = styled(Container.ItemBase)`
+  margin-block: 3rem;
   max-width: 100%;
-  margin: 30px auto;
-
 `;

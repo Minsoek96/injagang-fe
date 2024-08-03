@@ -12,6 +12,7 @@ const useLoginLogic = () => {
     password: '',
   });
   const [userLogicMsg, setUserLogicMsg] = useState('');
+
   const refs: { [key: string]: React.RefObject<HTMLInputElement> } = {
     loginIdRef: useRef<HTMLInputElement>(null),
     passwordRef: useRef<HTMLInputElement>(null),

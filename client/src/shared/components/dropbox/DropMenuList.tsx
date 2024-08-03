@@ -9,7 +9,7 @@ type Props = {
   offBox: () => void;
 };
 
-export default function DropMenuList({ dropList = [], offBox }: Props) {
+export default function DropMenuList({ dropList, offBox }: Props) {
   if (!dropList.length) {
     return (
       <p>Empty</p>

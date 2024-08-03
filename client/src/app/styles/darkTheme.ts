@@ -4,6 +4,7 @@ const darkTheme: Theme = {
   colors: {
     bodyColor: 'RGB(24, 25, 26)',
     primary: '#242526',
+    signatureColor: '#ff8800',
     button: '#444',
     logo: '#ffffff',
     text: '#fff',

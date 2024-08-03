@@ -3,6 +3,7 @@ import { memo } from 'react';
 import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
+import { MarkdownPreview } from '@/src/shared/components';
 
 interface BoardItemProps {
   title: string;
@@ -24,10 +25,7 @@ function BoardItem({ title, nickname, content }: BoardItemProps) {
         작성자:
         {nickname}
       </h4>
-      <h4 className="board_content">
-        {' '}
-        {content}
-      </h4>
+      <MarkdownPreview content={content} />
     </BoardItemContainer>
   );
 }
@@ -43,13 +41,5 @@ const BoardItemContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     text-decoration: underline;
-  }
-  .board_content {
-    margin-top: 15px;
-    width: 100%;
-    display: flex;
-    font-weight: normal;
-    justify-content: flex-start;
-    line-height: 1.8;
   }
 `;

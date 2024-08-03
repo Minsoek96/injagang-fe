@@ -60,22 +60,23 @@ function List({ dehydratedState }: ListProps) {
 
   return (
     <ListStyle>
-      <BoardHeader>
-        <MainButton
-          label={(
-            <span>
-              <MdOutlineModeEditOutline />
-              글쓰기
-            </span>
-          )}
-          onAction={() => router.push('/qna/question')}
-          sx={{
-            fontSize: '1.5rem',
-            padding: '1rem 2rem',
-          }}
-        />
-      </BoardHeader>
       <HydrationBoundary state={dehydratedState}>
+        <BoardHeader>
+          <BoardSearch />
+          <MainButton
+            label={(
+              <span>
+                <MdOutlineModeEditOutline />
+                글쓰기
+              </span>
+            )}
+            onAction={() => router.push('/qna/question')}
+            sx={{
+              fontSize: '1.5rem',
+              padding: '1rem 2rem',
+            }}
+          />
+        </BoardHeader>
         <BoardListView
           boardInfos={data?.boardInfos || []}
           idKey={ID_KEY}
@@ -84,7 +85,6 @@ function List({ dehydratedState }: ListProps) {
           route={ROUTE_TEMPLATE}
         />
         <PageNation />
-        <BoardSearch />
       </HydrationBoundary>
     </ListStyle>
   );
@@ -93,11 +93,11 @@ function List({ dehydratedState }: ListProps) {
 export default List;
 
 const ListStyle = styled.div`
-  ${styleMixin.Column('flex-start')}
+  ${styleMixin.Column('flex-start', 'center')}
   width: 100%;
 `;
 
 const BoardHeader = styled(Container.ItemBase)`
   ${styleMixin.Flex('flex-end')}
-  width: 100%;
+  max-width: 100%;
 `;

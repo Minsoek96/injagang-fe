@@ -9,17 +9,12 @@ function CoverLetterItem({ answer, question }: CoverLetterDetailItemsProps) {
   return (
     <CoverLetterDetailItemsStyle>
       <CoverLetterQuestionContainer>
-        <h4 className="coverletter_question">
-          <span>질문:</span>
-          {' '}
-          {question}
-        </h4>
+        <span>질문 : </span>
+        <p>{question}</p>
       </CoverLetterQuestionContainer>
       <CoverLetterAnswerContainer>
-        <p>답변:</p>
-        {' '}
-        {answer}
-        {' '}
+        <span>답변:</span>
+        <p>{answer}</p>
       </CoverLetterAnswerContainer>
     </CoverLetterDetailItemsStyle>
   );
@@ -28,15 +23,22 @@ function CoverLetterItem({ answer, question }: CoverLetterDetailItemsProps) {
 export default CoverLetterItem;
 
 const CoverLetterDetailItemsStyle = styled.div`
-  margin-bottom: 50px;
+  word-break: break-all;
+  span {
+    color :${(props) => props.theme.colors.signatureColor};
+  }
 `;
 const CoverLetterQuestionContainer = styled.div`
-  border-top: 1.5px solid #e4dddd;
-  border-bottom: 1.5px solid #e4dddd;
-  padding: 12px;
-  margin: 15px auto;
-  font-size: 14px;
+  font-size: 1.8rem;
+  padding-block: 0.8em;
+  border-top: .1em solid ${(props) => props.theme.colors.mainLine};
+  border-bottom: .1em solid ${(props) => props.theme.colors.mainLine};
+  margin: 1.5rem auto;
   line-height: 1.45;
+
+  p {
+    display: inline-block;
+  }
 `;
 
 const CoverLetterAnswerContainer = styled.div`

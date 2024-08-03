@@ -21,7 +21,7 @@ describe('queries', () => {
     jest.clearAllMocks();
   });
   it('유저의 자기소개서를 가져온다.', async () => {
-    act(() => useAuthStore.getState().setUserId('test'));
+    act(() => useAuthStore.getState().setUserInfo('test', 'USER'));
 
     (getCoverLetter as jest.Mock).mockResolvedValueOnce({
       data: responseCoverLetters,

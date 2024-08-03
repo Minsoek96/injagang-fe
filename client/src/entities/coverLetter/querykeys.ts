@@ -1,6 +1,6 @@
 const coverLetter = {
   all: ['coverLetter'],
-  list: (id: string|number) => [...coverLetter.all, id, 'list'],
+  list: (id: string|null) => [...coverLetter.all, id, 'list'],
   detail: (id: number) => [...coverLetter.all, 'detail', id],
 };
 

@@ -7,11 +7,11 @@ import { getCoverLetter, getDetailCoverLetter } from './apis';
 
 /** 자기소개서 목록 조회 */
 const useFetchCoverLetter = () => {
-  const { userId } = useAuthStore();
+  const { nickName } = useAuthStore();
   return useQuery({
-    queryKey: coverLetter.list(userId || ''),
+    queryKey: coverLetter.list(nickName),
     queryFn: () => getCoverLetter(),
-    enabled: !!userId,
+    enabled: !!nickName,
   });
 };
 /** 자기소개서 상세 조회 */

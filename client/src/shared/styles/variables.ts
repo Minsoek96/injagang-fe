@@ -1,6 +1,6 @@
 const V = {
   // device
-  mediaMobile: '500px',
+  mediaMobile: '560px',
   mediaTablet: '800px',
   mediaWeb: '1300px',
 
@@ -22,7 +22,7 @@ const V = {
   // Heights
   smHeight: '25rem',
   mdHeight: '35rem',
-  lgHeight: '50rem',
+  lgHeight: '90rem',
 
   // Margins
   smMargin: '1rem',

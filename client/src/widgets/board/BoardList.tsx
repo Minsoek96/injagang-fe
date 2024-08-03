@@ -43,6 +43,7 @@ const BoardConatainer = styled.table`
   border-collapse: collapse;
   border-radius: 1rem;
   overflow: hidden;
+  table-layout: fixed;
 
   thead {
     font-weight: bold;
@@ -53,6 +54,16 @@ const BoardConatainer = styled.table`
   td {
     padding: 1.5rem;
     text-align: left;
+    word-wrap: break-word;
+  }
+  th:first-child,
+  td:first-child {
+    width: 7rem;
+  }
+
+  th:last-child,
+  td:last-child {
+    width: 10rem;
   }
 `;
 
@@ -62,12 +73,6 @@ const BoardBody = styled.tbody`
 
   tr {
     border-bottom: 0.1em solid ${(props) => props.theme.colors.mainLine};
-    td {
-      width: 40%;
-    }
-    td:first-child {
-      width: 10%;
-    }
   }
 
   tr:hover {

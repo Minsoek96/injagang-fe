@@ -15,7 +15,7 @@ type DropBoxProps = {
 export default function DropBox({
   buttonContent,
   dropStyles = {},
-  dropList = [],
+  dropList,
 }: DropBoxProps) {
   const [isOpen, setIsOpen] = useState(false);
 

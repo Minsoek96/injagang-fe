@@ -10,19 +10,25 @@ interface CoverLetterProps {
   essayId: number;
 }
 
-function CoverLetterDetail({ essayId = 0 }: CoverLetterProps) {
+function CoverLetterDetail({ essayId }: CoverLetterProps) {
   const { data: coverLetterDetail } = useFetchDetailCoverLetter(essayId);
 
+  if (essayId === 0) {
+    return (
+      <div>
+        <p>선택된 값이 없습니다.</p>
+        <p>새로운 자소서를 첨부해주세요 ..</p>
+      </div>
+    );
+  }
   return (
     <CoverLetterDetailStyle>
       {coverLetterDetail && (
-        <CoverLetterContainer key={coverLetterDetail.essayId}>
-          <h2 className="essay_title">{coverLetterDetail.title}</h2>
-          <>
-            {coverLetterDetail.qnaList.map((qna) => (
-              <CoverLetterItem key={qna.qnaId} {...qna} />
-            ))}
-          </>
+        <CoverLetterContainer>
+          <SelectedTtile>{coverLetterDetail.title}</SelectedTtile>
+          {coverLetterDetail.qnaList.map((qna) => (
+            <CoverLetterItem key={qna.qnaId} {...qna} />
+          ))}
         </CoverLetterContainer>
       )}
     </CoverLetterDetailStyle>
@@ -33,18 +39,13 @@ export default memo(CoverLetterDetail);
 
 const CoverLetterDetailStyle = styled.div`
   ${styleMixin.ScrollBar}
-  padding: 15px;
-  background-color: #191919;
-  border-radius: 10.5px;
-  color: #dad6d1;
-  height: 100vh;
-  width: 100%;
+  color: ${(props) => props.theme.text};
   word-break: break-all;
   overflow-x: hidden;
 `;
-const CoverLetterContainer = styled.div`
-  .essay_title {
-    text-align: center;
-    color: #fff;
-  }
+const CoverLetterContainer = styled.div``;
+
+const SelectedTtile = styled.h2`
+  color: ${(props) => props.theme.colors.signatureColor};
+  font-size: 3rem;
 `;
