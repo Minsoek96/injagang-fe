@@ -4,6 +4,8 @@ import { memo, useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import DOMPurify from 'dompurify';
+
 import MarkdownIt from 'markdown-it';
 import 'react-markdown-editor-lite/lib/index.css';
 
@@ -39,7 +41,7 @@ function MarkdownEditor({
     <Container>
       <MdEditor
         value={value}
-        renderHTML={(text) => mdParser.render(text)}
+        renderHTML={(text) => DOMPurify.sanitize(mdParser.render(text))}
         onChange={handleEditorChange}
         placeholder={placeholder}
         view={{
