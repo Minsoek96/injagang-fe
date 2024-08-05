@@ -13,6 +13,7 @@ type ResizableTextareaProps = {
   placeholder: string;
   maxSize: number;
   sx?:CSSProperties;
+  readOnly?: boolean;
 };
 
 const ResizableTextarea = forwardRef(
@@ -23,6 +24,7 @@ const ResizableTextarea = forwardRef(
       placeholder,
       maxSize = 30,
       sx = {},
+      readOnly = false,
     }: ResizableTextareaProps,
     fwRef?: ForwardedRef<HTMLTextAreaElement>,
   ) => {
@@ -50,6 +52,7 @@ const ResizableTextarea = forwardRef(
         onChange={(e) => setText(e.target.value)}
         placeholder={placeholder}
         style={sx}
+        readOnly={readOnly}
       />
     );
   },

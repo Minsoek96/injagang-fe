@@ -42,12 +42,12 @@ function BoardSearch() {
         value={type}
         optionList={typeList}
         onChange={changeType}
-        sx={{ height: '4rem' }}
+        sx={{ height: '4rem', minWidth: '4rem' }}
       />
       <label htmlFor="searchInput" className="sr-only">
         검색 :
       </label>
-      <MainInput id="searchInput" value={search} onChange={setSearch} />
+      <MainInput id="searchInput" value={search} onChange={setSearch} sx={{ marginInline: '.1rem' }} />
     </Container>
   );
 }
@@ -56,6 +56,4 @@ export default BoardSearch;
 
 const Container = styled.div`
   ${styleMixin.Flex()}
-  gap: 3px;
-  margin: 1.2rem;
 `;

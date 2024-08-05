@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 interface DraggedAnswerProps {
   startText: string;
   selectedText: string;
@@ -16,10 +18,14 @@ export default function DraggedAnswer({
   return (
     <>
       {startText}
-      <span style={{ backgroundColor: selectedColor }} onClick={onRemove}>
+      <SeletedTextWrapper style={{ backgroundColor: selectedColor }} onClick={onRemove}>
         {selectedText}
-      </span>
+      </SeletedTextWrapper>
       {endText}
     </>
   );
 }
+
+const SeletedTextWrapper = styled.span`
+  color: ${(props) => props.theme.colors.text}!important;
+`;

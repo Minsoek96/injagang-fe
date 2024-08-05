@@ -30,4 +30,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export { default } from '@/src/pages/qna/answer';
+export { default } from '@/src/pages/qna/detail';

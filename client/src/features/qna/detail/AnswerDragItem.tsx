@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useState } from 'react';
 
-import styled from 'styled-components';
-
 import { boardType } from '@/src/entities/qnaboard';
-import ColorPicker from './ColorPicker';
+import { S } from '@/src/features/qna/style';
 
-import { ISelectedText } from '../../hooks/useDragCorrection';
+import { ISelectedText } from '../hooks/useDragCorrection';
 import DraggedAnswer from './DraggedAnswer';
 
 interface AnswerDragItemProps {
@@ -24,7 +22,7 @@ function AnswerDragItem({
   selectedText,
   index,
 }: AnswerDragItemProps) {
-  const [selectedColor, setSelectedColor] = useState('#e69a0def');
+  const [selectedColor] = useState('#e69a0def');
   const { selectedText: preSelectedText } = selectedText;
   const { qnaId, question, answer } = list;
 
@@ -36,15 +34,15 @@ function AnswerDragItem({
   );
 
   return (
-    <EssayDragItems>
-      <EssayQuestionContainer>
+    <S.detailItmes>
+      <S.questionContainer>
         <h4 className="essay_question">
           <span>질문:</span>
           {' '}
           {question}
         </h4>
-      </EssayQuestionContainer>
-      <EssayAnswerContainer>
+      </S.questionContainer>
+      <S.answerContainer>
         <span>답변</span>
         <p
           className="essay_answer"
@@ -62,43 +60,9 @@ function AnswerDragItem({
             answer
           )}
         </p>
-      </EssayAnswerContainer>
-      <ColorPicker
-        onSelectColor={(color) => {
-          setSelectedColor(color);
-        }}
-      />
-    </EssayDragItems>
+      </S.answerContainer>
+    </S.detailItmes>
   );
 }
 
 export default AnswerDragItem;
-
-const EssayDragItems = styled.div`
-  margin: 30px auto;
-  font-family: "Noto Sans KR", sans-serif;
-  .essay_question {
-    margin-bottom: 15px;
-    > span {
-    }
-  }
-  .essay_answer {
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 1.7em;
-  }
-`;
-
-const EssayQuestionContainer = styled.div`
-  border-top: 1.5px solid #e4dddd;
-  border-bottom: 1.5px solid #e4dddd;
-  padding: 12px;
-  margin: 15px auto;
-  font-size: 14px;
-  line-height: 1.45;
-`;
-
-const EssayAnswerContainer = styled.div`
-  padding: 12px;
-  line-height: 1.6;
-`;

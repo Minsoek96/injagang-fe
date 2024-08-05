@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useBoardStore, useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
 import { feedbackType } from '@/src/entities/feedback';
 
+// TODO 지우기 복잡한 관계를 만듬
 const useQnaManagerStore = () => {
   const { correction, setCorrection, initCorrection } = useCorrectionStore();
   const {

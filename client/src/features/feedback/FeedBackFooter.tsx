@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { BaseButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/components/button';
+import { V } from '@/src/shared/styles';
 import TextActionBtns from './TextActionBtns';
 
 interface FeedBackFooterProps {
@@ -22,14 +23,13 @@ function FeedBackFooter({
     <CommentFooter>
       <FeedBackViewBtns>
         {qnaIdList.map((list, i) => (
-          <BaseButton
-            className={list === feedBackIndex ? 'active_button' : ' '}
-            $Size={{ width: '40px', font: '15px' }}
-            onClick={() => handleFeedBackIndex(list)}
+          <MainButton
+            isActive={list === feedBackIndex}
+            sx={{ width: '4rem', fontSize: '1.6rem' }}
+            onAction={() => handleFeedBackIndex(list)}
+            label={`${i + 1}`}
             key={list}
-          >
-            {`${i + 1}`}
-          </BaseButton>
+          />
         ))}
       </FeedBackViewBtns>
       <TextActionBtns handleClear={handleClear} handleSubmit={handleSubmit} />
@@ -47,7 +47,10 @@ const CommentFooter = styled.div`
 `;
 
 const FeedBackViewBtns = styled.div`
-  button {
-    margin-right: 3px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap:.3rem;
+  @media screen and (max-width:${V.mediaMobile}){
+    grid-template-columns: 1fr 1fr
   }
 `;

@@ -21,8 +21,9 @@ export default function Header() {
 }
 
 const HeaderContainer = styled.header`
- z-index: 9999;
-  position: sticky;
+  z-index: 9999;
+  position: fixed;
+  top: 0;
   ${styleMixin.Flex()}
   width: 100%;
   height: 6.5rem;

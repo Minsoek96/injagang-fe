@@ -12,7 +12,7 @@ import { MdOutlineModeEditOutline } from 'react-icons/md';
 import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 
 import { MainButton } from '@/src/shared/components/button';
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 import {
   HEAD_ITEM,
@@ -74,6 +74,7 @@ function List({ dehydratedState }: ListProps) {
             sx={{
               fontSize: '1.5rem',
               padding: '1rem 2rem',
+              height: '100%',
             }}
           />
         </BoardHeader>
@@ -100,4 +101,16 @@ const ListStyle = styled.div`
 const BoardHeader = styled(Container.ItemBase)`
   ${styleMixin.Flex('flex-end')}
   max-width: 100%;
+  height: 4rem;
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    button {
+      font-size: 1.3rem !important;
+      width: 10rem;
+
+      svg {
+        display: none;
+      }
+    }
+  }
 `;

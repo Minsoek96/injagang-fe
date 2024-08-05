@@ -7,7 +7,7 @@ const darkTheme: Theme = {
     signatureColor: '#ff8800',
     button: '#444',
     logo: '#ffffff',
-    text: '#fff',
+    text: '#fdfdfd',
     highlight: '#b32eb3',
 
     svgColor: '#ffffff',
@@ -18,6 +18,8 @@ const darkTheme: Theme = {
 
     dropBoxColor: '#fff',
     brandColor: '#e00000',
+
+    boardText: '#B8B8B8',
   },
 };
 

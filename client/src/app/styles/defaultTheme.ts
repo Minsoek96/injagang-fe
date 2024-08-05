@@ -16,6 +16,7 @@ const defaultTheme = {
 
     dropBoxColor: '#2e2e2e',
     brandColor: '#e00000',
+    boardText: '#0f1419',
   },
 };
 export default defaultTheme;

@@ -21,7 +21,7 @@ const Container = styled.div`
   width: 100%;
   padding: 1rem;
   background-color: ${(props) => props.theme.colors.bodyColor};
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.boardText};
   height: 100%;
   border-radius: 8px;
 `;

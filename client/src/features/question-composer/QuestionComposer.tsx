@@ -12,7 +12,7 @@ import {
   Container,
 } from '@/src/shared/components';
 
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 import CoverLetterDetail from '@/src/features/question-composer/CoverLetterDetail';
 
@@ -92,7 +92,7 @@ const ComposerContainer = styled(Container.ItemBase)`
   width: 100%;
   height: 100%;
   gap: 30px;
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: ${V.mediaWeb}) {
     ${styleMixin.Column('flex-start')}
   }
 `;

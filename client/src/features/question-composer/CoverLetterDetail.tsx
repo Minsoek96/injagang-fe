@@ -1,9 +1,6 @@
-import styled from 'styled-components';
-
-import { styleMixin } from '@/src/shared/styles';
-
 import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
 import { memo } from 'react';
+import { S } from '@/src/features/qna/style';
 import CoverLetterItem from './CoverLetterItem';
 
 interface CoverLetterProps {
@@ -22,30 +19,17 @@ function CoverLetterDetail({ essayId }: CoverLetterProps) {
     );
   }
   return (
-    <CoverLetterDetailStyle>
+    <S.container>
       {coverLetterDetail && (
-        <CoverLetterContainer>
-          <SelectedTtile>{coverLetterDetail.title}</SelectedTtile>
+        <>
+          <S.mainTitle>{coverLetterDetail.title}</S.mainTitle>
           {coverLetterDetail.qnaList.map((qna) => (
             <CoverLetterItem key={qna.qnaId} {...qna} />
           ))}
-        </CoverLetterContainer>
+        </>
       )}
-    </CoverLetterDetailStyle>
+    </S.container>
   );
 }
 
 export default memo(CoverLetterDetail);
-
-const CoverLetterDetailStyle = styled.div`
-  ${styleMixin.ScrollBar}
-  color: ${(props) => props.theme.text};
-  word-break: break-all;
-  overflow-x: hidden;
-`;
-const CoverLetterContainer = styled.div``;
-
-const SelectedTtile = styled.h2`
-  color: ${(props) => props.theme.colors.signatureColor};
-  font-size: 3rem;
-`;
