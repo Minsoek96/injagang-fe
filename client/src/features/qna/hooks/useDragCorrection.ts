@@ -1,80 +1,91 @@
+import { useCorrectionStore } from '@/src/entities/qnaboard';
+import { type } from '@/src/features/qna/common';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
 
 import { useModal } from '@/src/shared/hooks';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
-export interface ISelectedText {
-  dragTitleId: number;
-  targetId: number;
-  selectedText: string;
-  start: number;
-  end: number;
-  added: boolean;
-}
+export const initialState: type.SelectedText = {
+  dragTitleId: 0,
+  targetId: 0,
+  selectedText: '',
+  start: 0,
+  end: 0,
+  added: false,
+};
 
 const useDragCorrection = () => {
   const { setModal } = useModal();
-  const [selectedText, setSelectedText] = useState<ISelectedText>({
-    dragTitleId: 0,
-    targetId: 0,
-    selectedText: '',
-    start: 0,
-    end: 0,
-    added: false,
-  });
 
-  // TODO :  연속적인 if 제거
-  const handleCorrection = (dragTitleId: number, targetId: number) => {
-    const selected = window.getSelection()?.toString();
-    const isSelected = selected !== '' && selectedText.added;
-    if (selected) {
+  const { setCorrection, initCorrection } = useCorrectionStore();
+
+  const [selectedText, setSelectedText] = useState<type.SelectedText>(initialState);
+
+  // 선택된 텍스트가 원본 텍스트에 포함되어있는지 검증하는 함수
+  const validateSelectedText = (originText: string) => {
+    const selection = window.getSelection();
+    const selected = selection?.toString();
+    const check = originText.includes(selected || '!&!');
+    return check ? selected : check;
+  };
+
+  /** 첨삭 내용을 전달 받는 함수 */
+  const handleCorrection = useCallback(
+    (dragTitleId: number, targetId: number, originText: string) => {
+      const isSelected = selectedText.added;
       if (isSelected) {
         showWarring();
-      } else {
-        changeCorrection(selected, dragTitleId, targetId);
+        return;
       }
-    }
-  };
 
-  const changeCorrection = (
-    newSelectedText: string,
-    dragTitleId: number,
-    targetId: number,
-  ) => {
-    const range = window.getSelection()?.getRangeAt(0);
-    const start = range?.startOffset || 0;
-    const end = range?.endOffset || 0;
+      const selectedCorrection = validateSelectedText(originText);
+      selectedCorrection
+        && changeCorrection(selectedCorrection, dragTitleId, targetId);
+    },
+    [selectedText],
+  );
 
-    setSelectedText({
-      dragTitleId,
-      targetId,
-      selectedText: newSelectedText,
-      start,
-      end,
-      added: true,
-    });
-  };
+  // 첨삭을 반영하는 함수
+  const changeCorrection = useCallback(
+    (newSelectedText: string, dragTitleId: number, targetId: number) => {
+      const range = window.getSelection()?.getRangeAt(0);
+      const start = range?.startOffset || 0;
+      const end = range?.endOffset || 0;
 
-  const showWarring = () => {
+      setSelectedText({
+        dragTitleId,
+        targetId,
+        selectedText: newSelectedText,
+        start,
+        end,
+        added: true,
+      });
+
+      setCorrection({
+        targetQuestion: dragTitleId,
+        targetAnswer: newSelectedText,
+        targetQuestionIndex: targetId,
+      });
+    },
+    [],
+  );
+
+  // 모달에 경고메시지를 등록하는 함수
+  const showWarring = useCallback(() => {
     setModal({
       contents: {
         title: MODAL_MESSAGES.WARNING,
         message: ERROR_MESSAGES.DUPLICATION_TEXT,
       },
     });
-  };
+  }, []);
 
-  const removeCorrection = () => {
-    setSelectedText({
-      dragTitleId: 0,
-      targetId: 0,
-      selectedText: '',
-      start: 0,
-      end: 0,
-      added: false,
-    });
-  };
+  // 첨삭 삭제를 처리하는 함수
+  const removeCorrection = useCallback(() => {
+    setSelectedText(initialState);
+    initCorrection();
+  }, []);
 
   return {
     handleCorrection,
