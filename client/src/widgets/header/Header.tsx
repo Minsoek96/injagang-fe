@@ -21,14 +21,14 @@ export default function Header() {
 }
 
 const HeaderContainer = styled.header`
- z-index: 9999;
+  z-index: 9999;
   position: fixed;
+  top: 0;
   ${styleMixin.Flex()}
-  width: calc(100% + 5px);
+  width: 100%;
   height: 6.5rem;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
-  border-right: 0.5px solid rgba(236, 225, 225, 0.904);
   border-bottom: 0.15em solid ${(props) => props.theme.colors.mainLine};
 
   svg {

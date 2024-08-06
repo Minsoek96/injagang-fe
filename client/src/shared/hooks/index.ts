@@ -9,3 +9,4 @@ export { default as useSectionObserver } from './useSectionObserver';
 export { default as useThemeToggler } from './useThemeToggler';
 export { default as useToast } from './useToast';
 export { default as useWebSpeech } from './useWebSpeech';
+export { default as useDragCorrection } from './useDragCorrection';

@@ -2,6 +2,7 @@ const defaultTheme = {
   colors: {
     bodyColor: '#F0F2F5',
     primary: '#FDFDFD',
+    signatureColor: '#ff8800',
     button: '#FDFDFD',
     logo: '#000000',
     text: '#0f1419',
@@ -15,6 +16,8 @@ const defaultTheme = {
 
     dropBoxColor: '#2e2e2e',
     brandColor: '#e00000',
+    boardText: '#0f1419',
+    highlightColor: '#ff8800',
   },
 };
 export default defaultTheme;

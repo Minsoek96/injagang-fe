@@ -62,6 +62,7 @@ interface ModalStyleProps {
 }
 
 const ModalStyle = styled.div<ModalStyleProps>`
+  font-size: 1.8rem;
   z-index: 1000;
   display: ${(props) => (props.$isOpen ? 'flex' : 'none')};
   justify-content: center;

@@ -1,50 +1,35 @@
-import styled from 'styled-components';
-
-import { styleMixin } from '@/src/shared/styles';
-
 import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
 import { memo } from 'react';
+import { S } from '@/src/features/qna/common';
 import CoverLetterItem from './CoverLetterItem';
 
 interface CoverLetterProps {
   essayId: number;
 }
 
-function CoverLetterDetail({ essayId = 0 }: CoverLetterProps) {
+function CoverLetterDetail({ essayId }: CoverLetterProps) {
   const { data: coverLetterDetail } = useFetchDetailCoverLetter(essayId);
 
+  if (essayId === 0) {
+    return (
+      <div>
+        <p>선택된 값이 없습니다.</p>
+        <p>새로운 자소서를 첨부해주세요 ..</p>
+      </div>
+    );
+  }
   return (
-    <CoverLetterDetailStyle>
+    <S.container>
       {coverLetterDetail && (
-        <CoverLetterContainer key={coverLetterDetail.essayId}>
-          <h2 className="essay_title">{coverLetterDetail.title}</h2>
-          <>
-            {coverLetterDetail.qnaList.map((qna) => (
-              <CoverLetterItem key={qna.qnaId} {...qna} />
-            ))}
-          </>
-        </CoverLetterContainer>
+        <>
+          <S.mainTitle>{coverLetterDetail.title}</S.mainTitle>
+          {coverLetterDetail.qnaList.map((qna) => (
+            <CoverLetterItem key={qna.qnaId} {...qna} />
+          ))}
+        </>
       )}
-    </CoverLetterDetailStyle>
+    </S.container>
   );
 }
 
 export default memo(CoverLetterDetail);
-
-const CoverLetterDetailStyle = styled.div`
-  ${styleMixin.ScrollBar}
-  padding: 15px;
-  background-color: #191919;
-  border-radius: 10.5px;
-  color: #dad6d1;
-  height: 100vh;
-  width: 100%;
-  word-break: break-all;
-  overflow-x: hidden;
-`;
-const CoverLetterContainer = styled.div`
-  .essay_title {
-    text-align: center;
-    color: #fff;
-  }
-`;

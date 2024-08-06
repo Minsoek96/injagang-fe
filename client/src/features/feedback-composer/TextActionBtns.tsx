@@ -1,4 +1,5 @@
-import { BaseButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/components/button';
+import { V } from '@/src/shared/styles';
 
 import styled from 'styled-components';
 
@@ -6,6 +7,8 @@ type ActionProps = {
   handleClear: () => void;
   handleSubmit: () => void;
 };
+
+/** 텍스트 관련 액션을 수행 (비우기, 작성) */
 export default function TextActionBtns({
   handleClear,
   handleSubmit,
@@ -17,26 +20,23 @@ export default function TextActionBtns({
   return (
     <ControlRightButtons>
       {btnInfo.map((info) => (
-        <BaseButton
+        <MainButton
+          label={info.text}
           key={info.id}
-          onClick={info.onClick}
-          $Size={{ width: '150px', font: '15px' }}
-        >
-          {info.text}
-        </BaseButton>
+          onAction={info.onClick}
+          sx={{ width: '150px', font: '15px' }}
+        />
       ))}
     </ControlRightButtons>
   );
 }
 
 const ControlRightButtons = styled.div`
-  button:first-child {
-    margin-right: 5px;
-  }
-
-  @media screen and (max-width: 756px) {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  display: flex;
+  gap: 0.3rem;
+  @media screen and (max-width: ${V.mediaMobile}) {
+    button {
+      width: auto!important;
+    }
   }
 `;

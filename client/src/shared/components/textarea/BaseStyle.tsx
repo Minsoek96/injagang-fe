@@ -1,11 +1,11 @@
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 import { styled } from 'styled-components';
 
 export const BaseTextareaStyle = styled.textarea`
     ${styleMixin.ScrollBar}
     resize: none;
-    font-family: "Malgun Gothic", sans-serif;
+    font-family: ${V.malgunGothic};
     font-weight: normal;
     line-height: 2;
 

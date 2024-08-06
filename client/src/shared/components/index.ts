@@ -10,3 +10,4 @@ export * from './textarea';
 export * from './title';
 export * from './svg';
 export * from './container';
+export * from './markdown';
