@@ -9,8 +9,8 @@ import { Container } from '@/src/shared/components';
 import { styleMixin, V } from '@/src/shared/styles';
 
 import EditMenuBar from './EditMenuBar';
-import BoardItem from './BoardItem';
-import AnswerDragView from './AnswerDragView';
+import QuestionDetailItem from './QuestionDetailItem';
+import { AnswerDragCoverLetter } from './dragview';
 
 function QuestionDetailView() {
   const router = useRouter();
@@ -34,19 +34,27 @@ function QuestionDetailView() {
   if (isLoading) return <p>게시글을 받아오는중입니다.</p>;
 
   if (isError || !boardList) return <p>오류가 발생했습니다.</p>;
-  // $size={{ width: '100%', height: '45vh', flex: 'row' }}
+
+  const {
+    owner, title, nickname, content,
+  } = boardList;
+
   return (
     <DetailContainer>
       <Container.ArticleCard
         $size={{ width: '100%', height: '100%', isMedia: true }}
       >
-        {boardList?.owner && <EditMenuBar boardID={boardList.boardId} />}
-        <BoardItem {...boardList} />
+        {owner && <EditMenuBar boardId={boardList.boardId} />}
+        <QuestionDetailItem
+          title={title}
+          nickname={nickname}
+          content={content}
+        />
       </Container.ArticleCard>
       <Container.ArticleCard
         $size={{ width: '100%', height: '100%', isMedia: true }}
       >
-        <AnswerDragView boardId={Number(boardId.id)} />
+        <AnswerDragCoverLetter boardId={Number(boardId.id)} />
       </Container.ArticleCard>
     </DetailContainer>
   );
@@ -56,7 +64,7 @@ export default QuestionDetailView;
 
 const DetailContainer = styled(Container.ItemBase)`
   ${styleMixin.Column()}
-  font-family: "Malgun Gothic", sans-serif;
+  font-family: ${V.malgunGothic};
   width: 100%;
   gap: 2rem;
   margin-bottom: 2rem;

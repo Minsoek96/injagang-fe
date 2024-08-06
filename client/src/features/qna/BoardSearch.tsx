@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
-import { MainInput } from '@/src/shared/components/input';
+
+import { useBoardStore } from '@/src/entities/qnaboard';
 
 import { useDebounce } from '@/src/shared/hooks';
-import { ComboBox } from '@/src/shared/components/combobox';
-
+import { ComboBox, MainInput } from '@/src/shared/components';
 import { styleMixin } from '@/src/shared/styles';
-import userQnaManager from './hooks/userQnaManager';
 
 const typeList = [
   { title: '제목', en: 'title' },
   { title: '작성자', en: 'writer' },
 ];
 
+/** 유저가 검색하는 타입와 검색어를 관리 */
 function BoardSearch() {
-  const { dispatchChangeType, dispatchChangeSearch } = userQnaManager();
+  const { setBoardType, setBoardSearch } = useBoardStore();
   const [search, setSearch] = useState('');
   const [type, setType] = useState('');
   const debounceSearch = useDebounce(search);
 
   useEffect(() => {
     if (debounceSearch) {
-      dispatchChangeSearch(debounceSearch);
+      setBoardSearch(debounceSearch);
     }
   }, [debounceSearch]);
 
@@ -30,8 +30,8 @@ function BoardSearch() {
     const findType = typeList.find((item) => item.title === newType);
     setType(newType);
     if (findType) {
-      dispatchChangeType(findType.en);
-      dispatchChangeSearch('');
+      setBoardType(findType.en);
+      setBoardSearch('');
     }
     setSearch('');
   };
@@ -47,7 +47,13 @@ function BoardSearch() {
       <label htmlFor="searchInput" className="sr-only">
         검색 :
       </label>
-      <MainInput id="searchInput" value={search} onChange={setSearch} sx={{ marginInline: '.1rem' }} />
+      <MainInput
+        placeholder="Search.."
+        id="searchInput"
+        value={search}
+        onChange={setSearch}
+        sx={{ marginInline: '.5rem' }}
+      />
     </Container>
   );
 }

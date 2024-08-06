@@ -5,7 +5,7 @@ import React, {
 
 import styled, { CSSProperties } from 'styled-components';
 
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 type ResizableTextareaProps = {
   text: string;
@@ -65,7 +65,7 @@ export default ResizableTextarea;
 const StyledTextarea = styled.textarea`
   ${styleMixin.ScrollBar}
   resize: none;
-  font-family: "Malgun Gothic", sans-serif;
+  font-family: ${V.malgunGothic};
   font-weight: normal;
   line-height: 2;
 

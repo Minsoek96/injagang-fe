@@ -1,4 +1,4 @@
-import { S } from '@/src/features/qna/style';
+import { S } from '@/src/features/qna/common';
 
 type CoverLetterDetailItemsProps = {
   answer: string;

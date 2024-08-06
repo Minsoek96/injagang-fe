@@ -1,6 +1,6 @@
 import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
 import { memo } from 'react';
-import { S } from '@/src/features/qna/style';
+import { S } from '@/src/features/qna/common';
 import CoverLetterItem from './CoverLetterItem';
 
 interface CoverLetterProps {

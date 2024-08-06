@@ -47,10 +47,10 @@ const CommentFooter = styled.div`
 `;
 
 const FeedBackViewBtns = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
   gap:.3rem;
   @media screen and (max-width:${V.mediaMobile}){
-    grid-template-columns: 1fr 1fr
+    display: grid;
+    grid-template-columns: repeat(2,1fr)
   }
 `;

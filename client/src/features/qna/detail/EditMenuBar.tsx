@@ -1,15 +1,25 @@
 import { useState } from 'react';
+
 import { useRouter } from 'next/router';
+
 import styled from 'styled-components';
-import { BiDotsVerticalRounded, BiTrash, BiMessageAltEdit } from 'react-icons/bi';
-import { useModal } from '@/src/shared/hooks';
+
+import {
+  BiDotsVerticalRounded,
+  BiTrash,
+  BiMessageAltEdit,
+} from 'react-icons/bi';
+
 import { useDeleteBoard } from '@/src/entities/qnaboard/mutaions';
 
+import { useModal } from '@/src/shared/hooks';
+
 type EditMenuBarProps = {
-  boardID: number;
+  boardId: number;
 };
 
-function EditMenuBar({ boardID }: EditMenuBarProps) {
+//* *자소서 편집 액션 컴포넌트 */
+function EditMenuBar({ boardId }: EditMenuBarProps) {
   const [tagPosition, setTagPosition] = useState(false);
   const { setModal } = useModal();
   const { mutate: deleteBoard } = useDeleteBoard();
@@ -19,15 +29,16 @@ function EditMenuBar({ boardID }: EditMenuBarProps) {
     router.replace('/qna/list');
   };
 
-  const handleElementClick = () => {
+  const handleChangeVisible = () => {
     setTagPosition(!tagPosition);
   };
 
   const handleRemoveBoard = () => {
-    deleteBoard(boardID);
+    deleteBoard(boardId);
     navigateToList();
   };
 
+  // 유저가 삭제를 컨펌 하는 함수
   const userConfirm = () => {
     setModal({
       onAction: handleRemoveBoard,
@@ -37,7 +48,7 @@ function EditMenuBar({ boardID }: EditMenuBarProps) {
 
   return (
     <MyComponentStyle>
-      <BiDotsVerticalRounded onClick={handleElementClick} />
+      <BiDotsVerticalRounded onClick={handleChangeVisible} />
       <ButtonContainer $isVisible={tagPosition}>
         <BiTrash onClick={userConfirm} />
         <BiMessageAltEdit />
@@ -61,7 +72,7 @@ const ButtonContainer = styled.div<{ $isVisible: boolean }>`
   display: flex;
   flex-direction: row;
   border: 1px solid ${(props) => props.theme.colors.mainLine};
-  padding: .5rem;
+  padding: 0.5rem;
   z-index: 1;
   margin-left: 1rem;
   visibility: ${(props) => (props.$isVisible ? 'visible' : 'hidden')};

@@ -7,6 +7,7 @@ import { usePageNation } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/components/button';
 import { styleMixin, V } from '@/src/shared/styles';
 
+/** 페이지 네이션 버튼을 렌더하는 함수 */
 function PageNation() {
   const {
     curPageNum,

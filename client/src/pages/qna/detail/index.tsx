@@ -2,15 +2,16 @@ import dynamic from 'next/dynamic';
 
 import { useEffect } from 'react';
 
-import { DehydratedState, HydrationBoundary } from '@tanstack/react-query';
-
 import styled from 'styled-components';
-import { styleMixin } from '@/src/shared/styles';
+
+import { DehydratedState, HydrationBoundary } from '@tanstack/react-query';
 
 import { useFeedStore } from '@/src/entities/qnaboard';
 
-import { FeedBackComposer } from '@/src/features/feedback';
+import { FeedBackComposer } from '@/src/features/feedback-composer';
+
 import { Spinner } from '@/src/shared/components';
+import { styleMixin } from '@/src/shared/styles';
 
 const QuestionDetailView = dynamic(
   () => import('@/src/features/qna/detail/QuestionDetailView'),

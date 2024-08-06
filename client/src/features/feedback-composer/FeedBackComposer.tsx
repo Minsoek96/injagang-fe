@@ -1,29 +1,30 @@
+import { useEffect } from 'react';
+
 import styled from 'styled-components';
 
-import userQnaManager from '@/src/features/qna/hooks/userQnaManager';
-import { useBoardStore } from '@/src/entities/qnaboard';
+import { useBoardStore, useFeedStore } from '@/src/entities/qnaboard';
 import { Container, ResizeableTextarea } from '@/src/shared/components';
 
-import { useEffect } from 'react';
+import { V } from '@/src/shared/styles';
+
 import CorrectionView from './CorrectionView';
 import FeedBackFooter from './FeedBackFooter';
-import useFeedBackLogic from '../qna/hooks/useFeedBackLogic';
+import useFeedBackLogic from './useFeedBackLogic';
 
 function FeedBackComposer() {
-  const { dispatchChangeFeed, targetFeed } = userQnaManager();
+  const { targetFeed, setTargetFeed } = useFeedStore();
+
   const { questionIds } = useBoardStore();
+
   const {
     textRef,
-    correctionText,
+    feedbackContent,
     selectedCorrection,
     handleChangeFeedBack,
     handleSubmit,
-    handleClear,
+    correctionClear,
   } = useFeedBackLogic();
 
-  // TODO:: 기본적인 컴포넌트 분리완료, 컴포넌트 모듈화 하고 상태에 대한 로직 분리하기, props에 따라 리덕스 고려하기 !!!!!!!
-
-  // Corection에 대한 상태 떄문에 props 드릴링이 발생한다. 리덕스로 변경
   useEffect(() => {
     if (selectedCorrection.targetQuestion) {
       textRef.current?.focus();
@@ -35,7 +36,6 @@ function FeedBackComposer() {
       $size={{
         width: '100%',
         height: '100%',
-        flex: 'col',
         isMedia: true,
       }}
     >
@@ -45,15 +45,15 @@ function FeedBackComposer() {
       />
       <ResizeableTextarea
         placeholder="피드백을 작성해주세요."
-        text={correctionText}
+        text={feedbackContent}
         setText={handleChangeFeedBack}
         ref={textRef}
         maxSize={50}
       />
       <FeedBackFooter
-        handleFeedBackIndex={dispatchChangeFeed}
+        handleFeedBackIndex={setTargetFeed}
         handleSubmit={handleSubmit}
-        handleClear={handleClear}
+        handleClear={correctionClear}
         qnaIdList={questionIds}
         feedBackIndex={targetFeed}
       />
@@ -64,5 +64,5 @@ function FeedBackComposer() {
 export default FeedBackComposer;
 
 const ComposerContainer = styled(Container.ArticleCard)`
-  font-family: "Malgun Gothic", sans-serif;
+  font-family: ${V.malgunGothic}
 `;

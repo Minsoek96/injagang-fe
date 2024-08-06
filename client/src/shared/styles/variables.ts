@@ -4,6 +4,9 @@ const V = {
   mediaTablet: '800px',
   mediaWeb: '1300px',
 
+  // fontFamily
+  malgunGothic: '"Malgun Gothic", sans-serif',
+
   // Box Widths
   mdBoxWidth: '100rem',
   smBoxWidth: '20rem',

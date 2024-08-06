@@ -1,5 +1,13 @@
 import { create } from 'zustand';
 
+/**
+ * qnaIdList : 액션이 발생한 번호의 원본아이디를 대입하기 위한 역할
+ * boardSearch: 유저가 검색한 내용
+ * boardTpye : 유저가 선택한 검색 타입
+ * curPageNum : 유저가 현재 선택한 번호
+ * totalPage : 페이지 최대수
+ */
+
 type State = {
   questionIds: number[];
   boardSearch: string;

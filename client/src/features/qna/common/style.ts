@@ -18,9 +18,6 @@ const S = {
 
   detailItmes: styled.div`
     word-break: break-all;
-    span {
-      color: ${(props) => props.theme.colors.signatureColor};
-    }
   `,
 
   questionContainer: styled.div`
@@ -31,6 +28,10 @@ const S = {
     margin: 1.5rem auto;
     line-height: 1.45;
 
+    > span {
+      color: ${(props) => props.theme.colors.signatureColor};
+    }
+
     p {
       display: inline-block;
     }
@@ -38,6 +39,9 @@ const S = {
 
   answerContainer: styled.div`
     line-height: 1.6;
+    > span {
+      color: ${(props) => props.theme.colors.signatureColor};
+    }
   `,
 };
 

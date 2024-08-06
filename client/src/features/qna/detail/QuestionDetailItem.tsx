@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 import { MarkdownPreview } from '@/src/shared/components';
-import { S } from '@/src/features/qna/style';
+import { S } from '@/src/features/qna/common';
 
 interface BoardItemProps {
   title: string;

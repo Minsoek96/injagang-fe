@@ -1,13 +1,16 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
-import { BaseButton } from '@/src/shared/components/button';
 
-import { ResizeableTextarea } from '@/src/shared/components/textarea';
-
-import { useModal } from '@/src/shared/hooks';
 import { feedbackType } from '@/src/entities/feedback';
-import { Container } from '@/src/shared/components';
+
+import {
+  MainButton,
+  ResizeableTextarea,
+  Container,
+} from '@/src/shared/components/';
+import { useModal } from '@/src/shared/hooks';
+import { V } from '@/src/shared/styles';
 
 type FeedBackItemsProps = {
   target: string;
@@ -58,7 +61,10 @@ function FeedBackItems({
   return (
     <Container.ArticleCard
       $size={{
-        width: '100%', height: '100%', flex: 'col', isMedia: true,
+        width: '100%',
+        height: '100%',
+        flex: 'col',
+        isMedia: true,
       }}
     >
       <CorrectionContainer>
@@ -82,18 +88,16 @@ function FeedBackItems({
       <CommentFooter>
         {owner && (
           <ControlRightButtons>
-            <BaseButton
-              onClick={isReadOnly ? userEditConfirm : handleUpdate}
-              $Size={{ width: '150px', font: '15px' }}
-            >
-              {isReadOnly ? '편집' : '수정완료'}
-            </BaseButton>
-            <BaseButton
-              onClick={() => {}}
-              $Size={{ width: '150px', font: '15px' }}
-            >
-              삭제
-            </BaseButton>
+            <MainButton
+              label={isReadOnly ? '편집' : '수정완료'}
+              onAction={isReadOnly ? userEditConfirm : handleUpdate}
+              sx={{ width: '15rem', font: '1.5rem' }}
+            />
+            <MainButton
+              label="삭제"
+              onAction={() => {}}
+              sx={{ width: '15rem', font: '1.5rem' }}
+            />
           </ControlRightButtons>
         )}
       </CommentFooter>
@@ -120,7 +124,6 @@ const CorrectionContainer = styled.div`
     margin-top: 1rem;
     word-break: break-all;
     line-height: 1.5;
-    width: 100%;
     border-left: 0.3em solid ${(props) => props.theme.colors.brandColor};
     background-color: ${(props) => props.theme.colors.primary};
     border-radius: 1rem;
@@ -132,12 +135,11 @@ const CommentFooter = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  @media screen and (max-width: 800px) {
-    justify-content: center;
-  }
 `;
 
 const CommentReadOnlyWrapper = styled.div`
+  width: 100%;
+  text-align: left;
   color: ${(props) => props.theme.colors.boardText};
   margin-top: 1.5rem;
   border-radius: 0.8rem;
@@ -150,5 +152,11 @@ const ControlRightButtons = styled.div`
   display: flex;
   button:first-child {
     margin-right: 5px;
+  }
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    button {
+      width: auto!important;;
+    }
   }
 `;
