@@ -1,7 +1,6 @@
-import { keyframes, styled } from "styled-components";
+import { keyframes, styled } from 'styled-components';
 
-import { V } from "@/src/shared/styles";
-
+import { V } from '@/src/shared/styles';
 
 type Props = {
   step: { title: string; id: string };
@@ -13,7 +12,7 @@ export default function StepMarker({ step, currentStep, index }: Props) {
   return (
     <Container>
       <Marker
-        data-testid={"marker"}
+        data-testid="marker"
         $active={currentStep === index}
         $completed={currentStep > index}
       />
@@ -21,7 +20,10 @@ export default function StepMarker({ step, currentStep, index }: Props) {
         Step.
         {index + 1}
       </p>
-      <HideText>: {step.title}</HideText>
+      <HideText>
+        :
+        {step.title}
+      </HideText>
     </Container>
   );
 }
@@ -63,11 +65,11 @@ const Marker = styled.div<StepProps>`
   background-color: ${(props) => {
     if (props.$completed) return props.theme.colors.signatureColor;
     if (props.$active) return props.theme.colors.bodyColor;
-    return "none";
+    return 'none';
   }};
-  color: ${props => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
   animation: ${(props) =>
-      props.$active && glow(props.theme.colors.highlightColor)}
+    props.$active && glow(props.theme.colors.highlightColor)}
     1s infinite alternate;
 
   @media screen and (max-width: ${V.mediaMobile}) {

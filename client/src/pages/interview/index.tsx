@@ -13,6 +13,8 @@ import { BaseButton } from '@/src/shared/components/button';
 import dynamic from 'next/dynamic';
 import { V, styleMixin } from '@/src/shared/styles';
 import ArrowAnimation from '@/src/features/interview-record/InterViewMenual';
+import StepProgressBar from '@/src/shared/components/progressbar/StepProgresBar';
+import { Container } from '@/src/shared/components';
 
 const InterViewRandomSetting = dynamic(
   () => import('@/src/features/interview-record/InterViewRandomSetting'),
@@ -35,6 +37,14 @@ const renderComponent = [
   { render: <InterviewRecord />, title: '면접 준비 완료' },
 ];
 
+const steps = [
+  { title: '약관 동의', id: 'Step_01' },
+  { title: '면접 질문 선택', id: 'Step_02' },
+  { title: '랜덤 질문 선택', id: 'Step_03' },
+  { title: '녹화 설정', id: 'Step_04' },
+  { title: '영상 촬영', id: 'Step_05' },
+];
+
 const START_SCREEN = 0;
 const END_SCREEN = 3;
 const SECOND_SCREEN = 1;
@@ -54,6 +64,16 @@ function Interview() {
 
   return (
     <InterViewStyle>
+      <StepProgressBar stepList={steps} currentStep={curIndex} />
+      <RecordComponent>{renderComponent[curIndex].render}</RecordComponent>
+      {curIndex === START_SCREEN && (
+        <Menual>
+          <ArrowAnimation targetId="Arrow_btn" />
+          <div className="interViewImg_box">
+            <Image src={roomout} alt="roomout" />
+          </div>
+        </Menual>
+      )}
       <ControlBtn>
         {curIndex > SECOND_SCREEN && (
           <BaseButton
@@ -71,15 +91,6 @@ function Interview() {
           {renderComponent[curIndex].title}
         </BaseButton>
       </ControlBtn>
-      {curIndex === START_SCREEN && (
-        <Menual>
-          <ArrowAnimation targetId="Arrow_btn" />
-          <div className="interViewImg_box">
-            <Image src={roomout} alt="roomout" />
-          </div>
-        </Menual>
-      )}
-      <RecordComponent>{renderComponent[curIndex].render}</RecordComponent>
     </InterViewStyle>
   );
 }
@@ -87,9 +98,8 @@ function Interview() {
 export default Interview;
 
 const InterViewStyle = styled.div`
-  ${styleMixin.Column()}
-  height: 100vh;
-  width: 80vw;
+  ${styleMixin.Column('flex-start')}
+  width: 100%;
 `;
 
 const Menual = styled.div`
@@ -120,6 +130,7 @@ const Menual = styled.div`
 
 const ControlBtn = styled.div`
   ${styleMixin.Flex()}
+  margin-top: 3rem;
   width: ${V.lgItemWidth};
   gap: 8px;
   @media screen and (max-width: 800px) {
@@ -127,8 +138,8 @@ const ControlBtn = styled.div`
   }
 `;
 
-const RecordComponent = styled.div`
-  ${styleMixin.Column()}
-  width: 100%;
-  height: 80%;
+const RecordComponent = styled(Container.ItemBase)`
+  ${styleMixin.Column('flex-start')}
+  max-width:100%;
+  margin-top: 5rem;
 `;

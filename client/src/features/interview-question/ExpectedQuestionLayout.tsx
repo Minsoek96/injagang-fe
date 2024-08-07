@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
+import { Container } from '@/src/shared/components';
 import { UserQuestionPlayList } from './playlist';
 import { ExpectedQuestionSelector } from './expected-question';
 
@@ -34,14 +35,9 @@ function ExpectedQuestionLayout() {
 
 export default ExpectedQuestionLayout;
 
-const InterViewListViewStyle = styled.div`
-  ${styleMixin.Column()}
+const InterViewListViewStyle = styled(Container.ItemBase)`
+  ${styleMixin.Column('flex-start')}
   width: 100%;
-  height: 90%;
-  margin-bottom: 40px;
-  @media screen and (max-width: 1200px) {
-    width: 90%;
-  }
 `;
 
 const SwitchContainer = styled.div`

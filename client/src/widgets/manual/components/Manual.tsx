@@ -4,7 +4,7 @@ import { Container } from '@/src/shared/components/container';
 
 import goodInterView from '@/public/assets/main.jpg';
 import interViewScreen from '@/public/assets/interview.png';
-import communityScreen from '@/public/assets/commu.png';
+import communityScreen from '@/public/assets/commu.webp';
 
 import ManualItems from './ManualItems';
 

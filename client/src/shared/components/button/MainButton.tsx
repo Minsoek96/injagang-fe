@@ -1,15 +1,23 @@
-import { BaseProps } from '@/src/shared/components/button/type';
-import { V } from '@/src/shared/styles';
 import styled from 'styled-components';
+
+import { V } from '@/src/shared/styles';
+
+import { BaseProps } from '@/src/shared/components/button/type';
 
 export default function MainButton({
   onAction,
   label,
   sx = {},
   isActive = false,
+  disabled = false,
 }: BaseProps) {
   return (
-    <CustomBtn onClick={onAction} style={sx} $isActive={isActive}>
+    <CustomBtn
+      onClick={onAction}
+      style={sx}
+      $isActive={isActive}
+      disabled={disabled}
+    >
       {label}
     </CustomBtn>
   );
@@ -39,6 +47,10 @@ const CustomBtn = styled.button.attrs({
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.mainHover}
+    background-color: ${(props) => props.theme.colors.mainHover};
+  }
+
+  &:disabled {
+   opacity: 0.3;
   }
 `;

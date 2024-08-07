@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
 import { useFetchFeedBackList } from '@/src/entities/feedback/queries';
-import { useReviseFeed } from '@/src/entities/feedback/mutation';
+import { useDeleteFeed, useReviseFeed } from '@/src/entities/feedback/mutation';
 
 import { Container } from '@/src/shared/components';
 import { useFeedStore } from '@/src/entities/qnaboard';
@@ -12,6 +12,7 @@ function TargetFeedBackView() {
   const { targetFeed } = useFeedStore();
   const { data: feedbackList } = useFetchFeedBackList(targetFeed);
   const { mutate: updateFeed } = useReviseFeed(targetFeed);
+  const { mutate: deleteFeed } = useDeleteFeed(targetFeed);
 
   if (!feedbackList?.length) {
     return (
@@ -32,6 +33,7 @@ function TargetFeedBackView() {
         <TargetFeedBackItems
           key={feedback.feedbackId}
           handleUpdateFeedBack={updateFeed}
+          handleDeleteFeedBack={deleteFeed}
           target={feedback.target}
           owner={feedback.owner}
           content={feedback.content}
