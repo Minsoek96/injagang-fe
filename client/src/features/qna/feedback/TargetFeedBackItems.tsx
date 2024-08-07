@@ -18,6 +18,7 @@ type FeedBackItemsProps = {
   feedbackId: number;
   owner: boolean;
   handleUpdateFeedBack: (feedback: feedbackType.IReviseFeedBack) => void;
+  handleDeleteFeedBack: (id:number) => void;
 };
 
 function FeedBackItems({
@@ -26,6 +27,7 @@ function FeedBackItems({
   feedbackId,
   owner,
   handleUpdateFeedBack,
+  handleDeleteFeedBack,
 }: FeedBackItemsProps) {
   const [isReadOnly, setIsReadOnly] = useState<boolean>(true);
   const [text, setText] = useState<string>(content);
@@ -55,6 +57,16 @@ function FeedBackItems({
       contents: {
         title: '경고',
         message: '정말 피드백 수정을 원하시나요?',
+      },
+    });
+  };
+
+  const userDeleteConfirm = () => {
+    setModal({
+      onAction: () => handleDeleteFeedBack(feedbackId),
+      contents: {
+        title: '경고',
+        message: '정말 피드백 삭제를 원하시나요?',
       },
     });
   };
@@ -95,7 +107,7 @@ function FeedBackItems({
             />
             <MainButton
               label="삭제"
-              onAction={() => {}}
+              onAction={userDeleteConfirm}
               sx={{ width: '15rem', font: '1.5rem' }}
             />
           </ControlRightButtons>
@@ -104,8 +116,6 @@ function FeedBackItems({
     </Container.ArticleCard>
   );
 }
-
-// 삭제 API가 없음
 
 export default FeedBackItems;
 

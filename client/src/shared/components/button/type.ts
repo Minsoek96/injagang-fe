@@ -6,6 +6,7 @@ type BaseProps = {
     label: string | React.ReactNode;
     sx?: CSSProperties;
     isActive? :boolean;
+    disabled?: boolean;
   };
 
 export {

@@ -128,19 +128,15 @@ function InterviewRecord() {
 
 export default InterviewRecord;
 const RecordStyle = styled.div`
-  ${styleMixin.Flex()}
-  margin: 20px;
-  gap: 20px;
-  width: 90%;
-  height: 90%;
+  ${styleMixin.Column('flex-start')}
 `;
 
 const RecordContainer = styled.div<{ $isResult: boolean }>`
   position: relative;
   display: flex;
   flex-grow: 1;
-  width: ${V.lgItemWidth};
-  height: 60%;
+  width: 80rem;
+  height: 70rem;
   border: ${({ $isResult }) => !$isResult && '2px solid #e0e0e0'};
   border-radius: 15px;
   overflow: hidden;
@@ -200,7 +196,6 @@ const Camera = styled.div`
 
 const Result = styled.div`
   ${styleMixin.Column()}
-  align-items: flex-start;
   gap: 15px;
   width: 100%;
   height: 20%;
@@ -212,6 +207,5 @@ const ResultContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
   gap: 10px;
 `;

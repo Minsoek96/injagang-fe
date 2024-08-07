@@ -14,7 +14,7 @@ export default function ThemeToggle() {
         {isDark ? <BiSun /> : <BiMoon />}
       </div>
       <span>
-        {isDark ? '다크' : '밝게'}
+        {isDark ? '밝게' : '다크'}
       </span>
     </>
   );
