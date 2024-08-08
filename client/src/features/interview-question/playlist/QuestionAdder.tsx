@@ -1,21 +1,9 @@
 import { useState, useRef } from 'react';
 
 import styled from 'styled-components';
-import { BaseButton } from '@/src/shared/components/button';
 
-const AddTextInputStyle = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  button {
-    margin: auto 2px;
-  }
-`;
-const Input = styled.input`
-  height: 40px;
-  width: 37.5%;
-`;
+import { MainButton, MainInput } from '@/src/shared/components';
+import { styleMixin } from '@/src/shared/styles';
 
 interface AddTextInputProps {
   handleAddQuestion: (title: string) => void;
@@ -26,37 +14,53 @@ function QuestionAdder({
   handleCancelQuestion,
 }: AddTextInputProps) {
   const [title, setTitle] = useState<string>('');
-  const textRef = useRef<HTMLInputElement | null>(null);
+  const textRef = useRef<HTMLInputElement>(null);
+
   const handleAddText = () => {
     handleAddQuestion(title);
     setTitle('');
     textRef.current?.focus();
   };
+
   return (
     <AddTextInputStyle>
-      <Input
+      <MainInput
         ref={textRef}
-        name="addTitle"
-        placeholder="제목을 입력해주세요"
+        placeholder="커스텀 질문을 등록해주세요."
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={setTitle}
+        sx={{ width: '100%' }}
       />
-      <div>
-        <BaseButton
-          $Size={{ width: '63px', font: '15px' }}
-          onClick={handleAddText}
-        >
-          확인
-        </BaseButton>
-        <BaseButton
-          $Size={{ width: '63px', font: '15px' }}
-          onClick={handleCancelQuestion}
-        >
-          확정
-        </BaseButton>
-      </div>
+      <ButtonContainer>
+        <MainButton
+          label="확인"
+          sx={{ width: '6.3rem', font: '1rem' }}
+          onAction={handleAddText}
+        />
+        <MainButton
+          label="확정"
+          sx={{ width: '6.3rem', font: '1rem' }}
+          onAction={handleCancelQuestion}
+        />
+      </ButtonContainer>
     </AddTextInputStyle>
   );
 }
 
 export default QuestionAdder;
+
+const AddTextInputStyle = styled.div`
+  ${styleMixin.Flex()};
+  width: 100%;
+  margin-top: 1rem;
+  button {
+    margin: auto 2px;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  ${styleMixin.Flex()};
+  button {
+    height: 4rem;
+  }
+`;

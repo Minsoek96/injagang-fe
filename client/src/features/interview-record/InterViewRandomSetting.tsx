@@ -5,7 +5,10 @@ import { styleMixin } from '@/src/shared/styles';
 
 import { useModal } from '@/src/shared/hooks';
 
-import { interviewType, interviewMutation } from '@/src/entities/interview_question';
+import {
+  interviewType,
+  interviewMutation,
+} from '@/src/entities/interview_question';
 
 function InterViewRandomSetting() {
   const [randomSetting, setRandomSetting] = useState({
@@ -25,11 +28,14 @@ function InterViewRandomSetting() {
     }));
   };
 
-  const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     const data = [
       { size: randomSetting.cs, questionType: interviewType.QuestionType.CS },
-      { size: randomSetting.situation, questionType: interviewType.QuestionType.SITUATION },
+      {
+        size: randomSetting.situation,
+        questionType: interviewType.QuestionType.SITUATION,
+      },
       { size: randomSetting.job, questionType: interviewType.QuestionType.JOB },
       {
         size: randomSetting.personality,
@@ -98,14 +104,12 @@ const InterViewSettingStyle = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 100%;
+  max-width: 70rem;
   padding: 20px;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.primary};
   box-shadow: 0 4px 8px rgba(14, 13, 13, 0.2);
-  @media screen and (max-width: 800px) {
-    width: 90%;
-  }
 `;
 
 const Label = styled.label`
@@ -123,7 +127,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 8px 16px;
-  background-color: #2ecc71;
+  background-color: ${(props) => props.theme.colors.signatureColor};
   color: #fff;
   font-size: 18px;
   font-weight: 600;

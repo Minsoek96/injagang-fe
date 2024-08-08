@@ -1,3 +1,4 @@
+import { V } from '@/src/shared/styles';
 import { styled } from 'styled-components';
 
 type Props = {
@@ -23,10 +24,18 @@ export default function ExplanationContent({ explanationList }: Props) {
 }
 
 const Explanation = styled.div`
-  margin: 3rem;
+  margin-bottom: 3rem;
   line-height: 2;
 
   h1 {
     font-size: 2rem;
+  }
+
+  @media screen and (max-width: ${V.mediaMobile}){
+    font-size: 1.4rem;
+
+    h1 {
+      font-size: 1.6rem;
+    }
   }
 `;

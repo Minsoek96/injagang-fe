@@ -3,6 +3,7 @@ import { ComboBox } from '@/src/shared/components/combobox';
 
 import { interviewType } from '@/src/entities/interview_question';
 import { memo } from 'react';
+import { V } from '@/src/shared/styles';
 
 const InterViewSelectData = [
   { title: interviewType.QuestionType.CS, id: 1 },
@@ -33,5 +34,7 @@ function QuestionSelector({ selectedType, onChange }: IQuestionSelectorProps) {
 export default memo(QuestionSelector);
 
 const Container = styled.div`
+  width: 100%;
+  max-width: ${V.lgItemWidth};
   margin-bottom: 15px;
 `;

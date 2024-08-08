@@ -1,25 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import Image from 'next/image';
+import Image from "next/image";
 
-import { styleMixin, V } from '@/src/shared/styles';
+import { useInterViewStore } from "@/src/entities/interview_question";
 
-import { BaseButton } from '@/src/shared/components/button';
+import { MainButton } from "@/src/shared/components";
+import { styleMixin, V } from "@/src/shared/styles";
+import { useMediaRecord, useWebSpeech } from "@/src/shared/hooks";
 
-import { useMediaRecord, useWebSpeech } from '@/src/shared/hooks';
-import { useInterViewStore } from '@/src/entities/interview_question';
-import room from '@/public/assets/room.svg';
-import InterViewSlider from './InterViewSlider';
-import VideoController from './video/VideoController';
-import RenderVideoInfo from './video/RenderVideoInfo';
+import room from "@/public/assets/room.svg";
+import InterViewSlider from "./InterViewSlider";
+import VideoController from "./video/VideoController";
+import RenderVideoInfo from "./video/RenderVideoInfo";
+import { RecordMainBtn } from "./video/RecordMainButton";
 
-import { RecordMainBtn } from './video/RecordMainButton';
-
+/**영상 녹화 메인 컴포넌트 */
 function InterviewRecord() {
   const [curIndex, setCurIndex] = useState<number>(0);
-  const [changeImg, setChangeImg] = useState<boolean>(false);
   const [isResult, setIsResult] = useState<boolean>(false);
   const [videoIndex, setVideoIndex] = useState<number>(0);
 
@@ -27,9 +26,10 @@ function InterviewRecord() {
 
   const { setSpeechData, readingTheScript, speechData } = useWebSpeech(
     [],
-    2000,
+    2000
   );
 
+  // 유저가 컨펌한 질문 리스트 셋팅
   useEffect(() => {
     setSpeechData([...confirmQuestions]);
   }, [confirmQuestions]);
@@ -45,9 +45,9 @@ function InterviewRecord() {
     recordedChunks,
   } = useMediaRecord();
 
+  /**음성 텍스트 시작 */
   const handleSpeak = async (): Promise<void> => {
     if (!isRecord) {
-      setChangeImg(!changeImg);
       if (curIndex < speechData.length) {
         await readingTheScript(curIndex);
         setCurIndex(curIndex + 1);
@@ -88,7 +88,7 @@ function InterviewRecord() {
           )}
         </Camera>
       </RecordContainer>
-      <Result>
+      <ResultContainer>
         {speechData.length > 0 && (
           <RenderVideoInfo
             numQuestions={speechData.length}
@@ -96,74 +96,69 @@ function InterviewRecord() {
           />
         )}
         {recordedChunks.length > 0 && (
-          <ResultContainer>
-            <BaseButton
-              onClick={() =>
+          <ResultController>
+            <MainButton
+              label="이전영상"
+              onAction={() =>
                 setVideoIndex((prevIndex) =>
-                  (prevIndex <= 1 ? 0 : videoIndex - 1))}
-              $Size={{ width: '150px', font: '15px' }}
-            >
-              이전영상
-            </BaseButton>
-            <BaseButton
-              onClick={() => setIsResult(!isResult)}
-              $Size={{ width: '150px', font: '15px' }}
-            >
-              결과확인
-            </BaseButton>
-            <BaseButton
-              onClick={() =>
+                  prevIndex <= 1 ? 0 : videoIndex - 1
+                )
+              }
+              sx={{ width: "100%", fontSize: "1.8rem" }}
+            />
+            <MainButton
+              label={isResult ? '다음촬영' : '결과확인'}
+              onAction={() => setIsResult(!isResult)}
+              sx={{ width: "100%", fontSize: "1.8rem" }}
+            />
+            <MainButton
+              label="다음영상"
+              onAction={() =>
                 setVideoIndex((prevIndex) =>
-                  (prevIndex >= recordedChunks.length - 1 ? 0 : videoIndex + 1))}
-              $Size={{ width: '150px', font: '15px' }}
-            >
-              다음영상
-            </BaseButton>
-          </ResultContainer>
+                  prevIndex >= recordedChunks.length - 1 ? 0 : videoIndex + 1
+                )
+              }
+              sx={{ width: "100%", fontSize: "1.8rem" }}
+            />
+          </ResultController>
         )}
-      </Result>
+      </ResultContainer>
     </RecordStyle>
   );
 }
 
 export default InterviewRecord;
 const RecordStyle = styled.div`
-  ${styleMixin.Column('flex-start')}
+  ${styleMixin.Column("flex-start")}
+  width: 100%;
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    max-height: 40rem;
+  }
 `;
 
 const RecordContainer = styled.div<{ $isResult: boolean }>`
   position: relative;
   display: flex;
-  flex-grow: 1;
-  width: 80rem;
-  height: 70rem;
-  border: ${({ $isResult }) => !$isResult && '2px solid #e0e0e0'};
+  width: 100%;
+  height: 100%;
+  max-height: 70rem;
+  border: ${(props) =>
+    !props.$isResult && `2px solid ${props.theme.colors.mainLine}`};
   border-radius: 15px;
   overflow: hidden;
 
-  .interView_img {
-    display: ${({ $isResult }) => ($isResult ? 'none' : 'block')};
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    height: 80%;
-    object-fit: cover;
+  .room_img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   video {
     width: 100%;
-    height: ${({ $isResult }) => ($isResult ? '75%' : '100%')};
     object-fit: cover;
   }
 
-  @media screen and (max-width: 800px) {
-    width: ${V.smItemWidth};
-    video {
-      height: ${({ $isResult }) => ($isResult ? '65%' : '100%')};
-    }
-  }
 `;
 
 const Camera = styled.div`
@@ -194,16 +189,16 @@ const Camera = styled.div`
   }
 `;
 
-const Result = styled.div`
+const ResultContainer = styled.div`
   ${styleMixin.Column()}
-  gap: 15px;
+  margin-block: 1rem;
   width: 100%;
-  height: 20%;
-  padding: 10px 0;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border: 0.1em solid ${(props) => props.theme.colors.mainLine};
+  border-radius: 0.8rem;
+  padding: 1em;
 `;
 
-const ResultContainer = styled.div`
+const ResultController = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

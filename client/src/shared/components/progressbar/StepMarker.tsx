@@ -1,6 +1,6 @@
 import { keyframes, styled } from 'styled-components';
 
-import { V } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 type Props = {
   step: { title: string; id: string };
@@ -51,9 +51,7 @@ const Container = styled.div`
 `;
 
 const Marker = styled.div<StepProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${styleMixin.Flex()}
   word-break: keep-all;
   padding-inline: 0.5em 1em;
   width: 100%;
@@ -78,6 +76,7 @@ const Marker = styled.div<StepProps>`
 `;
 
 const HideText = styled.p`
+  font-weight: bold;
   @media screen and (max-width: ${V.mediaMobile}) {
     display: none;
   }

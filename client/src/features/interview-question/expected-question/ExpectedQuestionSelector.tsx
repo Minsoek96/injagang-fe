@@ -1,5 +1,6 @@
 import { useCheckList } from '@/src/shared/hooks';
-import { BaseCard } from '@/src/shared/components/card';
+import { Container } from '@/src/shared/components';
+import { styled } from 'styled-components';
 import QuestionSelector from './QuestionSelector';
 import ExpectedQuestionList from './ExpectedQuestionList';
 import ActionBtns from './ActionBtns';
@@ -14,15 +15,16 @@ function ExpectedQuestionSelector() {
     checkList, handleAllCheck, handleCheckList, isAllCheck,
   } = useCheckList(interViewQuestionList);
 
-  const {
-    selectedType, dispatchSelectedType,
-    dispatchSelectedQuestions,
-  } = useEUserQuestionManager({
-    typeCheckCallback: isAllCheck ? handleAllCheck : () => {},
-  });
+  const
+    { selectedType, dispatchSelectedType, dispatchSelectedQuestions } = useEUserQuestionManager({
+      typeCheckCallback: isAllCheck ? handleAllCheck : () => {},
+    });
 
   return (
-    <BaseCard $size={{ height: '450px', width: '100%', flex: 'Col' }}>
+    <Container.ArticleCard
+      $size={{ height: '60rem', width: '100%', flex: 'Col' }}
+    >
+      <Header>Questions by Type</Header>
       <QuestionSelector
         selectedType={selectedType}
         onChange={dispatchSelectedType}
@@ -40,8 +42,14 @@ function ExpectedQuestionSelector() {
         onToggleAll={handleAllCheck}
         questions={interViewQuestionList}
       />
-    </BaseCard>
+    </Container.ArticleCard>
   );
 }
 
 export default ExpectedQuestionSelector;
+
+const Header = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+`;

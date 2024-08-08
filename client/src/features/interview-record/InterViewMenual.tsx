@@ -64,7 +64,7 @@ function ArrowAnimation({ targetId }: ArrowAnimationProps) {
       }}
     >
       <MdCallMade />
-      <p>Click Me</p>
+      <p>Next Stage Button</p>
     </Arrow>
   );
 }
