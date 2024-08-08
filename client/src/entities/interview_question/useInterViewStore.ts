@@ -11,6 +11,7 @@ type Action = {
   setSelectedType: (type: string) => void;
   setUserPlayList: (list: string[]) => void;
   initUserPlayList: () => void;
+  initConfirmQuestions: () => void;
 };
 
 /** 면접 녹화에 필요한 정보조합 */
@@ -31,6 +32,7 @@ const useInterViewStore = create<State & Action>((set) => ({
   setSelectedType: (type: string) => set({ selectedType: type }),
 
   initUserPlayList: () => set({ userPlayList: [] }),
+  initConfirmQuestions: () => set({ confirmQuestions: [] }),
 }));
 
 export default useInterViewStore;

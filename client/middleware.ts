@@ -13,5 +13,5 @@ export function middleware(req: NextRequest) {
 
 // 특정 경로에만 미들웨어 적용
 export const config = {
-  matcher: ['/admin', '/coverLetter/:path*', '/myProfile'],
+  matcher: ['/admin', '/coverLetter/:path*', '/myProfile', '/qna/detail/:path*'],
 };

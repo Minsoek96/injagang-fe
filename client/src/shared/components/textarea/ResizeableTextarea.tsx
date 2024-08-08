@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React, {
   useRef, useEffect, forwardRef, ForwardedRef,
 } from 'react';
@@ -16,7 +15,7 @@ type ResizableTextareaProps = {
   readOnly?: boolean;
 };
 
-const ResizableTextarea = forwardRef(
+const ResizeableTextarea = forwardRef(
   (
     {
       text,
@@ -58,9 +57,14 @@ const ResizableTextarea = forwardRef(
   },
 );
 
-ResizableTextarea.displayName = 'ResizableTextarea';
+ResizeableTextarea.displayName = 'ResizableTextarea';
 
-export default ResizableTextarea;
+ResizeableTextarea.defaultProps = {
+  sx: {},
+  readOnly: false,
+};
+
+export default ResizeableTextarea;
 
 const StyledTextarea = styled.textarea`
   ${styleMixin.ScrollBar}
