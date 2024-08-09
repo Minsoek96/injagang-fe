@@ -86,6 +86,7 @@ const ModalBox = styled.div`
     display: flex;
     flex-direction: column;
     height: 20rem;
+    word-break: keep-all;
   }
   .modal_Contents h2 {
     color: red;

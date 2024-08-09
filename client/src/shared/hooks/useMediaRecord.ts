@@ -49,13 +49,14 @@ const useMediaRecord = () => {
     stream.getVideoTracks().forEach((track) => track.stop());
   }, []);
 
-  /** 녹화를 중지한다. */
+  /** 녹화를 완료. */
   const handleRecordRemove = useCallback(() => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
       const stream = videoRef.current?.srcObject as MediaStream;
       stopMediaTracks(stream);
       setIsRecord(false);
+      setIsPaused(false);
       mediaRecorderRef.current = null;
     }
   }, [stopMediaTracks]);

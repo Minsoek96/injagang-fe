@@ -1,38 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Image from "next/image";
+import { useInterViewStore } from '@/src/entities/interview_question';
 
-import { useInterViewStore } from "@/src/entities/interview_question";
+import {
+  Container,
+  MainButton,
+} from '@/src/shared/components';
+import { styleMixin, V } from '@/src/shared/styles';
+import { useMediaRecord, useModal, useWebSpeech } from '@/src/shared/hooks';
 
-import { MainButton } from "@/src/shared/components";
-import { styleMixin, V } from "@/src/shared/styles";
-import { useMediaRecord, useWebSpeech } from "@/src/shared/hooks";
+import VideoTimer from '@/src/features/interview-record/video/VideoTimer';
+import InterViewSlider from './InterViewSlider';
+import { VideoPlayer, ScriptTextArea } from './video';
 
-import room from "@/public/assets/room.svg";
-import InterViewSlider from "./InterViewSlider";
-import VideoController from "./video/VideoController";
-import RenderVideoInfo from "./video/RenderVideoInfo";
-import { RecordMainBtn } from "./video/RecordMainButton";
-
-/**영상 녹화 메인 컴포넌트 */
+/** 영상 녹화 메인 컴포넌트 */
 function InterviewRecord() {
   const [curIndex, setCurIndex] = useState<number>(0);
-  const [isResult, setIsResult] = useState<boolean>(false);
-  const [videoIndex, setVideoIndex] = useState<number>(0);
-
-  const { confirmQuestions } = useInterViewStore();
-
-  const { setSpeechData, readingTheScript, speechData } = useWebSpeech(
-    [],
-    2000
-  );
-
-  // 유저가 컨펌한 질문 리스트 셋팅
-  useEffect(() => {
-    setSpeechData([...confirmQuestions]);
-  }, [confirmQuestions]);
+  const [isSpeaching, setIsSpeching] = useState<boolean>(false);
+  const [isResultMode, setIsResultMode] = useState<boolean>(false);
+  const [isScriptView, setIsScriptView] = useState<boolean>(false);
+  const [videoIndex] = useState<number>(0);
 
   const {
     videoRef,
@@ -45,162 +34,183 @@ function InterviewRecord() {
     recordedChunks,
   } = useMediaRecord();
 
-  /**음성 텍스트 시작 */
+  const { setModal } = useModal();
+
+  const { confirmQuestions } = useInterViewStore();
+
+  const { setSpeechData, readingTheScript, speechData } = useWebSpeech(
+    [],
+    3000,
+  );
+
+  const isComplete = curIndex >= speechData.length;
+
+  // 유저가 컨펌한 질문 리스트 셋팅
+  useEffect(() => {
+    setSpeechData([...confirmQuestions]);
+  }, [confirmQuestions]);
+
+  /** 음성 텍스트 시작 */
   const handleSpeak = async (): Promise<void> => {
-    if (!isRecord) {
-      if (curIndex < speechData.length) {
-        await readingTheScript(curIndex);
-        setCurIndex(curIndex + 1);
-      } else {
-        setCurIndex(0);
-      }
-      handleRecord();
-    } else {
-      handleRecordRemove();
+    if (isComplete) {
+      setModal({
+        onAction: () => setCurIndex(0),
+        contents: {
+          title: 'Congratulations',
+          message:
+            '준비된 모든 질문이 끝났습니다. 처음부터 다시 반복을 원하시면 게속 진행해주세요',
+        },
+      });
+      return;
     }
+    if (isRecord || isResultMode) {
+      handleRecordRemove();
+      return;
+    }
+
+    await readCurrentScript();
+    if (videoRef.current) handleRecord();
+  };
+
+  const handleEndRecord = () => {
+    setIsScriptView(false);
+    handleRecordRemove();
+  };
+
+  const readCurrentScript = async (): Promise<void> => {
+    setIsSpeching(true);
+    await readingTheScript(curIndex);
+    setIsSpeching(false);
+    setCurIndex((prevIndex) => prevIndex + 1);
   };
 
   return (
-    <RecordStyle>
-      <RecordContainer $isResult={isResult}>
-        <Image className="room_img" src={room} alt="interView" />
-        <Camera>
-          {!isResult ? (
-            <video autoPlay muted ref={videoRef} />
-          ) : (
-            recordedChunks.length > 0 && (
-              <InterViewSlider
-                idx={videoIndex}
-                video={recordedChunks}
-                question={speechData}
-              />
-            )
-          )}
-          {isRecord ? (
-            <VideoController
-              isPaused={isPaused}
-              handleResumeRecord={handleResumeRecord}
-              handlePauseRecord={handlePauseRecord}
-              handleSpeak={handleSpeak}
-            />
-          ) : (
-            <RecordMainBtn handleSpeak={handleSpeak} isRecord={isRecord} />
-          )}
-        </Camera>
-      </RecordContainer>
-      <ResultContainer>
-        {speechData.length > 0 && (
-          <RenderVideoInfo
-            numQuestions={speechData.length}
-            curIndex={curIndex}
+    <RecordContainer $size={{ height: '60vh', width: '100%', flex: 'Col' }}>
+      <PlayerHeader>
+        <PlayerState>{isRecord ? '녹화중' : '대기상태'}</PlayerState>
+        <SpeachingState $isBlock={isSpeaching || isRecord}>
+          {isSpeaching
+            ? '타이머가 3초가 되면 스피칭이 진행됩니다.'
+            : isRecord && `${speechData[curIndex - 1]}`}
+        </SpeachingState>
+        <VideoTimer isRunning={isSpeaching || isRecord} />
+      </PlayerHeader>
+      {isResultMode && !isRecord ? (
+        <InterViewSlider
+          idx={videoIndex}
+          video={recordedChunks}
+          question={speechData}
+        />
+      ) : (
+        <VideoPlayer videoRef={videoRef} />
+      )}
+      <ScriptWrapper $isScript={isScriptView}>
+        <ScriptTextArea />
+      </ScriptWrapper>
+      <PlayerController>
+        <MainButton
+          onAction={handleSpeak}
+          label={
+            !speechData.length ? '설정된 질문이 없습니다.' : '면접 녹화 시작'
+          }
+          disabled={!speechData.length || isResultMode}
+        />
+        {!isRecord && !!recordedChunks.length && (
+          <MainButton
+            label={isResultMode ? '다음촬영' : '결과확인'}
+            onAction={() => setIsResultMode(!isResultMode)}
           />
         )}
-        {recordedChunks.length > 0 && (
-          <ResultController>
+        {isRecord && (
+          <>
+            {isPaused ? (
+              <MainButton onAction={handleResumeRecord} label="영상재개" />
+            ) : (
+              <MainButton onAction={handlePauseRecord} label="촬영정지" />
+            )}
+            <MainButton onAction={handleEndRecord} label="촬영완료" />
             <MainButton
-              label="이전영상"
-              onAction={() =>
-                setVideoIndex((prevIndex) =>
-                  prevIndex <= 1 ? 0 : videoIndex - 1
-                )
-              }
-              sx={{ width: "100%", fontSize: "1.8rem" }}
+              onAction={() => setIsScriptView(!isScriptView)}
+              label="스크립트기록"
             />
-            <MainButton
-              label={isResult ? '다음촬영' : '결과확인'}
-              onAction={() => setIsResult(!isResult)}
-              sx={{ width: "100%", fontSize: "1.8rem" }}
-            />
-            <MainButton
-              label="다음영상"
-              onAction={() =>
-                setVideoIndex((prevIndex) =>
-                  prevIndex >= recordedChunks.length - 1 ? 0 : videoIndex + 1
-                )
-              }
-              sx={{ width: "100%", fontSize: "1.8rem" }}
-            />
-          </ResultController>
+          </>
         )}
-      </ResultContainer>
-    </RecordStyle>
+      </PlayerController>
+    </RecordContainer>
   );
 }
 
 export default InterviewRecord;
-const RecordStyle = styled.div`
-  ${styleMixin.Column("flex-start")}
+
+const RecordContainer = styled(Container.ArticleCard)`
+  position: relative;
   width: 100%;
+  height: 70dvh;
+  padding: 2em 1em;
 
   @media screen and (max-width: ${V.mediaMobile}) {
-    max-height: 40rem;
+    padding: 1em 0.5em;
   }
 `;
 
-const RecordContainer = styled.div<{ $isResult: boolean }>`
-  position: relative;
-  display: flex;
+const PlayerHeader = styled.header`
+  ${styleMixin.Flex('space-between')}
   width: 100%;
-  height: 100%;
-  max-height: 70rem;
-  border: ${(props) =>
-    !props.$isResult && `2px solid ${props.theme.colors.mainLine}`};
-  border-radius: 15px;
-  overflow: hidden;
+  padding-inline: 1.2em;
 
-  .room_img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  video {
-    width: 100%;
-    object-fit: cover;
-  }
-
-`;
-
-const Camera = styled.div`
-  ${styleMixin.Flex()}
-  position: absolute;
-  width: 100%;
-  height: 100%;
-
-  .record_btn {
-    position: absolute;
-    bottom: 25px;
-    left: 35px;
-
-    border: none;
-    outline: none;
-
-    padding: 10px 20px;
-    background-image: linear-gradient(to right, #252427, #362f31);
-    color: #fff;
-    font-size: 22px;
-    font-weight: 600;
-    border-radius: 25px;
-    transition: 0.3s;
-    cursor: pointer;
-    &:hover {
-      scale: 1.05;
+  @media screen and (max-width: ${V.mediaMobile}) {
+    div:nth-child(2) {
+      display: none;
     }
   }
 `;
 
-const ResultContainer = styled.div`
-  ${styleMixin.Column()}
-  margin-block: 1rem;
-  width: 100%;
-  border: 0.1em solid ${(props) => props.theme.colors.mainLine};
-  border-radius: 0.8rem;
-  padding: 1em;
+const PlayerController = styled.div`
+  ${styleMixin.Flex()}
+  gap: 1rem;
+  button {
+    font-size: 1.8rem;
+    background-color: ${(props) => props.theme.colors.signatureColor};
+  }
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    button {
+      font-size: 1.4rem;
+    }
+  }
 `;
 
-const ResultController = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+const PlayerState = styled.span`
+  color: ${(props) => props.theme.colors.brandColor};
+  font-weight: bold;
+`;
+
+type ScriptProps = {
+  $isScript: boolean;
+};
+
+const ScriptWrapper = styled.div<ScriptProps>`
+  z-index: 100;
+  position: absolute;
+  width: 50%;
+  bottom: 10rem;
+  display: ${(props) => (props.$isScript ? 'block' : 'none')};
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    display: none;
+  }
+`;
+
+type SpeachingProps = {
+  $isBlock: boolean;
+};
+
+const SpeachingState = styled.span<SpeachingProps>`
+  display: ${(props) => (props.$isBlock ? 'block' : 'none')};
+  padding: 0.5rem 1rem;
+  opacity: 0.8;
+  border-radius: 1rem;
+  font-weight: 600;
+  border-left: 0.2em solid ${(props) => props.theme.colors.signatureColor};
+  border-right: 0.2em solid ${(props) => props.theme.colors.signatureColor};
 `;

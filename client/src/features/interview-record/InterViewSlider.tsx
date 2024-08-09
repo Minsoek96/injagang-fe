@@ -24,13 +24,11 @@ function InterViewSlider({ video, question, idx }: InterViewSliderProps) {
   };
   return (
     <InterViewSliderStyle>
-      <InterViewInfo>
-        <h2>
-          질문:
-          {question[idx]}
-        </h2>
-        <h2>나의 대답: </h2>
-      </InterViewInfo>
+      <h2>
+        질문:
+        {question[idx]}
+      </h2>
+      <h2>나의 대답: </h2>
       <video autoPlay controls src={URL.createObjectURL(video[idx])}>
         <track
           kind="captions"
@@ -55,8 +53,4 @@ const InterViewSliderStyle = styled.div`
   ${styleMixin.Column()}
   width: 100%;
   height: 100%;
-`;
-
-const InterViewInfo = styled.div`
-
 `;
