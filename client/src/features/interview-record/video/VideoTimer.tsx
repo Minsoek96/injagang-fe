@@ -16,7 +16,7 @@ function VideoTimer({ isRunning }: Props) {
 
   useInterval(
     () => {
-      setTime(time + 1);
+      setTime((timer) => timer + 1);
     },
     isRunning ? 1000 : null,
   );

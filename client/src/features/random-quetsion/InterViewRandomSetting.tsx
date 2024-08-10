@@ -1,14 +1,15 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
-import { styleMixin } from '@/src/shared/styles';
-
-import { useModal } from '@/src/shared/hooks';
 
 import {
   interviewType,
   interviewMutation,
 } from '@/src/entities/interview_question';
+
+import { InputField } from '@/src/shared/components';
+import { styleMixin } from '@/src/shared/styles';
+import { useModal } from '@/src/shared/hooks';
 
 function InterViewRandomSetting() {
   const [randomSetting, setRandomSetting] = useState({
@@ -59,33 +60,35 @@ function InterViewRandomSetting() {
   return (
     <InterViewSettingStyle>
       <Form onSubmit={handleSubmit}>
-        <Label>CS 질문</Label>
-        <Input
-          type="number"
+        <InputField
+          label="CS질문"
           name="cs"
           value={randomSetting.cs}
           onChange={handleChange}
+          ref={null}
         />
-        <Label>상황 질문</Label>
-        <Input
+        <InputField
+          label="상황 질문"
           type="number"
           name="situation"
           value={randomSetting.situation}
           onChange={handleChange}
+          ref={null}
         />
-        <Label>성격 질문</Label>
-        <Input
-          type="number"
+        <InputField
+          label="성격 질문"
           name="personality"
           value={randomSetting.personality}
           onChange={handleChange}
+          ref={null}
         />
-        <Label>직업 질문</Label>
-        <Input
+        <InputField
+          label="직업 질문"
           type="number"
           name="job"
           value={randomSetting.job}
           onChange={handleChange}
+          ref={null}
         />
         <Button type="submit">셋팅완료</Button>
       </Form>
@@ -110,19 +113,6 @@ const Form = styled.form`
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.primary};
   box-shadow: 0 4px 8px rgba(14, 13, 13, 0.2);
-`;
-
-const Label = styled.label`
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 8px;
-`;
-
-const Input = styled.input`
-  padding: 8px;
-  margin-bottom: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
 `;
 
 const Button = styled.button`

@@ -1,6 +1,6 @@
 import { keyframes } from 'styled-components';
 
-export const fadeIn = keyframes`
+const fadeIn = keyframes`
   from {
     opacity: 0;
   } to {
@@ -8,7 +8,7 @@ export const fadeIn = keyframes`
   }
 `;
 
-export const fadeOut = keyframes`
+const fadeOut = keyframes`
   from {
     opacity: 1;
   } to {
@@ -16,7 +16,7 @@ export const fadeOut = keyframes`
   }
 `;
 
-export const slideIn = keyframes`
+const slideIn = keyframes`
   from {
     transform: translateX(100px);
     opacity: 0;
@@ -27,7 +27,7 @@ export const slideIn = keyframes`
   }
 `;
 
-export const progressBar = keyframes`
+const progressBar = keyframes`
   from {
     width: 100%;
   }
@@ -36,7 +36,7 @@ export const progressBar = keyframes`
   }
 `;
 
-export const shakeAnimation = keyframes`
+const shakeAnimation = keyframes`
   0% {
     transform: translateX(0);
   }
@@ -71,3 +71,19 @@ export const shakeAnimation = keyframes`
     transform: translateX(0);
   }
 `;
+
+const bounce = keyframes`
+0%, 20%, 50%, 80%, 100% {
+  transform: translateY(0);
+}
+40% {
+  transform: translateY(-15px);
+}
+60% {
+  transform: translateY(-10px);
+}
+`;
+
+export {
+  fadeIn, fadeOut, slideIn, progressBar, shakeAnimation, bounce,
+};

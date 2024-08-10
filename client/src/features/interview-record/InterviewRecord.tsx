@@ -4,21 +4,17 @@ import styled from 'styled-components';
 
 import { useInterViewStore } from '@/src/entities/interview_question';
 
-import {
-  Container,
-  MainButton,
-} from '@/src/shared/components';
+import { Container, MainButton } from '@/src/shared/components';
 import { styleMixin, V } from '@/src/shared/styles';
 import { useMediaRecord, useModal, useWebSpeech } from '@/src/shared/hooks';
 
-import VideoTimer from '@/src/features/interview-record/video/VideoTimer';
-import InterViewSlider from './InterViewSlider';
-import { VideoPlayer, ScriptTextArea } from './video';
+import { InterViewResult } from './video-result';
+import { VideoPlayer, ScriptTextArea, RecordActionButtons } from './video';
 
 /** 영상 녹화 메인 컴포넌트 */
 function InterviewRecord() {
   const [curIndex, setCurIndex] = useState<number>(0);
-  const [isSpeaching, setIsSpeching] = useState<boolean>(false);
+  const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [isResultMode, setIsResultMode] = useState<boolean>(false);
   const [isScriptView, setIsScriptView] = useState<boolean>(false);
   const [videoIndex] = useState<number>(0);
@@ -78,62 +74,65 @@ function InterviewRecord() {
   };
 
   const readCurrentScript = async (): Promise<void> => {
-    setIsSpeching(true);
+    setIsSpeaking(true);
     await readingTheScript(curIndex);
-    setIsSpeching(false);
+    setIsSpeaking(false);
     setCurIndex((prevIndex) => prevIndex + 1);
   };
 
   return (
-    <RecordContainer $size={{ height: '60vh', width: '100%', flex: 'Col' }}>
-      <PlayerHeader>
-        <PlayerState>{isRecord ? '녹화중' : '대기상태'}</PlayerState>
-        <SpeachingState $isBlock={isSpeaching || isRecord}>
-          {isSpeaching
-            ? '타이머가 3초가 되면 스피칭이 진행됩니다.'
-            : isRecord && `${speechData[curIndex - 1]}`}
-        </SpeachingState>
-        <VideoTimer isRunning={isSpeaching || isRecord} />
-      </PlayerHeader>
-      {isResultMode && !isRecord ? (
-        <InterViewSlider
+    <RecordContainer
+      $size={{
+        height: '60vh',
+        width: '100%',
+        flex: 'Col',
+        isMedia: true,
+      }}
+    >
+      {isResultMode ? (
+        <InterViewResult
           idx={videoIndex}
           video={recordedChunks}
           question={speechData}
         />
       ) : (
-        <VideoPlayer videoRef={videoRef} />
+        <VideoPlayer
+          videoRef={videoRef}
+          isRecord={isRecord}
+          isSpeaking={isSpeaking}
+          currentQuestion={speechData[curIndex - 1]}
+        />
       )}
+
       <ScriptWrapper $isScript={isScriptView}>
         <ScriptTextArea />
       </ScriptWrapper>
-      <PlayerController>
-        <MainButton
-          onAction={handleSpeak}
-          label={
-            !speechData.length ? '설정된 질문이 없습니다.' : '면접 녹화 시작'
-          }
-          disabled={!speechData.length || isResultMode}
-        />
+
+      <PlayerController $isResultMode={isResultMode}>
+        {!isResultMode && (
+          <MainButton
+            onAction={handleSpeak}
+            label={
+              !speechData.length ? '설정된 질문이 없습니다.' : '면접 녹화 시작'
+            }
+            disabled={!speechData.length || isResultMode}
+          />
+        )}
         {!isRecord && !!recordedChunks.length && (
           <MainButton
             label={isResultMode ? '다음촬영' : '결과확인'}
             onAction={() => setIsResultMode(!isResultMode)}
+            disabled={isSpeaking || isRecord}
           />
         )}
         {isRecord && (
-          <>
-            {isPaused ? (
-              <MainButton onAction={handleResumeRecord} label="영상재개" />
-            ) : (
-              <MainButton onAction={handlePauseRecord} label="촬영정지" />
-            )}
-            <MainButton onAction={handleEndRecord} label="촬영완료" />
-            <MainButton
-              onAction={() => setIsScriptView(!isScriptView)}
-              label="스크립트기록"
-            />
-          </>
+          <RecordActionButtons
+            handleEndRecord={handleEndRecord}
+            handlePauseRecord={handlePauseRecord}
+            handleResumeRecord={handleResumeRecord}
+            changeModeScript={() => setIsScriptView(!isScriptView)}
+            isRecordPaused={isPaused}
+          />
         )}
       </PlayerController>
     </RecordContainer>
@@ -153,20 +152,14 @@ const RecordContainer = styled(Container.ArticleCard)`
   }
 `;
 
-const PlayerHeader = styled.header`
-  ${styleMixin.Flex('space-between')}
+type ControllerProps = {
+  $isResultMode: boolean;
+};
+
+const PlayerController = styled.div<ControllerProps>`
+  ${(props) =>
+    (props.$isResultMode ? styleMixin.Flex('flex-end') : styleMixin.Flex())};
   width: 100%;
-  padding-inline: 1.2em;
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    div:nth-child(2) {
-      display: none;
-    }
-  }
-`;
-
-const PlayerController = styled.div`
-  ${styleMixin.Flex()}
   gap: 1rem;
   button {
     font-size: 1.8rem;
@@ -178,11 +171,6 @@ const PlayerController = styled.div`
       font-size: 1.4rem;
     }
   }
-`;
-
-const PlayerState = styled.span`
-  color: ${(props) => props.theme.colors.brandColor};
-  font-weight: bold;
 `;
 
 type ScriptProps = {
@@ -199,18 +187,4 @@ const ScriptWrapper = styled.div<ScriptProps>`
   @media screen and (max-width: ${V.mediaMobile}) {
     display: none;
   }
-`;
-
-type SpeachingProps = {
-  $isBlock: boolean;
-};
-
-const SpeachingState = styled.span<SpeachingProps>`
-  display: ${(props) => (props.$isBlock ? 'block' : 'none')};
-  padding: 0.5rem 1rem;
-  opacity: 0.8;
-  border-radius: 1rem;
-  font-weight: 600;
-  border-left: 0.2em solid ${(props) => props.theme.colors.signatureColor};
-  border-right: 0.2em solid ${(props) => props.theme.colors.signatureColor};
 `;
