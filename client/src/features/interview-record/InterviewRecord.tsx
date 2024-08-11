@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
-import { useInterViewStore } from '@/src/entities/interview_question';
+import {
+  useInterViewStore,
+  useRecordInfoStore,
+} from '@/src/entities/interview_question';
 
 import { Container, MainButton } from '@/src/shared/components';
 import { styleMixin, V } from '@/src/shared/styles';
@@ -17,7 +20,6 @@ function InterviewRecord() {
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [isResultMode, setIsResultMode] = useState<boolean>(false);
   const [isScriptView, setIsScriptView] = useState<boolean>(false);
-  const [videoIndex] = useState<number>(0);
 
   const {
     videoRef,
@@ -33,6 +35,9 @@ function InterviewRecord() {
   const { setModal } = useModal();
 
   const { confirmQuestions } = useInterViewStore();
+  const {
+    addRecordInfo, curScript, curTimer, initCurinfos, initRecordInfoList,
+  } = useRecordInfoStore();
 
   const { setSpeechData, readingTheScript, speechData } = useWebSpeech(
     [],
@@ -45,6 +50,8 @@ function InterviewRecord() {
   useEffect(() => {
     setSpeechData([...confirmQuestions]);
   }, [confirmQuestions]);
+
+  useEffect(() => () => initRecordInfoList(), []);
 
   /** 음성 텍스트 시작 */
   const handleSpeak = async (): Promise<void> => {
@@ -68,8 +75,16 @@ function InterviewRecord() {
     if (videoRef.current) handleRecord();
   };
 
+  const recordingResults = () => {
+    if (curScript) {
+      addRecordInfo({ timer: curTimer, script: curScript });
+    }
+    initCurinfos();
+  };
+
   const handleEndRecord = () => {
     setIsScriptView(false);
+    recordingResults();
     handleRecordRemove();
   };
 
@@ -91,7 +106,6 @@ function InterviewRecord() {
     >
       {isResultMode ? (
         <InterViewResult
-          idx={videoIndex}
           video={recordedChunks}
           question={speechData}
         />
@@ -104,9 +118,11 @@ function InterviewRecord() {
         />
       )}
 
-      <ScriptWrapper $isScript={isScriptView}>
-        <ScriptTextArea />
-      </ScriptWrapper>
+      {isScriptView && (
+        <ScriptWrapper>
+          <ScriptTextArea />
+        </ScriptWrapper>
+      )}
 
       <PlayerController $isResultMode={isResultMode}>
         {!isResultMode && (
@@ -173,16 +189,11 @@ const PlayerController = styled.div<ControllerProps>`
   }
 `;
 
-type ScriptProps = {
-  $isScript: boolean;
-};
-
-const ScriptWrapper = styled.div<ScriptProps>`
+const ScriptWrapper = styled.div`
   z-index: 100;
   position: absolute;
   width: 50%;
   bottom: 10rem;
-  display: ${(props) => (props.$isScript ? 'block' : 'none')};
 
   @media screen and (max-width: ${V.mediaMobile}) {
     display: none;

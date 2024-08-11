@@ -5,24 +5,38 @@ import { MdOutlineFileDownload } from 'react-icons/md';
 import { styleMixin, V } from '@/src/shared/styles';
 import { saveAs } from 'file-saver';
 import { MainButton } from '@/src/shared/components';
+import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useCounter } from '@/src/shared/hooks';
 
 type InterViewSliderProps = {
   video: Blob[];
   question: string[];
-  idx: number;
 };
 
-const script = ['fdsasfsa', 'sdfasfasdf', 'sadfasf'];
-export default function InterViewResult({ video, question, idx }: InterViewSliderProps) {
+export default function InterViewResult({
+  video,
+  question,
+}: InterViewSliderProps) {
+  const { counter, handleDecrease, handleIncrease } = useCounter({
+    maxCounter: video.length,
+  });
+  const { recordInfoList } = useRecordInfoStore();
   const downloadScript = () => {
-    if (script.length > 0) {
-      const blob = new Blob([script[idx]], {
-        type: 'text/plain;charset=utf-8',
-      });
+    if (recordInfoList.length > 0) {
+      const blob = new Blob(
+        [
+          `질문내용 : ${question[counter]}\n`,
+          `작성한 대본 : ${recordInfoList[counter]?.script}\n`,
+          `녹화시간 : ${recordInfoList[counter]?.timer}\n`,
+        ],
+        {
+          type: 'text/plain;charset=utf-8',
+        },
+      );
 
       const url = URL.createObjectURL(blob);
 
-      saveAs(blob, `${question[idx]}대본.txt`);
+      saveAs(blob, `${question[counter]}대본.txt`);
 
       URL.revokeObjectURL(url);
     }
@@ -30,20 +44,39 @@ export default function InterViewResult({ video, question, idx }: InterViewSlide
 
   const downloadVideo = () => {
     if (video.length > 0) {
-      const url = URL.createObjectURL(video[idx]);
+      const url = URL.createObjectURL(video[counter]);
       fetch(url)
         .then((res) => res.blob())
         .then((blob) => {
-          saveAs(blob, `${question[idx]}.mp4`);
+          saveAs(blob, `${question[counter]}.mp4`);
           URL.revokeObjectURL(url);
         });
       downloadScript();
     }
   };
-
   return (
     <InterViewResultContainer>
-      <PlayerWrapper autoPlay controls src={URL.createObjectURL(video[idx])}>
+      <VideoController>
+        <MainButton
+          label="<="
+          onAction={handleDecrease}
+          disabled={counter === 0}
+        />
+        <span>
+          진행현황
+          {`${counter + 1}/${question.length}`}
+        </span>
+        <MainButton
+          label="=>"
+          onAction={handleIncrease}
+          disabled={video.length - 1 <= counter}
+        />
+      </VideoController>
+      <PlayerWrapper
+        autoPlay
+        controls
+        src={URL.createObjectURL(video[counter])}
+      >
         <track
           kind="captions"
           src="path/to/captions.vtt"
@@ -57,15 +90,15 @@ export default function InterViewResult({ video, question, idx }: InterViewSlide
         <RecordInfo>
           <p>
             <span>인터뷰 질문 : </span>
-            {question[idx]}
+            {question[counter]}
           </p>
           <p>
             <span>스크립트 : </span>
-            [작성한 대본이 있습니다.]
+            {recordInfoList[counter]?.script || ['작성한 대본이 없습니다.']}
           </p>
           <p>
             <span>녹화 시간 : </span>
-            [00:00]
+            {recordInfoList[counter]?.timer || ['00:00']}
           </p>
         </RecordInfo>
         <MainButton
@@ -125,5 +158,14 @@ const RecordInfo = styled.div`
 
   @media screen and (max-width: ${V.mediaMobile}) {
     font-size: 1.4rem;
+  }
+`;
+
+const VideoController = styled.div`
+  ${styleMixin.Flex('space-between')};
+  width: 100%;
+  margin-bottom: 1rem;
+  button {
+    background-color: ${(props) => props.theme.colors.signatureColor};
   }
 `;
