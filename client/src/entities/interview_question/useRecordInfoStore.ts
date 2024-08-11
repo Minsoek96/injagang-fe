@@ -30,10 +30,7 @@ const useRecordInfoStore = create<State & Action>((set) => ({
       recordInfoList: [...state.recordInfoList, newInfo],
     }));
   },
-  initRecordInfoList: () =>
-    set({
-      recordInfoList: [],
-    }),
+  initRecordInfoList: () => set({ recordInfoList: [] }),
   initCurinfos: () => set({ curTimer: '', curScript: '' }),
 }));
 

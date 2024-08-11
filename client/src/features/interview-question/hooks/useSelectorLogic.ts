@@ -8,15 +8,13 @@ import {
 type ManagerProps = {
   typeCheckCallback: () => void; // 타입 선택시 전체 체크 상태 해제
 };
-const useEUserQuestionManager = ({
+const useSelectorLogic = ({
   typeCheckCallback = () => {},
 }: ManagerProps) => {
   const {
     selectedType,
     setSelectedType,
     setUserPlayList,
-    initUserPlayList,
-    userPlayList,
   } = useInterViewStore();
 
   const dispatchSelectedType = useCallback(
@@ -40,17 +38,11 @@ const useEUserQuestionManager = ({
     [],
   );
 
-  const dispatchClearSelectedQuestions = useCallback(() => {
-    initUserPlayList();
-  }, []);
-
   return {
-    selectedQuestions: userPlayList,
     selectedType,
     dispatchSelectedType,
     dispatchSelectedQuestions,
-    dispatchClearSelectedQuestions,
   };
 };
 
-export default useEUserQuestionManager;
+export default useSelectorLogic;
