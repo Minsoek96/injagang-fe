@@ -11,3 +11,4 @@ export { default as useToast } from './useToast';
 export { default as useWebSpeech } from './useWebSpeech';
 export { default as useDragCorrection } from './useDragCorrection';
 export { default as useInterval } from './useInterval';
+export { default as useCounter } from './useCounter';
