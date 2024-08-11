@@ -10,6 +10,7 @@ export default function MainButton({
   sx = {},
   isActive = false,
   disabled = false,
+  className = '',
 }: BaseProps) {
   return (
     <CustomBtn
@@ -17,6 +18,7 @@ export default function MainButton({
       style={sx}
       $isActive={isActive}
       disabled={disabled}
+      className={className}
     >
       {label}
     </CustomBtn>

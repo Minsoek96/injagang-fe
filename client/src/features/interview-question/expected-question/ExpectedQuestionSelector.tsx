@@ -1,28 +1,46 @@
+import { styled } from 'styled-components';
+
+import { useCallback } from 'react';
+
+import {
+  interviewQueries,
+  useInterViewStore,
+} from '@/src/entities/interview_question';
+import { useDeleteInterViewQ } from '@/src/entities/interview_question/mutations';
 import { useCheckList } from '@/src/shared/hooks';
-import { BaseCard } from '@/src/shared/components/card';
+import { Container } from '@/src/shared/components';
+
+import { useSelectorLogic } from '../hooks';
+
 import QuestionSelector from './QuestionSelector';
 import ExpectedQuestionList from './ExpectedQuestionList';
 import ActionBtns from './ActionBtns';
 
-import useEUserQuestionManager from '../hooks/useEUserQuestionManager';
-import useExpectedQuestionManager from '../hooks/useExpectedQuestionManager';
-
 function ExpectedQuestionSelector() {
-  const { interViewQuestionList, dispatchRemoveQuestions } = useExpectedQuestionManager();
+  const { selectedType } = useInterViewStore();
+  const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions(selectedType);
+  const { mutate: deleteQuestions } = useDeleteInterViewQ();
 
   const {
     checkList, handleAllCheck, handleCheckList, isAllCheck,
   } = useCheckList(interViewQuestionList);
 
-  const {
-    selectedType, dispatchSelectedType,
-    dispatchSelectedQuestions,
-  } = useEUserQuestionManager({
+  const { dispatchSelectedType, dispatchSelectedQuestions } = useSelectorLogic({
     typeCheckCallback: isAllCheck ? handleAllCheck : () => {},
   });
 
+  const removeQuestions = useCallback((targetIds: number[]) => {
+    const formmatData = {
+      ids: targetIds,
+    };
+    deleteQuestions(formmatData);
+  }, []);
+
   return (
-    <BaseCard $size={{ height: '450px', width: '100%', flex: 'Col' }}>
+    <Container.ArticleCard
+      $size={{ height: '60rem', width: '100%', flex: 'Col' }}
+    >
+      <Header>Questions by Type</Header>
       <QuestionSelector
         selectedType={selectedType}
         onChange={dispatchSelectedType}
@@ -36,12 +54,18 @@ function ExpectedQuestionSelector() {
         checkList={checkList}
         onAdd={dispatchSelectedQuestions}
         isAllChecked={isAllCheck}
-        onRemove={dispatchRemoveQuestions}
+        onRemove={removeQuestions}
         onToggleAll={handleAllCheck}
         questions={interViewQuestionList}
       />
-    </BaseCard>
+    </Container.ArticleCard>
   );
 }
 
 export default ExpectedQuestionSelector;
+
+const Header = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+`;

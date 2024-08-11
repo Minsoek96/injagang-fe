@@ -31,7 +31,7 @@ function ExpectedQuestionList({
 
 export default ExpectedQuestionList;
 
-const Container = styled.div`
+const Container = styled.ul`
   ${styleMixin.ScrollBar}
   width: 100%;
   height: 100%;

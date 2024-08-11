@@ -1,30 +1,36 @@
-import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import roomout from '@/public/assets/roomout.svg';
+
+import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
 import { BiArrowBack } from 'react-icons/bi';
 
-import Image from 'next/image';
-import roomout from '@/public/assets/roomout.svg';
+import { ExpectedQuestionLayout } from '@/src/features/interview-question';
 
-import InterViewListView from '@/src/features/interview-question/ExpectedQuestionLayout';
-
-import { BaseButton } from '@/src/shared/components/button';
-import dynamic from 'next/dynamic';
+import { useInterViewStore } from '@/src/entities/interview_question';
+import {
+  MainButton,
+  Container,
+  StepProgressBar,
+  ArrowGuide,
+} from '@/src/shared/components';
 import { V, styleMixin } from '@/src/shared/styles';
-import ArrowAnimation from '@/src/features/interview-record/InterViewMenual';
-import StepProgressBar from '@/src/shared/components/progressbar/StepProgresBar';
-import { Container } from '@/src/shared/components';
 
 const InterViewRandomSetting = dynamic(
-  () => import('@/src/features/interview-record/InterViewRandomSetting'),
+  () =>
+    import(
+      '@/src/features/random-quetsion/InterViewRandomSetting'
+    ),
   {
     ssr: false,
   },
 );
 
 const InterviewRecord = dynamic(
-  () => import('@/src/features/interview-record/interviewRecord'),
+  () => import('@/src/features/interview-record/InterviewRecord'),
   {
     ssr: false,
   },
@@ -32,8 +38,9 @@ const InterviewRecord = dynamic(
 
 const renderComponent = [
   { render: null, title: '면접영상촬영시작' },
-  { render: <InterViewListView />, title: '나만의 질문 리스트 셋팅' },
-  { render: <InterViewRandomSetting />, title: '랜덤 배치 리스트 셋팅' },
+  { render: <ExpectedQuestionLayout />, title: 'Next Step...' },
+  { render: <InterViewRandomSetting />, title: 'Next Step...' },
+  { render: <h1>준비중...</h1>, title: 'Next Step ...' },
   { render: <InterviewRecord />, title: '면접 준비 완료' },
 ];
 
@@ -46,51 +53,68 @@ const steps = [
 ];
 
 const START_SCREEN = 0;
-const END_SCREEN = 3;
+const END_SCREEN = renderComponent.length - 1;
 const SECOND_SCREEN = 1;
 
 function Interview() {
-  const [curIndex, setCurIndex] = useState<number>(START_SCREEN);
+  const [currentStep, setCurrentStep] = useState<number>(START_SCREEN);
+  const { initConfirmQuestions } = useInterViewStore();
 
   const moveToNextPage = () => {
-    setCurIndex((prevIndex) =>
-      (prevIndex >= END_SCREEN ? SECOND_SCREEN : prevIndex + 1));
+    setCurrentStep((prevStep) =>
+      (prevStep >= END_SCREEN ? SECOND_SCREEN : prevStep + 1));
   };
 
   const moveToPrevPage = () => {
-    setCurIndex((prevIndex) =>
-      (prevIndex <= START_SCREEN ? START_SCREEN : prevIndex - 1));
+    setCurrentStep((prevStep) =>
+      (prevStep <= START_SCREEN ? START_SCREEN : prevStep - 1));
   };
+
+  useEffect(
+    () => () => {
+      initConfirmQuestions();
+    },
+    [],
+  );
 
   return (
     <InterViewStyle>
-      <StepProgressBar stepList={steps} currentStep={curIndex} />
-      <RecordComponent>{renderComponent[curIndex].render}</RecordComponent>
-      {curIndex === START_SCREEN && (
+      <StepProgressBar stepList={steps} currentStep={currentStep} />
+      <RecordComponent>{renderComponent[currentStep].render}</RecordComponent>
+      {currentStep === START_SCREEN && (
         <Menual>
-          <ArrowAnimation targetId="Arrow_btn" />
-          <div className="interViewImg_box">
-            <Image src={roomout} alt="roomout" />
-          </div>
+          <ImageContainer>
+            <Image
+              src={roomout}
+              alt="roomout"
+              width={500}
+              height={500}
+              quality={100}
+            />
+          </ImageContainer>
+          <ArrowGuide targetId="Arrow_btn" guideText="Next Stage Button" />
         </Menual>
       )}
-      <ControlBtn>
-        {curIndex > SECOND_SCREEN && (
-          <BaseButton
-            onClick={moveToPrevPage}
-            $Size={{ width: '50px', font: '22px' }}
-          >
-            <BiArrowBack />
-          </BaseButton>
+      <ControlButtons>
+        {currentStep > SECOND_SCREEN && (
+          <MainButton
+            label={<BiArrowBack />}
+            onAction={moveToPrevPage}
+            sx={{ width: '50px', font: '3rem' }}
+          />
         )}
-        <BaseButton
+        <MainButton
           className="Arrow_btn"
-          onClick={moveToNextPage}
-          $Size={{ width: '90%', font: '20px' }}
-        >
-          {renderComponent[curIndex].title}
-        </BaseButton>
-      </ControlBtn>
+          label={renderComponent[currentStep].title}
+          onAction={moveToNextPage}
+          sx={{
+            width: '100%',
+            font: '2rem',
+            padding: '1em',
+          }}
+          disabled={currentStep === renderComponent.length - 1}
+        />
+      </ControlButtons>
     </InterViewStyle>
   );
 }
@@ -102,24 +126,32 @@ const InterViewStyle = styled.div`
   width: 100%;
 `;
 
-const Menual = styled.div`
-  ${styleMixin.Column()}
-  margin:50px;
+const ImageContainer = styled.div`
+  overflow: hidden;
+  border: 1px solid ${(props) => props.theme.colors.mainLine};
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1em;
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 3rem;
   width: 100%;
-  height: 100%;
-  .interViewImg_box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60%;
-    height: 60%;
+  height: 60rem;
+  min-height: 30rem;
+
+  &:hover {
+    transform: scale(1.05);
   }
-  img {
-    width: 100%;
+
+  @media screen and (max-width: ${V.mediaMobile}) {
     height: 100%;
-    border-radius: 12px;
-    background-color: #fff;
   }
+`;
+
+const Menual = styled.div`
+  ${styleMixin.Column('flex-start')}
+  width: 100%;
+  height: 50rem;
+
   @media screen and (max-width: 800px) {
     .interViewImg_box {
       width: 85%;
@@ -128,7 +160,7 @@ const Menual = styled.div`
   }
 `;
 
-const ControlBtn = styled.div`
+const ControlButtons = styled.div`
   ${styleMixin.Flex()}
   margin-top: 3rem;
   width: ${V.lgItemWidth};
@@ -136,10 +168,15 @@ const ControlBtn = styled.div`
   @media screen and (max-width: 800px) {
     width: ${V.smItemWidth};
   }
+
+  button {
+    height: 4rem;
+  }
 `;
 
 const RecordComponent = styled(Container.ItemBase)`
   ${styleMixin.Column('flex-start')}
-  max-width:100%;
+  width: 100%;
+  font-family: ${V.malgunGothic};
   margin-top: 5rem;
 `;

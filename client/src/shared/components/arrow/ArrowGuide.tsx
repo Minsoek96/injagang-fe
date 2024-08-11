@@ -1,36 +1,17 @@
 import { useEffect, useState } from 'react';
 
+import styled from 'styled-components';
+
 import { MdCallMade } from 'react-icons/md';
 
-import styled, { keyframes } from 'styled-components';
-
-const bounce = keyframes`
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-15px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
-`;
-
-const Arrow = styled.div`
-  font-size: 50px;
-  color: red;
-  animation: ${bounce} 2s infinite;
-  font-family: 'Oswald', sans-serif;
-  p {
-    font-size: 30px;
-  }
-`;
+import { bounce } from '@/src/shared/styles';
 
 interface ArrowAnimationProps {
   targetId: string;
+  guideText: string;
 }
 
-function ArrowAnimation({ targetId }: ArrowAnimationProps) {
+function ArrowAnimation({ targetId, guideText }: ArrowAnimationProps) {
   const [position, setPosition] = useState<{ top: number; left: number }>({
     top: 0,
     left: 0,
@@ -64,9 +45,19 @@ function ArrowAnimation({ targetId }: ArrowAnimationProps) {
       }}
     >
       <MdCallMade />
-      <p>Click Me</p>
+      <p>{guideText}</p>
     </Arrow>
   );
 }
 
 export default ArrowAnimation;
+
+const Arrow = styled.div`
+  font-size: 50px;
+  color: red;
+  animation: ${bounce} 2s infinite;
+  font-family: "Oswald", sans-serif;
+  p {
+    font-size: 30px;
+  }
+`;

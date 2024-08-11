@@ -7,6 +7,7 @@ type BaseProps = {
     sx?: CSSProperties;
     isActive? :boolean;
     disabled?: boolean;
+    className?: string;
   };
 
 export {

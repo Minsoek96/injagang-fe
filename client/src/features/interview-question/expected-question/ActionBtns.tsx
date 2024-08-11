@@ -1,6 +1,7 @@
-import { BaseButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/components/button';
 import { interviewType } from '@/src/entities/interview_question';
 import { useAuthStore } from '@/src/entities/auth';
+import styled from 'styled-components';
 
 interface ActionBtnProps {
   checkList: number[];
@@ -39,21 +40,24 @@ function ActionBtns({
   };
 
   return (
-    <div>
-      <BaseButton
-        onClick={onToggleAll}
-        $Size={{ width: '100px', font: '15px' }}
-      >
-        {isAllChecked ? '전체해제' : '전체선택'}
-      </BaseButton>
-      <BaseButton
-        onClick={btnConfig[isAdmin].onClick}
-        $Size={{ width: '100px', font: '15px' }}
-      >
-        {btnConfig[isAdmin].text}
-      </BaseButton>
-    </div>
+    <ActionContainer>
+      <MainButton
+        label={isAllChecked ? '전체해제' : '전체선택'}
+        onAction={onToggleAll}
+        sx={{ width: '100%', height: '4rem', marginRight: '.5rem' }}
+      />
+      <MainButton
+        label={btnConfig[isAdmin].text}
+        onAction={btnConfig[isAdmin].onClick}
+        sx={{ width: '100%', height: '4rem' }}
+      />
+    </ActionContainer>
   );
 }
 
 export default ActionBtns;
+
+const ActionContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;

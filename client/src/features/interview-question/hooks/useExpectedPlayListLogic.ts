@@ -1,28 +1,29 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import { useModal } from '@/src/shared/hooks';
-
-import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
 import { useAuthStore } from '@/src/entities/auth';
-import useEUserQuestionManager from './useEUserQuestionManager';
-import useExpectedQuestionManager from './useExpectedQuestionManager';
+import { useInterViewStore } from '@/src/entities/interview_question';
+import { useModal } from '@/src/shared/hooks';
+import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
+
+import { useAddInterViewQ } from '@/src/entities/interview_question/mutations';
 
 const useExpetedPlayListLogic = () => {
   const {
-    selectedType, selectedQuestions,
-    dispatchClearSelectedQuestions,
-  } = useEUserQuestionManager({ typeCheckCallback: () => {} });
-  const { dispatchAddQuestions, dispatchAddInterViewList } = useExpectedQuestionManager();
+    selectedType, userPlayList, initUserPlayList, setConfirmQuestions,
+  } = useInterViewStore();
+
+  const { mutate: dispatchAddQuestions } = useAddInterViewQ();
+
   const { role } = useAuthStore();
   const { setModal } = useModal();
   const [userQuestion, setUserQuestion] = useState<string[]>([]);
 
   // 유저가 추가한 리스트를 입력
   useEffect(() => {
-    if (selectedQuestions) {
-      setUserQuestion((cur) => [...cur, ...selectedQuestions]);
+    if (userPlayList) {
+      setUserQuestion((cur) => [...cur, ...userPlayList]);
     }
-  }, [selectedQuestions]);
+  }, [userPlayList]);
 
   /** 입력한 텍스트 리스트에 추가 */
   const handleAddText = useCallback(
@@ -67,7 +68,7 @@ const useExpetedPlayListLogic = () => {
       questionType: selectedType,
     };
     dispatchAddQuestions(addList);
-    dispatchClearSelectedQuestions();
+    initUserPlayList();
     setUserQuestion([]);
   }, [setModal, userQuestion, selectedType]);
 
@@ -82,8 +83,8 @@ const useExpetedPlayListLogic = () => {
       });
       return;
     }
-    dispatchAddInterViewList(userQuestion);
-    dispatchClearSelectedQuestions();
+    setConfirmQuestions(userQuestion);
+    initUserPlayList();
     setModal({
       contents: {
         title: MODAL_MESSAGES.MSG,

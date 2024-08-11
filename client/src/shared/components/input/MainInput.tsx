@@ -1,3 +1,5 @@
+import { ForwardedRef, forwardRef, useRef } from 'react';
+
 import { CSSProperties, styled } from 'styled-components';
 
 type Props = {
@@ -8,24 +10,38 @@ type Props = {
   sx?: CSSProperties;
 };
 
-export default function MainInput({
-  placeholder = '',
-  value,
-  onChange,
-  id = '',
-  sx = {},
-}: Props) {
-  return (
-    <Input
-      type="text"
-      placeholder={placeholder}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      id={id}
-      style={sx}
-    />
-  );
-}
+const MainInput = forwardRef(
+  (
+    {
+      placeholder = '', value, onChange, id = '', sx = {},
+    }: Props,
+    fwRef?: ForwardedRef<HTMLInputElement>,
+  ) => {
+    const internalRef = useRef<HTMLInputElement>(null);
+    const combinedRef = fwRef || internalRef;
+    return (
+      <Input
+        ref={combinedRef}
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        id={id}
+        style={sx}
+      />
+    );
+  },
+);
+
+MainInput.displayName = 'MainInput';
+
+MainInput.defaultProps = {
+  placeholder: '',
+  id: '',
+  sx: {},
+};
+
+export default MainInput;
 
 const Input = styled.input`
   height: 4rem;
