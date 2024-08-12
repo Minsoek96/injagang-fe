@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 import {
   useInterViewStore,
   useRecordInfoStore,
-} from "@/src/entities/interview_question";
+} from '@/src/entities/interview_question';
 
-import { Container, MainButton } from "@/src/shared/components";
-import { styleMixin, V } from "@/src/shared/styles";
-import { useMediaRecord, useModal, useWebSpeech } from "@/src/shared/hooks";
+import { Container, MainButton } from '@/src/shared/components';
+import { styleMixin, V } from '@/src/shared/styles';
+import { useMediaRecord, useModal, useWebSpeech } from '@/src/shared/hooks';
 
-import { InterViewResult } from "./video-result";
-import { VideoPlayer, ScriptTextArea, RecordActionButtons } from "./video";
+import { InterViewResult } from './video-result';
+import { VideoPlayer, ScriptTextArea, RecordActionButtons } from './video';
 
 /** 영상 녹화 메인 컴포넌트 */
 function InterviewRecord() {
@@ -45,7 +45,7 @@ function InterviewRecord() {
 
   const { setSpeechData, readingTheScript, speechData } = useWebSpeech(
     [],
-    3000
+    3000,
   );
 
   const isComplete = curIndex >= speechData.length;
@@ -63,9 +63,9 @@ function InterviewRecord() {
       setModal({
         onAction: () => setCurIndex(0),
         contents: {
-          title: "Congratulations",
+          title: 'Congratulations',
           message:
-            "준비된 모든 질문이 끝났습니다.\n 처음부터 다시 반복을 원하시면 게속 진행해주세요",
+            '준비된 모든 질문이 끝났습니다.\n 처음부터 다시 반복을 원하시면 게속 진행해주세요',
         },
       });
       return;
@@ -102,9 +102,9 @@ function InterviewRecord() {
   return (
     <RecordContainer
       $size={{
-        height: "60vh",
-        width: "100%",
-        flex: "Col",
+        height: '60vh',
+        width: '100%',
+        flex: 'Col',
         isMedia: true,
       }}
     >
@@ -112,7 +112,7 @@ function InterviewRecord() {
         <InterViewResult
           video={recordedChunks}
           question={speechData}
-          currentIdx={curIndex-1}
+          currentIdx={curIndex - 1}
         />
       ) : (
         <VideoPlayer
@@ -134,14 +134,14 @@ function InterviewRecord() {
           <MainButton
             onAction={handleSpeak}
             label={
-              !speechData.length ? "설정된 질문이 없습니다." : "면접 녹화 시작"
+              !speechData.length ? '설정된 질문이 없습니다.' : '면접 녹화 시작'
             }
             disabled={!speechData.length || isResultMode}
           />
         )}
         {!isRecord && !!recordedChunks.length && (
           <MainButton
-            label={isResultMode ? "다음촬영" : "결과확인"}
+            label={isResultMode ? '다음촬영' : '결과확인'}
             onAction={() => setIsResultMode(!isResultMode)}
             disabled={isSpeaking || isRecord}
           />
@@ -179,7 +179,7 @@ type ControllerProps = {
 
 const PlayerController = styled.div<ControllerProps>`
   ${(props) =>
-    props.$isResultMode ? styleMixin.Flex("flex-end") : styleMixin.Flex()};
+    (props.$isResultMode ? styleMixin.Flex('flex-end') : styleMixin.Flex())};
   width: 100%;
   gap: 1rem;
   button {

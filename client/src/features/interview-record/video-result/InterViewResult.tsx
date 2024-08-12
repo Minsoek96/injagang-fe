@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { MdOutlineFileDownload } from "react-icons/md";
+import { MdOutlineFileDownload } from 'react-icons/md';
 
-import { styleMixin, V } from "@/src/shared/styles";
-import { saveAs } from "file-saver";
-import { MainButton } from "@/src/shared/components";
-import { useRecordInfoStore } from "@/src/entities/interview_question";
-import { useCounter } from "@/src/shared/hooks";
+import { styleMixin, V } from '@/src/shared/styles';
+import { saveAs } from 'file-saver';
+import { MainButton } from '@/src/shared/components';
+import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useCounter } from '@/src/shared/hooks';
 
 type InterViewSliderProps = {
   video: Blob[];
@@ -23,8 +23,6 @@ export default function InterViewResult({
     maxCounter: video.length,
     initCounter: currentIdx,
   });
-  console.log(currentIdx)
-  console.log(counter)
   const { recordInfoList } = useRecordInfoStore();
   const downloadScript = () => {
     if (recordInfoList.length > 0) {
@@ -35,8 +33,8 @@ export default function InterViewResult({
           `녹화시간 : ${recordInfoList[counter]?.timer}\n`,
         ],
         {
-          type: "text/plain;charset=utf-8",
-        }
+          type: 'text/plain;charset=utf-8',
+        },
       );
 
       const url = URL.createObjectURL(blob);
@@ -99,22 +97,22 @@ export default function InterViewResult({
           </p>
           <p>
             <span>스크립트 : </span>
-            {recordInfoList[counter]?.script || ["작성한 대본이 없습니다."]}
+            {recordInfoList[counter]?.script || ['작성한 대본이 없습니다.']}
           </p>
           <p>
             <span>녹화 시간 : </span>
-            {recordInfoList[counter]?.timer || ["00:00"]}
+            {recordInfoList[counter]?.timer || ['00:00']}
           </p>
         </RecordInfo>
         <MainButton
           onAction={downloadVideo}
-          label={
+          label={(
             <p>
               <MdOutlineFileDownload />
               DOWNLOAD
             </p>
-          }
-          sx={{ marginTop: "1rem", fontSize: "1.8rem" }}
+          )}
+          sx={{ marginTop: '1rem', fontSize: '1.8rem' }}
         />
       </AccessoriesWrapper>
     </InterViewResultContainer>
@@ -123,14 +121,14 @@ export default function InterViewResult({
 
 const InterViewResultContainer = styled.div`
   position: relative;
-  ${styleMixin.Column("flex-start")}
+  ${styleMixin.Column('flex-start')}
   width: 100%;
   height: 100%;
   overflow-x: hidden;
 `;
 
 const AccessoriesWrapper = styled.div`
-  ${styleMixin.Column("", "flex-start")};
+  ${styleMixin.Column('', 'flex-start')};
   width: 100%;
   max-width: 110rem;
   font-size: 1.8rem;
@@ -168,7 +166,7 @@ const RecordInfo = styled.div`
 `;
 
 const VideoController = styled.div`
-  ${styleMixin.Flex("space-between")};
+  ${styleMixin.Flex('space-between')};
   width: 100%;
   margin-bottom: 1rem;
   button {

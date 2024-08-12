@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components';
 import { InputField } from '@/src/shared/components/input';
 import { shakeAnimation } from '@/src/shared/styles';
 
-import useLoginLogic from './hooks/useLoginLogic';
+import { useLoginLogic } from './hooks';
 
 function Login() {
   const {

@@ -1,12 +1,17 @@
-import useLoginManager from '@/src/features/auth/hooks/useLoginManager';
+import { useCallback } from 'react';
 
+import { useFetchCheckOut } from '@/src/entities/auth/mutations';
 import useModal from '@/src/shared/hooks/useModal';
 
 import { BiLogOut } from 'react-icons/bi';
 
 export default function LogoutMenu() {
   const { setModal } = useModal();
-  const { dispatchCheckOut } = useLoginManager();
+  const { mutate: checkOut } = useFetchCheckOut();
+
+  const dispatchCheckOut = useCallback(() => {
+    checkOut();
+  }, []);
 
   const handleClick = () => {
     setModal({
