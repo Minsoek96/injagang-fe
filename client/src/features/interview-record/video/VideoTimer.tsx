@@ -31,7 +31,8 @@ function VideoTimer({ isRunning }: Props) {
   );
 
   useEffect(() => {
-    if (!isRunning) {
+    if (!isRunning && time > 10) {
+      console.log(time,'현재기록')
       setCurTimer(formatTime(time));
       setTime(0);
     }
