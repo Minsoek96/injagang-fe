@@ -6,32 +6,37 @@ import { ERROR_MESSAGES } from '@/src/shared/const';
 import { useFetchSignin } from '@/src/entities/auth/mutations';
 
 const useLoginLogic = () => {
-  const { mutate: authenTicate, errorMsg: loginErrorMsg } = useFetchSignin();
+  const { mutate: authenTicate, errorMsg: serverErrorMsg } = useFetchSignin();
   const [loginInfo, setLoginInfo] = useState({
     loginId: '',
     password: '',
   });
-  const [userLogicMsg, setUserLogicMsg] = useState('');
+  const [logicErrorMsg, setLogicErrorMsg] = useState('');
 
+  /**  동적인 input ref를 연결하기 위한 선언 */
   const refs: { [key: string]: React.RefObject<HTMLInputElement> } = {
     loginIdRef: useRef<HTMLInputElement>(null),
     passwordRef: useRef<HTMLInputElement>(null),
   };
 
+  /**  비어있는 인풋을 탐색하고 메시지 알림 */
   const runValidationCheck = () => {
     const emptyfield = hasEmpty.fieldKey(loginInfo);
     if (emptyfield) {
       refs[`${emptyfield}Ref`].current?.focus();
-      setUserLogicMsg(ERROR_MESSAGES.FILL_BLANKS);
+      setLogicErrorMsg(ERROR_MESSAGES.FILL_BLANKS);
       return false;
     }
     return true;
   };
 
+  /** 서버에 로그인 요청 */
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    runValidationCheck() && authenTicate(loginInfo);
-    setUserLogicMsg('');
+    if (runValidationCheck()) {
+      authenTicate(loginInfo);
+      setLogicErrorMsg('');
+    }
   };
 
   const handleChange = useCallback(
@@ -48,12 +53,12 @@ const useLoginLogic = () => {
   const { loginIdRef, passwordRef } = refs;
   return {
     loginInfo,
-    userLogicMsg,
+    logicErrorMsg,
     handleChange,
     handleSubmit,
     loginIdRef,
     passwordRef,
-    loginErrorMsg,
+    serverErrorMsg,
   };
 };
 

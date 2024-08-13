@@ -14,22 +14,24 @@ function Login() {
     loginInfo,
     handleChange,
     handleSubmit,
-    userLogicMsg,
+    logicErrorMsg,
     loginIdRef,
     passwordRef,
-    loginErrorMsg,
+    serverErrorMsg,
   } = useLoginLogic();
   const [shakeTrigger, setShakeTrigger] = useState<boolean>(false);
   const router = useRouter();
 
+  const isError = (serverErrorMsg !== '' || logicErrorMsg !== '');
+
   useEffect(() => {
-    if (loginErrorMsg !== '') {
+    if (isError) {
       setShakeTrigger(false);
       setTimeout(() => {
         setShakeTrigger(true);
       }, 50);
     }
-  }, [loginErrorMsg, userLogicMsg]);
+  }, [serverErrorMsg, logicErrorMsg, isError]);
 
   return (
     <Form $shakeTrigger={shakeTrigger} onSubmit={handleSubmit}>
@@ -49,14 +51,11 @@ function Login() {
         value={loginInfo.password}
         onChange={handleChange}
       />
-      {userLogicMsg
-        || (loginErrorMsg && (
-          <ERROR>
-            {' '}
-            {userLogicMsg || loginErrorMsg}
-            {' '}
-          </ERROR>
-        ))}
+      {isError && (
+        <ERROR>
+          {logicErrorMsg || serverErrorMsg}
+        </ERROR>
+      )}
       <Button type="submit">로그인</Button>
       <Button type="button" onClick={() => router.replace('/join')}>
         회원가입
