@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
 
+import { BiLogOut } from 'react-icons/bi';
+
 import { useFetchCheckOut } from '@/src/entities/auth/mutations';
 import useModal from '@/src/shared/hooks/useModal';
-
-import { BiLogOut } from 'react-icons/bi';
+import { DropBoxStyle } from '@/src/shared/components';
 
 export default function LogoutMenu() {
   const { setModal } = useModal();
@@ -23,9 +24,9 @@ export default function LogoutMenu() {
     });
   };
   return (
-    <>
-      <BiLogOut onClick={handleClick} />
-      <span onClick={handleClick}>로그아웃</span>
-    </>
+    <DropBoxStyle.ItemWrapper onClick={handleClick}>
+      <BiLogOut />
+      <span>로그아웃</span>
+    </DropBoxStyle.ItemWrapper>
   );
 }

@@ -2,12 +2,13 @@ import Link from 'next/link';
 
 import { styled } from 'styled-components';
 
+import { ItemWrapper } from './style';
 import { DropItemType } from './types';
 
 type Props = {
   menuItem: DropItemType;
-  offBox: ()=> void;
-}
+  offBox: () => void;
+};
 
 export default function DropMenuItem({ menuItem, offBox }: Props) {
   if (menuItem.type === 'link') {
@@ -26,13 +27,7 @@ export default function DropMenuItem({ menuItem, offBox }: Props) {
 
   if (menuItem.type === 'component') {
     const { component } = menuItem;
-    return (
-      <Container onClick={offBox}>
-        <ItemWrapper>
-          {component}
-        </ItemWrapper>
-      </Container>
-    );
+    return <Container onClick={offBox}>{component}</Container>;
   }
 
   return null;
@@ -47,23 +42,10 @@ const Container = styled.li`
   }
 
   svg {
-    color : ${(props) => props.theme.colors.dropBoxColor};
+    color: ${(props) => props.theme.colors.dropBoxColor};
   }
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-`;
-
-const ItemWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding-inline: 1.2rem;
-  padding-block: 0.8rem;
-  gap: 1.2rem;
-  span {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: ${(props) => props.theme.colors.dropBoxColor}
-  }
 `;

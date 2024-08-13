@@ -1,21 +1,14 @@
-import { useThemeToggler } from '@/src/shared/hooks';
 import { BiSun, BiMoon } from 'react-icons/bi';
+
+import { DropBoxStyle } from '@/src/shared/components';
+import { useThemeToggler } from '@/src/shared/hooks';
 
 export default function ThemeToggle() {
   const [isDark, onToggle] = useThemeToggler();
   return (
-    <>
-      <div
-        onClick={onToggle}
-        style={{
-          width: '100%',
-        }}
-      >
-        {isDark ? <BiSun /> : <BiMoon />}
-      </div>
-      <span>
-        {isDark ? '밝게' : '다크'}
-      </span>
-    </>
+    <DropBoxStyle.ItemWrapper onClick={onToggle}>
+      <div>{isDark ? <BiSun /> : <BiMoon />}</div>
+      <span>{isDark ? '밝게' : '다크'}</span>
+    </DropBoxStyle.ItemWrapper>
   );
 }
