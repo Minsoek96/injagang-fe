@@ -4,12 +4,13 @@ import { useRouter } from 'next/router';
 
 import styled, { css } from 'styled-components';
 
-import { InputField } from '@/src/shared/components/input';
 import { shakeAnimation } from '@/src/shared/styles';
 
+import { MainButton, InputField } from '@/src/shared/components';
 import { useLoginLogic } from './hooks';
 
 function Login() {
+  const router = useRouter();
   const {
     loginInfo,
     handleChange,
@@ -20,9 +21,8 @@ function Login() {
     serverErrorMsg,
   } = useLoginLogic();
   const [shakeTrigger, setShakeTrigger] = useState<boolean>(false);
-  const router = useRouter();
 
-  const isError = (serverErrorMsg !== '' || logicErrorMsg !== '');
+  const isError = serverErrorMsg !== '' || logicErrorMsg !== '';
 
   useEffect(() => {
     if (isError) {
@@ -51,15 +51,9 @@ function Login() {
         value={loginInfo.password}
         onChange={handleChange}
       />
-      {isError && (
-        <ERROR>
-          {logicErrorMsg || serverErrorMsg}
-        </ERROR>
-      )}
-      <Button type="submit">로그인</Button>
-      <Button type="button" onClick={() => router.replace('/join')}>
-        회원가입
-      </Button>
+      {isError && <ERROR>{logicErrorMsg || serverErrorMsg}</ERROR>}
+      <MainButton type="submit" label="로그인" sx={{ marginBottom: '.5rem' }} />
+      <MainButton onAction={() => router.replace('/join')} label="회원가입" />
     </Form>
   );
 }
@@ -69,29 +63,20 @@ export default Login;
 const Form = styled.form<{ $shakeTrigger: boolean }>`
   display: flex;
   flex-direction: column;
-  width: 300px;
-  padding: 20px;
-  border-radius: 8px;
+  width: 30rem;
+  padding: 2rem;
+  border-radius: .8rem;
   background-color: #15202b;
-  box-shadow: 0 4px 8px rgba(14, 13, 13, 0.2);
   ${({ $shakeTrigger }) =>
     $shakeTrigger
     && css`
       animation: ${shakeAnimation} 0.5s;
     `}
-`;
 
-const Button = styled.button`
-  padding: 8px 16px;
-  width: 100%;
-  background-color: #2ecc71;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 4px;
-  border: none;
-  margin: 5px auto;
-  cursor: pointer;
+  button {
+    height: 4rem;
+    background-color: #2ecc71;
+  }
 `;
 
 const ERROR = styled.div`

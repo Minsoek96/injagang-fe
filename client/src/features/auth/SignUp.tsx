@@ -1,24 +1,13 @@
-import { useEffect, useRef } from 'react';
-
 import styled from 'styled-components';
 
-import { InputField } from '@/src/shared/components/input';
+import { InputField, MainButton } from '@/src/shared/components';
 
-import { ERROR_MESSAGES } from '@/src/shared/const';
 import useSignUpLogic from './hooks/useSignUpLogic';
 
 function SignUp() {
-  const passwordCheck = useRef<HTMLInputElement | null>(null);
-  const confirmPasswordCheck = useRef<HTMLInputElement | null>(null);
   const {
-    handleSubmit, handleValueChange, userMsg, joinInfo,
+    handleSubmit, handleValueChange, userMsg, joinInfo, refs,
   } = useSignUpLogic();
-
-  useEffect(() => {
-    if (userMsg === ERROR_MESSAGES.CHECK_PASSWORD) {
-      passwordCheck.current && passwordCheck.current.focus();
-    }
-  }, [userMsg]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -26,6 +15,7 @@ function SignUp() {
         label="아이디"
         type="test"
         name="loginId"
+        ref={refs.loginId}
         value={joinInfo.loginId}
         onChange={handleValueChange}
       />
@@ -33,7 +23,7 @@ function SignUp() {
         label="비밀번호"
         type="password"
         name="password"
-        ref={passwordCheck}
+        ref={refs.passwordRef}
         value={joinInfo.password}
         onChange={handleValueChange}
       />
@@ -41,7 +31,7 @@ function SignUp() {
         label="재확인"
         type="password"
         name="confirmPassword"
-        ref={confirmPasswordCheck}
+        ref={refs.confirmPasswordRef}
         value={joinInfo.confirmPassword}
         onChange={handleValueChange}
       />
@@ -49,6 +39,7 @@ function SignUp() {
         label="이메일"
         type="email"
         name="email"
+        ref={refs.emailRef}
         value={joinInfo.email}
         onChange={handleValueChange}
       />
@@ -56,11 +47,16 @@ function SignUp() {
         label="닉네임"
         type="text"
         name="nickName"
+        ref={refs.nickNameRef}
         value={joinInfo.nickName}
         onChange={handleValueChange}
       />
       <WarningMsg>{userMsg}</WarningMsg>
-      <Button type="submit">회원가입</Button>
+      <MainButton
+        type="submit"
+        label="회원가입"
+        sx={{ backgroundColor: '#2ecc71', height: '4rem' }}
+      />
     </Form>
   );
 }
@@ -69,22 +65,10 @@ export default SignUp;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 300px;
-  padding: 20px;
-  border-radius: 8px;
+  width: 30rem;
+  padding: 2rem;
+  border-radius: 0.8rem;
   background-color: #15202b;
-  box-shadow: 0 4px 8px rgba(14, 13, 13, 0.2);
-`;
-
-const Button = styled.button`
-  padding: 8px 16px;
-  background-color: #2ecc71;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
 `;
 
 const WarningMsg = styled.p`
