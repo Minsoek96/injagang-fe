@@ -90,6 +90,7 @@ export default function CoverLetterTeamplte({
       <ControllerBtns>
         {actionButtons.map((item) => (
           <MainButton
+            type="button"
             key={item.id}
             label={item.label}
             onAction={item.onAction}
