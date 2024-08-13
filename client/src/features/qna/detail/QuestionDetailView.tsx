@@ -44,7 +44,13 @@ function QuestionDetailView() {
       <Container.ArticleCard
         $size={{ width: '100%', height: '100%', isMedia: true }}
       >
-        {owner && <EditMenuBar boardId={boardList.boardId} />}
+        {owner && (
+          <EditMenuBar
+            boardId={boardList.boardId}
+            content={content}
+            title={title}
+          />
+        )}
         <QuestionDetailItem
           title={title}
           nickname={nickname}

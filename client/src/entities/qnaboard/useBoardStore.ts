@@ -6,7 +6,13 @@ import { create } from 'zustand';
  * boardTpye : 유저가 선택한 검색 타입
  * curPageNum : 유저가 현재 선택한 번호
  * totalPage : 페이지 최대수
+ * editBoardContent : 유저가 수정 요청하는 보드 정보
  */
+
+type EditBoardProps = {
+  title: string;
+  content: string;
+};
 
 type State = {
   questionIds: number[];
@@ -14,6 +20,7 @@ type State = {
   boardType: string;
   curPageNum: number;
   totalPage: number;
+  editBoardState: EditBoardProps;
 };
 
 type Action = {
@@ -23,6 +30,8 @@ type Action = {
   setBoardType: (type: string) => void;
   setCurPageNum: (update: (prev: number) => number) => void;
   setTotalPage: (page: number) => void;
+  setEditBoardState: (boardState: EditBoardProps) => void;
+  initEditBoardState: () => void;
 };
 
 /** 게시판 조회에 필요한 정보 */
@@ -32,6 +41,10 @@ const useBoardStore = create<State & Action>((set) => ({
   boardType: '',
   curPageNum: 1,
   totalPage: 1,
+  editBoardState: {
+    title: '',
+    content: '',
+  },
 
   setQuestionIds: (list: number[]) => set({ questionIds: list }),
   setBoardSearch: (search: string) => set({ boardSearch: search }),
@@ -42,6 +55,11 @@ const useBoardStore = create<State & Action>((set) => ({
       curPageNum: update(state.curPageNum),
     })),
   setTotalPage: (page: number) => set({ totalPage: page }),
+  setEditBoardState: (boardState: EditBoardProps) =>
+    set({
+      editBoardState: boardState,
+    }),
+  initEditBoardState: () => set({ editBoardState: { title: '', content: '' } }),
 }));
 
 export default useBoardStore;

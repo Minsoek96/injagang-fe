@@ -21,6 +21,7 @@ function PassWordSetting() {
         <InputField
           key={key}
           name={key}
+          type="password"
           value={passWordInfo[key as keyof authType.IChangePw]}
           label={labels[key as keyof authType.IChangePw]}
           onChange={handleInfoChange}

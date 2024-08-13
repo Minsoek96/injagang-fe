@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { styleMixin } from '@/src/shared/styles';
+
 import { QuestionComposer } from '@/src/features/question-composer';
+
+import { styleMixin } from '@/src/shared/styles';
 
 const question = () => (
   <WirteStyle>

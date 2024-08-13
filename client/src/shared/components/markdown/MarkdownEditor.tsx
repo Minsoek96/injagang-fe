@@ -18,15 +18,17 @@ const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
 const mdParser = new MarkdownIt();
 
 type Props = {
-  placeholder?: string;
   onChange: (text: string) => void;
+  placeholder?: string;
+  initText?: string;
 };
 
 function MarkdownEditor({
   onChange,
   placeholder = '값을 입력해주세요.',
+  initText = '',
 }: Props) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initText);
   const debouceValue = useDebounce(value);
 
   useEffect(() => {
