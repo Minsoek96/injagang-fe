@@ -88,8 +88,8 @@ const Container = styled.div`
 
   // md배경 관련
   .rc-md-editor .editor-container .input {
-    background-color: ${(props) => props.theme.colors.textArea};
-    color: ${(props) => props.theme.colors.text};
+    background-color: ${(props) => props.theme.colors.textArea}!important;
+    color: ${(props) => props.theme.colors.text}!important;
   }
 
   .rc-md-editor .editor-container > .section {

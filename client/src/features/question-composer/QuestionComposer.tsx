@@ -8,8 +8,8 @@ import {
   MainButton,
   MainInput,
   ComboBox,
-  MarkdownEditor,
   Container,
+  Spinner,
 } from '@/src/shared/components';
 
 import { styleMixin, V } from '@/src/shared/styles';
@@ -18,6 +18,18 @@ import CoverLetterDetail from '@/src/features/question-composer/CoverLetterDetai
 
 import { useWriteBoard } from '@/src/entities/qnaboard/mutaions';
 import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
+
+import dynamic from 'next/dynamic';
+
+const MarkdownEditor = dynamic(
+  () => import('@/src/shared/components/markdown/MarkdownEditor'),
+  {
+    loading: () => (
+      <Spinner message="편집기를 불러오는 중입니다." />
+    ),
+    ssr: false,
+  },
+);
 
 function QuestionComposer() {
   const router = useRouter();

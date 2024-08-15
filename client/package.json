@@ -2,6 +2,9 @@
   "name": "injagang",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": [
+    "./src/shared/components/markdown/"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
