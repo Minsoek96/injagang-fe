@@ -10,19 +10,22 @@ import {
   BiMessageAltEdit,
 } from 'react-icons/bi';
 
-import { useDeleteBoard } from '@/src/entities/qnaboard/mutaions';
+import { useBoardStore, boardMutation } from '@/src/entities/qnaboard';
 
 import { useModal } from '@/src/shared/hooks';
 
 type EditMenuBarProps = {
   boardId: number;
+  content: string;
+  title: string;
 };
 
 //* *자소서 편집 액션 컴포넌트 */
-function EditMenuBar({ boardId }: EditMenuBarProps) {
+function EditMenuBar({ boardId, content, title }: EditMenuBarProps) {
   const [tagPosition, setTagPosition] = useState(false);
   const { setModal } = useModal();
-  const { mutate: deleteBoard } = useDeleteBoard();
+  const { mutate: deleteBoard } = boardMutation.useDeleteBoard();
+  const { setEditBoardState } = useBoardStore();
   const router = useRouter();
 
   const navigateToList = () => {
@@ -38,11 +41,27 @@ function EditMenuBar({ boardId }: EditMenuBarProps) {
     navigateToList();
   };
 
+  const handleEditBoard = () => {
+    setEditBoardState({
+      title,
+      content,
+    });
+    router.push(`/qna/edit/${boardId}`);
+  };
+
   // 유저가 삭제를 컨펌 하는 함수
-  const userConfirm = () => {
+  const userDeleteConfirm = () => {
     setModal({
       onAction: handleRemoveBoard,
       contents: { title: '경고', message: '정말 삭제하시겠습니까?' },
+    });
+  };
+
+  // 유저가 수정을 컨펌 하는 함수
+  const userEditConfirm = () => {
+    setModal({
+      onAction: handleEditBoard,
+      contents: { title: '경고', message: '정말 수정하시겠습니까?' },
     });
   };
 
@@ -50,8 +69,8 @@ function EditMenuBar({ boardId }: EditMenuBarProps) {
     <MyComponentStyle>
       <BiDotsVerticalRounded onClick={handleChangeVisible} />
       <ButtonContainer $isVisible={tagPosition}>
-        <BiTrash onClick={userConfirm} />
-        <BiMessageAltEdit />
+        <BiTrash onClick={userDeleteConfirm} />
+        <BiMessageAltEdit onClick={userEditConfirm} />
       </ButtonContainer>
     </MyComponentStyle>
   );

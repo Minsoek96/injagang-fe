@@ -4,21 +4,16 @@ import { useRouter } from 'next/router';
 
 import styled from 'styled-components';
 
+import { useBoardStore } from '@/src/entities/qnaboard';
+import { useReviseBoard } from '@/src/entities/qnaboard/mutaions';
+
 import {
   MainButton,
   MainInput,
-  ComboBox,
   Container,
   Spinner,
 } from '@/src/shared/components';
-
 import { styleMixin, V } from '@/src/shared/styles';
-
-import CoverLetterDetail from '@/src/features/question-composer/CoverLetterDetail';
-
-import { useWriteBoard } from '@/src/entities/qnaboard/mutaions';
-import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
-
 import dynamic from 'next/dynamic';
 
 const MarkdownEditor = dynamic(
@@ -31,33 +26,29 @@ const MarkdownEditor = dynamic(
   },
 );
 
-function QuestionComposer() {
+type Props = {
+  boardId: number;
+};
+
+function QuestionEditComposer({ boardId }: Props) {
   const router = useRouter();
-  const { data: coverLtters = [] } = useFetchCoverLetter();
-  const { mutate: writeBoard } = useWriteBoard();
+  const { mutate: reviseBoard } = useReviseBoard();
+  const { editBoardState } = useBoardStore();
 
-  const [coverLetterTitle, setCoverLetterTitle] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
-  const [essayId, setEssayId] = useState<number>(0);
-
-  const changeCoverLetter = (changeTitle: string) => {
-    setCoverLetterTitle(changeTitle);
-    const findEssay = coverLtters?.find((list) => list.title === changeTitle);
-    if (findEssay) setEssayId(findEssay?.essayId);
-  };
+  const [title, setTitle] = useState<string>(editBoardState.title);
+  const [content, setContent] = useState<string>(editBoardState.content);
 
   const navigateToList = () => {
-    router.push('/qna/list');
+    router.push(`/qna/detail/${boardId}`);
   };
 
   const handleSubmit = () => {
     const data = {
-      title,
-      content,
-      essayId,
+      boardId,
+      changeTitle: title,
+      changeContent: content,
     };
-    writeBoard(data);
+    reviseBoard(data);
     navigateToList();
   };
 
@@ -69,18 +60,13 @@ function QuestionComposer() {
           onChange={setTitle}
           sx={{ width: '100%', marginBottom: '1rem' }}
         />
-        <ComboBox
-          Size={{ width: '100%', height: '4rem' }}
-          value={coverLetterTitle}
-          onChange={(e) => changeCoverLetter(e)}
-          optionList={coverLtters}
-        />
         <MarkdownEditor
+          initText={editBoardState.content}
           onChange={setContent}
           placeholder="질문을 작성해주세요."
         />
         <MainButton
-          label="작성완료"
+          label="수정완료"
           onAction={handleSubmit}
           sx={{
             width: '100%',
@@ -90,14 +76,11 @@ function QuestionComposer() {
           }}
         />
       </Container.ArticleCard>
-      <Container.ArticleCard $size={{ width: '100%', height: '87vh' }}>
-        <CoverLetterDetail essayId={essayId} />
-      </Container.ArticleCard>
     </ComposerContainer>
   );
 }
 
-export default memo(QuestionComposer);
+export default memo(QuestionEditComposer);
 
 const ComposerContainer = styled(Container.ItemBase)`
   ${styleMixin.Flex('flex-start')}

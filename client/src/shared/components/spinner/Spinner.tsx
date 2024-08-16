@@ -17,6 +17,8 @@ function Spinner({
 export default Spinner;
 const SpinnerWrapper = styled.div`
   ${styleMixin.Column()};
+  width: 100%;
+  height: 100%;
   gap: 12px;
 `;
 

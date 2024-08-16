@@ -36,7 +36,11 @@ function InterviewRecord() {
 
   const { confirmQuestions } = useInterViewStore();
   const {
-    addRecordInfo, curScript, curTimer, initCurinfos, initRecordInfoList,
+    addRecordInfo,
+    curScript,
+    curTimer,
+    initCurinfos,
+    initRecordInfoList,
   } = useRecordInfoStore();
 
   const { setSpeechData, readingTheScript, speechData } = useWebSpeech(
@@ -61,7 +65,7 @@ function InterviewRecord() {
         contents: {
           title: 'Congratulations',
           message:
-            '준비된 모든 질문이 끝났습니다. 처음부터 다시 반복을 원하시면 게속 진행해주세요',
+            '준비된 모든 질문이 끝났습니다.\n 처음부터 다시 반복을 원하시면 게속 진행해주세요',
         },
       });
       return;
@@ -108,6 +112,7 @@ function InterviewRecord() {
         <InterViewResult
           video={recordedChunks}
           question={speechData}
+          currentIdx={curIndex - 1}
         />
       ) : (
         <VideoPlayer

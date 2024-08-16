@@ -11,14 +11,17 @@ import { useCounter } from '@/src/shared/hooks';
 type InterViewSliderProps = {
   video: Blob[];
   question: string[];
+  currentIdx: number;
 };
 
 export default function InterViewResult({
   video,
   question,
+  currentIdx,
 }: InterViewSliderProps) {
   const { counter, handleDecrease, handleIncrease } = useCounter({
     maxCounter: video.length,
+    initCounter: currentIdx,
   });
   const { recordInfoList } = useRecordInfoStore();
   const downloadScript = () => {
@@ -121,6 +124,7 @@ const InterViewResultContainer = styled.div`
   ${styleMixin.Column('flex-start')}
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
 `;
 
 const AccessoriesWrapper = styled.div`

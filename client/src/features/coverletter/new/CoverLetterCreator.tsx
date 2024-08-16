@@ -42,13 +42,19 @@ function CoverLetterCreator() {
     setQnAList(resetSelectedTemplateList);
   }, [selectedTemplate]);
 
+  const navigateMoveLetterMainpage = ():void => {
+    router.push(moveCoverLetterMainPage);
+  };
+
   const actionButtons: BtnType.BaseProps[] = [
     {
+      id: 'back-01',
       label: '뒤로가기',
-      onAction: () => router.push(moveCoverLetterMainPage),
+      onAction: () => navigateMoveLetterMainpage(),
       sx: { fontSize: '2em' },
     },
     {
+      id: 'write-02',
       label: '작성완료',
       onAction: () => handleDispatch(),
       sx: { fontSize: '2em' },

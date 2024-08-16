@@ -45,10 +45,8 @@ export default memo(TQuestionItem);
 
 const QuestionItem = styled.div`
   ${styleMixin.Column('flex-start', 'flex-start')}
-  width: 80%;
+  width: 100%;
   height: 120px;
-  margin: auto 35px;
-  margin-bottom: 45px;
 
   font-size: 1.5rem;
   > textarea {

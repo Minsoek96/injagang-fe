@@ -20,8 +20,10 @@ function TemplateItem({ list }: TemplateItemProps) {
 export default TemplateItem;
 
 const TemplateTitle = styled.div<{ $isSelected: boolean }>`
-  font-size: ${({ $isSelected }) => ($isSelected ? '1.4rem' : '1.2rem')};
+  scale: ${({ $isSelected }) => ($isSelected ? '1' : '1.2')};
+  font-size: 1.8rem;
   font-weight: bold;
+  line-height: 1.4;
   opacity: ${({ $isSelected }) => ($isSelected ? 1 : 0.2)};
   border-radius: 12px;
   transition: all ease-in 0.2s;

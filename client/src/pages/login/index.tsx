@@ -23,5 +23,5 @@ const LoginStyle = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: #31404e;
-  color: ${({ theme }) => theme.colors.text};
+  color: white;
 `;

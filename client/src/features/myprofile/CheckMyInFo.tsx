@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { V, styleMixin } from '@/src/shared/styles';
+import { Container } from '@/src/shared/components';
 import UserInFo from './UserInfoSetting';
 import PassWordInfo from './PassWordSetting';
 
@@ -8,48 +9,30 @@ function CheckMyInFo() {
   const headerTitle = '나의 정보';
   return (
     <CheckMyInFoStyle>
-      <Container>
-        <MainTitle>{headerTitle}</MainTitle>
-        <SwitchContainer>
-          <UserInFo />
-          <PassWordInfo />
-        </SwitchContainer>
-      </Container>
+      <MainTitle>{headerTitle}</MainTitle>
+      <UserInFo />
+      <PassWordInfo />
     </CheckMyInFoStyle>
   );
 }
 
 export default CheckMyInFo;
 
-const Container = styled.div`
-  display: ${styleMixin.Column()};
-`;
-
-const CheckMyInFoStyle = styled.div`
+const CheckMyInFoStyle = styled(Container.ItemBase)`
   ${styleMixin.Column()}
-  width: ${V.lgWidth};
-  height: 400px;
-  h3 {
-    margin-top: 20px;
-    margin-bottom: 15px;
-  }
-
-  @media screen and (max-width: 900px) {
-    width: ${V.smWidth};
-    height: 700px;
-  }
+  max-width: ${V.lgItemWidth};
+  width: 100%;
+  gap: 2rem;
 `;
 
 const MainTitle = styled.h2`
-  margin-bottom: 15px;
-`;
-
-const SwitchContainer = styled.div`
-  ${styleMixin.Flex()}
-  gap:15px;
+  font-size: 2.5rem;
   width: 100%;
-  height: 90%;
-  @media screen and (max-width: 900px) {
-    ${styleMixin.Column()}
-  }
+  border: 0.1em solid ${(props) => props.theme.colors.mainLine};
+  padding: 1em;
+  border-radius: 0.8rem;
+
+  @media screen and (max-width: ${V.mediaMobile}){
+      font-size: 2rem;
+    }
 `;

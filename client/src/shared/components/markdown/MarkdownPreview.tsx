@@ -20,8 +20,8 @@ export default function MarkdownPreview({ content }: Props) {
 const Container = styled.div`
   width: 100%;
   padding: 1rem;
-  background-color: ${(props) => props.theme.colors.bodyColor};
-  color: ${(props) => props.theme.colors.boardText};
+  background-color: ${(props) => props.theme.colors.bodyColor}!important;
+  color: ${(props) => props.theme.colors.boardText}!important;
   height: 100%;
   border-radius: 8px;
 `;

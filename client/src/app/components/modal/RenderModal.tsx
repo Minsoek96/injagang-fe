@@ -3,6 +3,7 @@ import { useModalStore } from '@/src/shared/store';
 import { styled } from 'styled-components';
 
 import { MainButton } from '@/src/shared/components/button';
+import { styleMixin } from '@/src/shared/styles';
 
 const MODAL_CLOSE_DELAY = 50;
 
@@ -24,49 +25,46 @@ export default function RenderModal() {
   }
 
   return (
-    <ModalStyle $isOpen={isModalOpen}>
-      <ModalBox>
-        <div className="modal_Contents">
-          <h2>{contents.title}</h2>
-          <p>{contents.message}</p>
-        </div>
-        {modalState.onAction ? (
-          <div className="modal_Controller">
-            <MainButton
-              label="예"
-              onAction={actionModal}
-              sx={{ width: '150px', fontSize: '15px' }}
-            />
-            <MainButton
-              label="아니요"
-              onAction={closeModal}
-              sx={{ width: '150px', fontSize: '15px' }}
-            />
+    isModalOpen
+    && (
+      <ModalStyle>
+        <ModalBox>
+          <div className="modal_Contents">
+            <h2>{contents.title}</h2>
+            <p>{contents.message}</p>
           </div>
-        ) : (
-          <div className="modal_center_btn">
-            <MainButton
-              label="확인"
-              onAction={closeModal}
-              sx={{ width: '150px', fontSize: '15px' }}
-            />
-          </div>
-        )}
-      </ModalBox>
-    </ModalStyle>
+          {modalState.onAction ? (
+            <div className="modal_Controller">
+              <MainButton
+                label="예"
+                onAction={actionModal}
+                sx={{ width: '150px', fontSize: '15px' }}
+              />
+              <MainButton
+                label="아니요"
+                onAction={closeModal}
+                sx={{ width: '150px', fontSize: '15px' }}
+              />
+            </div>
+          ) : (
+            <div className="modal_center_btn">
+              <MainButton
+                label="확인"
+                onAction={closeModal}
+                sx={{ width: '150px', fontSize: '15px' }}
+              />
+            </div>
+          )}
+        </ModalBox>
+      </ModalStyle>
+    )
   );
 }
 
-interface ModalStyleProps {
-  $isOpen: boolean;
-}
-
-const ModalStyle = styled.div<ModalStyleProps>`
+const ModalStyle = styled.div`
+  ${styleMixin.Flex()}
   font-size: 1.8rem;
   z-index: 1000;
-  display: ${(props) => (props.$isOpen ? 'flex' : 'none')};
-  justify-content: center;
-  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -96,6 +94,8 @@ const ModalBox = styled.div`
     margin-top: 2rem;
     text-align: center;
     color: #e6dfdf;
+    white-space: pre-line;
+    line-height: 1.4;
   }
   .modal_Controller {
     display: flex;

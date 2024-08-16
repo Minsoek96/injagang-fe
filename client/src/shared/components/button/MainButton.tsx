@@ -11,6 +11,7 @@ export default function MainButton({
   isActive = false,
   disabled = false,
   className = '',
+  type = 'button',
 }: BaseProps) {
   return (
     <CustomBtn
@@ -19,6 +20,7 @@ export default function MainButton({
       $isActive={isActive}
       disabled={disabled}
       className={className}
+      type={type}
     >
       {label}
     </CustomBtn>
@@ -27,12 +29,13 @@ export default function MainButton({
 
 interface CustomProps {
   $isActive: boolean;
+  type?:'button' |'submit' | 'reset';
 }
 
-const CustomBtn = styled.button.attrs({
-  type: 'button',
+const CustomBtn = styled.button.attrs<CustomProps>((props) => ({
+  type: props.type || 'button',
   role: 'button',
-})<CustomProps>`
+}))<CustomProps>`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { usePwCheck } from '@/src/shared/hooks';
 
@@ -27,9 +27,29 @@ const useSignUpLogic = () => {
   const { isValid, errorMessage } = usePwCheck({ password: joinInfo.password });
   const { mutate: confirmSignUp } = useFetchSignup();
 
+  /** ref를 관리 */
+  const refs: { [key: string]: React.RefObject<HTMLInputElement> } = {
+    loginIdRef: useRef<HTMLInputElement>(null),
+    passwordRef: useRef<HTMLInputElement>(null),
+    confirmPasswordRef: useRef<HTMLInputElement>(null),
+    emailRef: useRef<HTMLInputElement>(null),
+    nickNameRef: useRef<HTMLInputElement>(null),
+  };
+
+  /** 관리 대상 ref가 비어있는지 체크 */
+  const runEmptyChecks = () => {
+    const emptyfield = hasEmpty.fieldKey(joinInfo);
+    if (emptyfield) {
+      refs[`${emptyfield}Ref`].current?.focus();
+      return false;
+    }
+    return true;
+  };
+
+  /** 회원가입시 룰을 정의 */
   const validation = [
     {
-      check: () => hasEmpty.fields(joinInfo),
+      check: () => !runEmptyChecks(),
       message: ERROR_MESSAGES.FILL_BLANKS,
     },
     {
@@ -42,6 +62,7 @@ const useSignUpLogic = () => {
     },
   ];
 
+  /** 회원가입 시 전체 룰을 검사하고 에러메시지를 반영 */
   const runValidationChecks = () => {
     const isValidation = validation.find((item) => item.check());
     if (isValidation) {
@@ -51,6 +72,7 @@ const useSignUpLogic = () => {
     return true;
   };
 
+  /** 회원 가입 진행 */
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -84,6 +106,7 @@ const useSignUpLogic = () => {
     handleValueChange,
     userMsg,
     joinInfo,
+    refs,
   };
 };
 

@@ -8,7 +8,6 @@ import { styleMixin } from '@/src/shared/styles';
 import { useAuthStore } from '@/src/entities/auth';
 import { useAuth } from '@/src/shared/hooks';
 
-// TODO : ErrorBoundary 테스트 하기
 function AdminPage() {
   useAuth();
   const { role } = useAuthStore();

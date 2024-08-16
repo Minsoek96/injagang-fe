@@ -9,7 +9,8 @@ import styled from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 
 import { keys } from '@/src/shared/utils';
-import TQustionItem from '../TQustionItem';
+import { MainInput } from '@/src/shared/components';
+import TQustionItem from './TQustionItem';
 
 import useAddTemplateLogic from '../hooks/useAddTemplateLogic';
 
@@ -43,21 +44,24 @@ function AddTemplate({ onClose }: AddTemplateProps) {
     { icon: <BiCheck onClick={confirmTemplateCreation} />, text: '확정하기' },
   ];
 
+  const handleChangeTitle = (text: string) => {
+    setTemplateList((prev) => ({
+      ...prev,
+      templateTitle: text,
+    }));
+  };
+
   return (
     <TemplateAddStyled>
       <TopMenu>
         <BiX onClick={() => onClose(false)} />
       </TopMenu>
-      <QuestionInput
+      <MainInput
         ref={titleRef}
-        type="text"
         value={templateList.templateTitle}
-        onChange={(e) =>
-          setTemplateList((prev) => ({
-            ...prev,
-            templateTitle: e.target.value,
-          }))}
+        onChange={handleChangeTitle}
         placeholder="제목을 입력해주세요"
+        sx={{ width: '100%' }}
       />
       <QuestionContainer>
         {templateList.templateQuestion.map((question, index) => (
@@ -85,7 +89,8 @@ function AddTemplate({ onClose }: AddTemplateProps) {
 export default AddTemplate;
 
 const TemplateAddStyled = styled.div`
-  ${styleMixin.Column()}
+  ${styleMixin.Column('space-between')}
+  padding: 1em 2em;
   height: 100%;
   width: 100%;
   position: relative;
@@ -93,47 +98,18 @@ const TemplateAddStyled = styled.div`
 
 const TopMenu = styled.div`
   position: absolute;
-  top: 0px;
-  right: 0px;
-`;
-
-const QuestionInput = styled.input`
-  position: absolute;
-  top: 0px;
-  margin-top: 15px;
-  width: 80%;
-
-  padding: 2px 8px;
-  border: 1px solid #e1e1e1;
-  background-color: #ffffff;
-  border-radius: 4px;
-  font-size: 16px;
-  color: #333;
-  transition: border-color 0.2s ease-in-out;
-
-  &:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-
-  &::placeholder {
-    color: #aaa;
-  }
+  top: -1.5rem;
+  right: -1rem;
 `;
 
 const QuestionContainer = styled.div`
-  ${styleMixin.ScrollBar}
-  overflow-y: auto;
-  justify-content: center;
+  margin-top:2rem;
   width: 100%;
-  height: 70%;
-  margin: 50px auto;
+  overflow-x: hidden;
 `;
 
 const Controller = styled.div`
-  position: absolute;
-  bottom: 0px;
-  display: flex;
+  ${styleMixin.Flex()};
   svg {
     font-size: 40px;
     cursor: pointer;
@@ -153,7 +129,7 @@ const IconButton = styled.div`
 
 const IconLabel = styled.span`
   position: absolute;
-  bottom: 30px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.7);
