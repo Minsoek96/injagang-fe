@@ -29,6 +29,13 @@ const InterViewRandomSetting = dynamic(
   },
 );
 
+const InterViewRecordSetting = dynamic(
+  () => import('@/src/features/interview-record/video-settings/InterviewRecordSetting'),
+  {
+    ssr: false,
+  },
+);
+
 const InterviewRecord = dynamic(
   () => import('@/src/features/interview-record/InterviewRecord'),
   {
@@ -40,7 +47,7 @@ const renderComponent = [
   { render: null, title: '면접영상촬영시작' },
   { render: <ExpectedQuestionLayout />, title: 'Next Step...' },
   { render: <InterViewRandomSetting />, title: 'Next Step...' },
-  { render: <h1>준비중...</h1>, title: 'Next Step ...' },
+  { render: <InterViewRecordSetting />, title: 'Next Step ...' },
   { render: <InterviewRecord />, title: '면접 준비 완료' },
 ];
 

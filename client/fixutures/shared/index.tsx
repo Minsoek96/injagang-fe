@@ -41,9 +41,9 @@ const sampleCheckList = [
 ];
 
 const sampleOptionList = [
-  { title: 'Option 1' },
-  { title: 'Option 2' },
-  { title: 'Option 3' },
+  { title: 'Option 1', id: 'test 1' },
+  { title: 'Option 2', id: 'test 2' },
+  { title: 'Option 3', id: 'test 3' },
 ];
 
 const sampleDropList: DropItemType[] = [

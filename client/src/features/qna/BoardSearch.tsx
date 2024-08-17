@@ -39,9 +39,13 @@ function BoardSearch() {
   return (
     <Container>
       <ComboBox
-        value={type}
-        optionList={typeList}
-        onChange={changeType}
+        label="검색"
+        hideLabel
+        selectedItem={type}
+        items={typeList.map((item) => item.title)}
+        itemToId={(itme) => itme || ''}
+        itemToText={(item) => item || ''}
+        onChange={(value) => value && changeType(value)}
         sx={{ height: '4rem', minWidth: '4rem' }}
       />
       <label htmlFor="searchInput" className="sr-only">
