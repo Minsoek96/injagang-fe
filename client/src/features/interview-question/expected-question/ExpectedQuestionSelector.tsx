@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 import {
   interviewQueries,
-  useInterViewStore,
+  useQuestionStore,
 } from '@/src/entities/interview_question';
 import { useDeleteInterViewQ } from '@/src/entities/interview_question/mutations';
 import { useCheckList } from '@/src/shared/hooks';
@@ -17,7 +17,7 @@ import ExpectedQuestionList from './ExpectedQuestionList';
 import ActionBtns from './ActionBtns';
 
 function ExpectedQuestionSelector() {
-  const { selectedType } = useInterViewStore();
+  const { selectedType } = useQuestionStore();
   const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions(selectedType);
   const { mutate: deleteQuestions } = useDeleteInterViewQ();
 

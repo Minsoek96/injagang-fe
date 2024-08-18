@@ -17,7 +17,7 @@ import {
 } from '@/src/entities/interview_question/mutations';
 import interview from '@/src/entities/interview_question/queryKeys';
 
-import useInterViewStore from '@/src/entities/interview_question/useInterViewStore';
+import useQuestionStore from '@/src/entities/interview_question/useQuestionStore';
 import { useToast } from '@/src/shared/hooks';
 
 import {
@@ -100,7 +100,7 @@ describe('useFetchRandomQuestion', () => {
       const { result } = testFetchRandomQuestion();
 
       await waitFor(() => result.current.isSuccess);
-      const { result: store } = renderHook(() => useInterViewStore());
+      const { result: store } = renderHook(() => useQuestionStore());
       const extractionRandomQuestions = sampleResponseRandomQ.map(
         (item) => item.questions,
       );

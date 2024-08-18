@@ -14,8 +14,14 @@ type Action = {
   initConfirmQuestions: () => void;
 };
 
-/** 면접 녹화에 필요한 정보조합 */
-const useInterViewStore = create<State & Action>((set) => ({
+/** 면접 녹화에 필요한 질문 설정 관련 정보
+ *  usePlayList : 유저가 선택한 타입별 질문
+ *  selectedTypes : 유저가 선택한 타입
+ *  confirmQuestions :  유저가 최종적으로 컨펌한 질문
+ *  initUserPlayList : 유저가 선택한 타입별 질문 초기화
+ *  initConfromQuestions : 유저가 면접리스트로 컨펌한 질문 초기화
+*/
+const useQuestionStore = create<State & Action>((set) => ({
   userPlayList: [],
   confirmQuestions: [],
   selectedType: '',
@@ -35,4 +41,4 @@ const useInterViewStore = create<State & Action>((set) => ({
   initConfirmQuestions: () => set({ confirmQuestions: [] }),
 }));
 
-export default useInterViewStore;
+export default useQuestionStore;

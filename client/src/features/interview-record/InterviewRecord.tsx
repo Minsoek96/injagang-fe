@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import {
-  useInterViewStore,
+  useQuestionStore,
   useRecordInfoStore,
 } from '@/src/entities/interview_question';
 
@@ -34,7 +34,7 @@ function InterviewRecord() {
 
   const { setModal } = useModal();
 
-  const { confirmQuestions } = useInterViewStore();
+  const { confirmQuestions } = useQuestionStore();
   const {
     addRecordInfo,
     curScript,

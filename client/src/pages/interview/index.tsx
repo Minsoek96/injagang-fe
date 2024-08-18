@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { ExpectedQuestionLayout } from '@/src/features/interview-question';
 
 import {
-  useInterViewStore,
+  useQuestionStore,
   useRecordInfoStore,
 } from '@/src/entities/interview_question';
 
@@ -43,7 +43,7 @@ const InterviewRecord = dynamic(
 
 function Interview() {
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const { initConfirmQuestions } = useInterViewStore();
+  const { initConfirmQuestions } = useQuestionStore();
   const { videoDevice, audioDevice } = useRecordInfoStore();
 
   const renderComponent = [
@@ -113,7 +113,7 @@ function Interview() {
         itemToText={(value) => value.title}
         itemToid={(value) => value.id}
       />
-      <RecordComponent>{renderComponent[currentStep].render}</RecordComponent>
+      <RenderComponent>{renderComponent[currentStep].render}</RenderComponent>
       <InterviewSliderButtons
         moveToNextPage={moveToNextPage}
         moveToPrevPage={moveToPrevPage}
@@ -132,7 +132,7 @@ const InterViewStyle = styled.div`
   width: 100%;
 `;
 
-const RecordComponent = styled(Container.ItemBase)`
+const RenderComponent = styled(Container.ItemBase)`
   ${styleMixin.Column('flex-start')}
   width: 100%;
   font-family: ${V.malgunGothic};
