@@ -1,14 +1,14 @@
-import { keyframes, styled } from 'styled-components';
+import { keyframes, styled } from "styled-components";
 
-import { styleMixin, V } from '@/src/shared/styles';
+import { styleMixin, V } from "@/src/shared/styles";
 
 type Props = {
-  step: { title: string; id: string };
+  stepTitle: string;
   currentStep: number;
   index: number;
 };
 
-export default function StepMarker({ step, currentStep, index }: Props) {
+export default function StepMarker({ stepTitle, currentStep, index }: Props) {
   return (
     <Container>
       <Marker
@@ -20,10 +20,7 @@ export default function StepMarker({ step, currentStep, index }: Props) {
         Step.
         {index + 1}
       </p>
-      <HideText>
-        :
-        {step.title}
-      </HideText>
+      <HideText>:{stepTitle}</HideText>
     </Container>
   );
 }
@@ -63,11 +60,11 @@ const Marker = styled.div<StepProps>`
   background-color: ${(props) => {
     if (props.$completed) return props.theme.colors.signatureColor;
     if (props.$active) return props.theme.colors.bodyColor;
-    return 'none';
+    return "none";
   }};
   color: ${(props) => props.theme.colors.text};
   animation: ${(props) =>
-    props.$active && glow(props.theme.colors.highlightColor)}
+      props.$active && glow(props.theme.colors.highlightColor)}
     1s infinite alternate;
 
   @media screen and (max-width: ${V.mediaMobile}) {

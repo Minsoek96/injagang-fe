@@ -8,7 +8,11 @@ const renderStepMarker = (currentStep: number, index: number) => {
   const step = { title: 'Step Title', id: 'step-1' };
   return render(
     <TestProvider>
-      <StepMarker step={step} currentStep={currentStep} index={index} />
+      <StepMarker
+        stepTitle={step.title}
+        currentStep={currentStep}
+        index={index}
+      />
     </TestProvider>,
   );
 };
