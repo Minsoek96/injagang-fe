@@ -43,7 +43,7 @@ const InterviewRecord = dynamic(
 
 function Interview() {
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const { initConfirmQuestions } = useQuestionStore();
+  const { initConfirmQuestions, confirmQuestions } = useQuestionStore();
   const { videoDevice, audioDevice } = useRecordInfoStore();
 
   const renderComponent = [
@@ -63,9 +63,11 @@ function Interview() {
     },
     {
       render: <InterViewRandomSetting />,
-      subTitle: 'Next Step...',
+      subTitle: confirmQuestions.length
+        ? 'Next Step...'
+        : '질문 설정은 필수...',
       title: '랜덤 질문 선택',
-      rule: null,
+      rule: !!confirmQuestions.length,
       id: 'Step_03',
     },
     {

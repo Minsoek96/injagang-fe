@@ -33,7 +33,10 @@ const useFetchRandomQuestion = () => {
       const filterQuestion = data.map((item) => item.questions);
       setConfirmQuestions(filterQuestion);
 
-      showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.GET_RANDOMQUESTION);
+      showToast(
+        TOAST_MODE.SUCCESS,
+        SUCCESS_MESSAGES.GET_RANDOMQUESTION(filterQuestion.length),
+      );
     },
 
     onError: () => {

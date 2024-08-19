@@ -9,7 +9,6 @@ import {
 
 import { InputField } from '@/src/shared/components';
 import { styleMixin } from '@/src/shared/styles';
-import { useModal } from '@/src/shared/hooks';
 
 function InterViewRandomSetting() {
   const [randomSetting, setRandomSetting] = useState({
@@ -19,7 +18,6 @@ function InterViewRandomSetting() {
     personality: 0,
   });
   const { mutate: getRandomQustions } = interviewMutation.useFetchRandomQuestion();
-  const { setModal } = useModal();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -45,16 +43,6 @@ function InterViewRandomSetting() {
     ];
 
     getRandomQustions(data);
-    const sumAllQuestions = Object.values(randomSetting).reduce(
-      (pre, cur) => pre + Number(cur),
-      0,
-    );
-    setModal({
-      contents: {
-        title: 'Success',
-        message: `${sumAllQuestions}개의 랜덤 질문을 셋팅 하였습니다.`,
-      },
-    });
   };
 
   return (

@@ -113,7 +113,7 @@ describe('useFetchRandomQuestion', () => {
       await waitFor(() => result.current.isSuccess);
       expect(showToastMock).toHaveBeenCalledWith(
         TOAST_MODE.SUCCESS,
-        SUCCESS_MESSAGES.GET_RANDOMQUESTION,
+        SUCCESS_MESSAGES.GET_RANDOMQUESTION(result.current.data?.length || 0),
       );
     });
   });
