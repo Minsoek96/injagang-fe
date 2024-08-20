@@ -43,15 +43,10 @@ const ImageContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 1em;
   border-radius: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-top: 3rem;
   width: 100%;
   height: 60rem;
   min-height: 30rem;
-
-  &:hover {
-    transform: scale(1.05);
-  }
 
   @media screen and (max-width: ${V.mediaMobile}) {
     height: 100%;

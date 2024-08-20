@@ -18,13 +18,14 @@ export default function InterviewSliderButtons({
   curPageLabel,
   rule,
 }: Props) {
+  const START_SCREEN = currentStep > 1;
   return (
     <ControlButtons>
-      {currentStep > 1 && (
+      {START_SCREEN && (
         <MainButton
           label={<BiArrowBack />}
           onAction={moveToPrevPage}
-          sx={{ width: '50px', font: '3rem' }}
+          sx={{ width: '5rem', font: '3rem' }}
         />
       )}
       <MainButton
