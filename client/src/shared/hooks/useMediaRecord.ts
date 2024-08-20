@@ -2,19 +2,29 @@ import {
   useRef, useState, useEffect, useCallback,
 } from 'react';
 
-const useMediaRecord = () => {
+type Props = {
+  audioId? : string;
+  videoId? : string;
+};
+
+const useMediaRecord = ({ audioId = '', videoId = '' }: Props) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [isRecord, setIsRecord] = useState<boolean>(false);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [recordStatus, setRecordStatus] = useState<
+    'pending' | 'record' | 'pause'
+  >('pending');
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
 
   /** 유저에게 권한을 요청함(캠여부) */
   const getUserAccess = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: true,
+        audio: {
+          deviceId: audioId,
+        },
+        video: {
+          deviceId: videoId,
+        },
       });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
@@ -41,7 +51,7 @@ const useMediaRecord = () => {
     mediaRecorderRef.current = mediaRecorder;
     mediaRecorder.ondataavailable = handleDataAvailable;
     mediaRecorder.start();
-    setIsRecord(true);
+    setRecordStatus('record');
   }, [getUserAccess, handleDataAvailable]);
 
   const stopMediaTracks = useCallback((stream: MediaStream) => {
@@ -55,8 +65,7 @@ const useMediaRecord = () => {
       mediaRecorderRef.current.stop();
       const stream = videoRef.current?.srcObject as MediaStream;
       stopMediaTracks(stream);
-      setIsRecord(false);
-      setIsPaused(false);
+      setRecordStatus('pending');
       mediaRecorderRef.current = null;
     }
   }, [stopMediaTracks]);
@@ -64,14 +73,14 @@ const useMediaRecord = () => {
   /** 녹화를 일시정지한다. */
   const handlePauseRecord = useCallback(() => {
     mediaRecorderRef.current?.pause();
-    setIsPaused(true);
+    setRecordStatus('pause');
   }, []);
 
   /** 녹화를 재개한다. */
   const handleResumeRecord = useCallback(() => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.resume();
-      setIsPaused(false);
+      setRecordStatus('record');
     }
   }, []);
 
@@ -93,8 +102,7 @@ const useMediaRecord = () => {
     handlePauseRecord,
     handleResumeRecord,
     handleRecordRemove,
-    isPaused,
-    isRecord,
+    recordStatus,
     recordedChunks,
   };
 };

@@ -23,7 +23,7 @@ export default function VideoHeader({
           ? '타이머가 3초가 되면 스피칭이 진행됩니다.'
           : isRecord && `${currentQuestion}`}
       </SpeachingState>
-      <VideoTimer isRunning={isRecord} />
+      <VideoTimer isRunning={isRecord || isSpeaking} />
     </PlayerHeader>
   );
 }

@@ -1,5 +1,6 @@
 export { METHOD, fetcher } from './fetcher';
 export * as hasEmpty from './hasEmpty';
+export * as formatTime from './formatTime';
 export { default as getServerCookie } from './getServerCookies';
 export { default as keys } from './keys';
 export { default as runValidationChecks } from './runValidationChecks';
