@@ -9,6 +9,7 @@ interface ControlMenuProps<T> {
   itemToId: (item: T) => string;
   itemToText: (item: T) => string;
   onChange: (item: T | null) => void;
+  placeholder?: string;
   sx?: CSSProperties;
   Size?: { width: string; height: string };
 }
@@ -21,6 +22,7 @@ function ComboBox<T>({
   items,
   itemToId,
   itemToText,
+  placeholder = 'Please select',
   Size = { width: '100%', height: '100%' },
   sx = {},
 }: ControlMenuProps<T>) {
@@ -45,7 +47,7 @@ function ComboBox<T>({
         style={sx}
       >
         <option value="" disabled>
-          Please select
+          {placeholder}
         </option>
         {items.map((item) => (
           <option key={itemToId(item)} value={itemToId(item)}>

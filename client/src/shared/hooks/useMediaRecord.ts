@@ -3,11 +3,16 @@ import {
 } from 'react';
 
 type Props = {
-  audioId? : string;
-  videoId? : string;
+  audioId?: string;
+  videoId?: string;
+  onError?: () => void;
 };
 
-const useMediaRecord = ({ audioId = '', videoId = '' }: Props) => {
+const useMediaRecord = ({
+  audioId = '',
+  videoId = '',
+  onError = () => {},
+}: Props) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [recordStatus, setRecordStatus] = useState<
@@ -15,25 +20,33 @@ const useMediaRecord = ({ audioId = '', videoId = '' }: Props) => {
   >('pending');
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
 
+  const getDevices = useCallback(async () => {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const audioDevices = devices.filter(
+      (device) => device.kind === 'audioinput',
+    );
+    const videoDevices = devices.filter(
+      (device) => device.kind === 'videoinput',
+    );
+    return { audioDevices, videoDevices };
+  }, []);
+
   /** 유저에게 권한을 요청함(캠여부) */
   const getUserAccess = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          deviceId: audioId,
-        },
-        video: {
-          deviceId: videoId,
-        },
+        video: videoId ? { deviceId: { exact: videoId } } : true,
+        audio: audioId ? { deviceId: { exact: audioId } } : true,
       });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
       return stream;
     } catch (error) {
+      onError();
       return undefined;
     }
-  }, []);
+  }, [audioId, videoId, onError]);
 
   const handleDataAvailable = useCallback((e: BlobEvent) => {
     if (e.data.size > 0) {
@@ -43,16 +56,20 @@ const useMediaRecord = ({ audioId = '', videoId = '' }: Props) => {
 
   /** 녹화촬영을 시작한다. */
   const handleRecord = useCallback(async () => {
-    const stream = (await getUserAccess()) as MediaStream;
+    try {
+      const stream = (await getUserAccess()) as MediaStream;
 
-    const mediaRecorder = new MediaRecorder(stream, {
-      mimeType: 'video/webm',
-    });
-    mediaRecorderRef.current = mediaRecorder;
-    mediaRecorder.ondataavailable = handleDataAvailable;
-    mediaRecorder.start();
-    setRecordStatus('record');
-  }, [getUserAccess, handleDataAvailable]);
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: 'video/webm',
+      });
+      mediaRecorderRef.current = mediaRecorder;
+      mediaRecorder.ondataavailable = handleDataAvailable;
+      mediaRecorder.start();
+      setRecordStatus('record');
+    } catch (error) {
+      onError();
+    }
+  }, [getUserAccess, handleDataAvailable, onError]);
 
   const stopMediaTracks = useCallback((stream: MediaStream) => {
     stream.getAudioTracks().forEach((track) => track.stop());
@@ -87,9 +104,14 @@ const useMediaRecord = ({ audioId = '', videoId = '' }: Props) => {
   /** 렌더링이 종료되면 모든녹화를 정리한다. */
   useEffect(
     () => () => {
-      if (mediaRecorderRef.current) {
-        mediaRecorderRef.current.stop();
-        const stream = videoRef.current?.srcObject as MediaStream;
+      const mediaRecorder = mediaRecorderRef.current;
+      const stream = videoRef.current?.srcObject as MediaStream;
+
+      if (mediaRecorder) {
+        mediaRecorder.stop();
+      }
+
+      if (stream) {
         stopMediaTracks(stream);
       }
     },
@@ -102,6 +124,7 @@ const useMediaRecord = ({ audioId = '', videoId = '' }: Props) => {
     handlePauseRecord,
     handleResumeRecord,
     handleRecordRemove,
+    getDevices,
     recordStatus,
     recordedChunks,
   };

@@ -69,6 +69,7 @@ class APIErrorBoundary extends React.Component<
       }
       return <NetworkError onClickRetry={() => this.reset()} />;
     }
+
     return <UnknownError onClickRetry={() => this.reset()} />;
   }
 }

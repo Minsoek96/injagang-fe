@@ -69,7 +69,7 @@ describe('useMediaRecored', () => {
   });
 
   const startRecord = async () => {
-    const { result } = renderHook(() => useMediaRecord());
+    const { result } = renderHook(() => useMediaRecord({}));
 
     await act(async () => {
       result.current.handleRecord();

@@ -62,7 +62,7 @@ export default function VideoPlayer({
 
   useEffect(() => {
     const recordingResults = () => {
-      addRecordInfo({ timer: curTimer, script: curScript });
+      addRecordInfo({ timer: curTimer ?? '', script: curScript ?? '' });
       initCurinfos();
     };
     if (recordStatus === 'pending' && curTimer) {
