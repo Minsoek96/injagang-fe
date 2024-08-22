@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { saveAs } from 'file-saver';
-
 import { MdOutlineFileDownload } from 'react-icons/md';
 
 import { useRecordInfoStore } from '@/src/entities/interview_question';
@@ -10,9 +8,10 @@ import { MainButton } from '@/src/shared/components';
 import { useCounter } from '@/src/shared/hooks';
 import { styleMixin, V } from '@/src/shared/styles';
 
-import VideoResultPlayer from '@/src/features/interview-record/video-result/VideoResultPlayer';
-import VideoInfos from '@/src/features/interview-record/video-result/VideoInfos';
 import VideoResultHeader from './VideoResultHeader';
+import VideoResultPlayer from './VideoResultPlayer';
+import VideoInfos from './VideoInfos';
+import { useDownloadLogic } from './useDownloadLogic';
 
 type InterViewSliderProps = {
   question: string[];
@@ -28,44 +27,19 @@ export default function InterViewResult({
     recordedChunks: video,
     setInterviewMode,
   } = useRecordInfoStore();
+
   const { counter, handleDecrease, handleIncrease } = useCounter({
     maxCounter: video.length,
     initCounter: currentIdx,
   });
 
-  const downloadScript = () => {
-    if (recordInfoList.length) {
-      const recordInfos = new Blob(
-        [
-          `질문내용 : ${question[counter]}\n`,
-          `작성한 대본 : ${recordInfoList[counter]?.script}\n`,
-          `녹화시간 : ${recordInfoList[counter]?.timer}\n`,
-        ],
-        {
-          type: 'text/plain;charset=utf-8',
-        },
-      );
+  const { downloadVideo } = useDownloadLogic({
+    video,
+    recordInfoList,
+    question,
+    counter,
+  });
 
-      const url = URL.createObjectURL(recordInfos);
-
-      saveAs(recordInfos, `${question[counter]}대본.txt`);
-
-      URL.revokeObjectURL(url);
-    }
-  };
-
-  const downloadVideo = () => {
-    if (video.length > 0) {
-      const url = URL.createObjectURL(video[counter]);
-      fetch(url)
-        .then((res) => res.blob())
-        .then((blob) => {
-          saveAs(blob, `${question[counter]}.mp4`);
-          URL.revokeObjectURL(url);
-        });
-      downloadScript();
-    }
-  };
   return (
     <InterViewResultContainer>
       <VideoResultHeader
@@ -117,7 +91,7 @@ const AccessoriesWrapper = styled.div`
   font-size: 1.8rem;
   line-height: 1.6;
 
-  button  {
+  button {
     background-color: ${(props) => props.theme.colors.signatureColor};
   }
 
