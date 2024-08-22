@@ -1,6 +1,6 @@
-import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
 
-import { useCallback, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 
 import styled from 'styled-components';
 
@@ -13,6 +13,7 @@ import {
 
 import { Container, StepProgressBar } from '@/src/shared/components';
 import { V, styleMixin } from '@/src/shared/styles';
+import { useCounter } from '@/src/shared/hooks';
 
 import InterviewSliderButtons from './InterviewSliderButtons';
 import InterviewMenual from './InterviewMenual';
@@ -42,9 +43,13 @@ const InterviewRecord = dynamic(
 );
 
 function Interview() {
-  const [currentStep, setCurrentStep] = useState<number>(0);
   const { initConfirmQuestions, confirmQuestions } = useQuestionStore();
-  const { videoDevice, audioDevice } = useRecordInfoStore();
+  const { videoDevice, audioDevice, initDevices } = useRecordInfoStore();
+  const {
+    handleDecrease: moveToPrevPage,
+    handleIncrease: moveToNextPage,
+    counter: currentStep,
+  } = useCounter({ minCounter: 0, maxCounter: 5 });
 
   const renderComponent = [
     {
@@ -86,23 +91,10 @@ function Interview() {
     },
   ];
 
-  const START_SCREEN = 0;
-  const END_SCREEN = renderComponent.length - 1;
-  const SECOND_SCREEN = 1;
-
-  const moveToNextPage = useCallback(() => {
-    setCurrentStep((prevStep) =>
-      (prevStep >= END_SCREEN ? SECOND_SCREEN : prevStep + 1));
-  }, [currentStep]);
-
-  const moveToPrevPage = useCallback(() => {
-    setCurrentStep((prevStep) =>
-      (prevStep <= START_SCREEN ? START_SCREEN : prevStep - 1));
-  }, [currentStep]);
-
   useEffect(
     () => () => {
       initConfirmQuestions();
+      initDevices();
     },
     [],
   );
