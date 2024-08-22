@@ -1,49 +1,11 @@
-import { useState } from 'react';
-
 import styled from 'styled-components';
-
-import {
-  interviewType,
-  interviewMutation,
-} from '@/src/entities/interview_question';
 
 import { InputField } from '@/src/shared/components';
 import { styleMixin } from '@/src/shared/styles';
+import useRandomSettingLogic from '@/src/features/random-quetsion/useRandomSettingLogic';
 
 function InterViewRandomSetting() {
-  const [randomSetting, setRandomSetting] = useState({
-    cs: 0,
-    situation: 0,
-    job: 0,
-    personality: 0,
-  });
-  const { mutate: getRandomQustions } = interviewMutation.useFetchRandomQuestion();
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setRandomSetting((cur) => ({
-      ...cur,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event?.preventDefault();
-    const data = [
-      { size: randomSetting.cs, questionType: interviewType.QuestionType.CS },
-      {
-        size: randomSetting.situation,
-        questionType: interviewType.QuestionType.SITUATION,
-      },
-      { size: randomSetting.job, questionType: interviewType.QuestionType.JOB },
-      {
-        size: randomSetting.personality,
-        questionType: interviewType.QuestionType.PERSONALITY,
-      },
-    ];
-
-    getRandomQustions(data);
-  };
+  const { handleChange, handleSubmit, randomSetting } = useRandomSettingLogic();
 
   return (
     <InterViewSettingStyle>
