@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { styled } from 'styled-components';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
 import { styleMixin, V } from '@/src/shared/styles';
-import { useMediaRecord, useModal } from '@/src/shared/hooks';
+import { useModal } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/components';
 
+import useVideoPlayerLogic from '@/src/features/interview-record/video-record/useVideoPlayerLogic';
 import ScriptTextArea from './ScriptTextArea';
 import VideoHeader from './VideoHeader';
 import RecordActionButtons from './RecordActionButtons';
@@ -32,55 +32,15 @@ export default function VideoPlayer({
   const { setModal } = useModal();
 
   const {
-    setRecordedChunks,
-    curScript,
-    curTimer,
-    addRecordInfo,
-    initCurinfos,
-    setInterviewMode,
-    recordedChunks: storeChunks,
-    audioDevice,
-    videoDevice,
-  } = useRecordInfoStore();
-
-  const {
-    videoRef,
-    handleRecord,
     handlePauseRecord,
-    handleResumeRecord,
     handleRecordRemove,
+    handleRecord,
+    handleResumeRecord,
+    videoRef,
     recordStatus,
-    recordedChunks,
-  } = useMediaRecord({
-    audioId: audioDevice?.deviceId,
-    videoId: videoDevice?.deviceId,
-  });
-
-  useEffect(() => {
-    setRecordedChunks(recordedChunks);
-  }, [recordedChunks, setRecordedChunks]);
-
-  useEffect(() => {
-    const recordingResults = () => {
-      addRecordInfo({ timer: curTimer ?? '', script: curScript ?? '' });
-      initCurinfos();
-    };
-    if (recordStatus === 'pending' && curTimer) {
-      recordingResults();
-    }
-  }, [curTimer, curScript, addRecordInfo, initCurinfos, recordStatus]);
-
-  const readCurrentScript = async (): Promise<void> => {
-    setIsSpeaking(true);
-    await readingTheScript(currentIndex);
-    setIsSpeaking(false);
-  };
-
-  const handleEndRecord = () => {
-    setIsScriptView(false);
-    handleRecordRemove();
-    onChangeIndex(currentIndex + 1);
-  };
+    setInterviewMode,
+    storeChunks,
+  } = useVideoPlayerLogic();
 
   const onCompleteMsg = () => {
     setModal({
@@ -88,19 +48,27 @@ export default function VideoPlayer({
       contents: {
         title: 'Congratulations',
         message:
-          '준비된 모든 질문이 끝났습니다.\n 처음부터 다시 반복을 원하시면 확인을 눌러주세요',
+        '준비된 모든 질문이 끝났습니다.\n 처음부터 다시 반복을 원하시면 확인을 눌러주세요',
       },
     });
   };
 
+  const endInterviewRecord = () => {
+    setIsScriptView(false);
+    handleRecordRemove();
+    onChangeIndex(currentIndex + 1);
+  };
+
+  const readCurrentScript = async (): Promise<void> => {
+    setIsSpeaking(true);
+    await readingTheScript(currentIndex);
+    setIsSpeaking(false);
+  };
+
   /** 면접 질문 스피칭 */
-  const handleSpeak = async (): Promise<void> => {
+  const startInterviewRecord = async (): Promise<void> => {
     if (isComplete) {
       onCompleteMsg();
-      return;
-    }
-    if (recordStatus === 'record') {
-      handleRecordRemove();
       return;
     }
 
@@ -124,7 +92,7 @@ export default function VideoPlayer({
       <PlayerController>
         {recordStatus === 'pending' ? (
           <>
-            <MainButton onAction={handleSpeak} label="면접녹화시작" />
+            <MainButton onAction={startInterviewRecord} label="면접녹화시작" />
             <MainButton
               onAction={() => setInterviewMode('result')}
               label="결과보기"
@@ -134,7 +102,7 @@ export default function VideoPlayer({
         ) : (
           <RecordActionButtons
             isRecordPaused={recordStatus === 'pause'}
-            handleEndRecord={handleEndRecord}
+            handleEndRecord={endInterviewRecord}
             handlePauseRecord={handlePauseRecord}
             handleResumeRecord={handleResumeRecord}
             changeModeScript={() => setIsScriptView(!isScriptView)}
