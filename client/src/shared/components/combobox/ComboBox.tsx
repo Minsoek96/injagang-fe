@@ -1,44 +1,57 @@
-import { keys } from '@/src/shared/utils';
 import { useId } from 'react';
 import styled, { CSSProperties } from 'styled-components';
 
-interface ControlMenuProps {
-  value: string;
-  onChange: (
-    selected: string
-  ) => void | React.Dispatch<React.SetStateAction<string>>;
-  optionList: { title: string }[];
+interface ControlMenuProps<T> {
+  label?: string;
+  hideLabel?: boolean;
+  selectedItem: T;
+  items: T[];
+  itemToId: (item: T) => string;
+  itemToText: (item: T) => string;
+  onChange: (item: T | null) => void;
+  placeholder?: string;
   sx?: CSSProperties;
   Size?: { width: string; height: string };
 }
 
-function ComboBox({
-  value,
+function ComboBox<T>({
+  label = '옵션선택 : ',
+  hideLabel = false,
   onChange,
-  optionList,
+  selectedItem,
+  items,
+  itemToId,
+  itemToText,
+  placeholder = 'Please select',
   Size = { width: '100%', height: '100%' },
   sx = {},
-}: ControlMenuProps) {
+}: ControlMenuProps<T>) {
   const id = useId();
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    const selected = items.find((item) => itemToId(item) === value);
+    onChange(selected ?? null);
+  };
 
   return (
     <Container>
-      <label htmlFor={id} className="sr-only">
-        옵션 선택 :
+      <label htmlFor={id} className={hideLabel ? 'sr-only' : ''}>
+        {label}
       </label>
       <MenuSelect
         id={id}
         $Size={Size}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+        value={itemToId(selectedItem)}
+        onChange={handleChange}
         style={sx}
       >
         <option value="" disabled>
-          Please select
+          {placeholder}
         </option>
-        {optionList.map((option, index) => (
-          <option key={keys(option.title, index)} value={option.title}>
-            {option.title}
+        {items.map((item) => (
+          <option key={itemToId(item)} value={itemToId(item)}>
+            {itemToText(item)}
           </option>
         ))}
       </MenuSelect>
@@ -68,5 +81,5 @@ const MenuSelect = styled.select<SelectProps>`
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
-  border: .1em solid ${({ theme }) => theme.colors.mainLine}
+  border: 0.1em solid ${({ theme }) => theme.colors.mainLine};
 `;

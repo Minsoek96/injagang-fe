@@ -80,7 +80,7 @@
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
 
-    "import/prefer-default-export": "off", // 임시
+    "import/prefer-default-export": "off",
     "react/jsx-props-no-spreading": "off",
     "implicit-arrow-linebreak": "off",
     "import/no-cycle": "off",
@@ -89,6 +89,5 @@
       { "allowShortCircuit": true, "allowTernary": true }
     ],
     "no-restricted-exports": "off"
-    // "indent": "off"
   }
 }

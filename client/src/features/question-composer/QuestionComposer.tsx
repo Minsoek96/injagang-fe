@@ -71,9 +71,13 @@ function QuestionComposer() {
         />
         <ComboBox
           Size={{ width: '100%', height: '4rem' }}
-          value={coverLetterTitle}
-          onChange={(e) => changeCoverLetter(e)}
-          optionList={coverLtters}
+          label="대표자소서선택"
+          hideLabel
+          selectedItem={coverLetterTitle}
+          items={coverLtters.map((item) => item.title)}
+          itemToId={(item) => item || ''}
+          itemToText={(item) => item || ''}
+          onChange={(value) => value && changeCoverLetter(value)}
         />
         <MarkdownEditor
           onChange={setContent}

@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import {
   interviewType,
-  useInterViewStore,
+  useQuestionStore,
 } from '@/src/entities/interview_question';
 
 type ManagerProps = {
@@ -15,7 +15,7 @@ const useSelectorLogic = ({
     selectedType,
     setSelectedType,
     setUserPlayList,
-  } = useInterViewStore();
+  } = useQuestionStore();
 
   const dispatchSelectedType = useCallback(
     (type: interviewType.QuestionType | string) => {

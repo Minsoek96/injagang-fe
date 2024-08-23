@@ -12,7 +12,7 @@ import {
   TOAST_MODE,
 } from '@/src/shared/const';
 
-import useInterViewStore from './useInterViewStore';
+import useQuestionStore from './useQuestionStore';
 import {
   addInterViewQuestion,
   deleteInterViewQuestion,
@@ -23,7 +23,7 @@ import interview from './queryKeys';
 /** 랜덤 면접 질문리스트 요청 */
 const useFetchRandomQuestion = () => {
   const { showToast } = useToast();
-  const { setConfirmQuestions } = useInterViewStore();
+  const { setConfirmQuestions } = useQuestionStore();
 
   return useMutation({
     mutationFn: (random: IRandomQuestions[]) =>
@@ -33,7 +33,10 @@ const useFetchRandomQuestion = () => {
       const filterQuestion = data.map((item) => item.questions);
       setConfirmQuestions(filterQuestion);
 
-      showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.GET_RANDOMQUESTION);
+      showToast(
+        TOAST_MODE.SUCCESS,
+        SUCCESS_MESSAGES.GET_RANDOMQUESTION(filterQuestion.length),
+      );
     },
 
     onError: () => {

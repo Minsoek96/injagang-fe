@@ -69,7 +69,7 @@ describe('useMediaRecored', () => {
   });
 
   const startRecord = async () => {
-    const { result } = renderHook(() => useMediaRecord());
+    const { result } = renderHook(() => useMediaRecord({}));
 
     await act(async () => {
       result.current.handleRecord();
@@ -112,7 +112,7 @@ describe('useMediaRecored', () => {
     it('녹화를 일시중지할 수 있다.', async () => {
       const { result } = await pauseRecord();
 
-      expect(result.current.isPaused).toBe(true);
+      expect(result.current.recordStatus).toBe('pause');
       expect(mockMediaRecorder.pause).toHaveBeenCalled();
     });
 
@@ -125,7 +125,7 @@ describe('useMediaRecored', () => {
       });
 
       expect(mockMediaRecorder.resume).toHaveBeenCalled();
-      expect(result.current.isPaused).toBe(false);
+      expect(result.current.recordStatus).toBe('record');
     });
   });
 });

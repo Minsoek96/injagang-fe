@@ -24,9 +24,9 @@ export default function ScriptTextArea() {
         height: '100px',
         borderRadius: '4px',
         padding: '10px',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
         fontSize: '1.8rem',
-        color: '#13df0cb3',
+        color: '#000',
       }}
     />
   );

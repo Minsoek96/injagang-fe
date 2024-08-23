@@ -6,11 +6,11 @@ import { memo } from 'react';
 import { V } from '@/src/shared/styles';
 
 const InterViewSelectData = [
-  { title: interviewType.QuestionType.CS, id: 1 },
-  { title: interviewType.QuestionType.SITUATION, id: 2 },
-  { title: interviewType.QuestionType.JOB, id: 3 },
-  { title: interviewType.QuestionType.PERSONALITY, id: 4 },
-  { title: 'ALL', id: 5 },
+  { title: interviewType.QuestionType.CS, id: 'qeustion_1' },
+  { title: interviewType.QuestionType.SITUATION, id: 'qeustion_2' },
+  { title: interviewType.QuestionType.JOB, id: 'qeustion_3' },
+  { title: interviewType.QuestionType.PERSONALITY, id: 'qeustion_4' },
+  { title: 'ALL', id: 'qeustion_5' },
 ];
 
 interface IQuestionSelectorProps {
@@ -22,10 +22,14 @@ function QuestionSelector({ selectedType, onChange }: IQuestionSelectorProps) {
   return (
     <Container>
       <ComboBox
-        value={selectedType}
-        optionList={InterViewSelectData}
-        onChange={onChange}
-        Size={{ width: '100%', height: '30px' }}
+        label="질문타입선택"
+        hideLabel
+        items={InterViewSelectData.map((item) => item.title)}
+        selectedItem={selectedType}
+        itemToId={(item) => item || ''}
+        itemToText={(item) => item || ''}
+        onChange={(value) => value && onChange(value)}
+        Size={{ width: '100%', height: '3rem' }}
       />
     </Container>
   );

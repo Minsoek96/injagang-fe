@@ -41,9 +41,9 @@ const sampleCheckList = [
 ];
 
 const sampleOptionList = [
-  { title: 'Option 1' },
-  { title: 'Option 2' },
-  { title: 'Option 3' },
+  { title: 'Option 1', id: 'test 1' },
+  { title: 'Option 2', id: 'test 2' },
+  { title: 'Option 3', id: 'test 3' },
 ];
 
 const sampleDropList: DropItemType[] = [
@@ -74,7 +74,7 @@ const sampleDropList: DropItemType[] = [
   },
 ];
 
-export const sampleNavList: MenuItemType[] = [
+const sampleNavList: MenuItemType[] = [
   {
     title: '테스트',
     path: '/test1',
@@ -97,10 +97,18 @@ export const sampleNavList: MenuItemType[] = [
   },
 ];
 
+const sampleStepList = [
+  { id: 'test_01', title: 'test01', recommend: '...' },
+  { id: 'test_02', title: 'test02', recommend: '...' },
+  { id: 'test_03', title: 'test03', recommend: '...' },
+  { id: 'test_04', title: 'test04', recommend: '...' },
+];
 export {
   sampleToast,
   sampleModal,
   sampleCheckList,
   sampleOptionList,
   sampleDropList,
+  sampleNavList,
+  sampleStepList,
 };

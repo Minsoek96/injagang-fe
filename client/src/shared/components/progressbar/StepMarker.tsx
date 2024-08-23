@@ -3,12 +3,12 @@ import { keyframes, styled } from 'styled-components';
 import { styleMixin, V } from '@/src/shared/styles';
 
 type Props = {
-  step: { title: string; id: string };
+  stepTitle: string;
   currentStep: number;
   index: number;
 };
 
-export default function StepMarker({ step, currentStep, index }: Props) {
+export default function StepMarker({ stepTitle, currentStep, index }: Props) {
   return (
     <Container>
       <Marker
@@ -22,7 +22,7 @@ export default function StepMarker({ step, currentStep, index }: Props) {
       </p>
       <HideText>
         :
-        {step.title}
+        {stepTitle}
       </HideText>
     </Container>
   );

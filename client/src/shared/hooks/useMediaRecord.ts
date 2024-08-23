@@ -2,28 +2,51 @@ import {
   useRef, useState, useEffect, useCallback,
 } from 'react';
 
-const useMediaRecord = () => {
+type Props = {
+  audioId?: string;
+  videoId?: string;
+  onError?: () => void;
+};
+
+const useMediaRecord = ({
+  audioId = '',
+  videoId = '',
+  onError = () => {},
+}: Props) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [isRecord, setIsRecord] = useState<boolean>(false);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [recordStatus, setRecordStatus] = useState<
+    'pending' | 'record' | 'pause'
+  >('pending');
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
+
+  const getDevices = useCallback(async () => {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const audioDevices = devices.filter(
+      (device) => device.kind === 'audioinput',
+    );
+    const videoDevices = devices.filter(
+      (device) => device.kind === 'videoinput',
+    );
+    return { audioDevices, videoDevices };
+  }, []);
 
   /** 유저에게 권한을 요청함(캠여부) */
   const getUserAccess = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: true,
+        video: videoId ? { deviceId: { exact: videoId } } : true,
+        audio: audioId ? { deviceId: { exact: audioId } } : true,
       });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
       return stream;
     } catch (error) {
+      onError();
       return undefined;
     }
-  }, []);
+  }, [audioId, videoId, onError]);
 
   const handleDataAvailable = useCallback((e: BlobEvent) => {
     if (e.data.size > 0) {
@@ -33,16 +56,20 @@ const useMediaRecord = () => {
 
   /** 녹화촬영을 시작한다. */
   const handleRecord = useCallback(async () => {
-    const stream = (await getUserAccess()) as MediaStream;
+    try {
+      const stream = (await getUserAccess()) as MediaStream;
 
-    const mediaRecorder = new MediaRecorder(stream, {
-      mimeType: 'video/webm',
-    });
-    mediaRecorderRef.current = mediaRecorder;
-    mediaRecorder.ondataavailable = handleDataAvailable;
-    mediaRecorder.start();
-    setIsRecord(true);
-  }, [getUserAccess, handleDataAvailable]);
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: 'video/webm',
+      });
+      mediaRecorderRef.current = mediaRecorder;
+      mediaRecorder.ondataavailable = handleDataAvailable;
+      mediaRecorder.start();
+      setRecordStatus('record');
+    } catch (error) {
+      onError();
+    }
+  }, [getUserAccess, handleDataAvailable, onError]);
 
   const stopMediaTracks = useCallback((stream: MediaStream) => {
     stream.getAudioTracks().forEach((track) => track.stop());
@@ -55,8 +82,7 @@ const useMediaRecord = () => {
       mediaRecorderRef.current.stop();
       const stream = videoRef.current?.srcObject as MediaStream;
       stopMediaTracks(stream);
-      setIsRecord(false);
-      setIsPaused(false);
+      setRecordStatus('pending');
       mediaRecorderRef.current = null;
     }
   }, [stopMediaTracks]);
@@ -64,23 +90,28 @@ const useMediaRecord = () => {
   /** 녹화를 일시정지한다. */
   const handlePauseRecord = useCallback(() => {
     mediaRecorderRef.current?.pause();
-    setIsPaused(true);
+    setRecordStatus('pause');
   }, []);
 
   /** 녹화를 재개한다. */
   const handleResumeRecord = useCallback(() => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.resume();
-      setIsPaused(false);
+      setRecordStatus('record');
     }
   }, []);
 
   /** 렌더링이 종료되면 모든녹화를 정리한다. */
   useEffect(
     () => () => {
-      if (mediaRecorderRef.current) {
-        mediaRecorderRef.current.stop();
-        const stream = videoRef.current?.srcObject as MediaStream;
+      const mediaRecorder = mediaRecorderRef.current;
+      const stream = videoRef.current?.srcObject as MediaStream;
+
+      if (mediaRecorder) {
+        mediaRecorder.stop();
+      }
+
+      if (stream) {
         stopMediaTracks(stream);
       }
     },
@@ -93,8 +124,8 @@ const useMediaRecord = () => {
     handlePauseRecord,
     handleResumeRecord,
     handleRecordRemove,
-    isPaused,
-    isRecord,
+    getDevices,
+    recordStatus,
     recordedChunks,
   };
 };

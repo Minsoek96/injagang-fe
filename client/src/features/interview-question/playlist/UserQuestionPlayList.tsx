@@ -19,15 +19,14 @@ function UserQuestionPlayList() {
     >
       <Header>Play List</Header>
       <ItemContainer>
-        {userQuestion
-            && userQuestion.map((question, idx) => (
-              <UserQuestionPlayListItems
-                key={keys(question, idx)}
-                item={question}
-                index={idx}
-                handleRemoveText={handleRemoveText}
-              />
-            ))}
+        {userQuestion?.map((question, idx) => (
+          <UserQuestionPlayListItems
+            key={keys(question, idx)}
+            item={question}
+            index={idx}
+            handleRemoveText={handleRemoveText}
+          />
+        ))}
       </ItemContainer>
       <QuestionAdder
         handleAddQuestion={handleAddText}

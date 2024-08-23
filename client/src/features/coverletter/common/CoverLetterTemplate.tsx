@@ -39,7 +39,7 @@ type Props = {
 };
 
 /** 자소서 생성-삭제 공용 템플릿  */
-export default function CoverLetterTeamplte({
+export default function CoverLetterTemplate({
   mainTitle,
   coverLetterTitle,
   setCoverLetterTitle,
@@ -68,9 +68,13 @@ export default function CoverLetterTeamplte({
       {isTemplate && (
         <ComboBox
           sx={{ maxWidth: '100%', height: '4rem' }}
-          value={selectedTemplateTitle}
-          optionList={templateTitles}
-          onChange={changeSelectedTemplate}
+          label="자소서 선택"
+          hideLabel
+          selectedItem={selectedTemplateTitle}
+          items={templateTitles.map((item) => item.title)}
+          itemToId={(item) => item || ''}
+          itemToText={(item) => item || ''}
+          onChange={(value) => value && changeSelectedTemplate(value)}
         />
       )}
       {qnaList.map((qna) => (
@@ -127,6 +131,5 @@ const ControllerBtns = styled.div`
 
   @media screen and (max-width: ${V.mediaMobile}) {
     font-size: 0.7rem;
-
   }
 `;
