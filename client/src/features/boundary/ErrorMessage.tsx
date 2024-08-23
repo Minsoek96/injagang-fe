@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 import Image from 'next/image';
-import sorry from '@/public/assets/sorry.png';
+
+import sorry from '@/public/assets/sorry.webp';
 
 import { fadeIn } from '@/src/shared/styles/animations';
 import { styleMixin } from '@/src/shared/styles';

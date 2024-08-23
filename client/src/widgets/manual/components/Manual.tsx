@@ -2,8 +2,8 @@ import { styled } from 'styled-components';
 
 import { Container } from '@/src/shared/components/container';
 
-import goodInterView from '@/public/assets/main.jpg';
-import interViewScreen from '@/public/assets/interview.png';
+import goodInterView from '@/public/assets/main.webp';
+import interViewScreen from '@/public/assets/interview.webp';
 import communityScreen from '@/public/assets/commu.webp';
 
 import ManualItems from './ManualItems';
