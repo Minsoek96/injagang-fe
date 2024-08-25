@@ -3,22 +3,25 @@ import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 
 import { useFetchUserInfo } from '@/src/entities/auth/mutations';
-import { TOKEN_KEYS } from '@/src/shared/const';
 import { useAuthStore } from '@/src/entities/auth';
+
+import { TOKEN_KEYS } from '@/src/shared/const';
 
 // 인증을 위한 훅
 const useAuth = () => {
-  const { mutate: getProfile, isSuccess } = useFetchUserInfo();
-  const { userId } = useAuthStore();
+  const { mutate: getProfile } = useFetchUserInfo();
+  const { userId, role } = useAuthStore();
+
   useEffect(() => {
     const accessToken = Cookies.get(TOKEN_KEYS.ACCESS_TOKEN);
-    if (!accessToken) {
-      return;
+    if (accessToken) {
+      getProfile();
     }
-    getProfile();
-  }, [userId]);
+  }, [userId, getProfile]);
 
-  return isSuccess;
+  const isVerify = !!role;
+
+  return isVerify;
 };
 
 export default useAuth;

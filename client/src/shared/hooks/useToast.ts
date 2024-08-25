@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { v4 as uuid4 } from 'uuid';
 
 import useToastStore from '@/src/shared/store/useToastStore';
+
 import { toastType } from '@/src/shared/types';
 
 const useToast = (duration: number = 3000) => {

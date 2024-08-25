@@ -3,7 +3,7 @@ import { useModalStore } from '@/src/shared/store';
 import { styled } from 'styled-components';
 
 import { MainButton } from '@/src/shared/components/button';
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 const MODAL_CLOSE_DELAY = 50;
 
@@ -108,5 +108,10 @@ const ModalBox = styled.div`
     justify-content: center;
     width: 100%;
     padding: 0.5em;
+  }
+
+  @media screen and (max-width: ${V.mediaMobile}){
+    width: 30rem;
+    font-size: 1.6rem;
   }
 `;
