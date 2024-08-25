@@ -19,6 +19,7 @@ export const ERROR_MESSAGES = {
   NO_AUTHORIZATION: '권한이 없습니다. ',
   JWT_EXPIRED: 'JWT가 만료되었습니다.',
   REFRESH_TOKEN_EXPIRED: 'Refresh 토큰이 만료되었습니다.',
+  PROTECTED_PAGE: '접근 권한이 없습니다 ㅜㅜ',
 
   CHECK_OUT: '로그아웃에 실패했습니다.',
   GET_PROFILE: '회원정보를 불러오지 못했습니다.',
