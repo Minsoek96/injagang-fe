@@ -68,6 +68,7 @@ const useMediaRecord = ({
       setRecordStatus('record');
     } catch (error) {
       onError();
+      handleRecordRemove();
     }
   }, [getUserAccess, handleDataAvailable, onError]);
 
