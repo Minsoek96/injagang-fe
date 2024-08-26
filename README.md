@@ -6,20 +6,27 @@
 
 <br/>
 
+## 배포 주소
+
+[배포링크](https://injagang-fe.vercel.app/)   
+TEST 계정 : test@test.com  
+TEST 비번 : test
+
 ## 목차
 
 1. [팀원 소개](#팀원-소개)
 2. [사이트 특징](#사이트-특징)
-3. [서비스 가치 & 가설](#서비스-가치--가설)
+3. [서비스 기대 효과](#서비스-기대-효과)
 4. [ERD](#erd)
 5. [주요 기능](#주요-기능)
-   - [접근 권한 인증](#접근-권한-인증)
-   - [유저 자소서 관리](#유저-자소서-관리-특정-유저)
-   - [자소서 템플릿](#자소서-템플릿-관리자)
-   - [자소서 첨삭 게시판](#자소서-첨삭-게시판-모든-유저)
-   - [피드백](#피드백-모든-유저)
-   - [모의 면접](#모의-면접-특정-유저)
-6. [Tech Stack](#기술-스택)
+   - [자소서-첨부-게시](#자소서-첨부-게시)
+   - [면접-녹화-셋팅](#면접-녹화-셋팅)
+   - [자소서-첨삭-피드백](#자소서-첨삭-피드백)
+   - [자소서-작성](#자소서-작성)
+   - [페이지-접근-권한-통제](#페이지-접근-권한-통제)
+   - [테마-설정](#테마-설정)
+   - [ADMIN](#관리자-페이지)
+6. [Tech Stack](#tech-stack)
 
 <br/>
 
@@ -68,67 +75,83 @@
 
 ---
 
-### 접근 권한 인증
+### 자소서 첨부 게시
 
+**[작성]**  
+![c_board](https://github.com/user-attachments/assets/69310b20-8000-41e5-b0ef-76d10715766e)
+
+
+**[수정 및 삭제]**  
+![u_board](https://github.com/user-attachments/assets/ca8e89a4-c17d-49a8-8094-504432540b25)
+
+<br/>
+
+### 면접 녹화 셋팅
+
+**[랜덤 질문 설정]**  
+![setting1](https://github.com/user-attachments/assets/abfb8d8f-c7e9-47ae-b263-53051ef18896)
+
+
+**[디바이스 설정]**  
+![setting2](https://github.com/user-attachments/assets/9af7da40-5187-48cb-b316-fe62dea59179)
+
+
+**[커스텀 질문 설정]**  
+![question_set](https://github.com/user-attachments/assets/e41056ee-757b-4a98-8f2b-a8d61f19824c)
+
+<br/>
+
+### 면접 녹화 
+
+![interview](https://github.com/user-attachments/assets/502ed900-07a5-455f-8c0e-1e860e785041)
+
+<br/>
+
+
+### 자소서 첨삭 피드백
+
+![feedback](https://github.com/user-attachments/assets/ed2fe925-0de8-4342-a9b9-1cc02641b3ba)
+
+### 자소서 작성
+
+![c_coverletter](https://github.com/user-attachments/assets/d1eec35e-1030-4538-9233-8837b1a8dbbf)
+
+<br/>
+
+### 페이지 접근 권한 통제 
 - 토큰 검증을 통한 인증 처리
 - AccessToken + RefreshToken
-- 권한별 서비스 이용 제어
-- 잘못된 정보 검증
 
-![접근권한](https://github.com/Minsoek96/Injagang/assets/125581005/ecaaced2-2c70-4c9f-8ef4-14283f201978)
+![access](https://github.com/user-attachments/assets/5fad593c-25ee-4937-9449-cafc3824f697)
 
-### 유저 자소서 관리 ( 특정 유저 )
 
-- 자소서 작성하기
-- 자소서 삭제하기
-- 자소서 수정하기
-- ADMIN 기업별 자소서 질문 문항 템플릿 제공(커스텀가능)
 
-![자소서](https://github.com/Minsoek96/Injagang/assets/125581005/a822a103-5728-4c35-a39c-e9501b1de38b)
+### 테마 설정
 
-### 자소서 템플릿( 관리자 )
+![theme](https://github.com/user-attachments/assets/5b8807d8-cf95-41f5-997a-018624b12ee1)
 
-- 기업별 자소서 질문 문항 작성하기
-- 질문 문항 삭제하기
+<br/>
 
-![템플릿](https://github.com/Minsoek96/Injagang/assets/125581005/7575344e-dd23-4c32-860a-f9b929e06683)
+### 관리자 페이지  
 
-### 자소서 첨삭 게시판 ( 모든 유저 )
+**[자소서 템플릿 생성]**  
+![admin1](https://github.com/user-attachments/assets/f0a49e1a-c806-4201-99af-340b8f4addc3)
 
-- 게시글 자소서 첨부 하기
-- 게시글 자소서 삭제 하기
-- 게시글 자소서 수정 하기
-- 제목별, 닉네임별 자소서 내용 탐색하기
 
-### 피드백 ( 모든 유저 )
+**[면접 질문 등록]**  
+![admin2](https://github.com/user-attachments/assets/9fbeb135-bad9-490d-805b-00337c5c5481)
 
-- 첨부 자소서 문항별 첨삭하기
-- 문항별 피드백 작성하기
-- 피드백 삭제하기
-- 피드백 수정하기
 
-![게시판](https://github.com/Minsoek96/Injagang/assets/125581005/0da76966-98dc-4860-aaa0-34f0ec3265e1)
 
-### 모의 면접 ( 특정 유저 )
 
-- 모의 면접 질문 관리자 제공
-- 자신만의 모의 면접 질문 설정
-- 관리자 랜덤 면접 질문 설정 (타입 별 갯수지정)
-- 면접 질문 문항별 스피칭
-- 면접 질문 문항별 녹화
-- 면접 질문 문항별 저장
-
-![면접](https://github.com/Minsoek96/Injagang/assets/125581005/f1400b82-39a6-46fa-986a-3a243feab6b1)
-
-![랜덤면접](https://github.com/Minsoek96/Injagang/assets/125581005/3f011e6d-96ed-4dec-bf28-7aae0f7f9570)
-
-## 🛠Tech Stack
+## Tech-Stack
 
 <div>
 
-|     Area     |                                                                                                                                                                                                                                                                                                                                      Tech Stack                                                                                                                                                                                                                                                                                                                                      |
-| :----------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| **Frontend** | <img src="https://img.shields.io/badge/next.js-000000.svg?&style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"> <img src="https://img.shields.io/badge/typescript-3178C6.svg?&style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"> <img src="https://img.shields.io/badge/styled--components-DB7093.svg?&style=for-the-badge&logo=styled-components&logoColor=white" alt="Styled Components"> <img src="https://img.shields.io/badge/redux-764ABC.svg?&style=for-the-badge&logo=Redux&logoColor=white" alt="Redux"> <img src="https://img.shields.io/badge/redux--thunk-764ABC.svg?&style=for-the-badge&logo=redux&logoColor=white" alt="Redux Thunk"> |
-| **Backend**  |                                                <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white" alt="Java"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring"> <img src="https://img.shields.io/badge/h2-4479A1?style=for-the-badge&logo=h2&logoColor=white" alt="H2"> <img src="https://img.shields.io/badge/jwt-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" alt="JWT"> <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="Redis">                                                 |
+|     Area     |                                                                                                                                                                                                                                                                                                                                                           Tech Stack                                                                                                                                                                                                                                                                                                                                                            |
+|:------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| **Frontend** | <img src="https://img.shields.io/badge/next.js-000000.svg?&style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"> <img src="https://img.shields.io/badge/typescript-3178C6.svg?&style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"> <img src="https://img.shields.io/badge/styled--components-DB7093.svg?&style=for-the-badge&logo=styled-components&logoColor=white" alt="Styled Components"> <img src="https://img.shields.io/badge/react--query-FF4154.svg?&style=for-the-badge&logo=react-query&logoColor=white" alt="React Query"> <img src="https://img.shields.io/badge/zustand-764ABC.svg?&style=for-the-badge&logo=Zustand&logoColor=white" alt="Zustand"> <img src="https://img.shields.io/badge/react--testing--library-E33332.svg?&style=for-the-badge&logo=testing-library&logoColor=white" alt="React Testing Library"> <img src="https://img.shields.io/badge/vercel-000000.svg?&style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"> <img src="https://img.shields.io/badge/husky-4D4D4D.svg?&style=for-the-badge&logo=husky&logoColor=white" alt="Husky"> |
+| **Backend**  | <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white" alt="Java"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring"> <img src="https://img.shields.io/badge/h2-4479A1?style=for-the-badge&logo=h2&logoColor=white" alt="H2"> <img src="https://img.shields.io/badge/jwt-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" alt="JWT"> <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="Redis"> <img src="https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" alt="AWS"> |
 
 </div>
+
