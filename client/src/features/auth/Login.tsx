@@ -7,6 +7,8 @@ import styled, { css } from 'styled-components';
 import { shakeAnimation } from '@/src/shared/styles';
 
 import { MainButton, InputField } from '@/src/shared/components';
+
+import useAuthRedirect from '@/src/features/auth/hooks/useAuthRedirect';
 import { useLoginLogic } from './hooks';
 
 function Login() {
@@ -20,6 +22,9 @@ function Login() {
     passwordRef,
     serverErrorMsg,
   } = useLoginLogic();
+
+  useAuthRedirect();
+
   const [shakeTrigger, setShakeTrigger] = useState<boolean>(false);
 
   const isError = serverErrorMsg !== '' || logicErrorMsg !== '';
