@@ -8,7 +8,6 @@ import { shakeAnimation } from '@/src/shared/styles';
 
 import { MainButton, InputField } from '@/src/shared/components';
 
-import useAuthRedirect from '@/src/features/auth/hooks/useAuthRedirect';
 import { useLoginLogic } from './hooks';
 
 function Login() {
@@ -23,7 +22,7 @@ function Login() {
     serverErrorMsg,
   } = useLoginLogic();
 
-  useAuthRedirect();
+  // useAuthRedirect();
 
   const [shakeTrigger, setShakeTrigger] = useState<boolean>(false);
 

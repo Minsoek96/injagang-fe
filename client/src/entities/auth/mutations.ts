@@ -21,7 +21,6 @@ import {
 } from '@/src/entities/auth/type';
 import { useAuthStore } from '@/src/entities/auth';
 
-import { SessionStorageManager } from '@/src/shared/utils';
 import {
   authInfo,
   checkOut,
@@ -30,8 +29,6 @@ import {
   passwordChange,
   signup,
 } from './apis';
-
-const sessionStorage = new SessionStorageManager('auth');
 
 const useFetchSignin = () => {
   const [errorMsg, setErrorMsg] = useState('');
@@ -47,7 +44,7 @@ const useFetchSignin = () => {
       Cookies.set(TOKEN_KEYS.REFRESH_TOKEN, refresh, { expires: 1 });
       Cookies.set('userId', userId, { expires: 1 });
       setUserId(userId);
-      router.replace(sessionStorage.get() ?? '/');
+      router.replace('/');
     },
     onError: () => {
       setErrorMsg(ERROR_MESSAGES.DOESN_T_MATCH);
