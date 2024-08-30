@@ -5,7 +5,9 @@ import { useRouter } from 'next/router';
 type Props = {
   children: React.ReactNode;
 };
-export default function AuthProvider({ children }: Props) {
+
+/** 페이지 권한을 인가하는 역할 */
+export default function AuthGard({ children }: Props) {
   const isVerifiedToken = useAuth();
   const router = useRouter();
 

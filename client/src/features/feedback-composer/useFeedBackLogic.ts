@@ -1,6 +1,4 @@
-import {
-  useState, useCallback, useRef,
-} from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 import { useWriteFeed } from '@/src/entities/feedback/mutation';
 import { useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';

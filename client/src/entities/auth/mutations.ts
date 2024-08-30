@@ -86,9 +86,17 @@ const useFetchCheckOut = () => {
   });
 };
 
+// TODO: 유저가 강제로 토큰을 삭제한 경우 문제 발생
 const useFetchUserInfo = () => {
   const { showToast } = useToast();
   const { setUserInfo } = useAuthStore();
+
+  const removeToken = () => {
+    Cookies.remove(TOKEN_KEYS.ACCESS_TOKEN);
+    Cookies.remove(TOKEN_KEYS.REFRESH_TOKEN);
+    Cookies.remove('userId');
+  };
+
   return useMutation({
     mutationFn: () => authInfo(),
 
@@ -100,6 +108,7 @@ const useFetchUserInfo = () => {
 
     onError: () => {
       showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.GET_PROFILE);
+      removeToken();
     },
   });
 };
