@@ -14,6 +14,7 @@ export default function AuthGard({ children }: Props) {
   const protectedPages = [
     /^\/coverLetter(?:\/.*)?$/,
     /^\/qna\/detail\/.*/,
+    /^\/qna\/question/,
     /^\/profile\/.+/,
     /^\/myProfile/,
   ];
