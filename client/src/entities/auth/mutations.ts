@@ -86,7 +86,7 @@ const useFetchCheckOut = () => {
   });
 };
 
-// TODO: 유저가 강제로 토큰을 삭제한 경우 문제 발생
+// TODO : 임의로 토큰이 삭제된 경우 오류발생 대비(현재 조치)
 const useFetchUserInfo = () => {
   const { showToast } = useToast();
   const { setUserInfo } = useAuthStore();

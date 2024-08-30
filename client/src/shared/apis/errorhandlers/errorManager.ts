@@ -6,17 +6,31 @@ import { AxiosRequestConfig, isAxiosError } from 'axios';
 
 import { tokenReissue } from '@/src/shared/apis/tokenReissue';
 import { ERROR_MESSAGES, TOKEN_KEYS } from '@/src/shared/const';
+
 import { reRequest } from './reRequest';
 
 const errorManager = async (
   message: string,
   originRequest: AxiosRequestConfig,
 ) => {
-  message === ERROR_MESSAGES.JWT_EXPIRED && jwtExpired(originRequest);
+  switch (message) {
+  case ERROR_MESSAGES.JWT_EXPIRED:
+    jwtExpired(originRequest);
+    break;
+  default:
+    unauthorized();
+    break;
+  }
 };
 
 /** jwt 만료시 처리 함수 */
 const unauthorized = () => {
+  const removeToken = () => {
+    Cookies.remove(TOKEN_KEYS.ACCESS_TOKEN);
+    Cookies.remove(TOKEN_KEYS.REFRESH_TOKEN);
+    Cookies.remove('userId');
+  };
+  removeToken();
   Router.replace('/login');
 };
 
@@ -37,6 +51,4 @@ const jwtExpired = async (originRequest: AxiosRequestConfig) => {
   }
 };
 
-export {
-  errorManager,
-};
+export { errorManager };
