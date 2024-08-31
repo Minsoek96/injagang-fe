@@ -29,9 +29,7 @@ export default function useRecordSettingsLogic() {
     initDevices();
   }, []);
 
-  const {
-    videoRef, handleRecord, getDevices,
-  } = useMediaRecord({
+  const { videoRef, handleRecord, getDevices } = useMediaRecord({
     onError: () => showErrorModal(),
     audioId: audioDevice?.deviceId,
     videoId: videoDevice?.deviceId,
@@ -49,6 +47,14 @@ export default function useRecordSettingsLogic() {
 
   useEffect(() => {
     FetchSettingDevices();
+    const handleFetchDevices = () => {
+      FetchSettingDevices();
+    };
+    navigator.mediaDevices.addEventListener('devicechange', handleFetchDevices);
+    return navigator.mediaDevices.removeEventListener(
+      'devicechange',
+      handleFetchDevices,
+    );
   }, []);
 
   useEffect(() => {
