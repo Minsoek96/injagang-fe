@@ -9,10 +9,6 @@ import Cookies from 'js-cookie';
 import { useToast } from '@/src/shared/hooks';
 
 import {
-  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE, TOKEN_KEYS,
-} from '@/src/shared/const';
-
-import {
   IChangePw,
   IResponseSignin,
   ISignin,
@@ -20,6 +16,10 @@ import {
   IUserInfo,
 } from '@/src/entities/auth/type';
 import { useAuthStore } from '@/src/entities/auth';
+import {
+  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE, TOKEN_KEYS,
+} from '@/src/shared/const';
+import { getCookies, removeCookies, setCookies } from '@/src/shared/utils';
 
 import {
   authInfo,
@@ -40,9 +40,7 @@ const useFetchSignin = () => {
 
     onSuccess: (data: IResponseSignin) => {
       const { access, refresh, userId } = data;
-      Cookies.set(TOKEN_KEYS.ACCESS_TOKEN, access, { expires: 1 });
-      Cookies.set(TOKEN_KEYS.REFRESH_TOKEN, refresh, { expires: 1 });
-      Cookies.set('userId', userId, { expires: 1 });
+      setCookies({ accessToken: access, refreshToken: refresh, userId });
       setUserId(userId);
       router.replace('/');
     },
@@ -57,15 +55,11 @@ const useFetchCheckOut = () => {
   const { showToast } = useToast();
   const { nickName, initCurrentUser } = useAuthStore();
 
-  const currentToken = {
-    access: Cookies.get(TOKEN_KEYS.ACCESS_TOKEN),
-    refresh: Cookies.get(TOKEN_KEYS.REFRESH_TOKEN),
-  };
+  const { accessToken, refreshToken } = getCookies();
 
-  const removeToken = () => {
-    Cookies.remove(TOKEN_KEYS.ACCESS_TOKEN);
-    Cookies.remove(TOKEN_KEYS.REFRESH_TOKEN);
-    Cookies.remove('userId');
+  const currentToken = {
+    access: accessToken,
+    refresh: refreshToken,
   };
 
   return useMutation({
@@ -76,7 +70,7 @@ const useFetchCheckOut = () => {
         TOAST_MODE.SUCCESS,
         SUCCESS_MESSAGES.CHECK_OUT(nickName ?? '게스트'),
       );
-      removeToken();
+      removeCookies();
       initCurrentUser();
     },
 

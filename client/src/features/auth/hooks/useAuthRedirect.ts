@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 
-import Cookies from 'js-cookie';
-
 import { useAuthStore } from '@/src/entities/auth';
 
-import { TOKEN_KEYS } from '@/src/shared/const';
 import { useRouter } from 'next/router';
+import { getCookies } from '@/src/shared/utils';
 
 const useAuthRedirect = () => {
   const router = useRouter();
-  const accessToken = Cookies.get(TOKEN_KEYS.ACCESS_TOKEN);
+  const { accessToken } = getCookies();
   const { history } = useAuthStore();
 
   useEffect(() => {

@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-import Cookies from 'js-cookie';
-
-import { TOKEN_KEYS } from '@/src/shared/const';
-
+import { getCookies } from '@/src/shared/utils';
 import { errorManager, serverDisconnected } from './errorhandlers';
 import { SERVER } from '../config/apis';
 
@@ -16,9 +13,10 @@ export const API = axios.create({
 
 API.interceptors.request.use(
   (config) => {
-    if (Cookies.get(TOKEN_KEYS.ACCESS_TOKEN)) {
+    const { accessToken } = getCookies();
+    if (accessToken) {
       const newConfig = { ...config };
-      newConfig.headers.Authorization = Cookies.get(TOKEN_KEYS.ACCESS_TOKEN);
+      newConfig.headers.Authorization = accessToken;
       return newConfig;
     }
     return config;

@@ -22,8 +22,6 @@ function Login() {
     serverErrorMsg,
   } = useLoginLogic();
 
-  // useAuthRedirect();
-
   const [shakeTrigger, setShakeTrigger] = useState<boolean>(false);
 
   const isError = serverErrorMsg !== '' || logicErrorMsg !== '';
