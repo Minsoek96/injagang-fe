@@ -22,7 +22,7 @@ export default function VideoResultHeader({
     <VideoController>
       <MainButton
         label="<="
-        onAction={onCounterDecrease}
+        onClick={onCounterDecrease}
         disabled={counter === 0}
       />
       <span>
@@ -31,7 +31,7 @@ export default function VideoResultHeader({
       </span>
       <MainButton
         label="=>"
-        onAction={onCounterIncrease}
+        onClick={onCounterIncrease}
         disabled={lastVideo}
       />
     </VideoController>

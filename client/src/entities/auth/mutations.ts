@@ -4,8 +4,6 @@ import { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import Cookies from 'js-cookie';
-
 import { useToast } from '@/src/shared/hooks';
 
 import {
@@ -17,7 +15,7 @@ import {
 } from '@/src/entities/auth/type';
 import { useAuthStore } from '@/src/entities/auth';
 import {
-  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE, TOKEN_KEYS,
+  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE,
 } from '@/src/shared/const';
 import { getCookies, removeCookies, setCookies } from '@/src/shared/utils';
 
@@ -85,12 +83,6 @@ const useFetchUserInfo = () => {
   const { showToast } = useToast();
   const { setUserInfo } = useAuthStore();
 
-  const removeToken = () => {
-    Cookies.remove(TOKEN_KEYS.ACCESS_TOKEN);
-    Cookies.remove(TOKEN_KEYS.REFRESH_TOKEN);
-    Cookies.remove('userId');
-  };
-
   return useMutation({
     mutationFn: () => authInfo(),
 
@@ -102,7 +94,7 @@ const useFetchUserInfo = () => {
 
     onError: () => {
       showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.GET_PROFILE);
-      removeToken();
+      removeCookies();
     },
   });
 };

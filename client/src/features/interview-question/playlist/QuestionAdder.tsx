@@ -35,12 +35,12 @@ function QuestionAdder({
         <MainButton
           label="확인"
           sx={{ width: '6.3rem', font: '1rem' }}
-          onAction={handleAddText}
+          onClick={handleAddText}
         />
         <MainButton
           label="확정"
           sx={{ width: '6.3rem', font: '1rem' }}
-          onAction={handleCancelQuestion}
+          onClick={handleCancelQuestion}
         />
       </ButtonContainer>
     </AddTextInputStyle>

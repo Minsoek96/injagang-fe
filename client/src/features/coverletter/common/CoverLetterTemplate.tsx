@@ -97,7 +97,7 @@ export default function CoverLetterTemplate({
             type="button"
             key={item.id}
             label={item.label}
-            onAction={item.onAction}
+            onClick={item.onClick}
             sx={item.sx}
           />
         ))}

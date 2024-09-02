@@ -30,7 +30,7 @@ function PassWordSetting() {
       <MainButton
         label="변경"
         sx={{ width: '100%', height: '4rem' }}
-        onAction={() => dispatchPasswordChange(passWordInfo)}
+        onClick={() => dispatchPasswordChange(passWordInfo)}
       />
     </S.MainContainer>
   );

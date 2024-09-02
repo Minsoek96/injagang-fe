@@ -102,12 +102,12 @@ function FeedBackItems({
           <ControlRightButtons>
             <MainButton
               label={isReadOnly ? '편집' : '수정완료'}
-              onAction={isReadOnly ? userEditConfirm : handleUpdate}
+              onClick={isReadOnly ? userEditConfirm : handleUpdate}
               sx={{ width: '15rem', font: '1.5rem' }}
             />
             <MainButton
               label="삭제"
-              onAction={userDeleteConfirm}
+              onClick={userDeleteConfirm}
               sx={{ width: '15rem', font: '1.5rem' }}
             />
           </ControlRightButtons>

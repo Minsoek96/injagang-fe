@@ -26,7 +26,7 @@ function FeedBackFooter({
           <MainButton
             isActive={list === feedBackIndex}
             sx={{ width: '4rem', fontSize: '1.6rem' }}
-            onAction={() => handleFeedBackIndex(list)}
+            onClick={() => handleFeedBackIndex(list)}
             label={`${i + 1}`}
             key={list}
           />

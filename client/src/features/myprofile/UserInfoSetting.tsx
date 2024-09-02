@@ -30,7 +30,7 @@ function UserInfoSetting() {
       />
       <MainButton
         label="변경"
-        onAction={() => dispatchNickNameChange(nickName)}
+        onClick={() => dispatchNickNameChange(nickName)}
         sx={{ width: '100%', height: '4rem' }}
       />
     </S.MainContainer>

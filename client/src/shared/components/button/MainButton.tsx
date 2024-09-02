@@ -5,7 +5,7 @@ import { V } from '@/src/shared/styles';
 import { BaseProps } from '@/src/shared/components/button/type';
 
 export default function MainButton({
-  onAction,
+  onClick,
   label,
   sx = {},
   isActive = false,
@@ -15,7 +15,7 @@ export default function MainButton({
 }: BaseProps) {
   return (
     <CustomBtn
-      onClick={onAction}
+      onClick={onClick}
       style={sx}
       $isActive={isActive}
       disabled={disabled}

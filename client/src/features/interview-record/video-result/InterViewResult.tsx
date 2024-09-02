@@ -57,7 +57,7 @@ export default function InterViewResult({
           timer={recordInfoList[counter]?.timer || '00:00'}
         />
         <MainButton
-          onAction={downloadVideo}
+          onClick={downloadVideo}
           label={(
             <p>
               <MdOutlineFileDownload />
@@ -68,7 +68,7 @@ export default function InterViewResult({
         />
         <MainButton
           label="면접장으로"
-          onAction={() => setInterviewMode('record')}
+          onClick={() => setInterviewMode('record')}
           sx={{ marginTop: '1rem', fontSize: '1.8rem' }}
         />
       </AccessoriesWrapper>

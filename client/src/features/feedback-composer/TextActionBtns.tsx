@@ -23,7 +23,7 @@ export default function TextActionBtns({
         <MainButton
           label={info.text}
           key={info.id}
-          onAction={info.onClick}
+          onClick={info.onClick}
           sx={{ width: '150px', font: '15px' }}
         />
       ))}

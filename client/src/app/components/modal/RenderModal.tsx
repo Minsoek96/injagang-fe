@@ -37,12 +37,12 @@ export default function RenderModal() {
             <div className="modal_Controller">
               <MainButton
                 label="예"
-                onAction={actionModal}
+                onClick={actionModal}
                 sx={{ width: '150px', fontSize: '15px' }}
               />
               <MainButton
                 label="아니요"
-                onAction={closeModal}
+                onClick={closeModal}
                 sx={{ width: '150px', fontSize: '15px' }}
               />
             </div>
@@ -50,7 +50,7 @@ export default function RenderModal() {
             <div className="modal_center_btn">
               <MainButton
                 label="확인"
-                onAction={closeModal}
+                onClick={closeModal}
                 sx={{ width: '150px', fontSize: '15px' }}
               />
             </div>

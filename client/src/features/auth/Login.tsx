@@ -55,7 +55,7 @@ function Login() {
       />
       {isError && <ERROR>{logicErrorMsg || serverErrorMsg}</ERROR>}
       <MainButton type="submit" label="로그인" sx={{ marginBottom: '.5rem' }} />
-      <MainButton onAction={() => router.replace('/join')} label="회원가입" />
+      <MainButton onClick={() => router.replace('/join')} label="회원가입" />
     </Form>
   );
 }

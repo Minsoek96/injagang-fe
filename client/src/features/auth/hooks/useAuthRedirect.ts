@@ -14,7 +14,7 @@ const useAuthRedirect = () => {
     if (accessToken) {
       router.replace(history ?? '/');
     }
-  }, [accessToken]);
+  }, [accessToken, history, router]);
 };
 
 export default useAuthRedirect;

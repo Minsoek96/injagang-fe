@@ -70,7 +70,7 @@ function List({ dehydratedState }: ListProps) {
                 글쓰기
               </span>
             )}
-            onAction={() => router.push('/qna/question')}
+            onClick={() => router.push('/qna/question')}
             sx={{
               fontSize: '1.5rem',
               padding: '1rem 2rem',

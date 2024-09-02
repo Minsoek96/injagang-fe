@@ -1,8 +1,5 @@
-import Cookies from 'js-cookie';
-
-import { fetcher, METHOD } from '@/src/shared/utils';
+import { fetcher, getCookies, METHOD } from '@/src/shared/utils';
 import { AUTH_APIS } from '@/src/shared/config/apis';
-import { TOKEN_KEYS } from '@/src/shared/const';
 import { tokenReissue } from '@/src/shared/apis/tokenReissue';
 
 jest.mock('@/src/shared/utils', () => ({
@@ -10,20 +7,20 @@ jest.mock('@/src/shared/utils', () => ({
   METHOD: {
     POST: 'POST',
   },
-}));
-
-jest.mock('js-cookie', () => ({
-  get: jest.fn(),
+  getCookies: jest.fn(),
 }));
 
 describe('tokenReissue 함수', () => {
-  beforeEach(() => {
-    (Cookies.get as jest.Mock).mockImplementation((key: string) => {
-      if (key === TOKEN_KEYS.ACCESS_TOKEN) return 'mockAccessToken';
-      if (key === TOKEN_KEYS.REFRESH_TOKEN) return 'mockRefreshToken';
-      return null;
-    });
+  const accessToken = 'mockAccessToken';
+  const refreshToken = 'mockRefreshToken';
+  const userId = 'mockUserId';
 
+  beforeEach(() => {
+    (getCookies as jest.Mock).mockReturnValue({
+      accessToken,
+      refreshToken,
+      userId,
+    });
     (fetcher as jest.Mock).mockResolvedValue({ data: 'mockData' });
   });
 

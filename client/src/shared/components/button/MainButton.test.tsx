@@ -16,7 +16,7 @@ describe('MainButton', () => {
       <TestProvider>
         <MainButton
           label={label}
-          onAction={mockAction}
+          onClick={mockAction}
           isActive={isActive}
           sx={sx}
         />

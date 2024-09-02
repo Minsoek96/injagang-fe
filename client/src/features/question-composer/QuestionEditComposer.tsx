@@ -67,7 +67,7 @@ function QuestionEditComposer({ boardId }: Props) {
         />
         <MainButton
           label="수정완료"
-          onAction={handleSubmit}
+          onClick={handleSubmit}
           sx={{
             width: '100%',
             minHeight: '4rem',

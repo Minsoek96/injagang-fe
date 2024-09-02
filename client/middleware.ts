@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { TOKEN_KEYS } from '@/src/shared/const';
 
 export function middleware(req: NextRequest) {
