@@ -55,7 +55,7 @@ function Interview() {
     {
       render: <InterviewMenual />,
       subTitle: '면접영상촬영시작',
-      title: '약관동의',
+      title: '면접 대기',
       rule: null,
       id: 'Step_01',
     },
