@@ -50,13 +50,13 @@ function CoverLetterCreator() {
     {
       id: 'back-01',
       label: '뒤로가기',
-      onAction: () => navigateMoveLetterMainpage(),
+      onClick: () => navigateMoveLetterMainpage(),
       sx: { fontSize: '2em' },
     },
     {
       id: 'write-02',
       label: '작성완료',
-      onAction: () => handleDispatch(),
+      onClick: () => handleDispatch(),
       sx: { fontSize: '2em' },
     },
   ];

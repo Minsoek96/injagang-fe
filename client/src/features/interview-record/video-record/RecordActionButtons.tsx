@@ -18,12 +18,12 @@ export default function RecordActionButtons({
   return (
     <>
       {isRecordPaused ? (
-        <MainButton onAction={handleResumeRecord} label="영상재개" />
+        <MainButton onClick={handleResumeRecord} label="영상재개" />
       ) : (
-        <MainButton onAction={handlePauseRecord} label="촬영정지" />
+        <MainButton onClick={handlePauseRecord} label="촬영정지" />
       )}
-      <MainButton onAction={handleEndRecord} label="촬영완료" />
-      <MainButton onAction={changeModeScript} label="스크립트기록" />
+      <MainButton onClick={handleEndRecord} label="촬영완료" />
+      <MainButton onClick={changeModeScript} label="스크립트기록" />
     </>
   );
 }

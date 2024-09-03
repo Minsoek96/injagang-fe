@@ -85,7 +85,7 @@ function QuestionComposer() {
         />
         <MainButton
           label="작성완료"
-          onAction={handleSubmit}
+          onClick={handleSubmit}
           sx={{
             width: '100%',
             minHeight: '4rem',

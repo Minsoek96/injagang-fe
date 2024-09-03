@@ -1,22 +1,30 @@
 import Router from 'next/router';
 
-import Cookies from 'js-cookie';
-
 import { AxiosRequestConfig, isAxiosError } from 'axios';
 
 import { tokenReissue } from '@/src/shared/apis/tokenReissue';
-import { ERROR_MESSAGES, TOKEN_KEYS } from '@/src/shared/const';
+import { ERROR_MESSAGES } from '@/src/shared/const';
+
+import { removeCookies, setCookies } from '@/src/shared/utils';
 import { reRequest } from './reRequest';
 
 const errorManager = async (
   message: string,
   originRequest: AxiosRequestConfig,
 ) => {
-  message === ERROR_MESSAGES.JWT_EXPIRED && jwtExpired(originRequest);
+  switch (message) {
+  case ERROR_MESSAGES.JWT_EXPIRED:
+    jwtExpired(originRequest);
+    break;
+  default:
+    unauthorized();
+    break;
+  }
 };
 
 /** jwt 만료시 처리 함수 */
 const unauthorized = () => {
+  removeCookies();
   Router.replace('/login');
 };
 
@@ -26,7 +34,7 @@ const jwtExpired = async (originRequest: AxiosRequestConfig) => {
     const response = await tokenReissue();
     if (response) {
       const { access } = response.data;
-      Cookies.set(TOKEN_KEYS.ACCESS_TOKEN, access);
+      setCookies({ accessToken: access });
       await reRequest(originRequest);
     }
   } catch (error) {
@@ -37,6 +45,4 @@ const jwtExpired = async (originRequest: AxiosRequestConfig) => {
   }
 };
 
-export {
-  errorManager,
-};
+export { errorManager };

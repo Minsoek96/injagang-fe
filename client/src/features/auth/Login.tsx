@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 import { shakeAnimation } from '@/src/shared/styles';
 
 import { MainButton, InputField } from '@/src/shared/components';
+
 import { useLoginLogic } from './hooks';
 
 function Login() {
@@ -20,6 +21,7 @@ function Login() {
     passwordRef,
     serverErrorMsg,
   } = useLoginLogic();
+
   const [shakeTrigger, setShakeTrigger] = useState<boolean>(false);
 
   const isError = serverErrorMsg !== '' || logicErrorMsg !== '';
@@ -53,7 +55,7 @@ function Login() {
       />
       {isError && <ERROR>{logicErrorMsg || serverErrorMsg}</ERROR>}
       <MainButton type="submit" label="로그인" sx={{ marginBottom: '.5rem' }} />
-      <MainButton onAction={() => router.replace('/join')} label="회원가입" />
+      <MainButton onClick={() => router.replace('/join')} label="회원가입" />
     </Form>
   );
 }

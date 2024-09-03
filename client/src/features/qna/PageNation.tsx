@@ -19,19 +19,19 @@ function PageNation() {
 
   return (
     <Container>
-      <MainButton label="<" onAction={handlePrevClick} />
+      <MainButton label="<" onClick={handlePrevClick} />
       <PageButtonContainer>
         {visiblePageNumbers.map((pageNum) => (
           <MainButton
             key={pageNum}
             label={`${pageNum}`}
             isActive={pageNum === curPageNum}
-            onAction={() => handlePageClick(pageNum)}
+            onClick={() => handlePageClick(pageNum)}
             sx={{ marginInline: '.2rem' }}
           />
         ))}
       </PageButtonContainer>
-      <MainButton label=">" onAction={handleNextClick} />
+      <MainButton label=">" onClick={handleNextClick} />
     </Container>
   );
 }

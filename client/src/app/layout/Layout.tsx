@@ -4,10 +4,8 @@ import { usePathname } from 'next/navigation';
 
 import { Header } from '@/src/widgets';
 
-import AuthProvider from '@/src/app/providers/AuthProvider';
 import { RenderToast, RenderModal, HeadMeta } from '../components';
-
-import { ReactQueryProvider, StyledProvider } from '../providers';
+import { ReactQueryProvider, StyledProvider, AuthGard } from '../providers';
 
 interface LayoutProps {
   children: ReactNode;
@@ -25,12 +23,12 @@ function Layout({ children }: LayoutProps) {
     <StyledProvider>
       <HeadMeta />
       <ReactQueryProvider>
-        <AuthProvider>
+        <AuthGard>
           <LayoutContainer>
             {!isBlockPath && <Header />}
             <MainContent>{children}</MainContent>
           </LayoutContainer>
-        </AuthProvider>
+        </AuthGard>
         <RenderToast />
         <RenderModal />
       </ReactQueryProvider>
@@ -43,7 +41,6 @@ export default Layout;
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-
 `;
 
 const MainContent = styled.main`

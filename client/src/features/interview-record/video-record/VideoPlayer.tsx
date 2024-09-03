@@ -92,9 +92,9 @@ export default function VideoPlayer({
       <PlayerController>
         {recordStatus === 'pending' ? (
           <>
-            <MainButton onAction={startInterviewRecord} label="면접녹화시작" />
+            <MainButton onClick={startInterviewRecord} label="면접녹화시작" />
             <MainButton
-              onAction={() => setInterviewMode('result')}
+              onClick={() => setInterviewMode('result')}
               label="결과보기"
               disabled={!storeChunks.length}
             />

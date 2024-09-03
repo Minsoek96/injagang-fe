@@ -2,12 +2,12 @@ import { CSSProperties } from 'styled-components';
 
 type TypeExists = {
   type: 'button' | 'submit' | 'reset';
-  onAction?: () => void;
+  onClick?: () => void;
 };
 
 type TypeDoentExists = {
   type?: 'button' | 'submit' | 'reset';
-  onAction: () => void;
+  onClick: () => void;
 };
 
 type BaseProps = {

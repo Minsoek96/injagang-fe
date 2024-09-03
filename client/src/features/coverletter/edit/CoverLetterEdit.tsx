@@ -48,19 +48,19 @@ function CoverLetterEdit() {
     {
       id: 'back-01',
       label: '뒤로가기',
-      onAction: () => navigateMoveLetterMainpage(),
+      onClick: () => navigateMoveLetterMainpage(),
       sx: { fontSize: '2em' },
     },
     {
       id: 'delete-02',
       label: '삭제하기',
-      onAction: () => deleteCoverLetter(Number(id)),
+      onClick: () => deleteCoverLetter(Number(id)),
       sx: { fontSize: '2em' },
     },
     {
       id: 'change-03',
       label: '수정완료',
-      onAction: () => changeCoverLetter(Number(id), coverLetterTitle, qnaList),
+      onClick: () => changeCoverLetter(Number(id), coverLetterTitle, qnaList),
       sx: { fontSize: '2em' },
     },
   ];

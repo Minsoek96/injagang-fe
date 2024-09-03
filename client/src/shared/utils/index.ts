@@ -6,3 +6,4 @@ export { default as keys } from './keys';
 export { default as runValidationChecks } from './runValidationChecks';
 export { default as SessionStorageManager } from './sessionStorageManager';
 export { default as LocalStorageManager } from './localStorageManager';
+export * from './cookiesManager';

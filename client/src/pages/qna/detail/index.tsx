@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { DehydratedState, HydrationBoundary } from '@tanstack/react-query';
 
-import { useFeedStore } from '@/src/entities/qnaboard';
+import { useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
 
 import { Spinner } from '@/src/shared/components';
 import { styleMixin } from '@/src/shared/styles';
@@ -41,10 +41,12 @@ type AnswerProps = {
 
 function Answer({ dehydratedState }: AnswerProps) {
   const { initTargetFeed } = useFeedStore();
+  const { initCorrection } = useCorrectionStore();
 
   useEffect(
     () => () => {
       initTargetFeed();
+      initCorrection();
     },
     [],
   );

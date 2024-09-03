@@ -24,14 +24,14 @@ export default function InterviewSliderButtons({
       {START_SCREEN && (
         <MainButton
           label={<BiArrowBack />}
-          onAction={moveToPrevPage}
+          onClick={moveToPrevPage}
           sx={{ width: '5rem', font: '3rem' }}
         />
       )}
       <MainButton
         className="Arrow_btn"
         label={curPageLabel}
-        onAction={moveToNextPage}
+        onClick={moveToNextPage}
         sx={{
           width: '100%',
           font: '2rem',

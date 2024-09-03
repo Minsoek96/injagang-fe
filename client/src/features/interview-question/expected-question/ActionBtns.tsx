@@ -43,12 +43,12 @@ function ActionBtns({
     <ActionContainer>
       <MainButton
         label={isAllChecked ? '전체해제' : '전체선택'}
-        onAction={onToggleAll}
+        onClick={onToggleAll}
         sx={{ width: '100%', height: '4rem', marginRight: '.5rem' }}
       />
       <MainButton
         label={btnConfig[isAdmin].text}
-        onAction={btnConfig[isAdmin].onClick}
+        onClick={btnConfig[isAdmin].onClick}
         sx={{ width: '100%', height: '4rem' }}
       />
     </ActionContainer>

@@ -1,15 +1,15 @@
-import Cookies from 'js-cookie';
-
-import { TOKEN_KEYS } from '@/src/shared/const';
 import { AUTH_APIS } from '@/src/shared/config/apis';
-import { fetcher, METHOD } from '@/src/shared/utils';
+import { fetcher, getCookies, METHOD } from '@/src/shared/utils';
 
-const tokenReissue = async () =>
-  fetcher(METHOD.POST, AUTH_APIS.TOKKEN_REISSUE_API, {
-    access: Cookies.get(TOKEN_KEYS.ACCESS_TOKEN),
-    refresh: Cookies.get(TOKEN_KEYS.REFRESH_TOKEN),
+/** 토큰 재발급 API */
+const tokenReissue = async () => {
+  const { accessToken, refreshToken } = getCookies();
+
+  return fetcher(METHOD.POST, AUTH_APIS.TOKKEN_REISSUE_API, {
+    access: accessToken,
+    refresh: refreshToken,
   });
-
+};
 export {
   tokenReissue,
 };

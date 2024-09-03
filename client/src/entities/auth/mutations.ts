@@ -4,13 +4,7 @@ import { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import Cookies from 'js-cookie';
-
 import { useToast } from '@/src/shared/hooks';
-
-import {
-  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE, TOKEN_KEYS,
-} from '@/src/shared/const';
 
 import {
   IChangePw,
@@ -20,6 +14,10 @@ import {
   IUserInfo,
 } from '@/src/entities/auth/type';
 import { useAuthStore } from '@/src/entities/auth';
+import {
+  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE,
+} from '@/src/shared/const';
+import { getCookies, removeCookies, setCookies } from '@/src/shared/utils';
 
 import {
   authInfo,
@@ -40,9 +38,7 @@ const useFetchSignin = () => {
 
     onSuccess: (data: IResponseSignin) => {
       const { access, refresh, userId } = data;
-      Cookies.set(TOKEN_KEYS.ACCESS_TOKEN, access, { expires: 1 });
-      Cookies.set(TOKEN_KEYS.REFRESH_TOKEN, refresh, { expires: 1 });
-      Cookies.set('userId', userId, { expires: 1 });
+      setCookies({ accessToken: access, refreshToken: refresh, userId });
       setUserId(userId);
       router.replace('/');
     },
@@ -57,15 +53,11 @@ const useFetchCheckOut = () => {
   const { showToast } = useToast();
   const { nickName, initCurrentUser } = useAuthStore();
 
-  const currentToken = {
-    access: Cookies.get(TOKEN_KEYS.ACCESS_TOKEN),
-    refresh: Cookies.get(TOKEN_KEYS.REFRESH_TOKEN),
-  };
+  const { accessToken, refreshToken } = getCookies();
 
-  const removeToken = () => {
-    Cookies.remove(TOKEN_KEYS.ACCESS_TOKEN);
-    Cookies.remove(TOKEN_KEYS.REFRESH_TOKEN);
-    Cookies.remove('userId');
+  const currentToken = {
+    access: accessToken,
+    refresh: refreshToken,
   };
 
   return useMutation({
@@ -76,7 +68,7 @@ const useFetchCheckOut = () => {
         TOAST_MODE.SUCCESS,
         SUCCESS_MESSAGES.CHECK_OUT(nickName ?? '게스트'),
       );
-      removeToken();
+      removeCookies();
       initCurrentUser();
     },
 
@@ -86,9 +78,11 @@ const useFetchCheckOut = () => {
   });
 };
 
+// TODO : 임의로 토큰이 삭제된 경우 오류발생 대비(현재 조치)
 const useFetchUserInfo = () => {
   const { showToast } = useToast();
   const { setUserInfo } = useAuthStore();
+
   return useMutation({
     mutationFn: () => authInfo(),
 
@@ -100,6 +94,7 @@ const useFetchUserInfo = () => {
 
     onError: () => {
       showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.GET_PROFILE);
+      removeCookies();
     },
   });
 };
