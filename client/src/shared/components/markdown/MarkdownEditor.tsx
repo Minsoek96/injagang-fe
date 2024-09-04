@@ -29,7 +29,7 @@ function MarkdownEditor({
   initText = '',
 }: Props) {
   const [value, setValue] = useState(initText);
-  const debouceValue = useDebounce(value);
+  const debouceValue = useDebounce(value, 200);
 
   useEffect(() => {
     onChange(value);
