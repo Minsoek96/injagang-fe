@@ -19,7 +19,7 @@ function PageNation() {
 
   return (
     <Container>
-      <MainButton label="<" onClick={handlePrevClick} />
+      <MainButton label="<" onClick={handlePrevClick} disabled={curPageNum === 1} />
       <PageButtonContainer>
         {visiblePageNumbers.map((pageNum) => (
           <MainButton
@@ -31,7 +31,7 @@ function PageNation() {
           />
         ))}
       </PageButtonContainer>
-      <MainButton label=">" onClick={handleNextClick} />
+      <MainButton label=">" onClick={handleNextClick} disabled={curPageNum === visiblePageNumbers.length} />
     </Container>
   );
 }
