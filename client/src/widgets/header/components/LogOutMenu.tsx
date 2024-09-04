@@ -23,6 +23,7 @@ export default function LogoutMenu() {
       },
     });
   };
+
   return (
     <DropBoxStyle.ItemWrapper onClick={handleClick}>
       <BiLogOut />
