@@ -54,7 +54,9 @@ const BoardConatainer = styled.table`
   td {
     padding: 1.5rem;
     text-align: left;
-    word-wrap: break-word;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   th:first-child,
   td:first-child {

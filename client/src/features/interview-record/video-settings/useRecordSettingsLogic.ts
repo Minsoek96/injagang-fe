@@ -51,7 +51,7 @@ export default function useRecordSettingsLogic() {
       FetchSettingDevices();
     };
     navigator.mediaDevices.addEventListener('devicechange', handleFetchDevices);
-    return navigator.mediaDevices.removeEventListener(
+    return () => navigator.mediaDevices.removeEventListener(
       'devicechange',
       handleFetchDevices,
     );

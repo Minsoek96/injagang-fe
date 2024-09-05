@@ -52,4 +52,5 @@ const SelectorContainer = styled.div`
   ${styleMixin.Flex()}
   gap: 1rem;
   margin: 2rem;
+
 `;

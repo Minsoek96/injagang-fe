@@ -68,12 +68,16 @@ const useFetchCheckOut = () => {
         TOAST_MODE.SUCCESS,
         SUCCESS_MESSAGES.CHECK_OUT(nickName ?? '게스트'),
       );
-      removeCookies();
-      initCurrentUser();
     },
 
+    // TODO : 고민해보기 로그아웃 실패가 과연 좋은 메시지일까???..
     onError: () => {
       showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.CHECK_OUT);
+    },
+
+    onSettled: () => {
+      removeCookies();
+      initCurrentUser();
     },
   });
 };

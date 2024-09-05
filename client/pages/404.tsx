@@ -25,18 +25,18 @@ const Custom404: NextPage = function Custom404() {
 export default Custom404;
 
 const Container = styled.div`
-  ${styleMixin.Column()}
-  justify-content: center;
+  ${styleMixin.Column('center', 'center')}
+  width: 100%;
   height: 100vh;
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 `;
 
 const StyledLink = styled(Link)`
-  font-size: 1.2rem;
+  font-size: 2rem;
   margin-top: 12px;
   color: red;
 `;

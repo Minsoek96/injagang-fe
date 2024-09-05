@@ -45,6 +45,7 @@ const QuestionItemContainer = styled.div`
 const TitleWrapper = styled.div`
   width: 100%;
   font-weight: bold;
+
 `;
 
 const NickNameWrapper = styled.div`
