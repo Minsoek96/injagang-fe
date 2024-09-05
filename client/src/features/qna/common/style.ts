@@ -14,6 +14,9 @@ const S = {
   mainTitle: styled.h2`
     color: ${(props) => props.theme.colors.signatureColor};
     font-size: 3rem;
+    word-break: normal !important;
+    white-space: normal;
+    line-height: 1.3;
   `,
 
   detailItmes: styled.div`
