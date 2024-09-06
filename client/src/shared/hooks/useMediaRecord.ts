@@ -58,7 +58,6 @@ const useMediaRecord = ({
   const handleRecord = useCallback(async () => {
     try {
       const stream = (await getUserAccess()) as MediaStream;
-
       const mediaRecorder = new MediaRecorder(stream, {
         mimeType: 'video/webm',
       });
@@ -106,14 +105,10 @@ const useMediaRecord = ({
   useEffect(
     () => () => {
       const mediaRecorder = mediaRecorderRef.current;
-      const stream = videoRef.current?.srcObject as MediaStream;
 
       if (mediaRecorder) {
         mediaRecorder.stop();
-      }
-
-      if (stream) {
-        stopMediaTracks(stream);
+        stopMediaTracks(mediaRecorder.stream);
       }
     },
     [stopMediaTracks],
