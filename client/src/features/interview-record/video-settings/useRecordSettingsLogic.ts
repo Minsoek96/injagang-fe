@@ -61,7 +61,7 @@ export default function useRecordSettingsLogic() {
     if (!!audioDevice && !!videoDevice) {
       handleRecord();
     }
-  }, [audioDevice, videoDevice, handleRecord]);
+  }, [audioDevice, videoDevice]);
 
   return {
     videoRef,

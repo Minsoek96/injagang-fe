@@ -9,13 +9,13 @@ import { getCookies } from '@/src/shared/utils/';
 const useAuth = () => {
   const { mutate: getProfile } = useFetchUserInfo();
   const { userId, role } = useAuthStore();
+  const { accessToken } = getCookies();
 
   useEffect(() => {
-    const { accessToken } = getCookies();
     if (accessToken) {
       getProfile();
     }
-  }, [userId, getProfile]);
+  }, [userId, getProfile, accessToken]);
 
   const isVerify = !!role;
 

@@ -20,6 +20,7 @@ const useMediaRecord = ({
   >('pending');
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
 
+  /** 사용자 디바이스 정보를 조회. */
   const getDevices = useCallback(async () => {
     const devices = await navigator.mediaDevices.enumerateDevices();
     const audioDevices = devices.filter(
@@ -41,6 +42,7 @@ const useMediaRecord = ({
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
+      // 상태로 관리할 경우 렌더링
       return stream;
     } catch (error) {
       onError();
@@ -48,6 +50,7 @@ const useMediaRecord = ({
     }
   }, [audioId, videoId, onError]);
 
+  /** 녹화 데이터를 기록 */
   const handleDataAvailable = useCallback((e: BlobEvent) => {
     if (e.data.size > 0) {
       setRecordedChunks((prev) => [...prev, e.data]);
@@ -58,7 +61,6 @@ const useMediaRecord = ({
   const handleRecord = useCallback(async () => {
     try {
       const stream = (await getUserAccess()) as MediaStream;
-
       const mediaRecorder = new MediaRecorder(stream, {
         mimeType: 'video/webm',
       });
@@ -72,7 +74,9 @@ const useMediaRecord = ({
     }
   }, [getUserAccess, handleDataAvailable, onError]);
 
+  /** 녹화 장비를 제거한다. */
   const stopMediaTracks = useCallback((stream: MediaStream) => {
+    if (!stream) return;
     stream.getAudioTracks().forEach((track) => track.stop());
     stream.getVideoTracks().forEach((track) => track.stop());
   }, []);
@@ -81,8 +85,7 @@ const useMediaRecord = ({
   const handleRecordRemove = useCallback(() => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
-      const stream = videoRef.current?.srcObject as MediaStream;
-      stopMediaTracks(stream);
+      stopMediaTracks(mediaRecorderRef.current.stream);
       setRecordStatus('pending');
       mediaRecorderRef.current = null;
     }
@@ -106,14 +109,9 @@ const useMediaRecord = ({
   useEffect(
     () => () => {
       const mediaRecorder = mediaRecorderRef.current;
-      const stream = videoRef.current?.srcObject as MediaStream;
-
       if (mediaRecorder) {
         mediaRecorder.stop();
-      }
-
-      if (stream) {
-        stopMediaTracks(stream);
+        stopMediaTracks(mediaRecorder.stream);
       }
     },
     [stopMediaTracks],
