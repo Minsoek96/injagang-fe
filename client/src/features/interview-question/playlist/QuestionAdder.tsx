@@ -33,12 +33,12 @@ function QuestionAdder({
       />
       <ButtonContainer>
         <MainButton
-          label="확인"
+          label="추가"
           sx={{ width: '6.3rem', font: '1rem' }}
           onClick={handleAddText}
         />
         <MainButton
-          label="확정"
+          label="비우기"
           sx={{ width: '6.3rem', font: '1rem' }}
           onClick={handleConfirmQuestion}
         />

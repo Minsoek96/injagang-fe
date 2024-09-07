@@ -35,7 +35,7 @@ const useSelectorLogic = ({
       const questionList = filterItem.map((item) => item.questions);
       setUserPlayList(questionList);
     },
-    [],
+    [setUserPlayList],
   );
 
   return {

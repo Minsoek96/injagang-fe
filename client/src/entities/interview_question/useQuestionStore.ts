@@ -10,6 +10,7 @@ type Action = {
   setConfirmQuestions: (list: string[]) => void;
   setSelectedType: (type: string) => void;
   setUserPlayList: (list: string[]) => void;
+  removePlayItem: (targetItem: string) => void;
   initUserPlayList: () => void;
   initConfirmQuestions: () => void;
 };
@@ -32,10 +33,25 @@ const useQuestionStore = create<State & Action>((set) => ({
     }));
   },
   setUserPlayList: (list: string[]) =>
-    set({
-      userPlayList: list,
+    set((state) => {
+      const { userPlayList } = state;
+
+      // 현재 userPlayList에 없는 새로운 항목만 필터링
+      const newItems = list.filter((item) => !userPlayList.includes(item));
+      return {
+        userPlayList: [...userPlayList, ...newItems],
+      };
     }),
+
   setSelectedType: (type: string) => set({ selectedType: type }),
+
+  removePlayItem: (targetItem: string) => set((state) => {
+    const { userPlayList } = state;
+    const filterItem = userPlayList.filter((item) => item !== targetItem);
+    return {
+      userPlayList: filterItem,
+    };
+  }),
 
   initUserPlayList: () => set({ userPlayList: [] }),
   initConfirmQuestions: () => set({ confirmQuestions: [] }),
