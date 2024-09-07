@@ -104,7 +104,7 @@ describe('useFetchRandomQuestion', () => {
       const extractionRandomQuestions = sampleResponseRandomQ.map(
         (item) => item.questions,
       );
-      expect(store.current.confirmQuestions).toEqual(extractionRandomQuestions);
+      expect(store.current.userPlayList).toEqual(extractionRandomQuestions);
     });
 
     it('랜덤 질문을 가져오면 성공 토스트를 등록한다.', async () => {

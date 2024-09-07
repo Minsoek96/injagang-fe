@@ -1,18 +1,15 @@
 import { create } from 'zustand';
 
 type State = {
-  confirmQuestions: string[];
   selectedType: string;
   userPlayList: string[];
 };
 
 type Action = {
-  setConfirmQuestions: (list: string[]) => void;
   setSelectedType: (type: string) => void;
   setUserPlayList: (list: string[]) => void;
   removePlayItem: (targetItem: string) => void;
   initUserPlayList: () => void;
-  initConfirmQuestions: () => void;
 };
 
 /** 면접 녹화에 필요한 질문 설정 관련 정보
@@ -27,11 +24,6 @@ const useQuestionStore = create<State & Action>((set) => ({
   confirmQuestions: [],
   selectedType: '',
 
-  setConfirmQuestions: (lists: string[]) => {
-    set((state) => ({
-      confirmQuestions: [...state.confirmQuestions, ...lists],
-    }));
-  },
   setUserPlayList: (list: string[]) =>
     set((state) => {
       const { userPlayList } = state;
@@ -54,7 +46,6 @@ const useQuestionStore = create<State & Action>((set) => ({
   }),
 
   initUserPlayList: () => set({ userPlayList: [] }),
-  initConfirmQuestions: () => set({ confirmQuestions: [] }),
 }));
 
 export default useQuestionStore;

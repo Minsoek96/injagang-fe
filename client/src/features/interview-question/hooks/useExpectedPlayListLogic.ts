@@ -60,7 +60,7 @@ const useExpetedPlayListLogic = () => {
     };
     dispatchAddQuestions(addList);
     initUserPlayList();
-  }, [setModal, userPlayList, selectedType]);
+  }, [userPlayList, selectedType]);
 
   const roleAction = role === 'ADMIN' ? handleSubmit : initUserPlayList;
 

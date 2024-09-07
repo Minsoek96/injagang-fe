@@ -19,8 +19,8 @@ function InterviewRecord() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
   const { interviewMode } = useRecordInfoStore();
-  const { confirmQuestions } = useQuestionStore();
-  const { readingTheScript, speechData } = useWebSpeech(confirmQuestions, 3000);
+  const { userPlayList } = useQuestionStore();
+  const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
   const { initRecordInfoList } = useRecordInfoStore();
 
   useEffect(() => () => initRecordInfoList(), []);
