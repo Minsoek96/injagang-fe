@@ -22,6 +22,10 @@ const useCheckList = <T extends { id: number }>(
     setIsAllCheck((prev) => !prev);
   }, []);
 
+  const clearCheckList = useCallback(() => {
+    setCheckList([]);
+  }, []);
+
   const checkAllItems = useCallback(
     <V extends { id: number }>(targets: ItemWithID<V>[]) => {
       const allItems = targets.map((item) => item.id);
@@ -61,6 +65,7 @@ const useCheckList = <T extends { id: number }>(
   );
 
   return {
+    clearCheckList,
     handleCheckList,
     handleAllCheck,
     checkList,

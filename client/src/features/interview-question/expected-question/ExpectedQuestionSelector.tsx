@@ -7,7 +7,7 @@ import {
   useQuestionStore,
 } from '@/src/entities/interview_question';
 import { useDeleteInterViewQ } from '@/src/entities/interview_question/mutations';
-import { useCheckList } from '@/src/shared/hooks';
+import { useCheckList, useModal } from '@/src/shared/hooks';
 import { Container } from '@/src/shared/components';
 
 import { useSelectorLogic } from '../hooks';
@@ -17,12 +17,13 @@ import ExpectedQuestionList from './ExpectedQuestionList';
 import ActionBtns from './ActionBtns';
 
 function ExpectedQuestionSelector() {
+  const { setModal } = useModal();
   const { selectedType } = useQuestionStore();
   const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions(selectedType);
   const { mutate: deleteQuestions } = useDeleteInterViewQ();
 
   const {
-    checkList, handleAllCheck, handleCheckList, isAllCheck,
+    checkList, handleAllCheck, handleCheckList, isAllCheck, clearCheckList,
   } = useCheckList(interViewQuestionList);
 
   const { dispatchSelectedType, dispatchSelectedQuestions } = useSelectorLogic({
@@ -30,10 +31,20 @@ function ExpectedQuestionSelector() {
   });
 
   const removeQuestions = useCallback((targetIds: number[]) => {
+    if (!targetIds.length) {
+      setModal({
+        contents: {
+          title: 'Warring',
+          message: '선택된 질문이 없습니다.',
+        },
+      });
+      return;
+    }
     const formmatData = {
       ids: targetIds,
     };
     deleteQuestions(formmatData);
+    clearCheckList();
   }, []);
 
   return (

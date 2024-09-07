@@ -30,7 +30,7 @@ function UserQuestionPlayList() {
       </ItemContainer>
       <QuestionAdder
         handleAddQuestion={handleAddText}
-        handleCancelQuestion={roleAction}
+        handleConfirmQuestion={roleAction}
       />
     </Container.ArticleCard>
   );

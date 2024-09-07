@@ -7,11 +7,11 @@ import { styleMixin } from '@/src/shared/styles';
 
 interface AddTextInputProps {
   handleAddQuestion: (title: string) => void;
-  handleCancelQuestion: () => void;
+  handleConfirmQuestion: () => void;
 }
 function QuestionAdder({
   handleAddQuestion,
-  handleCancelQuestion,
+  handleConfirmQuestion,
 }: AddTextInputProps) {
   const [title, setTitle] = useState<string>('');
   const textRef = useRef<HTMLInputElement>(null);
@@ -40,7 +40,7 @@ function QuestionAdder({
         <MainButton
           label="확정"
           sx={{ width: '6.3rem', font: '1rem' }}
-          onClick={handleCancelQuestion}
+          onClick={handleConfirmQuestion}
         />
       </ButtonContainer>
     </AddTextInputStyle>

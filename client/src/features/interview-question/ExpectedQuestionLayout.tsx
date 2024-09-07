@@ -15,6 +15,11 @@ const explanationList = [
   '모든 설정이 끝난후 확정 버튼을 꼭 눌러주세요...',
 ];
 
+/** 인터뷰 질문 설정 레이아웃
+ * - ExplanationContent : 사용자 가이드를 표시합니다.
+ * - ExpectedQuestionSelecotr : 관리자가 제공하는 질문을 선택
+ * - UserQuestionPlayList : 유저가 선택한 질문 + 커스텀 질문
+*/
 function ExpectedQuestionLayout() {
   return (
     <InterViewListViewStyle>
