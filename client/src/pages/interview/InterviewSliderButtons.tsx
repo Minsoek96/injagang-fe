@@ -11,6 +11,7 @@ type Props = {
   rule: boolean;
 };
 
+// TODO : BACK버튼 제어 생각해보기
 export default function InterviewSliderButtons({
   moveToNextPage,
   moveToPrevPage,
@@ -26,6 +27,7 @@ export default function InterviewSliderButtons({
           label={<BiArrowBack />}
           onClick={moveToPrevPage}
           sx={{ width: '5rem', font: '3rem' }}
+          disabled={currentStep === 4}
         />
       )}
       <MainButton
