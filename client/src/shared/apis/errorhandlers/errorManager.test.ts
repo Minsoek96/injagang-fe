@@ -74,7 +74,6 @@ describe('errorManager', () => {
       await errorManager(ERROR_MESSAGES.JWT_EXPIRED, originRequest);
       expect(mockedTokenReissue).toHaveBeenCalled();
       expect(mockedCookies.remove).toHaveBeenCalledWith(TOKEN_KEYS.ACCESS_TOKEN);
-      expect(mockedCookies.remove).toHaveBeenCalledWith(TOKEN_KEYS.REFRESH_TOKEN);
       expect(mockedCookies.remove).toHaveBeenCalledWith('userId');
     });
   });
@@ -84,7 +83,6 @@ describe('errorManager', () => {
       errorManager('unknown error', originRequest);
 
       expect(mockedCookies.remove).toHaveBeenCalledWith(TOKEN_KEYS.ACCESS_TOKEN);
-      expect(mockedCookies.remove).toHaveBeenCalledWith(TOKEN_KEYS.REFRESH_TOKEN);
       expect(mockedCookies.remove).toHaveBeenCalledWith('userId');
     });
   });

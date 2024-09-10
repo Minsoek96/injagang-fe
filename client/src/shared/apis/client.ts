@@ -16,7 +16,7 @@ API.interceptors.request.use(
     const { accessToken } = getCookies();
     if (accessToken) {
       const newConfig = { ...config };
-      newConfig.headers.Authorization = accessToken;
+      newConfig.headers.Authorization = `Bearer ${accessToken}`;
       return newConfig;
     }
     return config;

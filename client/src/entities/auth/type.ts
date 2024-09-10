@@ -5,7 +5,6 @@ export interface ISignin {
 
 export interface ICheckOut {
   access: string | undefined;
-  refresh: string | undefined;
 }
 
 export type ChangeNick = {
@@ -29,7 +28,6 @@ export interface ISignup {
 export interface IResponseSignin {
   userId: string;
   access: string;
-  refresh: string;
 }
 
 export type RoleType = 'USER' | 'ADMIN';

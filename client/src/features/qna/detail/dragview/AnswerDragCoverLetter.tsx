@@ -41,5 +41,6 @@ function AnswerDragCoverLetter({ boardId }: AnswerProps) {
 export default AnswerDragCoverLetter;
 
 const Container = styled(S.container)`
+  width: 100%;
   overflow: hidden;
 `;

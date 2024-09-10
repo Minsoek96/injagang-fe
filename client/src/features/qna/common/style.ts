@@ -6,6 +6,8 @@ import styled from 'styled-components';
 const S = {
   container: styled.div`
     ${styleMixin.ScrollBar}
+    width: 100%;
+    height: 100%;
     color: ${(props) => props.theme.colors.boardText};
     word-break: break-all;
     overflow-x: hidden;

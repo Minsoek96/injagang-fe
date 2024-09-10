@@ -26,7 +26,7 @@ const getDetailBoard = async (
   const config: AxiosRequestConfig = authToken
     ? {
       headers: {
-        Authorization: `${authToken}`,
+        Authorization: `Bearer ${authToken}`,
       },
     }
     : {};
