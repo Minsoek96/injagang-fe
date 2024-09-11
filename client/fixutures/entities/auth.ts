@@ -18,7 +18,6 @@ const signinData: ISignin = {
 /** API 반환 - 로그인 정보 */
 const signinResponse: IResponseSignin = {
   access: 'access_token',
-  refresh: 'refresh_token',
   userId: 'user_id',
 };
 

@@ -11,7 +11,7 @@ import useExpetedPlayListLogic from '../hooks/useExpectedPlayListLogic';
 
 function UserQuestionPlayList() {
   const {
-    userQuestion, handleRemoveText, handleAddText, roleAction,
+    userPlayList, handleRemoveText, handleAddText, roleAction,
   } = useExpetedPlayListLogic();
   return (
     <Container.ArticleCard
@@ -19,18 +19,18 @@ function UserQuestionPlayList() {
     >
       <Header>Play List</Header>
       <ItemContainer>
-        {userQuestion?.map((question, idx) => (
+        {userPlayList?.map((question, idx) => (
           <UserQuestionPlayListItems
             key={keys(question, idx)}
             item={question}
-            index={idx}
             handleRemoveText={handleRemoveText}
           />
         ))}
       </ItemContainer>
       <QuestionAdder
+        playListLen={userPlayList.length}
         handleAddQuestion={handleAddText}
-        handleCancelQuestion={roleAction}
+        handleConfirmQuestion={roleAction}
       />
     </Container.ArticleCard>
   );

@@ -9,6 +9,8 @@ const useFetchQuestions = (type: QuestionType | string) =>
     queryKey: interview.list(type),
     queryFn: () => getInterViewQuestionList(type),
     enabled: Object.values(QuestionType).includes(type as QuestionType),
+    staleTime: 24 * 60 * 60 * 1000,
+
   });
 
 export { useFetchQuestions };

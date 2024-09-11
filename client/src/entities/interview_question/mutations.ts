@@ -23,7 +23,7 @@ import interview from './queryKeys';
 /** 랜덤 면접 질문리스트 요청 */
 const useFetchRandomQuestion = () => {
   const { showToast } = useToast();
-  const { setConfirmQuestions } = useQuestionStore();
+  const { setUserPlayList } = useQuestionStore();
 
   return useMutation({
     mutationFn: (random: IRandomQuestions[]) =>
@@ -31,7 +31,7 @@ const useFetchRandomQuestion = () => {
 
     onSuccess: (data: IResponseRandom[]) => {
       const filterQuestion = data.map((item) => item.questions);
-      setConfirmQuestions(filterQuestion);
+      setUserPlayList(filterQuestion);
 
       showToast(
         TOAST_MODE.SUCCESS,

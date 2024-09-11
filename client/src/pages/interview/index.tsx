@@ -43,7 +43,7 @@ const InterviewRecord = dynamic(
 );
 
 function Interview() {
-  const { initConfirmQuestions, confirmQuestions } = useQuestionStore();
+  const { initUserPlayList, userPlayList } = useQuestionStore();
   const { videoDevice, audioDevice, initDevices } = useRecordInfoStore();
   const {
     handleDecrease: moveToPrevPage,
@@ -68,11 +68,11 @@ function Interview() {
     },
     {
       render: <InterViewRandomSetting />,
-      subTitle: confirmQuestions.length
+      subTitle: userPlayList.length
         ? 'Next Step...'
         : '질문 설정은 필수...',
       title: '랜덤 질문 선택',
-      rule: !!confirmQuestions.length,
+      rule: !!userPlayList.length,
       id: 'Step_03',
     },
     {
@@ -93,7 +93,7 @@ function Interview() {
 
   useEffect(
     () => () => {
-      initConfirmQuestions();
+      initUserPlayList();
       initDevices();
     },
     [],

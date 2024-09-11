@@ -24,7 +24,6 @@ function ActionBtns({
   const isAdmin = role === 'ADMIN' ? 'ADMIN' : 'USER';
 
   const handleRemove = () => {
-    onToggleAll();
     onRemove(checkList);
   };
 

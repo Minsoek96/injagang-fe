@@ -37,8 +37,8 @@ const useFetchSignin = () => {
       login(loginData).then((res) => res.data),
 
     onSuccess: (data: IResponseSignin) => {
-      const { access, refresh, userId } = data;
-      setCookies({ accessToken: access, refreshToken: refresh, userId });
+      const { access, userId } = data;
+      setCookies({ accessToken: access, userId });
       setUserId(userId);
       router.replace('/');
     },
@@ -53,11 +53,10 @@ const useFetchCheckOut = () => {
   const { showToast } = useToast();
   const { nickName, initCurrentUser } = useAuthStore();
 
-  const { accessToken, refreshToken } = getCookies();
+  const { accessToken } = getCookies();
 
   const currentToken = {
     access: accessToken,
-    refresh: refreshToken,
   };
 
   return useMutation({

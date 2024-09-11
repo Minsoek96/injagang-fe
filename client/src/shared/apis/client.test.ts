@@ -41,7 +41,7 @@ describe('API Interceptors', () => {
       const requestHandler = requestInterceptor.mock.calls[0][0];
       const result = requestHandler(config);
 
-      expect(result.headers.Authorization).toBe(token);
+      expect(result.headers.Authorization).toBe(`Bearer ${token}`);
     });
 
     it('액세스 토큰이 쿠키가 없으면 Authorization 헤더를 추가하지 않는다.', () => {

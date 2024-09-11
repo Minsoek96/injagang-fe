@@ -12,9 +12,13 @@ const explanationList = [
   '(선택사항)커스텀 질문을 작성하여 추가',
   '실제 면접 처럼 랜덤 질문을 원하시면 넘어가셔도 됩니다.',
   '플레이리스트와 랜덤셋팅을 조합할 수 도 있습니다.',
-  '모든 설정이 끝난후 확정 버튼을 꼭 눌러주세요...',
 ];
 
+/** 인터뷰 질문 설정 레이아웃
+ * - ExplanationContent : 사용자 가이드를 표시합니다.
+ * - ExpectedQuestionSelecotr : 관리자가 제공하는 질문을 선택
+ * - UserQuestionPlayList : 유저가 선택한 질문 + 커스텀 질문
+*/
 function ExpectedQuestionLayout() {
   return (
     <InterViewListViewStyle>

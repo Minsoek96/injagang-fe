@@ -12,13 +12,11 @@ jest.mock('@/src/shared/utils', () => ({
 
 describe('tokenReissue 함수', () => {
   const accessToken = 'mockAccessToken';
-  const refreshToken = 'mockRefreshToken';
   const userId = 'mockUserId';
 
   beforeEach(() => {
     (getCookies as jest.Mock).mockReturnValue({
       accessToken,
-      refreshToken,
       userId,
     });
     (fetcher as jest.Mock).mockResolvedValue({ data: 'mockData' });
@@ -33,7 +31,6 @@ describe('tokenReissue 함수', () => {
 
     expect(fetcher).toHaveBeenCalledWith(METHOD.POST, AUTH_APIS.TOKKEN_REISSUE_API, {
       access: 'mockAccessToken',
-      refresh: 'mockRefreshToken',
     });
 
     expect(response).toEqual({ data: 'mockData' });

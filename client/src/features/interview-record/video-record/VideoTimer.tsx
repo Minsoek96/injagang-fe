@@ -24,7 +24,7 @@ function VideoTimer({ isRunning }: Props) {
   );
 
   useEffect(() => {
-    if (!isRunning && time > 10) {
+    if (!isRunning && time > 8) {
       setCurTimer(formatTime.mmss(time));
       setTime(0);
     }

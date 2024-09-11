@@ -71,6 +71,7 @@ export default function VideoPlayer({
       onCompleteMsg();
       return;
     }
+    if (isSpeaking) return;
 
     await readCurrentScript();
     if (videoRef.current) handleRecord();

@@ -9,20 +9,18 @@ import { styleMixin, V } from '@/src/shared/styles';
 
 type AddQuestionItemProps = {
   item: string;
-  index: number;
-  handleRemoveText: (index: number) => void;
+  handleRemoveText: (question: string) => void;
 };
 
 function UserQuestionPlayListItems({
   item,
-  index,
   handleRemoveText,
 }: AddQuestionItemProps) {
   const [isRemoving, setIsRemoving] = useState(false);
 
   const handleRemoveClick = () => {
     setIsRemoving(true);
-    setTimeout(() => handleRemoveText(index), 500);
+    setTimeout(() => handleRemoveText(item), 500);
   };
 
   return (

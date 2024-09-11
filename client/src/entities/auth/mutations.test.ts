@@ -143,11 +143,6 @@ describe('useFetchSignin', () => {
         { expires: 1 },
       );
       expect(Cookies.set).toHaveBeenCalledWith(
-        TOKEN_KEYS.REFRESH_TOKEN,
-        signinResponse.refresh,
-        { expires: 1 },
-      );
-      expect(Cookies.set).toHaveBeenCalledWith(
         'userId',
         signinResponse.userId,
         {
@@ -199,7 +194,6 @@ describe('useFetchCheckOut', () => {
       const { result } = callCheckOut();
       await waitFor(() => result.current.isSuccess);
       expect(Cookies.remove).toHaveBeenCalledWith(TOKEN_KEYS.ACCESS_TOKEN);
-      expect(Cookies.remove).toHaveBeenCalledWith(TOKEN_KEYS.REFRESH_TOKEN);
       expect(Cookies.remove).toHaveBeenCalledWith('userId');
     });
     it('유저에게 성공을 알림', async () => {
