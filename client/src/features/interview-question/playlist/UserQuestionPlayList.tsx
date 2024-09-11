@@ -28,6 +28,7 @@ function UserQuestionPlayList() {
         ))}
       </ItemContainer>
       <QuestionAdder
+        playListLen={userPlayList.length}
         handleAddQuestion={handleAddText}
         handleConfirmQuestion={roleAction}
       />
