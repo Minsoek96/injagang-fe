@@ -5,8 +5,7 @@ import { ExpectedQuestionLayout } from '@/src/features/interview-question';
 
 import { styleMixin } from '@/src/shared/styles';
 
-import { useAuthStore } from '@/src/entities/auth';
-import { useAuth } from '@/src/shared/hooks';
+import { useAuthStore, useAuth } from '@/src/entities/auth';
 
 function AdminPage() {
   useAuth();

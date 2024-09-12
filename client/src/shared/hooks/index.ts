@@ -1,4 +1,3 @@
-export { default as useAuth } from './useAuth';
 export { default as useCheckList } from './checklist/useCheckList';
 export { default as useDebounce } from './debounce/useDebounce';
 export { default as useMediaRecord } from './record/useMediaRecord';

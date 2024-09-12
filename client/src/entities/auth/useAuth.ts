@@ -5,7 +5,7 @@ import { useAuthStore } from '@/src/entities/auth';
 
 import { getCookies } from '@/src/shared/utils/';
 
-// 인증을 위한 훅
+/** 토큰 검증을 위한 훅 */
 const useAuth = () => {
   const { mutate: getProfile } = useFetchUserInfo();
   const { userId, role } = useAuthStore();
