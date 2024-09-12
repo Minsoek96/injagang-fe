@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 
-import useCheckList from '@/src/shared/hooks/useCheckList';
+import useCheckList from '@/src/shared/hooks/checklist/useCheckList';
 
 import { sampleCheckList } from '@/fixutures/shared';
 

@@ -1,4 +1,4 @@
-import useCounter from '@/src/shared/hooks/useCounter';
+import useCounter from '@/src/shared/hooks/counter/useCounter';
 import { act, renderHook } from '@testing-library/react';
 
 const context = describe;

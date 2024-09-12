@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 
-import useInterval from '@/src/shared/hooks/useInterval';
+import useInterval from '@/src/shared/hooks/interval/useInterval';
 
 const context = describe;
 

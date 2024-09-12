@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 
-import useWebSpeech from '@/src/shared/hooks/useWebSpeech';
+import useWebSpeech from '@/src/shared/hooks/speech/useWebSpeech';
 
 import { MockSpeech, MockUtterance } from '@/fixutures/shared/types';
 
