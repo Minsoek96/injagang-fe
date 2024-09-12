@@ -8,7 +8,7 @@ import {
 } from '@/src/entities/interview_question';
 import { useDeleteInterViewQ } from '@/src/entities/interview_question/mutations';
 import { useCheckList, useModal } from '@/src/shared/hooks';
-import { Container } from '@/src/shared/components';
+import { Container } from '@/src/shared/ui';
 
 import { useSelectorLogic } from '../hooks';
 

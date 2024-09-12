@@ -8,7 +8,7 @@ import {
   MainButton,
   ResizeableTextarea,
   Container,
-} from '@/src/shared/components/';
+} from '@/src/shared/ui';
 import { useModal } from '@/src/shared/hooks';
 import { V } from '@/src/shared/styles';
 

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useBoardStore } from '@/src/entities/qnaboard';
 
 import { useDebounce } from '@/src/shared/hooks';
-import { ComboBox, MainInput } from '@/src/shared/components';
+import { ComboBox, MainInput } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 
 const typeList = [

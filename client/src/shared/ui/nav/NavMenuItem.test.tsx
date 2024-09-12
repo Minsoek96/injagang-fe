@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 
 import { usePathname } from 'next/navigation';
 
-import NavMenuItem from '@/src/shared/components/nav/NavMenuItem';
+import NavMenuItem from '@/src/shared/ui/nav/NavMenuItem';
 import TestProvider from '@/fixutures/TestProvider';
 
 import { defaultTheme } from '@/src/app/styles';

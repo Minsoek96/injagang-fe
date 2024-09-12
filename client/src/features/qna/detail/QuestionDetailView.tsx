@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
-import { Container } from '@/src/shared/components';
+import { Container } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
 import EditMenuBar from './EditMenuBar';

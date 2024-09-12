@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-import NavMenuList from '@/src/shared/components/nav/NavMenuList';
+import NavMenuList from '@/src/shared/ui/nav/NavMenuList';
 
 import { sampleNavList } from '@/fixutures/shared';
 

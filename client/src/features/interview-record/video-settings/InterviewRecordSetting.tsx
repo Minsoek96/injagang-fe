@@ -1,5 +1,5 @@
 import VideoSettingPlayer from '@/src/features/interview-record/video-settings/VideoPlayer';
-import { ExplanationContent } from '@/src/shared/components/';
+import { ExplanationContent } from '@/src/shared/ui';
 
 import useRecordSettingsLogic from './useRecordSettingsLogic';
 import DevicesSelector from './DevicesSelector';

@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import { MainButton } from '@/src/shared/components';
+import { MainButton } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   onCounterIncrease: () => void;
   counter: number;
   progressStatus: string;
-  lastVideo: boolean;
+  lastVideo: number;
 };
 
 export default function VideoResultHeader({
@@ -32,7 +32,7 @@ export default function VideoResultHeader({
       <MainButton
         label="=>"
         onClick={onCounterIncrease}
-        disabled={lastVideo}
+        disabled={lastVideo <= counter}
       />
     </VideoController>
   );

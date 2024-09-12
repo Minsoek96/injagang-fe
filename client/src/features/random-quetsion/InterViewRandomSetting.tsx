@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { InputField } from '@/src/shared/components';
+import { InputField } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 import useRandomSettingLogic from '@/src/features/random-quetsion/useRandomSettingLogic';
 

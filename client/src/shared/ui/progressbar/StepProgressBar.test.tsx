@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import { sampleStepList } from '@/fixutures/shared';
-import StepProgressBar from '@/src/shared/components/progressbar/StepProgressBar';
+import StepProgressBar from '@/src/shared/ui/progressbar/StepProgressBar';
 
 import TestProvider from '@/fixutures/TestProvider';
 

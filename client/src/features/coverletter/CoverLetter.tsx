@@ -5,7 +5,7 @@ import { BiPlus } from 'react-icons/bi';
 import styled from 'styled-components';
 import { styleMixin, V } from '@/src/shared/styles';
 
-import { Container, HideSvg, Spinner } from '@/src/shared/components';
+import { Container, HideSvg, Spinner } from '@/src/shared/ui';
 import { Suspense } from 'react';
 import CoverLetterList from './list/CoverLetterList';
 import CoverLetterPreView from './preview/CoverLetterPreView';

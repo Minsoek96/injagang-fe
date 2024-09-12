@@ -4,7 +4,7 @@ import CoverLetterCreator from '@/src/features/coverletter/new/CoverLetterCreato
 import useTemplateStoreManager from '@/src/features/template/hooks/useTemplateStoreManager';
 import { styled } from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
-import { Spinner } from '@/src/shared/components';
+import { Spinner } from '@/src/shared/ui';
 
 function CoverLetterEditorPage() {
   const { clearCurTemplate } = useTemplateStoreManager();

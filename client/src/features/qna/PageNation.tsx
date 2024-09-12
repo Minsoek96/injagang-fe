@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { usePageNation } from '@/src/shared/hooks';
 
-import { MainButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/ui/button';
 import { styleMixin, V } from '@/src/shared/styles';
 
 /** 페이지 네이션 버튼을 렌더하는 함수 */

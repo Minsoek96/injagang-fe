@@ -4,7 +4,7 @@ import { BiLogOut } from 'react-icons/bi';
 
 import { useFetchCheckOut } from '@/src/entities/auth/mutations';
 import useModal from '@/src/shared/hooks/useModal';
-import { DropBoxStyle } from '@/src/shared/components';
+import { DropBoxStyle } from '@/src/shared/ui';
 
 export default function LogoutMenu() {
   const { setModal } = useModal();

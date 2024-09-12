@@ -1,6 +1,6 @@
 import { GrUserSettings } from 'react-icons/gr';
 
-import { DropBox } from '@/src/shared/components/dropbox';
+import { DropBox } from '@/src/shared/ui/dropbox';
 import { useAuthStore } from '@/src/entities/auth';
 
 import LoginMenu from './LoginMenu';

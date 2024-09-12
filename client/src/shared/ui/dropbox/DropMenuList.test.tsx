@@ -1,7 +1,7 @@
 import { sampleDropList } from '@/fixutures/shared';
 
 import TestProvider from '@/fixutures/TestProvider';
-import DropMenuList from '@/src/shared/components/dropbox/DropMenuList';
+import DropMenuList from '@/src/shared/ui/dropbox/DropMenuList';
 
 import { render, screen } from '@testing-library/react';
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ResizeableTextarea } from '@/src/shared/components';
+import { ResizeableTextarea } from '@/src/shared/ui';
 import { useRecordInfoStore } from '@/src/entities/interview_question';
 import { useDebounce } from '@/src/shared/hooks';
 

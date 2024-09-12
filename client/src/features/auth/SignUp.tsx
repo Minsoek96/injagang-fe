@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { InputField, MainButton } from '@/src/shared/components';
+import { InputField, MainButton } from '@/src/shared/ui';
 
 import useSignUpLogic from './hooks/useSignUpLogic';
 

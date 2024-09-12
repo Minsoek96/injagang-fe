@@ -1,4 +1,4 @@
-import { MainButton } from '@/src/shared/components';
+import { MainButton } from '@/src/shared/ui';
 
 type Props = {
   isRecordPaused: boolean;

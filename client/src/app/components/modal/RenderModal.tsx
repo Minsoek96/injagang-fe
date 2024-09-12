@@ -2,7 +2,7 @@ import { useModalStore } from '@/src/shared/store';
 
 import { styled } from 'styled-components';
 
-import { MainButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/ui/button';
 import { styleMixin, V } from '@/src/shared/styles';
 
 const MODAL_CLOSE_DELAY = 50;

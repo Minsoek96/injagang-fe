@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 
 import { shakeAnimation } from '@/src/shared/styles';
 
-import { MainButton, InputField } from '@/src/shared/components';
+import { MainButton, InputField } from '@/src/shared/ui';
 
 import { useLoginLogic } from './hooks';
 

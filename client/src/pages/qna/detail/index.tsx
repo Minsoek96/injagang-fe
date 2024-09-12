@@ -8,7 +8,7 @@ import { DehydratedState, HydrationBoundary } from '@tanstack/react-query';
 
 import { useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
 
-import { Spinner } from '@/src/shared/components';
+import { Spinner } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 
 const QuestionDetailView = dynamic(

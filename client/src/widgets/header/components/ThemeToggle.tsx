@@ -1,6 +1,6 @@
 import { BiSun, BiMoon } from 'react-icons/bi';
 
-import { DropBoxStyle } from '@/src/shared/components';
+import { DropBoxStyle } from '@/src/shared/ui';
 import { useThemeToggler } from '@/src/shared/hooks';
 
 export default function ThemeToggle() {

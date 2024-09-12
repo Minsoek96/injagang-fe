@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useBoardStore, useFeedStore } from '@/src/entities/qnaboard';
-import { Container, ResizeableTextarea } from '@/src/shared/components';
+import { Container, ResizeableTextarea } from '@/src/shared/ui';
 
 import { V } from '@/src/shared/styles';
 

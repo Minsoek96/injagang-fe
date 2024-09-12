@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { V } from '@/src/shared/styles';
 
-import { BaseProps } from '@/src/shared/components/button/type';
+import { BaseProps } from '@/src/shared/ui/button/type';
 
 export default function MainButton({
   onClick,

@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 
 import styled from 'styled-components';
 
-import { MainButton, MainInput } from '@/src/shared/components';
+import { MainButton, MainInput } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 
 interface AddTextInputProps {

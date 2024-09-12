@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import StepMarker from '@/src/shared/components/progressbar/StepMarker';
+import StepMarker from '@/src/shared/ui/progressbar/StepMarker';
 
 type Props<T> = {
   stepList: T[];

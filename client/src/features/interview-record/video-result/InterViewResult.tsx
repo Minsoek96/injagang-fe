@@ -4,7 +4,7 @@ import { MdOutlineFileDownload } from 'react-icons/md';
 
 import { useRecordInfoStore } from '@/src/entities/interview_question';
 
-import { MainButton } from '@/src/shared/components';
+import { MainButton } from '@/src/shared/ui';
 import { useCounter } from '@/src/shared/hooks';
 import { styleMixin, V } from '@/src/shared/styles';
 
@@ -47,7 +47,7 @@ export default function InterViewResult({
         onCounterIncrease={handleIncrease}
         counter={counter}
         progressStatus={`${counter + 1}/${question.length}`}
-        lastVideo={video.length - 1 <= counter}
+        lastVideo={video.length - 1}
       />
       <VideoResultPlayer currentVideoChunk={video[counter]} />
       <AccessoriesWrapper>

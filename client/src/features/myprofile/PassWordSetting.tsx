@@ -1,6 +1,6 @@
 import { S } from '@/src/features/myprofile/common';
 import { authType } from '@/src/entities/auth';
-import { InputField, MainButton } from '@/src/shared/components';
+import { InputField, MainButton } from '@/src/shared/ui';
 
 import { useMyProfileManager, useMyProfileLogic } from './hooks';
 

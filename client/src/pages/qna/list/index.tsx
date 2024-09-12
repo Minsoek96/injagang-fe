@@ -11,7 +11,7 @@ import { MdOutlineModeEditOutline } from 'react-icons/md';
 
 import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 
-import { MainButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/ui/button';
 import { styleMixin, V } from '@/src/shared/styles';
 
 import {
@@ -20,7 +20,7 @@ import {
   ROUTE_TEMPLATE,
   TABLE_KEYS,
 } from '@/src/pages/qna/list/const';
-import { Container } from '@/src/shared/components';
+import { Container } from '@/src/shared/ui';
 
 const BoardListView = dynamic(
   () => import('@/src/widgets/board/BoardListLayout'),

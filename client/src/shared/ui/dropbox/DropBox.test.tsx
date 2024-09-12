@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-import DropBox from '@/src/shared/components/dropbox/DropBox';
+import DropBox from '@/src/shared/ui/dropbox/DropBox';
 
 import { sampleDropList } from '@/fixutures/shared';
 

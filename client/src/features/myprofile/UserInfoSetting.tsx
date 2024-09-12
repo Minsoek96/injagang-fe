@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useAuthStore } from '@/src/entities/auth';
-import { InputField, MainButton } from '@/src/shared/components';
+import { InputField, MainButton } from '@/src/shared/ui';
 
 import { S } from '@/src/features/myprofile/common';
 import useMyProfileManager from './hooks/useMyProfileManager';

@@ -1,4 +1,4 @@
-import { MainButton } from '@/src/shared/components';
+import { MainButton } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 import { BiArrowBack } from 'react-icons/bi';
 import { styled } from 'styled-components';

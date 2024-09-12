@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import { Container } from '@/src/shared/components/container';
+import { Container } from '@/src/shared/ui/container';
 
 import goodInterView from '@/public/assets/main.webp';
 import interViewScreen from '@/public/assets/interview.webp';

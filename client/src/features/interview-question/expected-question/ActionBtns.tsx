@@ -1,4 +1,4 @@
-import { MainButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/ui/button';
 import { interviewType } from '@/src/entities/interview_question';
 import { useAuthStore } from '@/src/entities/auth';
 import styled from 'styled-components';

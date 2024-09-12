@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import MainInput from '@/src/shared/components/input/MainInput';
+import MainInput from '@/src/shared/ui/input/MainInput';
 import TestProvider from '@/fixutures/TestProvider';
 
 describe('MainInput', () => {

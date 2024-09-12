@@ -7,7 +7,7 @@ import {
   useRecordInfoStore,
 } from '@/src/entities/interview_question';
 
-import { Container } from '@/src/shared/components';
+import { Container } from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
 import { useWebSpeech } from '@/src/shared/hooks';
 

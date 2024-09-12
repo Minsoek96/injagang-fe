@@ -4,7 +4,7 @@ import { BRAND } from '@/src/shared/const';
 
 import { styleMixin, V } from '@/src/shared/styles';
 import { BrandLogo, UserMenu } from './components';
-import { NavMenuList } from '../../shared/components/nav';
+import { NavMenuList } from '../../shared/ui/nav';
 
 import { navList } from './data';
 

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import TestProvider from '@/fixutures/TestProvider';
 import 'jest-styled-components';
 
-import ExplanationContent from '@/src/shared/components/explanation/ExplanationContent';
+import ExplanationContent from '@/src/shared/ui/explanation/ExplanationContent';
 
 describe('ExplanationContent', () => {
   const sampleList = ['test1', 'test2', 'test3'];
