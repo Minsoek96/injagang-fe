@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 
-import useModal from '@/src/shared/hooks/useModal';
+import useModal from '@/src/shared/hooks/modal/useModal';
 
 import { sampleModal } from '@/fixutures/shared';
 

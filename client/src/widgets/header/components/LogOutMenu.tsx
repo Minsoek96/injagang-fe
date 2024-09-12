@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { BiLogOut } from 'react-icons/bi';
 
 import { useFetchCheckOut } from '@/src/entities/auth/mutations';
-import useModal from '@/src/shared/hooks/useModal';
+import { useModal } from '@/src/shared/hooks/';
 import { DropBoxStyle } from '@/src/shared/ui';
 
 export default function LogoutMenu() {
