@@ -3,14 +3,14 @@ import Cookies from 'js-cookie';
 import { ERROR_MESSAGES } from '@/src/shared/const';
 
 import { API } from './client';
-import { tokenReissue } from './tokenReissue';
+import { tokenReissue } from './errorhandlers/tokenReissue';
 
 jest.mock('js-cookie', () => ({
   get: jest.fn(),
   set: jest.fn(),
 }));
 
-jest.mock('./tokenReissue', () => ({
+jest.mock('./errorhandlers/tokenReissue', () => ({
   tokenReissue: jest.fn(),
 }));
 

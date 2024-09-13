@@ -1,6 +1,6 @@
 import { fetcher, getCookies, METHOD } from '@/src/shared/utils';
 import { AUTH_APIS } from '@/src/shared/config/apis';
-import { tokenReissue } from '@/src/shared/apis/tokenReissue';
+import { tokenReissue } from '@/src/shared/apis/errorhandlers/tokenReissue';
 
 jest.mock('@/src/shared/utils', () => ({
   fetcher: jest.fn(),

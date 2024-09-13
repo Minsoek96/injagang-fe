@@ -1,10 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 
+import { LocalStorageManager } from '@/src/shared/utils';
 import useThemeToggler from './useThemeToggler';
-
-import { LocalStorageManager } from '../utils';
-
-jest.mock('../utils');
 
 describe('useThemeToggeler', () => {
   const context = describe;
