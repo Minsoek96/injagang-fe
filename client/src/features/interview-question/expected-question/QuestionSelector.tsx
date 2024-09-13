@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ComboBox } from '@/src/shared/components/combobox';
+import { ComboBox } from '@/src/shared/ui/combobox';
 
 import { interviewType } from '@/src/entities/interview_question';
 import { memo } from 'react';

@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { BtnType } from '@/src/shared/components';
+import { BtnType } from '@/src/shared/ui';
 
-import { Spinner } from '@/src/shared/components/spinner';
+import { Spinner } from '@/src/shared/ui/spinner';
 import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
 
 import { CoverLetterTemplate } from '@/src/features/coverletter/common';

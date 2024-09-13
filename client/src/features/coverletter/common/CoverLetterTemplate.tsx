@@ -10,7 +10,7 @@ import {
   Spinner,
   Container,
   MainInput,
-} from '@/src/shared/components';
+} from '@/src/shared/ui';
 
 import { V, styleMixin } from '@/src/shared/styles';
 

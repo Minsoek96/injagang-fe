@@ -1,4 +1,4 @@
-import { Container } from '@/src/shared/components';
+import { Container } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 import styled from 'styled-components';
 

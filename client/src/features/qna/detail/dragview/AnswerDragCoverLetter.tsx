@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
+import { S } from '@/src/features/qna/common';
 import { boardQueries } from '@/src/entities/qnaboard';
 
-import { S } from '@/src/features/qna/common';
-
-import { useDragCorrection } from '@/src/shared/hooks';
-
 import AnswerDragItem from './AnswerDragItem';
+
+import useDragCorrection from './useDragCorrection';
 
 /** 드래그 첨삭 기능을 가진 자소서 View */
 type AnswerProps = {

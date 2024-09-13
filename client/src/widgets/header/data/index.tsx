@@ -5,8 +5,8 @@ import {
   BiUser,
 } from 'react-icons/bi';
 
-import { DropItemType } from '@/src/shared/components/dropbox';
-import { MenuItemType } from '@/src/shared/components/nav';
+import { DropItemType } from '@/src/shared/ui/dropbox';
+import { MenuItemType } from '@/src/shared/ui/nav';
 
 import { LogOutMenu, ThemeToggle } from '../components';
 

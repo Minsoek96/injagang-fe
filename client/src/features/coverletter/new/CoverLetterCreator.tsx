@@ -6,7 +6,7 @@ import { v4 as uuid4 } from 'uuid';
 
 import {
   BtnType,
-} from '@/src/shared/components';
+} from '@/src/shared/ui';
 import { CoverLetterTemplate } from '@/src/features/coverletter/common';
 
 import { useControlTemplate, useCoverLetterCreatorLogic } from '../hooks';

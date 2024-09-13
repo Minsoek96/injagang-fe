@@ -1,6 +1,6 @@
 import { AxiosRequestConfig, isAxiosError } from 'axios';
 
-import { tokenReissue } from '@/src/shared/apis/tokenReissue';
+import { tokenReissue } from '@/src/shared/apis/errorhandlers/tokenReissue';
 import { ERROR_MESSAGES } from '@/src/shared/const';
 
 import { removeCookies, setCookies } from '@/src/shared/utils';

@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 
 import { keys } from '@/src/shared/utils';
-import { MainInput } from '@/src/shared/components';
+import { MainInput } from '@/src/shared/ui';
 import TQustionItem from './TQustionItem';
 
 import useAddTemplateLogic from '../hooks/useAddTemplateLogic';

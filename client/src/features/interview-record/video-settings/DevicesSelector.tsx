@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
-import { ComboBox } from '@/src/shared/components';
+import { ComboBox } from '@/src/shared/ui';
 
 type Props = {
   selectedAudio: MediaDeviceInfo | null;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Container } from '@/src/shared/components';
+import { Container } from '@/src/shared/ui';
 import BoardList from './BoardList';
 
 type Props<T> = {

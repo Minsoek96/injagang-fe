@@ -1,4 +1,4 @@
-import { ResizeableTextarea } from '@/src/shared/components/textarea';
+import { ResizeableTextarea } from '@/src/shared/ui/textarea';
 import { useDebounce } from '@/src/shared/hooks';
 import { styleMixin } from '@/src/shared/styles';
 

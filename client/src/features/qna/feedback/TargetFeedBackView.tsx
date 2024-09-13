@@ -4,7 +4,7 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { useFetchFeedBackList } from '@/src/entities/feedback/queries';
 import { useDeleteFeed, useReviseFeed } from '@/src/entities/feedback/mutation';
 
-import { Container } from '@/src/shared/components';
+import { Container } from '@/src/shared/ui';
 import { useFeedStore } from '@/src/entities/qnaboard';
 import TargetFeedBackItems from './TargetFeedBackItems';
 

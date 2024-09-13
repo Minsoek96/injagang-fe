@@ -1,6 +1,8 @@
-import ProtectedPage from '@/src/app/providers/ProtectedPage';
-import { useAuth } from '@/src/shared/hooks';
 import { useRouter } from 'next/router';
+
+import { useAuth } from '@/src/entities/auth';
+
+import ProtectedPage from './ProtectedPage';
 
 type Props = {
   children: React.ReactNode;

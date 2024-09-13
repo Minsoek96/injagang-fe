@@ -3,7 +3,7 @@ import { memo } from 'react';
 import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
-import { MarkdownPreview } from '@/src/shared/components';
+import { MarkdownPreview } from '@/src/shared/ui';
 import { S } from '@/src/features/qna/common';
 
 interface BoardItemProps {

@@ -10,7 +10,7 @@ import {
   ComboBox,
   Container,
   Spinner,
-} from '@/src/shared/components';
+} from '@/src/shared/ui';
 
 import { styleMixin, V } from '@/src/shared/styles';
 
@@ -22,7 +22,7 @@ import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
 import dynamic from 'next/dynamic';
 
 const MarkdownEditor = dynamic(
-  () => import('@/src/shared/components/markdown/MarkdownEditor'),
+  () => import('@/src/shared/ui/markdown/MarkdownEditor'),
   {
     loading: () => (
       <Spinner message="편집기를 불러오는 중입니다." />

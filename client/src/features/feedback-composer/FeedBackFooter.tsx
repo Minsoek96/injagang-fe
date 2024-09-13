@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { MainButton } from '@/src/shared/components/button';
+import { MainButton } from '@/src/shared/ui/button';
 import { V } from '@/src/shared/styles';
 import TextActionBtns from './TextActionBtns';
 

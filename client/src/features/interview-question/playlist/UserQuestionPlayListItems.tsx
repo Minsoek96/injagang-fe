@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { BiTrash } from 'react-icons/bi';
 
-import { HideSvg } from '@/src/shared/components';
+import { HideSvg } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
 type AddQuestionItemProps = {

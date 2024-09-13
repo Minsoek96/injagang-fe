@@ -11,7 +11,7 @@ import {
   useRecordInfoStore,
 } from '@/src/entities/interview_question';
 
-import { Container, StepProgressBar } from '@/src/shared/components';
+import { Container, StepProgressBar } from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
 

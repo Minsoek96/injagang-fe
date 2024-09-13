@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import { ArrowGuide } from '@/src/shared/components';
+import { ArrowGuide } from '@/src/shared/ui';
 
 import roomout from '@/public/assets/roomout.svg';
 

@@ -4,7 +4,7 @@ import { StaticImageData } from 'next/image';
 
 import styled, { keyframes, css } from 'styled-components';
 
-import { ArrowDown } from '@/src/shared/components/arrow';
+import { ArrowDown } from '@/src/shared/ui/arrow';
 
 import { useSectionObserver } from '@/src/shared/hooks';
 

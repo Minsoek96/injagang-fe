@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
 import { useModal } from '@/src/shared/hooks';
-import { MainButton } from '@/src/shared/components';
+import { MainButton } from '@/src/shared/ui';
 
 import useVideoPlayerLogic from '@/src/features/interview-record/video-record/useVideoPlayerLogic';
 import ScriptTextArea from './ScriptTextArea';

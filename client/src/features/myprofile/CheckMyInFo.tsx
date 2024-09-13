@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { V, styleMixin } from '@/src/shared/styles';
-import { Container } from '@/src/shared/components';
+import { Container } from '@/src/shared/ui';
 import UserInFo from './UserInfoSetting';
 import PassWordInfo from './PassWordSetting';
 

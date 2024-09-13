@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Container } from '@/src/shared/components';
+import { Container } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 import styled from 'styled-components';
 import { keys } from '@/src/shared/utils';

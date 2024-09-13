@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { BiX } from 'react-icons/bi';
 
-import { HideSvg, ResizeableTextarea } from '@/src/shared/components';
+import { HideSvg, ResizeableTextarea } from '@/src/shared/ui';
 import { useDebounce } from '@/src/shared/hooks';
 import { styleMixin, V } from '@/src/shared/styles';
 import { coverLetterType } from '@/src/entities/coverLetter';

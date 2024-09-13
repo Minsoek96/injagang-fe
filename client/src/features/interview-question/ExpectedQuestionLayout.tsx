@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ExplanationContent } from '@/src/shared/components';
+import { ExplanationContent } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
 import { UserQuestionPlayList } from './playlist';

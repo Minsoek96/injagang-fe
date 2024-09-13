@@ -2,11 +2,11 @@ import Router from 'next/router';
 
 import Cookies from 'js-cookie';
 
-import { tokenReissue } from '@/src/shared/apis/tokenReissue';
 import { ERROR_MESSAGES, TOKEN_KEYS } from '@/src/shared/const';
 
 import { reRequest } from './reRequest';
 import { errorManager } from './errorManager';
+import { tokenReissue } from './tokenReissue';
 
 jest.mock('next/router', () => ({
   replace: jest.fn(),
@@ -14,7 +14,7 @@ jest.mock('next/router', () => ({
 
 jest.mock('js-cookie');
 
-jest.mock('@/src/shared/apis/tokenReissue', () => ({
+jest.mock('./tokenReissue', () => ({
   tokenReissue: jest.fn(),
 }));
 

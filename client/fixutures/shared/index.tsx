@@ -1,5 +1,5 @@
-import { DropItemType } from '@/src/shared/components/dropbox';
-import { MenuItemType } from '@/src/shared/components/nav';
+import { DropItemType } from '@/src/shared/ui/dropbox';
+import { MenuItemType } from '@/src/shared/ui/nav';
 import { TOAST_MODE } from '@/src/shared/const';
 
 const sampleToast = {
