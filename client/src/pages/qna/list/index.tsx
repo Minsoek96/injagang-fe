@@ -27,7 +27,7 @@ const BoardListView = dynamic(
   { ssr: false },
 );
 
-const PageNation = dynamic(() => import('@/src/features/qna/PageNation'), {
+const PagiNation = dynamic(() => import('@/src/features/qna/pagination/PagiNation'), {
   ssr: false,
 });
 
@@ -85,7 +85,7 @@ function List({ dehydratedState }: ListProps) {
           tableKey={TABLE_KEYS}
           route={ROUTE_TEMPLATE}
         />
-        <PageNation />
+        <PagiNation />
       </HydrationBoundary>
     </ListStyle>
   );

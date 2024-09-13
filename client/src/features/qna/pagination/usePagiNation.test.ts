@@ -1,12 +1,12 @@
 /* eslint-disable no-shadow */
 import { act, renderHook } from '@testing-library/react';
 
-import usePageNation from '@/src/shared/hooks/usePageNation';
+import usePagiNation from '@/src/features/qna/pagination/usePagiNation';
 
 import useBoardStore from '@/src/entities/qnaboard/useBoardStore';
 
 jest.mock('@/src/entities/qnaboard/useBoardStore');
-describe('usePageNation', () => {
+describe('usePagiNation', () => {
   const context = describe;
   const setCurPageNum = jest.fn();
 
@@ -33,7 +33,7 @@ describe('usePageNation', () => {
     equal: number;
     mode: 'prev' | 'next';
   }) => {
-    const { result } = renderHook(() => usePageNation(8));
+    const { result } = renderHook(() => usePagiNation(8));
     expect(result.current.curPageNum).toEqual(equal);
     act(() => {
       mode === 'prev'
@@ -49,7 +49,7 @@ describe('usePageNation', () => {
 
   it('handlePageClick의 값을 전달하면 업데이트 함수가 전달된다.', () => {
     mockImplementBoardStore({});
-    const { result } = renderHook(() => usePageNation(8));
+    const { result } = renderHook(() => usePagiNation(8));
     act(() => {
       result.current.handlePageClick(4);
     });

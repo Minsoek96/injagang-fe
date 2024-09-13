@@ -2,20 +2,20 @@ import { memo } from 'react';
 
 import styled from 'styled-components';
 
-import { usePageNation } from '@/src/shared/hooks';
-
 import { MainButton } from '@/src/shared/ui/button';
 import { styleMixin, V } from '@/src/shared/styles';
 
+import usePagiNation from './usePagiNation';
+
 /** 페이지 네이션 버튼을 렌더하는 함수 */
-function PageNation() {
+function PagiNation() {
   const {
     curPageNum,
     handlePageClick,
     handlePrevClick,
     handleNextClick,
     visiblePageNumbers,
-  } = usePageNation(8);
+  } = usePagiNation(8);
 
   return (
     <Container>
@@ -36,7 +36,7 @@ function PageNation() {
   );
 }
 
-export default memo(PageNation);
+export default memo(PagiNation);
 
 const Container = styled.div`
  ${styleMixin.Flex()}
