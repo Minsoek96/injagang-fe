@@ -1,4 +1,4 @@
-import { API } from '../apis';
+import { API } from '../../apis';
 
 // eslint-disable-next-line no-shadow
 export enum METHOD {

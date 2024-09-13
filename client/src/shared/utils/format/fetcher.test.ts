@@ -1,8 +1,8 @@
+import { API } from '@/src/shared/apis';
+
 import { fetcher, METHOD } from './fetcher';
 
-import { API } from '../apis';
-
-jest.mock('../apis', () => ({
+jest.mock('@/src/shared/apis', () => ({
   API: {
     get: jest.fn(),
     post: jest.fn(),
