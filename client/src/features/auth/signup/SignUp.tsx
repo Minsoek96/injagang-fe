@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { InputField, MainButton } from '@/src/shared/ui';
 
-import useSignUpLogic from './hooks/useSignUpLogic';
+import useSignUpLogic from './useSignUpLogic';
 
 function SignUp() {
   const {

@@ -1,10 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
 
-import { usePwCheck } from '@/src/shared/hooks';
+import { authMutations } from '@/src/entities/auth';
 
+import { usePwCheck } from '@/src/shared/hooks';
 import { hasEmpty } from '@/src/shared/utils';
 import { ERROR_MESSAGES } from '@/src/shared/const';
-import { useFetchSignup } from '@/src/entities/auth/mutations';
 
 interface joinInfoType {
   [key: string]: string;
@@ -25,7 +25,7 @@ const useSignUpLogic = () => {
   });
   const [userMsg, setUserMsg] = useState<string | null>('');
   const { isValid, errorMessage } = usePwCheck({ password: joinInfo.password });
-  const { mutate: confirmSignUp } = useFetchSignup();
+  const { mutate: confirmSignUp } = authMutations.useFetchSignup();
 
   /** ref를 관리 */
   const refs: { [key: string]: React.RefObject<HTMLInputElement> } = {
