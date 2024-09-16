@@ -8,7 +8,7 @@ import { shakeAnimation } from '@/src/shared/styles';
 
 import { MainButton, InputField } from '@/src/shared/ui';
 
-import  useLoginLogic  from './useLoginLogic';
+import useLoginLogic from './useLoginLogic';
 
 function Login() {
   const router = useRouter();

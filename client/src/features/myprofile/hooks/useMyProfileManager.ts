@@ -4,7 +4,7 @@ import { useModal } from '@/src/shared/hooks';
 
 import { runValidationChecks, hasEmpty } from '@/src/shared/utils';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
-import { authType ,authMutations} from '@/src/entities/auth';
+import { authType, authMutations } from '@/src/entities/auth';
 
 const validation = {
   password: ({
