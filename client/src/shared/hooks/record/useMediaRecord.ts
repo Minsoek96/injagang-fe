@@ -8,7 +8,6 @@ type Props = {
   onError?: () => void;
 };
 
-
 const useMediaRecord = ({
   audioId = '',
   videoId = '',
@@ -29,16 +28,16 @@ const useMediaRecord = ({
   }, []);
 
   /** 현재 선택된 디바이스 정보를 제거 */
-  const clearStreamRef = useCallback(()=> {
-    if(streamRef.current) {
-      stopMediaTracks(streamRef.current)
-      streamRef.current = null
+  const clearStreamRef = useCallback(() => {
+    if (streamRef.current) {
+      stopMediaTracks(streamRef.current);
+      streamRef.current = null;
     }
-  },[])
+  }, []);
 
   /** 유저에게 권한을 요청함(캠여부) */
   const getUserAccess = useCallback(async () => {
-    if (streamRef.current){
+    if (streamRef.current) {
       clearStreamRef();
     }
 
@@ -72,7 +71,6 @@ const useMediaRecord = ({
   const handleRecord = useCallback(async () => {
     try {
       const stream = (await getUserAccess()) as MediaStream;
-      console.log(stream)
       const mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
       mediaRecorderRef.current = mediaRecorder;
       mediaRecorder.ondataavailable = handleDataAvailable;
