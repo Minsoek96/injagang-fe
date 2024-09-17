@@ -13,36 +13,46 @@ const useMediaRecord = ({
   videoId = '',
   onError = () => {},
 }: Props) => {
+  const streamRef = useRef<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [recordStatus, setRecordStatus] = useState<
-    'pending' | 'record' | 'pause'
-  >('pending');
+  const [recordStatus, setRecordStatus] = useState<'pending' | 'record' | 'pause'>('pending');
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
 
   /** 사용자 디바이스 정보를 조회. */
   const getDevices = useCallback(async () => {
     const devices = await navigator.mediaDevices.enumerateDevices();
-    const audioDevices = devices.filter(
-      (device) => device.kind === 'audioinput',
-    );
-    const videoDevices = devices.filter(
-      (device) => device.kind === 'videoinput',
-    );
+    const audioDevices = devices.filter((device) => device.kind === 'audioinput');
+    const videoDevices = devices.filter((device) => device.kind === 'videoinput');
     return { audioDevices, videoDevices };
+  }, []);
+
+  /** 현재 선택된 디바이스 정보를 제거 */
+  const clearStreamRef = useCallback(() => {
+    if (streamRef.current) {
+      stopMediaTracks(streamRef.current);
+      streamRef.current = null;
+    }
   }, []);
 
   /** 유저에게 권한을 요청함(캠여부) */
   const getUserAccess = useCallback(async () => {
+    if (streamRef.current) {
+      clearStreamRef();
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: videoId ? { deviceId: { exact: videoId } } : true,
         audio: audioId ? { deviceId: { exact: audioId } } : true,
       });
+
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
-      // 상태로 관리할 경우 렌더링
+
+      // 중복실행을 방지
+      streamRef.current = stream;
       return stream;
     } catch (error) {
       onError();
@@ -61,9 +71,7 @@ const useMediaRecord = ({
   const handleRecord = useCallback(async () => {
     try {
       const stream = (await getUserAccess()) as MediaStream;
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: 'video/webm',
-      });
+      const mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
       mediaRecorderRef.current = mediaRecorder;
       mediaRecorder.ondataavailable = handleDataAvailable;
       mediaRecorder.start();
@@ -77,8 +85,7 @@ const useMediaRecord = ({
   /** 녹화 장비를 제거한다. */
   const stopMediaTracks = useCallback((stream: MediaStream) => {
     if (!stream) return;
-    stream.getAudioTracks().forEach((track) => track.stop());
-    stream.getVideoTracks().forEach((track) => track.stop());
+    stream.getTracks().forEach((track) => track.stop());
   }, []);
 
   /** 녹화를 완료. */
@@ -88,6 +95,7 @@ const useMediaRecord = ({
       stopMediaTracks(mediaRecorderRef.current.stream);
       setRecordStatus('pending');
       mediaRecorderRef.current = null;
+      clearStreamRef();
     }
   }, [stopMediaTracks]);
 
@@ -113,6 +121,8 @@ const useMediaRecord = ({
         mediaRecorder.stop();
         stopMediaTracks(mediaRecorder.stream);
       }
+
+      clearStreamRef();
     },
     [stopMediaTracks],
   );

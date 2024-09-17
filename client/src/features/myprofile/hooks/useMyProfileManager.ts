@@ -4,8 +4,7 @@ import { useModal } from '@/src/shared/hooks';
 
 import { runValidationChecks, hasEmpty } from '@/src/shared/utils';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
-import { useChangeNick, useChangePassWord } from '@/src/entities/auth/mutations';
-import { authType } from '@/src/entities/auth';
+import { authType, authMutations } from '@/src/entities/auth';
 
 const validation = {
   password: ({
@@ -32,8 +31,8 @@ const validation = {
 };
 
 const useMyProfileManager = () => {
-  const { mutate: changeNickname } = useChangeNick();
-  const { mutate: confirmChangePw } = useChangePassWord();
+  const { mutate: changeNickname } = authMutations.useChangeNick();
+  const { mutate: confirmChangePw } = authMutations.useChangePassWord();
 
   const { setModal } = useModal();
 

@@ -3,10 +3,10 @@ import { useState, useCallback, useRef } from 'react';
 import { hasEmpty } from '@/src/shared/utils';
 
 import { ERROR_MESSAGES } from '@/src/shared/const';
-import { useFetchSignin } from '@/src/entities/auth/mutations';
+import { authMutations } from '@/src/entities/auth';
 
 const useLoginLogic = () => {
-  const { mutate: authenTicate, errorMsg: serverErrorMsg } = useFetchSignin();
+  const { mutate: authenTicate, errorMsg: serverErrorMsg } = authMutations.useFetchSignin();
   const [loginInfo, setLoginInfo] = useState({
     loginId: '',
     password: '',
