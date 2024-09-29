@@ -1,10 +1,13 @@
-import { BiEdit } from 'react-icons/bi';
+import { memo } from 'react';
 
 import styled from 'styled-components';
+
+import { BiEdit } from 'react-icons/bi';
+
+import { coverLetterType } from '@/src/entities/coverLetter';
+
 import { styleMixin, V } from '@/src/shared/styles';
 
-import { memo } from 'react';
-import { coverLetterType } from '@/src/entities/coverLetter';
 import useUserCoverLetterManager from '../hooks/useCoverLetterManager';
 
 interface CoverLetterItemsProps {

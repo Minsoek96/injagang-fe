@@ -1,2 +1,1 @@
-export { default as CoverLetterPreview } from './CoverLetterPreView';
-export { default as CoverLetterPreViewItem } from './CoverLetterPreViewItem';
+export { default as CoverLetter } from './CoverLetter';

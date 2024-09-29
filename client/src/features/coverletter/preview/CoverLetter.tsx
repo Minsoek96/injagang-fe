@@ -1,14 +1,16 @@
+import { Suspense } from 'react';
+
 import { useRouter } from 'next/router';
 
 import { BiPlus } from 'react-icons/bi';
 
 import styled from 'styled-components';
-import { styleMixin, V } from '@/src/shared/styles';
 
+import { styleMixin, V } from '@/src/shared/styles';
 import { Container, HideSvg, Spinner } from '@/src/shared/ui';
-import { Suspense } from 'react';
-import CoverLetterList from './list/CoverLetterList';
-import CoverLetterPreView from './preview/CoverLetterPreView';
+
+import CoverLetterList from './CoverLetterList';
+import CoverLetterPreView from './CoverLetterPreView';
 
 /** 메인 자소서 */
 function CoverLetter() {

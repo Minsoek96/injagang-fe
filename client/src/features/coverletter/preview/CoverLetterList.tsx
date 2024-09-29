@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { styleMixin, V } from '@/src/shared/styles';
 
 import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
-import CoverLetterItems from '@/src/features/coverletter/list/CoverLetterItems';
-import useCoverLetterManager from '../hooks/useCoverLetterManager';
+import { useCoverLetterStore } from '@/src/entities/coverLetter';
+
+import CoverLetterItems from './CoverLetterItems';
 
 function CoverLetterList() {
   const { data: coverLetters } = useFetchCoverLetter();
-  const { selectedCoverLetter } = useCoverLetterManager();
+  const { selectedCoverLetter } = useCoverLetterStore();
 
   return (
     <CoverLetterListContainer>
