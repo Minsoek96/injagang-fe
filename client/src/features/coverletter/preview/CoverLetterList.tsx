@@ -17,7 +17,7 @@ function CoverLetterList() {
         <CoverLetterItems
           key={item.essayId}
           item={item}
-          selectedId={selectedCoverLetter.essayId}
+          selectedCoverLetter={selectedCoverLetter}
         />
       ))}
     </CoverLetterListContainer>

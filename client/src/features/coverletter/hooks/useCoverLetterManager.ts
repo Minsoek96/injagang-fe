@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 
 import { useRouter } from 'next/router';
 import {
-  useCoverLetterStore,
   coverLetterType,
 } from '@/src/entities/coverLetter';
 import {
@@ -14,23 +13,8 @@ import {
 const useCoverLetterManager = () => {
   const router = useRouter();
 
-  const { selectedCoverLetter, setCoverLetter } = useCoverLetterStore();
-
   const { mutate: reviseCoverLetter } = useReviseCoverLetter();
   const { mutate: removeCoverLetter } = useDeleteCoverLetter();
-
-  /** 유저가 선택한 자소서 미리보기 반영 */
-  const changeSeleted = (newList: coverLetterType.ICoverLetters) => {
-    if (newList === selectedCoverLetter) return;
-    setCoverLetter(newList);
-  };
-
-  /** 자소서 수정 페이지 이동 */
-  const moveEditPage = (essayId: number) => {
-    router.push({
-      pathname: `/coverLetter/${essayId}/edit`,
-    });
-  };
 
   /** 자소서 업데이트 반영 */
   const changeCoverLetter = useCallback(
@@ -55,11 +39,8 @@ const useCoverLetterManager = () => {
   }, []);
 
   return {
-    changeSeleted,
-    moveEditPage,
     changeCoverLetter,
     deleteCoverLetter,
-    selectedCoverLetter,
   };
 };
 

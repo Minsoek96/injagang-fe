@@ -4,25 +4,32 @@ import styled from 'styled-components';
 
 import { BiEdit } from 'react-icons/bi';
 
-import { coverLetterType } from '@/src/entities/coverLetter';
+import { coverLetterType, useCoverLetterStore } from '@/src/entities/coverLetter';
 
 import { styleMixin, V } from '@/src/shared/styles';
-
-import useUserCoverLetterManager from '../hooks/useCoverLetterManager';
+import usePageRouter from '@/src/shared/hooks/router/usePageRouter';
 
 interface CoverLetterItemsProps {
   item: coverLetterType.ICoverLetters;
-  selectedId: number;
+  selectedCoverLetter: coverLetterType.ICoverLetters;
 }
 
-function CoverLetterItems({ item, selectedId }: CoverLetterItemsProps) {
-  const { moveEditPage, changeSeleted } = useUserCoverLetterManager();
-  const isSelectedItem = selectedId === item.essayId;
+function CoverLetterItems({ item, selectedCoverLetter }: CoverLetterItemsProps) {
+  const { moveCoverLetterEditPage } = usePageRouter();
+  const { setCoverLetter } = useCoverLetterStore();
+
+  /** 유저가 선택한 자소서 미리보기 반영 */
+  const changeSeleted = (newList: coverLetterType.ICoverLetters) => {
+    if (newList === selectedCoverLetter) return;
+    setCoverLetter(newList);
+  };
+
+  const isSelectedItem = selectedCoverLetter.essayId === item.essayId;
 
   return (
     <CoverLetterItemsContainer $isActive={isSelectedItem}>
       <div onClick={() => changeSeleted(item)}>{item.title}</div>
-      <HideSvg onClick={() => moveEditPage(item.essayId)}>
+      <HideSvg onClick={() => moveCoverLetterEditPage(item.essayId)}>
         <BiEdit />
         <span>상세보기</span>
       </HideSvg>
