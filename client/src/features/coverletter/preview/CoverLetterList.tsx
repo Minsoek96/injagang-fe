@@ -3,12 +3,21 @@ import styled from 'styled-components';
 import { styleMixin, V } from '@/src/shared/styles';
 
 import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
-import CoverLetterItems from '@/src/features/coverletter/list/CoverLetterItems';
-import useCoverLetterManager from '../hooks/useCoverLetterManager';
+import { useCoverLetterStore } from '@/src/entities/coverLetter';
+
+import CoverLetterItems from './CoverLetterItems';
 
 function CoverLetterList() {
   const { data: coverLetters } = useFetchCoverLetter();
-  const { selectedCoverLetter } = useCoverLetterManager();
+  const { selectedCoverLetter } = useCoverLetterStore();
+
+  if (!coverLetters?.length) {
+    return (
+      <CoverLetterListContainer>
+        <EmptyItem>작성된 자소서가 없습니다.</EmptyItem>
+      </CoverLetterListContainer>
+    );
+  }
 
   return (
     <CoverLetterListContainer>
@@ -16,7 +25,7 @@ function CoverLetterList() {
         <CoverLetterItems
           key={item.essayId}
           item={item}
-          selectedId={selectedCoverLetter.essayId}
+          selectedCoverLetter={selectedCoverLetter}
         />
       ))}
     </CoverLetterListContainer>
@@ -25,7 +34,7 @@ function CoverLetterList() {
 
 export default CoverLetterList;
 
-export const CoverLetterListContainer = styled.div`
+const CoverLetterListContainer = styled.ul`
   ${styleMixin.Column()}
   ${styleMixin.ScrollBar}
   width: 100%;
@@ -35,4 +44,8 @@ export const CoverLetterListContainer = styled.div`
   margin: 0.5rem auto;
   overflow-x: hidden;
   box-shadow: ${V.boxShadow2};
+`;
+
+const EmptyItem = styled.li`
+  font-size: 1.8rem;
 `;

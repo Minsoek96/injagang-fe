@@ -6,6 +6,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
+    '^.+\\.css$': 'jest-transform-css',
   },
   transform: {
     '^.+\\.(t|j)sx?$': [

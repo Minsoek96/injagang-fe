@@ -32,7 +32,7 @@ function CoverLetterPreView() {
 
 export default CoverLetterPreView;
 
-const CoverLetterPreViewContainer = styled.div`
+const CoverLetterPreViewContainer = styled.ul`
   ${styleMixin.Column('center', 'flex-start')}
   ${styleMixin.ScrollBar}
   font-size: 1.8rem;

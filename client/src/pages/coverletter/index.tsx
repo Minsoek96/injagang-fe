@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 
-import { CoverLetter } from '@/src/features/coverletter';
+import { CoverLetter } from '@/src/features/coverletter/preview';
 
 import { useCoverLetterStore } from '@/src/entities/coverLetter';
 import { useAuthStore } from '@/src/entities/auth';
