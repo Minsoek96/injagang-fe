@@ -11,6 +11,14 @@ function CoverLetterList() {
   const { data: coverLetters } = useFetchCoverLetter();
   const { selectedCoverLetter } = useCoverLetterStore();
 
+  if (!coverLetters?.length) {
+    return (
+      <CoverLetterListContainer>
+        <EmptyItem>작성된 자소서가 없습니다.</EmptyItem>
+      </CoverLetterListContainer>
+    );
+  }
+
   return (
     <CoverLetterListContainer>
       {coverLetters?.map((item) => (
@@ -26,7 +34,7 @@ function CoverLetterList() {
 
 export default CoverLetterList;
 
-export const CoverLetterListContainer = styled.div`
+const CoverLetterListContainer = styled.ul`
   ${styleMixin.Column()}
   ${styleMixin.ScrollBar}
   width: 100%;
@@ -36,4 +44,8 @@ export const CoverLetterListContainer = styled.div`
   margin: 0.5rem auto;
   overflow-x: hidden;
   box-shadow: ${V.boxShadow2};
+`;
+
+const EmptyItem = styled.li`
+  font-size: 1.8rem;
 `;

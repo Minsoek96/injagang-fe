@@ -29,6 +29,18 @@ const responseCoverLetters: ICoverLetters[] = [
     essayId: 10000,
     questions: ['question1', 'question2', 'question3'],
   },
+  {
+    title: 'test2',
+    owner: true,
+    essayId: 10001,
+    questions: ['question11', 'question22', 'question33'],
+  },
+  {
+    title: 'test3',
+    owner: true,
+    essayId: 10002,
+    questions: ['question111', 'question222', 'question333'],
+  },
 ];
 
 /** 샘플 자소서 API 반환 - 상세목록 */

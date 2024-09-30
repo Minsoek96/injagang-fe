@@ -4,7 +4,10 @@ import styled from 'styled-components';
 
 import { BiEdit } from 'react-icons/bi';
 
-import { coverLetterType, useCoverLetterStore } from '@/src/entities/coverLetter';
+import {
+  coverLetterType,
+  useCoverLetterStore,
+} from '@/src/entities/coverLetter';
 
 import { styleMixin, V } from '@/src/shared/styles';
 import usePageRouter from '@/src/shared/hooks/router/usePageRouter';
@@ -14,7 +17,10 @@ interface CoverLetterItemsProps {
   selectedCoverLetter: coverLetterType.ICoverLetters;
 }
 
-function CoverLetterItems({ item, selectedCoverLetter }: CoverLetterItemsProps) {
+function CoverLetterItems({
+  item,
+  selectedCoverLetter,
+}: CoverLetterItemsProps) {
   const { moveCoverLetterEditPage } = usePageRouter();
   const { setCoverLetter } = useCoverLetterStore();
 
@@ -29,7 +35,10 @@ function CoverLetterItems({ item, selectedCoverLetter }: CoverLetterItemsProps) 
   return (
     <CoverLetterItemsContainer $isActive={isSelectedItem}>
       <div onClick={() => changeSeleted(item)}>{item.title}</div>
-      <HideSvg onClick={() => moveCoverLetterEditPage(item.essayId)}>
+      <HideSvg
+        onClick={() => moveCoverLetterEditPage(item.essayId)}
+        role="button"
+      >
         <BiEdit />
         <span>상세보기</span>
       </HideSvg>
@@ -39,18 +48,19 @@ function CoverLetterItems({ item, selectedCoverLetter }: CoverLetterItemsProps) 
 
 export default memo(CoverLetterItems);
 
-const CoverLetterItemsContainer = styled.div<{ $isActive: boolean }>`
+const CoverLetterItemsContainer = styled.li<{ $isActive: boolean }>`
   ${styleMixin.Flex()}
   gap: 1.3rem;
   margin-top: ${V.mdMargin};
   font-size: 2rem;
   font-weight: 600;
-  scale: ${({ $isActive }) => ($isActive ? '1.5' : '1')};
+  transform: ${({ $isActive }) => ($isActive ? 'scale(1.5)' : 'scale(1)')};
   transition: all ease-in 0.2s;
   width: 100%;
   opacity: ${({ $isActive }) => ($isActive ? '1' : '0.2')};
   border-radius: 8px;
   cursor: pointer;
+
   @media screen and (max-width: ${V.mediaMobile}) {
     font-size: 1.5rem;
   }
