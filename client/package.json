@@ -69,12 +69,14 @@
     "next": "^14.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.53.0",
     "react-icons": "^4.7.1",
     "react-markdown-editor-lite": "^1.3.4",
     "reflect-metadata": "^0.2.2",
     "sharp": "^0.33.4",
     "styled-components": "^6.1.11",
     "styled-reset": "^4.5.2",
+    "text-encoding": "^0.7.0",
     "uuid": "^9.0.1",
     "zustand": "^4.5.4"
   }
