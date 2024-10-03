@@ -1,14 +1,13 @@
 import { useState } from 'react';
 
-import useTemplateStoreManager from '@/src/features/template/hooks/useTemplateStoreManager';
-
 import { useFetchTemplate } from '@/src/entities/template/queries';
+import { useTemplateStore } from '@/src/entities/template';
 
 /** TemplateStore에서 상태를 가져와 커스텀하는 로직 */
 const useControlTemplate = () => {
   const { data: templateList = [] } = useFetchTemplate();
   const [selectedTemplateTitle, setSelectedTemplateTitle] = useState<string>('');
-  const { selectedTemplate, setItemInfo } = useTemplateStoreManager();
+  const { selectedTemplate, setSelectedTemplate } = useTemplateStore();
 
   /** 선택된 템플릿탐색하고, 없을시 초기 템플릿 상태 반영 */
   const changeSelectedTemplate = (seleted: string) => {
@@ -19,9 +18,9 @@ const useControlTemplate = () => {
       questions: [''],
     };
     if (searchTemplate) {
-      setItemInfo(searchTemplate);
+      setSelectedTemplate(searchTemplate);
     } else if (seleted === '커스텀 자소서') {
-      setItemInfo(initTemplate);
+      setSelectedTemplate(initTemplate);
     }
     setSelectedTemplateTitle(seleted);
   };
