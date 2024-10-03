@@ -7,3 +7,4 @@ export { default as runValidationChecks } from './check/runValidationChecks';
 export { default as SessionStorageManager } from './storage/sessionStorageManager';
 export { default as LocalStorageManager } from './storage/localStorageManager';
 export * from './cookies/cookiesManager';
+export * from './check/getFirstErrorMessage';
