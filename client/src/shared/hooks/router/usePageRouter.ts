@@ -10,8 +10,15 @@ export default function usePageRouter() {
       pathname: `/coverLetter/${essayId}/edit`,
     });
   }, []);
+  /** 자소서 메인 페이지 이동 */
+  const moveCoverLetterMainPage = useCallback(() => {
+    router.push({
+      pathname: '/coverLetter',
+    });
+  }, []);
 
   return {
     moveCoverLetterEditPage,
+    moveCoverLetterMainPage,
   };
 }

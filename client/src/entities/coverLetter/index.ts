@@ -5,4 +5,4 @@ export { default as querykeys } from './querykeys';
 export * as coverLetterType from './type';
 export { default as useCoverLetterStore } from './useCoverLetterStore';
 export { default as CoverLetterItem } from './ui/CoverLetterItem';
-export * as coverLetterModel from './model/model';
+export * as coverLetterModel from './model/schema';
