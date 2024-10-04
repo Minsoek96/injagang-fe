@@ -8,6 +8,7 @@ import { runValidationChecks } from '@/src/shared/utils';
 import { ERROR_MESSAGES } from '@/src/shared/const';
 import { useWriteCoverLetter } from '@/src/entities/coverLetter/mutations';
 import { useModal } from '@/src/shared/hooks';
+
 import {
   qnaReducer,
   ADD_QNA,
@@ -107,7 +108,7 @@ const useCoverLetterCreatorLogic = () => {
       owner: true,
       qnaList: formatQnAList,
     };
-
+    console.log(qnaListForSubmission);
     writeCoverLetter(qnaListForSubmission);
     router.push('/coverLetter');
   }, [state]);

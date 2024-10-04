@@ -1,86 +1,61 @@
-import { useEffect } from 'react';
+import { styled } from 'styled-components';
+
+import { SubmitHandler } from 'react-hook-form';
+
+import {
+  coverLetterType,
+  coverLetterQueries,
+} from '@/src/entities/coverLetter';
+
+import { styleMixin, V } from '@/src/shared/styles';
+import { Container, Spinner } from '@/src/shared/ui';
+import { usePageRouter } from '@/src/shared/hooks';
 
 import { useRouter } from 'next/router';
+import { useCoverLetterManager } from '@/src/features/coverletter/hooks';
+import EditForm from './EditForm';
 
-import { BtnType } from '@/src/shared/ui';
-
-import { Spinner } from '@/src/shared/ui/spinner';
-import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
-
-import { CoverLetterTemplate } from '@/src/features/coverletter/common';
-import useCoverLetterManager from '../hooks/useCoverLetterManager';
-import useCoverLetterCreatorLogic from '../hooks/useCoverLetterCreatorLogic';
-
-/** 자소서 수정 메인 컴포넌트 */
-function CoverLetterEdit() {
-  const router = useRouter();
-  const moveCoverLetterMainPage = '/coverLetter';
-
-  const { id } = router.query;
-  const { data: coverLetter, isLoading } = useFetchDetailCoverLetter(
-    Number(id),
-  );
-
-  const {
-    qnaList,
-    setQnAList,
-    deleteQnAList,
-    changeQnAList,
-    addQnAList,
-    coverLetterTitle,
-    setCoverLetterTitle,
-  } = useCoverLetterCreatorLogic();
-
+export default function CoverLetterCreator() {
+  const { moveCoverLetterMainPage } = usePageRouter();
   const { changeCoverLetter, deleteCoverLetter } = useCoverLetterManager();
+  const router = useRouter();
+  const { id } = router.query;
+  const { data: coverLetter, isLoading } = coverLetterQueries.useFetchDetailCoverLetter(Number(id));
 
-  useEffect(() => {
-    if (coverLetter && !isLoading) {
-      setQnAList(coverLetter?.qnaList ?? []);
-      setCoverLetterTitle(coverLetter?.title ?? '');
-    }
-  }, [coverLetter]);
-
-  const navigateMoveLetterMainpage = ():void => {
-    router.push(moveCoverLetterMainPage);
+  /** field 반영 */
+  const onSubmit: SubmitHandler<coverLetterType.ICoverLetter> = (data) => {
+    const { title, qnaList } = data;
+    changeCoverLetter(Number(id), title, qnaList);
   };
 
-  const actionButtons: BtnType.BaseProps[] = [
-    {
-      id: 'back-01',
-      label: '뒤로가기',
-      onClick: () => navigateMoveLetterMainpage(),
-      sx: { fontSize: '2em' },
-    },
-    {
-      id: 'delete-02',
-      label: '삭제하기',
-      onClick: () => deleteCoverLetter(Number(id)),
-      sx: { fontSize: '2em' },
-    },
-    {
-      id: 'change-03',
-      label: '수정완료',
-      onClick: () => changeCoverLetter(Number(id), coverLetterTitle, qnaList),
-      sx: { fontSize: '2em' },
-    },
-  ];
-
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner message="데이터를 불러오는 중입니다." />;
 
   return (
-    <CoverLetterTemplate
-      mainTitle="자소서 수정하기"
-      coverLetterTitle={coverLetterTitle}
-      setCoverLetterTitle={setCoverLetterTitle}
-      qnaList={qnaList}
-      deleteQnAList={deleteQnAList}
-      changeQnAList={changeQnAList}
-      addQnAList={addQnAList}
-      actionButtons={actionButtons}
-      isLoading={isLoading}
-      isTemplate={false}
-    />
+    <CoverLetterCreatorContainer>
+      <MainTitle>자기소개서 작성</MainTitle>
+      <EditForm
+        movePage={moveCoverLetterMainPage}
+        onSubmit={onSubmit}
+        coverLetters={coverLetter}
+        onDelete={() => deleteCoverLetter(Number(id))}
+      />
+    </CoverLetterCreatorContainer>
   );
 }
 
-export default CoverLetterEdit;
+const CoverLetterCreatorContainer = styled(Container.ItemBase)`
+  ${styleMixin.Column()}
+  width: 100%;
+  max-width: ${V.lgWidth};
+`;
+
+const MainTitle = styled.h2`
+  ${styleMixin.Flex('flex-start', 'flex-start')}
+  width: 100%;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-underline-offset: 0;
+`;
