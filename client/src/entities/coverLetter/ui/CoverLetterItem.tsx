@@ -12,7 +12,7 @@ import { coverLetterType } from '@/src/entities/coverLetter';
 
 import { styleMixin, V } from '@/src/shared/styles';
 import { HideSvg } from '@/src/shared/ui';
-import { ResizeableTextarea } from '@/src/shared/ui/uncontrolled';
+import { UnResizeableTextarea } from '@/src/shared/ui/uncontrolled';
 
 type Props = {
   register: UseFormRegister<coverLetterType.ICoverLetter>;
@@ -60,13 +60,13 @@ export default function CoverLetterItem({
           fontSize: '2em',
         }}
       />
-      <ResizeableTextarea
+      <UnResizeableTextarea
         register={register(`qnaList.${index}.question`)}
         placeholder="내용을 작성해주세요."
         maxSize={10}
         style={{ resize: 'vertical' }}
       />
-      <ResizeableTextarea
+      <UnResizeableTextarea
         register={register(`qnaList.${index}.answer`)}
         placeholder="내용을 작성해주세요."
         maxSize={30}

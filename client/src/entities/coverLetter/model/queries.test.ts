@@ -1,20 +1,24 @@
+import { act, renderHook, waitFor } from '@testing-library/react';
+
 import {
   responseCoverLetters,
   responseDetailCoverLetter,
 } from '@/fixutures/entities/coverLetter';
 import TestProvider from '@/fixutures/TestProvider';
+
+// TODO : 룰 위반.. 이거 어디 분류하지
 import { useAuthStore } from '@/src/entities/auth';
 import {
   getCoverLetter,
   getDetailCoverLetter,
-} from '@/src/entities/coverLetter/apis';
+} from '@/src/entities/coverLetter/api/apis';
+
 import {
   useFetchCoverLetter,
   useFetchDetailCoverLetter,
-} from '@/src/entities/coverLetter/queries';
-import { act, renderHook, waitFor } from '@testing-library/react';
+} from './queries';
 
-jest.mock('./apis');
+jest.mock('@/src/entities/coverLetter/api/apis');
 
 describe('queries', () => {
   beforeEach(() => {

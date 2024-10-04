@@ -1,6 +1,6 @@
-import { useFetchDetailCoverLetter } from '@/src/entities/coverLetter/queries';
 import { memo } from 'react';
 import { S } from '@/src/features/qna/common';
+import { coverLetterQueries } from '@/src/entities/coverLetter';
 import CoverLetterItem from './CoverLetterItem';
 
 interface CoverLetterProps {
@@ -8,7 +8,7 @@ interface CoverLetterProps {
 }
 
 function CoverLetterDetail({ essayId }: CoverLetterProps) {
-  const { data: coverLetterDetail } = useFetchDetailCoverLetter(essayId);
+  const { data: coverLetterDetail } = coverLetterQueries.useFetchDetailCoverLetter(essayId);
 
   if (essayId === 0) {
     return (

@@ -24,7 +24,7 @@ type Props = {
   onSubmit: (data: coverLetterType.ICoverLetter) => void;
   onDelete: () => void;
   movePage: () => void;
-  coverLetters: coverLetterType.ICoverLetterDetail| undefined;
+  coverLetters: coverLetterType.ICoverLetterDetail | undefined;
 };
 
 /**

@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useAuthStore } from '@/src/entities/auth';
-import coverLetter from './querykeys';
-
-import { getCoverLetter, getDetailCoverLetter } from './apis';
+import coverLetter from '@/src/entities/coverLetter/lib/querykeys';
+import { getCoverLetter, getDetailCoverLetter } from '@/src/entities/coverLetter/api/apis';
 
 /** 자기소개서 목록 조회 */
 const useFetchCoverLetter = () => {

@@ -2,7 +2,7 @@ import { act } from '@testing-library/react';
 
 import { emptyCoverLetter, sampleCoverLetter } from '@/fixutures/entities/coverLetter';
 
-import useCoverLetterStore from '@/src/entities/coverLetter/useCoverLetterStore';
+import useCoverLetterStore from './useCoverLetterStore';
 
 describe('useCoverLetterStore', () => {
   it('선택된 자소서 세부목록을 저장한다.', () => {

@@ -2,13 +2,12 @@ import styled from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
 
-import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
-import { useCoverLetterStore } from '@/src/entities/coverLetter';
+import { useCoverLetterStore, coverLetterQueries } from '@/src/entities/coverLetter';
 
 import CoverLetterItems from './CoverLetterItems';
 
 function CoverLetterList() {
-  const { data: coverLetters } = useFetchCoverLetter();
+  const { data: coverLetters } = coverLetterQueries.useFetchCoverLetter();
   const { selectedCoverLetter } = useCoverLetterStore();
 
   if (!coverLetters?.length) {

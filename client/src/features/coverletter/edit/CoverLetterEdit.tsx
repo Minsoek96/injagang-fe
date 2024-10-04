@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import { styled } from 'styled-components';
 
 import { SubmitHandler } from 'react-hook-form';
@@ -11,8 +13,7 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { Container, Spinner } from '@/src/shared/ui';
 import { usePageRouter } from '@/src/shared/hooks';
 
-import { useRouter } from 'next/router';
-import { useCoverLetterManager } from '@/src/features/coverletter/hooks';
+import useCoverLetterManager from './model/useCoverLetterManager';
 import EditForm from './EditForm';
 
 export default function CoverLetterCreator() {

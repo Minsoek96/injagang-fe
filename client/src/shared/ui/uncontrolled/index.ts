@@ -1,2 +1,2 @@
 export { default as StlyeInput } from './StyleInput';
-export { default as ResizeableTextarea } from './ResizeableTextarea';
+export { default as UnResizeableTextarea } from './ResizeableTextarea';

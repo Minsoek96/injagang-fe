@@ -7,7 +7,7 @@ import {
   ICoverLetterDetail,
   IReviseCoverLetter,
   IWriteCoverLetter,
-} from '@/src/entities/coverLetter/type';
+} from '@/src/entities/coverLetter/lib/type';
 
 const getCoverLetter = async (): Promise<ICoverLetters[]> =>
   fetcher(METHOD.GET, `${ESSAY_APIS.GET_API}`).then(
