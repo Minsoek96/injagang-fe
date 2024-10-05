@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { styled } from 'styled-components';
 
 import { SubmitHandler } from 'react-hook-form';
@@ -8,7 +6,6 @@ import {
   coverLetterMutation,
   coverLetterType,
 } from '@/src/entities/coverLetter';
-import { useFetchTemplate } from '@/src/entities/template/queries';
 
 import { styleMixin, V } from '@/src/shared/styles';
 import {
@@ -20,10 +17,7 @@ import CreateForm from './CreateForm';
 
 export default function CoverLetterCreator() {
   const { moveCoverLetterMainPage } = usePageRouter();
-  const { data: templateList = [] } = useFetchTemplate();
   const { mutate } = coverLetterMutation.useWriteCoverLetter();
-
-  const [selectedTemplateTitle, setSelectedTemplateTitle] = useState<string>('');
 
   /** field 반영 */
   const onSubmit: SubmitHandler<coverLetterType.ICoverLetter> = (data) => {
@@ -37,9 +31,6 @@ export default function CoverLetterCreator() {
       <CreateForm
         movePage={moveCoverLetterMainPage}
         onSubmit={onSubmit}
-        templateList={templateList}
-        selectedTemplateTitle={selectedTemplateTitle}
-        setSelectedTemplateTitle={setSelectedTemplateTitle}
       />
     </CoverLetterCreatorContainer>
   );

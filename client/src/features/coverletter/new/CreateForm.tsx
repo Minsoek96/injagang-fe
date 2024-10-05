@@ -12,20 +12,18 @@ import {
   coverLetterModel,
   coverLetterType,
 } from '@/src/entities/coverLetter';
-import { templateType } from '@/src/entities/template';
 
 import {
-  ComboBox, HideSvg, MainButton, StlyeInput,
+  HideSvg, MainButton, StlyeInput,
 } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 import { getFirstErrorMessage } from '@/src/shared/utils/check/getFirstErrorMessage';
 import { useModal } from '@/src/shared/hooks';
 
+import TemplateSelector from './TemplateSelector';
+
 type Props = {
   onSubmit: (data: coverLetterType.ICoverLetter) => void;
-  templateList: templateType.IGetTemplate[];
-  selectedTemplateTitle: string;
-  setSelectedTemplateTitle: (template: string) => void;
   movePage: () => void;
 };
 
@@ -37,21 +35,18 @@ type Props = {
  *
  * @param {Function} movePage - 페이지 이동 함수
  * @param onSubmit - 폼 제출 시 호출되는 함수
- * @param templateList - 템플릿 리스트
- * @param selectedTemplateTitle - 선택된 템플릿의 제목
- * @param setSelectedTemplateTitle - 템플릿 선택 변경 함수
  */
 
 export default function CreateForm({
   movePage,
   onSubmit,
-  templateList,
-  selectedTemplateTitle,
-  setSelectedTemplateTitle,
 }: Props) {
   const { setModal } = useModal();
   const {
-    register, control, handleSubmit, reset,
+    register,
+    control,
+    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<coverLetterType.ICoverLetter>({
     resolver: zodResolver(coverLetterModel.schema),
@@ -69,19 +64,6 @@ export default function CreateForm({
   /** field 데이터추가 */
   const addQustion = () => {
     append({ question: '', answer: '', qnaId: uuid4() });
-  };
-
-  const changeSelectedTemplate = (selctedTemplate: string) => {
-    setSelectedTemplateTitle(selctedTemplate);
-    const template = templateList.find(
-      (item) => item.title === selctedTemplate,
-    );
-    if (template) {
-      reset({ qnaList: [] });
-      template.questions.forEach((item) => {
-        append({ question: item, answer: '', qnaId: uuid4() });
-      });
-    }
   };
 
   /** field 데이터삭제 */
@@ -109,17 +91,7 @@ export default function CreateForm({
         placeholder="자소서제목"
         style={{ width: '100%', marginBottom: '1.5rem' }}
       />
-      <ComboBox
-        sx={{ maxWidth: '100%', height: '4rem' }}
-        label="자소서 선택"
-        placeholder="템플릿 선택(선택사항)"
-        hideLabel
-        selectedItem={selectedTemplateTitle}
-        items={templateList.map((item) => item.title)}
-        itemToId={(item) => item || ''}
-        itemToText={(item) => item || ''}
-        onChange={(value) => value && changeSelectedTemplate(value)}
-      />
+      <TemplateSelector append={append} reset={reset} />
       {fields.map((field, index) => (
         <CoverLetterItem
           key={field.id}
@@ -136,7 +108,12 @@ export default function CreateForm({
         sx={{ fontSize: '3.5rem', margin: '1rem' }}
       />
       <ControllerBtns>
-        <MainButton type="button" label="뒤로가기" sx={{ fontSize: '1.7em' }} onClick={movePage} />
+        <MainButton
+          type="button"
+          label="뒤로가기"
+          sx={{ fontSize: '1.7em' }}
+          onClick={movePage}
+        />
         <MainButton type="submit" label="작성완료" sx={{ fontSize: '1.7em' }} />
       </ControllerBtns>
     </CoverLetterForm>
