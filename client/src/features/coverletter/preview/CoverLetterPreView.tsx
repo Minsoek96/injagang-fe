@@ -6,6 +6,10 @@ import { useCoverLetterStore } from '@/src/entities/coverLetter';
 import { keys } from '@/src/shared/utils';
 import CoverLetterPreViewItem from './CoverLetterPreViewItem';
 
+/**
+ * CoverLetterItems 유저가 선택한 자소서 질문 리스트 UI
+ * - 유저가 선택한 자소서의 질문 리스트를 출력
+ */
 function CoverLetterPreView() {
   const { selectedCoverLetter } = useCoverLetterStore();
 

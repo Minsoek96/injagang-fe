@@ -12,7 +12,7 @@ import { Container, HideSvg, Spinner } from '@/src/shared/ui';
 import CoverLetterList from './CoverLetterList';
 import CoverLetterPreView from './CoverLetterPreView';
 
-/** 메인 자소서 */
+/** 유저 자소서 선택 페이지 */
 function CoverLetter() {
   const router = useRouter();
   const headerTitle = '나의 자소서 목록';

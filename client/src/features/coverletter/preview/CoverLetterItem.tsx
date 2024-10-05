@@ -17,14 +17,21 @@ interface CoverLetterItemsProps {
   selectedCoverLetter: coverLetterType.ICoverLetters;
 }
 
-function CoverLetterItems({
+/**
+ * CoverLetterItem 유저의 자소서 목록 리스트 아이템
+ * - 선택한 자소서를 미리보기에 등록
+ * - 선택한 제목의 자소서 정보 상세보기
+ *
+ * @param item - 질문 넘버
+ * @param selectedCoverLetter - 현재 유저가 선택한 자소
+ */
+function CoverLetterItem({
   item,
   selectedCoverLetter,
 }: CoverLetterItemsProps) {
   const { moveCoverLetterEditPage } = usePageRouter();
   const { setCoverLetter } = useCoverLetterStore();
 
-  /** 유저가 선택한 자소서 미리보기 반영 */
   const changeSeleted = (newList: coverLetterType.ICoverLetters) => {
     if (newList === selectedCoverLetter) return;
     setCoverLetter(newList);
@@ -46,7 +53,7 @@ function CoverLetterItems({
   );
 }
 
-export default memo(CoverLetterItems);
+export default memo(CoverLetterItem);
 
 const CoverLetterItemsContainer = styled.li<{ $isActive: boolean }>`
   ${styleMixin.Flex()}

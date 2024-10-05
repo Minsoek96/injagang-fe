@@ -9,7 +9,7 @@ import { responseCoverLetters } from '@/fixutures/entities/coverLetter';
 
 import { coverLetterType, useCoverLetterStore } from '@/src/entities/coverLetter';
 
-import CoverLetterItems from '../CoverLetterItems';
+import CoverLetterItem from '../CoverLetterItem';
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn().mockReturnValue({
@@ -19,7 +19,7 @@ jest.mock('next/router', () => ({
 
 const context = describe;
 
-describe('CoverLetterItems', () => {
+describe('CoverLetterItem', () => {
   const coverLetterItem = responseCoverLetters[0];
   const diffCoveLetterItem = responseCoverLetters[1];
 
@@ -29,7 +29,7 @@ describe('CoverLetterItems', () => {
   ) => {
     render(
       <TestProvider>
-        <CoverLetterItems item={item} selectedCoverLetter={selectedItem} />
+        <CoverLetterItem item={item} selectedCoverLetter={selectedItem} />
       </TestProvider>,
     );
   };
