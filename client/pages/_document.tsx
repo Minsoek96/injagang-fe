@@ -38,6 +38,8 @@ export default class MyDocument extends Document {
         <Head />
         <body>
           <Main />
+          <div id="modal-root" />
+          {/* 포탈을 사용할 DOM 노드 */}
           <NextScript />
         </body>
       </Html>
