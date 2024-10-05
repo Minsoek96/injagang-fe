@@ -4,15 +4,8 @@ import {
   act, renderHook, waitFor,
 } from '@testing-library/react';
 
-import coverLetter from '@/src/entities/coverLetter/querykeys';
+import coverLetter from '@/src/entities/coverLetter/lib/querykeys';
 
-import TestProvider from '@/fixutures/TestProvider';
-
-import {
-  useDeleteCoverLetter,
-  useReviseCoverLetter,
-  useWriteCoverLetter,
-} from '@/src/entities/coverLetter/mutations';
 import { useToast } from '@/src/shared/hooks';
 
 import {
@@ -22,17 +15,24 @@ import {
 } from '@/src/shared/const';
 
 import {
-  addCoverLetter,
-  deleteCoverLetter,
-  reviseCoverLetter,
-} from '@/src/entities/coverLetter/apis';
-import {
   sampleCoverLetters,
   sampleReviseCoverLetter,
 } from '@/fixutures/entities/coverLetter';
+import TestProvider from '@/fixutures/TestProvider';
+import {
+  addCoverLetter,
+  deleteCoverLetter,
+  reviseCoverLetter,
+} from '@/src/entities/coverLetter/api/apis';
+
+import {
+  useDeleteCoverLetter,
+  useReviseCoverLetter,
+  useWriteCoverLetter,
+} from './mutations';
 
 /** 목킹 설정 */
-jest.mock('./apis');
+jest.mock('@/src/entities/coverLetter/api/apis');
 jest.mock('js-cookie');
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),

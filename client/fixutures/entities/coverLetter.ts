@@ -3,7 +3,7 @@ import {
   ICoverLetters,
   IReviseCoverLetter,
   IWriteCoverLetter,
-} from '@/src/entities/coverLetter/type';
+} from '@/src/entities/coverLetter/lib/type';
 
 /** 샘플 자소서 작성 목록 */
 const sampleCoverLetters: IWriteCoverLetter = {

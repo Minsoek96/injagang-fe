@@ -17,9 +17,8 @@ import { styleMixin, V } from '@/src/shared/styles';
 import CoverLetterDetail from '@/src/features/question-composer/CoverLetterDetail';
 
 import { useWriteBoard } from '@/src/entities/qnaboard/mutaions';
-import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
-
 import dynamic from 'next/dynamic';
+import { coverLetterQueries } from '@/src/entities/coverLetter';
 
 const MarkdownEditor = dynamic(
   () => import('@/src/shared/ui/markdown/MarkdownEditor'),
@@ -33,7 +32,7 @@ const MarkdownEditor = dynamic(
 
 function QuestionComposer() {
   const router = useRouter();
-  const { data: coverLtters = [] } = useFetchCoverLetter();
+  const { data: coverLtters = [] } = coverLetterQueries.useFetchCoverLetter();
   const { mutate: writeBoard } = useWriteBoard();
 
   const [coverLetterTitle, setCoverLetterTitle] = useState<string>('');

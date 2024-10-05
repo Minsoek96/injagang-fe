@@ -1,16 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/src/shared/const';
-
-import { useToast } from '@/src/shared/hooks';
 import {
   IReviseCoverLetter,
   IWriteCoverLetter,
-} from '@/src/entities/coverLetter/type';
+} from '@/src/entities/coverLetter/lib/type';
+import coverLetter from '@/src/entities/coverLetter/lib/querykeys';
 
-import { addCoverLetter, deleteCoverLetter, reviseCoverLetter } from './apis';
-
-import coverLetter from './querykeys';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/src/shared/const';
+import { useToast } from '@/src/shared/hooks';
+import { addCoverLetter, deleteCoverLetter, reviseCoverLetter } from '@/src/entities/coverLetter/api/apis';
 
 /** 자기소개서 작성 */
 const useWriteCoverLetter = () => {

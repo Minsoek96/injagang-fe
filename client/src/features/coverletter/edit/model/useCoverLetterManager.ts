@@ -3,18 +3,16 @@ import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import {
   coverLetterType,
+
+  coverLetterMutation,
 } from '@/src/entities/coverLetter';
-import {
-  useDeleteCoverLetter,
-  useReviseCoverLetter,
-} from '@/src/entities/coverLetter/mutations';
 
 /** 유저가 선택한 자소서의 상태를 반영하고 업데이트를 위한 함수 */
 const useCoverLetterManager = () => {
   const router = useRouter();
 
-  const { mutate: reviseCoverLetter } = useReviseCoverLetter();
-  const { mutate: removeCoverLetter } = useDeleteCoverLetter();
+  const { mutate: reviseCoverLetter } = coverLetterMutation.useReviseCoverLetter();
+  const { mutate: removeCoverLetter } = coverLetterMutation.useDeleteCoverLetter();
 
   /** 자소서 업데이트 반영 */
   const changeCoverLetter = useCallback(

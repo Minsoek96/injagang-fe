@@ -2,13 +2,16 @@ import styled from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
 
-import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
-import { useCoverLetterStore } from '@/src/entities/coverLetter';
+import { useCoverLetterStore, coverLetterQueries } from '@/src/entities/coverLetter';
 
-import CoverLetterItems from './CoverLetterItems';
+import CoverLetterItem from './CoverLetterItem';
 
+/**
+ * CoverLetterList 유저의 자소서 목록 리스트
+ * - 유저가 작성한 자소서 목록 리스트를 가져온다.
+ */
 function CoverLetterList() {
-  const { data: coverLetters } = useFetchCoverLetter();
+  const { data: coverLetters } = coverLetterQueries.useFetchCoverLetter();
   const { selectedCoverLetter } = useCoverLetterStore();
 
   if (!coverLetters?.length) {
@@ -22,7 +25,7 @@ function CoverLetterList() {
   return (
     <CoverLetterListContainer>
       {coverLetters?.map((item) => (
-        <CoverLetterItems
+        <CoverLetterItem
           key={item.essayId}
           item={item}
           selectedCoverLetter={selectedCoverLetter}

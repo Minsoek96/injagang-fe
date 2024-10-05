@@ -2,15 +2,28 @@ import { useModalStore } from '@/src/shared/store';
 
 import { styled } from 'styled-components';
 
-import { MainButton } from '@/src/shared/ui/button';
+import { MainButton } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
+
+import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
 
 const MODAL_CLOSE_DELAY = 50;
 
 export default function RenderModal() {
   const { isModalOpen, modalState, closeModal } = useModalStore();
-
   const { contents } = modalState;
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  if (!mounted) return null;
+
+  const modalRoot = document.getElementById('modal-root') || document.body;
 
   const actionModal = () => {
     if (!modalState.onAction) return;
@@ -24,47 +37,44 @@ export default function RenderModal() {
     return null;
   }
 
-  return (
-    isModalOpen
-    && (
-      <ModalStyle>
-        <ModalBox>
-          <div className="modal_Contents">
-            <h2>{contents.title}</h2>
-            <p>{contents.message}</p>
+  return createPortal(
+    <ModalStyle>
+      <ModalBox>
+        <div className="modal_Contents">
+          <h2>{contents.title}</h2>
+          <p>{contents.message}</p>
+        </div>
+        {modalState.onAction ? (
+          <div className="modal_Controller">
+            <MainButton
+              label="예"
+              onClick={actionModal}
+              sx={{ width: '150px', fontSize: '15px' }}
+            />
+            <MainButton
+              label="아니요"
+              onClick={closeModal}
+              sx={{ width: '150px', fontSize: '15px' }}
+            />
           </div>
-          {modalState.onAction ? (
-            <div className="modal_Controller">
-              <MainButton
-                label="예"
-                onClick={actionModal}
-                sx={{ width: '150px', fontSize: '15px' }}
-              />
-              <MainButton
-                label="아니요"
-                onClick={closeModal}
-                sx={{ width: '150px', fontSize: '15px' }}
-              />
-            </div>
-          ) : (
-            <div className="modal_center_btn">
-              <MainButton
-                label="확인"
-                onClick={closeModal}
-                sx={{ width: '150px', fontSize: '15px' }}
-              />
-            </div>
-          )}
-        </ModalBox>
-      </ModalStyle>
-    )
+        ) : (
+          <div className="modal_center_btn">
+            <MainButton
+              label="확인"
+              onClick={closeModal}
+              sx={{ width: '150px', fontSize: '15px' }}
+            />
+          </div>
+        )}
+      </ModalBox>
+    </ModalStyle>,
+    modalRoot,
   );
 }
 
 const ModalStyle = styled.div`
   ${styleMixin.Flex()}
   font-size: 1.8rem;
-  z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;

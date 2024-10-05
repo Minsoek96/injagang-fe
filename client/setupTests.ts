@@ -2,6 +2,10 @@
 import 'reflect-metadata';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'jest-styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'whatwg-fetch';
+
+import { TextEncoder } from 'util';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -16,3 +20,5 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: jest.fn(),
   })),
 });
+
+global.TextEncoder = TextEncoder;

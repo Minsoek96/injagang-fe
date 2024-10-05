@@ -9,3 +9,4 @@ export { default as useToast } from './toast/useToast';
 export { default as useWebSpeech } from './speech/useWebSpeech';
 export { default as useInterval } from './interval/useInterval';
 export { default as useCounter } from './counter/useCounter';
+export { default as usePageRouter } from './router/usePageRouter';

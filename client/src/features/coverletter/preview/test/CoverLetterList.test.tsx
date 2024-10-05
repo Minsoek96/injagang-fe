@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { useFetchCoverLetter } from '@/src/entities/coverLetter/queries';
 
 import TestProvider from '@/fixutures/TestProvider';
 import { responseCoverLetters } from '@/fixutures/entities/coverLetter';
+import { coverLetterQueries } from '@/src/entities/coverLetter';
 
 import CoverLetterList from '../CoverLetterList';
 
-jest.mock('@/src/entities/coverLetter/queries', () => ({
+jest.mock('@/src/entities/coverLetter/model/queries', () => ({
   useFetchCoverLetter: jest.fn(),
 }));
 
@@ -26,7 +26,7 @@ describe('CoverLetterList', () => {
   };
 
   beforeEach(() => {
-    (useFetchCoverLetter as jest.Mock).mockReturnValue({
+    (coverLetterQueries.useFetchCoverLetter as jest.Mock).mockReturnValue({
       data: responseCoverLetters,
     });
   });
@@ -41,7 +41,7 @@ describe('CoverLetterList', () => {
   });
 
   it('자소서리스트가 없을 때 안내메시지가 렌더링된다.', () => {
-    (useFetchCoverLetter as jest.Mock).mockReturnValue({
+    (coverLetterQueries.useFetchCoverLetter as jest.Mock).mockReturnValue({
       data: [],
     });
 

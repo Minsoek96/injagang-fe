@@ -1,8 +1,8 @@
 import { create } from 'zustand';
-import { ICoverLetters } from '@/src/entities/coverLetter/type';
+import { coverLetterType } from '@/src/entities/coverLetter';
 
 interface InitiaState {
-  selectedCoverLetter: ICoverLetters;
+  selectedCoverLetter: coverLetterType.ICoverLetters;
 }
 
 const initialState: InitiaState = {
@@ -15,18 +15,18 @@ const initialState: InitiaState = {
 };
 
 type State = {
-  selectedCoverLetter: ICoverLetters;
+  selectedCoverLetter: coverLetterType.ICoverLetters;
 };
 
 type Action = {
-  setCoverLetter: (data: ICoverLetters) => void;
+  setCoverLetter: (data: coverLetterType.ICoverLetters) => void;
   initCoverLetter: () => void;
 };
 
 /** 유저가 선택한 자기소개서 관리 */
 const useCoverLetterStore = create<State & Action>((set) => ({
   selectedCoverLetter: initialState.selectedCoverLetter,
-  setCoverLetter: (data: ICoverLetters) =>
+  setCoverLetter: (data: coverLetterType.ICoverLetters) =>
     set({
       selectedCoverLetter: data,
     }),
