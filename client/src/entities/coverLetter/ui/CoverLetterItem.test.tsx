@@ -7,6 +7,7 @@ import { coverLetterType } from '@/src/entities/coverLetter';
 import TestProvider from '@/fixutures/TestProvider';
 import CoverLetterItem from './CoverLetterItem';
 
+// TODO: 테스트코드 수정
 describe('CoverLetterItem', () => {
   const mockRemove = jest.fn();
 
@@ -33,13 +34,13 @@ describe('CoverLetterItem', () => {
 
   it('컴포넌트가 렌더링된다.', () => {
     render(<Wrapper />);
-    expect(screen.getAllByPlaceholderText('내용을 작성해주세요.').length).toBe(2);
+    expect(screen.getByPlaceholderText('질문을 작성해주세요.')).toBeInTheDocument();
     expect(screen.getByText('글자수 : 0/500')).toBeInTheDocument();
   });
 
   it('답변 텍스트 입력 시 글자수가 업데이트된다.', () => {
     render(<Wrapper />);
-    const answerTextarea = screen.getAllByPlaceholderText('내용을 작성해주세요.')[1];
+    const answerTextarea = screen.getByPlaceholderText('답변을 작성해주세요.');
     fireEvent.change(answerTextarea, { target: { value: '테스트 답변' } });
     expect(screen.getByText('글자수 : 6/500')).toBeInTheDocument();
   });

@@ -62,13 +62,13 @@ export default function CoverLetterItem({
       />
       <UnResizeableTextarea
         register={register(`qnaList.${index}.question`)}
-        placeholder="내용을 작성해주세요."
+        placeholder="질문을 작성해주세요."
         maxSize={10}
         style={{ resize: 'vertical' }}
       />
       <UnResizeableTextarea
         register={register(`qnaList.${index}.answer`)}
-        placeholder="내용을 작성해주세요."
+        placeholder="답변을 작성해주세요."
         maxSize={30}
         style={{ minHeight: '15rem', resize: 'vertical' }}
       />
