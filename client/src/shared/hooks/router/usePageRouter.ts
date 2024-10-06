@@ -17,8 +17,13 @@ export default function usePageRouter() {
     });
   }, []);
 
+  const moveBoardDetailPage = useCallback((boardId: number) => {
+    router.replace({ pathname: `/qna/detail/${boardId}` });
+  }, []);
+
   return {
     moveCoverLetterEditPage,
     moveCoverLetterMainPage,
+    moveBoardDetailPage,
   };
 }

@@ -14,7 +14,7 @@ import {
 } from '@/src/entities/coverLetter';
 
 import {
-  HideSvg, MainButton, StlyeInput,
+  HideSvg, MainButton, UnInput,
 } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 import { getFirstErrorMessage } from '@/src/shared/utils/check/getFirstErrorMessage';
@@ -86,7 +86,7 @@ export default function CreateForm({
 
   return (
     <CoverLetterForm onSubmit={handleSubmit(onSubmit, onError)}>
-      <StlyeInput
+      <UnInput
         register={register('title')}
         placeholder="자소서제목"
         style={{ width: '100%', marginBottom: '1.5rem' }}

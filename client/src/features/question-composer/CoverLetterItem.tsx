@@ -5,6 +5,12 @@ type CoverLetterDetailItemsProps = {
   question: string;
 };
 
+/**
+ * CoverLetterItem 유저가 선택한 자소서 목록 아이템
+ * - 유저가 선택한 자소서 아이템
+ * @param question : 자소서 질문
+ * @param answer : 자소서 답변
+ */
 function CoverLetterItem({ answer, question }: CoverLetterDetailItemsProps) {
   return (
     <S.detailItmes>

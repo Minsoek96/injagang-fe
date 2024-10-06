@@ -7,6 +7,11 @@ interface CoverLetterProps {
   essayId: number;
 }
 
+/**
+ * CoverLetterDetail
+ * - 유저가 선택한 자소서 상세 리스트
+ * @param essayId : 선택된 자소서 아이디
+ */
 function CoverLetterDetail({ essayId }: CoverLetterProps) {
   const { data: coverLetterDetail } = coverLetterQueries.useFetchDetailCoverLetter(essayId);
 

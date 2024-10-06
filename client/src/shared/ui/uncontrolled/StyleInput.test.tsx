@@ -1,6 +1,6 @@
 import TestProvider from '@/fixutures/TestProvider';
-import { StlyeInput } from '@/src/shared/ui/uncontrolled';
 import { fireEvent, render, screen } from '@testing-library/react';
+import StlyeInput from './StyleInput';
 
 const mockRegister = {
   name: 'test-input',
