@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import useBoardStore from '@/src/entities/qnaboard/useBoardStore';
+import useBoardStore from '@/src/entities/qnaboard/model/useBoardStore';
 import { getBoardList, getDetailBoard } from './apis';
 
 import board from './queryKeys';

@@ -19,6 +19,8 @@ const S = {
     word-break: normal !important;
     white-space: normal;
     line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
 
   detailItmes: styled.div`

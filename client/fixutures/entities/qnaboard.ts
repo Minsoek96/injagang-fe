@@ -1,7 +1,7 @@
 import { feedbackType } from '@/src/entities/feedback';
 import {
   IBoardList, IGetQnaBoardList, IReviseQnaBoard, IWriteQnaBoard,
-} from '@/src/entities/qnaboard/type';
+} from '@/src/entities/qnaboard/model/type';
 
 const sampleReviseQnaBoard:IReviseQnaBoard = {
   boardId: 10001,

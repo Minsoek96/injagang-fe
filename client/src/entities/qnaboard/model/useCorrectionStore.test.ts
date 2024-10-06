@@ -4,7 +4,7 @@ import {
   sampleCorrection,
 } from '@/fixutures/entities/qnaboard';
 
-import useCorrectionStore from '@/src/entities/qnaboard/useCorrectionStore';
+import useCorrectionStore from './useCorrectionStore';
 
 describe('useCorrectionStore', () => {
   it('유저가 첨삭한 정보를 저장한다.', () => {

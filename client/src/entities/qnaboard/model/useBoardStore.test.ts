@@ -2,7 +2,7 @@ import { act } from '@testing-library/react';
 
 import { sampleQuestionIds } from '@/fixutures/entities/qnaboard';
 
-import useBoardStore from '@/src/entities/qnaboard/useBoardStore';
+import useBoardStore from './useBoardStore';
 
 describe('useBoardStore', () => {
   it('게시판 첨삭 댓글 조회를 위한 1 대 1 매칭될 첨삭 질문Ids를 저장한다.', () => {

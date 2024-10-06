@@ -3,12 +3,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   IReviseCoverLetter,
   IWriteCoverLetter,
-} from '@/src/entities/coverLetter/lib/type';
-import coverLetter from '@/src/entities/coverLetter/lib/querykeys';
+} from '@/src/entities/coverLetter/model/type';
 
 import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/src/shared/const';
 import { useToast } from '@/src/shared/hooks';
-import { addCoverLetter, deleteCoverLetter, reviseCoverLetter } from '@/src/entities/coverLetter/api/apis';
+
+import { addCoverLetter, deleteCoverLetter, reviseCoverLetter } from './apis';
+import coverLetter from './querykeys';
 
 /** 자기소개서 작성 */
 const useWriteCoverLetter = () => {

@@ -1,12 +1,14 @@
 import { AxiosRequestConfig } from 'axios';
+
 import { fetcher, METHOD } from '@/src/shared/utils';
 import { BOARD_APIS } from '@/src/shared/config/apis';
+
 import {
   IGetDetailQnaBoard,
   IGetQnaBoardList,
   IReviseQnaBoard,
   IWriteQnaBoard,
-} from '@/src/entities/qnaboard/type';
+} from '@/src/entities/qnaboard/model/type';
 
 const getBoardList = async (
   queryString?: number,

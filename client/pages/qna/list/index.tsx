@@ -5,14 +5,13 @@ import {
   dehydrate,
 } from '@tanstack/react-query';
 
-import board from '@/src/entities/qnaboard/queryKeys';
-import { getBoardList } from '@/src/entities/qnaboard/apis';
+import { queryKeys, boardApi } from '@/src/entities/qnaboard/';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: board.lists(1, '', ''),
-    queryFn: () => getBoardList(1, '', ''),
+    queryKey: queryKeys.lists(1, '', ''),
+    queryFn: () => boardApi.getBoardList(1, '', ''),
   });
   return {
     props: {

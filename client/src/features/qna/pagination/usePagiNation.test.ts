@@ -3,9 +3,9 @@ import { act, renderHook } from '@testing-library/react';
 
 import usePagiNation from '@/src/features/qna/pagination/usePagiNation';
 
-import useBoardStore from '@/src/entities/qnaboard/useBoardStore';
+import useBoardStore from '@/src/entities/qnaboard/model/useBoardStore';
 
-jest.mock('@/src/entities/qnaboard/useBoardStore');
+jest.mock('@/src/entities/qnaboard/model/useBoardStore');
 describe('usePagiNation', () => {
   const context = describe;
   const setCurPageNum = jest.fn();

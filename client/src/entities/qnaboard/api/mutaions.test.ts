@@ -5,28 +5,28 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import TestProvider from '@/fixutures/TestProvider';
 
 import {
-  useDeleteBoard,
-  useReviseBoard,
-  useWriteBoard,
-} from '@/src/entities/qnaboard/mutaions';
+  sampleReviseQnaBoard,
+  sampleWriteQnaBoard,
+} from '@/fixutures/entities/qnaboard';
+
 import { useToast } from '@/src/shared/hooks';
-
-import {
-  deleteQnaBoard,
-  reviseQnaBoard,
-  writeQnaBoard,
-} from '@/src/entities/qnaboard/apis';
-
 import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
   TOAST_MODE,
 } from '@/src/shared/const';
-import board from '@/src/entities/qnaboard/queryKeys';
+
+import board from './queryKeys';
 import {
-  sampleReviseQnaBoard,
-  sampleWriteQnaBoard,
-} from '@/fixutures/entities/qnaboard';
+  useDeleteBoard,
+  useReviseBoard,
+  useWriteBoard,
+} from './mutaions';
+import {
+  deleteQnaBoard,
+  reviseQnaBoard,
+  writeQnaBoard,
+} from './apis';
 
 /** 목킹 설정 */
 jest.mock('./apis');

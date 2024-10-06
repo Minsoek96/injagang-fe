@@ -1,5 +1,6 @@
-import useFeedStore from '@/src/entities/qnaboard/useFeedStore';
 import { act } from '@testing-library/react';
+
+import useFeedStore from './useFeedStore';
 
 describe('useFeedStore', () => {
   it('유저가 선택한 댓글 번호 저장', () => {

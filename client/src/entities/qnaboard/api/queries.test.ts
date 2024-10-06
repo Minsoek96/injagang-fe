@@ -2,10 +2,10 @@ import { renderHook, waitFor } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import { useFetchBoardDetail, useFetchBoardList } from '@/src/entities/qnaboard/queries';
-
-import { getBoardList, getDetailBoard } from '@/src/entities/qnaboard/apis';
 import { sampleBoardList, sampleDetailBoard } from '@/fixutures/entities/qnaboard';
+import { getBoardList, getDetailBoard } from '@/src/entities/qnaboard/api/apis';
+
+import { useFetchBoardDetail, useFetchBoardList } from './queries';
 
 jest.mock('./apis');
 

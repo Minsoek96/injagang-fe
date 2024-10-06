@@ -5,11 +5,11 @@ import {
 import TestProvider from '@/fixutures/TestProvider';
 import { responseCoverLetters } from '@/fixutures/entities/coverLetter';
 
-import { useFetchCoverLetter } from '@/src/entities/coverLetter/model/queries';
+import { useFetchCoverLetter } from '@/src/entities/coverLetter/api/queries';
 
 import CoverLetterSelector from './CoverLetterSelector';
 
-jest.mock('@/src/entities/coverLetter/model/queries', () => ({
+jest.mock('@/src/entities/coverLetter/api/queries', () => ({
   useFetchCoverLetter: jest.fn(),
 }));
 
