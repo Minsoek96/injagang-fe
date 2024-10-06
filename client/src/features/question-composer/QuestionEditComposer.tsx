@@ -1,27 +1,25 @@
-import { memo, useState } from 'react';
-
-import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
 import styled from 'styled-components';
 
-import { useBoardStore } from '@/src/entities/qnaboard';
-import { useReviseBoard } from '@/src/entities/qnaboard/mutaions';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
-  MainButton,
-  MainInput,
-  Container,
-  Spinner,
+  boardType, useBoardStore, boardMutation, boardSchema,
+} from '@/src/entities/qnaboard';
+
+import {
+  MainButton, Container, Spinner,
+  UnInput,
 } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
-import dynamic from 'next/dynamic';
+import { usePageRouter } from '@/src/shared/hooks';
 
 const MarkdownEditor = dynamic(
   () => import('@/src/shared/ui/markdown/MarkdownEditor'),
   {
-    loading: () => (
-      <Spinner message="편집기를 불러오는 중입니다." />
-    ),
+    loading: () => <Spinner message="편집기를 불러오는 중입니다." />,
     ssr: false,
   },
 );
@@ -31,43 +29,50 @@ type Props = {
 };
 
 function QuestionEditComposer({ boardId }: Props) {
-  const router = useRouter();
-  const { mutate: reviseBoard } = useReviseBoard();
+  const { mutate: reviseBoard } = boardMutation.useReviseBoard();
   const { editBoardState } = useBoardStore();
+  const { moveBoardDetailPage } = usePageRouter();
 
-  const [title, setTitle] = useState<string>(editBoardState.title);
-  const [content, setContent] = useState<string>(editBoardState.content);
-
-  const navigateToList = () => {
-    router.push(`/qna/detail/${boardId}`);
-  };
-
-  const handleSubmit = () => {
-    const data = {
+  const {
+    register,
+    handleSubmit,
+    control,
+  } = useForm<boardType.IReviseQnaBoard>({
+    resolver: zodResolver(boardSchema.revise),
+    defaultValues: {
+      changeTitle: editBoardState.title,
+      changeContent: editBoardState.content,
       boardId,
-      changeTitle: title,
-      changeContent: content,
-    };
+    },
+  });
+
+  const onSubmit = (data: boardType.IReviseQnaBoard) => {
     reviseBoard(data);
-    navigateToList();
+    moveBoardDetailPage(boardId);
   };
 
   return (
     <ComposerContainer>
       <Container.ArticleCard $size={{ width: '100%', height: '87vh' }}>
-        <MainInput
-          value={title}
-          onChange={setTitle}
-          sx={{ width: '100%', marginBottom: '1rem' }}
+        <UnInput
+          register={register('changeTitle')}
+          style={{ width: '100%', marginBottom: '1rem' }}
+          placeholder="제목을 작성해주세요."
         />
-        <MarkdownEditor
-          initText={editBoardState.content}
-          onChange={setContent}
-          placeholder="질문을 작성해주세요."
+        <Controller
+          name="changeContent"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <MarkdownEditor
+              initText={value}
+              onChange={onChange}
+              placeholder="질문을 작성해주세요."
+            />
+          )}
         />
         <MainButton
           label="수정완료"
-          onClick={handleSubmit}
+          onClick={handleSubmit(onSubmit)}
           sx={{
             width: '100%',
             minHeight: '4rem',
@@ -80,7 +85,7 @@ function QuestionEditComposer({ boardId }: Props) {
   );
 }
 
-export default memo(QuestionEditComposer);
+export default QuestionEditComposer;
 
 const ComposerContainer = styled(Container.ItemBase)`
   ${styleMixin.Flex('flex-start')}
