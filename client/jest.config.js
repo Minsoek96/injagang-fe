@@ -27,5 +27,8 @@ module.exports = {
       },
     ],
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(uuid|react-markdown-editor-lite)/)', // 변환할 모듈 추가
+  ],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
 };
