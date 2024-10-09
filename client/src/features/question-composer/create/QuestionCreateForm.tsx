@@ -24,6 +24,13 @@ type Props = {
     onSubmit: (data: boardType.IWriteQnaBoard) => void;
 }
 
+/**
+ * QuestionCreateForm 컴포넌트는 자소서 첨부 게시물을 작성.
+ * - 제목, 질문내용 입력 필드
+ * - 첨부 자소서 선택
+ * - 첨부 자소서 출력
+ * @param onSubmit - 폼 제출 시 호출되는 함수
+ */
 function QuestionCreateForm({ onSubmit }:Props) {
   const {
     register, handleSubmit, setValue, watch, control,

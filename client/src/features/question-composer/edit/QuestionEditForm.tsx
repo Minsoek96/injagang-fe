@@ -27,6 +27,13 @@ type Props<T extends FieldValues> = {
     defaultValues: DefaultValues<T>;
 };
 
+/**
+ * QuestionEditForm 컴포넌트는 게시판 질문 수정 폼 관리.
+ * - 질문 내용을 수정
+ *
+ * @param onSubmit - 폼 제출 시 호출되는 함수
+ * @param defaultValues - 이전 질문 내용 셋팅값
+ */
 function QuestionEditForm<T extends FieldValues>({ onSubmit, defaultValues }: Props<T>) {
   const {
     register,

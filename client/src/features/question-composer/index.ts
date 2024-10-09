@@ -1,2 +1,2 @@
-export { default as QuestionComposer } from './QuestionComposer';
-export { default as QuestionEditComposer } from './QuestionEditComposer';
+export { default as QuestionComposer } from './create/QuestionComposer';
+export { default as QuestionEditComposer } from './edit/QuestionEditComposer';

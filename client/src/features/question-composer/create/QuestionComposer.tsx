@@ -8,7 +8,7 @@ import {
 import { styleMixin, V } from '@/src/shared/styles';
 import { usePageRouter } from '@/src/shared/hooks';
 
-import QuestionCreateForm from '@/src/features/question-composer/QuestionCreateForm';
+import QuestionCreateForm from './QuestionCreateForm';
 
 function QuestionComposer() {
   const { moveBoardMainPage } = usePageRouter();

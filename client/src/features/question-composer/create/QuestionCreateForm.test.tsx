@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import preloadAll from 'jest-next-dynamic-ts';
 
 import TestProvider from '@/fixutures/TestProvider';
-import QuestionCreateForm from '@/src/features/question-composer/QuestionCreateForm';
+import QuestionCreateForm from './QuestionCreateForm';
 
 const context = describe;
 
@@ -53,9 +53,9 @@ describe('QuestionComposer', () => {
       userEvent.type(contentInput, '테스트 질문');
       await waitFor(() => expect(contentInput).toHaveValue('테스트 질문'));
 
-      userEvent.click(submitButton); // 제출 버튼 클릭
+      userEvent.click(submitButton);
       await waitFor(() => {
-        expect(mockSubmit).not.toHaveBeenCalledTimes(1); // 필드가 모두 채워졌으므로 submit이 호출되어야 함
+        expect(mockSubmit).not.toHaveBeenCalled();
       });
     });
   });

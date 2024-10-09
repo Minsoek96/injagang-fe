@@ -11,7 +11,8 @@ import {
 } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 import { usePageRouter } from '@/src/shared/hooks';
-import QuestionEditForm from '@/src/features/question-composer/QuestionEditForm';
+
+import QuestionEditForm from './QuestionEditForm';
 
 type Props = {
   boardId: number;
