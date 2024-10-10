@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { MainButton } from '@/src/shared/ui/button';
 import { styleMixin, V } from '@/src/shared/styles';
 
-import usePagiNation from './usePagiNation';
+import usePagiNation from './model/usePagiNation';
 
 /** 페이지 네이션 버튼을 렌더하는 함수 */
 function PagiNation() {

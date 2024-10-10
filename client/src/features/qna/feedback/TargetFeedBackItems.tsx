@@ -21,6 +21,15 @@ type FeedBackItemsProps = {
   handleDeleteFeedBack: (id:number) => void;
 };
 
+/** FeedBackItems 조회된 피드백 아이템
+ *
+ * @param target - 첨삭된 자소서 내용
+ * @param content - 피드백 질문
+ * @param feedbackId - 현재 피드백 아이디
+ * @param owner - 작성자 여부
+ * @param handleUpdateFeedBack - 피드백 수정 함수
+ * @param handleDeleteFeedBack - 피드백 삭제 함수
+ */
 function FeedBackItems({
   target,
   content,

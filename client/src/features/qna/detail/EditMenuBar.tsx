@@ -20,13 +20,20 @@ type EditMenuBarProps = {
   title: string;
 };
 
-//* *자소서 편집 액션 컴포넌트 */
+/** EditMenuBar 자소서 메뉴 (수정 - 삭제)
+ *
+ * @param boardId - 보드 아이디
+ * @param content - 질문
+ * @param title - 제목
+ */
 function EditMenuBar({ boardId, content, title }: EditMenuBarProps) {
+  const router = useRouter();
   const [tagPosition, setTagPosition] = useState(false);
+
   const { setModal } = useModal();
+
   const { mutate: deleteBoard } = boardMutation.useDeleteBoard();
   const { setEditBoardState } = useBoardStore();
-  const router = useRouter();
 
   const navigateToList = () => {
     router.replace('/qna/list');

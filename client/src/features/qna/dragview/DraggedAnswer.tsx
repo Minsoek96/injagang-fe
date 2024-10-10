@@ -7,7 +7,13 @@ interface DraggedAnswerProps {
   onRemove: () => void;
 }
 
-/** 첨삭된 내용을 추적하여 재조합하여 하이라이터 효과를 부여하는 */
+/** DraggedAnswer 첨삭된 내용을 추적하여 재조합하여 하이라이터 효과를 부여하는
+ *
+ * @param startText - 첨삭된 부분 이전까지 내용
+ * @param selectedText - 첨삭 내용
+ * @param endText - 첨삭된 부분 이후 내용
+ * @param onRemove - 첨삭 내용 취소 함수
+ */
 function DraggedAnswer({
   startText,
   selectedText,

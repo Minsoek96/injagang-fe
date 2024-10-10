@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 import { MarkdownPreview } from '@/src/shared/ui';
-import { S } from '@/src/features/qna/common';
 
 interface BoardItemProps {
   title: string;
@@ -12,11 +11,19 @@ interface BoardItemProps {
   content: string;
 }
 
+/**
+ * QuestionDetailItem 질문 상세 아이템
+ * 유저의 질문
+ *
+ * @param title -  질문 제목
+ * @param nickname - 작성자
+ * @param content - 질문 내용
+ */
 function QuestionDetailItem({ title, nickname, content }: BoardItemProps) {
   return (
     <QuestionItemContainer>
       <TitleWrapper>
-        <S.mainTitle>{title}</S.mainTitle>
+        <Title>{title}</Title>
       </TitleWrapper>
       <NickNameWrapper>
         <p>{nickname}</p>
@@ -45,8 +52,17 @@ const QuestionItemContainer = styled.div`
 const TitleWrapper = styled.div`
   width: 100%;
   font-weight: bold;
-
 `;
+
+const Title = styled.h2`
+    color: ${(props) => props.theme.colors.signatureColor};
+    font-size: 3rem;
+    word-break: normal !important;
+    white-space: normal;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    `;
 
 const NickNameWrapper = styled.div`
   width: 100%;

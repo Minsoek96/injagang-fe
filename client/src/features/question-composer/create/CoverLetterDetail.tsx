@@ -1,6 +1,5 @@
 import { memo } from 'react';
-import { S } from '@/src/features/qna/common';
-import { coverLetterQueries } from '@/src/entities/coverLetter';
+import { coverLetterQueries, S } from '@/src/entities/coverLetter';
 import CoverLetterItem from './CoverLetterItem';
 
 interface CoverLetterProps {
@@ -19,7 +18,7 @@ function CoverLetterDetail({ essayId }: CoverLetterProps) {
     return (
       <div>
         <p>선택된 값이 없습니다.</p>
-        <p>새로운 자소서를 첨부해주세요 ..</p>
+        <p>새로운 자소서를 첨부해주세요..</p>
       </div>
     );
   }

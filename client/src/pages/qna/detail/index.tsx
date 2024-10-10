@@ -11,8 +11,8 @@ import { useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
 import { Spinner } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 
-const QuestionDetailView = dynamic(
-  () => import('@/src/features/qna/detail/QuestionDetailView'),
+const QuestionDetail = dynamic(
+  () => import('./QuestionDetail'),
   {
     ssr: false,
     loading: () => <Spinner />,
@@ -54,7 +54,7 @@ function Answer({ dehydratedState }: AnswerProps) {
   return (
     <ViewStyle>
       <HydrationBoundary state={dehydratedState}>
-        <QuestionDetailView />
+        <QuestionDetail />
         <FeedBackComposer />
         <TargetFeedBackView />
       </HydrationBoundary>

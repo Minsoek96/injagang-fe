@@ -1,9 +1,9 @@
 /* eslint-disable no-shadow */
 import { act, renderHook } from '@testing-library/react';
 
-import usePagiNation from '@/src/features/qna/pagination/usePagiNation';
-
 import useBoardStore from '@/src/entities/qnaboard/model/useBoardStore';
+
+import usePagiNation from './usePagiNation';
 
 jest.mock('@/src/entities/qnaboard/model/useBoardStore');
 describe('usePagiNation', () => {

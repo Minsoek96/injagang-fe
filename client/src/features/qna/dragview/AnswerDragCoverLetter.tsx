@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
-import { S } from '@/src/features/qna/common';
+import { S } from '@/src/entities/coverLetter';
 import { boardQueries } from '@/src/entities/qnaboard';
 
 import AnswerDragItem from './AnswerDragItem';
 
-import useDragCorrection from './useDragCorrection';
+import useDragCorrection from './model/useDragCorrection';
 
-/** 드래그 첨삭 기능을 가진 자소서 View */
+/** AnswerDragCoverLetter 드래그 자소서 메인
+ *
+ * @param boardId - 보드 아이디
+ */
 type AnswerProps = {
   boardId: number;
 };

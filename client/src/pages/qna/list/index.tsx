@@ -31,7 +31,7 @@ const PagiNation = dynamic(() => import('@/src/features/qna/pagination/PagiNatio
   ssr: false,
 });
 
-const BoardSearch = dynamic(() => import('@/src/features/qna/BoardSearch'), {
+const BoardSearch = dynamic(() => import('@/src/features/qna/search/BoardSearch'), {
   ssr: false,
 });
 
