@@ -24,6 +24,7 @@ export default function QuestionDetail() {
     isError,
   } = boardQueries.useFetchBoardDetail(Number(boardId.id));
 
+  /** 보드 상태를 조회한 후 피드백 검색기 생성 */
   useEffect(() => {
     if (boardList) {
       const questions = boardList.qnaList.map((item) => item.qnaId);
