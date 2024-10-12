@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 
 import Cookies from 'js-cookie';
 
-import { useFetchUserInfo } from '@/src/entities/auth/mutations';
+import { useFetchUserInfo } from '@/src/entities/auth/api/mutations';
 import { useAuthStore } from '@/src/entities/auth';
 import useAuth from './useAuth';
 
@@ -10,7 +10,7 @@ jest.mock('js-cookie', () => ({
   get: jest.fn(),
 }));
 
-jest.mock('@/src/entities/auth/mutations', () => ({
+jest.mock('@/src/entities/auth/api/mutations', () => ({
   useFetchUserInfo: jest.fn(),
 }));
 

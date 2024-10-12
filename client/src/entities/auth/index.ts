@@ -1,5 +1,5 @@
-export * as authMutations from './mutations';
-export * as authApi from './apis';
-export * as authType from './type';
-export { default as useAuthStore } from './useAuthStore';
-export { default as useAuth } from './useAuth';
+export * as authMutations from './api/mutations';
+export * as authApi from './api/apis';
+export * as authType from './model/type';
+export { default as useAuthStore } from './model/useAuthStore';
+export { default as useAuth } from './model/useAuth';

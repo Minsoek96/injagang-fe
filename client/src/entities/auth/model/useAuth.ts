@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useFetchUserInfo } from '@/src/entities/auth/mutations';
+import { useFetchUserInfo } from '@/src/entities/auth/api/mutations';
 import { useAuthStore } from '@/src/entities/auth';
 
 import { getCookies } from '@/src/shared/utils/';

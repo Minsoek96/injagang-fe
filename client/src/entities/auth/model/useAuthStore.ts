@@ -1,16 +1,16 @@
 import { create } from 'zustand';
-import { RoleType } from '@/src/entities/auth/type';
+import { authType } from '@/src/entities/auth';
 
 type State = {
   userId: string | null;
   nickName: string | null;
-  role: RoleType | null;
+  role: authType.RoleType | null;
   history: string | null;
 };
 
 type Action = {
   setUserId: (id: string) => void;
-  setUserInfo: (nick: string, role: RoleType) => void;
+  setUserInfo: (nick: string, role: authType.RoleType) => void;
   initCurrentUser: () => void;
   setHistory: (history: string) => void;
 };
@@ -25,7 +25,7 @@ const useAuthStore = create<State & Action>((set) => ({
     set({
       userId: id,
     }),
-  setUserInfo: (nick: string, role: RoleType) => {
+  setUserInfo: (nick: string, role: authType.RoleType) => {
     set({
       nickName: nick,
       role,

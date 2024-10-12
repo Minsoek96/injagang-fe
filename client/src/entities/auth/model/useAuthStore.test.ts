@@ -1,5 +1,6 @@
-import useAuthStore from '@/src/entities/auth/useAuthStore';
 import { act } from '@testing-library/react';
+
+import useAuthStore from './useAuthStore';
 
 describe('useAuthStore', () => {
   it('유저의 아이디를 저장한다.', () => {

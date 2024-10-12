@@ -1,3 +1,6 @@
+import { fetcher, METHOD } from '@/src/shared/utils';
+
+import { AUTH_APIS } from '@/src/shared/config/apis';
 import {
   ISignin,
   ISignup,
@@ -5,11 +8,7 @@ import {
   ChangeNick,
   IChangePw,
   IUserInfo,
-} from '@/src/entities/auth/type';
-
-import { fetcher, METHOD } from '@/src/shared/utils';
-
-import { AUTH_APIS } from '@/src/shared/config/apis';
+} from '@/src/entities/auth/model/type';
 
 const authInfo = async (): Promise<IUserInfo> =>
   fetcher(METHOD.GET, AUTH_APIS.INFO_API).then((res) => res.data);

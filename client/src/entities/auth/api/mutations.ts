@@ -6,18 +6,19 @@ import { useMutation } from '@tanstack/react-query';
 
 import { useToast } from '@/src/shared/hooks';
 
+import { useAuthStore } from '@/src/entities/auth';
+import {
+  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE,
+} from '@/src/shared/const';
+import { getCookies, removeCookies, setCookies } from '@/src/shared/utils';
+
 import {
   IChangePw,
   IResponseSignin,
   ISignin,
   ISignup,
   IUserInfo,
-} from '@/src/entities/auth/type';
-import { useAuthStore } from '@/src/entities/auth';
-import {
-  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE,
-} from '@/src/shared/const';
-import { getCookies, removeCookies, setCookies } from '@/src/shared/utils';
+} from '@/src/entities/auth/model/type';
 
 import {
   authInfo,

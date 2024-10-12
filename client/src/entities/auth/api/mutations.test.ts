@@ -1,28 +1,9 @@
-import { act, renderHook, waitFor } from '@testing-library/react';
+import { useRouter } from 'next/router';
 
 import Cookies from 'js-cookie';
 
-import { useRouter } from 'next/router';
-
+import { act, renderHook, waitFor } from '@testing-library/react';
 import TestProvider from '@/fixutures/TestProvider';
-
-import {
-  useChangeNick,
-  useChangePassWord,
-  useFetchCheckOut,
-  useFetchSignin,
-  useFetchSignup,
-  useFetchUserInfo,
-} from '@/src/entities/auth/mutations';
-
-import {
-  authInfo,
-  checkOut,
-  login,
-  nickChange,
-  passwordChange,
-  signup,
-} from '@/src/entities/auth/apis';
 
 import {
   changePassword,
@@ -40,6 +21,23 @@ import {
 } from '@/src/shared/const';
 
 import { useToast } from '@/src/shared/hooks';
+
+import {
+  authInfo,
+  checkOut,
+  login,
+  nickChange,
+  passwordChange,
+  signup,
+} from './apis';
+import {
+  useChangeNick,
+  useChangePassWord,
+  useFetchCheckOut,
+  useFetchSignin,
+  useFetchSignup,
+  useFetchUserInfo,
+} from './mutations';
 
 /** 목킹 설정 */
 jest.mock('./apis');
