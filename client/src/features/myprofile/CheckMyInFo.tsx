@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { V, styleMixin } from '@/src/shared/styles';
 import { Container } from '@/src/shared/ui';
-import UserInFo from './UserInfoSetting';
+import UserInFo from './nick/UserInfoSetting';
 import PassWordInfo from './PassWordSetting';
 
 function CheckMyInFo() {
