@@ -1,10 +1,8 @@
 import { useForm } from 'react-hook-form';
 
-import { useAuthStore } from '@/src/entities/auth';
+import { useAuthStore, S } from '@/src/entities/auth';
 
 import { InputField, MainButton } from '@/src/shared/ui';
-
-import { S } from '@/src/features/myprofile/common';
 
 type Props = {
     onSubmit : (data: { nickName: string }) => void;

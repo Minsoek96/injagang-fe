@@ -1,1 +1,2 @@
-export { default as CheckMyInFo } from './CheckMyInFo';
+export { default as UserInfoSetting } from './nick/UserInfoSetting';
+export { default as PassWordSetting } from './password/PassWordSetting';

@@ -1,4 +1,4 @@
-import { S } from '@/src/features/myprofile/common';
+import { S } from '@/src/entities/auth';
 
 import useNick from '@/src/features/myprofile/nick/model/useNick';
 import NickForm from './NickForm';
