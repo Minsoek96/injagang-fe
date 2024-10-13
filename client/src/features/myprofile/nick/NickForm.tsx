@@ -11,7 +11,6 @@ type Props = {
 }
 function NickForm({ onSubmit }:Props) {
   const { nickName: confirmNick } = useAuthStore();
-  const mainTitle = '닉네임 변경';
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
@@ -20,23 +19,20 @@ function NickForm({ onSubmit }:Props) {
   });
 
   return (
-    <S.MainContainer $size={{ height: '100%', width: '100%', flex: 'Col' }}>
-      <S.MainTitle>{mainTitle}</S.MainTitle>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <InputField
-          label="닉네임"
-          type="text"
-          id="changeNickname"
-          {...register('nickName', { required: '닉네임을 입력해주세요.' })}
-        />
-        {errors.nickName && <S.Warring>{errors.nickName.message}</S.Warring>}
-        <MainButton
-          label="변경"
-          type="submit"
-          sx={{ width: '100%', height: '4rem' }}
-        />
-      </S.Form>
-    </S.MainContainer>
+    <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <InputField
+        label="닉네임"
+        type="text"
+        id="changeNickname"
+        {...register('nickName', { required: '닉네임을 입력해주세요.' })}
+      />
+      {errors.nickName && <S.Warring>{errors.nickName.message}</S.Warring>}
+      <MainButton
+        label="변경"
+        type="submit"
+        sx={{ width: '100%', height: '4rem' }}
+      />
+    </S.Form>
   );
 }
 

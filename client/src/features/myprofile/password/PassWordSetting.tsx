@@ -2,7 +2,7 @@ import { S } from '@/src/features/myprofile/common';
 import { authType } from '@/src/entities/auth';
 import { InputField, MainButton } from '@/src/shared/ui';
 
-import { useMyProfileManager, useMyProfileLogic } from './hooks';
+import { useMyProfileManager, useMyProfileLogic } from '../hooks';
 
 function PassWordSetting() {
   const { dispatchPasswordChange } = useMyProfileManager();

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { V, styleMixin } from '@/src/shared/styles';
 import { Container } from '@/src/shared/ui';
 import UserInFo from './nick/UserInfoSetting';
-import PassWordInfo from './PassWordSetting';
+import PassWordInfo from './password/PassWordSetting';
 
 function CheckMyInFo() {
   const headerTitle = '나의 정보';
