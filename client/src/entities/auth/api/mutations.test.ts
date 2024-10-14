@@ -163,7 +163,7 @@ describe('useFetchSignin', () => {
       const { result } = callFetchSignin();
 
       await waitFor(() => result.current.isError);
-      expect(result.current.errorMsg).toBe(ERROR_MESSAGES.DOESN_T_MATCH);
+      expect(result.current.isError).toBe(true);
     });
   });
 });

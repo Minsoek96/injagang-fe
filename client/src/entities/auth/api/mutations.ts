@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 
-import { useState } from 'react';
-
 import { useMutation } from '@tanstack/react-query';
 
 import { useToast } from '@/src/shared/hooks';
 
 import { useAuthStore } from '@/src/entities/auth';
 import {
-  ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE,
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES,
+  TOAST_MODE,
 } from '@/src/shared/const';
 import { getCookies, removeCookies, setCookies } from '@/src/shared/utils';
 
@@ -30,8 +30,8 @@ import {
 } from './apis';
 
 const useFetchSignin = () => {
-  const [errorMsg, setErrorMsg] = useState('');
   const { setUserId } = useAuthStore();
+  const { showToast } = useToast();
   const router = useRouter();
   const mutate = useMutation({
     mutationFn: (loginData: ISignin) =>
@@ -44,10 +44,10 @@ const useFetchSignin = () => {
       router.replace('/');
     },
     onError: () => {
-      setErrorMsg(ERROR_MESSAGES.DOESN_T_MATCH);
+      showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.DOESN_T_MATCH);
     },
   });
-  return { ...mutate, errorMsg };
+  return { ...mutate };
 };
 
 const useFetchCheckOut = () => {
@@ -82,7 +82,6 @@ const useFetchCheckOut = () => {
   });
 };
 
-// TODO : 임의로 토큰이 삭제된 경우 오류발생 대비(현재 조치)
 const useFetchUserInfo = () => {
   const { showToast } = useToast();
   const { setUserInfo } = useAuthStore();

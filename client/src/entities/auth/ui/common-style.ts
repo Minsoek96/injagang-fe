@@ -29,7 +29,7 @@ export const S = {
 
   Warring: styled.p`
     color: red;
-    text-align: center;
+    margin-bottom: 1rem;
   `,
 
   Form: styled.form`
