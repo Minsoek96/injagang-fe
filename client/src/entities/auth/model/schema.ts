@@ -29,6 +29,13 @@ export const signin = z.object({
     .min(1, '아이디를 입력해주세요.'),
   password: z
     .string()
+    .min(1, '비밀번호를 입력해주세요.'),
+});
+
+export const signup = z.object({
+  loginId: z.string().min(1, '아이디를 입력해주세요.'),
+  password: z
+    .string()
     .min(1, '비밀번호를 입력해주세요.')
     .min(8, '비밀번호는 최소 8자리 이상이어야 합니다.')
     .regex(
@@ -40,4 +47,16 @@ export const signin = z.object({
       /[^a-zA-Z0-9]/,
       '비밀번호에는 최소 하나의 특수 문자가 포함되어야 합니다.',
     ),
-});
+  passwordCheck: z.string().min(1, '비밀번호를 입력해주세요.'),
+  email: z.string()
+    .email('유효한 이메일 형식이어야 합니다.'),
+  nickname: z.string()
+    .min(3, '닉네임은 최소 3자 이상이어야 합니다.')
+    .max(15, '닉네임은 최대 15자 이하여야 합니다.'),
+}).refine(
+  (data) => data.password === data.passwordCheck,
+  {
+    message: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
+    path: ['passwordCheck'],
+  },
+);
