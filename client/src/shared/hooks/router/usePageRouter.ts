@@ -26,10 +26,16 @@ export default function usePageRouter() {
   const moveBoardMainPage = useCallback(() => {
     router.replace({ pathname: '/qna/list' });
   }, []);
+
+  /** 회원가입 페이지 이동 */
+  const moveSignupPage = useCallback(() => {
+    router.push({ pathname: '/join' });
+  }, []);
   return {
     moveCoverLetterEditPage,
     moveCoverLetterMainPage,
     moveBoardDetailPage,
     moveBoardMainPage,
+    moveSignupPage,
   };
 }

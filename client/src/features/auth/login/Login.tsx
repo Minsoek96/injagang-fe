@@ -1,11 +1,12 @@
-import { useRouter } from 'next/router';
-
 import LoginForm from '@/src/features/auth/login/LoginForm';
+
 import { authMutations, authType } from '@/src/entities/auth';
+
+import { usePageRouter } from '@/src/shared/hooks';
 
 function Login() {
   const { mutate: authenTicate } = authMutations.useFetchSignin();
-  const router = useRouter();
+  const { moveSignupPage } = usePageRouter();
 
   const labels = [
     { key: 'loginId', label: '아이디', type: 'text' },
@@ -20,7 +21,7 @@ function Login() {
     <LoginForm
       onSubmit={handleSubmit}
       labels={labels}
-      navigateToSignUp={() => router.push('/join')}
+      navigateToSignUp={moveSignupPage}
     />
   );
 }
