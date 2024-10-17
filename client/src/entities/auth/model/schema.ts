@@ -29,7 +29,8 @@ export const signin = z.object({
     .min(1, '아이디를 입력해주세요.'),
   password: z
     .string()
-    .min(1, '비밀번호를 입력해주세요.'),
+    .min(1, '비밀번호를 입력해주세요.')
+    .min(8, '비밀번호는 최소 8자리여야 합니다.'),
 });
 
 export const signup = z.object({

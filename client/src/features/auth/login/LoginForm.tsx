@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { shakeAnimation } from '@/src/shared/styles';
 import { InputField, MainButton } from '@/src/shared/ui';
 import { authSchema, authType } from '@/src/entities/auth';
-import { keys } from '@/src/shared/utils';
+import { getFirstErrorMessage, keys } from '@/src/shared/utils';
 
 type FormType = {
   key: string;
@@ -37,7 +37,7 @@ export default function LoginForm({
   });
 
   useEffect(() => {
-    if (errors) {
+    if (getFirstErrorMessage(errors)) {
       setShakeTrigger(false);
       setTimeout(() => {
         setShakeTrigger(true);
