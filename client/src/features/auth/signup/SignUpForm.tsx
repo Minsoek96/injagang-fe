@@ -19,6 +19,12 @@ type Props = {
   labels: FormType[];
 };
 
+/**
+ * SignUpForm 회원가입 입력 폼
+ *
+ * @param onSubmit -  회원가입 처리를 위한 submit
+ * @param label - 회원가입 필드 상태
+ */
 export default function SignUpForm({ onSubmit, labels }: Props) {
   const {
     register,

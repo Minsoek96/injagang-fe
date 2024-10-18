@@ -4,6 +4,10 @@ import { styleMixin, V } from '@/src/shared/styles';
 
 import styled from 'styled-components';
 
+/**
+ * auth 공용 스타일
+ *
+ */
 export const S = {
   MainContainer: styled(Container.ArticleCard)`
     ${styleMixin.Column()}

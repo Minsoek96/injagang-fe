@@ -22,6 +22,13 @@ type Props = {
   labels: FormType[];
 };
 
+/**
+ * LoginForm 로그인 입력 폼
+ *
+ * @param onSubmit -  로그인 처리를 위한 submit
+ * @param navigateToSignUp - 회원가입 페이지 이동 함수
+ * @param label - 로그인 필드 상태
+ */
 export default function LoginForm({
   onSubmit,
   labels,
