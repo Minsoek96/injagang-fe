@@ -36,7 +36,8 @@ function DraggedAnswer({
 
 export default DraggedAnswer;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.p`
+`;
 
 const SeletedTextWrapper = styled.span`
   background-color: ${(props) => props.theme.colors.highlightColor};

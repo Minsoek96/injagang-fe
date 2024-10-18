@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { boardType } from '@/src/entities/qnaboard';
 import { S } from '@/src/entities/coverLetter';
 
+import DraggableAnswerText from '@/src/features/qna/dragview/DraggableAnswer';
 import DraggedAnswer from './DraggedAnswer';
 
 interface AnswerDragItemProps {
@@ -37,6 +38,9 @@ function AnswerDragItem({
     selectedText.end,
     answer.length,
   );
+  const handleSelect = () => {
+    onSelect(index + 1, qnaId, answer);
+  };
 
   return (
     <S.detailItmes>
@@ -54,9 +58,7 @@ function AnswerDragItem({
             onRemove={onRemove}
           />
         ) : (
-          <div onMouseUp={() => onSelect(index + 1, qnaId, answer)}>
-            <p>{answer}</p>
-          </div>
+          <DraggableAnswerText answer={answer} onSelect={handleSelect} />
         )}
       </S.answerContainer>
     </S.detailItmes>

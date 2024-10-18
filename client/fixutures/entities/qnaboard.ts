@@ -1,6 +1,7 @@
 import { feedbackType } from '@/src/entities/feedback';
 import {
   IBoardList, IGetQnaBoardList, IReviseQnaBoard, IWriteQnaBoard,
+  SelectedText,
 } from '@/src/entities/qnaboard/model/type';
 
 const sampleReviseQnaBoard:IReviseQnaBoard = {
@@ -37,6 +38,15 @@ const sampleCorrection:feedbackType.CorrectionItem = {
   targetQuestionIndex: 10001,
 };
 
+const sampleSelectedText: SelectedText = {
+  dragTitleId: 10001,
+  targetId: 10001,
+  selectedText: 'answer',
+  start: 5,
+  end: 10,
+  added: false,
+};
+
 export {
   sampleReviseQnaBoard,
   sampleWriteQnaBoard,
@@ -44,4 +54,5 @@ export {
   sampleDetailBoard,
   sampleQuestionIds,
   sampleCorrection,
+  sampleSelectedText,
 };
