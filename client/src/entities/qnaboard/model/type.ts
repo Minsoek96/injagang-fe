@@ -45,7 +45,6 @@ export interface IDeleteQnaBoard {
 }
 
 export type SelectedText = {
-  dragTitleId: number;
   targetId: number;
   selectedText: string;
   start: number;

@@ -17,7 +17,6 @@ export interface IGetFeedBack {
 }
 
 export type CorrectionItem = {
-  targetQuestion: number;
   targetAnswer: string;
   targetQuestionIndex: number;
 };

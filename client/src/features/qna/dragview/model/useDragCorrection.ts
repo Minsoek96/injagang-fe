@@ -6,7 +6,6 @@ import { useModal } from '@/src/shared/hooks';
 import { useCallback, useState } from 'react';
 
 export const initialState: boardType.SelectedText = {
-  dragTitleId: 0,
   targetId: 0,
   selectedText: '',
   start: 0,
@@ -31,7 +30,7 @@ const useDragCorrection = () => {
 
   /** 첨삭 내용을 전달 받는 함수 */
   const handleCorrection = useCallback(
-    (dragTitleId: number, targetId: number, originText: string) => {
+    (targetId: number, originText: string) => {
       const isSelected = selectedText.added;
       if (isSelected) {
         showWarring();
@@ -40,20 +39,19 @@ const useDragCorrection = () => {
 
       const selectedCorrection = validateSelectedText(originText);
       selectedCorrection
-        && changeCorrection(selectedCorrection, dragTitleId, targetId);
+        && changeCorrection(selectedCorrection, targetId);
     },
     [selectedText],
   );
 
   // 첨삭을 반영하는 함수
   const changeCorrection = useCallback(
-    (newSelectedText: string, dragTitleId: number, targetId: number) => {
+    (newSelectedText: string, targetId: number) => {
       const range = window.getSelection()?.getRangeAt(0);
       const start = range?.startOffset || 0;
       const end = range?.endOffset || 0;
 
       setSelectedText({
-        dragTitleId,
         targetId,
         selectedText: newSelectedText,
         start,
@@ -62,7 +60,6 @@ const useDragCorrection = () => {
       });
 
       setCorrection({
-        targetQuestion: dragTitleId,
         targetAnswer: newSelectedText,
         targetQuestionIndex: targetId,
       });

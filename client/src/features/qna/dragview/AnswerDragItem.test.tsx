@@ -24,7 +24,6 @@ describe('AnswerDragItem', () => {
           onSelect={mockSelect}
           onRemove={mockRemove}
           selectedText={isSelected ? sampleSelectedText : emptySelectedText}
-          index={10001}
         />
       </TestProvider>,
     );

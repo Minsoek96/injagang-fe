@@ -19,7 +19,6 @@ type Action = {
 const useCorrectionStore = create<State & Action>((set) => ({
   correction: {
     targetAnswer: '',
-    targetQuestion: 0,
     targetQuestionIndex: 0,
   },
   setCorrection: (item: feedbackType.CorrectionItem) =>
@@ -28,7 +27,6 @@ const useCorrectionStore = create<State & Action>((set) => ({
     set({
       correction: {
         targetAnswer: '',
-        targetQuestion: 0,
         targetQuestionIndex: 0,
       },
     }),

@@ -26,12 +26,11 @@ function AnswerDragCoverLetter({ boardId }: AnswerProps) {
     <Container>
       <S.mainTitle>{boardList?.essayTitle}</S.mainTitle>
       {boardList?.qnaList
-        && boardList.qnaList.map((list, idx) => (
+        && boardList.qnaList.map((list) => (
           <AnswerDragItem
             key={list.qnaId}
             onSelect={handleCorrection}
             onRemove={removeCorrection}
-            index={idx}
             selectedText={selectedText}
             list={list}
           />
