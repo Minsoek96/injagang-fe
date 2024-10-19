@@ -31,6 +31,7 @@ function AnswerDragItem({
 }: AnswerDragItemProps) {
   const { selectedText: selectedCorrection } = selectedText;
   const { qnaId, question, answer } = list;
+  const curNumber = index + 1;
 
   const isTargetAnswer = selectedText.targetId === list.qnaId;
   const 시작점부터타겟까지문장 = list.answer.substring(0, selectedText.start);
@@ -39,7 +40,7 @@ function AnswerDragItem({
     answer.length,
   );
   const handleSelect = () => {
-    onSelect(index + 1, qnaId, answer);
+    onSelect(curNumber, qnaId, answer);
   };
 
   return (
@@ -49,7 +50,7 @@ function AnswerDragItem({
         {question}
       </S.questionContainer>
       <S.answerContainer>
-        <span>답변</span>
+        <span>답변: </span>
         {selectedCorrection && isTargetAnswer ? (
           <DraggedAnswer
             startText={시작점부터타겟까지문장}

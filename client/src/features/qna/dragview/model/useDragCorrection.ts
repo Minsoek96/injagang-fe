@@ -90,7 +90,6 @@ const useDragCorrection = () => {
     handleCorrection,
     removeCorrection,
     selectedText,
-    setModal,
   };
 };
 

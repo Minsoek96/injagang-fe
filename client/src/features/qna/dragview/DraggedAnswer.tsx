@@ -36,10 +36,11 @@ function DraggedAnswer({
 
 export default DraggedAnswer;
 
-const Wrapper = styled.p`
-`;
+const Wrapper = styled.p``;
 
 const SeletedTextWrapper = styled.span`
+  padding-bottom: 0.3em;
+  padding-inline: 0.3em;
   background-color: ${(props) => props.theme.colors.highlightColor};
   opacity: 0.8;
   color: black !important;

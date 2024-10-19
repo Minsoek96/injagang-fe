@@ -43,7 +43,16 @@ const sampleSelectedText: SelectedText = {
   targetId: 10001,
   selectedText: 'answer',
   start: 5,
-  end: 10,
+  end: 11,
+  added: false,
+};
+
+const emptySelectedText: SelectedText = {
+  dragTitleId: 0,
+  targetId: 0,
+  selectedText: '',
+  start: 0,
+  end: 0,
   added: false,
 };
 
@@ -55,4 +64,5 @@ export {
   sampleQuestionIds,
   sampleCorrection,
   sampleSelectedText,
+  emptySelectedText,
 };
