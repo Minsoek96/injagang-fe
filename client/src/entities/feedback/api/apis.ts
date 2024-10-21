@@ -1,12 +1,11 @@
+import { fetcher, METHOD } from '@/src/shared/utils';
+
+import { FEED_APIS } from '@/src/shared/config/apis';
 import {
   IGetFeedBack,
   IReviseFeedBack,
   IWriteFeedBack,
-} from '@/src/entities/feedback/type';
-
-import { fetcher, METHOD } from '@/src/shared/utils';
-
-import { FEED_APIS } from '@/src/shared/config/apis';
+} from '@/src/entities/feedback/model/type';
 
 export const getFeedBackList = async (
   targetId: number,

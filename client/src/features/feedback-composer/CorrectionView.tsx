@@ -14,7 +14,7 @@ function CorrectionView({ targetQuestion, targetAnswer }: CorrectionViewProps) {
       <CorrectionTitle>
         현재 선택된 문장 :
         {' '}
-        {emptyTarget ? emptyMessage : targetQuestion}
+        {emptyTarget && emptyMessage }
       </CorrectionTitle>
       <Sentenc>{targetAnswer}</Sentenc>
     </CorrectionContainer>

@@ -1,8 +1,8 @@
 import { useState, useCallback, useRef } from 'react';
 
-import { useWriteFeed } from '@/src/entities/feedback/mutation';
 import { useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
 import { useModal } from '@/src/shared/hooks';
+import { feedbackMutation } from '@/src/entities/feedback';
 
 const useFeedBackLogic = () => {
   const [feedbackContent, setFeedbackContent] = useState<string>('');
@@ -13,7 +13,7 @@ const useFeedBackLogic = () => {
 
   const { targetFeed } = useFeedStore();
 
-  const { mutate: writeFeedBack } = useWriteFeed(targetFeed);
+  const { mutate: writeFeedBack } = feedbackMutation.useWriteFeed(targetFeed);
 
   const CORRECTION_MIN = feedbackContent.length < 30;
   const EMPTY_CORRECTION = correction.targetAnswer === '';
@@ -44,8 +44,8 @@ const useFeedBackLogic = () => {
   const correctionRules = [
     {
       rule: EMPTY_CORRECTION,
-      action: () => {},
       modal: () => handleWarring('첨삭 내용을 등록하세요.'),
+      action: () => {},
     },
     {
       rule: CORRECTION_MIN,

@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import { useFetchFeedBackList } from '@/src/entities/feedback/queries';
-import { useDeleteFeed, useReviseFeed } from '@/src/entities/feedback/mutation';
-
 import { Container } from '@/src/shared/ui';
 import { useFeedStore } from '@/src/entities/qnaboard';
+import { feedbackMutation, feedbackQueries } from '@/src/entities/feedback';
+
 import TargetFeedBackItems from './TargetFeedBackItems';
 
 /** TargetFeedBackView 피드백 조회
@@ -15,9 +14,9 @@ import TargetFeedBackItems from './TargetFeedBackItems';
  */
 function TargetFeedBackView() {
   const { targetFeed } = useFeedStore();
-  const { data: feedbackList } = useFetchFeedBackList(targetFeed);
-  const { mutate: updateFeed } = useReviseFeed(targetFeed);
-  const { mutate: deleteFeed } = useDeleteFeed(targetFeed);
+  const { data: feedbackList } = feedbackQueries.useFetchFeedBackList(targetFeed);
+  const { mutate: updateFeed } = feedbackMutation.useReviseFeed(targetFeed);
+  const { mutate: deleteFeed } = feedbackMutation.useDeleteFeed(targetFeed);
 
   if (!feedbackList?.length) {
     return (

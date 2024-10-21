@@ -13,6 +13,7 @@ export const initialState: boardType.SelectedText = {
   added: false,
 };
 
+/** 드래그 첨삭 상태를 관리하기 위한 함수 */
 const useDragCorrection = () => {
   const { setModal } = useModal();
 

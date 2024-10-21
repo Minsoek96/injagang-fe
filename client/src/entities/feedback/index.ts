@@ -1,5 +1,5 @@
-export * as feedbackMutation from './mutation';
-export * as feedbackApi from './apis';
-export * as feedbackQueries from './queries';
-export * as feedbackType from './type';
-export { default as querykeys } from './queryKeys';
+export * as feedbackMutation from './api/mutation';
+export * as feedbackApi from './api/apis';
+export * as feedbackQueries from './api/queries';
+export * as feedbackType from './model/type';
+export { default as querykeys } from './api/queryKeys';

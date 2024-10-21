@@ -26,10 +26,10 @@ function FeedBackComposer() {
   } = useFeedBackLogic();
 
   useEffect(() => {
-    if (selectedCorrection.targetQuestion) {
+    if (selectedCorrection.targetQuestionIndex) {
       textRef.current?.focus();
     }
-  }, [selectedCorrection.targetQuestion, textRef]);
+  }, [selectedCorrection.targetQuestionIndex, textRef]);
 
   return (
     <ComposerContainer
@@ -41,7 +41,7 @@ function FeedBackComposer() {
     >
       <CorrectionView
         targetAnswer={selectedCorrection.targetAnswer}
-        targetQuestion={selectedCorrection.targetQuestion}
+        targetQuestion={selectedCorrection.targetQuestionIndex}
       />
       <ResizeableTextarea
         placeholder="피드백을 작성해주세요."
@@ -64,5 +64,5 @@ function FeedBackComposer() {
 export default FeedBackComposer;
 
 const ComposerContainer = styled(Container.ArticleCard)`
-  font-family: ${V.malgunGothic}
+  font-family: ${V.malgunGothic};
 `;

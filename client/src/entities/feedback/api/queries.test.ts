@@ -1,9 +1,12 @@
+import { act, renderHook, waitFor } from '@testing-library/react';
+
 import { sampleResponseFeed, sampleTargetId } from '@/fixutures/entities/feed';
 import TestProvider from '@/fixutures/TestProvider';
-import { getFeedBackList } from '@/src/entities/feedback/apis';
-import { useFetchFeedBackList } from '@/src/entities/feedback/queries';
+
 import { useFeedStore } from '@/src/entities/qnaboard';
-import { act, renderHook, waitFor } from '@testing-library/react';
+
+import { getFeedBackList } from './apis';
+import { useFetchFeedBackList } from './queries';
 
 jest.mock('./apis');
 

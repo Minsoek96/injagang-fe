@@ -4,23 +4,22 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import { useToast } from '@/src/shared/hooks';
-import { useDeleteFeed, useReviseFeed, useWriteFeed } from '@/src/entities/feedback/mutation';
-
-import { deleteFeedBack, reviseFeedBack, writeFeedBack } from '@/src/entities/feedback/apis';
-
-import feedback from '@/src/entities/feedback/queryKeys';
-
 import {
   sampleReviseFeed,
   sampleTargetId,
   sampleWriteFeed,
 } from '@/fixutures/entities/feed';
+
 import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
   TOAST_MODE,
 } from '@/src/shared/const';
+import { useToast } from '@/src/shared/hooks';
+
+import { useDeleteFeed, useReviseFeed, useWriteFeed } from './mutation';
+import { deleteFeedBack, reviseFeedBack, writeFeedBack } from './apis';
+import feedback from './queryKeys';
 
 /** 목킹 설정 */
 jest.mock('./apis');
@@ -136,6 +135,7 @@ describe('mutations', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
+
     successTestCases.forEach(
       ({
         title, hook, mutateArgs, toastMode, toastMsg, apiMock, queryKey,
