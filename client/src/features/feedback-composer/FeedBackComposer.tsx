@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import { useBoardStore, useFeedStore } from '@/src/entities/qnaboard';
-import { Container, ResizeableTextarea } from '@/src/shared/ui';
+import { useBoardStore } from '@/src/entities/qnaboard';
+import { useFeedStore } from '@/src/entities/feedback';
 
+import { Container, ResizeableTextarea } from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
 
 import CorrectionView from './CorrectionView';

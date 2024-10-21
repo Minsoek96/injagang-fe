@@ -3,7 +3,7 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import { sampleResponseFeed, sampleTargetId } from '@/fixutures/entities/feed';
 import TestProvider from '@/fixutures/TestProvider';
 
-import { useFeedStore } from '@/src/entities/qnaboard';
+import useFeedStore from '@/src/entities/feedback/model/useFeedStore';
 
 import { getFeedBackList } from './apis';
 import { useFetchFeedBackList } from './queries';

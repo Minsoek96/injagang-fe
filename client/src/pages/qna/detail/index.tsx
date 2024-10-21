@@ -6,7 +6,8 @@ import styled from 'styled-components';
 
 import { DehydratedState, HydrationBoundary } from '@tanstack/react-query';
 
-import { useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
+import { useCorrectionStore } from '@/src/entities/qnaboard';
+import { useFeedStore } from '@/src/entities/feedback';
 
 import { Spinner } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';

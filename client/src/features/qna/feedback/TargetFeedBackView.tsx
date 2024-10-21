@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
+import { feedbackMutation, feedbackQueries, useFeedStore } from '@/src/entities/feedback';
+
 import { styleMixin, V } from '@/src/shared/styles';
 import { Container } from '@/src/shared/ui';
-import { useFeedStore } from '@/src/entities/qnaboard';
-import { feedbackMutation, feedbackQueries } from '@/src/entities/feedback';
 
 import TargetFeedBackItems from './TargetFeedBackItems';
 

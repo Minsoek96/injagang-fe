@@ -1,8 +1,9 @@
 import { useState, useCallback, useRef } from 'react';
 
-import { useCorrectionStore, useFeedStore } from '@/src/entities/qnaboard';
-import { useModal } from '@/src/shared/hooks';
+import { useCorrectionStore } from '@/src/entities/qnaboard';
 import { feedbackMutation } from '@/src/entities/feedback';
+
+import { useModal } from '@/src/shared/hooks';
 
 const useFeedBackLogic = () => {
   const [feedbackContent, setFeedbackContent] = useState<string>('');
@@ -11,9 +12,7 @@ const useFeedBackLogic = () => {
 
   const { correction, initCorrection } = useCorrectionStore();
 
-  const { targetFeed } = useFeedStore();
-
-  const { mutate: writeFeedBack } = feedbackMutation.useWriteFeed(targetFeed);
+  const { mutate: writeFeedBack } = feedbackMutation.useWriteFeed();
 
   const CORRECTION_MIN = feedbackContent.length < 30;
   const EMPTY_CORRECTION = correction.targetAnswer === '';

@@ -12,6 +12,7 @@ import {
   TOAST_MODE,
 } from '@/src/shared/const';
 
+import useFeedStore from '@/src/entities/feedback/model/useFeedStore';
 import feedback from './queryKeys';
 
 import { deleteFeedBack, reviseFeedBack, writeFeedBack } from './apis';
@@ -37,15 +38,16 @@ const useReviseFeed = (targetId: number) => {
 };
 
 /** 댓글 작성 */
-const useWriteFeed = (targetId: number) => {
+const useWriteFeed = () => {
   const { showToast } = useToast();
+  const { targetFeed } = useFeedStore();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (feed: IWriteFeedBack) => writeFeedBack(feed),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: feedback.list(targetId) });
+      queryClient.invalidateQueries({ queryKey: feedback.list(targetFeed) });
 
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.ADDED_FEED);
     },

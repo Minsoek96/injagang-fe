@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { useFeedStore } from '@/src/entities/qnaboard';
+import useFeedStore from '@/src/entities/feedback/model/useFeedStore';
+
 import { getFeedBackList } from './apis';
 
 import feedback from './queryKeys';

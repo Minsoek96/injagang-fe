@@ -17,6 +17,7 @@ import {
 } from '@/src/shared/const';
 import { useToast } from '@/src/shared/hooks';
 
+import useFeedStore from '@/src/entities/feedback/model/useFeedStore';
 import { useDeleteFeed, useReviseFeed, useWriteFeed } from './mutation';
 import { deleteFeedBack, reviseFeedBack, writeFeedBack } from './apis';
 import feedback from './queryKeys';
@@ -31,6 +32,7 @@ jest.mock('next/router', () => ({
 jest.mock('@/src/shared/hooks', () => ({
   useToast: jest.fn(),
 }));
+jest.mock('@/src/entities/feedback/model/useFeedStore');
 
 const replaceMock = jest.fn();
 const showToastMock = jest.fn();
@@ -60,7 +62,7 @@ const successTestCases = [
     title:
       '댓글 작성에 성공하면 해당 피드백키를 초기화하고 토스트 메시지를 등록한다.',
     hook: useWriteFeed,
-    mutateArgs: sampleReviseFeed,
+    mutateArgs: null,
     toastMsg: SUCCESS_MESSAGES.ADDED_FEED,
     toastMode: TOAST_MODE.SUCCESS,
     queryKey: feedback.list(sampleTargetId),
@@ -92,7 +94,7 @@ const failureTestCases = [
   {
     title: '댓글 작성에 실패하면 실패 토스트를 등록한다',
     hook: useWriteFeed,
-    mutateArgs: sampleWriteFeed,
+    mutateArgs: null,
     toastMsg: ERROR_MESSAGES.ADDED_FEED,
     toastMode: TOAST_MODE.ERROR,
     apiMock: writeFeedBack,
@@ -130,6 +132,9 @@ describe('mutations', () => {
   context('뮤테이션 성공한 경우', () => {
     beforeEach(() => {
       setupMocks();
+      (useFeedStore as unknown as jest.Mock).mockReturnValue({
+        targetFeed: 1001,
+      });
     });
 
     afterEach(() => {
