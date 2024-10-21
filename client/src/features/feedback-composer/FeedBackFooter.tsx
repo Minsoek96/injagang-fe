@@ -1,38 +1,29 @@
 import styled from 'styled-components';
 
-import { MainButton } from '@/src/shared/ui/button';
-import { V } from '@/src/shared/styles';
-import TextActionBtns from './TextActionBtns';
+import FeedBackViewButtons from '@/src/features/feedback-composer/FeedBackViewButton';
+
+import ActionBtns from './ActionBtns';
 
 interface FeedBackFooterProps {
   handleClear: () => void;
   handleSubmit: () => void;
   qnaIdList: number[];
-  feedBackIndex: number;
-  handleFeedBackIndex: (qnaId: number) => void;
 }
 
 function FeedBackFooter({
   handleClear,
-  handleFeedBackIndex,
   handleSubmit,
   qnaIdList,
-  feedBackIndex,
 }: FeedBackFooterProps) {
+  const btnInfos = [
+    { id: 'btn-01', text: '비우기', onClick: handleClear },
+    { id: 'btn-02', text: '작성', onClick: handleSubmit },
+  ];
+
   return (
     <CommentFooter>
-      <FeedBackViewBtns>
-        {qnaIdList.map((list, i) => (
-          <MainButton
-            isActive={list === feedBackIndex}
-            sx={{ width: '4rem', fontSize: '1.6rem' }}
-            onClick={() => handleFeedBackIndex(list)}
-            label={`${i + 1}`}
-            key={list}
-          />
-        ))}
-      </FeedBackViewBtns>
-      <TextActionBtns handleClear={handleClear} handleSubmit={handleSubmit} />
+      <FeedBackViewButtons qnaIdList={qnaIdList} />
+      <ActionBtns btnInfos={btnInfos} />
     </CommentFooter>
   );
 }
@@ -44,13 +35,4 @@ const CommentFooter = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-`;
-
-const FeedBackViewBtns = styled.div`
-  display: flex;
-  gap:.3rem;
-  @media screen and (max-width:${V.mediaMobile}){
-    display: grid;
-    grid-template-columns: repeat(2,1fr)
-  }
 `;
