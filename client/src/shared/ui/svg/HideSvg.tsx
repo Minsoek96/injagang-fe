@@ -14,7 +14,7 @@ export default function HideSvg<T>({
   sx = {},
 }: Props<T>) {
   return (
-    <HideContainer onClick={() => onClick({} as T)} style={sx}>
+    <HideContainer onClick={() => onClick({} as T)} style={sx} role="button">
       {Logo}
       <HideSpan data-testid="hide-span">{label}</HideSpan>
     </HideContainer>
@@ -28,8 +28,8 @@ const HideContainer = styled.div`
   flex-direction: column;
   color: ${({ theme }) => theme.colors.text};
 
-  &:hover span{
-      display: block;
+  &:hover span {
+    display: block;
   }
 `;
 

@@ -7,9 +7,9 @@ import { useBoardStore } from '@/src/entities/qnaboard';
 import { Container, ResizeableTextarea } from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
 
+import useFeedBackLogic from './model/useFeedBackLogic';
 import CorrectionView from './CorrectionView';
 import FeedBackFooter from './FeedBackFooter';
-import useFeedBackLogic from './useFeedBackLogic';
 
 function FeedBackComposer() {
   const { questionIds } = useBoardStore();

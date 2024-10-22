@@ -13,6 +13,7 @@ import {
 import { useBoardStore, boardMutation } from '@/src/entities/qnaboard';
 
 import { useModal } from '@/src/shared/hooks';
+import { HideSvg } from '@/src/shared/ui';
 
 type EditMenuBarProps = {
   boardId: number;
@@ -76,8 +77,12 @@ function EditMenuBar({ boardId, content, title }: EditMenuBarProps) {
     <MyComponentStyle>
       <BiDotsVerticalRounded onClick={handleChangeVisible} />
       <ButtonContainer $isVisible={tagPosition}>
-        <BiTrash onClick={userDeleteConfirm} />
-        <BiMessageAltEdit onClick={userEditConfirm} />
+        <HideSvg Logo={<BiTrash />} label="삭제" onClick={userDeleteConfirm} />
+        <HideSvg
+          Logo={<BiMessageAltEdit />}
+          label="수정"
+          onClick={userEditConfirm}
+        />
       </ButtonContainer>
     </MyComponentStyle>
   );
@@ -99,6 +104,7 @@ const ButtonContainer = styled.div<{ $isVisible: boolean }>`
   flex-direction: row;
   border: 1px solid ${(props) => props.theme.colors.mainLine};
   padding: 0.5rem;
+  gap: 1rem;
   z-index: 1;
   margin-left: 1rem;
   visibility: ${(props) => (props.$isVisible ? 'visible' : 'hidden')};

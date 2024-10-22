@@ -4,6 +4,7 @@ import { useCorrectionStore } from '@/src/entities/qnaboard';
 import { feedbackMutation } from '@/src/entities/feedback';
 
 import { useModal } from '@/src/shared/hooks';
+import { MODAL_MESSAGES } from '@/src/shared/const';
 
 const useFeedBackLogic = () => {
   const [feedbackContent, setFeedbackContent] = useState<string>('');
@@ -21,7 +22,7 @@ const useFeedBackLogic = () => {
   const handleWarring = useCallback((message: string) => {
     setModal({
       contents: {
-        title: '경고',
+        title: MODAL_MESSAGES.WARNING,
         message,
       },
     });
@@ -43,7 +44,7 @@ const useFeedBackLogic = () => {
   const correctionRules = [
     {
       rule: EMPTY_CORRECTION,
-      modal: () => handleWarring('첨삭 내용을 등록하세요.'),
+      modal: () => handleWarring('첨삭 내용을 등록해주세요.'),
       action: () => {},
     },
     {

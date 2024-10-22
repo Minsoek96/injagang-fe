@@ -1,8 +1,10 @@
-import TestProvider from '@/fixutures/TestProvider';
-import ActionBtns from '@/src/features/feedback-composer/ActionBtns';
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+
+import TestProvider from '@/fixutures/TestProvider';
+
+import ActionBtns from '@/src/features/feedback-composer/ActionBtns';
 
 describe('ActionBtns', () => {
   const firstActionMock = jest.fn();
