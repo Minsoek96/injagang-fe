@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { useRouter } from 'next/router';
-
 import styled from 'styled-components';
 
 import {
@@ -10,10 +8,8 @@ import {
   BiMessageAltEdit,
 } from 'react-icons/bi';
 
-import { useBoardStore, boardMutation } from '@/src/entities/qnaboard';
-
-import { useModal } from '@/src/shared/hooks';
 import { HideSvg } from '@/src/shared/ui';
+import { useDetailMenu } from '@/src/features/qna/detail/model/useDetailMenu';
 
 type EditMenuBarProps = {
   boardId: number;
@@ -28,62 +24,33 @@ type EditMenuBarProps = {
  * @param title - 제목
  */
 function EditMenuBar({ boardId, content, title }: EditMenuBarProps) {
-  const router = useRouter();
   const [tagPosition, setTagPosition] = useState(false);
 
-  const { setModal } = useModal();
-
-  const { mutate: deleteBoard } = boardMutation.useDeleteBoard();
-  const { setEditBoardState } = useBoardStore();
-
-  const navigateToList = () => {
-    router.replace('/qna/list');
-  };
+  const { editConfirm, deleteConfirm } = useDetailMenu({
+    boardId,
+    content,
+    title,
+  });
 
   const handleChangeVisible = () => {
     setTagPosition(!tagPosition);
   };
 
-  const handleRemoveBoard = () => {
-    deleteBoard(boardId);
-    navigateToList();
-  };
-
-  const handleEditBoard = () => {
-    setEditBoardState({
-      title,
-      content,
-    });
-    router.push(`/qna/edit/${boardId}`);
-  };
-
-  // 유저가 삭제를 컨펌 하는 함수
-  const userDeleteConfirm = () => {
-    setModal({
-      onAction: handleRemoveBoard,
-      contents: { title: '경고', message: '정말 삭제하시겠습니까?' },
-    });
-  };
-
-  // 유저가 수정을 컨펌 하는 함수
-  const userEditConfirm = () => {
-    setModal({
-      onAction: handleEditBoard,
-      contents: { title: '경고', message: '정말 수정하시겠습니까?' },
-    });
-  };
-
   return (
     <MyComponentStyle>
-      <BiDotsVerticalRounded onClick={handleChangeVisible} />
-      <ButtonContainer $isVisible={tagPosition}>
-        <HideSvg Logo={<BiTrash />} label="삭제" onClick={userDeleteConfirm} />
+      <HideSvg
+        Logo={<BiDotsVerticalRounded />}
+        label={tagPosition ? 'OFF' : 'ON'}
+        onClick={handleChangeVisible}
+      />
+      <MenuWrapper $isVisible={tagPosition}>
+        <HideSvg Logo={<BiTrash />} label="삭제" onClick={deleteConfirm} />
         <HideSvg
           Logo={<BiMessageAltEdit />}
           label="수정"
-          onClick={userEditConfirm}
+          onClick={editConfirm}
         />
-      </ButtonContainer>
+      </MenuWrapper>
     </MyComponentStyle>
   );
 }
@@ -99,7 +66,7 @@ const MyComponentStyle = styled.div`
   padding-block: 0.3rem;
 `;
 
-const ButtonContainer = styled.div<{ $isVisible: boolean }>`
+const MenuWrapper = styled.div<{ $isVisible: boolean }>`
   display: flex;
   flex-direction: row;
   border: 1px solid ${(props) => props.theme.colors.mainLine};
