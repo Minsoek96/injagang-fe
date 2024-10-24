@@ -1,9 +1,7 @@
-import { act, renderHook, waitFor } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 
 import { sampleResponseFeed, sampleTargetId } from '@/fixutures/entities/feed';
 import TestProvider from '@/fixutures/TestProvider';
-
-import useFeedStore from '@/src/entities/feedback/model/useFeedStore';
 
 import { getFeedBackList } from './apis';
 import { useFetchFeedBackList } from './queries';
@@ -19,7 +17,6 @@ describe('queries', () => {
   });
 
   it('유저가 선택한 번호의 댓글리스트를 조회한다.', async () => {
-    act(() => useFeedStore.getState().setTargetFeed(sampleTargetId));
     const { result } = renderHook(() => useFetchFeedBackList(sampleTargetId), {
       wrapper: TestProvider,
     });

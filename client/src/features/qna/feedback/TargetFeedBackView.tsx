@@ -1,19 +1,22 @@
 import styled from 'styled-components';
 
-import { feedbackMutation, feedbackQueries, useFeedStore } from '@/src/entities/feedback';
+import { feedbackMutation, feedbackQueries } from '@/src/entities/feedback';
 
 import { styleMixin, V } from '@/src/shared/styles';
 import { Container } from '@/src/shared/ui';
 
 import TargetFeedBackItems from './TargetFeedBackItems';
 
+type Props = {
+  targetFeed: number
+}
+
 /** TargetFeedBackView 피드백 조회
  *
  * 선택된 피드백의 내용을 조회
  * 등록된 피드백이 없는 경우 경고
  */
-function TargetFeedBackView() {
-  const { targetFeed } = useFeedStore();
+function TargetFeedBackView({ targetFeed }:Props) {
   const { data: feedbackList } = feedbackQueries.useFetchFeedBackList(targetFeed);
   const { mutate: updateFeed } = feedbackMutation.useReviseFeed(targetFeed);
   const { mutate: deleteFeed } = feedbackMutation.useDeleteFeed(targetFeed);
