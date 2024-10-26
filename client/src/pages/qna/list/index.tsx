@@ -85,7 +85,7 @@ function List({ dehydratedState }: ListProps) {
           tableKey={TABLE_KEYS}
           route={ROUTE_TEMPLATE}
         />
-        <PagiNation />
+        <PagiNation maxButtonNum={8} />
       </HydrationBoundary>
     </ListStyle>
   );

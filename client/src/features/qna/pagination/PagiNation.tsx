@@ -7,15 +7,18 @@ import { styleMixin, V } from '@/src/shared/styles';
 
 import usePagiNation from './model/usePagiNation';
 
+type Props = {
+  maxButtonNum: number;
+}
 /** 페이지 네이션 버튼을 렌더하는 함수 */
-function PagiNation() {
+function PagiNation({ maxButtonNum }:Props) {
   const {
     curPageNum,
     handlePageClick,
     handlePrevClick,
     handleNextClick,
     visiblePageNumbers,
-  } = usePagiNation(8);
+  } = usePagiNation(maxButtonNum);
 
   return (
     <Container>
@@ -24,7 +27,7 @@ function PagiNation() {
         {visiblePageNumbers.map((pageNum) => (
           <MainButton
             key={pageNum}
-            label={`${pageNum}`}
+            label={pageNum}
             isActive={pageNum === curPageNum}
             onClick={() => handlePageClick(pageNum)}
             sx={{ marginInline: '.2rem' }}
