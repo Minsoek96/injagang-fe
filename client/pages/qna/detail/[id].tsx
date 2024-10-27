@@ -6,8 +6,7 @@ import {
   dehydrate,
 } from '@tanstack/react-query';
 
-import board from '@/src/entities/qnaboard/queryKeys';
-import { boardApi } from '@/src/entities/qnaboard';
+import { boardApi, queryKeys } from '@/src/entities/qnaboard';
 
 import { getServerCookie } from '@/src/shared/utils';
 import { TOKEN_KEYS } from '@/src/shared/const';
@@ -19,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const authToken = getServerCookie(context, TOKEN_KEYS.ACCESS_TOKEN);
 
   await queryClient.prefetchQuery({
-    queryKey: board.detail(Number(id)),
+    queryKey: queryKeys.detail(Number(id)),
     queryFn: () => boardApi.getDetailBoard(Number(id), authToken),
   });
 

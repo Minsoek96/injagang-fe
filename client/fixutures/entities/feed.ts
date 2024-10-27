@@ -2,7 +2,7 @@ import {
   IGetFeedBack,
   IReviseFeedBack,
   IWriteFeedBack,
-} from '@/src/entities/feedback/type';
+} from '@/src/entities/feedback/model/type';
 
 const sampleReviseFeed: IReviseFeedBack = {
   feedbackId: 10001,

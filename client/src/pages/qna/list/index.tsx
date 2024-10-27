@@ -31,7 +31,7 @@ const PagiNation = dynamic(() => import('@/src/features/qna/pagination/PagiNatio
   ssr: false,
 });
 
-const BoardSearch = dynamic(() => import('@/src/features/qna/BoardSearch'), {
+const BoardSearch = dynamic(() => import('@/src/features/qna/search/BoardSearch'), {
   ssr: false,
 });
 
@@ -85,7 +85,7 @@ function List({ dehydratedState }: ListProps) {
           tableKey={TABLE_KEYS}
           route={ROUTE_TEMPLATE}
         />
-        <PagiNation />
+        <PagiNation maxButtonNum={8} />
       </HydrationBoundary>
     </ListStyle>
   );

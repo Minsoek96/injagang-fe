@@ -3,7 +3,7 @@ import {
   ICoverLetters,
   IReviseCoverLetter,
   IWriteCoverLetter,
-} from '@/src/entities/coverLetter/lib/type';
+} from '@/src/entities/coverLetter/model/type';
 
 /** 샘플 자소서 작성 목록 */
 const sampleCoverLetters: IWriteCoverLetter = {
@@ -49,9 +49,9 @@ const responseDetailCoverLetter: ICoverLetterDetail = {
   title: 'test coverLetter',
   owner: true,
   qnaList: [
-    { qnaId: 10001, question: 'test1', answer: 'test1' },
-    { qnaId: 10002, question: 'test2', answer: 'test2' },
-    { qnaId: 10003, question: 'test3', answer: 'test3' },
+    { qnaId: 10001, question: 'question1', answer: 'answer1' },
+    { qnaId: 10002, question: 'question2', answer: 'answer2' },
+    { qnaId: 10003, question: 'question3', answer: 'answer3' },
   ],
 };
 

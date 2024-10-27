@@ -2,18 +2,16 @@ import { useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import { useBoardStore, useFeedStore } from '@/src/entities/qnaboard';
-import { Container, ResizeableTextarea } from '@/src/shared/ui';
+import { useBoardStore } from '@/src/entities/qnaboard';
 
+import { Container, ResizeableTextarea } from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
 
+import useFeedBackLogic from './model/useFeedBackLogic';
 import CorrectionView from './CorrectionView';
 import FeedBackFooter from './FeedBackFooter';
-import useFeedBackLogic from './useFeedBackLogic';
 
 function FeedBackComposer() {
-  const { targetFeed, setTargetFeed } = useFeedStore();
-
   const { questionIds } = useBoardStore();
 
   const {
@@ -26,10 +24,10 @@ function FeedBackComposer() {
   } = useFeedBackLogic();
 
   useEffect(() => {
-    if (selectedCorrection.targetQuestion) {
+    if (selectedCorrection.targetQuestionIndex) {
       textRef.current?.focus();
     }
-  }, [selectedCorrection.targetQuestion, textRef]);
+  }, [selectedCorrection.targetQuestionIndex, textRef]);
 
   return (
     <ComposerContainer
@@ -41,7 +39,6 @@ function FeedBackComposer() {
     >
       <CorrectionView
         targetAnswer={selectedCorrection.targetAnswer}
-        targetQuestion={selectedCorrection.targetQuestion}
       />
       <ResizeableTextarea
         placeholder="피드백을 작성해주세요."
@@ -51,11 +48,9 @@ function FeedBackComposer() {
         maxSize={50}
       />
       <FeedBackFooter
-        handleFeedBackIndex={setTargetFeed}
         handleSubmit={handleSubmit}
         handleClear={correctionClear}
         qnaIdList={questionIds}
-        feedBackIndex={targetFeed}
       />
     </ComposerContainer>
   );
@@ -64,5 +59,5 @@ function FeedBackComposer() {
 export default FeedBackComposer;
 
 const ComposerContainer = styled(Container.ArticleCard)`
-  font-family: ${V.malgunGothic}
+  font-family: ${V.malgunGothic};
 `;

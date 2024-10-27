@@ -17,8 +17,30 @@ export default function usePageRouter() {
     });
   }, []);
 
+  /** 게시판 상세 페이지 */
+  const moveBoardDetailPage = useCallback((boardId: number) => {
+    router.replace(`/qna/detail/${boardId}`);
+  }, []);
+
+  /** 게시판 이동 페이지 */
+  const moveBoardMainPage = useCallback(() => {
+    router.replace({ pathname: '/qna/list' });
+  }, []);
+
+  const moveBoardEditPage = useCallback((boardId: number) => {
+    router.replace(`/qna/edit/${boardId}`);
+  }, []);
+
+  /** 회원가입 페이지 이동 */
+  const moveSignupPage = useCallback(() => {
+    router.push({ pathname: '/join' });
+  }, []);
   return {
     moveCoverLetterEditPage,
     moveCoverLetterMainPage,
+    moveBoardEditPage,
+    moveBoardDetailPage,
+    moveBoardMainPage,
+    moveSignupPage,
   };
 }

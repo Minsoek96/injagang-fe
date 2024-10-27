@@ -6,7 +6,7 @@ import { coverLetterQueries } from '@/src/entities/coverLetter';
 
 import CoverLetterList from '../CoverLetterList';
 
-jest.mock('@/src/entities/coverLetter/model/queries', () => ({
+jest.mock('@/src/entities/coverLetter/api/queries', () => ({
   useFetchCoverLetter: jest.fn(),
 }));
 

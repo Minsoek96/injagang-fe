@@ -1,20 +1,18 @@
 import styled from 'styled-components';
 
 interface CorrectionViewProps {
-  targetQuestion: number;
   targetAnswer: string;
 }
 
 /** 첨삭 내용을 보여주는 컴포넌트 */
-function CorrectionView({ targetQuestion, targetAnswer }: CorrectionViewProps) {
-  const emptyTarget = targetQuestion === 0;
+function CorrectionView({ targetAnswer }: CorrectionViewProps) {
   const emptyMessage = '첨삭된 내용이 없습니다...';
   return (
     <CorrectionContainer>
       <CorrectionTitle>
         현재 선택된 문장 :
         {' '}
-        {emptyTarget ? emptyMessage : targetQuestion}
+        {!targetAnswer && emptyMessage }
       </CorrectionTitle>
       <Sentenc>{targetAnswer}</Sentenc>
     </CorrectionContainer>

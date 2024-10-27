@@ -1,4 +1,4 @@
-import { IResponseSignin, ISignin, ISignup } from '@/src/entities/auth/type';
+import { IResponseSignin, ISignin, ISignup } from '@/src/entities/auth/model/type';
 
 /** 샘플 회원가입 정보 */
 const signUpDate: ISignup = {

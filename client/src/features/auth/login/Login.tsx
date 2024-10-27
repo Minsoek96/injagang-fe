@@ -1,86 +1,29 @@
-import { useState, useEffect } from 'react';
+import LoginForm from '@/src/features/auth/login/LoginForm';
 
-import { useRouter } from 'next/router';
+import { authMutations, authType } from '@/src/entities/auth';
 
-import styled, { css } from 'styled-components';
-
-import { shakeAnimation } from '@/src/shared/styles';
-
-import { MainButton, InputField } from '@/src/shared/ui';
-
-import useLoginLogic from './useLoginLogic';
+import { usePageRouter } from '@/src/shared/hooks';
 
 function Login() {
-  const router = useRouter();
-  const {
-    loginInfo,
-    handleChange,
-    handleSubmit,
-    logicErrorMsg,
-    loginIdRef,
-    passwordRef,
-    serverErrorMsg,
-  } = useLoginLogic();
+  const { mutate: authenTicate } = authMutations.useFetchSignin();
+  const { moveSignupPage } = usePageRouter();
 
-  const [shakeTrigger, setShakeTrigger] = useState<boolean>(false);
+  const labels = [
+    { key: 'loginId', label: '아이디', type: 'text' },
+    { key: 'password', label: '비밀번호', type: 'password' },
+  ];
 
-  const isError = serverErrorMsg !== '' || logicErrorMsg !== '';
-
-  useEffect(() => {
-    if (isError) {
-      setShakeTrigger(false);
-      setTimeout(() => {
-        setShakeTrigger(true);
-      }, 50);
-    }
-  }, [serverErrorMsg, logicErrorMsg, isError]);
+  const handleSubmit = (data: authType.ISignin) => {
+    authenTicate(data);
+  };
 
   return (
-    <Form $shakeTrigger={shakeTrigger} onSubmit={handleSubmit}>
-      <InputField
-        label="아이디"
-        ref={loginIdRef}
-        type="text"
-        name="loginId"
-        value={loginInfo.loginId}
-        onChange={handleChange}
-      />
-      <InputField
-        label="비밀번호"
-        ref={passwordRef}
-        type="password"
-        name="password"
-        value={loginInfo.password}
-        onChange={handleChange}
-      />
-      {isError && <ERROR>{logicErrorMsg || serverErrorMsg}</ERROR>}
-      <MainButton type="submit" label="로그인" sx={{ marginBottom: '.5rem' }} />
-      <MainButton onClick={() => router.replace('/join')} label="회원가입" />
-    </Form>
+    <LoginForm
+      onSubmit={handleSubmit}
+      labels={labels}
+      navigateToSignUp={moveSignupPage}
+    />
   );
 }
 
 export default Login;
-
-const Form = styled.form<{ $shakeTrigger: boolean }>`
-  display: flex;
-  flex-direction: column;
-  width: 30rem;
-  padding: 2rem;
-  border-radius: .8rem;
-  background-color: #15202b;
-  ${({ $shakeTrigger }) =>
-    $shakeTrigger
-    && css`
-      animation: ${shakeAnimation} 0.5s;
-    `}
-
-  button {
-    height: 4rem;
-    background-color: #2ecc71;
-  }
-`;
-
-const ERROR = styled.div`
-  color: red;
-`;
