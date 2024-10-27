@@ -2,9 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useToast } from '@/src/shared/hooks';
 
-import { IAddTemplate } from '@/src/entities/template/type';
-
 import { ERROR_MESSAGES, SUCCESS_MESSAGES, TOAST_MODE } from '@/src/shared/const';
+import { IAddTemplate } from '@/src/entities/template/model/type';
 
 import { addTemplate, deleteTemplate } from './apis';
 

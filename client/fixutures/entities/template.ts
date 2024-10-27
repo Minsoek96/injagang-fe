@@ -1,4 +1,4 @@
-import { IAddTemplate, IGetTemplate } from '@/src/entities/template/type';
+import { IAddTemplate, IGetTemplate } from '@/src/entities/template/model/type';
 
 const sampleAddTemplate: IAddTemplate = {
   title: 'TestCompany',

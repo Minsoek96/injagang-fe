@@ -4,15 +4,21 @@ import {
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import { useFetchTemplate } from '@/src/entities/template/queries';
+import { templateQueries } from '@/src/entities/template';
 import CreateForm from './CreateForm';
 
 const context = describe;
 // TODO : 테스트코드 수정하기
 
-jest.mock('@/src/entities/template/queries', () => ({
-  useFetchTemplate: jest.fn(),
-}));
+jest.mock('@/src/entities/template', () => {
+  const actualHooks = jest.requireActual('@/src/entities/template');
+  return {
+    ...actualHooks,
+    templateQueries: {
+      useFetchTemplate: jest.fn(),
+    },
+  };
+});
 
 const templateList = [
   { title: 'Template 1', questions: ['Question 1', 'Question 2'] },
@@ -37,7 +43,7 @@ describe('CreateForm', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    (useFetchTemplate as jest.Mock).mockReturnValue({
+    (templateQueries.useFetchTemplate as jest.Mock).mockReturnValue({
       data: templateList,
     });
     jest.clearAllMocks();

@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 import { BiPlus } from 'react-icons/bi';
 
-import { useFetchTemplate } from '@/src/entities/template/queries';
+import { templateQueries } from '@/src/entities/template';
 import TemplateItem from './TemplateTitleItem';
 
 import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
 
 function TemplateTitleList() {
-  const { data: templateList } = useFetchTemplate();
+  const { data: templateList } = templateQueries.useFetchTemplate();
 
   const { isAddTemplate, setIsAddTemplate } = useTemplateStoreManager();
 

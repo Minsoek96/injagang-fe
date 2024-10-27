@@ -1,6 +1,6 @@
-export * as templateApi from './apis';
-export * as templateMutations from './mutations';
-export * as templateQueries from './queries';
-export * as templateType from './type';
-export { default as useTemplateStore } from './useTemplateStore';
-export { default as queryKeys } from './queryKeys';
+export * as templateApi from './api/apis';
+export * as templateMutations from './api/mutations';
+export * as templateQueries from './api/queries';
+export * as templateType from './model/type';
+export { default as useTemplateStore } from './model/useTemplateStore';
+export { default as queryKeys } from './api/queryKeys';

@@ -1,13 +1,12 @@
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 import styled from 'styled-components';
+
 import { styleMixin } from '@/src/shared/styles';
-
 import { Spinner } from '@/src/shared/ui/spinner';
-
-import { APIErrorBoundary } from '@/src/features/boundary';
-import { Suspense } from 'react';
 import { Container } from '@/src/shared/ui';
+
 import { TemplateViewController } from './TemplateDetail';
 
 const TemplateTitleList = dynamic(
@@ -22,11 +21,9 @@ function TemplateList() {
     <TemplateContainer>
       <MainTitle>템플릿 만들기</MainTitle>
       <TemplateCard $size={{ width: '100%', height: '35rem' }}>
-        <APIErrorBoundary>
-          <Suspense fallback={<Spinner />}>
-            <TemplateTitleList />
-          </Suspense>
-        </APIErrorBoundary>
+        <Suspense fallback={<Spinner />}>
+          <TemplateTitleList />
+        </Suspense>
       </TemplateCard>
       <TemplateCard $size={{ width: '100%', height: '35rem' }}>
         <TemplateViewController />
