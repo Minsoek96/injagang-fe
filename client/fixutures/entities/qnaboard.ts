@@ -34,12 +34,10 @@ const sampleQuestionIds = [10001, 10002, 10003, 10004, 10005];
 
 const sampleCorrection:feedbackType.CorrectionItem = {
   targetAnswer: 'testAnswer',
-  targetQuestion: 1,
   targetQuestionIndex: 10001,
 };
 
 const sampleSelectedText: SelectedText = {
-  dragTitleId: 10001,
   targetId: 10001,
   selectedText: 'answer',
   start: 5,
@@ -48,7 +46,6 @@ const sampleSelectedText: SelectedText = {
 };
 
 const emptySelectedText: SelectedText = {
-  dragTitleId: 0,
   targetId: 0,
   selectedText: '',
   start: 0,
