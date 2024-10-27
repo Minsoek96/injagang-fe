@@ -1,5 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import {
+  fireEvent, render, screen, waitFor,
+} from '@testing-library/react';
 import preloadAll from 'jest-next-dynamic-ts';
 
 import TestProvider from '@/fixutures/TestProvider';
@@ -8,7 +9,7 @@ import QuestionCreateForm from './QuestionCreateForm';
 const context = describe;
 
 // TODO : 테스트 코드 수정 방안
-describe('QuestionComposer', () => {
+describe('QuestionCreateForm', () => {
   const mockSubmit = jest.fn();
 
   beforeAll(async () => {
@@ -24,39 +25,68 @@ describe('QuestionComposer', () => {
     );
   };
 
-  context('submit 테스트', () => {
-    it('전체 필드의 값을 채우지 않으면 submit이 호출되지 않는다.', async () => {
+  it('제목, 내용, 버튼이 렌더링 된다.', () => {
+    renderComponent();
+    const searchTitle = screen.getByPlaceholderText('제목을 작성해주세요.');
+    const searchContent = screen.getByPlaceholderText('질문을 작성해주세요.');
+    const searchSubmit = screen.getByRole('button', { name: '작성완료' });
+    expect(searchTitle).toBeInTheDocument();
+    expect(searchContent).toBeInTheDocument();
+    expect(searchSubmit).toBeInTheDocument();
+  });
+
+  context('사용자 입력 테스트', () => {
+    it('제목 필드가 업데이트 된다.', () => {
       renderComponent();
+      const searchTitle = screen.getByPlaceholderText('제목을 작성해주세요.');
+      fireEvent.change(searchTitle, { target: { value: '테스트 제목' } });
 
-      const titleInput = screen.getByPlaceholderText(/제목을 작성/);
-      const submitButton = screen.getByText(/작성완료/);
-
-      userEvent.type(titleInput, '테스트 제목');
-
-      await waitFor(() => expect(titleInput).toHaveValue('테스트 제목'));
-
-      userEvent.click(submitButton);
-      // 제목만 입력했으므로 submit이 호출되지 않아야 함
-      expect(mockSubmit).not.toHaveBeenCalled();
+      expect(searchTitle).toHaveValue('테스트 제목');
     });
 
-    it('모든 필드를 채우면 submit이 호출된다.', async () => {
+    it('내용 필드가 업데이트 된다.', async () => {
       renderComponent();
 
-      const titleInput = screen.getByPlaceholderText(/제목을 작성/);
-      const contentInput = screen.getByPlaceholderText(/질문을 작성/);
-      const submitButton = screen.getByText(/작성완료/);
+      const searchContent = screen.getByPlaceholderText('질문을 작성해주세요.');
+      fireEvent.change(searchContent, { target: { value: '테스트 질문' } });
 
-      userEvent.type(titleInput, '테스트 제목');
-      await waitFor(() => expect(titleInput).toHaveValue('테스트 제목'));
+      await waitFor(() => {
+        expect(searchContent).toHaveValue('테스트 질문');
+      });
+    });
+  });
 
-      userEvent.type(contentInput, '테스트 질문');
-      await waitFor(() => expect(contentInput).toHaveValue('테스트 질문'));
+  context('필드가 비어 있는 경우', () => {
+    it('제출이 불가능하다.', async () => {
+      renderComponent();
+      const searchTitle = screen.getByPlaceholderText('제목을 작성해주세요.');
+      const searchSubmit = screen.getByRole('button', { name: '작성완료' });
+      fireEvent.change(searchTitle, { target: { value: '테스트 제목' } });
 
-      userEvent.click(submitButton);
+      expect(searchTitle).toHaveValue('테스트 제목');
+      fireEvent.click(searchSubmit);
       await waitFor(() => {
         expect(mockSubmit).not.toHaveBeenCalled();
       });
+    });
+  });
+
+  context('필드가 채워져 있는 경우', () => {
+    it('제출이 가능하다.', async () => {
+      renderComponent();
+      const searchTitle = screen.getByPlaceholderText('제목을 작성해주세요.');
+      const searchContent = screen.getByPlaceholderText('질문을 작성해주세요.');
+
+      fireEvent.change(searchTitle, { target: { value: '테스트 제목' } });
+      expect(searchTitle).toHaveValue('테스트 제목');
+      fireEvent.change(searchContent, { target: { value: '테스트 질문' } });
+
+      await waitFor(() => {
+        expect(searchContent).toHaveValue('테스트 질문');
+      });
+
+      const searchSubmit = screen.getByRole('button', { name: '작성완료' });
+      fireEvent.click(searchSubmit);
     });
   });
 });

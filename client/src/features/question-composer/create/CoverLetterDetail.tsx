@@ -1,5 +1,7 @@
 import { memo } from 'react';
+
 import { coverLetterQueries, S } from '@/src/entities/coverLetter';
+
 import CoverLetterItem from './CoverLetterItem';
 
 interface CoverLetterProps {
