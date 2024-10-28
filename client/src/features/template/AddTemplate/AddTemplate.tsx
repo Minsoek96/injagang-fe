@@ -1,77 +1,79 @@
-import { useRef, useEffect } from 'react';
+import styled from 'styled-components';
+
+import { useFieldArray, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { v4 as uuid4 } from 'uuid';
 
 import {
   BiPlus, BiRedo, BiCheck, BiX,
 } from 'react-icons/bi';
 
-import styled from 'styled-components';
+import { templateSchema, templateType } from '@/src/entities/template';
 
 import { styleMixin } from '@/src/shared/styles';
-
 import { keys } from '@/src/shared/utils';
-import { MainInput } from '@/src/shared/ui';
-import TQustionItem from './TQustionItem';
+import { HideSvg, UnInput } from '@/src/shared/ui';
 
-import useAddTemplateLogic from '../hooks/useAddTemplateLogic';
+import QustionItem from './QustionItem';
 
 interface AddTemplateProps {
   onClose: (isClose: boolean) => void;
+  onSubmit: (data: templateType.IAddFormTemplate) => void;
 }
 
-function AddTemplate({ onClose }: AddTemplateProps) {
+function AddTemplate({ onClose, onSubmit }: AddTemplateProps) {
   const {
-    templateList,
-    setTemplateList,
-    handleQuestionChange,
-    addQuestion,
-    removeLastQuestion,
-    confirmTemplateCreation,
-  } = useAddTemplateLogic();
-  const questionRef = useRef<HTMLTextAreaElement | null>(null);
-  const titleRef = useRef<HTMLInputElement | null>(null);
+    handleSubmit,
+    register,
+    control,
+  } = useForm<templateType.IAddFormTemplate>({
+    resolver: zodResolver(templateSchema.create),
+    defaultValues: {
+      title: '',
+      questions: [],
+    },
+  });
 
-  useEffect(() => {
-    questionRef.current?.focus();
-  }, [templateList.templateQuestion.length]);
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'questions',
+  });
 
-  useEffect(() => {
-    titleRef.current?.focus();
-  }, []);
+  const onDeleteQuestion = () => {
+    if (fields.length > 1) {
+      remove(fields.length - 1);
+    }
+  };
+
+  const onAddQuestion = () => {
+    if (fields.length < 5) {
+      append({ question: '', id: uuid4() });
+    }
+  };
 
   const ControllerData = [
-    { icon: <BiPlus onClick={addQuestion} />, text: '질문추가' },
-    { icon: <BiRedo onClick={removeLastQuestion} />, text: '되돌리기' },
-    { icon: <BiCheck onClick={confirmTemplateCreation} />, text: '확정하기' },
+    {
+      icon: <BiPlus onClick={onAddQuestion} />,
+      text: '질문추가',
+    },
+    { icon: <BiRedo onClick={onDeleteQuestion} />, text: '되돌리기' },
+    { icon: <BiCheck onClick={handleSubmit(onSubmit)} />, text: '확정하기' },
   ];
-
-  const handleChangeTitle = (text: string) => {
-    setTemplateList((prev) => ({
-      ...prev,
-      templateTitle: text,
-    }));
-  };
 
   return (
     <TemplateAddStyled>
       <TopMenu>
-        <BiX onClick={() => onClose(false)} />
+        <HideSvg onClick={() => onClose(false)} Logo={<BiX />} label="닫기" />
       </TopMenu>
-      <MainInput
-        ref={titleRef}
-        value={templateList.templateTitle}
-        onChange={handleChangeTitle}
+      <UnInput
+        register={register('title')}
         placeholder="제목을 입력해주세요"
-        sx={{ width: '100%' }}
+        style={{ width: '100%' }}
       />
       <QuestionContainer>
-        {templateList.templateQuestion.map((question, index) => (
-          <TQustionItem
-            key={keys(question, index)}
-            index={index}
-            question={question}
-            onChange={handleQuestionChange}
-            ref={questionRef}
-          />
+        {fields.map((question, index) => (
+          <QustionItem key={question.id} register={register} index={index} />
         ))}
       </QuestionContainer>
       <Controller>
@@ -103,7 +105,7 @@ const TopMenu = styled.div`
 `;
 
 const QuestionContainer = styled.div`
-  margin-top:2rem;
+  margin-top: 2rem;
   width: 100%;
   overflow-x: hidden;
 `;

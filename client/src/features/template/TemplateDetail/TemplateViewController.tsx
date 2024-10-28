@@ -4,17 +4,28 @@ import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 import { Spinner } from '@/src/shared/ui/spinner';
+import { templateMutations, templateType, useTemplateStore } from '@/src/entities/template';
+
 import AddTemplate from '../AddTemplate/AddTemplate';
 import TemplateDetail from './TemplateDetail';
 
-import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
-
 function TemplateViewController() {
-  const { isAddTemplate, setIsAddTemplate } = useTemplateStoreManager();
+  const { setAddTemplateToggle, isAddTemplate } = useTemplateStore();
+  const { mutate: addTemplate } = templateMutations.useAddTemplate();
+
+  const onSubmit = (data: templateType.IAddFormTemplate) => {
+    const formatData:templateType.IAddTemplate = {
+      title: data.title,
+      questions: data.questions.map((item) => item.question),
+    };
+    addTemplate(formatData);
+    setAddTemplateToggle(false);
+  };
+
   return (
     <TemplateViewStyle>
       {isAddTemplate ? (
-        <AddTemplate onClose={setIsAddTemplate} />
+        <AddTemplate onClose={setAddTemplateToggle} onSubmit={onSubmit} />
       ) : (
         <Suspense fallback={<Spinner />}>
           <TemplateDetail />
