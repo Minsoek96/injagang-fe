@@ -9,7 +9,7 @@ import {
   BiPlus, BiRedo, BiCheck, BiX,
 } from 'react-icons/bi';
 
-import { templateSchema, templateType } from '@/src/entities/template';
+import { templateMutations, templateSchema, templateType } from '@/src/entities/template';
 
 import { styleMixin } from '@/src/shared/styles';
 import { keys } from '@/src/shared/utils';
@@ -17,12 +17,11 @@ import { HideSvg, UnInput } from '@/src/shared/ui';
 
 import QustionItem from './QustionItem';
 
-interface AddTemplateProps {
+interface Props {
   onClose: (isClose: boolean) => void;
-  onSubmit: (data: templateType.IAddFormTemplate) => void;
 }
 
-function AddTemplate({ onClose, onSubmit }: AddTemplateProps) {
+function CreateTemplate({ onClose }: Props) {
   const {
     handleSubmit,
     register,
@@ -34,6 +33,17 @@ function AddTemplate({ onClose, onSubmit }: AddTemplateProps) {
       questions: [],
     },
   });
+
+  const { mutate: addTemplate } = templateMutations.useAddTemplate();
+
+  const onSubmit = (data: templateType.IAddFormTemplate) => {
+    const formatData:templateType.IAddTemplate = {
+      title: data.title,
+      questions: data.questions.map((item) => item.question),
+    };
+    addTemplate(formatData);
+    onClose(false);
+  };
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -88,7 +98,7 @@ function AddTemplate({ onClose, onSubmit }: AddTemplateProps) {
   );
 }
 
-export default AddTemplate;
+export default CreateTemplate;
 
 const TemplateAddStyled = styled.div`
   ${styleMixin.Column('space-between')}

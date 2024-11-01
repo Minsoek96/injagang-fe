@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
-import { TemplateList } from '@/src/features/template';
 import { ExpectedQuestionLayout } from '@/src/features/interview-question';
 
 import { styleMixin } from '@/src/shared/styles';
 
 import { useAuthStore, useAuth } from '@/src/entities/auth';
+import Template from './template/Template';
 
 function AdminPage() {
   useAuth();
   const { role } = useAuthStore();
   return role === 'ADMIN' ? (
     <AdminPageStyle>
-      <TemplateList />
+      <Template />
       <ExpectedQuestionLayout />
     </AdminPageStyle>
   ) : (

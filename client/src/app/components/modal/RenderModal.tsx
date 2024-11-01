@@ -81,6 +81,7 @@ const ModalStyle = styled.div`
   height: 100dvh;
   width: 100dvw;
   background-color: rgba(36, 31, 31, 0.5);
+  z-index: 1000;
 `;
 
 const ModalBox = styled.div`

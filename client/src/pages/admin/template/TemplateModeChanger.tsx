@@ -4,28 +4,17 @@ import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 import { Spinner } from '@/src/shared/ui/spinner';
-import { templateMutations, templateType, useTemplateStore } from '@/src/entities/template';
+import { useTemplateStore } from '@/src/entities/template';
 
-import AddTemplate from '../AddTemplate/AddTemplate';
-import TemplateDetail from './TemplateDetail';
+import { CreateTemplate, TemplateDetail } from '@/src/features/template';
 
-function TemplateViewController() {
+function TemplateModeChanger() {
   const { setAddTemplateToggle, isAddTemplate } = useTemplateStore();
-  const { mutate: addTemplate } = templateMutations.useAddTemplate();
-
-  const onSubmit = (data: templateType.IAddFormTemplate) => {
-    const formatData:templateType.IAddTemplate = {
-      title: data.title,
-      questions: data.questions.map((item) => item.question),
-    };
-    addTemplate(formatData);
-    setAddTemplateToggle(false);
-  };
 
   return (
     <TemplateViewStyle>
       {isAddTemplate ? (
-        <AddTemplate onClose={setAddTemplateToggle} onSubmit={onSubmit} />
+        <CreateTemplate onClose={setAddTemplateToggle} />
       ) : (
         <Suspense fallback={<Spinner />}>
           <TemplateDetail />
@@ -35,7 +24,7 @@ function TemplateViewController() {
   );
 }
 
-export default TemplateViewController;
+export default TemplateModeChanger;
 
 const TemplateViewStyle = styled.div`
   ${styleMixin.Column()}

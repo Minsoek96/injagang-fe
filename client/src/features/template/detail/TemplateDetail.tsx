@@ -4,10 +4,11 @@ import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 import { keys } from '@/src/shared/utils';
-import TemplateItem from '@/src/features/template/TemplateDetail/TemplateItem';
 
 import useTemplateManager from '../hooks/useTemplateManager';
 import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
+
+import TemplateItem from './TemplateItem';
 
 function TemplateDetail() {
   const { removeTemplateItem } = useTemplateManager();

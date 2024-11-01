@@ -3,6 +3,7 @@ import { styleMixin } from '@/src/shared/styles';
 import { BiPlus } from 'react-icons/bi';
 
 import { templateQueries } from '@/src/entities/template';
+import { HideSvg } from '@/src/shared/ui';
 import TemplateItem from './TemplateTitleItem';
 
 import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
@@ -17,7 +18,13 @@ function TemplateTitleList() {
       {templateList?.map((item) => (
         <TemplateItem key={item.templateId} list={item} />
       ))}
-      {!isAddTemplate && <BiPlus onClick={() => setIsAddTemplate(true)} />}
+      {!isAddTemplate && (
+        <HideSvg
+          Logo={<BiPlus />}
+          label="템플릿 추가"
+          onClick={() => setIsAddTemplate(true)}
+        />
+      )}
     </TemplateTtileContainer>
   );
 }
