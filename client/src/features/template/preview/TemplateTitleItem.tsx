@@ -1,17 +1,20 @@
 import styled from 'styled-components';
-import { templateType } from '@/src/entities/template';
-import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
+
+import { templateType, useTemplateStore } from '@/src/entities/template';
 
 interface TemplateItemProps {
   list: templateType.IGetTemplate;
 }
 
 function TemplateItem({ list }: TemplateItemProps) {
-  const { setItemInfo, selectedTemplate } = useTemplateStoreManager();
+  const { setSelectedTemplate, selectedTemplate } = useTemplateStore();
   const isSelected = list.templateId === selectedTemplate.templateId;
 
   return (
-    <TemplateTitle onClick={() => setItemInfo(list)} $isSelected={isSelected}>
+    <TemplateTitle
+      onClick={() => setSelectedTemplate(list)}
+      $isSelected={isSelected}
+    >
       {list.title}
     </TemplateTitle>
   );

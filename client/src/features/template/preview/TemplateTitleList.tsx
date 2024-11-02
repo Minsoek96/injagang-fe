@@ -2,16 +2,14 @@ import styled from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 import { BiPlus } from 'react-icons/bi';
 
-import { templateQueries } from '@/src/entities/template';
+import { templateQueries, useTemplateStore } from '@/src/entities/template';
 import { HideSvg } from '@/src/shared/ui';
 import TemplateItem from './TemplateTitleItem';
-
-import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
 
 function TemplateTitleList() {
   const { data: templateList } = templateQueries.useFetchTemplate();
 
-  const { isAddTemplate, setIsAddTemplate } = useTemplateStoreManager();
+  const { isAddTemplate, setAddTemplateToggle } = useTemplateStore();
 
   return (
     <TemplateTtileContainer>
@@ -22,7 +20,7 @@ function TemplateTitleList() {
         <HideSvg
           Logo={<BiPlus />}
           label="템플릿 추가"
-          onClick={() => setIsAddTemplate(true)}
+          onClick={() => setAddTemplateToggle(true)}
         />
       )}
     </TemplateTtileContainer>

@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { BiTrash } from 'react-icons/bi';
 
 import styled from 'styled-components';
@@ -5,14 +7,19 @@ import styled from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 import { keys } from '@/src/shared/utils';
 
-import useTemplateManager from '../hooks/useTemplateManager';
-import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
+import { templateMutations, useTemplateStore } from '@/src/entities/template';
 
 import TemplateItem from './TemplateItem';
 
 function TemplateDetail() {
-  const { removeTemplateItem } = useTemplateManager();
-  const { selectedTemplate } = useTemplateStoreManager();
+  const { mutate: removeTemplate } = templateMutations.useDeleteTemplate();
+  const { clearCurTemplate, selectedTemplate } = useTemplateStore();
+
+  const removeTemplateItem = useCallback((index: number) => {
+    removeTemplate(index);
+    clearCurTemplate();
+  }, []);
+
   const isTemplateSelected = selectedTemplate.questions.length < 1;
 
   if (isTemplateSelected) return <WarringMsg>현재 선택된 리스트가 없습니다.</WarringMsg>;
