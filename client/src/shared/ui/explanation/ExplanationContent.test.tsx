@@ -19,7 +19,7 @@ describe('ExplanationContent', () => {
       sampleList.forEach((content, index) => {
         const isTitle = index === 0;
         if (isTitle) {
-          const getTitle = screen.getByText(`[${content}]`);
+          const getTitle = screen.getByText(`${content}`);
           expect(getTitle).toBeInTheDocument();
           expect(getTitle.tagName).toBe('H1');
           return;

@@ -5,28 +5,28 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { v4 as uuid4 } from 'uuid';
 
-import {
-  BiPlus, BiRedo, BiCheck, BiX,
-} from 'react-icons/bi';
+import { BiX } from 'react-icons/bi';
 
-import { templateMutations, templateSchema, templateType } from '@/src/entities/template';
+import {
+  templateMutations,
+  templateSchema,
+  templateType,
+} from '@/src/entities/template';
 
 import { styleMixin } from '@/src/shared/styles';
-import { keys } from '@/src/shared/utils';
 import { HideSvg, UnInput } from '@/src/shared/ui';
 
-import QustionItem from './QustionItem';
+import FormHandler from '@/src/features/template/create/FormHandler';
+import QuestionItem from './QuestionItem';
 
 interface Props {
   onClose: (isClose: boolean) => void;
 }
 
 function CreateTemplate({ onClose }: Props) {
-  const {
-    handleSubmit,
-    register,
-    control,
-  } = useForm<templateType.IAddFormTemplate>({
+  const { mutate: addTemplate } = templateMutations.useAddTemplate();
+
+  const { handleSubmit, register, control } = useForm<templateType.IAddFormTemplate>({
     resolver: zodResolver(templateSchema.create),
     defaultValues: {
       title: '',
@@ -34,42 +34,31 @@ function CreateTemplate({ onClose }: Props) {
     },
   });
 
-  const { mutate: addTemplate } = templateMutations.useAddTemplate();
-
-  const onSubmit = (data: templateType.IAddFormTemplate) => {
-    const formatData:templateType.IAddTemplate = {
-      title: data.title,
-      questions: data.questions.map((item) => item.question),
-    };
-    addTemplate(formatData);
-    onClose(false);
-  };
-
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'questions',
   });
 
   const onDeleteQuestion = () => {
-    if (fields.length > 1) {
-      remove(fields.length - 1);
-    }
+    const minFieldNum = 1;
+    if (fields.length <= minFieldNum) return;
+    remove(fields.length - 1);
   };
 
   const onAddQuestion = () => {
-    if (fields.length < 5) {
-      append({ question: '', id: uuid4() });
-    }
+    const maxFieldNum = 5;
+    if (fields.length >= maxFieldNum) return;
+    append({ question: '', id: uuid4() });
   };
 
-  const ControllerData = [
-    {
-      icon: <BiPlus onClick={onAddQuestion} />,
-      text: '질문추가',
-    },
-    { icon: <BiRedo onClick={onDeleteQuestion} />, text: '되돌리기' },
-    { icon: <BiCheck onClick={handleSubmit(onSubmit)} />, text: '확정하기' },
-  ];
+  const onSubmit = (data: templateType.IAddFormTemplate) => {
+    const formatData: templateType.IAddTemplate = {
+      title: data.title,
+      questions: data.questions.map((item) => item.question),
+    };
+    addTemplate(formatData);
+    onClose(false);
+  };
 
   return (
     <TemplateAddStyled>
@@ -83,17 +72,14 @@ function CreateTemplate({ onClose }: Props) {
       />
       <QuestionContainer>
         {fields.map((question, index) => (
-          <QustionItem key={question.id} register={register} index={index} />
+          <QuestionItem key={question.id} register={register} index={index} />
         ))}
       </QuestionContainer>
-      <Controller>
-        {ControllerData.map((info, idx) => (
-          <IconButton key={keys(info.text, idx)}>
-            {info.icon}
-            <IconLabel>{info.text}</IconLabel>
-          </IconButton>
-        ))}
-      </Controller>
+      <FormHandler
+        onAddQuestion={onAddQuestion}
+        onDeleteQuestion={onDeleteQuestion}
+        handleSubmit={handleSubmit(onSubmit)}
+      />
     </TemplateAddStyled>
   );
 }
@@ -118,39 +104,4 @@ const QuestionContainer = styled.div`
   margin-top: 2rem;
   width: 100%;
   overflow-x: hidden;
-`;
-
-const Controller = styled.div`
-  ${styleMixin.Flex()};
-  svg {
-    font-size: 40px;
-    cursor: pointer;
-  }
-`;
-
-const IconButton = styled.div`
-  position: relative;
-  margin: auto 15px;
-  cursor: pointer;
-
-  &:hover span {
-    opacity: 1;
-    visibility: visible;
-  }
-`;
-
-const IconLabel = styled.span`
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
 `;

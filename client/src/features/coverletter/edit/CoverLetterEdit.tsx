@@ -17,10 +17,10 @@ import useCoverLetterManager from './model/useCoverLetterManager';
 import EditForm from './EditForm';
 
 export default function CoverLetterCreator() {
-  const { moveCoverLetterMainPage } = usePageRouter();
-  const { changeCoverLetter, deleteCoverLetter } = useCoverLetterManager();
   const router = useRouter();
   const { id } = router.query;
+  const { moveCoverLetterMainPage } = usePageRouter();
+  const { changeCoverLetter, deleteCoverLetter } = useCoverLetterManager();
   const { data: coverLetter, isLoading } = coverLetterQueries.useFetchDetailCoverLetter(Number(id));
 
   /** field 반영 */

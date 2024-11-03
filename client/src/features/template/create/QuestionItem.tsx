@@ -1,11 +1,13 @@
-import { styleMixin } from '@/src/shared/styles';
-
 import { memo } from 'react';
 
-import styled from 'styled-components';
 import { UseFormRegister } from 'react-hook-form';
+
+import styled from 'styled-components';
+
 import { templateType } from '@/src/entities/template';
+
 import { UnResizeableTextarea } from '@/src/shared/ui';
+import { styleMixin } from '@/src/shared/styles';
 
 interface Props {
   index: number;

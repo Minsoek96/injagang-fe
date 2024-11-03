@@ -32,9 +32,8 @@ export default TemplateTitleList;
 const TemplateTtileContainer = styled.div`
   ${styleMixin.Column()}
   svg {
-    margin-top: 10px;
-    font-size: 35px;
-    cursor: pointer;
+    margin-top: 1.5rem;
+    font-size: 3.5rem;
   }
   svg:hover {
     color: red;
