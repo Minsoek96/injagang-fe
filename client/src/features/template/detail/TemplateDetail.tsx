@@ -34,6 +34,7 @@ function TemplateDetail() {
         />
       ))}
       <TrashIcon
+        aria-label="delete-Template"
         onClick={() => removeTemplateItem(selectedTemplate.templateId)}
       />
     </TemplateDetailStyled>
