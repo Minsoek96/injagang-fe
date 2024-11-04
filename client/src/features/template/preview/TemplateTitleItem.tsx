@@ -23,7 +23,7 @@ function TemplateItem({ list }: TemplateItemProps) {
 export default TemplateItem;
 
 const TemplateTitle = styled.div<{ $isSelected: boolean }>`
-  scale: ${({ $isSelected }) => ($isSelected ? '1' : '1.2')};
+  transform: ${({ $isSelected }) => ($isSelected ? 'scale(1.2)' : 'scale(1)')};
   font-size: 1.8rem;
   font-weight: bold;
   line-height: 1.4;

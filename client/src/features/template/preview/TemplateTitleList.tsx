@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import { styleMixin } from '@/src/shared/styles';
+
 import { BiPlus } from 'react-icons/bi';
 
 import { templateQueries, useTemplateStore } from '@/src/entities/template';
+
+import { styleMixin } from '@/src/shared/styles';
 import { HideSvg } from '@/src/shared/ui';
+
 import TemplateItem from './TemplateTitleItem';
 
 function TemplateTitleList() {
