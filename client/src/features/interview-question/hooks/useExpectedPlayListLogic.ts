@@ -1,11 +1,10 @@
 import { useCallback } from 'react';
 
 import { useAuthStore } from '@/src/entities/auth';
-import { useQuestionStore } from '@/src/entities/interview_question';
+import { useQuestionStore, interviewMutation } from '@/src/entities/interview_question';
+
 import { useModal } from '@/src/shared/hooks';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
-
-import { useAddInterViewQ } from '@/src/entities/interview_question/mutations';
 
 const useExpetedPlayListLogic = () => {
   const {
@@ -16,7 +15,7 @@ const useExpetedPlayListLogic = () => {
     setUserPlayList,
   } = useQuestionStore();
 
-  const { mutate: dispatchAddQuestions } = useAddInterViewQ();
+  const { mutate: dispatchAddQuestions } = interviewMutation.useAddInterViewQ();
 
   const { role } = useAuthStore();
   const { setModal } = useModal();

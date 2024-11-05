@@ -3,33 +3,29 @@ import { useRouter } from 'next/router';
 import { act, renderHook, waitFor } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-
-import {
-  addInterViewQuestion,
-  deleteInterViewQuestion,
-  getRandomQuestions,
-} from '@/src/entities/interview_question/apis';
-
-import {
-  useAddInterViewQ,
-  useDeleteInterViewQ,
-  useFetchRandomQuestion,
-} from '@/src/entities/interview_question/mutations';
-import interview from '@/src/entities/interview_question/queryKeys';
-
-import useQuestionStore from '@/src/entities/interview_question/useQuestionStore';
-import { useToast } from '@/src/shared/hooks';
-
 import {
   sampleAddQuestions,
   sampleRandomQuestion,
   sampleResponseRandomQ,
 } from '@/fixutures/entities/intervew_question';
+
+import useQuestionStore from '@/src/entities/interview_question/model/useQuestionStore';
+
+import { useToast } from '@/src/shared/hooks';
+
 import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
   TOAST_MODE,
 } from '@/src/shared/const';
+
+import interview from './queryKeys';
+import {
+  useAddInterViewQ, useDeleteInterViewQ, useFetchRandomQuestion,
+} from './mutations';
+import {
+  addInterViewQuestion, deleteInterViewQuestion, getRandomQuestions,
+} from './apis';
 
 /** 목킹 설정 */
 jest.mock('./apis');

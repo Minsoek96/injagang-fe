@@ -1,8 +1,10 @@
-import { sampleResponseQuestions, sampleType } from '@/fixutures/entities/intervew_question';
-import TestProvider from '@/fixutures/TestProvider';
-import { getInterViewQuestionList } from '@/src/entities/interview_question/apis';
-import { useFetchQuestions } from '@/src/entities/interview_question/queries';
 import { renderHook, waitFor } from '@testing-library/react';
+
+import TestProvider from '@/fixutures/TestProvider';
+import { sampleResponseQuestions, sampleType } from '@/fixutures/entities/intervew_question';
+
+import { getInterViewQuestionList } from './apis';
+import { useFetchQuestions } from './queries';
 
 jest.mock('./apis');
 

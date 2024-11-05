@@ -1,17 +1,17 @@
-import { styled } from 'styled-components';
-
 import { useCallback } from 'react';
+
+import { styled } from 'styled-components';
 
 import {
   interviewQueries,
   useQuestionStore,
+  interviewMutation,
 } from '@/src/entities/interview_question';
-import { useDeleteInterViewQ } from '@/src/entities/interview_question/mutations';
+
 import { useCheckList, useModal } from '@/src/shared/hooks';
 import { Container } from '@/src/shared/ui';
 
 import { useSelectorLogic } from '../hooks';
-
 import QuestionSelector from './QuestionSelector';
 import ExpectedQuestionList from './ExpectedQuestionList';
 import ActionBtns from './ActionBtns';
@@ -20,7 +20,7 @@ function ExpectedQuestionSelector() {
   const { setModal } = useModal();
   const { selectedType } = useQuestionStore();
   const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions(selectedType);
-  const { mutate: deleteQuestions } = useDeleteInterViewQ();
+  const { mutate: deleteQuestions } = interviewMutation.useDeleteInterViewQ();
 
   const {
     checkList, handleAllCheck, handleCheckList, isAllCheck, clearCheckList,

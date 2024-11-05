@@ -2,7 +2,7 @@ import { act } from '@testing-library/react';
 
 import { sampleType, sampleUserPlayList } from '@/fixutures/entities/intervew_question';
 
-import useQuestionStore from '@/src/entities/interview_question/useQuestionStore';
+import useQuestionStore from './useQuestionStore';
 
 describe('useQuestionStore', () => {
   beforeEach(() => {

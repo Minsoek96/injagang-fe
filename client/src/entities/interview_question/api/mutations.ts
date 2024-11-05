@@ -1,18 +1,21 @@
-import { useToast } from '@/src/shared/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import {
   IAddQuestions,
   IDeleteQuestions,
   IRandomQuestions,
   IResponseRandom,
-} from '@/src/entities/interview_question/type';
+} from '@/src/entities/interview_question/model/type';
+
+import useQuestionStore from '@/src/entities/interview_question/model/useQuestionStore';
+
+import { useToast } from '@/src/shared/hooks';
 import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
   TOAST_MODE,
 } from '@/src/shared/const';
 
-import useQuestionStore from './useQuestionStore';
 import {
   addInterViewQuestion,
   deleteInterViewQuestion,

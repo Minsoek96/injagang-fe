@@ -1,5 +1,6 @@
-import useRecordInfoStore from '@/src/entities/interview_question/useRecordInfoStore';
 import { act } from '@testing-library/react';
+
+import useRecordInfoStore from './useRecordInfoStore';
 
 const context = describe;
 describe('useRecordInfoStore', () => {

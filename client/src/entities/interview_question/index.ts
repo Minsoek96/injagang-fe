@@ -1,7 +1,8 @@
-export * as interviewApi from './apis';
-export * as interviewMutation from './mutations';
-export * as interviewQueries from './queries';
-export * as interviewType from './type';
-export { default as useQuestionStore } from './useQuestionStore';
-export { default as useRecordInfoStore } from './useRecordInfoStore';
-export { default as queryKeys } from './queryKeys';
+export * as interviewApi from './api/apis';
+export * as interviewMutation from './api/mutations';
+export * as interviewQueries from './api/queries';
+export { default as queryKeys } from './api/queryKeys';
+
+export * as interviewType from './model/type';
+export { default as useQuestionStore } from './model/useQuestionStore';
+export { default as useRecordInfoStore } from './model/useRecordInfoStore';

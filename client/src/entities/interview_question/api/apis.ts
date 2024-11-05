@@ -4,10 +4,9 @@ import {
   IQuestion,
   IRandomQuestions,
   QuestionType,
-} from '@/src/entities/interview_question/type';
+} from '@/src/entities/interview_question/model/type';
 
 import { fetcher, METHOD } from '@/src/shared/utils';
-
 import { QUESTIONS_APIS } from '@/src/shared/config/apis';
 
 // FIXME : 잘못된 예외처리 사용중 수정해야함
