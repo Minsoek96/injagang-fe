@@ -16,13 +16,17 @@ import {
 import { styleMixin } from '@/src/shared/styles';
 import { HideSvg, UnInput } from '@/src/shared/ui';
 
-import FormHandler from '@/src/features/template/create/FormHandler';
+import FormHandler from './FormHandler';
 import QuestionItem from './QuestionItem';
 
 interface Props {
   onClose: (isClose: boolean) => void;
 }
 
+/** CreateTemplate - Template 생성을 위한 폼
+ *
+ * @param onClose : 생성 모드를 제어하기 위한 함수
+ */
 function CreateTemplate({ onClose }: Props) {
   const { mutate: addTemplate } = templateMutations.useAddTemplate();
 

@@ -10,7 +10,7 @@
 
 [배포링크](https://injagang-fe.vercel.app/)   
 TEST 계정 : test@test.com  
-TEST 비번 : test
+TEST 비번 : password
 
 ## 목차
 

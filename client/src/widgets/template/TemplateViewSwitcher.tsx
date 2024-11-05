@@ -8,11 +8,11 @@ import { useTemplateStore } from '@/src/entities/template';
 
 import { CreateTemplate, TemplateDetail } from '@/src/features/template';
 
-function TemplateModeChanger() {
+function TemplateViewSwitcher() {
   const { setAddTemplateToggle, isAddTemplate } = useTemplateStore();
 
   return (
-    <TemplateViewStyle>
+    <Container>
       {isAddTemplate ? (
         <CreateTemplate onClose={setAddTemplateToggle} />
       ) : (
@@ -20,13 +20,13 @@ function TemplateModeChanger() {
           <TemplateDetail />
         </Suspense>
       )}
-    </TemplateViewStyle>
+    </Container>
   );
 }
 
-export default TemplateModeChanger;
+export default TemplateViewSwitcher;
 
-const TemplateViewStyle = styled.div`
+const Container = styled.div`
   ${styleMixin.Column()}
   justify-content: space-between;
   width: 100%;

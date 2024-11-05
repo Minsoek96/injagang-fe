@@ -1,5 +1,7 @@
-import { sampleGetTemplate } from '@/fixutures/entities/template';
 import { act } from '@testing-library/react';
+
+import { sampleGetTemplate } from '@/fixutures/entities/template';
+
 import useTemplateStore from './useTemplateStore';
 
 describe('useTemplateStore', () => {

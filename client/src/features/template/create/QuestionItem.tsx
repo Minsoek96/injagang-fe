@@ -14,6 +14,11 @@ interface Props {
   register: UseFormRegister<templateType.IAddFormTemplate>;
 }
 
+/** QuestionItem : 질문 작성 아이템
+ *
+ * @param index : 질문 번호
+ * @param register : 질문 정보
+ */
 function QuestionItem({ index, register }: Props) {
   return (
     <Wrapper>

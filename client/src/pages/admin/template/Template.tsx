@@ -3,11 +3,11 @@ import dynamic from 'next/dynamic';
 
 import styled from 'styled-components';
 
+import { TemplateViewSwitcher } from '@/src/widgets/template';
+
 import { styleMixin } from '@/src/shared/styles';
 import { Spinner } from '@/src/shared/ui/spinner';
 import { Container } from '@/src/shared/ui';
-
-import TemplateModeChanger from './TemplateModeChanger';
 
 const TemplateTitleList = dynamic(
   () => import('@/src/features/template/preview/TemplateTitleList'),
@@ -26,7 +26,7 @@ function Template() {
         </Suspense>
       </TemplateCard>
       <TemplateCard $size={{ width: '100%', height: '35rem' }}>
-        <TemplateModeChanger />
+        <TemplateViewSwitcher />
       </TemplateCard>
     </TemplateContainer>
   );

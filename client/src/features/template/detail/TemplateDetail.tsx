@@ -4,10 +4,10 @@ import { BiTrash } from 'react-icons/bi';
 
 import styled from 'styled-components';
 
+import { templateMutations, useTemplateStore } from '@/src/entities/template';
+
 import { styleMixin } from '@/src/shared/styles';
 import { keys } from '@/src/shared/utils';
-
-import { templateMutations, useTemplateStore } from '@/src/entities/template';
 
 import TemplateItem from './TemplateItem';
 
