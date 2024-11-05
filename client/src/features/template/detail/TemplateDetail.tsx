@@ -1,15 +1,25 @@
+import { useCallback } from 'react';
+
 import { BiTrash } from 'react-icons/bi';
 
 import styled from 'styled-components';
+
+import { templateMutations, useTemplateStore } from '@/src/entities/template';
+
 import { styleMixin } from '@/src/shared/styles';
 import { keys } from '@/src/shared/utils';
-import TemplateItem from '@/src/features/template/TemplateDetail/TemplateItem';
-import useTemplateManager from '../hooks/useTemplateManager';
-import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
+
+import TemplateItem from './TemplateItem';
 
 function TemplateDetail() {
-  const { removeTemplateItem } = useTemplateManager();
-  const { selectedTemplate } = useTemplateStoreManager();
+  const { mutate: removeTemplate } = templateMutations.useDeleteTemplate();
+  const { clearCurTemplate, selectedTemplate } = useTemplateStore();
+
+  const removeTemplateItem = useCallback((index: number) => {
+    removeTemplate(index);
+    clearCurTemplate();
+  }, []);
+
   const isTemplateSelected = selectedTemplate.questions.length < 1;
 
   if (isTemplateSelected) return <WarringMsg>현재 선택된 리스트가 없습니다.</WarringMsg>;
@@ -24,6 +34,7 @@ function TemplateDetail() {
         />
       ))}
       <TrashIcon
+        aria-label="delete-Template"
         onClick={() => removeTemplateItem(selectedTemplate.templateId)}
       />
     </TemplateDetailStyled>
@@ -57,7 +68,7 @@ const WarringMsg = styled.div`
   width: 100%;
   height: 100%;
   color: red;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
 `;

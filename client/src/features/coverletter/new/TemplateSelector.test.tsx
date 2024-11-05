@@ -1,13 +1,19 @@
 import TestProvider from '@/fixutures/TestProvider';
-import { useFetchTemplate } from '@/src/entities/template/queries';
+import { templateQueries } from '@/src/entities/template';
 import TemplateSelector from '@/src/features/coverletter/new/TemplateSelector';
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
 
-jest.mock('@/src/entities/template/queries', () => ({
-  useFetchTemplate: jest.fn(),
-}));
+jest.mock('@/src/entities/template', () => {
+  const actualHooks = jest.requireActual('@/src/entities/template');
+  return {
+    ...actualHooks,
+    templateQueries: {
+      useFetchTemplate: jest.fn(),
+    },
+  };
+});
 
 const templateList = [
   { title: 'Template 1', questions: ['Question 1', 'Question 2'] },
@@ -28,7 +34,7 @@ describe('TemplateSelector', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    (useFetchTemplate as jest.Mock).mockReturnValue({
+    (templateQueries.useFetchTemplate as jest.Mock).mockReturnValue({
       data: templateList,
     });
   });

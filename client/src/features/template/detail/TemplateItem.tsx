@@ -1,5 +1,6 @@
-import { V } from '@/src/shared/styles';
 import { styled } from 'styled-components';
+
+import { V } from '@/src/shared/styles';
 
 type Props = {
   index: number;

@@ -1,6 +1,8 @@
-import { sampleGetTemplate } from '@/fixutures/entities/template';
-import useTemplateStore from '@/src/entities/template/useTemplateStore';
 import { act } from '@testing-library/react';
+
+import { sampleGetTemplate } from '@/fixutures/entities/template';
+
+import useTemplateStore from './useTemplateStore';
 
 describe('useTemplateStore', () => {
   it('유저가 선택한 템플릿의 정보를 저장', () => {

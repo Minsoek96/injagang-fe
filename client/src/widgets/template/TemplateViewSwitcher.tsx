@@ -4,29 +4,29 @@ import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 import { Spinner } from '@/src/shared/ui/spinner';
-import AddTemplate from '../AddTemplate/AddTemplate';
-import TemplateDetail from './TemplateDetail';
+import { useTemplateStore } from '@/src/entities/template';
 
-import useTemplateStoreManager from '../hooks/useTemplateStoreManager';
+import { CreateTemplate, TemplateDetail } from '@/src/features/template';
 
-function TemplateViewController() {
-  const { isAddTemplate, setIsAddTemplate } = useTemplateStoreManager();
+function TemplateViewSwitcher() {
+  const { setAddTemplateToggle, isAddTemplate } = useTemplateStore();
+
   return (
-    <TemplateViewStyle>
+    <Container>
       {isAddTemplate ? (
-        <AddTemplate onClose={setIsAddTemplate} />
+        <CreateTemplate onClose={setAddTemplateToggle} />
       ) : (
         <Suspense fallback={<Spinner />}>
           <TemplateDetail />
         </Suspense>
       )}
-    </TemplateViewStyle>
+    </Container>
   );
 }
 
-export default TemplateViewController;
+export default TemplateViewSwitcher;
 
-const TemplateViewStyle = styled.div`
+const Container = styled.div`
   ${styleMixin.Column()}
   justify-content: space-between;
   width: 100%;

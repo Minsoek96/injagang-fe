@@ -1,7 +1,7 @@
 import { fetcher, METHOD } from '@/src/shared/utils';
 
 import { TEMPLATE_APIS } from '@/src/shared/config/apis';
-import { IAddTemplate, IGetTemplate } from '@/src/entities/template/type';
+import { IAddTemplate, IGetTemplate } from '@/src/entities/template/model/type';
 
 export const getTemplate = async (): Promise<IGetTemplate[]> =>
   fetcher(METHOD.GET, TEMPLATE_APIS.GET_API)

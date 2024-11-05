@@ -7,18 +7,16 @@ import {
 import TestProvider from '@/fixutures/TestProvider';
 
 import { useToast } from '@/src/shared/hooks';
-
-import { useAddTemplate, useDeleteTemplate } from '@/src/entities/template/mutations';
-import template from '@/src/entities/template/queryKeys';
-
-import { addTemplate, deleteTemplate } from '@/src/entities/template/apis';
-
 import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
   TOAST_MODE,
 } from '@/src/shared/const';
 import { sampleAddTemplate } from '@/fixutures/entities/template';
+
+import { useAddTemplate, useDeleteTemplate } from './mutations';
+import template from './queryKeys';
+import { addTemplate, deleteTemplate } from './apis';
 
 /** 목킹 설정 */
 jest.mock('./apis');

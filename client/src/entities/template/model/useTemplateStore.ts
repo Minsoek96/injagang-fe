@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { IGetTemplate } from '@/src/entities/template/type';
+import { IGetTemplate } from '@/src/entities/template/model/type';
 
 interface InitiaState {
   selectedTemplateList: IGetTemplate;

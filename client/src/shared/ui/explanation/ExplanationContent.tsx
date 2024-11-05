@@ -10,13 +10,7 @@ export default function ExplanationContent({ explanationList }: Props) {
     <Explanation>
       {explanationList.map((content, index) => (
         <div key={content}>
-          {index === 0 ? (
-            <h1>
-              [
-              {content}
-              ]
-            </h1>
-          ) : <p>{content}</p>}
+          {index === 0 ? <h1>{content}</h1> : <p>{content}</p>}
         </div>
       ))}
     </Explanation>
@@ -31,7 +25,7 @@ const Explanation = styled.div`
     font-size: 2rem;
   }
 
-  @media screen and (max-width: ${V.mediaMobile}){
+  @media screen and (max-width: ${V.mediaMobile}) {
     font-size: 1.4rem;
 
     h1 {

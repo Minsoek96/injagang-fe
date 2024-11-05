@@ -3,10 +3,9 @@ import { UseFieldArrayAppend, UseFormReset } from 'react-hook-form';
 
 import { v4 as uuid4 } from 'uuid';
 
-import { useFetchTemplate } from '@/src/entities/template/queries';
-
 import { ComboBox } from '@/src/shared/ui';
 import { coverLetterType } from '@/src/entities/coverLetter';
+import { templateQueries } from '@/src/entities/template';
 
 type Props = {
     append: UseFieldArrayAppend<coverLetterType.ICoverLetter, 'qnaList'>,
@@ -14,7 +13,7 @@ type Props = {
 }
 
 export default function TemplateSelector({ append, reset }:Props) {
-  const { data: templateList = [] } = useFetchTemplate();
+  const { data: templateList = [] } = templateQueries.useFetchTemplate();
 
   const [selectedTemplateTitle, setSelectedTemplateTitle] = useState<string>('');
 

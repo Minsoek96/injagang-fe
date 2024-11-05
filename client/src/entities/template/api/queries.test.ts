@@ -1,9 +1,9 @@
 import { sampleResponseQuestions } from '@/fixutures/entities/intervew_question';
 import TestProvider from '@/fixutures/TestProvider';
 
-import { getTemplate } from '@/src/entities/template/apis';
-import { useFetchTemplate } from '@/src/entities/template/queries';
 import { renderHook, waitFor } from '@testing-library/react';
+import { getTemplate } from './apis';
+import { useFetchTemplate } from './queries';
 
 jest.mock('./apis');
 

@@ -37,10 +37,13 @@ const HideSpan = styled.span`
   color: white;
   position: absolute;
   font-size: 1.6rem;
-  top: 0;
+  top: -2rem;
+  left: 0;
   margin-top: 3rem;
   display: none;
   padding: 0.5em;
   background-color: rgba(0, 0, 0, 0.55);
   white-space: nowrap;
+  transform: translateY(-100%);
+  pointer-events: none;
 `;
