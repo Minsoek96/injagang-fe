@@ -4,8 +4,6 @@ import dynamic from 'next/dynamic';
 
 import styled from 'styled-components';
 
-import { ExpectedQuestionLayout } from '@/src/features/interview-question';
-
 import {
   useQuestionStore,
   useRecordInfoStore,
@@ -14,6 +12,7 @@ import {
 import { Container, StepProgressBar } from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
+import { ExpectedQuestionLayout } from '@/src/widgets/interview';
 
 import InterviewSliderButtons from './InterviewSliderButtons';
 import InterviewMenual from './InterviewMenual';
