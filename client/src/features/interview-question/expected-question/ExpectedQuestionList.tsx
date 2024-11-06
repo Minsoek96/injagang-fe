@@ -6,12 +6,12 @@ import ExpectedQuestionListItem from './ExpectedQuestionListItem';
 
 interface ExpectedQuestionListProps {
   questions: interviewType.IQuestion[];
-  isAllCheck: boolean;
+  checkList: number[];
   handleCheckList: (id: number, isCheck: boolean) => void;
 }
 function ExpectedQuestionList({
   questions,
-  isAllCheck,
+  checkList,
   handleCheckList,
 }: ExpectedQuestionListProps) {
   return (
@@ -20,8 +20,8 @@ function ExpectedQuestionList({
         && questions.map((question) => (
           <ExpectedQuestionListItem
             key={question.id}
-            allCheck={isAllCheck}
             onChange={handleCheckList}
+            isCheked={checkList.includes(question.id)}
             {...question}
           />
         ))}

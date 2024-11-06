@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 type ItemWithID<T> = T & {
   id: number;
@@ -8,66 +8,34 @@ const useCheckList = <T extends { id: number }>(
   targetList: ItemWithID<T>[],
 ) => {
   const [checkList, setCheckList] = useState<number[]>([]);
-  const [isAllCheck, setIsAllCheck] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (isAllCheck) {
-      checkAllItems(targetList);
-    } else {
-      unCheckAllItems();
-    }
-  }, [isAllCheck]);
+  const isAllCheck = useMemo(() => {
+    const allChecked = checkList.length === targetList.length;
+    const hasItems = targetList.length > 0; // 리스트에 항목이 있는지 확인
+    return hasItems && allChecked;
+  }, [targetList, checkList]);
 
   const handleAllCheck = useCallback(() => {
-    setIsAllCheck((prev) => !prev);
+    const shouldUncheckAll = checkList.length === targetList.length;
+    if (shouldUncheckAll) {
+      setCheckList([]);
+    } else {
+      setCheckList(targetList.map((item) => item.id));
+    }
+  }, [targetList, checkList]);
+
+  const handleCheckList = useCallback((id: number) => {
+    setCheckList((prev) => {
+      const isChecked = prev.includes(id);
+      const removeChecked = prev.filter((itemId) => itemId !== id);
+      const addChecked = [...prev, id];
+      return isChecked ? removeChecked : addChecked;
+    });
   }, []);
-
-  const clearCheckList = useCallback(() => {
-    setCheckList([]);
-  }, []);
-
-  const checkAllItems = useCallback(
-    <V extends { id: number }>(targets: ItemWithID<V>[]) => {
-      const allItems = targets.map((item) => item.id);
-      setCheckList(allItems);
-    },
-    [targetList],
-  );
-
-  const unCheckAllItems = useCallback(() => {
-    setCheckList([]);
-  }, []);
-
-  const handleCheckList = useCallback(
-    (id: number, isCheck: boolean) => {
-      if (isCheck) {
-        removeCheckItem(id);
-      } else {
-        addCheckItem(id);
-      }
-    },
-    [checkList],
-  );
-
-  const addCheckItem = useCallback(
-    (id: number) => {
-      setCheckList((prev) => [...prev, id]);
-    },
-    [checkList],
-  );
-
-  const removeCheckItem = useCallback(
-    (targetId: number) => {
-      const removeItem = checkList.filter((id) => id !== targetId);
-      setCheckList(removeItem);
-    },
-    [checkList],
-  );
 
   return {
-    clearCheckList,
-    handleCheckList,
     handleAllCheck,
+    handleCheckList,
     checkList,
     isAllCheck,
   };

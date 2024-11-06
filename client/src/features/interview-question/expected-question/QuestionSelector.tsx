@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { ComboBox } from '@/src/shared/ui/combobox';
 
 import { interviewType } from '@/src/entities/interview_question';
-import { memo } from 'react';
 import { V } from '@/src/shared/styles';
 
 const InterViewSelectData = [
@@ -35,7 +34,7 @@ function QuestionSelector({ selectedType, onChange }: IQuestionSelectorProps) {
   );
 }
 
-export default memo(QuestionSelector);
+export default QuestionSelector;
 
 const Container = styled.div`
   width: 100%;

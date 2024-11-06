@@ -23,7 +23,7 @@ function ExpectedQuestionSelector() {
   const { mutate: deleteQuestions } = interviewMutation.useDeleteInterViewQ();
 
   const {
-    checkList, handleAllCheck, handleCheckList, isAllCheck, clearCheckList,
+    checkList, handleAllCheck, handleCheckList, isAllCheck,
   } = useCheckList(interViewQuestionList);
 
   const { dispatchSelectedType, dispatchSelectedQuestions } = useSelectorLogic({
@@ -44,7 +44,6 @@ function ExpectedQuestionSelector() {
       ids: targetIds,
     };
     deleteQuestions(formmatData);
-    clearCheckList();
   }, []);
 
   return (
@@ -58,7 +57,7 @@ function ExpectedQuestionSelector() {
       />
       <ExpectedQuestionList
         questions={interViewQuestionList}
-        isAllCheck={isAllCheck}
+        checkList={checkList}
         handleCheckList={handleCheckList}
       />
       <ActionBtns

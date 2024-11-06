@@ -1,11 +1,11 @@
 import { V } from '@/src/shared/styles';
-import { useState, useEffect, memo } from 'react';
+import { memo } from 'react';
 
 import styled from 'styled-components';
 
 type InterViewListItemProps = {
   questions: string;
-  allCheck: boolean;
+  isCheked: boolean;
   id: number;
   onChange: (id: number, isCheck: boolean) => void;
 };
@@ -13,27 +13,16 @@ type InterViewListItemProps = {
 function ExpectedQuestionListItem({
   onChange,
   questions,
-  allCheck,
+  isCheked,
   id,
 }: InterViewListItemProps) {
-  const [isCheck, setIsCheck] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (allCheck) {
-      setIsCheck(true);
-    } else {
-      setIsCheck(false);
-    }
-  }, [allCheck]);
-
   /** 현재 리스트의 체크리스트 변경하고 핸들러를 통해 id값과 체크 상태를 전달 */
   const handleCheckList = () => {
-    onChange(id, isCheck);
-    setIsCheck((check) => !check);
+    onChange(id, !isCheked);
   };
 
   return (
-    <InterViewListItemStyle $checked={isCheck} onClick={handleCheckList}>
+    <InterViewListItemStyle $checked={isCheked} onClick={handleCheckList}>
       <label htmlFor={questions}>{questions}</label>
     </InterViewListItemStyle>
   );
