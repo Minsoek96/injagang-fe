@@ -11,27 +11,31 @@ import {
 import { useCheckList, useModal } from '@/src/shared/hooks';
 import { Container } from '@/src/shared/ui';
 
-import { useSelectorLogic } from '../hooks';
-import QuestionSelector from './QuestionSelector';
+import QuestionTypeSelector from './QuestionTypeSelector';
 import ExpectedQuestionList from './ExpectedQuestionList';
-import ActionBtns from './ActionBtns';
+import ActionButtons from './ActionButtons';
 
 function ExpectedQuestionSelector() {
   const { setModal } = useModal();
-  const { selectedType } = useQuestionStore();
-  const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions(selectedType);
+  const { setUserPlayList } = useQuestionStore();
+  const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions();
   const { mutate: deleteQuestions } = interviewMutation.useDeleteInterViewQ();
 
   const {
     checkList, handleAllCheck, handleCheckList, isAllCheck,
   } = useCheckList(interViewQuestionList);
 
-  const { dispatchSelectedType, dispatchSelectedQuestions } = useSelectorLogic({
-    typeCheckCallback: isAllCheck ? handleAllCheck : () => {},
-  });
+  /** 선택된 질문 추가 함수 */
+  const addQuestions = useCallback(() => {
+    const selectedQuestions = interViewQuestionList.filter((question) =>
+      checkList.includes(question.id));
+    const questionTexts = selectedQuestions.map((item) => item.questions);
+    setUserPlayList(questionTexts);
+  }, [interViewQuestionList, checkList]);
 
-  const removeQuestions = useCallback((targetIds: number[]) => {
-    if (!targetIds.length) {
+  /** 선택된 질문 삭제 함수 */
+  const removeQuestions = useCallback(() => {
+    if (!checkList.length) {
       setModal({
         contents: {
           title: 'Warring',
@@ -41,32 +45,27 @@ function ExpectedQuestionSelector() {
       return;
     }
     const formmatData = {
-      ids: targetIds,
+      ids: checkList,
     };
     deleteQuestions(formmatData);
-  }, []);
+  }, [checkList]);
 
   return (
     <Container.ArticleCard
       $size={{ height: '60rem', width: '100%', flex: 'Col' }}
     >
       <Header>Questions by Type</Header>
-      <QuestionSelector
-        selectedType={selectedType}
-        onChange={dispatchSelectedType}
-      />
+      <QuestionTypeSelector onReset={handleAllCheck} />
       <ExpectedQuestionList
         questions={interViewQuestionList}
         checkList={checkList}
         handleCheckList={handleCheckList}
       />
-      <ActionBtns
-        checkList={checkList}
-        onAdd={dispatchSelectedQuestions}
+      <ActionButtons
+        onAdd={addQuestions}
         isAllChecked={isAllCheck}
         onRemove={removeQuestions}
-        onToggleAll={handleAllCheck}
-        questions={interViewQuestionList}
+        onChecked={handleAllCheck}
       />
     </Container.ArticleCard>
   );

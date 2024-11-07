@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
-import { V } from '@/src/shared/styles';
-
 import styled from 'styled-components';
+
+import { V } from '@/src/shared/styles';
 
 type InterViewListItemProps = {
   question: string;
@@ -35,9 +35,9 @@ function ExpectedQuestionItem({
         type="checkbox"
         id={`checkbox-${id}`}
         checked={isChecked}
-        readOnly
+        onChange={handleCheckList}
       />
-      <label htmlFor={`checkbox-${id}`}>{question}</label>
+      <StyledLabel htmlFor={`checkbox-${id}`}>{question}</StyledLabel>
     </CheckedWrapper>
   );
 }
@@ -53,14 +53,15 @@ const CheckedWrapper = styled.li<StyleProps>`
     (props.$checked ? props.theme.colors.mainHover : 'none')};
   opacity: ${(props) => (props.$checked ? 0.5 : 1)};
   font-size: 1.8rem;
+
   border-radius: 0.5rem;
   border: 0.1rem solid ${(props) => props.theme.colors.mainLine};
-  padding: 0.5em 1em;
   border-left: 0.2em solid ${(props) => props.theme.colors.signatureColor};
+
   display: flex;
   align-items: center;
+  padding: 0.5em 1em;
   gap: 0.5rem;
-  width: 100%;
   margin-bottom: 12px;
   line-height: 1.4;
   cursor: pointer;
@@ -72,4 +73,10 @@ const CheckedWrapper = styled.li<StyleProps>`
 
 const HiddenCheckbox = styled.input`
   display: none;
+`;
+
+const StyledLabel = styled.label`
+  cursor: pointer;
+  flex: 1;
+  user-select: none;
 `;

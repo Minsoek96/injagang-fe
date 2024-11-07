@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ComboBox } from '@/src/shared/ui/combobox';
 
-import { interviewType } from '@/src/entities/interview_question';
+import { interviewType, useQuestionStore } from '@/src/entities/interview_question';
 import { V } from '@/src/shared/styles';
 
 const InterViewSelectData = [
@@ -13,11 +13,19 @@ const InterViewSelectData = [
 ];
 
 interface IQuestionSelectorProps {
-  selectedType: interviewType.QuestionType | string;
-  onChange: (type: interviewType.QuestionType | string) => void;
+  onReset: () => void;
 }
-
-function QuestionSelector({ selectedType, onChange }: IQuestionSelectorProps) {
+/** QuestionTypeSelector : 질문 타입 변경
+ * 선택된 질문 타입을 변경하기 위한 역할
+ *
+ * @param onReset : 질문 체크 해제
+ */
+function QuestionTypeSelector({ onReset }: IQuestionSelectorProps) {
+  const { selectedType, setSelectedType } = useQuestionStore();
+  const onChangeType = (type: interviewType.QuestionType | string) => {
+    setSelectedType(type);
+    onReset();
+  };
   return (
     <Container>
       <ComboBox
@@ -27,14 +35,14 @@ function QuestionSelector({ selectedType, onChange }: IQuestionSelectorProps) {
         selectedItem={selectedType}
         itemToId={(item) => item || ''}
         itemToText={(item) => item || ''}
-        onChange={(value) => value && onChange(value)}
+        onChange={(value) => value && onChangeType(value)}
         Size={{ width: '100%', height: '3rem' }}
       />
     </Container>
   );
 }
 
-export default QuestionSelector;
+export default QuestionTypeSelector;
 
 const Container = styled.div`
   width: 100%;

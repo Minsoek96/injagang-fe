@@ -19,6 +19,7 @@ type Action = {
  *  - initUserPlayList : 유저가 선택한 타입별 질문 초기화
  *  - initConfromQuestions : 유저가 면접리스트로 컨펌한 질문 초기화
 */
+
 const useQuestionStore = create<State & Action>((set) => ({
   userPlayList: [],
   confirmQuestions: [],
@@ -27,7 +28,6 @@ const useQuestionStore = create<State & Action>((set) => ({
   setUserPlayList: (list: string[]) =>
     set((state) => {
       const { userPlayList } = state;
-
       // 현재 userPlayList에 없는 새로운 항목만 필터링
       const newItems = list.filter((item) => !userPlayList.includes(item));
       return {
