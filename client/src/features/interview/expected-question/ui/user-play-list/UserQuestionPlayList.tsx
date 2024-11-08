@@ -1,18 +1,17 @@
-import { memo } from 'react';
+import styled from 'styled-components';
 
 import { Container } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
-import styled from 'styled-components';
 import { keys } from '@/src/shared/utils';
-import QuestionAdder from './QuestionAdder';
-import UserQuestionPlayListItems from './UserQuestionPlayListItems';
 
-import useExpetedPlayListLogic from './useExpectedPlayListLogic';
+import QuestionAdder from './QuestionAdder';
+import UserQuestionPlayListItem from './UserQuestionPlayListItem';
+import useExpetedPlayList from '../../model/useExpectedPlayList';
 
 function UserQuestionPlayList() {
   const {
     userPlayList, handleRemoveText, handleAddText, roleAction,
-  } = useExpetedPlayListLogic();
+  } = useExpetedPlayList();
   return (
     <Container.ArticleCard
       $size={{ height: '60rem', width: '100%', flex: 'Col' }}
@@ -20,7 +19,7 @@ function UserQuestionPlayList() {
       <Header>Play List</Header>
       <ItemContainer>
         {userPlayList?.map((question, idx) => (
-          <UserQuestionPlayListItems
+          <UserQuestionPlayListItem
             key={keys(question, idx)}
             item={question}
             handleRemoveText={handleRemoveText}
@@ -36,7 +35,7 @@ function UserQuestionPlayList() {
   );
 }
 
-export default memo(UserQuestionPlayList);
+export default UserQuestionPlayList;
 
 const ItemContainer = styled.ul`
   height: 100%;

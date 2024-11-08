@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-import ExpectedQuestionItem from '@/src/features/interview-question/expected-question/ExpectedQuestionItem';
+import ExpectedQuestionItem from './ExpectedQuestionItem';
 
 const context = describe;
 

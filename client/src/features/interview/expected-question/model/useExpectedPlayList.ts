@@ -6,7 +6,7 @@ import { useQuestionStore, interviewMutation } from '@/src/entities/interview_qu
 import { useModal } from '@/src/shared/hooks';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
 
-const useExpetedPlayListLogic = () => {
+const useExpetedPlayList = () => {
   const {
     selectedType,
     userPlayList,
@@ -71,4 +71,4 @@ const useExpetedPlayListLogic = () => {
   };
 };
 
-export default useExpetedPlayListLogic;
+export default useExpetedPlayList;

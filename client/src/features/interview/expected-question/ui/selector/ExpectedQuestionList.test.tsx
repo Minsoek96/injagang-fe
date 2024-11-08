@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { sampleResponseQuestions } from '@/fixutures/entities/intervew_question';
 import TestProvider from '@/fixutures/TestProvider';
-import ExpectedQuestionList from '@/src/features/interview-question/expected-question/ExpectedQuestionList';
+import ExpectedQuestionList from './ExpectedQuestionList';
 
 const context = describe;
 describe('ExpectedQuestionList', () => {

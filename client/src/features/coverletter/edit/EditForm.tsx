@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { styled } from 'styled-components';
 
 import { v4 as uuid4 } from 'uuid';
@@ -49,13 +47,16 @@ export default function EditForm({
     register,
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<coverLetterType.ICoverLetterDetail>({
     resolver: zodResolver(coverLetterModel.schema),
     defaultValues: {
-      title: '',
-      qnaList: [],
+      title: coverLetters?.title,
+      qnaList: coverLetters?.qnaList.map((field) => ({
+        question: field.question,
+        answer: field.answer,
+        qnaId: field.qnaId,
+      })),
     },
   });
 
@@ -63,19 +64,6 @@ export default function EditForm({
     control,
     name: 'qnaList',
   });
-
-  useEffect(() => {
-    if (coverLetters) {
-      reset({
-        title: coverLetters.title,
-        qnaList: coverLetters.qnaList.map((field) => ({
-          question: field.question,
-          answer: field.answer,
-          qnaId: field.qnaId,
-        })),
-      });
-    }
-  }, [coverLetters]);
 
   /** field 데이터추가 */
   const addQustion = () => {

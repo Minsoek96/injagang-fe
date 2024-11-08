@@ -4,7 +4,7 @@ import {
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import QuestionTypeSelector from '@/src/features/interview-question/expected-question/QuestionTypeSelector';
+import QuestionTypeSelector from './QuestionTypeSelector';
 
 describe('QuestionTypeSelector', () => {
   const mockReset = jest.fn();
