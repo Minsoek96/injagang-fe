@@ -7,7 +7,7 @@ import { keys } from '@/src/shared/utils';
 import QuestionAdder from './QuestionAdder';
 import UserQuestionPlayListItems from './UserQuestionPlayListItems';
 
-import useExpetedPlayListLogic from '../hooks/useExpectedPlayListLogic';
+import useExpetedPlayListLogic from './useExpectedPlayListLogic';
 
 function UserQuestionPlayList() {
   const {

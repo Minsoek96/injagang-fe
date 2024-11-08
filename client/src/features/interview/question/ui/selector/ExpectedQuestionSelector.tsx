@@ -21,6 +21,7 @@ function ExpectedQuestionSelector() {
   const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions();
   const { mutate: deleteQuestions } = interviewMutation.useDeleteInterViewQ();
 
+  /** 체크리스트 상태 관리 */
   const {
     checkList, handleAllCheck, handleCheckList, isAllCheck,
   } = useCheckList(interViewQuestionList);

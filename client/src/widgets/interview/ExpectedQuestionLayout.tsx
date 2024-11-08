@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import { ExplanationContent } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
-import { UserQuestionPlayList, ExpectedQuestionSelector } from '@/src/features/interview-question';
+import {
+  ExpectedQuestionSelector,
+  UserQuestionPlayList,
+} from '@/src/features/interview/';
 
-const explanationList = [
+const explanationList: string[] = [
   '면접 질문 셋팅 가이드',
   '(선택사항)샘플 질문을 선택하여 추가',
   '(선택사항)커스텀 질문을 작성하여 추가',
@@ -17,7 +20,7 @@ const explanationList = [
  * - ExplanationContent : 사용자 가이드를 표시합니다.
  * - ExpectedQuestionSelecotr : 관리자가 제공하는 질문을 선택
  * - UserQuestionPlayList : 유저가 선택한 질문 + 커스텀 질문
-*/
+ */
 function ExpectedQuestionLayout() {
   return (
     <InterViewListViewStyle>
