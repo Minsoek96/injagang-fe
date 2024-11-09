@@ -18,7 +18,7 @@ import InterviewSliderButtons from './InterviewSliderButtons';
 import InterviewMenual from './InterviewMenual';
 
 const InterViewRandomSetting = dynamic(
-  () => import('@/src/features/random-quetsion/InterViewRandomSetting'),
+  () => import('@/src/features/interview/random-quetsion/ui/InterViewRandomSetting'),
   {
     ssr: false,
   },
