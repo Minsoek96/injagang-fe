@@ -3,7 +3,7 @@ import {
   IQuestion,
   IRandomQuestions,
   QuestionType,
-} from '@/src/entities/interview_question/type';
+} from '@/src/entities/interview_question/model/type';
 
 const sampleRandomQuestion: IRandomQuestions[] = [
   {

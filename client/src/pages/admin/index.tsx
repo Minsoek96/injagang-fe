@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ExpectedQuestionLayout } from '@/src/features/interview-question';
+import { ExpectedQuestionLayout } from '@/src/widgets/interview';
 
 import { styleMixin } from '@/src/shared/styles';
 
