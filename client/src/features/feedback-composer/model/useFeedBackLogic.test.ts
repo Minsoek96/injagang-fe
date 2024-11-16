@@ -92,10 +92,8 @@ describe('useFeedBackLogic', () => {
       });
 
       expect(mockSetModal).toHaveBeenCalledWith({
-        contents: {
-          title: MODAL_MESSAGES.WARNING,
-          message: '첨삭 내용을 등록해주세요.',
-        },
+        title: MODAL_MESSAGES.WARNING,
+        message: '첨삭 내용을 등록해주세요.',
       });
     });
 
@@ -110,10 +108,8 @@ describe('useFeedBackLogic', () => {
       });
 
       expect(mockSetModal).toHaveBeenCalledWith({
-        contents: {
-          title: MODAL_MESSAGES.WARNING,
-          message: '피드백은 30자 이상 작성해주세요.',
-        },
+        title: MODAL_MESSAGES.WARNING,
+        message: '피드백은 30자 이상 작성해주세요.',
       });
     });
   });

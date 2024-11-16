@@ -19,10 +19,8 @@ const usePassword = () => {
             changePassword,
             changePasswordCheck,
           }),
-        contents: {
-          title: MODAL_MESSAGES.MSG,
-          message: '비밀번호 : **** 변경하시겠습니까?',
-        },
+        title: MODAL_MESSAGES.MSG,
+        message: '비밀번호 : **** 변경하시겠습니까?',
       });
     },
     [],

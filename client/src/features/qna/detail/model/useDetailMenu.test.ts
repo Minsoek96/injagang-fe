@@ -71,10 +71,8 @@ describe('useDetailMenu', () => {
   const checkModalCall = (expectedMessage: string) => {
     expect(mockSetModal).toHaveBeenCalledWith({
       onAction: expect.any(Function),
-      contents: {
-        title: MODAL_MESSAGES.WARNING,
-        message: expectedMessage,
-      },
+      title: MODAL_MESSAGES.WARNING,
+      message: expectedMessage,
     });
   };
 

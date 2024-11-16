@@ -12,7 +12,7 @@ const MODAL_CLOSE_DELAY = 50;
 
 export default function RenderModal() {
   const { isModalOpen, modalState, closeModal } = useModalStore();
-  const { contents } = modalState;
+  const { title, message } = modalState;
 
   const [mounted, setMounted] = useState(false);
 
@@ -41,8 +41,8 @@ export default function RenderModal() {
     <ModalStyle>
       <ModalBox>
         <div className="modal_Contents">
-          <h2>{contents.title}</h2>
-          <p>{contents.message}</p>
+          <h2>{title}</h2>
+          <p>{message}</p>
         </div>
         {modalState.onAction ? (
           <div className="modal_Controller">

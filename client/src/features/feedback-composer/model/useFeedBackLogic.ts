@@ -21,10 +21,8 @@ const useFeedBackLogic = () => {
   // Warring 모달
   const handleWarring = useCallback((message: string) => {
     setModal({
-      contents: {
-        title: MODAL_MESSAGES.WARNING,
-        message,
-      },
+      title: MODAL_MESSAGES.WARNING,
+      message,
     });
   }, []);
 

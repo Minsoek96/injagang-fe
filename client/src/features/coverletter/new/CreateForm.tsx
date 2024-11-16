@@ -76,10 +76,8 @@ export default function CreateForm({
     const getError = getFirstErrorMessage(errors);
     if (getError) {
       setModal({
-        contents: {
-          title: 'Warring',
-          message: getError,
-        },
+        title: 'Warring',
+        message: getError,
       });
     }
   };

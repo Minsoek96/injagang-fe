@@ -31,7 +31,8 @@ export function useDetailMenu({ boardId, content, title }: UseDetailMenuProps) {
   const confirmAction = useCallback((onAction: () => void, message: string) => {
     setModal({
       onAction,
-      contents: { title: MODAL_MESSAGES.WARNING, message },
+      title: MODAL_MESSAGES.WARNING,
+      message,
     });
   }, []);
 

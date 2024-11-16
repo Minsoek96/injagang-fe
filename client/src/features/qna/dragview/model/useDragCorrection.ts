@@ -71,10 +71,8 @@ const useDragCorrection = () => {
   // 모달에 경고메시지를 등록하는 함수
   const showWarring = useCallback(() => {
     setModal({
-      contents: {
-        title: MODAL_MESSAGES.WARNING,
-        message: ERROR_MESSAGES.DUPLICATION_TEXT,
-      },
+      title: MODAL_MESSAGES.WARNING,
+      message: ERROR_MESSAGES.DUPLICATION_TEXT,
     });
   }, []);
 

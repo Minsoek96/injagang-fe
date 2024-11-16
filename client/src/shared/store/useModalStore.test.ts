@@ -11,10 +11,8 @@ describe('useModalStore 훅', () => {
     context('모달을 열 때', () => {
       it('모달 상태를 열림으로 설정하고 주어진 속성을 저장해야 한다', () => {
         const modalProps: modalType.ModalProps = {
-          contents: {
-            title: '테스트 제목',
-            message: '테스트 메시지',
-          },
+          title: '테스트 제목',
+          message: '테스트 메시지',
         };
 
         act(() => {

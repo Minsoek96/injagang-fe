@@ -21,10 +21,8 @@ export default function useRecordSettingsLogic() {
   // TODO: 좀 더 유연한 에러처리 방식 생각해보기
   const showErrorModal = useCallback(() => {
     setModal({
-      contents: {
-        title: 'Warring',
-        message: '디바이스 연결에 실패했습니다 ㅜㅜ',
-      },
+      title: 'Warring',
+      message: '디바이스 연결에 실패했습니다 ㅜㅜ',
     });
     initDevices();
   }, []);
@@ -51,10 +49,11 @@ export default function useRecordSettingsLogic() {
       FetchSettingDevices();
     };
     navigator.mediaDevices.addEventListener('devicechange', handleFetchDevices);
-    return () => navigator.mediaDevices.removeEventListener(
-      'devicechange',
-      handleFetchDevices,
-    );
+    return () =>
+      navigator.mediaDevices.removeEventListener(
+        'devicechange',
+        handleFetchDevices,
+      );
   }, []);
 
   useEffect(() => {

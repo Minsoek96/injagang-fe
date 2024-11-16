@@ -17,10 +17,8 @@ export default function LogoutMenu() {
   const handleClick = () => {
     setModal({
       onAction: dispatchCheckOut,
-      contents: {
-        title: 'Message',
-        message: '정말 로그아웃을 원하시나요?',
-      },
+      title: 'Message',
+      message: '정말 로그아웃을 원하시나요?',
     });
   };
 

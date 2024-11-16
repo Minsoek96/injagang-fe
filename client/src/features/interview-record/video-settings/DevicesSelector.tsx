@@ -12,6 +12,15 @@ type Props = {
   videoLabels : MediaDeviceInfo[];
 };
 
+/** DevicesSelector : 디바이스 환경 선택기
+ *
+ * @param selectedAudio : 선택된 오디오 장치
+ * @param selectedVideo : 선택된 비디오 장치
+ * @param setAudioDevice : 오디오 장치 선택 함수
+ * @param setVideoDevice : 비디오 장치 선택 함수
+ * @param audioLabels : 선택할 오디오 장치 목록
+ * @param videoLabels : 선택할 비디오 장치 목록
+ */
 export default function DevicesSelector({
   selectedAudio,
   selectedVideo,
@@ -52,5 +61,4 @@ const SelectorContainer = styled.div`
   ${styleMixin.Flex()}
   gap: 1rem;
   margin: 2rem;
-
 `;

@@ -45,11 +45,9 @@ export default function VideoPlayer({
   const onCompleteMsg = () => {
     setModal({
       onAction: () => onChangeIndex(0),
-      contents: {
-        title: 'Congratulations',
-        message:
+      title: 'Congratulations',
+      message:
         '준비된 모든 질문이 끝났습니다.\n 처음부터 다시 반복을 원하시면 확인을 눌러주세요',
-      },
     });
   };
 

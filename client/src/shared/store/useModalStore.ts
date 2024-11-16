@@ -14,10 +14,8 @@ type Action = {
 const useModalStore = create<State&Action>((set) => ({
   isModalOpen: false,
   modalState: {
-    contents: {
-      title: '',
-      message: '',
-    },
+    title: '',
+    message: '',
   },
 
   setModal: (props: modalType.ModalProps) => set({

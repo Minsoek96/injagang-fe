@@ -38,10 +38,8 @@ function ExpectedQuestionSelector() {
   const removeQuestions = useCallback(() => {
     if (!checkList.length) {
       setModal({
-        contents: {
-          title: 'Warring',
-          message: '선택된 질문이 없습니다.',
-        },
+        title: 'Warring',
+        message: '선택된 질문이 없습니다.',
       });
       return;
     }

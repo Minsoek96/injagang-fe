@@ -11,10 +11,8 @@ const sampleToast = {
 } as const;
 
 const sampleModal = {
-  contents: {
-    title: 'TEST_TITLE',
-    message: 'TEST_MODAL',
-  },
+  title: 'TEST_TITLE',
+  message: 'TEST_MODAL',
 };
 
 const sampleCheckList = [

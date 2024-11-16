@@ -38,10 +38,8 @@ describe('useNick', () => {
     result.current.changeNickname('NewNickName');
     expect(mockSetModal).toHaveBeenCalledWith({
       onAction: expect.any(Function),
-      contents: {
-        title: MODAL_MESSAGES.MSG,
-        message: '닉네임 : NewNickName 변경하시겠습니까?',
-      },
+      title: MODAL_MESSAGES.MSG,
+      message: '닉네임 : NewNickName 변경하시겠습니까?',
     });
   });
 
