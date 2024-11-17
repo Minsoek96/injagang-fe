@@ -27,7 +27,7 @@ const InterViewRandomSetting = dynamic(
 const InterViewRecordSetting = dynamic(
   () =>
     import(
-      '@/src/features/interview-record/video-settings/InterviewRecordSetting'
+      '@/src/features/interview/screen-record/ui/setting/InterviewRecordSetting'
     ),
   {
     ssr: false,
@@ -35,7 +35,7 @@ const InterViewRecordSetting = dynamic(
 );
 
 const InterviewRecord = dynamic(
-  () => import('@/src/features/interview-record/InterviewRecord'),
+  () => import('@/src/features/interview/screen-record/ui/InterviewRecord'),
   {
     ssr: false,
   },

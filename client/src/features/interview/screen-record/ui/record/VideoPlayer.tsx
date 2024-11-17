@@ -6,7 +6,7 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { useModal } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/ui';
 
-import useVideoPlayerLogic from '@/src/features/interview-record/video-record/useVideoPlayerLogic';
+import useVideoPlayerLogic from './useVideoPlayerLogic';
 import ScriptTextArea from './ScriptTextArea';
 import VideoHeader from './VideoHeader';
 import RecordActionButtons from './RecordActionButtons';

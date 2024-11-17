@@ -11,8 +11,8 @@ import { Container } from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
 import { useWebSpeech } from '@/src/shared/hooks';
 
-import { InterViewResult } from './video-result';
-import { VideoPlayer } from './video-record';
+import { InterViewResult } from './result';
+import { VideoPlayer } from './record';
 
 /** 영상 녹화 메인 컴포넌트 */
 function InterviewRecord() {
