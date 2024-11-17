@@ -1,7 +1,7 @@
 import { ExplanationContent } from '@/src/shared/ui';
 
+import useRecordSettings from '@/src/features/interview/screen-record/model/useRecordSettings';
 import VideoSettingPlayer from './VideoPlayer';
-import useRecordSettingsLogic from './useRecordSettingsLogic';
 import DevicesSelector from './DevicesSelector';
 
 export default function InterViewRecordSetting() {
@@ -13,7 +13,7 @@ export default function InterViewRecordSetting() {
     videoDevice,
     videoLabels,
     setVideoDevice,
-  } = useRecordSettingsLogic();
+  } = useRecordSettings();
 
   return (
     <>

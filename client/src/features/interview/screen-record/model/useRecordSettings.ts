@@ -4,7 +4,7 @@ import { useRecordInfoStore } from '@/src/entities/interview_question';
 
 import { useMediaRecord, useModal } from '@/src/shared/hooks';
 
-export default function useRecordSettingsLogic() {
+export default function useRecordSettings() {
   const [audioLabels, setAudioLabels] = useState<MediaDeviceInfo[]>([]);
   const [videoLabels, setVideoLabels] = useState<MediaDeviceInfo[]>([]);
 
