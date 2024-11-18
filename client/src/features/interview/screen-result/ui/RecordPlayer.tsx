@@ -1,10 +1,21 @@
+import { useEffect, useRef } from 'react';
 import { styled } from 'styled-components';
 
 type Props = {
     currentVideoChunk: Blob
 }
 
-export default function VideoResultPlayer({ currentVideoChunk }:Props) {
+export default function RecordPlayer({ currentVideoChunk }:Props) {
+  const videoUrl = useRef<string>(URL.createObjectURL(currentVideoChunk));
+
+  useEffect(() => () => {
+    URL.revokeObjectURL(videoUrl.current); // 메모리 누수 방지를 위해 URL 해제
+  }, []);
+
+  if (!currentVideoChunk) {
+    return <p>비디오를 로드 중입니다...</p>;
+  }
+
   return (
     <PlayerWrapper
       autoPlay

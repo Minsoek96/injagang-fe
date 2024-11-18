@@ -11,7 +11,7 @@ type Props = {
   lastVideo: number;
 };
 
-export default function VideoResultHeader({
+export default function RecordNavigation({
   onCounterDecrease,
   onCounterIncrease,
   counter,
@@ -19,7 +19,7 @@ export default function VideoResultHeader({
   lastVideo,
 }: Props) {
   return (
-    <VideoController>
+    <Controller>
       <MainButton
         label="<="
         onClick={onCounterDecrease}
@@ -34,11 +34,11 @@ export default function VideoResultHeader({
         onClick={onCounterIncrease}
         disabled={lastVideo <= counter}
       />
-    </VideoController>
+    </Controller>
   );
 }
 
-const VideoController = styled.div`
+const Controller = styled.div`
   ${styleMixin.Flex('space-between')};
   width: 100%;
   margin-bottom: 1rem;

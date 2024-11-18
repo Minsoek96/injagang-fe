@@ -11,7 +11,7 @@ import { Container } from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
 import { useWebSpeech } from '@/src/shared/hooks';
 
-import { InterViewResult, InterviewRecordingQueue } from '@/src/features/interview';
+import { InterviewResultViewer, InterviewRecordingQueue } from '@/src/features/interview';
 
 /** 영상 녹화 메인 컴포넌트 */
 export default function InterviewFlow() {
@@ -37,7 +37,7 @@ export default function InterviewFlow() {
       );
     case 'result':
       return (
-        <InterViewResult question={speechData} currentIdx={curIndex - 1} />
+        <InterviewResultViewer question={speechData} currentIdx={curIndex - 1} />
       );
     default:
       return null;

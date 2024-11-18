@@ -35,7 +35,9 @@ type Action = {
 
 /**
  * interviewMode : "현재 인터뷰 모드를 의미"
- * devices : "녹화 장치 연결 장치 고유 아이디"
+ * recordedChunks : "현재 녹화된 Blob"
+ * audioDevices : "녹화 연결 장치 고유 아이디"
+ * videoDevices : "화면 연결 장치 고유 아이디"
  * recordInfoList : "유저가 녹화한 순서별 스크립트 기록"
  * curScript: "현재 녹화 입력 대본 기록"
  * curTimer: "현재 녹화 타이머 기록"

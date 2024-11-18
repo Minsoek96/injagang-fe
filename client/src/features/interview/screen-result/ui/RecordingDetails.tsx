@@ -7,9 +7,9 @@ type Props = {
   script: string;
   timer: string;
 };
-export default function VideoInfos({ question, script, timer }: Props) {
+export default function RecordingDetails({ question, script, timer }: Props) {
   return (
-    <RecordInfo>
+    <Wrapper>
       <p>
         <span>인터뷰 질문 : </span>
         {question}
@@ -22,11 +22,11 @@ export default function VideoInfos({ question, script, timer }: Props) {
         <span>녹화 시간 : </span>
         {timer}
       </p>
-    </RecordInfo>
+    </Wrapper>
   );
 }
 
-const RecordInfo = styled.div`
+const Wrapper = styled.div`
   font-size: 1.8rem;
   span {
     color: ${(props) => props.theme.colors.signatureColor};

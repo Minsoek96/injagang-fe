@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 
 import { Header } from '@/src/widgets';
 
-import { RenderToast, RenderModal, HeadMeta } from '../components';
+import { RenderToast, RenderModal, HeadMeta } from '../ui';
 import { ReactQueryProvider, StyledProvider, AuthGard } from '../providers';
 
 interface LayoutProps {

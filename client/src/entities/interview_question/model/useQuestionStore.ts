@@ -19,7 +19,6 @@ type Action = {
  *  - initUserPlayList : 유저가 선택한 타입별 질문 초기화
  *  - initConfromQuestions : 유저가 면접리스트로 컨펌한 질문 초기화
 */
-
 const useQuestionStore = create<State & Action>((set) => ({
   userPlayList: [],
   confirmQuestions: [],
