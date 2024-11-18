@@ -27,15 +27,15 @@ const InterViewRandomSetting = dynamic(
 const InterViewRecordSetting = dynamic(
   () =>
     import(
-      '@/src/features/interview/screen-record/ui/setting/InterviewRecordSetting'
+      '@/src/features/interview/setting/ui/InterviewRecordSetting'
     ),
   {
     ssr: false,
   },
 );
 
-const InterviewRecord = dynamic(
-  () => import('@/src/features/interview/screen-record/ui/InterviewRecord'),
+const InterviewFlow = dynamic(
+  () => import('@/src/widgets/interview/InterviewFlow'),
   {
     ssr: false,
   },
@@ -82,7 +82,7 @@ function Interview() {
       id: 'Step_04',
     },
     {
-      render: <InterviewRecord />,
+      render: <InterviewFlow />,
       subTitle: '면접 준비 완료',
       title: '영상 촬영',
       rule: currentStep === 5,

@@ -1,6 +1,8 @@
-import useRecordSettings from '@/src/features/interview/screen-record/model/useRecordSettings';
-import { useMediaRecord, useModal } from '@/src/shared/hooks';
 import { act, renderHook } from '@testing-library/react';
+
+import { useMediaRecord, useModal } from '@/src/shared/hooks';
+
+import useRecordSettings from './useRecordSettings';
 
 jest.mock('@/src/shared/hooks');
 

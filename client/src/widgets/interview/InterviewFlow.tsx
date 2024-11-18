@@ -11,11 +11,10 @@ import { Container } from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
 import { useWebSpeech } from '@/src/shared/hooks';
 
-import { InterViewResult } from './result';
-import { InterviewRecordingQueue } from './record';
+import { InterViewResult, InterviewRecordingQueue } from '@/src/features/interview';
 
 /** 영상 녹화 메인 컴포넌트 */
-function InterviewRecord() {
+export default function InterviewFlow() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
   const { interviewMode, initRecordInfoList } = useRecordInfoStore();
@@ -58,8 +57,6 @@ function InterviewRecord() {
     </RecordContainer>
   );
 }
-
-export default InterviewRecord;
 
 const RecordContainer = styled(Container.ArticleCard)`
   position: relative;
