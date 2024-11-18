@@ -2,7 +2,7 @@ import { styleMixin, V } from '@/src/shared/styles';
 
 import { styled } from 'styled-components';
 
-import VideoTimer from './VideoTimer';
+import RecordingTimer from './RecordingTimer';
 
 type Props = {
   isRecord: boolean;
@@ -10,25 +10,25 @@ type Props = {
   currentQuestion: string;
 };
 
-export default function VideoHeader({
+export default function RecordingStatusHeader({
   isRecord,
   isSpeaking,
   currentQuestion,
 }: Props) {
   return (
-    <PlayerHeader>
-      <PlayerState>{isRecord ? '녹화중' : '대기상태'}</PlayerState>
-      <SpeachingState $isBlock={isSpeaking || isRecord}>
+    <RecordingStatusWrapper>
+      <RecordingStateLabel>{isRecord ? '녹화중' : '대기상태'}</RecordingStateLabel>
+      <SpeakingStatusMessage $isBlock={isSpeaking || isRecord}>
         {isSpeaking
           ? '타이머가 3초가 되면 스피칭이 진행됩니다.'
           : isRecord && `${currentQuestion}`}
-      </SpeachingState>
-      <VideoTimer isRunning={isRecord || isSpeaking} />
-    </PlayerHeader>
+      </SpeakingStatusMessage>
+      <RecordingTimer isRunning={isRecord || isSpeaking} />
+    </RecordingStatusWrapper>
   );
 }
 
-const PlayerHeader = styled.header`
+const RecordingStatusWrapper = styled.header`
   ${styleMixin.Flex('space-between')}
   width: 100%;
   padding-inline: 1.2em;
@@ -40,7 +40,7 @@ const PlayerHeader = styled.header`
   }
 `;
 
-const PlayerState = styled.span`
+const RecordingStateLabel = styled.span`
   color: ${(props) => props.theme.colors.brandColor};
   font-weight: bold;
 `;
@@ -49,7 +49,7 @@ type SpeachingProps = {
   $isBlock: boolean;
 };
 
-const SpeachingState = styled.span<SpeachingProps>`
+const SpeakingStatusMessage = styled.span<SpeachingProps>`
   display: ${(props) => (props.$isBlock ? 'block' : 'none')};
   padding: 0.5rem 1rem;
   opacity: 0.8;

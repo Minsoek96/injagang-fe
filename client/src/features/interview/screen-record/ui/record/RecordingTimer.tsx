@@ -12,7 +12,8 @@ import { formatTime } from '@/src/shared/utils';
 type Props = {
     isRunning: boolean;
 };
-function VideoTimer({ isRunning }: Props) {
+
+export default function RecordingTimer({ isRunning }: Props) {
   const { setCurTimer } = useRecordInfoStore();
   const [time, setTime] = useState(0);
 
@@ -39,8 +40,6 @@ function VideoTimer({ isRunning }: Props) {
     </Container>
   );
 }
-
-export default VideoTimer;
 
 const Container = styled.div`
     ${styleMixin.Flex()}

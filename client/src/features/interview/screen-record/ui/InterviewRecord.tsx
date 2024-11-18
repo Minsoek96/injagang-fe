@@ -12,16 +12,16 @@ import { V } from '@/src/shared/styles';
 import { useWebSpeech } from '@/src/shared/hooks';
 
 import { InterViewResult } from './result';
-import { VideoPlayer } from './record';
+import { InterviewRecordingQueue } from './record';
 
 /** 영상 녹화 메인 컴포넌트 */
 function InterviewRecord() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
-  const { interviewMode } = useRecordInfoStore();
+  const { interviewMode, initRecordInfoList } = useRecordInfoStore();
+
   const { userPlayList } = useQuestionStore();
   const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
-  const { initRecordInfoList } = useRecordInfoStore();
 
   useEffect(() => () => initRecordInfoList(), []);
 
@@ -29,7 +29,7 @@ function InterviewRecord() {
     switch (interviewMode) {
     case 'record':
       return (
-        <VideoPlayer
+        <InterviewRecordingQueue
           currentIndex={curIndex}
           speechData={speechData}
           readingTheScript={readingTheScript}

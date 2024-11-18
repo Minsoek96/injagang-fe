@@ -8,7 +8,7 @@ import { MainButton } from '@/src/shared/ui';
 
 import useVideoPlayerLogic from './useVideoPlayerLogic';
 import ScriptTextArea from './ScriptTextArea';
-import VideoHeader from './VideoHeader';
+import VideoHeader from './RecordingStatusHeader';
 import RecordActionButtons from './RecordActionButtons';
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
   readingTheScript: (index: number) => Promise<void>;
 };
 
-export default function VideoPlayer({
+export default function InterviewRecordingQueue({
   currentIndex,
   onChangeIndex,
   readingTheScript,
@@ -42,6 +42,7 @@ export default function VideoPlayer({
     storeChunks,
   } = useVideoPlayerLogic();
 
+  /** 메시지를 표시하고, 면접을 처음부터 다시 진행 설정 */
   const onCompleteMsg = () => {
     setModal({
       onAction: () => onChangeIndex(0),
@@ -51,12 +52,14 @@ export default function VideoPlayer({
     });
   };
 
+  /** 면접 종료 */
   const endInterviewRecord = () => {
     setIsScriptView(false);
     handleRecordRemove();
     onChangeIndex(currentIndex + 1);
   };
 
+  /** 스크립트를 읽고 상태를 업데이트 */
   const readCurrentScript = async (): Promise<void> => {
     setIsSpeaking(true);
     await readingTheScript(currentIndex);
@@ -84,11 +87,11 @@ export default function VideoPlayer({
       />
       <PlayerWrapper ref={videoRef} autoPlay muted />
       {isScriptView && (
-        <ScriptWrapper>
+        <ScriptView>
           <ScriptTextArea />
-        </ScriptWrapper>
+        </ScriptView>
       )}
-      <PlayerController>
+      <RecordingControls>
         {recordStatus === 'pending' ? (
           <>
             <MainButton onClick={startInterviewRecord} label="면접녹화시작" />
@@ -107,7 +110,7 @@ export default function VideoPlayer({
             changeModeScript={() => setIsScriptView(!isScriptView)}
           />
         )}
-      </PlayerController>
+      </RecordingControls>
     </>
   );
 }
@@ -122,7 +125,7 @@ const PlayerWrapper = styled.video`
   border-radius: 0.8rem;
 `;
 
-const ScriptWrapper = styled.div`
+const ScriptView = styled.div`
   z-index: 100;
   position: absolute;
   width: 50%;
@@ -133,7 +136,7 @@ const ScriptWrapper = styled.div`
   }
 `;
 
-const PlayerController = styled.div`
+const RecordingControls = styled.div`
   ${styleMixin.Flex()};
   width: 100%;
   gap: 1rem;
