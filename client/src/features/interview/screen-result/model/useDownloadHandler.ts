@@ -15,12 +15,13 @@ export function useDownloadHandler({
 }: Props) {
   const downloadScript = () => {
     if (!recordInfoList[counter]) return;
+    const { script, timer } = recordInfoList[counter];
 
     const recordInfoBlob = new Blob(
       [
         `질문내용 : ${question[counter]}\n`,
-        `작성한 대본 : ${recordInfoList[counter].script || '없음'}\n`,
-        `녹화시간 : ${recordInfoList[counter].timer || '00:00'}\n`,
+        `작성한 대본 : ${script || '없음'}\n`,
+        `녹화시간 : ${timer || '00:00'}\n`,
       ],
       { type: 'text/plain;charset=utf-8' },
     );
@@ -29,10 +30,9 @@ export function useDownloadHandler({
   };
 
   const downloadVideo = () => {
-    if (video[counter]) {
-      saveAs(video[counter], `${question[counter]}.mp4`);
-      downloadScript();
-    }
+    if (!video[counter]) return;
+    saveAs(video[counter], `${question[counter]}.mp4`);
+    downloadScript();
   };
 
   return { downloadVideo };

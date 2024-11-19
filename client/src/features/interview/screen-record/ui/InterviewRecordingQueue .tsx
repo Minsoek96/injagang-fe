@@ -6,7 +6,7 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { useModal } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/ui';
 
-import useVideoPlayerLogic from './useVideoPlayerLogic';
+import useInterviewRecorder from '../model/useInterviewRecorder';
 import ScriptTextArea from './ScriptTextArea';
 import VideoHeader from './RecordingStatusHeader';
 import RecordActionButtons from './RecordActionButtons';
@@ -40,7 +40,7 @@ export default function InterviewRecordingQueue({
     recordStatus,
     setInterviewMode,
     storeChunks,
-  } = useVideoPlayerLogic();
+  } = useInterviewRecorder();
 
   /** 메시지를 표시하고, 면접을 처음부터 다시 진행 설정 */
   const onCompleteMsg = () => {
