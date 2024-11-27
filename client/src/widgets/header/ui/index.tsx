@@ -1,20 +1,24 @@
 import { styled } from 'styled-components';
 
+import UserDropdown from '@/src/widgets/header/ui/user-menu/UserDropdown';
+import { BrandLogo, LoginMenuItem } from '@/src/widgets/header/ui/default-menu';
+
+import { useAuthStore } from '@/src/entities/auth';
+
+import { NavMenuList } from '@/src/shared/ui';
+import { styleMixin, V } from '@/src/shared/styles';
 import { BRAND } from '@/src/shared/const';
 
-import { styleMixin, V } from '@/src/shared/styles';
-import { BrandLogo, UserMenu } from './components';
-import { NavMenuList } from '../../shared/ui/nav';
-
-import { navList } from './data';
+import { navList } from '../consts';
 
 export default function Header() {
+  const { role } = useAuthStore();
   return (
     <HeaderContainer>
       <Wrapper>
         <BrandLogo title={BRAND.title} path="/" />
         <NavMenuList navList={navList} />
-        <UserMenu />
+        {role === null ? <LoginMenuItem /> : <UserDropdown />}
       </Wrapper>
     </HeaderContainer>
   );

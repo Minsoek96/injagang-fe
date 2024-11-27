@@ -59,9 +59,13 @@ function Dropdown({ children }: DropdownProps) {
 
   const toggle = () => setIsOpen((prev) => !prev);
 
-  const value = useMemo(() => ({
-    isOpen, toggle,
-  }), [isOpen]);
+  const value = useMemo(
+    () => ({
+      isOpen,
+      toggle,
+    }),
+    [isOpen],
+  );
 
   return (
     <DropdownContext.Provider value={value}>
@@ -86,11 +90,20 @@ function Trigger({ children }: DropdownTriggerProps) {
 
 interface DropdownMenuProps {
   children: ReactNode;
+  style?: React.CSSProperties;
 }
 
-function Menu({ children }: DropdownMenuProps) {
+function Menu({ children, style = {} }: DropdownMenuProps) {
   const { isOpen } = useDropdownContext();
-  return isOpen ? <div style={{ position: 'absolute' }}>{children}</div> : null;
+
+  // 기본 스타일과 전달받은 스타일 병합
+  const defaultStyle: React.CSSProperties = {
+    position: 'absolute',
+  };
+
+  const mergedStyle = { ...defaultStyle, ...style };
+
+  return isOpen ? <div style={mergedStyle}>{children}</div> : null;
 }
 
 interface DropdownItemProps {
