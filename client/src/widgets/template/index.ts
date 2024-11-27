@@ -1,1 +1,1 @@
-export { default as TemplateViewSwitcher } from './TemplateViewSwitcher';
+export { default as TemplateViewSwitcher } from './ui/temlate-view-switcher/TemplateViewSwitcher';
