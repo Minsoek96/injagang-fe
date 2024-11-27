@@ -12,29 +12,32 @@ import {
 import { Container, StepProgressBar } from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
-import { InterviewMenual, ExpectedQuestionLayout } from '@/src/widgets/interview';
+import {
+  InterviewMenual,
+  ExpectedQuestionLayout,
+} from '@/src/widgets/interview';
 
 import InterviewSliderButtons from './InterviewSliderButtons';
 
 const InterViewRandomSetting = dynamic(
-  () => import('@/src/features/interview/random-quetsion/ui/InterViewRandomSetting'),
-  {
-    ssr: false,
-  },
-);
-
-const InterViewRecordSetting = dynamic(
   () =>
     import(
-      '@/src/features/interview/setting/ui/InterviewRecordSetting'
+      '@/src/features/interview/random-quetsion/ui/InterViewRandomSetting'
     ),
   {
     ssr: false,
   },
 );
 
+const InterViewRecordSetting = dynamic(
+  () => import('@/src/features/interview/setting/ui/InterviewRecordSetting'),
+  {
+    ssr: false,
+  },
+);
+
 const InterviewFlow = dynamic(
-  () => import('@/src/widgets/interview/InterviewFlow'),
+  () => import('@/src/widgets/interview/ui/interview-flow/InterviewFlow'),
   {
     ssr: false,
   },
@@ -66,9 +69,7 @@ function Interview() {
     },
     {
       render: <InterViewRandomSetting />,
-      subTitle: userPlayList.length
-        ? 'Next Step...'
-        : '질문 설정은 필수...',
+      subTitle: userPlayList.length ? 'Next Step...' : '질문 설정은 필수...',
       title: '랜덤 질문 선택',
       rule: !!userPlayList.length,
       id: 'Step_03',
