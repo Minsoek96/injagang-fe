@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import BoardListHead from '@/src/widgets/board/BoardListHead';
+import BoardListHead from './BoardListHead';
 import BoardListItem from './BoardListItem';
 
 interface BoardListProps<T> {
