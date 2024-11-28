@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 
-import { Header } from '@/src/widgets';
+import { Header } from '@/src/widgets/header';
 
 import { RenderToast, RenderModal, HeadMeta } from '../ui';
 import { ReactQueryProvider, StyledProvider, AuthGard } from '../providers';

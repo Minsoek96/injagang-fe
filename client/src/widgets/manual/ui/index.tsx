@@ -1,14 +1,13 @@
-import { styled } from 'styled-components';
-
-import { Container } from '@/src/shared/ui/container';
+import styled from 'styled-components';
 
 import goodInterView from '@/public/assets/main.webp';
 import interViewScreen from '@/public/assets/interview.webp';
 import communityScreen from '@/public/assets/commu.webp';
 
-import ManualItems from './ManualItems';
+import { ManualData } from '../model/types';
+import Section from './menual-section/MenualSection';
 
-const manualData = [
+const menual: ManualData[] = [
   {
     id: 'manual-01',
     main: '인터뷰와 자소서를 강하게 어필하자',
@@ -30,25 +29,18 @@ const manualData = [
 ];
 
 function Manual() {
-  const lastSection = manualData.length - 1;
   return (
     <ManualContainer>
-      {manualData.map((item, index) => (
-        <ManualItems
-          key={item.id}
-          mainTitle={item.main}
-          subTitle={item.sub}
-          isArrow={!(index >= lastSection)}
-          imageList={item.imageList}
-        />
+      {menual.map((item) => (
+        <Section key={item.id} {...item} />
       ))}
     </ManualContainer>
   );
 }
 
-export default Manual;
-
-const ManualContainer = styled(Container.ItemBase)`
-  max-width: 70rem;
+const ManualContainer = styled.div`
   width: 100%;
+  max-width: 70rem;
 `;
+
+export default Manual;

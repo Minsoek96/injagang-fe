@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
 
-import { Manual } from '@/src/widgets';
+import { Manual } from '@/src/widgets/manual';
 
 function Home() {
   return (
