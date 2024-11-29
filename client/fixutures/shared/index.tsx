@@ -1,4 +1,3 @@
-import { DropItemType } from '@/src/shared/ui/dropbox';
 import { MenuItemType } from '@/src/shared/ui/nav';
 import { TOAST_MODE } from '@/src/shared/const';
 
@@ -44,34 +43,6 @@ const sampleOptionList = [
   { title: 'Option 3', id: 'test 3' },
 ];
 
-const sampleDropList: DropItemType[] = [
-  {
-    id: 'drop-01',
-    type: 'link',
-    link: {
-      path: '/test-path',
-      label: 'Test-Label1',
-      icon: <i />,
-      title: 'Test-Title1',
-    },
-  },
-  {
-    id: 'drop-02',
-    type: 'link',
-    link: {
-      path: '/test-path',
-      label: 'Test-Label2',
-      icon: <i />,
-      title: 'Test-Title2',
-    },
-  },
-  {
-    id: 'drop-03',
-    type: 'component',
-    component: <div>컴포넌트</div>,
-  },
-];
-
 const sampleNavList: MenuItemType[] = [
   {
     title: '테스트',
@@ -106,7 +77,6 @@ export {
   sampleModal,
   sampleCheckList,
   sampleOptionList,
-  sampleDropList,
   sampleNavList,
   sampleStepList,
 };

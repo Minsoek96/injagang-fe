@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 
 import { Header } from '@/src/widgets/header';
+import { AuthGuard } from '@/src/features/guard';
 
 import { RenderToast, RenderModal, HeadMeta } from '../ui';
-import { ReactQueryProvider, StyledProvider, AuthGard } from '../providers';
+import { ReactQueryProvider, StyledProvider } from '../providers';
 
 interface LayoutProps {
   children: ReactNode;
@@ -23,12 +24,12 @@ function Layout({ children }: LayoutProps) {
     <StyledProvider>
       <HeadMeta />
       <ReactQueryProvider>
-        <AuthGard>
+        <AuthGuard>
           <LayoutContainer>
             {!isBlockPath && <Header />}
             <MainContent>{children}</MainContent>
           </LayoutContainer>
-        </AuthGard>
+        </AuthGuard>
         <RenderToast />
         <RenderModal />
       </ReactQueryProvider>
