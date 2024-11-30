@@ -29,10 +29,10 @@ const ImageContainer = styled.div`
 
   img {
     margin-bottom: 2rem;
-    border: 0.5px solid ${(props) => props.theme.colors.text};
     object-fit: contain;
     border-radius: 0.8em;
     max-width: 100%;
     height: auto;
+    max-height: 45rem;
   }
 `;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import goodInterView from '@/public/assets/main.webp';
+import ghostImage from '@/public/assets/main.webp';
 import interViewScreen from '@/public/assets/interview.webp';
 import communityScreen from '@/public/assets/commu.webp';
 
@@ -12,7 +12,7 @@ const menual: ManualData[] = [
     id: 'manual-01',
     main: '인터뷰와 자소서를 강하게 어필하자',
     sub: '당신을 서포트 하겠습니다.',
-    imageList: [goodInterView],
+    imageList: [ghostImage],
   },
   {
     id: 'manual-02',
