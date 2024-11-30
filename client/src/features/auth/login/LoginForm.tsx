@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import { css, styled } from 'styled-components';
-
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { shakeAnimation } from '@/src/shared/styles';
-import { InputField, MainButton } from '@/src/shared/ui';
 import { authSchema, authType } from '@/src/entities/auth';
+
+import { shakeAnimation, styleMixin, V } from '@/src/shared/styles';
+import { InputField, MainButton } from '@/src/shared/ui';
 import { getFirstErrorMessage, keys } from '@/src/shared/utils';
 
 type FormType = {
@@ -22,13 +22,6 @@ type Props = {
   labels: FormType[];
 };
 
-/**
- * LoginForm 로그인 입력 폼
- *
- * @param onSubmit -  로그인 처리를 위한 submit
- * @param navigateToSignUp - 회원가입 페이지 이동 함수
- * @param label - 로그인 필드 상태
- */
 export default function LoginForm({
   onSubmit,
   labels,
@@ -55,45 +48,77 @@ export default function LoginForm({
   return (
     <Form $shakeTrigger={shakeTrigger} onSubmit={handleSubmit(onSubmit)}>
       {labels.map((field, index) => (
-        <div key={keys(field.key, index)}>
+        <FieldWrapper key={keys(field.key, index)}>
           <InputField
             label={field.label}
             type={field.type}
             {...register(field.key as keyof authType.ISignin)}
           />
           {errors && (
-            <ERROR>
+            <ErrorMessage>
               {errors[field.key as keyof authType.ISignin]?.message || ''}
-            </ERROR>
+            </ErrorMessage>
           )}
-        </div>
+        </FieldWrapper>
       ))}
-      <MainButton type="submit" label="로그인" sx={{ marginBottom: '.5rem' }} />
-      <MainButton onClick={navigateToSignUp} label="회원가입" />
+      <ButtonGroup>
+        <MainButton type="submit" label="로그인" />
+        <MainButton
+          onClick={navigateToSignUp}
+          label="회원가입"
+          sx={{
+            border: '1px solid #f0f0f0',
+            color: '#666666',
+          }}
+        />
+      </ButtonGroup>
     </Form>
   );
 }
 
 const Form = styled.form<{ $shakeTrigger: boolean }>`
-  display: flex;
-  flex-direction: column;
-  width: 30rem;
+  width: 40rem;
   padding: 2rem;
-  border-radius: 0.8rem;
-  background-color: #15202b;
+  background-color: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 1rem;
+
   ${({ $shakeTrigger }) =>
     $shakeTrigger
     && css`
       animation: ${shakeAnimation} 0.5s;
     `}
 
-  button {
-    height: 4rem;
-    background-color: #2ecc71;
+  @media screen and (max-width: ${V.mediaMobile}) {
+    width: 35rem;
   }
 `;
 
-const ERROR = styled.div`
-  color: red;
-  margin-bottom: 1rem;
+const FieldWrapper = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
+const ErrorMessage = styled.div`
+  color: ${(props) => props.theme.colors.brandColor};
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  padding-left: 0.25rem;
+`;
+
+const ButtonGroup = styled.div`
+  ${styleMixin.Column()};
+  gap: 0.75rem;
+  margin-top: 1rem;
+
+  button {
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+
+    &:first-child {
+      background-color: ${(props) => props.theme.colors.signatureColor};
+      color: white;
+    }
+  }
 `;
