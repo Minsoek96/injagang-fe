@@ -44,35 +44,45 @@ export default function SignUpForm({ onSubmit, labels }: Props) {
             {...register(field.key as keyof authType.ISignup)}
           />
           {errors && (
-            <ERROR>
+            <ErrorMessage>
               {errors[field.key as keyof authType.ISignup]?.message || ''}
-            </ERROR>
+            </ErrorMessage>
           )}
         </div>
       ))}
       <MainButton
         type="submit"
         label="회원가입"
-        sx={{ backgroundColor: '#2ecc71', height: '4rem' }}
       />
     </Form>
   );
 }
 
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
   width: 40rem;
   padding: 2rem;
-  border-radius: 0.8rem;
-  background-color: #15202b;
+  background-color: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 1rem;
+
+  button {
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+
+    background-color: ${(props) => props.theme.colors.signatureColor};
+    color: white;
+  }
 
   @media screen and (max-width: ${V.mediaMobile}) {
-    width: 30rem;
+    width: 35rem;
   }
 `;
 
-const ERROR = styled.div`
-  color: red;
-  margin-bottom: 1rem;
+const ErrorMessage = styled.div`
+  color: ${(props) => props.theme.colors.brandColor};
+  font-size: 1.2rem;
+  margin-block: 1rem;
+  padding-left: 0.25rem;
 `;
