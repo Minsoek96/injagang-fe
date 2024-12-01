@@ -9,7 +9,7 @@ function LoginPage() {
   return (
     <Container>
       <Wrapper>
-        <PageTitle>INJAGANG</PageTitle>
+        <PageTitle lang="en">INJAGANG</PageTitle>
         <PageSubTitle>인터뷰와 자소서를 강하게</PageSubTitle>
 
         <IconContainer>

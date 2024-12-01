@@ -8,8 +8,8 @@ const defaultTheme = {
     text: '#0f1419',
     highlight: '#fff',
 
-    svgColor: '#27282b',
-    svgOnColor: '#005FCC',
+    svgColor: '#666666',
+    svgOnColor: '#ff8800',
     mainLine: 'rgb(219, 220, 223)',
     mainHover: 'rgba(0, 0, 0, 0.1)',
     textArea: '#F0F2F5',

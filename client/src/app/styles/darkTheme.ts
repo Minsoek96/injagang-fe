@@ -11,7 +11,7 @@ const darkTheme: Theme = {
     highlight: '#b32eb3',
 
     svgColor: '#ffffff',
-    svgOnColor: '#007FFF',
+    svgOnColor: '#ff8800',
     mainLine: '#393A3B',
     mainHover: 'rgba(0, 0, 0, 0.3)',
     textArea: '#414141',
