@@ -27,6 +27,17 @@ const slideIn = keyframes`
   }
 `;
 
+const slideUp = keyframes`
+  from {
+    transform: translateY(10rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
 const progressBar = keyframes`
   from {
     width: 100%;
@@ -85,5 +96,5 @@ const bounce = keyframes`
 `;
 
 export {
-  fadeIn, fadeOut, slideIn, progressBar, shakeAnimation, bounce,
+  fadeIn, fadeOut, slideIn, progressBar, shakeAnimation, bounce, slideUp,
 };

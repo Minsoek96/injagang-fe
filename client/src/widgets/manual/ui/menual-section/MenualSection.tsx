@@ -57,6 +57,7 @@ const SubTitle = styled.h3`
   font-size: 2.2rem;
   font-weight: 600;
   letter-spacing: 0.05em;
+  color: ${(props) => props.theme.colors.lightText};
 
   &::before,
   &::after {

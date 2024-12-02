@@ -73,7 +73,7 @@ const PageTitle = styled.h1`
 `;
 
 const PageSubTitle = styled.p`
-  color: #666666;
+  color: ${(props) => props.theme.colors.lightText};
   font-weight: 400;
   font-size: 1.5rem;
   margin-bottom: 4rem;
@@ -102,7 +102,7 @@ const IconWrapper = styled.div`
 
 const IconText = styled.p`
   margin-top: 1rem;
-  color: #333333;
+  color: ${(props) => props.theme.colors.lightText};
   font-weight: 500;
   font-size: 1rem;
   letter-spacing: -0.01em;
