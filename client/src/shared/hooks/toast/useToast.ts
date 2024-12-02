@@ -6,7 +6,7 @@ import useToastStore from '@/src/shared/store/useToastStore';
 
 import { toastType } from '@/src/shared/types';
 
-const useToast = (duration: number = 3000) => {
+const useToast = (duration: number = 2000) => {
   const { showToastAction, hideToastAction, toastList } = useToastStore();
 
   const showToast = useCallback(

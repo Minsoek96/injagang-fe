@@ -16,5 +16,5 @@ const ToastContainer = styled.div`
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  z-index: 1000;
+  z-index: 99999;
 `;
