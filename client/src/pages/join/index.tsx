@@ -12,7 +12,6 @@ function SignupPage() {
         <PageSubTitle>인터뷰와 자소서를 강하게</PageSubTitle>
         <SignUp />
       </Wrapper>
-      <BackgroundGradient />
     </Container>
   );
 }
@@ -29,20 +28,6 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 2rem;
   z-index: 1;
-`;
-
-const BackgroundGradient = styled.div`
-  position: fixed;
-  top: -10%;
-  right: -5%;
-  width: 50%;
-  height: 120%;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 136, 0, 0.03) 0%,
-    rgba(224, 0, 0, 0.03) 100%
-  );
-  z-index: 0;
 `;
 
 const PageTitle = styled.h1`

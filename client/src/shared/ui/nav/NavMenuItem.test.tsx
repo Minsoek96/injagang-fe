@@ -24,11 +24,12 @@ describe('NavMenuItem 컴포넌트', () => {
     (usePathname as jest.Mock).mockReturnValue(mockPath);
   });
 
-  const renderNavMenuItem = (path = mockPath) => render(
-    <TestProvider>
-      <NavMenuItem title={mockTitle} path={path} icon={<MockIcon />} />
-    </TestProvider>,
-  );
+  const renderNavMenuItem = (path = mockPath) =>
+    render(
+      <TestProvider>
+        <NavMenuItem title={mockTitle} path={path} icon={<MockIcon />} />
+      </TestProvider>,
+    );
 
   describe('기본 렌더링', () => {
     context('아이템이 렌더링될 때', () => {
@@ -49,9 +50,22 @@ describe('NavMenuItem 컴포넌트', () => {
       it('아이템의 테두리 색상과 아이콘 색상이 올바르게 설정되어야 한다.', () => {
         renderNavMenuItem();
 
-        const container = screen.getByText(mockTitle).closest('li');
-        expect(container).toHaveStyle(`border-bottom: 1px solid ${defaultTheme.colors.svgOnColor}`);
-        expect(screen.getByTestId('mock-icon')).toHaveStyle(`fill: ${defaultTheme.colors.svgOnColor}`);
+        const container = screen.getByRole('listitem');
+        expect(container).toHaveStyleRule('width', '100%', {
+          modifier: '::after',
+        });
+
+        expect(container).toHaveStyleRule(
+          'background-color',
+          defaultTheme.colors.svgOnColor,
+          {
+            modifier: '::after',
+          },
+        );
+
+        expect(screen.getByTestId('mock-icon')).toHaveStyle(
+          `fill: ${defaultTheme.colors.svgOnColor}`,
+        );
       });
     });
   });
@@ -81,7 +95,9 @@ describe('NavMenuItem 컴포넌트', () => {
 
         const container = screen.getByText(mockTitle).closest('li');
         expect(container).toHaveStyle('border-bottom: none');
-        expect(screen.getByTestId('mock-icon')).toHaveStyle(`fill: ${defaultTheme.colors.svgColor}`);
+        expect(screen.getByTestId('mock-icon')).toHaveStyle(
+          `fill: ${defaultTheme.colors.svgColor}`,
+        );
       });
     });
   });

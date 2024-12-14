@@ -30,7 +30,6 @@ function LoginPage() {
 
         <Login />
       </Wrapper>
-      <BackgroundGradient />
     </Container>
   );
 }
@@ -47,20 +46,6 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 2rem;
   z-index: 1;
-`;
-
-const BackgroundGradient = styled.div`
-  position: fixed;
-  top: -10%;
-  right: -5%;
-  width: 50%;
-  height: 120%;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 136, 0, 0.03) 0%,
-    rgba(224, 0, 0, 0.03) 100%
-  );
-  transform: rotate(-15deg);
 `;
 
 const PageTitle = styled.h1`
