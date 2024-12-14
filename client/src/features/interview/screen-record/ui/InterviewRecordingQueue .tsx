@@ -85,7 +85,7 @@ export default function InterviewRecordingQueue({
         isSpeaking={isSpeaking}
         currentQuestion={speechData[currentIndex]}
       />
-      <PlayerWrapper ref={videoRef} autoPlay muted />
+      <PlayerWrapper ref={videoRef} autoPlay muted playsInline />
       {isScriptView && (
         <ScriptView>
           <ScriptTextArea />

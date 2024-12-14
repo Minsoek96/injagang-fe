@@ -20,6 +20,7 @@ export default function RecordPlayer({ currentVideoChunk }:Props) {
     <PlayerWrapper
       autoPlay
       controls
+      playsInline
       src={URL.createObjectURL(currentVideoChunk)}
     />
   );

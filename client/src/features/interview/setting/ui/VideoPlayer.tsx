@@ -10,6 +10,7 @@ export default function VideoSettingPlayer({ videoRef }:Props) {
     <PlayerWrapper
       autoPlay
       muted
+      playsInline // iOS Safari 필수
       ref={videoRef}
     />
   );
