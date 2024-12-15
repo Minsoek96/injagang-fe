@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { styleMixin, V } from '@/src/shared/styles';
 import { ArrowGuide } from '@/src/shared/ui';
 
-import roomout from '@/public/assets/roomout.svg';
+import roomout from '@/public/assets/roomout.webp';
 
 export default function InterviewMenual() {
   return (
@@ -14,7 +14,7 @@ export default function InterviewMenual() {
         <Image
           src={roomout}
           alt="roomout"
-          width={500}
+          width={400}
           height={500}
           quality={100}
         />
@@ -29,7 +29,7 @@ const Menual = styled.div`
   width: 100%;
   height: 50rem;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: ${V.mediaTablet}) {
     .interViewImg_box {
       width: 85%;
       height: 100%;
@@ -50,5 +50,10 @@ const ImageContainer = styled.div`
 
   @media screen and (max-width: ${V.mediaMobile}) {
     height: 100%;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
   }
 `;
