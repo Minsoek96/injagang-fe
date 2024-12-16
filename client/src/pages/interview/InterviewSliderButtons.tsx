@@ -19,7 +19,11 @@ export default function InterviewSliderButtons({
   curPageLabel,
   rule,
 }: Props) {
+  // 마지막 스텝은 렌더링하지 않음
+  const LAST_STEP = 4;
   const START_SCREEN = currentStep > 1;
+
+  if (currentStep === LAST_STEP) return null;
   return (
     <ControlButtons>
       {START_SCREEN && (
@@ -27,7 +31,7 @@ export default function InterviewSliderButtons({
           label={<BiArrowBack />}
           onClick={moveToPrevPage}
           sx={{ width: '5rem', font: '3rem' }}
-          disabled={currentStep === 4}
+          disabled={currentStep === LAST_STEP}
         />
       )}
       <MainButton
@@ -47,11 +51,11 @@ export default function InterviewSliderButtons({
 
 const ControlButtons = styled.div`
   ${styleMixin.Flex()}
-  margin-top: 3rem;
+  margin-top: 2rem;
   width: ${V.lgItemWidth};
   gap: 8px;
   @media screen and (max-width: 800px) {
-    width: ${V.smItemWidth};
+    width: calc(100% - 3rem);
   }
 
   button {

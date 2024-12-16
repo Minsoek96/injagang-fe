@@ -49,7 +49,7 @@ const MainContent = styled.main`
   flex: 1;
   width: 100%;
   max-width: 135rem;
-  padding: 3rem;
+  padding: 2.5rem 1.25rem;
   margin: 0 auto;
   margin-top: 6.5rem;
 `;

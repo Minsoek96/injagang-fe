@@ -3,7 +3,6 @@ import { styled } from 'styled-components';
 import Image from 'next/image';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import { ArrowGuide } from '@/src/shared/ui';
 
 import roomout from '@/public/assets/roomout.webp';
 
@@ -19,7 +18,6 @@ export default function InterviewMenual() {
           quality={100}
         />
       </ImageContainer>
-      <ArrowGuide targetId="Arrow_btn" guideText="Next Stage Button" />
     </Menual>
   );
 }

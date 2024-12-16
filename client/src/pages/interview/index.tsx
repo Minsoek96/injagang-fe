@@ -9,7 +9,7 @@ import {
   useRecordInfoStore,
 } from '@/src/entities/interview_question';
 
-import { Container, StepProgressBar } from '@/src/shared/ui';
+import { Container, RunningLoader, StepProgressBar } from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
 import {
@@ -40,6 +40,12 @@ const InterviewFlow = dynamic(
   () => import('@/src/widgets/interview/ui/interview-flow/InterviewFlow'),
   {
     ssr: false,
+    loading: () => (
+      <>
+        <RunningLoader />
+        <p>환경 설정을 적용 중 입니다.</p>
+      </>
+    ),
   },
 );
 
@@ -55,7 +61,7 @@ function Interview() {
   const renderComponent = [
     {
       render: <InterviewMenual />,
-      subTitle: '면접영상촬영시작',
+      subTitle: 'NextStage => (면접 설정)',
       title: '면접 대기',
       rule: null,
       id: 'Step_01',
