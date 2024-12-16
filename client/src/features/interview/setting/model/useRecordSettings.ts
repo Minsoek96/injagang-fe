@@ -18,7 +18,6 @@ export default function useRecordSettings() {
     initDevices,
   } = useRecordInfoStore();
 
-  // TODO: 좀 더 유연한 에러처리 방식 생각해보기
   const showErrorModal = useCallback(() => {
     setModal({
       title: 'Warring',

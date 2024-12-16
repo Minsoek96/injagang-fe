@@ -5,10 +5,9 @@ import useMediaRecord from './useMediaRecord';
 
 // MediaStream과 MediaRecorder 모킹
 const mockMediaStream = {
-  getTracks: jest.fn().mockReturnValue([
-    { stop: jest.fn() },
-    { stop: jest.fn() },
-  ]),
+  getTracks: jest
+    .fn()
+    .mockReturnValue([{ stop: jest.fn() }, { stop: jest.fn() }]),
 };
 
 const mockMediaRecorder: MockMediaRecorder = {
@@ -23,12 +22,18 @@ const mockMediaRecorder: MockMediaRecorder = {
 const context = describe;
 
 describe('useMediaRecord 훅', () => {
-// navigator.mediaDevices 모킹
+  // navigator.mediaDevices 모킹
   const mockGetUserMedia = jest.fn();
   const mockEnumerateDevices = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
+
+    // MediaRecorder 모킹 설정
+    global.MediaRecorder = jest.fn().mockImplementation(() => ({
+      ...mockMediaRecorder,
+    })) as unknown as typeof MediaRecorder;
+    global.MediaRecorder.isTypeSupported = jest.fn().mockReturnValue(true);
 
     // navigator.mediaDevices 모킹 설정
     Object.defineProperty(navigator, 'mediaDevices', {
@@ -68,10 +73,6 @@ describe('useMediaRecord 훅', () => {
   describe('미디어 접근', () => {
     context('정상적인 경우', () => {
       it('사용자의 미디어 접근 요청을 처리할 수 있어야 한다.', async () => {
-        global.MediaRecorder = jest.fn().mockImplementation(() => ({
-          ...mockMediaRecorder,
-        })) as unknown as typeof MediaRecorder;
-
         mockGetUserMedia.mockResolvedValue(mockMediaStream);
 
         const onError = jest.fn();
@@ -107,9 +108,6 @@ describe('useMediaRecord 훅', () => {
 
   describe('녹화 조작', () => {
     beforeEach(() => {
-      global.MediaRecorder = jest.fn().mockImplementation(() => ({
-        ...mockMediaRecorder,
-      })) as unknown as typeof MediaRecorder;
       mockGetUserMedia.mockResolvedValue(mockMediaStream);
     });
 
@@ -153,9 +151,6 @@ describe('useMediaRecord 훅', () => {
 
   context('렌더링 종료시', () => {
     it('녹화 자원이 정리되어야 한다.', async () => {
-      global.MediaRecorder = jest.fn().mockImplementation(() => ({
-        ...mockMediaRecorder,
-      })) as unknown as typeof MediaRecorder;
       mockGetUserMedia.mockResolvedValue(mockMediaStream);
 
       const { result, unmount } = renderHook(() => useMediaRecord({}));
