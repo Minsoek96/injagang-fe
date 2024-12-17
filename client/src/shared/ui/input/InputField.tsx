@@ -32,6 +32,7 @@ const InputFieldStyle = styled.div`
   flex-direction: column;
   width: 100%;
   color: #333333;
+  margin-bottom: 1rem;
 `;
 
 const Label = styled.label`

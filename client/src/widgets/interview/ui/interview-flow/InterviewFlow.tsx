@@ -63,6 +63,7 @@ const RecordContainer = styled(Container.ArticleCard)`
   width: 100%;
   height: 70dvh;
   padding: 2em 1em;
+  border: none;
 
   @media screen and (max-width: ${V.mediaMobile}) {
     padding: 1em 0.5em;

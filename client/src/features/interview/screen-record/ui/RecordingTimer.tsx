@@ -10,7 +10,7 @@ import { useInterval } from '@/src/shared/hooks';
 import { formatTime } from '@/src/shared/utils';
 
 type Props = {
-    isRunning: boolean;
+  isRunning: boolean;
 };
 
 export default function RecordingTimer({ isRunning }: Props) {
@@ -34,14 +34,18 @@ export default function RecordingTimer({ isRunning }: Props) {
   return (
     <Container>
       <LuTimerReset />
-      <p>
-        {formatTime.mmss(time)}
-      </p>
+      <TimeDisplay>{formatTime.mmss(time)}</TimeDisplay>
     </Container>
   );
 }
 
 const Container = styled.div`
-    ${styleMixin.Flex()}
-    font-size: 1.8rem;
+  ${styleMixin.Flex('flex-end', '')}
+  font-size: 1.8rem;
+  min-width: 8rem;
+  gap:0.5rem;
+`;
+
+const TimeDisplay = styled.p`
+  font-family: monospace;
 `;

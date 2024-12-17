@@ -116,7 +116,7 @@ export default function InterviewRecordingQueue({
 }
 
 const PlayerWrapper = styled.video`
-  margin-block: 2rem;
+  margin-block: 1.5rem;
   width: 100%;
   height: 90%;
   object-fit: cover;
@@ -146,8 +146,17 @@ const RecordingControls = styled.div`
   }
 
   @media screen and (max-width: ${V.mediaMobile}) {
+    background-color: ${(props) => props.theme.colors.primary};
+    padding-block: 1rem;
+    position: fixed;
+    bottom: 0;
+    border-top-right-radius: 3rem;
+    border-top-left-radius: 3rem;
+    height: 6rem;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 100;
     button {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
     }
   }
 `;
