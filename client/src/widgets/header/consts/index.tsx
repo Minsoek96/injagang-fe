@@ -11,16 +11,19 @@ export const navList: MenuItemType[] = [
   {
     title: '자소서작성',
     path: '/coverLetter',
+    keyword: '/coverLetter',
     icon: <BiEdit />,
   },
   {
     title: '면접연습',
     path: '/interview',
+    keyword: '/interview',
     icon: <BiSolidVideoRecording />,
   },
   {
     title: 'Q&A',
     path: '/qna/list',
+    keyword: '/qna',
     icon: <BiCommentDetail />,
   },
 ];

@@ -14,7 +14,8 @@ jest.mock('next/navigation', () => ({
 describe('NavMenuItem 컴포넌트', () => {
   const context = describe;
   const mockTitle = 'testTitle';
-  const mockPath = '/test';
+  const mockPath = '/test/detail/34';
+  const mockKeyword = '/test';
 
   function MockIcon() {
     return <svg data-testid="mock-icon" />;
@@ -24,10 +25,15 @@ describe('NavMenuItem 컴포넌트', () => {
     (usePathname as jest.Mock).mockReturnValue(mockPath);
   });
 
-  const renderNavMenuItem = (path = mockPath) =>
+  const renderNavMenuItem = (path = mockPath, keyword = mockKeyword) =>
     render(
       <TestProvider>
-        <NavMenuItem title={mockTitle} path={path} icon={<MockIcon />} />
+        <NavMenuItem
+          title={mockTitle}
+          path={path}
+          icon={<MockIcon />}
+          keyword={keyword}
+        />
       </TestProvider>,
     );
 

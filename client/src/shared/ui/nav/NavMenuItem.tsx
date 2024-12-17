@@ -7,15 +7,18 @@ import { usePathname } from 'next/navigation';
 interface MainMenuItemProps {
   title: string;
   path: string;
+  keyword: string;
   icon: React.ReactNode;
 }
 
-export default function NavMenuItem({ title, path, icon }: MainMenuItemProps) {
+export default function NavMenuItem({
+  title, path, icon, keyword,
+}: MainMenuItemProps) {
   const pathname = usePathname();
-  const isSelected = pathname === path;
+  const isSelected = pathname?.startsWith(keyword);
 
   return (
-    <Container $isSelected={isSelected}>
+    <Container $isSelected={isSelected ?? false}>
       <StyledLink href={path} aria-label={title}>
         <MenuWrapper>
           <i>{icon}</i>
