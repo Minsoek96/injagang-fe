@@ -95,6 +95,12 @@ const bounce = keyframes`
 }
 `;
 
+const blink = keyframes`
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+`;
+
 export {
-  fadeIn, fadeOut, slideIn, progressBar, shakeAnimation, bounce, slideUp,
+  fadeIn, fadeOut, slideIn, progressBar, shakeAnimation, bounce, slideUp, blink,
 };

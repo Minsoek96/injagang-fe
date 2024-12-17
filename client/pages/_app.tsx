@@ -2,12 +2,20 @@
 import type { AppProps } from 'next/app';
 
 import { Layout } from '@/src/app/layout/index';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   onFCP, onLCP, onCLS, onTTFB,
 } from 'web-vitals';
+import { Router } from 'next/router';
+import GlobalLoading from '@/pages/GlobalLoading';
 
 function App({ Component, pageProps }: AppProps) {
+  const [loading, setLoading] = useState(false);
+
+  Router.events.on('routeChangeStart', () => setLoading(true));
+  Router.events.on('routeChangeComplete', () => setLoading(false));
+  Router.events.on('routeChangeError', () => setLoading(false));
+
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       const renderType = pageProps.dehydratedState ? 'SSR' : 'CSR';
@@ -21,6 +29,7 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <Layout>
+      {loading && <GlobalLoading />}
       <Component {...pageProps} />
     </Layout>
   );
