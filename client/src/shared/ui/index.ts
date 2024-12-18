@@ -1,6 +1,5 @@
 export * from './arrow';
 export * from './button';
-export * from './card';
 export * from './combobox';
 export * from './dropbox';
 export * from './input';

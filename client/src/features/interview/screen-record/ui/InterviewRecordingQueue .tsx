@@ -79,7 +79,7 @@ export default function InterviewRecordingQueue({
   };
 
   return (
-    <>
+    <Container>
       <VideoHeader
         isRecord={recordStatus === 'record'}
         isSpeaking={isSpeaking}
@@ -111,9 +111,15 @@ export default function InterviewRecordingQueue({
           />
         )}
       </RecordingControls>
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: ${styleMixin.Column()};
+  width: 100%;
+  height: 100%;
+`;
 
 const PlayerWrapper = styled.video`
   margin-block: 1.5rem;
@@ -146,14 +152,14 @@ const RecordingControls = styled.div`
   }
 
   @media screen and (max-width: ${V.mediaMobile}) {
-    background-color: ${(props) => props.theme.colors.primary};
-    padding-block: 1rem;
     position: fixed;
+    left: 0;
     bottom: 0;
+    background-color: ${(props) => props.theme.colors.primary};
     border-top-right-radius: 3rem;
     border-top-left-radius: 3rem;
     height: 6rem;
-    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -4px 6px -1px rgba(63, 24, 24, 0.1);
     z-index: 100;
     button {
       font-size: 1.6rem;

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-import { MdOutlineFileDownload } from 'react-icons/md';
+import { MdOutlineFileDownload, MdOutlineReplay } from 'react-icons/md';
 
 import { useRecordInfoStore } from '@/src/entities/interview_question';
 
-import { MainButton } from '@/src/shared/ui';
+import { HideSvg } from '@/src/shared/ui';
 import { useCounter } from '@/src/shared/hooks';
-import { styleMixin, V } from '@/src/shared/styles';
+import { styleMixin } from '@/src/shared/styles';
 
 import RecordNavigation from './RecordNavigation';
 import RecordPlayer from './RecordPlayer';
@@ -18,10 +18,7 @@ type Props = {
   currentIdx: number;
 };
 
-export default function InterviewResultViewer({
-  question,
-  currentIdx,
-}: Props) {
+export default function InterviewResultViewer({ question, currentIdx }: Props) {
   const {
     recordInfoList,
     recordedChunks: video,
@@ -56,49 +53,49 @@ export default function InterviewResultViewer({
           script={recordInfoList[counter]?.script || '작성한 대본이 없습니다.'}
           timer={recordInfoList[counter]?.timer || '00:00'}
         />
-        <MainButton
+      </ResultControlsWrapper>
+      <ButtonSection>
+        <HideSvg
+          Logo={<MdOutlineFileDownload />}
+          label="다운로드"
           onClick={downloadVideo}
-          label={(
-            <p>
-              <MdOutlineFileDownload />
-              DOWNLOAD
-            </p>
-          )}
-          sx={{ marginTop: '1rem', fontSize: '1.8rem' }}
+          sx={{ fontSize: '3.5rem' }}
         />
-        <MainButton
+        <HideSvg
+          Logo={<MdOutlineReplay />}
           label="면접장으로"
           onClick={() => setInterviewMode('record')}
-          sx={{ marginTop: '1rem', fontSize: '1.8rem' }}
+          sx={{ fontSize: '3.5rem' }}
         />
-      </ResultControlsWrapper>
+      </ButtonSection>
     </InterViewResultContainer>
   );
 }
 
 const InterViewResultContainer = styled.div`
-  position: relative;
   ${styleMixin.Column('flex-start')}
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+  ${styleMixin.hideScrollbarStyle}
 `;
 
 const ResultControlsWrapper = styled.div`
   ${styleMixin.Column('', 'flex-start')};
   width: 100%;
-  max-width: 110rem;
-  font-size: 1.8rem;
-  line-height: 1.6;
+  line-height: 1.4;
+`;
 
-  button {
-    background-color: ${(props) => props.theme.colors.signatureColor};
-  }
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    font-size: 1.4rem;
-    button {
-      font-size: 1.4rem !important;
-    }
-  }
+const ButtonSection = styled.div`
+  ${styleMixin.Flex()};
+  position: fixed;
+  width: 100%;
+  gap: 5rem;
+  background-color: ${(props) => props.theme.colors.primary};
+  bottom: 0;
+  border-top-right-radius: 3rem;
+  border-top-left-radius: 3rem;
+  height: 6rem;
+  box-shadow: 0 -4px 6px -1px rgba(63, 24, 24, 0.1);
+  z-index: 100;
 `;

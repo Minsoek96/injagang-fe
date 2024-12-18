@@ -8,7 +8,6 @@ import {
 } from '@/src/entities/interview_question';
 
 import { Container } from '@/src/shared/ui';
-import { V } from '@/src/shared/styles';
 import { useWebSpeech } from '@/src/shared/hooks';
 
 import { InterviewResultViewer, InterviewRecordingQueue } from '@/src/features/interview';
@@ -62,10 +61,6 @@ const RecordContainer = styled(Container.ArticleCard)`
   position: relative;
   width: 100%;
   height: 70dvh;
-  padding: 2em 1em;
   border: none;
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    padding: 1em 0.5em;
-  }
+  padding: 0;
 `;
