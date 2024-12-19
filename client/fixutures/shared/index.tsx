@@ -48,21 +48,25 @@ const sampleNavList: MenuItemType[] = [
     title: '테스트',
     path: '/test1',
     icon: <i data-testid="mock-icon1" />,
+    keyword: '/test1',
   },
   {
     title: '테스트2',
     path: '/test2',
     icon: <i data-testid="mock-icon2" />,
+    keyword: '/test2',
   },
   {
     title: '테스트3',
     path: '/qna/test3',
     icon: <i data-testid="mock-icon3" />,
+    keyword: '/qna',
   },
   {
     title: '테스트4',
     path: '/test4',
     icon: <i data-testid="mock-icon4" />,
+    keyword: '/test4',
   },
 ];
 
