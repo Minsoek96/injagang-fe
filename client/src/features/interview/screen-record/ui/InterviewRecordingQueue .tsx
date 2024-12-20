@@ -116,6 +116,7 @@ export default function InterviewRecordingQueue({
 }
 
 const Container = styled.div`
+  position: relative;
   display: ${styleMixin.Column()};
   width: 100%;
   height: 100%;
@@ -134,8 +135,10 @@ const PlayerWrapper = styled.video`
 const ScriptView = styled.div`
   z-index: 100;
   position: absolute;
+  transform: translate(-50%);
+  left: 50%;
   width: 50%;
-  bottom: 10rem;
+  bottom: 10%;
 
   @media screen and (max-width: ${V.mediaMobile}) {
     display: none;
