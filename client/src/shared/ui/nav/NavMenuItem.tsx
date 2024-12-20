@@ -7,15 +7,18 @@ import { usePathname } from 'next/navigation';
 interface MainMenuItemProps {
   title: string;
   path: string;
+  keyword: string;
   icon: React.ReactNode;
 }
 
-export default function NavMenuItem({ title, path, icon }: MainMenuItemProps) {
+export default function NavMenuItem({
+  title, path, icon, keyword,
+}: MainMenuItemProps) {
   const pathname = usePathname();
-  const isSelected = pathname === path;
+  const isSelected = pathname?.startsWith(keyword);
 
   return (
-    <Container $isSelected={isSelected}>
+    <Container $isSelected={isSelected ?? false}>
       <StyledLink href={path} aria-label={title}>
         <MenuWrapper>
           <i>{icon}</i>
@@ -33,11 +36,29 @@ const Container = styled.li<{ $isSelected: boolean }>`
   height: inherit;
   width: 10rem;
   list-style: none;
-  opacity: 0.8;
-  border-bottom: 1px solid
-    ${(props) => (props.$isSelected ? props.theme.colors.svgOnColor : 'none')};
+  position: relative;
+  cursor: pointer;
+
+  /* 밑줄 */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: ${(props) => props.theme.colors.svgOnColor};
+    transition: width 0.3s ease-in-out;
+    width: ${(props) => (props.$isSelected ? '100%' : '0')};
+  }
+
   svg {
+    transition: fill 0.3s ease-in-out;
     fill: ${(props) => (props.$isSelected ? props.theme.colors.svgOnColor : props.theme.colors.svgColor)};
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 `;
 

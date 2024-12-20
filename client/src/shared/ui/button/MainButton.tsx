@@ -1,8 +1,17 @@
+import { ButtonHTMLAttributes, CSSProperties } from 'react';
+
 import styled from 'styled-components';
 
 import { V } from '@/src/shared/styles';
 
-import { BaseProps } from '@/src/shared/ui/button/type';
+import { VariantProps, buttonVariants } from './variants';
+
+interface BaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string | React.ReactNode;
+  sx?: CSSProperties;
+  isActive?: boolean;
+  variant?: VariantProps;
+}
 
 export default function MainButton({
   onClick,
@@ -12,6 +21,7 @@ export default function MainButton({
   disabled = false,
   className = '',
   type = 'button',
+  variant = 'default',
 }: BaseProps) {
   return (
     <CustomBtn
@@ -21,6 +31,7 @@ export default function MainButton({
       disabled={disabled}
       className={className}
       type={type}
+      $variant={variant}
     >
       {label}
     </CustomBtn>
@@ -29,6 +40,7 @@ export default function MainButton({
 
 interface CustomProps {
   $isActive: boolean;
+  $variant: VariantProps;
   type?:'button' |'submit' | 'reset';
 }
 
@@ -39,23 +51,15 @@ const CustomBtn = styled.button.attrs<CustomProps>((props) => ({
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) =>
-    (props.$isActive
-      ? props.theme.colors.brandColor
-      : props.theme.colors.button)};
-  color: ${({ theme }) => theme.colors.text};
-  border: 0.1em solid ${(props) => props.theme.colors.mainLine};
   padding: ${V.smPadding};
   border-radius: 0.5rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
 
-  &:hover {
-    background-color: ${(props) => props.theme.colors.mainHover};
-  }
+  ${({ $variant }) => buttonVariants[$variant]}
 
   &:disabled {
-   opacity: 0.3;
+    opacity: 0.3;
   }
 `;

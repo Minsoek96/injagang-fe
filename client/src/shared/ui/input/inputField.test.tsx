@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
+import TestProvider from '@/fixutures/TestProvider';
 import InputField from './InputField';
 
 const context = describe;
@@ -13,13 +14,15 @@ describe('InputField 컴포넌트', () => {
 
   beforeEach(() => {
     render(
-      <InputField
-        label={label}
-        type={type}
-        name={name}
-        value={value}
-        onChange={handleChange}
-      />,
+      <TestProvider>
+        <InputField
+          label={label}
+          type={type}
+          name={name}
+          value={value}
+          onChange={handleChange}
+        />
+      </TestProvider>,
     );
   });
 
@@ -48,7 +51,9 @@ describe('InputField 컴포넌트', () => {
   context('입력 값이 변경될 때', () => {
     it('onChange 핸들러가 호출되어야 한다', () => {
       const inputElement = screen.getByRole('textbox');
-      fireEvent.change(inputElement, { target: { value: '안녕하세요, 세계!' } });
+      fireEvent.change(inputElement, {
+        target: { value: '안녕하세요, 세계!' },
+      });
       expect(handleChange).toHaveBeenCalledTimes(1);
     });
   });

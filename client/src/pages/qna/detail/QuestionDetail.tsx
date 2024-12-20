@@ -52,11 +52,13 @@ export default function QuestionDetail() {
           nickname={nickname}
         />
       </Container.ArticleCard>
-      <Container.ArticleCard
-        $size={{ width: '100%', height: '100%', isMedia: true }}
+      <ArticleCard
+        $size={{
+          width: '100%', height: '100%', isMedia: true,
+        }}
       >
         <AnswerDragCoverLetter boardId={Number(boardId.id)} />
-      </Container.ArticleCard>
+      </ArticleCard>
     </DetailContainer>
   );
 }
@@ -68,11 +70,11 @@ const DetailContainer = styled(Container.ItemBase)`
   gap: 2rem;
   margin-bottom: 2rem;
 
-  @media screen and (max-width: ${V.mediaWeb}) {
-    ${styleMixin.Column()}
-  }
-
   > article:first-child {
     max-height: 100%;
   }
+`;
+
+const ArticleCard = styled(Container.ArticleCard)`
+  max-height: 100%;
 `;

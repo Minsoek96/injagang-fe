@@ -12,10 +12,8 @@ const useNick = () => {
   const changeNickname = useCallback((nickName: string) => {
     setModal({
       onAction: () => confirmNickNameChange(nickName),
-      contents: {
-        title: MODAL_MESSAGES.MSG,
-        message: `닉네임 : ${nickName} 변경하시겠습니까?`,
-      },
+      title: MODAL_MESSAGES.MSG,
+      message: `닉네임 : ${nickName} 변경하시겠습니까?`,
     });
   }, []);
 

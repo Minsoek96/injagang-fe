@@ -9,7 +9,7 @@ type Action = {
 };
 
 const useThemeStore = create<State & Action>((set) => ({
-  isDark: true,
+  isDark: false,
 
   changeThemeMode: (isDark: boolean) =>
     set({

@@ -4,6 +4,7 @@ export enum QuestionType {
   SITUATION = 'SITUATION',
   JOB = 'JOB',
   PERSONALITY = 'PERSONALITY',
+  ALL = 'ALL', // ALL이라는 타입은 API 문서상은 존재하지 않는 예외 타입
 }
 
 export interface IAddQuestions {

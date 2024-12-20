@@ -31,17 +31,24 @@ const InputFieldStyle = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  color: #333333;
+  margin-bottom: 1rem;
 `;
 
 const Label = styled.label`
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 `;
 
 const Input = styled.input`
-  padding: 8px;
-  margin-bottom: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  height: 3.5rem;
+  padding: 0 1rem;
+  border: 1px solid #f0f0f0;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: ${(props) => props.theme.colors.signatureColor};
+    outline: none;
+  }
 `;

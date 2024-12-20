@@ -1,15 +1,18 @@
+type MockTrack = {
+  stop: jest.Mock;
+}
+
+type MockStream = {
+  getTracks: () => MockTrack[];
+}
+
 type MockMediaRecorder = {
   start: jest.Mock;
   stop: jest.Mock;
   pause: jest.Mock;
   resume: jest.Mock;
-  ondataavailable: jest.Mock;
-  isTypeSupported: jest.Mock;
-};
-
-type MockStream = {
-  getAudioTracks: jest.Mock;
-  getVideoTracks: jest.Mock;
+  ondataavailable: ((event: BlobEvent) => void) | null;
+  stream: MockStream;
 };
 
 type MockHTMLVideoElement = {

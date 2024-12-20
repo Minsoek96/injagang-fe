@@ -21,7 +21,7 @@ describe('InterViewRandomSetting', () => {
     expect(screen.getByLabelText('직무 적합성 질문')).toBeInTheDocument();
     expect(screen.getByLabelText('성격 질문')).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: '셋팅완료' }),
+      screen.getByRole('button', { name: '질문 불러오기' }),
     ).toBeInTheDocument();
   });
 });

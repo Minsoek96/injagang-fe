@@ -14,8 +14,8 @@ export default function NavMenuList({ navList }: NavProps) {
   }
   return (
     <Container>
-      {navList.map(({ title, path, icon }) => (
-        <NavMenuItem key={title} title={title} path={path} icon={icon} />
+      {navList.map((item) => (
+        <NavMenuItem key={item.title} {...item} />
       ))}
     </Container>
   );

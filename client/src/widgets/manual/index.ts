@@ -1,1 +1,1 @@
-export { default as Manual } from './components/Manual';
+export { default as Manual } from './ui';

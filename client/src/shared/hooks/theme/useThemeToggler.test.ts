@@ -10,7 +10,7 @@ describe('useThemeToggeler', () => {
 
   const renderChangeToggle = () => {
     const { result } = renderHook(() => useThemeToggler());
-    expect(result.current[0]).toBe(true);
+    expect(result.current[0]).toBe(false);
     act(() => result.current[1]());
     return { result };
   };
@@ -39,7 +39,7 @@ describe('useThemeToggeler', () => {
   context('ChangeToggleTheme를 호출하면', () => {
     it('currentMode의 상태가 반전된다.', () => {
       const { result } = renderChangeToggle();
-      expect(result.current[0]).toBe(false);
+      expect(result.current[0]).toBe(true);
     });
 
     it('새로운 상태를 로컬스토리지에 저장한다.', () => {

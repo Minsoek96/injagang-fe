@@ -23,7 +23,7 @@ function ExpectedQuestionSelector() {
 
   /** 체크리스트 상태 관리 */
   const {
-    checkList, handleAllCheck, handleCheckList, isAllCheck,
+    checkList, handleAllCheck, handleCheckList, isAllCheck, clearCheckList,
   } = useCheckList(interViewQuestionList);
 
   /** 선택된 질문 추가 함수 */
@@ -38,10 +38,8 @@ function ExpectedQuestionSelector() {
   const removeQuestions = useCallback(() => {
     if (!checkList.length) {
       setModal({
-        contents: {
-          title: 'Warring',
-          message: '선택된 질문이 없습니다.',
-        },
+        title: 'Warring',
+        message: '선택된 질문이 없습니다.',
       });
       return;
     }
@@ -56,7 +54,7 @@ function ExpectedQuestionSelector() {
       $size={{ height: '60rem', width: '100%', flex: 'Col' }}
     >
       <Header>Questions by Type</Header>
-      <QuestionTypeSelector onReset={handleAllCheck} />
+      <QuestionTypeSelector onReset={clearCheckList} />
       <ExpectedQuestionList
         questions={interViewQuestionList}
         checkList={checkList}

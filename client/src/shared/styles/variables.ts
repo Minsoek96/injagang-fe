@@ -20,7 +20,6 @@ const V = {
   smItemWidth: '21rem',
   mdItemWidth: '38rem',
   lgItemWidth: '50rem',
-  xlItemWidth: '48rem', // 제거대상
 
   // Heights
   smHeight: '25rem',

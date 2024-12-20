@@ -8,17 +8,19 @@ const darkTheme: Theme = {
     button: '#444',
     logo: '#ffffff',
     text: '#fdfdfd',
+    lightText: '#dedede',
     highlight: '#b32eb3',
 
     svgColor: '#ffffff',
-    svgOnColor: '#007FFF',
+    svgOnColor: '#ff8800',
     mainLine: '#393A3B',
     mainHover: 'rgba(0, 0, 0, 0.3)',
     textArea: '#414141',
 
+    modalBody: '#ffffffbe',
+
     dropBoxColor: '#fff',
     brandColor: '#e00000',
-
     boardText: '#B8B8B8',
     highlightColor: 'rgba(255, 192, 128, 1)',
   },

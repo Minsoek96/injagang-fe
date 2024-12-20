@@ -1,4 +1,3 @@
-import { DropItemType } from '@/src/shared/ui/dropbox';
 import { MenuItemType } from '@/src/shared/ui/nav';
 import { TOAST_MODE } from '@/src/shared/const';
 
@@ -11,10 +10,8 @@ const sampleToast = {
 } as const;
 
 const sampleModal = {
-  contents: {
-    title: 'TEST_TITLE',
-    message: 'TEST_MODAL',
-  },
+  title: 'TEST_TITLE',
+  message: 'TEST_MODAL',
 };
 
 const sampleCheckList = [
@@ -46,54 +43,30 @@ const sampleOptionList = [
   { title: 'Option 3', id: 'test 3' },
 ];
 
-const sampleDropList: DropItemType[] = [
-  {
-    id: 'drop-01',
-    type: 'link',
-    link: {
-      path: '/test-path',
-      label: 'Test-Label1',
-      icon: <i />,
-      title: 'Test-Title1',
-    },
-  },
-  {
-    id: 'drop-02',
-    type: 'link',
-    link: {
-      path: '/test-path',
-      label: 'Test-Label2',
-      icon: <i />,
-      title: 'Test-Title2',
-    },
-  },
-  {
-    id: 'drop-03',
-    type: 'component',
-    component: <div>컴포넌트</div>,
-  },
-];
-
 const sampleNavList: MenuItemType[] = [
   {
     title: '테스트',
     path: '/test1',
     icon: <i data-testid="mock-icon1" />,
+    keyword: '/test1',
   },
   {
     title: '테스트2',
     path: '/test2',
     icon: <i data-testid="mock-icon2" />,
+    keyword: '/test2',
   },
   {
     title: '테스트3',
     path: '/qna/test3',
     icon: <i data-testid="mock-icon3" />,
+    keyword: '/qna',
   },
   {
     title: '테스트4',
     path: '/test4',
     icon: <i data-testid="mock-icon4" />,
+    keyword: '/test4',
   },
 ];
 
@@ -108,7 +81,6 @@ export {
   sampleModal,
   sampleCheckList,
   sampleOptionList,
-  sampleDropList,
   sampleNavList,
   sampleStepList,
 };

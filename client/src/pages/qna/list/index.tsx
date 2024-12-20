@@ -23,17 +23,23 @@ import {
 import { Container } from '@/src/shared/ui';
 
 const BoardListView = dynamic(
-  () => import('@/src/widgets/board/BoardListLayout'),
+  () => import('@/src/widgets/board/ui/list-layout/BoardListLayout'),
   { ssr: false },
 );
 
-const PagiNation = dynamic(() => import('@/src/features/qna/pagination/PagiNation'), {
-  ssr: false,
-});
+const PagiNation = dynamic(
+  () => import('@/src/features/qna/pagination/PagiNation'),
+  {
+    ssr: false,
+  },
+);
 
-const BoardSearch = dynamic(() => import('@/src/features/qna/search/BoardSearch'), {
-  ssr: false,
-});
+const BoardSearch = dynamic(
+  () => import('@/src/features/qna/search/BoardSearch'),
+  {
+    ssr: false,
+  },
+);
 
 type ListProps = {
   dehydratedState: DehydratedState;

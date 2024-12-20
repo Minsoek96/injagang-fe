@@ -1,14 +1,14 @@
 import { css } from 'styled-components';
 
 /** Flex 설정 */
-export const Flex = (justify = 'center', align = 'center') => css`
+const Flex = (justify = 'center', align = 'center') => css`
   display: flex;
   justify-content: ${justify};
   align-items: ${align};
 `;
 
 /** Column Flex 설정 */
-export const Column = (justify = 'center', align = 'center') => css`
+const Column = (justify = 'center', align = 'center') => css`
   display: flex;
   flex-direction: column;
   justify-content: ${justify};
@@ -16,7 +16,7 @@ export const Column = (justify = 'center', align = 'center') => css`
 `;
 
 /** 스타일 스크롤바 */
-export const ScrollBar = css`
+const ScrollBar = css`
   ::-webkit-scrollbar {
     width: 1rem;
   }
@@ -31,3 +31,15 @@ export const ScrollBar = css`
     border-radius: 0.5rem;
   }
 `;
+const hideScrollbarStyle = css`
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export {
+  Flex, Column, ScrollBar, hideScrollbarStyle,
+};

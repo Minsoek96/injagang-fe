@@ -63,20 +63,16 @@ function FeedBackItems({
   const userEditConfirm = () => {
     setModal({
       onAction: openReadOnly,
-      contents: {
-        title: '경고',
-        message: '정말 피드백 수정을 원하시나요?',
-      },
+      title: '경고',
+      message: '정말 피드백 수정을 원하시나요?',
     });
   };
 
   const userDeleteConfirm = () => {
     setModal({
       onAction: () => handleDeleteFeedBack(feedbackId),
-      contents: {
-        title: '경고',
-        message: '정말 피드백 삭제를 원하시나요?',
-      },
+      title: '경고',
+      message: '정말 피드백 삭제를 원하시나요?',
     });
   };
   return (

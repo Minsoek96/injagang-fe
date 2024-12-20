@@ -80,10 +80,8 @@ describe('useDragCorrection', () => {
       });
 
       expect(mockSetModal).toHaveBeenCalledWith({
-        contents: {
-          title: MODAL_MESSAGES.WARNING,
-          message: ERROR_MESSAGES.DUPLICATION_TEXT,
-        },
+        title: MODAL_MESSAGES.WARNING,
+        message: ERROR_MESSAGES.DUPLICATION_TEXT,
       });
     });
   });

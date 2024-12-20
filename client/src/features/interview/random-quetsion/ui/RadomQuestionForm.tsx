@@ -5,15 +5,16 @@ import { useForm } from 'react-hook-form';
 import { InputField, MainButton } from '@/src/shared/ui';
 import { keys } from '@/src/shared/utils';
 import { RandomQuestionType } from '@/src/features/interview/random-quetsion/model/type';
+import { Fragment } from 'react';
 
 type Props = {
-    labels: {
-        key: string;
-        label: string;
-        type: string;
-    }[]
-    onSubmit : (data: RandomQuestionType) => void;
-}
+  labels: {
+    key: string;
+    label: string;
+    type: string;
+  }[];
+  onSubmit: (data: RandomQuestionType) => void;
+};
 
 function RadomQuestionForm({ labels, onSubmit }: Props) {
   const { register, handleSubmit } = useForm<RandomQuestionType>({
@@ -28,18 +29,22 @@ function RadomQuestionForm({ labels, onSubmit }: Props) {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {labels.map((field, index) => (
-        <div key={keys(field.key, index)}>
+        <Fragment key={keys(field.key, index)}>
           <InputField
             label={field.label}
             type={field.type}
             {...register(field.key as keyof RandomQuestionType)}
           />
-        </div>
+        </Fragment>
       ))}
       <MainButton
         type="submit"
-        label="셋팅완료"
-        sx={{ backgroundColor: '#ff8800', fontSize: '1.8rem' }}
+        label="질문 불러오기"
+        sx={{
+          backgroundColor: '#ff8800',
+          fontSize: '1.8rem',
+          marginTop: '1rem',
+        }}
       />
     </Form>
   );
@@ -56,4 +61,8 @@ const Form = styled.form`
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.primary};
   box-shadow: 0 4px 8px rgba(14, 13, 13, 0.2);
+
+  label {
+    color: ${(prop) => prop.theme.colors.text}
+  }
 `;

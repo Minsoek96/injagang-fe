@@ -45,6 +45,7 @@ const S = {
   `,
 
   answerContainer: styled.div`
+    letter-spacing: 1.25px;
     line-height: 1.6;
     > span {
       color: ${(props) => props.theme.colors.signatureColor};

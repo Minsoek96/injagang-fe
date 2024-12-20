@@ -1,2 +1,1 @@
-export { default as BoardList } from './BoardList';
-export { default as BoardListHead } from './BoardListHead';
+export { default as BoardListLayout } from './ui/list-layout/BoardListLayout';

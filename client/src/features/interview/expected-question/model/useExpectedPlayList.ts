@@ -25,10 +25,8 @@ const useExpetedPlayList = () => {
     (text: string) => {
       if (text === '') {
         setModal({
-          contents: {
-            title: MODAL_MESSAGES.WARNING,
-            message: ERROR_MESSAGES.FILL_BLANKS,
-          },
+          title: MODAL_MESSAGES.WARNING,
+          message: ERROR_MESSAGES.FILL_BLANKS,
         });
         return;
       }
@@ -46,10 +44,8 @@ const useExpetedPlayList = () => {
   const handleSubmit = useCallback(() => {
     if (selectedType === 'ALL') {
       setModal({
-        contents: {
-          title: MODAL_MESSAGES.WARNING,
-          message: ERROR_MESSAGES.DOESN_T_TYPE,
-        },
+        title: MODAL_MESSAGES.WARNING,
+        message: ERROR_MESSAGES.DOESN_T_TYPE,
       });
       return;
     }

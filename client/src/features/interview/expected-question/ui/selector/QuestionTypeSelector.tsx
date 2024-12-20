@@ -23,8 +23,8 @@ interface IQuestionSelectorProps {
 function QuestionTypeSelector({ onReset }: IQuestionSelectorProps) {
   const { selectedType, setSelectedType } = useQuestionStore();
   const onChangeType = (type: interviewType.QuestionType | string) => {
-    setSelectedType(type);
     onReset();
+    setSelectedType(type);
   };
   return (
     <Container>

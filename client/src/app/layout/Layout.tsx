@@ -2,10 +2,11 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 
-import { Header } from '@/src/widgets';
+import { Header } from '@/src/widgets/header';
+import { AuthGuard } from '@/src/features/guard';
 
-import { RenderToast, RenderModal, HeadMeta } from '../components';
-import { ReactQueryProvider, StyledProvider, AuthGard } from '../providers';
+import { RenderToast, RenderModal, HeadMeta } from '../ui';
+import { ReactQueryProvider, StyledProvider } from '../providers';
 
 interface LayoutProps {
   children: ReactNode;
@@ -23,12 +24,12 @@ function Layout({ children }: LayoutProps) {
     <StyledProvider>
       <HeadMeta />
       <ReactQueryProvider>
-        <AuthGard>
+        <AuthGuard>
           <LayoutContainer>
             {!isBlockPath && <Header />}
             <MainContent>{children}</MainContent>
           </LayoutContainer>
-        </AuthGard>
+        </AuthGuard>
         <RenderToast />
         <RenderModal />
       </ReactQueryProvider>
@@ -48,7 +49,7 @@ const MainContent = styled.main`
   flex: 1;
   width: 100%;
   max-width: 135rem;
-  padding: 3rem;
+  padding: 2.5rem 1.25rem;
   margin: 0 auto;
   margin-top: 6.5rem;
 `;

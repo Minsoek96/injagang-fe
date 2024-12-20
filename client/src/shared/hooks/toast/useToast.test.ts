@@ -25,7 +25,7 @@ describe('useToast 훅', () => {
         id: uniqueId,
         mode: 'Info',
         message: '',
-        duration: 3000,
+        duration: 2000,
         startTime: expect.any(Number),
       };
 

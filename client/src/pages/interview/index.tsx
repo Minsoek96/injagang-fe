@@ -9,35 +9,43 @@ import {
   useRecordInfoStore,
 } from '@/src/entities/interview_question';
 
-import { Container, StepProgressBar } from '@/src/shared/ui';
+import { Container, RunningLoader, StepProgressBar } from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
-import { ExpectedQuestionLayout } from '@/src/widgets/interview';
+import {
+  InterviewMenual,
+  ExpectedQuestionLayout,
+} from '@/src/widgets/interview';
 
 import InterviewSliderButtons from './InterviewSliderButtons';
-import InterviewMenual from './InterviewMenual';
 
 const InterViewRandomSetting = dynamic(
-  () => import('@/src/features/interview/random-quetsion/ui/InterViewRandomSetting'),
-  {
-    ssr: false,
-  },
-);
-
-const InterViewRecordSetting = dynamic(
   () =>
     import(
-      '@/src/features/interview-record/video-settings/InterviewRecordSetting'
+      '@/src/features/interview/random-quetsion/ui/InterViewRandomSetting'
     ),
   {
     ssr: false,
   },
 );
 
-const InterviewRecord = dynamic(
-  () => import('@/src/features/interview-record/InterviewRecord'),
+const InterViewRecordSetting = dynamic(
+  () => import('@/src/features/interview/setting/ui/InterviewRecordSetting'),
   {
     ssr: false,
+  },
+);
+
+const InterviewFlow = dynamic(
+  () => import('@/src/widgets/interview/ui/interview-flow/InterviewFlow'),
+  {
+    ssr: false,
+    loading: () => (
+      <>
+        <RunningLoader />
+        <p>환경 설정을 적용 중 입니다.</p>
+      </>
+    ),
   },
 );
 
@@ -53,7 +61,7 @@ function Interview() {
   const renderComponent = [
     {
       render: <InterviewMenual />,
-      subTitle: '면접영상촬영시작',
+      subTitle: 'NextStage => (면접 설정)',
       title: '면접 대기',
       rule: null,
       id: 'Step_01',
@@ -67,9 +75,7 @@ function Interview() {
     },
     {
       render: <InterViewRandomSetting />,
-      subTitle: userPlayList.length
-        ? 'Next Step...'
-        : '질문 설정은 필수...',
+      subTitle: userPlayList.length ? 'Next Step...' : '질문 설정은 필수...',
       title: '랜덤 질문 선택',
       rule: !!userPlayList.length,
       id: 'Step_03',
@@ -82,7 +88,7 @@ function Interview() {
       id: 'Step_04',
     },
     {
-      render: <InterviewRecord />,
+      render: <InterviewFlow />,
       subTitle: '면접 준비 완료',
       title: '영상 촬영',
       rule: currentStep === 5,

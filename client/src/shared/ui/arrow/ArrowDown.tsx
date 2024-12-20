@@ -23,9 +23,8 @@ const bounce = keyframes`
 `;
 
 const ArrowContainer = styled.div`
-  position: fixed;
   ${styleMixin.Flex()};
-  margin-top: 5rem;
+  margin-top: 2rem;
   left: 50%;
   transform: translateX(-50%);
   animation: ${bounce} 2s infinite;

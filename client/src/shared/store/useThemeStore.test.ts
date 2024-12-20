@@ -8,7 +8,7 @@ describe('useThemeStore 훅', () => {
   context('토글 버튼이 OFF 일때', () => {
     it('isDark가 true를 반환한다.', () => {
       const { isDark } = useThemeStore.getState();
-      expect(isDark).toBe(true);
+      expect(isDark).toBe(false);
     });
 
     context('changeThemeMode에 boolean값을 전달하면', () => {

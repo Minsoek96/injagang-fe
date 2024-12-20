@@ -16,14 +16,20 @@ const useMediaRecord = ({
   const streamRef = useRef<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [recordStatus, setRecordStatus] = useState<'pending' | 'record' | 'pause'>('pending');
+  const [recordStatus, setRecordStatus] = useState<
+    'pending' | 'record' | 'pause'
+  >('pending');
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
 
   /** 사용자 디바이스 정보를 조회. */
   const getDevices = useCallback(async () => {
     const devices = await navigator.mediaDevices.enumerateDevices();
-    const audioDevices = devices.filter((device) => device.kind === 'audioinput');
-    const videoDevices = devices.filter((device) => device.kind === 'videoinput');
+    const audioDevices = devices.filter(
+      (device) => device.kind === 'audioinput',
+    );
+    const videoDevices = devices.filter(
+      (device) => device.kind === 'videoinput',
+    );
     return { audioDevices, videoDevices };
   }, []);
 
@@ -67,11 +73,33 @@ const useMediaRecord = ({
     }
   }, []);
 
+  /** 지원하는 MIME 타입을 확인하고 반환 */
+  const getSupportedMimeType = (): string => {
+    const types = [
+      'video/webm;codecs=vp9,opus',
+      'video/webm;codecs=vp8,opus',
+      'video/webm;codecs=h264,opus',
+      'video/webm',
+      'video/mp4',
+    ];
+
+    const supportedType = types.find((type) =>
+      MediaRecorder.isTypeSupported(type));
+
+    if (!supportedType) {
+      throw new Error('지원되는 미디어 타입이 없습니다.');
+    }
+
+    return supportedType;
+  };
   /** 녹화촬영을 시작한다. */
   const handleRecord = useCallback(async () => {
     try {
       const stream = (await getUserAccess()) as MediaStream;
-      const mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+      const mimeType = getSupportedMimeType();
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType,
+      });
       mediaRecorderRef.current = mediaRecorder;
       mediaRecorder.ondataavailable = handleDataAvailable;
       mediaRecorder.start();
