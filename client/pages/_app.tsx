@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Router } from 'next/router';
 import type { AppProps } from 'next/app';
@@ -16,19 +16,23 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 
 function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
     const handleStart = () => {
-      timeoutId = setTimeout(() => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      timeoutRef.current = setTimeout(() => {
         setLoading(true);
       }, LOADING_DELAY);
     };
 
     const handleComplete = () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
       }
       setLoading(false);
     };
@@ -38,8 +42,8 @@ function App({ Component, pageProps }: AppProps) {
     Router.events.on('routeChangeError', handleComplete);
 
     return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
       Router.events.off('routeChangeStart', handleStart);
       Router.events.off('routeChangeComplete', handleComplete);
