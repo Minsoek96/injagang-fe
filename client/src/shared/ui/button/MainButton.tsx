@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, CSSProperties } from 'react';
 
 import styled from 'styled-components';
 
-import { V } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 import { VariantProps, buttonVariants } from './variants';
 
@@ -48,12 +48,9 @@ const CustomBtn = styled.button.attrs<CustomProps>((props) => ({
   type: props.type || 'button',
   role: 'button',
 }))<CustomProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${styleMixin.Flex()}
   padding: ${V.smPadding};
   border-radius: 0.5rem;
-  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
 
