@@ -2,7 +2,7 @@ const defaultTheme = {
   colors: {
     bodyColor: '#F0F2F5',
     primary: '#FDFDFD',
-    signatureColor: '#ff8800',
+    signatureColor: '#0F766E',
     button: '#FDFDFD',
     logo: '#000000',
     text: '#0f1419',
@@ -10,7 +10,7 @@ const defaultTheme = {
     highlight: '#fff',
 
     svgColor: '#666666',
-    svgOnColor: '#ff8800',
+    svgOnColor: '#0F766E',
     mainLine: 'rgb(219, 220, 223)',
     mainHover: 'rgba(0, 0, 0, 0.1)',
     textArea: '#F0F2F5',
@@ -20,7 +20,7 @@ const defaultTheme = {
     dropBoxColor: '#2e2e2e',
     brandColor: '#e00000',
     boardText: '#0f1419',
-    highlightColor: '#ff8800',
+    highlightColor: '#0f766d80',
   },
 };
 export default defaultTheme;

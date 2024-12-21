@@ -152,6 +152,7 @@ const RecordingControls = styled.div`
   button {
     font-size: 1.8rem;
     background-color: ${(props) => props.theme.colors.signatureColor};
+    color: white;
   }
 
   @media screen and (max-width: ${V.mediaMobile}) {

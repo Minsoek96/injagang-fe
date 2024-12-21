@@ -31,6 +31,6 @@ const FeedBackViewBtns = styled.div`
   gap: 0.3rem;
   @media screen and (max-width: ${V.mediaMobile}) {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 `;

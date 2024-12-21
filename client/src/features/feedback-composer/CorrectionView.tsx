@@ -27,7 +27,7 @@ const CorrectionContainer = styled.div`
 
 const CorrectionTitle = styled.span`
   font-weight: bold;
-  color: red;
+  color: #ff0000ae;
   text-align: left;
 `;
 
