@@ -22,6 +22,6 @@ describe('CorrectionView', () => {
     renderComponent('');
     const searchAnswer = screen.queryByText(/첨삭된 내용이 없습니다/);
     expect(searchAnswer).toBeInTheDocument();
-    expect(searchAnswer).toHaveStyle({ color: 'red', fontWeight: 'bold' });
+    expect(searchAnswer).toHaveStyle({ color: '#ff0000ae', fontWeight: 'bold' });
   });
 });

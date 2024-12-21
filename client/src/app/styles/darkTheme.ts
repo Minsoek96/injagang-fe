@@ -23,6 +23,9 @@ const darkTheme: Theme = {
     brandColor: '#e00000',
     boardText: '#B8B8B8',
     highlightColor: 'rgba(255, 192, 128, 1)',
+
+    signatureText: '#fdfdfd',
+    signatureHover: '#FF9933',
   },
 };
 

@@ -36,6 +36,7 @@ export default function PasswordForm({ onSubmit, labels }: Props) {
       <MainButton
         label="변경"
         type="submit"
+        variant="signature"
         sx={{ width: '100%', height: '4rem' }}
       />
     </S.Form>

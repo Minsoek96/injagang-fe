@@ -21,8 +21,8 @@ const MarkdownEditor = dynamic(
 );
 
 type Props = {
-    onSubmit: (data: boardType.IWriteQnaBoard) => void;
-}
+  onSubmit: (data: boardType.IWriteQnaBoard) => void;
+};
 
 /**
  * QuestionCreateForm 컴포넌트는 자소서 첨부 게시물을 작성.
@@ -31,7 +31,7 @@ type Props = {
  * - 첨부 자소서 출력
  * @param onSubmit - 폼 제출 시 호출되는 함수
  */
-function QuestionCreateForm({ onSubmit }:Props) {
+function QuestionCreateForm({ onSubmit }: Props) {
   const {
     register, handleSubmit, setValue, watch, control,
   } = useForm<boardType.IWriteQnaBoard>({
@@ -65,11 +65,11 @@ function QuestionCreateForm({ onSubmit }:Props) {
         <MainButton
           label="작성완료"
           onClick={handleSubmit(onSubmit)}
+          variant="signature"
           sx={{
             width: '100%',
             minHeight: '4rem',
             fontSize: '1.6rem',
-            backgroundColor: '#ff8800',
           }}
         />
       </Container.ArticleCard>

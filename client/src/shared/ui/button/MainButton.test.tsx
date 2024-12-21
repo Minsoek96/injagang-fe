@@ -53,7 +53,7 @@ describe('MainButton', () => {
       const afterButton = screen.getByRole('button');
       expect(afterButton).toHaveStyleRule(
         'background-color',
-        defaultTheme.colors.brandColor,
+        defaultTheme.colors.signatureColor,
       );
     });
   });

@@ -94,11 +94,16 @@ export default function InterviewRecordingQueue({
       <RecordingControls>
         {recordStatus === 'pending' ? (
           <>
-            <MainButton onClick={startInterviewRecord} label="면접녹화시작" />
+            <MainButton
+              onClick={startInterviewRecord}
+              label="면접녹화시작"
+              variant="signature"
+            />
             <MainButton
               onClick={() => setInterviewMode('result')}
               label="결과보기"
               disabled={!storeChunks.length}
+              variant="signature"
             />
           </>
         ) : (

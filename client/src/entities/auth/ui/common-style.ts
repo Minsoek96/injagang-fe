@@ -38,5 +38,9 @@ export const S = {
 
   Form: styled.form`
     width: 100%;
+
+    label {
+      color: ${(props) => props.theme.colors.lightText};
+    }
   `,
 };

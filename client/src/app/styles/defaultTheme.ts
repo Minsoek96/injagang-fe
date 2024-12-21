@@ -21,6 +21,9 @@ const defaultTheme = {
     brandColor: '#e00000',
     boardText: '#0f1419',
     highlightColor: '#0f766d80',
+
+    signatureText: '#FFFFFF',
+    signatureHover: '#29a197',
   },
 };
 export default defaultTheme;

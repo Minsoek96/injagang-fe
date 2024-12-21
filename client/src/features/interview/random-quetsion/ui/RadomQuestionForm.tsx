@@ -40,6 +40,8 @@ function RadomQuestionForm({ labels, onSubmit }: Props) {
       <MainButton
         type="submit"
         label="질문 불러오기"
+        variant="signature"
+        sx={{ fontSize: '1.8rem', marginTop: '1rem' }}
       />
     </Form>
   );
@@ -59,11 +61,5 @@ const Form = styled.form`
 
   label {
     color: ${(prop) => prop.theme.colors.text}
-  }
-  button {
-    color: white;
-    background-color: ${(props) => props.theme.colors.signatureColor};
-    font-size: 1.8rem;
-    margin-top: 1rem;
   }
 `;

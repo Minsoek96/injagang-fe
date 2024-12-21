@@ -62,14 +62,11 @@ export default function LoginForm({
         </FieldWrapper>
       ))}
       <ButtonGroup>
-        <MainButton type="submit" label="로그인" />
+        <MainButton type="submit" label="로그인" variant="signature" />
         <MainButton
           onClick={navigateToSignUp}
           label="회원가입"
-          sx={{
-            border: '1px solid #f0f0f0',
-            color: '#666666',
-          }}
+          variant="signature"
         />
       </ButtonGroup>
     </Form>
@@ -113,12 +110,5 @@ const ButtonGroup = styled.div`
   button {
     width: 100%;
     height: 3.5rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-
-    &:first-child {
-      background-color: ${(props) => props.theme.colors.signatureColor};
-      color: white;
-    }
   }
 `;
