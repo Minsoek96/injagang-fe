@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { TbMoodEmpty } from "react-icons/tb";
+
 import { styleMixin, V } from '@/src/shared/styles';
 
 import { useCoverLetterStore } from '@/src/entities/coverLetter';
@@ -16,8 +18,11 @@ function CoverLetterPreView() {
   if (!selectedCoverLetter.questions.length) {
     return (
       <CoverLetterPreViewContainer>
-        <p>선택된 리스트가 없습니다.</p>
-        <p>리스트를 선택해주세요.</p>
+        <EmptyContainer>
+          <TbMoodEmpty />
+          <EmptyTitle>선택된 자소서가 없습니다.</EmptyTitle>
+          <EmptyText>자소서를 선택해주세요.</EmptyText>
+        </EmptyContainer>
       </CoverLetterPreViewContainer>
     );
   }
@@ -37,20 +42,38 @@ function CoverLetterPreView() {
 export default CoverLetterPreView;
 
 const CoverLetterPreViewContainer = styled.ul`
-  ${styleMixin.Column('center', 'flex-start')}
-  ${styleMixin.ScrollBar}
-  font-size: 1.8rem;
+  ${styleMixin.Column('flex-start', 'flex-start')}
   width: 100%;
-  height: 25rem;
-  border-radius: 5px;
-  padding: ${V.lgPadding};
-  margin: 1.5rem auto;
-  overflow-x: hidden;
-  border: 1px solid ${(props) => props.theme.colors.mainLine};
+  height: 40rem;
+  background: ${(props) => props.theme.colors.primary};
+  border-radius: 1.2rem;
   box-shadow: ${V.boxShadow1};
-  line-height: 1.4;
-
   @media screen and (max-width: ${V.mediaMobile}) {
-    font-size: 1.6rem;
+    height: 20rem;
   }
+`;
+
+const EmptyContainer = styled.div`
+  ${styleMixin.Column('center', 'center')}
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+
+  svg {
+    ${styleMixin.Flex()}
+    font-size: 7rem;
+    margin-bottom: 1.6rem;
+    color: ${props => props.theme.colors.emptyGray};
+  }
+`;
+
+const EmptyTitle = styled.p`
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+`;
+
+const EmptyText = styled.p`
+  font-size: 1.4rem;
 `;

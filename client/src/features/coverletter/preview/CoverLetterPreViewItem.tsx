@@ -1,10 +1,6 @@
 import styled from 'styled-components';
+import { styleMixin, V } from '@/src/shared/styles';
 
-/**
- * CoverLetterItems 유저가 선택한 자소서의 질문 아이템
- * @param idx - 질문 넘버
- * @param question - 질문 제목
- */
 function CoverLetterPreViewItem({
   idx,
   question,
@@ -13,17 +9,43 @@ function CoverLetterPreViewItem({
   question: string;
 }) {
   return (
-    <CoverLetterTitle>
-      {idx + 1}
-      .
-      {question}
-    </CoverLetterTitle>
+    <QuestionContainer>
+      <QuestionNumber>{idx + 1}</QuestionNumber>
+      <QuestionTitle>{question}</QuestionTitle>
+    </QuestionContainer>
   );
 }
 
 export default CoverLetterPreViewItem;
 
-const CoverLetterTitle = styled.li`
-  margin-top: 1.2rem;
+const QuestionContainer = styled.li`
+  ${styleMixin.Flex('flex-start', 'flex-start')}
+  width: 100%;
+  padding: 1.6rem;
+  gap: 1.2rem;
+  background: ${props => props.theme.colors.primary};
+  border-bottom: 1px solid ${props => props.theme.colors.mainLine};
+  border-top-right-radius: 1.2rem;
+  border-top-left-radius: 1.2rem;
+  @media screen and (max-width: ${V.mediaMobile}) {
+    padding: 1rem;
+  }
+`;
+
+const QuestionNumber = styled.span`
+  ${styleMixin.Flex()}
+  min-width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: ${props => props.theme.colors.signatureColor};
+  background: ${props => props.theme.colors.highlightColor};
+  border-radius: 6px;
+`;
+
+const QuestionTitle = styled.p`
+  font-size: 1.6rem;
+  font-weight: 500;
   line-height: 1.4;
+  word-break: keep-all;
 `;
