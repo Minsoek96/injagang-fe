@@ -24,6 +24,8 @@ const defaultTheme = {
 
     signatureText: '#FFFFFF',
     signatureHover: '#29a197',
+
+    emptyGray: '#666666',
   },
 };
 export default defaultTheme;

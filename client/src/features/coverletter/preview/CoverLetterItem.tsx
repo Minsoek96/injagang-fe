@@ -1,34 +1,22 @@
-import { memo } from 'react';
+import styled from "styled-components";
 
-import styled from 'styled-components';
-
-import { BiEdit } from 'react-icons/bi';
+import { BiEditAlt, BiFile } from "react-icons/bi";
 
 import {
   coverLetterType,
   useCoverLetterStore,
-} from '@/src/entities/coverLetter';
+} from "@/src/entities/coverLetter";
 
-import { styleMixin, V } from '@/src/shared/styles';
-import usePageRouter from '@/src/shared/hooks/router/usePageRouter';
+import { styleMixin, V } from "@/src/shared/styles";
+import usePageRouter from "@/src/shared/hooks/router/usePageRouter";
+import { HideSvg } from "@/src/shared/ui";
 
 interface CoverLetterItemsProps {
   item: coverLetterType.ICoverLetters;
   selectedCoverLetter: coverLetterType.ICoverLetters;
 }
 
-/**
- * CoverLetterItem 유저의 자소서 목록 리스트 아이템
- * - 선택한 자소서를 미리보기에 등록
- * - 선택한 제목의 자소서 정보 상세보기
- *
- * @param item - 질문 넘버
- * @param selectedCoverLetter - 현재 유저가 선택한 자소
- */
-function CoverLetterItem({
-  item,
-  selectedCoverLetter,
-}: CoverLetterItemsProps) {
+function CoverLetterItem({ item, selectedCoverLetter }: CoverLetterItemsProps) {
   const { moveCoverLetterEditPage } = usePageRouter();
   const { setCoverLetter } = useCoverLetterStore();
 
@@ -41,48 +29,87 @@ function CoverLetterItem({
 
   return (
     <CoverLetterItemsContainer $isActive={isSelectedItem}>
-      <div onClick={() => changeSeleted(item)}>{item.title}</div>
-      <HideSvg
-        onClick={() => moveCoverLetterEditPage(item.essayId)}
-        role="button"
-      >
-        <BiEdit />
-        <span>상세보기</span>
-      </HideSvg>
+      <ItemContainer onClick={() => changeSeleted(item)}>
+        <FileIconWrapper>
+          <BiFile />
+        </FileIconWrapper>
+        <ItemWrapper>
+          <ItemTitle>{item.title}</ItemTitle>
+          <ItemInfo>
+            <span>{item.questions.length}</span>
+            개의 문항이 존재합니다.
+          </ItemInfo>
+        </ItemWrapper>
+      </ItemContainer>
+      {isSelectedItem && (
+        <HideSvg
+          onClick={() => moveCoverLetterEditPage(item.essayId)}
+          Logo={<BiEditAlt />}
+          label="상세보기"
+          sx={{ fontSize: "2.5rem", fontWeight: 500 }}
+        />
+      )}
     </CoverLetterItemsContainer>
   );
 }
 
-export default memo(CoverLetterItem);
+export default CoverLetterItem;
 
 const CoverLetterItemsContainer = styled.li<{ $isActive: boolean }>`
-  ${styleMixin.Flex()}
-  gap: 1.3rem;
-  margin-top: ${V.mdMargin};
-  font-size: 2rem;
-  font-weight: 600;
-  transform: ${({ $isActive }) => ($isActive ? 'scale(1.5)' : 'scale(1)')};
-  transition: all ease-in 0.2s;
+  ${styleMixin.Flex("space-between", "center")}
+  padding-block: 1.2rem 1.6rem;
   width: 100%;
-  opacity: ${({ $isActive }) => ($isActive ? '1' : '0.2')};
-  border-radius: 8px;
+  background-color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.highlightColor : "transparent"};
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.text : theme.colors.emptyGray};
   cursor: pointer;
 
+  &:hover {
+    background-color: ${({ $isActive, theme }) =>
+      $isActive ? theme.colors.highlightColor : theme.colors.mainHover};
+  }
+
   @media screen and (max-width: ${V.mediaMobile}) {
-    font-size: 1.5rem;
+    padding: 1rem 0.8rem;
   }
 `;
 
-const HideSvg = styled.div`
-  ${styleMixin.Flex()}
-  color: ${(props) => props.theme.colors.brandColor};
+const ItemContainer = styled.div`
+  ${styleMixin.Flex("flex-start", "center")};
+  gap: 1.2rem;
+  flex: 1;
+  min-width: 0;
+`;
+
+const FileIconWrapper = styled.div`
+  ${styleMixin.Flex()};
+  font-size: 2.8rem;
+  flex-shrink: 0;
+`;
+
+const ItemWrapper = styled.div`
+  ${styleMixin.Column("", "flex-start")}
+  gap: 0.4rem;
+  min-width: 0;
+`;
+
+const ItemTitle = styled.div`
+  font-size: 1.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const ItemInfo = styled.div`
+  font-size: 1.4rem;
+
   span {
-    display: none;
-  }
-  &:hover {
-    span {
-      display: block;
-      font-size: 1rem;
-    }
+    font-weight: 500;
+    color: ${(props) => props.theme.colors.signatureColor};
+    margin-right: 0.4rem;
   }
 `;

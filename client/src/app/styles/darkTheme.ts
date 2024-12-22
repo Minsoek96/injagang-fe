@@ -26,6 +26,8 @@ const darkTheme: Theme = {
 
     signatureText: '#fdfdfd',
     signatureHover: '#FF9933',
+
+    emptyGray: '#666666',
   },
 };
 

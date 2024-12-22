@@ -29,6 +29,5 @@ function CoverLetterPage() {
 export default CoverLetterPage;
 
 const CoverLetterStyle = styled.div`
-  ${styleMixin.Column('flex-start')}
   width: 100%;
 `;

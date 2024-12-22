@@ -53,6 +53,7 @@ const CustomBtn = styled.button.attrs<CustomProps>((props) => ({
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.3s;
+  font-weight: 600;
 
   ${({ $variant }) => buttonVariants[$variant]}
 
