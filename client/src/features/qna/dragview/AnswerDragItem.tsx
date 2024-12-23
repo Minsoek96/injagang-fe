@@ -1,7 +1,6 @@
 import { memo } from 'react';
 
-import { boardType } from '@/src/entities/qnaboard';
-import { S } from '@/src/entities/coverLetter';
+import { boardType, S } from '@/src/entities/qnaboard';
 
 import DraggableAnswerText from './DraggableAnswer';
 import DraggedAnswer from './DraggedAnswer';

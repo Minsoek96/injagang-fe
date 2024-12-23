@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
-import { coverLetterQueries, S } from '@/src/entities/coverLetter';
+import { coverLetterQueries } from '@/src/entities/coverLetter';
+import { S } from '@/src/entities/qnaboard';
 
 import CoverLetterItem from './CoverLetterItem';
 
