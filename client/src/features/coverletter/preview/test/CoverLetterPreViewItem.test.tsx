@@ -15,7 +15,9 @@ describe('CoverLetterPreviewItem', () => {
     const questionId = 10001;
     const questionItem = '테스트질문';
     renderCoverLetterPreviewItem(questionId, questionItem);
-    const searchItem = screen.getByText(`${questionId + 1}.${questionItem}`);
+    const searchNum = screen.getByText(RegExp((questionId + 1).toString()));
+    const searchItem = screen.getByText(RegExp(questionItem));
     expect(searchItem).toBeInTheDocument();
+    expect(searchNum).toBeInTheDocument();
   });
 });

@@ -20,8 +20,8 @@ describe('CoverLetterPreview', () => {
   context('선택된 자소서 리스트가 없는 경우', () => {
     it('안내 메시지를 렌더링한다.', () => {
       renderCoverLetterPreview();
-      const emptyText = screen.getByText(/선택된 리스트가 없습니다./);
-      const emptysubText = screen.getByText(/리스트를 선택해주세요./);
+      const emptyText = screen.getByText(/선택된 자소서가 없습니다./);
+      const emptysubText = screen.getByText(/자소서를 선택해주세요/);
       expect(emptyText).toBeInTheDocument();
       expect(emptysubText).toBeInTheDocument();
     });

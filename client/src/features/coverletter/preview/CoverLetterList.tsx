@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-import { GoFile } from "react-icons/go";
+import { GoFile } from 'react-icons/go';
 
-import { styleMixin, V } from '@/src/shared/styles';
+import { styleMixin } from '@/src/shared/styles';
 import {
   useCoverLetterStore,
   coverLetterQueries,
+  PreviewStyle as S,
 } from '@/src/entities/coverLetter';
 
 import CoverLetterItem from './CoverLetterItem';
@@ -20,18 +21,18 @@ function CoverLetterList() {
 
   if (!coverLetters?.length) {
     return (
-      <CoverLetterListContainer>
-        <EmptyContainer>
+      <S.container>
+        <S.emptyContainer>
           <GoFile />
-          <EmptyTitle>작성된 자소서가 없습니다</EmptyTitle>
-          <EmptyText>새로운 자기소개서를 작성해보세요</EmptyText>
-        </EmptyContainer>
-      </CoverLetterListContainer>
+          <S.emptyTitle>작성된 자소서가 없습니다.</S.emptyTitle>
+          <S.emptyText>새로운 자기소개서를 작성해보세요</S.emptyText>
+        </S.emptyContainer>
+      </S.container>
     );
   }
 
   return (
-    <CoverLetterListContainer>
+    <S.container>
       <ListHeader>
         <ListTitle>자기소개서 목록</ListTitle>
       </ListHeader>
@@ -44,23 +45,11 @@ function CoverLetterList() {
           />
         ))}
       </ListContent>
-    </CoverLetterListContainer>
+    </S.container>
   );
 }
 
 export default CoverLetterList;
-
-const CoverLetterListContainer = styled.div`
-  ${styleMixin.Column('flex-start', 'flex-start')}
-  width: 100%;
-  height: 40rem;
-  background: ${(props) => props.theme.colors.primary};
-  border-radius: 1.2rem;
-  box-shadow: ${V.boxShadow1};
-  @media screen and (max-width: ${V.mediaMobile}) {
-    height: 20rem;
-  }
-`;
 
 const ListHeader = styled.div`
   width: 100%;
@@ -80,29 +69,4 @@ const ListContent = styled.ul`
   height: 100%;
   padding: 0.8rem;
   gap: 0.4rem;
-`;
-
-const EmptyContainer = styled.div`
-  ${styleMixin.Column('center', 'center')}
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-  text-align: center;
-
-  svg {
-    ${styleMixin.Flex()}
-    font-size: 7rem;
-    margin-bottom: 1.6rem;
-    color: ${props => props.theme.colors.emptyGray};
-  }
-`;
-
-const EmptyTitle = styled.p`
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
-`;
-
-const EmptyText = styled.p`
-  font-size: 1.4rem;
 `;

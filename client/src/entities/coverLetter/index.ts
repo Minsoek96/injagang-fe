@@ -6,4 +6,4 @@ export * as coverLetterType from './model/type';
 export { default as useCoverLetterStore } from './model/useCoverLetterStore';
 export { default as CoverLetterItem } from './ui/CoverLetterItem';
 export * as coverLetterModel from './model/schema';
-export * from './ui/common-style';
+export { default as PreviewStyle } from './ui/preview-style';

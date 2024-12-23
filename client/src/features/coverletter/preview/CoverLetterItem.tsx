@@ -1,15 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { BiEditAlt, BiFile } from "react-icons/bi";
+import { BiEditAlt, BiFile } from 'react-icons/bi';
 
 import {
   coverLetterType,
   useCoverLetterStore,
-} from "@/src/entities/coverLetter";
+} from '@/src/entities/coverLetter';
 
-import { styleMixin, V } from "@/src/shared/styles";
-import usePageRouter from "@/src/shared/hooks/router/usePageRouter";
-import { HideSvg } from "@/src/shared/ui";
+import { styleMixin, V } from '@/src/shared/styles';
+import usePageRouter from '@/src/shared/hooks/router/usePageRouter';
+import { MainButton } from '@/src/shared/ui';
 
 interface CoverLetterItemsProps {
   item: coverLetterType.ICoverLetters;
@@ -42,11 +42,11 @@ function CoverLetterItem({ item, selectedCoverLetter }: CoverLetterItemsProps) {
         </ItemWrapper>
       </ItemContainer>
       {isSelectedItem && (
-        <HideSvg
+        <MainButton
           onClick={() => moveCoverLetterEditPage(item.essayId)}
-          Logo={<BiEditAlt />}
-          label="상세보기"
-          sx={{ fontSize: "2.5rem", fontWeight: 500 }}
+          label={<BiEditAlt />}
+          sx={{ fontSize: '2.5rem', fontWeight: 500, paddingRight: '.5rem' }}
+          variant="ghost"
         />
       )}
     </CoverLetterItemsContainer>
@@ -56,20 +56,20 @@ function CoverLetterItem({ item, selectedCoverLetter }: CoverLetterItemsProps) {
 export default CoverLetterItem;
 
 const CoverLetterItemsContainer = styled.li<{ $isActive: boolean }>`
-  ${styleMixin.Flex("space-between", "center")}
+  ${styleMixin.Flex('space-between', 'center')}
   padding-block: 1.2rem 1.6rem;
   width: 100%;
   background-color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.highlightColor : "transparent"};
+    ($isActive ? theme.colors.highlightColor : 'transparent')};
   border-radius: 12px;
   transition: all 0.3s ease;
   color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.text : theme.colors.emptyGray};
+    ($isActive ? theme.colors.text : theme.colors.emptyGray)};
   cursor: pointer;
 
   &:hover {
     background-color: ${({ $isActive, theme }) =>
-      $isActive ? theme.colors.highlightColor : theme.colors.mainHover};
+    ($isActive ? theme.colors.highlightColor : theme.colors.mainHover)};
   }
 
   @media screen and (max-width: ${V.mediaMobile}) {
@@ -78,7 +78,7 @@ const CoverLetterItemsContainer = styled.li<{ $isActive: boolean }>`
 `;
 
 const ItemContainer = styled.div`
-  ${styleMixin.Flex("flex-start", "center")};
+  ${styleMixin.Flex('flex-start', 'center')};
   gap: 1.2rem;
   flex: 1;
   min-width: 0;
@@ -91,7 +91,7 @@ const FileIconWrapper = styled.div`
 `;
 
 const ItemWrapper = styled.div`
-  ${styleMixin.Column("", "flex-start")}
+  ${styleMixin.Column('', 'flex-start')}
   gap: 0.4rem;
   min-width: 0;
 `;

@@ -23,8 +23,8 @@ const QuestionContainer = styled.li`
   width: 100%;
   padding: 1.6rem;
   gap: 1.2rem;
-  background: ${props => props.theme.colors.primary};
-  border-bottom: 1px solid ${props => props.theme.colors.mainLine};
+  background: ${(props) => props.theme.colors.primary};
+  border-bottom: 1px solid ${(props) => props.theme.colors.mainLine};
   border-top-right-radius: 1.2rem;
   border-top-left-radius: 1.2rem;
   @media screen and (max-width: ${V.mediaMobile}) {
@@ -38,8 +38,8 @@ const QuestionNumber = styled.span`
   height: 2.4rem;
   font-size: 1.4rem;
   font-weight: 600;
-  color: ${props => props.theme.colors.signatureColor};
-  background: ${props => props.theme.colors.highlightColor};
+  color: ${(props) => props.theme.colors.signatureColor};
+  background: ${(props) => props.theme.colors.highlightColor};
   border-radius: 6px;
 `;
 

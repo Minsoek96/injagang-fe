@@ -21,7 +21,7 @@ describe('CoverLetter', () => {
           <CoverLetter />
         </TestProvider>,
       );
-      const searchTitle = screen.getByText(/나의 자소서 목록/);
+      const searchTitle = screen.getByText(/나의 자기소개서 목록/);
       expect(searchTitle).toBeInTheDocument();
     });
     it('자소서 작성 버튼이 렌더링 된다.', () => {
@@ -30,7 +30,7 @@ describe('CoverLetter', () => {
           <CoverLetter />
         </TestProvider>,
       );
-      const searchBtn = screen.getByText(/자소서 작성하기/);
+      const searchBtn = screen.getByText(/새로 작성하기/);
       expect(searchBtn).toBeInTheDocument();
     });
   });
@@ -43,7 +43,7 @@ describe('CoverLetter', () => {
           <CoverLetter />
         </TestProvider>,
       );
-      const searchBtn = screen.getByText(/자소서 작성하기/);
+      const searchBtn = screen.getByText(/새로 작성하기/);
       fireEvent.click(searchBtn);
       expect(push).toHaveBeenCalledWith('/coverLetter/new');
     });
