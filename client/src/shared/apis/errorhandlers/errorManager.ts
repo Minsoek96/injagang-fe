@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, isAxiosError } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 
 import { tokenReissue } from '@/src/shared/apis/errorhandlers/tokenReissue';
 import { ERROR_MESSAGES } from '@/src/shared/const';
@@ -39,10 +39,7 @@ const jwtExpired = async (originRequest: AxiosRequestConfig) => {
       await reRequest(originRequest);
     }
   } catch (error) {
-    if (isAxiosError(error)) {
-      const errorMessage = error.response?.data?.message;
-      errorMessage && unauthorized();
-    }
+    // errorManager처리 순환을 위한 캐치만
   }
 };
 

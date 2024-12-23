@@ -10,6 +10,7 @@ const reRequest = async (
   const requestWithRetry = {
     ...originRequest,
     retryFetch: originRequest.retryFetch || 0,
+    isRetrying: true,
   };
 
   try {

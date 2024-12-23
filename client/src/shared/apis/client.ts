@@ -34,7 +34,7 @@ API.interceptors.response.use(
 
     const { status, config } = originRequest;
     const errorMessage = originRequest.data.message;
-    if (status === 401) {
+    if (status === 401 && !config.isRetrying) {
       errorManager(errorMessage, config);
     }
     return Promise.reject(error);
