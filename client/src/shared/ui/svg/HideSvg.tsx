@@ -1,3 +1,4 @@
+import { V } from '@/src/shared/styles';
 import styled, { CSSProperties } from 'styled-components';
 
 type Props<T> = {
@@ -38,7 +39,7 @@ const HideSpan = styled.span`
   position: absolute;
   font-size: 1.6rem;
   top: -2rem;
-  left: 0;
+  left: 2rem;
   margin-top: 3rem;
   display: none;
   padding: 0.5em;
@@ -46,4 +47,8 @@ const HideSpan = styled.span`
   white-space: nowrap;
   transform: translateY(-100%);
   pointer-events: none;
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    left: -3rem;
+  }
 `;

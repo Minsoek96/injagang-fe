@@ -13,9 +13,7 @@ import {
   coverLetterType,
 } from '@/src/entities/coverLetter';
 
-import {
-  HideSvg, MainButton, UnInput,
-} from '@/src/shared/ui';
+import { HideSvg, MainButton, UnInput } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 import { getFirstErrorMessage } from '@/src/shared/utils/check/getFirstErrorMessage';
 import { useModal } from '@/src/shared/hooks';
@@ -37,10 +35,7 @@ type Props = {
  * @param onSubmit - 폼 제출 시 호출되는 함수
  */
 
-export default function CreateForm({
-  movePage,
-  onSubmit,
-}: Props) {
+export default function CreateForm({ movePage, onSubmit }: Props) {
   const { setModal } = useModal();
   const {
     register,
@@ -109,10 +104,10 @@ export default function CreateForm({
         <MainButton
           type="button"
           label="뒤로가기"
-          sx={{ fontSize: '1.7em' }}
+          variant="signature"
           onClick={movePage}
         />
-        <MainButton type="submit" label="작성완료" sx={{ fontSize: '1.7em' }} />
+        <MainButton type="submit" label="작성완료" variant="signature" />
       </ControllerBtns>
     </CoverLetterForm>
   );
@@ -125,12 +120,15 @@ const CoverLetterForm = styled.form`
 
 const ControllerBtns = styled.div`
   margin-top: 3rem;
-  font-size: 1rem;
   display: flex;
   justify-content: space-between;
   width: 100%;
 
-  @media screen and (max-width: ${V.mediaMobile}) {
-    font-size: 0.7rem;
+  button {
+    font-size: 1.8rem;
+
+    @media screen and (max-width: ${V.mediaMobile}) {
+      font-size: 1.6rem;
+    }
   }
 `;

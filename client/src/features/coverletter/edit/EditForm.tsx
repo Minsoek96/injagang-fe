@@ -112,16 +112,17 @@ export default function EditForm({
         <MainButton
           type="button"
           label="뒤로가기"
-          sx={{ fontSize: '1.7em' }}
+          variant="signature"
           onClick={movePage}
         />
         <MainButton
           type="button"
           label="삭제하기"
-          sx={{ fontSize: '1.7em' }}
+          variant="signature"
+          sx={{ fontSize: '1.7rem' }}
           onClick={onDelete}
         />
-        <MainButton type="submit" label="수정완료" sx={{ fontSize: '1.7em' }} />
+        <MainButton type="submit" label="수정완료" variant="signature" />
       </ControllerBtns>
     </CoverLetterForm>
   );
@@ -134,12 +135,15 @@ const CoverLetterForm = styled.form`
 
 const ControllerBtns = styled.div`
   margin-top: 3rem;
-  font-size: 1rem;
   display: flex;
   justify-content: space-between;
   width: 100%;
 
-  @media screen and (max-width: ${V.mediaMobile}) {
-    font-size: 0.7rem;
+  button {
+    font-size: 1.8rem;
+
+    @media screen and (max-width: ${V.mediaMobile}) {
+      font-size: 1.6rem;
+    }
   }
 `;

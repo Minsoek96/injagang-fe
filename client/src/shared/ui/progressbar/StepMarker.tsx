@@ -67,7 +67,7 @@ const Marker = styled.div<StepProps>`
   }};
   color: ${(props) => props.theme.colors.text};
   animation: ${(props) =>
-    props.$active && glow(props.theme.colors.highlightColor)}
+    props.$active && glow(props.theme.colors.highlight)}
     1s infinite alternate;
 
   @media screen and (max-width: ${V.mediaMobile}) {
