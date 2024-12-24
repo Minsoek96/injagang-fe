@@ -58,7 +58,7 @@ const ListHeader = styled.div`
 `;
 
 const ListTitle = styled.h2`
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 600;
 `;
 

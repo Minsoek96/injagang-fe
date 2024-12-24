@@ -7,7 +7,6 @@ const defaultTheme = {
     logo: '#000000',
     text: '#0f1419',
     lightText: '#333333',
-    highlight: '#fff',
 
     svgColor: '#666666',
     svgOnColor: '#0F766E',
@@ -20,12 +19,14 @@ const defaultTheme = {
     dropBoxColor: '#2e2e2e',
     brandColor: '#e00000',
     boardText: '#0f1419',
-    highlightColor: '#0f766d80',
 
+    highlight: '#145853ec', // 인터뷰 마커
+    highlightColor: '#144b4667', // 글자 형광 마크
     signatureText: '#FFFFFF',
     signatureHover: '#29a197',
 
     emptyGray: '#666666',
+    dark: '#0f1419',
   },
 };
 export default defaultTheme;

@@ -28,6 +28,13 @@ const GlobalStyle = createGlobalStyle`
     "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   }
 
+  /* 폼 요소들의 폰트 사이즈 통일 */
+  input, textarea, button, select {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
   :lang(ko) {
     font-family: 'Pretendard', -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
     h1, h2, h3 {

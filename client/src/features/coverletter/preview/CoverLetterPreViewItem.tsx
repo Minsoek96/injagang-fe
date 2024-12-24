@@ -23,7 +23,6 @@ const QuestionContainer = styled.li`
   width: 100%;
   padding: 1.6rem;
   gap: 1.2rem;
-  background: ${(props) => props.theme.colors.primary};
   border-bottom: 1px solid ${(props) => props.theme.colors.mainLine};
   border-top-right-radius: 1.2rem;
   border-top-left-radius: 1.2rem;

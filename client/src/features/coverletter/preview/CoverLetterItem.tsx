@@ -64,8 +64,12 @@ const CoverLetterItemsContainer = styled.li<{ $isActive: boolean }>`
   border-radius: 12px;
   transition: all 0.3s ease;
   color: ${({ $isActive, theme }) =>
-    ($isActive ? theme.colors.text : theme.colors.emptyGray)};
+    ($isActive ? theme.colors.dark : theme.colors.emptyGray)};
   cursor: pointer;
+
+  svg {
+    fill: ${(props) => props.theme.colors.dark};
+  }
 
   &:hover {
     background-color: ${({ $isActive, theme }) =>
@@ -75,6 +79,7 @@ const CoverLetterItemsContainer = styled.li<{ $isActive: boolean }>`
   @media screen and (max-width: ${V.mediaMobile}) {
     padding: 1rem 0.8rem;
   }
+
 `;
 
 const ItemContainer = styled.div`
@@ -97,7 +102,7 @@ const ItemWrapper = styled.div`
 `;
 
 const ItemTitle = styled.div`
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -105,7 +110,7 @@ const ItemTitle = styled.div`
 `;
 
 const ItemInfo = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 
   span {
     font-weight: 500;

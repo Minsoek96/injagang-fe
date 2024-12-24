@@ -10,6 +10,8 @@ import {
 import TestProvider from '@/fixutures/TestProvider';
 import { responseCoverLetters } from '@/fixutures/entities/coverLetter';
 
+import { defaultTheme } from '@/src/app/styles';
+
 import {
   coverLetterType,
   useCoverLetterStore,
@@ -47,7 +49,7 @@ describe('CoverLetterItem', () => {
       const container = searchItem.closest('li');
 
       expect(searchItem).toBeInTheDocument();
-      expect(container).toHaveStyle('backgroundColor:#0f766d80');
+      expect(container).toHaveStyle(`background: ${defaultTheme.colors.highlightColor}`);
     });
 
     it('자소서 상세보기 아이콘버튼이 렌더링된다.', () => {

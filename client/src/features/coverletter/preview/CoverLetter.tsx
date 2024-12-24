@@ -7,10 +7,9 @@ import { BiPlus } from 'react-icons/bi';
 import styled from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import {
-  Container, MainButton, Spinner,
-} from '@/src/shared/ui';
+import { Container, MainButton, Spinner } from '@/src/shared/ui';
 
+import CoverLetterGuide from '@/src/features/coverletter/preview/CoverLetterGuide';
 import CoverLetterList from './CoverLetterList';
 import CoverLetterPreView from './CoverLetterPreView';
 
@@ -42,6 +41,7 @@ function CoverLetter() {
           <CoverLetterList />
         </Suspense>
         <CoverLetterPreView />
+        <CoverLetterGuide />
       </CoverLetterContainer>
     </>
   );
@@ -75,8 +75,7 @@ const ListHeader = styled.div`
   letter-spacing: -0.02em;
 
   @media screen and (max-width: ${V.mediaMobile}) {
-    font-size: 2rem;
-    padding: 1rem 0.8rem;
+    padding: 0.8rem 0.5rem;
   }
 `;
 
@@ -84,4 +83,8 @@ const HeaderTitle = styled.p`
   font-size: 2.5rem;
   font-weight: 400;
   color: ${(props) => props.theme.colors.signatureText};
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    font-size: 1.8rem;
+  }
 `;

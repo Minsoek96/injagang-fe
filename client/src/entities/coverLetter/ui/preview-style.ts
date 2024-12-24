@@ -7,10 +7,12 @@ const PreviewStyle = {
     width: 100%;
     height: 40rem;
     background: ${(props) => props.theme.colors.primary};
+    background-color: transparent;
+    border: 1px solid ${(props) => props.theme.colors.mainLine};
     border-radius: 1.2rem;
     box-shadow: ${V.boxShadow1};
     @media screen and (max-width: ${V.mediaMobile}) {
-      height: 20rem;
+      height: 30rem;
     }
   `,
 
