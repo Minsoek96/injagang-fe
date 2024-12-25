@@ -37,7 +37,7 @@ const QuestionNumber = styled.span`
   height: 2.4rem;
   font-size: 1.4rem;
   font-weight: 600;
-  color: ${(props) => props.theme.colors.signatureColor};
+  color: ${(props) => props.theme.colors.signatureText};
   background: ${(props) => props.theme.colors.highlightColor};
   border-radius: 6px;
 `;

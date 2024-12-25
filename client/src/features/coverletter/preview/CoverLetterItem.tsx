@@ -68,7 +68,7 @@ const CoverLetterItemsContainer = styled.li<{ $isActive: boolean }>`
   cursor: pointer;
 
   svg {
-    fill: ${(props) => props.theme.colors.dark};
+    fill: ${({ $isActive, theme }) => ($isActive ? theme.colors.dark : theme.colors.emptyGray)};
   }
 
   &:hover {

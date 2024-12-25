@@ -77,7 +77,7 @@ const Form = styled.form<{ $shakeTrigger: boolean }>`
   width: 40rem;
   padding: 2rem;
   background-color: #ffffff;
-  border: 1px solid #f0f0f0;
+  border: 1px solid ${(props) => props.theme.colors.mainLine};
   border-radius: 1rem;
 
   ${({ $shakeTrigger }) =>
