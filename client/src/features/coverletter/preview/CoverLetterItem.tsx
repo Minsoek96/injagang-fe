@@ -102,7 +102,8 @@ const ItemWrapper = styled.div`
 `;
 
 const ItemTitle = styled.div`
-  font-size: 1.9rem;
+  width: 100%;
+  font-size: 1.8rem;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;

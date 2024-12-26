@@ -44,7 +44,8 @@ export default function CoverLetterGuide() {
 }
 
 const Container = styled.div`
-    ${styleMixin.Column('flex-start')}
+    ${styleMixin.Column('space-between', 'flex-start')}
+    max-height: 50rem;
     cursor: not-allowed;
     gap: 1rem;
 
@@ -54,7 +55,7 @@ const Container = styled.div`
    `;
 
 const ItemContainer = styled(S.container)`
-    height: 18rem;
+    min-height: auto;
     background-color: transparent;
     box-shadow: ${V.boxShadow1};
     border: 1px solid ${(props) => props.theme.colors.mainLine};
