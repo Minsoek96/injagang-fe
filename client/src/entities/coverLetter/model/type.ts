@@ -12,7 +12,8 @@ interface ICoverLetterBase {
   owner: boolean;
 }
 
-export interface IWriteCoverLetter extends ICoverLetterBase {
+export interface IWriteCoverLetter {
+  title: '',
   qnaList: IQnaList[];
 }
 

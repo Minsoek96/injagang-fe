@@ -1,13 +1,14 @@
-import { coverLetterType } from '@/src/entities/coverLetter';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import { coverLetterType } from '@/src/entities/coverLetter';
+
 type State = {
-    draftCoverLetter: coverLetterType.ICoverLetter | null;
+    draftCoverLetter: coverLetterType.IWriteCoverLetter | null;
 }
 
 type Action = {
-    setDraft: (draft: coverLetterType.ICoverLetter) => void;
+    setDraft: (draft: coverLetterType.IWriteCoverLetter) => void;
     clearDraft: () => void;
 }
 

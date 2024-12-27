@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { UseFieldArrayAppend, UseFormReset } from 'react-hook-form';
 
-import { v4 as uuid4 } from 'uuid';
-
 import { ComboBox } from '@/src/shared/ui';
 import { coverLetterType } from '@/src/entities/coverLetter';
 import { templateQueries } from '@/src/entities/template';
 
 type Props = {
-    append: UseFieldArrayAppend<coverLetterType.ICoverLetter, 'qnaList'>,
-    reset: UseFormReset<coverLetterType.ICoverLetter>,
-}
+  append: UseFieldArrayAppend<coverLetterType.IWriteCoverLetter, 'qnaList'>;
+  reset: UseFormReset<coverLetterType.IWriteCoverLetter>;
+};
 
-export default function TemplateSelector({ append, reset }:Props) {
+export default function TemplateSelector({ append, reset }: Props) {
   const { data: templateList = [] } = templateQueries.useFetchTemplate();
 
   const [selectedTemplateTitle, setSelectedTemplateTitle] = useState<string>('');
@@ -25,7 +23,7 @@ export default function TemplateSelector({ append, reset }:Props) {
     if (template) {
       reset({ qnaList: [] });
       template.questions.forEach((item) => {
-        append({ question: item, answer: '', qnaId: uuid4() });
+        append({ question: item, answer: '' });
       });
     }
   };

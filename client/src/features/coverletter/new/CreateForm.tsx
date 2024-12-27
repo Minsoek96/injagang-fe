@@ -1,7 +1,5 @@
 import { styled } from 'styled-components';
 
-import { v4 as uuid4 } from 'uuid';
-
 import { useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -18,10 +16,11 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { getFirstErrorMessage } from '@/src/shared/utils/check/getFirstErrorMessage';
 import { useModal } from '@/src/shared/hooks';
 
+import useProgressCoverLetter from '@/src/features/coverletter/new/useProgressCoverLetter';
 import TemplateSelector from './TemplateSelector';
 
 type Props = {
-  onSubmit: (data: coverLetterType.ICoverLetter) => void;
+  onSubmit: (data: coverLetterType.IWriteCoverLetter) => void;
   movePage: () => void;
 };
 
@@ -42,14 +41,18 @@ export default function CreateForm({ movePage, onSubmit }: Props) {
     control,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
-  } = useForm<coverLetterType.ICoverLetter>({
+  } = useForm<coverLetterType.IWriteCoverLetter>({
     resolver: zodResolver(coverLetterModel.schema),
     defaultValues: {
       title: '',
       qnaList: [],
     },
   });
+
+  // 초안 관리
+  useProgressCoverLetter(reset, getValues);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -58,7 +61,7 @@ export default function CreateForm({ movePage, onSubmit }: Props) {
 
   /** field 데이터추가 */
   const addQustion = () => {
-    append({ question: '', answer: '', qnaId: uuid4() });
+    append({ question: '', answer: '' });
   };
 
   /** field 데이터삭제 */

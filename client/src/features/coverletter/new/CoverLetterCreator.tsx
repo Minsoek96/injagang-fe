@@ -5,6 +5,7 @@ import { SubmitHandler } from 'react-hook-form';
 import {
   coverLetterMutation,
   coverLetterType,
+  useTempStore,
 } from '@/src/entities/coverLetter';
 
 import { styleMixin, V } from '@/src/shared/styles';
@@ -19,9 +20,19 @@ export default function CoverLetterCreator() {
   const { moveCoverLetterMainPage } = usePageRouter();
   const { mutate } = coverLetterMutation.useWriteCoverLetter();
 
+  const { setDraft, clearDraft } = useTempStore();
+
   /** field 반영 */
-  const onSubmit: SubmitHandler<coverLetterType.ICoverLetter> = (data) => {
-    mutate(data);
+  const onSubmit: SubmitHandler<coverLetterType.IWriteCoverLetter> = (data) => {
+    mutate(data, {
+      onSuccess: () => {
+        clearDraft();
+      },
+      onError: () => {
+        setDraft(data);
+      },
+    });
+    setDraft(data);
     moveCoverLetterMainPage();
   };
 

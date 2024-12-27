@@ -10,8 +10,8 @@ import { HideSvg } from '@/src/shared/ui';
 import { UnResizeableTextarea } from '@/src/shared/ui/uncontrolled';
 
 type Props = {
-  register: UseFormRegister<coverLetterType.ICoverLetter>;
-  control: Control<coverLetterType.ICoverLetter>;
+  register: UseFormRegister<coverLetterType.IWriteCoverLetter>;
+  control: Control<coverLetterType.IWriteCoverLetter>;
   index: number;
   remove: (index: number) => void;
 };
