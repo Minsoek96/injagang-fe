@@ -5,6 +5,7 @@ import {
 import TestProvider from '@/fixutures/TestProvider';
 
 import { templateQueries } from '@/src/entities/template';
+import { useModal } from '@/src/shared/hooks';
 import CreateForm from './CreateForm';
 
 const context = describe;
@@ -17,6 +18,14 @@ jest.mock('@/src/entities/template', () => {
     templateQueries: {
       useFetchTemplate: jest.fn(),
     },
+  };
+});
+
+jest.mock('@/src/shared/hooks', () => {
+  const actualHooks = jest.requireActual('@/src/shared/hooks');
+  return {
+    ...actualHooks,
+    useModal: jest.fn(),
   };
 });
 
@@ -46,7 +55,10 @@ describe('CreateForm', () => {
     (templateQueries.useFetchTemplate as jest.Mock).mockReturnValue({
       data: templateList,
     });
-    jest.clearAllMocks();
+
+    (useModal as jest.Mock).mockReturnValue({
+      setModal: jest.fn(),
+    });
   });
 
   context('렌더링 테스트', () => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { useInterval, useModal } from '@/src/shared/hooks';
+import useInterval from '@/src/shared/hooks/interval/useInterval';
+import useModal from '@/src/shared/hooks/modal/useModal';
 
 /**
  * 폼 데이터의 자동 저장 및 복구를 관리하는 훅
