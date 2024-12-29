@@ -1,9 +1,10 @@
-import TestProvider from '@/fixutures/TestProvider';
+import { useRouter } from 'next/router';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { useRouter } from 'next/router';
-import CoverLetter from '../CoverLetter';
+import TestProvider from '@/fixutures/TestProvider';
+
+import CoverLetter from './CoverLetter';
 
 const context = describe;
 

@@ -1,7 +1,10 @@
-import { PreviewStyle as S } from '@/src/entities/coverLetter';
-import { styleMixin, V } from '@/src/shared/styles';
-import { BiFile, BiPlus, BiEditAlt } from 'react-icons/bi';
 import styled from 'styled-components';
+
+import { BiFile, BiPlus, BiEditAlt } from 'react-icons/bi';
+
+import { PreviewStyle as S } from '@/src/entities/coverLetter';
+
+import { styleMixin, V } from '@/src/shared/styles';
 
 // 가이드 데이터
 const GUIDE_LIST = [

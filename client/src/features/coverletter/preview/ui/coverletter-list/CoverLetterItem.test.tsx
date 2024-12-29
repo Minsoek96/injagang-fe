@@ -17,7 +17,7 @@ import {
   useCoverLetterStore,
 } from '@/src/entities/coverLetter';
 
-import CoverLetterItem from '../CoverLetterItem';
+import CoverLetterItem from './CoverLetterItem';
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn().mockReturnValue({

@@ -1,6 +1,8 @@
-import TestProvider from '@/fixutures/TestProvider';
-import CoverLetterPreViewItem from '@/src/features/coverletter/preview/CoverLetterPreViewItem';
 import { render, screen } from '@testing-library/react';
+
+import TestProvider from '@/fixutures/TestProvider';
+
+import CoverLetterPreViewItem from './CoverLetterPreViewItem';
 
 describe('CoverLetterPreviewItem', () => {
   const renderCoverLetterPreviewItem = (idx: number, question: string) => {

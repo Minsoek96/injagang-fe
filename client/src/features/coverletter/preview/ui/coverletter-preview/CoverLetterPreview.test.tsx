@@ -1,10 +1,11 @@
 import { render, screen, act } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-import CoverLetterPreView from '@/src/features/coverletter/preview/CoverLetterPreView';
 
 import { useCoverLetterStore } from '@/src/entities/coverLetter';
 import { sampleCoverLetter } from '@/fixutures/entities/coverLetter';
+
+import CoverLetterPreView from './CoverLetterPreView';
 
 const context = describe;
 

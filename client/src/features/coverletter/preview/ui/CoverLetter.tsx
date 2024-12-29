@@ -9,9 +9,9 @@ import styled from 'styled-components';
 import { styleMixin, V } from '@/src/shared/styles';
 import { Container, MainButton, Spinner } from '@/src/shared/ui';
 
-import CoverLetterGuide from '@/src/features/coverletter/preview/CoverLetterGuide';
-import CoverLetterList from './CoverLetterList';
-import CoverLetterPreView from './CoverLetterPreView';
+import CoverLetterGuide from './coverletter-guide/CoverLetterGuide';
+import CoverLetterList from './coverletter-list/CoverLetterList';
+import CoverLetterPreView from './coverletter-preview/CoverLetterPreView';
 
 /** 유저 자소서 선택 페이지 */
 function CoverLetter() {

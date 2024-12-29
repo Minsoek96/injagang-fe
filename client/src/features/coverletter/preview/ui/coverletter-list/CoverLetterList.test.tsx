@@ -4,7 +4,7 @@ import TestProvider from '@/fixutures/TestProvider';
 import { responseCoverLetters } from '@/fixutures/entities/coverLetter';
 import { coverLetterQueries } from '@/src/entities/coverLetter';
 
-import CoverLetterList from '../CoverLetterList';
+import CoverLetterList from './CoverLetterList';
 
 jest.mock('@/src/entities/coverLetter/api/queries', () => ({
   useFetchCoverLetter: jest.fn(),
