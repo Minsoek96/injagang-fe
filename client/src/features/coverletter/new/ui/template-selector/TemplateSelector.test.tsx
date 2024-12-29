@@ -1,9 +1,12 @@
-import TestProvider from '@/fixutures/TestProvider';
-import { templateQueries } from '@/src/entities/template';
-import TemplateSelector from '@/src/features/coverletter/new/TemplateSelector';
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+
+import TestProvider from '@/fixutures/TestProvider';
+
+import { templateQueries } from '@/src/entities/template';
+
+import TemplateSelector from './TemplateSelector';
 
 jest.mock('@/src/entities/template', () => {
   const actualHooks = jest.requireActual('@/src/entities/template');

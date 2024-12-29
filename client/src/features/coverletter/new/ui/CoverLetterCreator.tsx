@@ -14,7 +14,7 @@ import {
 } from '@/src/shared/ui';
 import { usePageRouter } from '@/src/shared/hooks';
 
-import CreateForm from './CreateForm';
+import CreateForm from './create-form/CreateForm';
 
 export default function CoverLetterCreator() {
   const { moveCoverLetterMainPage } = usePageRouter();

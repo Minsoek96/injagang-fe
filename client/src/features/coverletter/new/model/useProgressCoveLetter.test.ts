@@ -1,8 +1,9 @@
 import { renderHook } from '@testing-library/react';
 
-import useProgressCoverLetter from '@/src/features/coverletter/new/useProgressCoverLetter';
 import { useTempStore } from '@/src/entities/coverLetter';
 import { useAutoSave } from '@/src/shared/hooks';
+
+import useProgressCoverLetter from './useProgressCoverLetter';
 
 const context = describe;
 

@@ -16,8 +16,8 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { getFirstErrorMessage } from '@/src/shared/utils/check/getFirstErrorMessage';
 import { useModal } from '@/src/shared/hooks';
 
-import useProgressCoverLetter from '@/src/features/coverletter/new/useProgressCoverLetter';
-import TemplateSelector from './TemplateSelector';
+import useProgressCoverLetter from '../../model/useProgressCoverLetter';
+import TemplateSelector from '../template-selector/TemplateSelector';
 
 type Props = {
   onSubmit: (data: coverLetterType.IWriteCoverLetter) => void;
