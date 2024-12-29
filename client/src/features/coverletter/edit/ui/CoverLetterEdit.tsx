@@ -13,8 +13,8 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { Container, Spinner } from '@/src/shared/ui';
 import { usePageRouter } from '@/src/shared/hooks';
 
-import useCoverLetterManager from './model/useCoverLetterManager';
-import EditForm from './EditForm';
+import useCoverLetterManager from '../model/useCoverLetterManager';
+import EditForm from './edit-form/EditForm';
 
 export default function CoverLetterCreator() {
   const router = useRouter();

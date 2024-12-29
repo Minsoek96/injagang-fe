@@ -1,1 +1,1 @@
-export { default as CoverLetterEdit } from './CoverLetterEdit';
+export { default as CoverLetterEdit } from './ui/CoverLetterEdit';

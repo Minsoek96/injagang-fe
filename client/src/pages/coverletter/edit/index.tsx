@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-import CoverLetterEdit from '@/src/features/coverletter/edit/CoverLetterEdit';
-
 import { styleMixin } from '@/src/shared/styles';
+import { CoverLetterEdit } from '@/src/features/coverletter/edit';
 
 function CoverLetterEditorPage() {
   return (

@@ -4,7 +4,8 @@ import {
 
 import { responseDetailCoverLetter } from '@/fixutures/entities/coverLetter';
 import TestProvider from '@/fixutures/TestProvider';
-import EditForm from '@/src/features/coverletter/edit/EditForm';
+
+import EditForm from './EditForm';
 
 const context = describe;
 // TODO : 테스트코드 수정하기
