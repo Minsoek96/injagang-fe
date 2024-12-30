@@ -18,7 +18,7 @@ const useThemeToggler = (): [boolean, () => void] => {
   }, [currentMode, changeThemeMode]);
 
   useEffect(() => {
-    const currentSaveMode = storage.get();
+    const currentSaveMode = storage.get<StoraTheme>();
     if (currentSaveMode) {
       changeThemeMode(currentSaveMode.theme);
     }
