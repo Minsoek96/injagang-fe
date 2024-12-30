@@ -27,13 +27,12 @@ export default function CoverLetterCreator() {
     mutate(data, {
       onSuccess: () => {
         clearDraft();
+        moveCoverLetterMainPage();
       },
       onError: () => {
         setDraft(data);
       },
     });
-    setDraft(data);
-    moveCoverLetterMainPage();
   };
 
   return (
