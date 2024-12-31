@@ -1,4 +1,4 @@
-interface IQnaList {
+export interface IQnaList {
   question: string;
   answer: string;
 }
@@ -13,7 +13,7 @@ interface ICoverLetterBase {
 }
 
 export interface IWriteCoverLetter {
-  title: '',
+  title: string,
   qnaList: IQnaList[];
 }
 

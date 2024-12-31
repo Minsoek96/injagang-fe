@@ -1,6 +1,8 @@
 import { styled } from 'styled-components';
 
-import { Control, UseFormRegister, useWatch } from 'react-hook-form';
+import {
+  Control, Path, PathValue, UseFormRegister, useWatch,
+} from 'react-hook-form';
 
 import { BiX } from 'react-icons/bi';
 
@@ -9,9 +11,9 @@ import { coverLetterType } from '@/src/entities/coverLetter';
 import { HideSvg } from '@/src/shared/ui';
 import { UnResizeableTextarea } from '@/src/shared/ui/uncontrolled';
 
-type Props = {
-  register: UseFormRegister<coverLetterType.IWriteCoverLetter>;
-  control: Control<coverLetterType.IWriteCoverLetter>;
+type Props<T extends coverLetterType.IWriteCoverLetter> = {
+  register: UseFormRegister<T>;
+  control: Control<T>;
   index: number;
   remove: (index: number) => void;
 };
@@ -30,17 +32,17 @@ type Props = {
  * @param remove - 항목을 삭제하는 함수
  */
 
-export default function CoverLetterItem({
+export default function CoverLetterItem<T extends coverLetterType.IWriteCoverLetter>({
   index,
   register,
   remove,
   control,
-}: Props) {
+}: Props<T>) {
   const watchedValue = useWatch({
     control,
-    name: `qnaList.${index}.answer`,
-    defaultValue: '',
-  });
+    name: `qnaList.${index}.answer` as Path<T>,
+    defaultValue: '' as PathValue<T, Path<T>>,
+  }) as string;
 
   return (
     <ItemsContainer>
@@ -56,13 +58,13 @@ export default function CoverLetterItem({
         }}
       />
       <UnResizeableTextarea
-        register={register(`qnaList.${index}.question`)}
+        register={register(`qnaList.${index}.question` as Path<T>)}
         placeholder="질문을 작성해주세요."
         maxSize={10}
         style={{ resize: 'vertical', minHeight: '5.5rem' }}
       />
       <UnResizeableTextarea
-        register={register(`qnaList.${index}.answer`)}
+        register={register(`qnaList.${index}.answer` as Path<T>)}
         placeholder="답변을 작성해주세요."
         maxSize={30}
         style={{ minHeight: '15rem', resize: 'vertical' }}
