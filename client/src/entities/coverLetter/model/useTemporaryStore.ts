@@ -34,7 +34,7 @@ const useTempStore = create<State & Action>()(
     (set) => ({
       draftCoverLetter: null,
       setDraft: (draft) => set({ draftCoverLetter: draft }),
-      clearDraft: () => { storage.delete(); },
+      clearDraft: () => set({ draftCoverLetter: null }),
     }),
     {
       name: 'temp-store',
