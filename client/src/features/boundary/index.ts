@@ -1,1 +1,1 @@
-export { default as APIErrorBoundary } from './APIErrorBoundary';
+export { default as ErrorBoundary } from './ErrorBoundary';
