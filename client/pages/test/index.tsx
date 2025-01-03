@@ -5,15 +5,26 @@ import axios from 'axios';
 import { styled } from 'styled-components';
 
 import {
-  ThrowAuthError,
   ThrowError,
-  ThrowNetworkError,
 } from '@/src/pages/test';
+
 import { ErrorBoundary } from '@/src/features/boundary';
+import GlobalErrorBoundary from '@/src/features/boundary/GlobalErrorBoundary';
+
 import { MainButton } from '@/src/shared/ui';
 
+type ErrorType = 'network' | 'timeout' | 'auth' | 'forbidden' | 'badRequest'
+
 export default function ErrorBoundaryTest() {
-  const [errorComponent, setErrorComponent] = useState<string | null>(null);
+  const [errorType, setErrorType] = useState<ErrorType | null>(null);
+
+  const errorButtons = [
+    { type: 'network', label: '네트워크 에러' },
+    { type: 'timeout', label: '타임아웃 에러' },
+    { type: 'auth', label: '인증 에러 (401)' },
+    { type: 'forbidden', label: '권한 에러 (403)' },
+    { type: 'badRequest', label: '잘못된 요청 (400)' },
+  ] as const;
 
   const renderFallback = (error: Error, reset: () => void) => (
     <ErrorDisplay>
@@ -37,34 +48,27 @@ export default function ErrorBoundaryTest() {
   );
 
   const handleReset = () => {
-    setErrorComponent(null);
+    setErrorType(null);
   };
 
   return (
     <Container>
       <h2>ErrorBoundary 테스트</h2>
-      <Wrapper>
-        <MainButton
-          onClick={() => setErrorComponent('general')}
-          label=" 일반 에러 발생"
-        />
-        <MainButton
-          onClick={() => setErrorComponent('network')}
-          label="네트워크 에러 발생"
-        >
-          네트워크 에러 발생
-        </MainButton>
-        <MainButton
-          onClick={() => setErrorComponent('auth')}
-          label="인증 에러 발생"
-        />
-      </Wrapper>
+      <GlobalErrorBoundary>
+        <Wrapper>
+          {errorButtons.map(({ type, label }) => (
+            <MainButton
+              key={type}
+              onClick={() => setErrorType(type)}
+              label={label}
+            />
+          ))}
+        </Wrapper>
 
-      <ErrorBoundary onReset={handleReset} renderFallback={renderFallback}>
-        {errorComponent === 'general' && <ThrowError />}
-        {errorComponent === 'network' && <ThrowNetworkError />}
-        {errorComponent === 'auth' && <ThrowAuthError />}
-      </ErrorBoundary>
+        <ErrorBoundary onReset={handleReset} renderFallback={renderFallback}>
+          {errorType && <ThrowError type={errorType} />}
+        </ErrorBoundary>
+      </GlobalErrorBoundary>
     </Container>
   );
 }
