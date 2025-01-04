@@ -1,6 +1,8 @@
 import { Component, PropsWithChildren } from 'react';
 
 import { AxiosError } from 'axios';
+import RequireLogin from '@/src/features/boundary/RequireLogin';
+import ConnectionError from '@/src/features/boundary/ConnectionError';
 import { ERROR_CODE } from './error-code';
 
 interface ErrorBoundaryState {
@@ -31,9 +33,9 @@ class GlobalErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryStat
     return { error, errorData: ERROR_CODE.default };
   }
 
-  // reset = () => {
-  //   this.setState({ error: null, errorData: null });
-  // };
+  reset = () => {
+    this.setState({ error: null, errorData: null });
+  };
 
   render() {
     const { children } = this.props;
@@ -41,12 +43,12 @@ class GlobalErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryStat
 
     if (error && errorData?.requireLogin) {
       return (
-        <div> 로그인을 해주세요.</div>
+        <RequireLogin onReset={this.reset} />
       );
     }
-    if (error && errorData?.code === '통신 에러') {
+    if (error && errorData) {
       return (
-        <div> 서버와의 연결이 끊어짐</div>
+        <ConnectionError onReset={this.reset} />
       );
     }
 

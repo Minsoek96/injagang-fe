@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { getCookies } from '@/src/shared/utils';
-import { errorManager, serverDisconnected } from './errorhandlers';
+import { errorManager } from './errorhandlers';
 import { SERVER } from '../config/apis';
 
 export const API = axios.create({

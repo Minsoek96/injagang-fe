@@ -9,7 +9,7 @@ const ERROR_CODE: ErrorCodeType = {
   ERR_NETWORK: {
     code: '통신 에러',
     message:
-      '서버가 응답하지 않습니다. \n프로그램을 재시작하거나 관리자에게 연락하세요.',
+      '서버가 응답하지 않습니다.',
   },
   ECONNABORTED: {
     code: '요청 시간 초과',
