@@ -10,10 +10,13 @@ const S = {
     text-align: center;
     min-width: 40rem;
     max-width: 50rem;
-    margin: 0 auto;
     border-radius: 12px;
     box-shadow: ${V.boxShadow3};
     background-color: ${(props) => props.theme.colors.primary};
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   `,
 
   iconWrapper: styled.div`
@@ -47,6 +50,4 @@ const S = {
   `,
 };
 
-export {
-  S,
-};
+export { S };

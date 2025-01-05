@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Header } from '@/src/widgets/header';
 import { AuthGuard } from '@/src/features/guard';
 
+import GlobalErrorBoundary from '@/src/features/boundary/GlobalErrorBoundary';
 import { RenderToast, RenderModal, HeadMeta } from '../ui';
 import { ReactQueryProvider, StyledProvider } from '../providers';
 
@@ -23,16 +24,18 @@ function Layout({ children }: LayoutProps) {
 
     <StyledProvider>
       <HeadMeta />
-      <ReactQueryProvider>
-        <AuthGuard>
-          <LayoutContainer>
-            {!isBlockPath && <Header />}
-            <MainContent>{children}</MainContent>
-          </LayoutContainer>
-        </AuthGuard>
-        <RenderToast />
-        <RenderModal />
-      </ReactQueryProvider>
+      <GlobalErrorBoundary>
+        <ReactQueryProvider>
+          <AuthGuard>
+            <LayoutContainer>
+              {!isBlockPath && <Header />}
+              <MainContent>{children}</MainContent>
+            </LayoutContainer>
+          </AuthGuard>
+          <RenderToast />
+          <RenderModal />
+        </ReactQueryProvider>
+      </GlobalErrorBoundary>
     </StyledProvider>
   );
 }
