@@ -1,32 +1,33 @@
-import { AxiosRequestConfig } from 'axios';
+import { AxiosError, AxiosRequestConfig } from 'axios';
 
 import { tokenReissue } from '@/src/shared/apis/errorhandlers/tokenReissue';
 import { ERROR_MESSAGES } from '@/src/shared/const';
 
 import { removeCookies, setCookies } from '@/src/shared/utils';
-import Router from 'next/router';
 import { reRequest } from './reRequest';
 
 const errorManager = async (
   message: string,
   originRequest: AxiosRequestConfig,
+  error: AxiosError,
 ) => {
   switch (message) {
   case ERROR_MESSAGES.JWT_EXPIRED:
     jwtExpired(originRequest);
     break;
   default:
-    unauthorized();
+    unauthorized(error);
     break;
   }
 };
 
 /** jwt 만료시 처리 함수 */
-const unauthorized = () => {
+const unauthorized = (error: AxiosError) => {
   removeCookies();
-  if (typeof window !== 'undefined') {
-    Router.replace('/login');
-  }
+  return Promise.reject(error);
+  // if (typeof window !== 'undefined') {
+  //   Router.replace('/login');
+  // }
 };
 
 /** jwt 검증 함수  */

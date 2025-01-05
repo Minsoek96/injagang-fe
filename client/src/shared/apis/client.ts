@@ -37,11 +37,16 @@ API.interceptors.response.use(
       throw error;
     }
     const originRequest = error.response;
-
     const { status, config } = originRequest;
     const errorMessage = originRequest.data.message;
+
     if (status === 401 && !config.isRetrying) {
-      errorManager(errorMessage, config);
+      try {
+        await errorManager(errorMessage, config, error);
+      // eslint-disable-next-line no-shadow
+      } catch (error) {
+        return Promise.reject(error);
+      }
     }
     return Promise.reject(error);
   },
