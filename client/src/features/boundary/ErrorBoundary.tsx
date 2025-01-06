@@ -1,9 +1,13 @@
 import React, { Component, PropsWithChildren } from 'react';
+
 import { AxiosError } from 'axios';
+
 import { ERROR_CODE } from './error-code';
 
 interface ErrorBoundaryProps extends PropsWithChildren {
-  onReset: () => void;
+ // ErrorBoundary 타입에서는 defaultProps를 지원하지 않음
+  // eslint-disable-next-line react/require-default-props
+  onReset?: () => void;
   renderFallback: (error: Error, reset: () => void) => React.ReactNode;
 }
 
@@ -46,7 +50,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   reset = () => {
     const { onReset } = this.props;
     this.setState({ error: null, errorData: null });
-    onReset();
+    onReset?.();
   };
 
   render() {
