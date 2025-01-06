@@ -8,10 +8,7 @@ import {
   ThrowError,
 } from '@/src/pages/test';
 
-import { ErrorBoundary } from '@/src/features/boundary';
-import GlobalErrorBoundary from '@/src/features/boundary/GlobalErrorBoundary';
-
-import { MainButton } from '@/src/shared/ui';
+import { MainButton, ErrorBoundary } from '@/src/shared/ui';
 
 type ErrorType = 'network' | 'timeout' | 'auth' | 'forbidden' | 'badRequest'
 
@@ -54,21 +51,19 @@ export default function ErrorBoundaryTest() {
   return (
     <Container>
       <h2>ErrorBoundary 테스트</h2>
-      <GlobalErrorBoundary>
-        <Wrapper>
-          {errorButtons.map(({ type, label }) => (
-            <MainButton
-              key={type}
-              onClick={() => setErrorType(type)}
-              label={label}
-            />
-          ))}
-        </Wrapper>
+      <Wrapper>
+        {errorButtons.map(({ type, label }) => (
+          <MainButton
+            key={type}
+            onClick={() => setErrorType(type)}
+            label={label}
+          />
+        ))}
+      </Wrapper>
 
-        <ErrorBoundary onReset={handleReset} renderFallback={renderFallback}>
-          {errorType && <ThrowError type={errorType} />}
-        </ErrorBoundary>
-      </GlobalErrorBoundary>
+      <ErrorBoundary onReset={handleReset} renderFallback={renderFallback}>
+        {errorType && <ThrowError type={errorType} />}
+      </ErrorBoundary>
     </Container>
   );
 }

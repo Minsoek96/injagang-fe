@@ -1,8 +1,9 @@
 import { Component, PropsWithChildren } from 'react';
 
 import { AxiosError } from 'axios';
-import RequireLogin from '@/src/features/boundary/RequireLogin';
-import ConnectionError from '@/src/features/boundary/ConnectionError';
+
+import RequireLogin from './ui/RequireLogin';
+import ConnectionError from './ui/ConnectionError';
 import { ERROR_CODE } from './error-code';
 
 interface ErrorBoundaryState {

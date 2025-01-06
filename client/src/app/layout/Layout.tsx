@@ -5,7 +5,8 @@ import { usePathname } from 'next/navigation';
 import { Header } from '@/src/widgets/header';
 import { AuthGuard } from '@/src/features/guard';
 
-import GlobalErrorBoundary from '@/src/features/boundary/GlobalErrorBoundary';
+import { GlobalErrorBoundary } from '@/src/shared/ui';
+
 import { RenderToast, RenderModal, HeadMeta } from '../ui';
 import { ReactQueryProvider, StyledProvider } from '../providers';
 
