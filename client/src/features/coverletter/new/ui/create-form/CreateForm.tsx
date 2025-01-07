@@ -11,12 +11,15 @@ import {
   coverLetterType,
 } from '@/src/entities/coverLetter';
 
-import { HideSvg, MainButton, UnInput } from '@/src/shared/ui';
+import {
+  HideSvg, MainButton, UnInput, ErrorBoundary,
+} from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 import { getFirstErrorMessage } from '@/src/shared/utils/check/getFirstErrorMessage';
 import { useModal } from '@/src/shared/hooks';
 
 import useProgressCoverLetter from '../../model/useProgressCoverLetter';
+import TemplateSelectorFallback from '../template-selector/TemplateSelectorFallback';
 import TemplateSelector from '../template-selector/TemplateSelector';
 
 type Props = {
@@ -87,7 +90,13 @@ export default function CreateForm({ movePage, onSubmit }: Props) {
         placeholder="자소서제목"
         style={{ width: '100%', marginBottom: '1.5rem' }}
       />
-      <TemplateSelector append={append} reset={reset} />
+      <ErrorBoundary
+        renderFallback={(error, onReset) => (
+          <TemplateSelectorFallback onReset={onReset} />
+        )}
+      >
+        <TemplateSelector append={append} reset={reset} />
+      </ErrorBoundary>
       {fields.map((field, index) => (
         <CoverLetterItem
           key={field.id}
