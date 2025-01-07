@@ -7,8 +7,11 @@ import { BiPlus } from 'react-icons/bi';
 import styled from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import { Container, MainButton, Spinner } from '@/src/shared/ui';
+import {
+  Container, MainButton, Spinner, ErrorBoundary,
+} from '@/src/shared/ui';
 
+import CoverLetterListFallback from '@/src/features/coverletter/preview/ui/coverletter-list/CoverLetterListFallback';
 import CoverLetterGuide from './coverletter-guide/CoverLetterGuide';
 import CoverLetterList from './coverletter-list/CoverLetterList';
 import CoverLetterPreView from './coverletter-preview/CoverLetterPreView';
@@ -37,9 +40,15 @@ function CoverLetter() {
         />
       </ListHeader>
       <CoverLetterContainer>
-        <Suspense fallback={<Spinner />}>
-          <CoverLetterList />
-        </Suspense>
+        <ErrorBoundary
+          renderFallback={(error, onReset) => (
+            <CoverLetterListFallback onReset={onReset} />
+          )}
+        >
+          <Suspense fallback={<Spinner />}>
+            <CoverLetterList />
+          </Suspense>
+        </ErrorBoundary>
         <CoverLetterPreView />
         <CoverLetterGuide />
       </CoverLetterContainer>
@@ -51,7 +60,7 @@ export default CoverLetter;
 
 const CoverLetterContainer = styled(Container.ItemBase)`
   display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 3rem;
   width: 100%;
   color: ${(props) => props.theme.colors.text};
