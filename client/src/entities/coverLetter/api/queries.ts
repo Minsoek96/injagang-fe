@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import { useAuthStore } from '@/src/entities/auth';
 
@@ -16,10 +16,9 @@ const useFetchCoverLetter = () => {
 };
 /** 자기소개서 상세 조회 */
 const useFetchDetailCoverLetter = (id: number) =>
-  useQuery({
+  useSuspenseQuery({
     queryKey: coverLetter.detail(id),
     queryFn: () => getDetailCoverLetter(id),
-    enabled: id !== 0,
   });
 
 export { useFetchCoverLetter, useFetchDetailCoverLetter };

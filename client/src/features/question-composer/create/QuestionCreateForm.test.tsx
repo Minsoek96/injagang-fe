@@ -3,10 +3,24 @@ import {
 } from '@testing-library/react';
 import preloadAll from 'jest-next-dynamic-ts';
 
+import { coverLetterQueries } from '@/src/entities/coverLetter';
+
 import TestProvider from '@/fixutures/TestProvider';
+import { responseCoverLetters, sampleCoverLetter } from '@/fixutures/entities/coverLetter';
 import QuestionCreateForm from './QuestionCreateForm';
 
 const context = describe;
+
+jest.mock('@/src/entities/coverLetter', () => {
+  const actualHooks = jest.requireActual('@/src/entities/coverLetter');
+  return {
+    ...actualHooks,
+    coverLetterQueries: {
+      useFetchDetailCoverLetter: jest.fn(),
+      useFetchCoverLetter: jest.fn(),
+    },
+  };
+});
 
 // TODO : 테스트 코드 수정 방안
 describe('QuestionCreateForm', () => {
@@ -14,6 +28,12 @@ describe('QuestionCreateForm', () => {
 
   beforeAll(async () => {
     jest.clearAllMocks();
+    (coverLetterQueries.useFetchDetailCoverLetter as jest.Mock).mockReturnValue({
+      data: sampleCoverLetter,
+    });
+    (coverLetterQueries.useFetchCoverLetter as jest.Mock).mockReturnValue({
+      data: responseCoverLetters,
+    });
     await preloadAll();
   });
 
