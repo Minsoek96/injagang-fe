@@ -10,18 +10,26 @@ import {
 } from '@/src/entities/coverLetter';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import { Container, Spinner } from '@/src/shared/ui';
+import { Container } from '@/src/shared/ui';
 import { usePageRouter } from '@/src/shared/hooks';
 
+import { useEffect, useState } from 'react';
 import useCoverLetterManager from '../model/useCoverLetterManager';
 import EditForm from './edit-form/EditForm';
 
 export default function CoverLetterCreator() {
+  const [error, setError] = useState<boolean>(false);
   const router = useRouter();
   const { id } = router.query;
   const { moveCoverLetterMainPage } = usePageRouter();
   const { changeCoverLetter, deleteCoverLetter } = useCoverLetterManager();
-  const { data: coverLetter, isLoading } = coverLetterQueries.useFetchDetailCoverLetter(Number(id));
+  const { data: coverLetter } = coverLetterQueries.useFetchDetailCoverLetter(Number(id));
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError(true);
+    }, 5000);
+  }, []);
 
   /** field 반영 */
   const onSubmit: SubmitHandler<coverLetterType.ICoverLetter> = (data) => {
@@ -29,11 +37,11 @@ export default function CoverLetterCreator() {
     changeCoverLetter(Number(id), title, qnaList);
   };
 
-  if (isLoading) return <Spinner message="데이터를 불러오는 중입니다." />;
+  if (error) throw Error('알 수 없는 에러');
 
   return (
     <CoverLetterCreatorContainer>
-      <MainTitle>자기소개서 작성</MainTitle>
+      <MainTitle>자기소개서 수정</MainTitle>
       <EditForm
         movePage={moveCoverLetterMainPage}
         onSubmit={onSubmit}
