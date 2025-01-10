@@ -48,7 +48,7 @@ describe('FeedBackViewButtons', () => {
       if (list === mockTarget) {
         expect(searchButton).toHaveStyleRule(
           'background-color',
-          '#e00000',
+          '#0F766E',
         );
       }
     });
@@ -65,7 +65,7 @@ describe('FeedBackViewButtons', () => {
       if (list !== mockTarget) {
         expect(searchButton).not.toHaveStyleRule(
           'background-color',
-          '#e00000',
+          '#0F766E',
         );
       }
 
@@ -76,7 +76,7 @@ describe('FeedBackViewButtons', () => {
       await waitFor(() => {
         expect(searchButton).toHaveStyleRule(
           'background-color',
-          '#e00000',
+          '#0F766E',
         );
       });
     });

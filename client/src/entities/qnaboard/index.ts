@@ -7,3 +7,4 @@ export { default as queryKeys } from './api/queryKeys';
 export { default as useBoardStore } from './model/useBoardStore';
 export { default as useCorrectionStore } from './model/useCorrectionStore';
 export { default as QuestionDetailItem } from './ui/QuestionDetailItem';
+export * from './ui/common-style';

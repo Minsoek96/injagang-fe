@@ -1,22 +1,19 @@
 import { styled } from 'styled-components';
 
 import {
-  Control,
-  UseFormRegister,
-  useWatch,
+  Control, Path, PathValue, UseFormRegister, useWatch,
 } from 'react-hook-form';
 
 import { BiX } from 'react-icons/bi';
 
 import { coverLetterType } from '@/src/entities/coverLetter';
 
-import { styleMixin, V } from '@/src/shared/styles';
 import { HideSvg } from '@/src/shared/ui';
 import { UnResizeableTextarea } from '@/src/shared/ui/uncontrolled';
 
-type Props = {
-  register: UseFormRegister<coverLetterType.ICoverLetter>;
-  control: Control<coverLetterType.ICoverLetter>;
+type Props<T extends coverLetterType.IWriteCoverLetter> = {
+  register: UseFormRegister<T>;
+  control: Control<T>;
   index: number;
   remove: (index: number) => void;
 };
@@ -35,17 +32,17 @@ type Props = {
  * @param remove - 항목을 삭제하는 함수
  */
 
-export default function CoverLetterItem({
+export default function CoverLetterItem<T extends coverLetterType.IWriteCoverLetter>({
   index,
   register,
   remove,
   control,
-}: Props) {
+}: Props<T>) {
   const watchedValue = useWatch({
     control,
-    name: `qnaList.${index}.answer`,
-    defaultValue: '',
-  });
+    name: `qnaList.${index}.answer` as Path<T>,
+    defaultValue: '' as PathValue<T, Path<T>>,
+  }) as string;
 
   return (
     <ItemsContainer>
@@ -55,19 +52,19 @@ export default function CoverLetterItem({
         onClick={() => remove(index)}
         sx={{
           position: 'absolute',
-          right: 2,
-          top: 2,
+          right: 1,
+          top: 1,
           fontSize: '2em',
         }}
       />
       <UnResizeableTextarea
-        register={register(`qnaList.${index}.question`)}
+        register={register(`qnaList.${index}.question` as Path<T>)}
         placeholder="질문을 작성해주세요."
         maxSize={10}
-        style={{ resize: 'vertical' }}
+        style={{ resize: 'vertical', minHeight: '5.5rem' }}
       />
       <UnResizeableTextarea
-        register={register(`qnaList.${index}.answer`)}
+        register={register(`qnaList.${index}.answer` as Path<T>)}
         placeholder="답변을 작성해주세요."
         maxSize={30}
         style={{ minHeight: '15rem', resize: 'vertical' }}
@@ -78,14 +75,20 @@ export default function CoverLetterItem({
 }
 
 const ItemsContainer = styled.div`
-  ${styleMixin.Column()}
   position: relative;
   width: 100%;
-  padding: 2.5em 0.8em 1em 0.8em;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${(props) => props.theme.colors.text};
-  min-height: 25rem;
-  border-radius: 8px;
-  box-shadow: ${V.boxShadow3};
-  margin: 2.5rem auto;
+  padding: 2.5rem 1.8rem;
+  margin: 2rem 0;
+  background: ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.mainLine};
+  border-radius: 16px;
+  transition: all 0.2s ease;
+  &:has(textarea:focus) {
+    border-color: ${(props) => props.theme.colors.signatureColor};
+  }
+
+  textarea:focus {
+    color: ${(props) => props.theme.colors.dark};
+    background-color: ${(props) => props.theme.colors.highlightColor};
+  }
 `;

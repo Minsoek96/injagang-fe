@@ -121,7 +121,7 @@ const ModalHeader = styled.header`
 `;
 
 const Title = styled.h2`
-  color: #333333;
+  color: ${(props) => props.theme.colors.signatureText};
   font-size: 2rem;
   font-weight: 600;
   word-break: keep-all;
@@ -140,7 +140,8 @@ const Message = styled.p`
   line-height: 1.6;
   white-space: pre-line;
   margin-bottom: 3rem;
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: 500;
 
   @media screen and (max-width: ${V.mediaMobile}) {
     font-size: 1.6rem;

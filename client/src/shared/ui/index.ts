@@ -12,5 +12,6 @@ export * from './markdown';
 export * from './progressbar';
 export * from './explanation';
 export * from './uncontrolled';
+export * from './error-boundary';
 
 // TODO : uncontrolled UI Controller 활용에 대한 검토

@@ -12,7 +12,7 @@ describe('CoverLetterItem', () => {
   const mockRemove = jest.fn();
 
   function Wrapper() {
-    const { register, control } = useForm<coverLetterType.ICoverLetter>({
+    const { register, control } = useForm<coverLetterType.IWriteCoverLetter>({
       defaultValues: {
         qnaList: [
           { question: '', answer: '' },

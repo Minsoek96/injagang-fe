@@ -1,5 +1,8 @@
 import TestProvider from '@/fixutures/TestProvider';
 import DraggedAnswer from '@/src/features/qna/dragview/DraggedAnswer';
+
+import { defaultTheme } from '@/src/app/styles';
+
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
@@ -40,7 +43,7 @@ describe('DraggedAnswer', () => {
     it('선택단어는 하이라이트 효과를 낸다.', () => {
       renderComponent();
       const searchSelected = screen.getByText(new RegExp(selectedText));
-      expect(searchSelected).toHaveStyle('background: #ff8800');
+      expect(searchSelected).toHaveStyle(`background: ${defaultTheme.colors.highlightColor}`);
     });
 
     it('끝 단어가 렌더링된다.', () => {

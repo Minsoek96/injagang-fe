@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-import { S } from '@/src/entities/coverLetter';
-import { boardQueries } from '@/src/entities/qnaboard';
+import { boardQueries, S } from '@/src/entities/qnaboard';
 
 import AnswerDragItem from './AnswerDragItem';
 

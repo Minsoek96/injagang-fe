@@ -7,7 +7,7 @@ import { CoverLetterCreator } from '@/src/features/coverletter/new';
 import { styleMixin } from '@/src/shared/styles';
 import { Spinner } from '@/src/shared/ui';
 
-function CoverLetterEditorPage() {
+function CoverLetterCreaterPage() {
   return (
     <CoverLetterStyle>
       <Suspense fallback={<Spinner />}>
@@ -17,7 +17,7 @@ function CoverLetterEditorPage() {
   );
 }
 
-export default CoverLetterEditorPage;
+export default CoverLetterCreaterPage;
 
 const CoverLetterStyle = styled.div`
   ${styleMixin.Column('flex-start')}

@@ -9,7 +9,6 @@ const darkTheme: Theme = {
     logo: '#ffffff',
     text: '#fdfdfd',
     lightText: '#dedede',
-    highlight: '#b32eb3',
 
     svgColor: '#ffffff',
     svgOnColor: '#ff8800',
@@ -22,7 +21,15 @@ const darkTheme: Theme = {
     dropBoxColor: '#fff',
     brandColor: '#e00000',
     boardText: '#B8B8B8',
-    highlightColor: 'rgba(255, 192, 128, 1)',
+    highlightColor: '#FFC375',
+
+    signatureText: '#2D3748',
+    signatureHover: '#FF9933',
+
+    emptyGray: '#666666',
+
+    highlight: '#FF9933',
+    dark: '#0f1419',
   },
 };
 

@@ -8,7 +8,6 @@ import {
 /** 샘플 자소서 작성 목록 */
 const sampleCoverLetters: IWriteCoverLetter = {
   title: '',
-  owner: true,
   qnaList: [
     { question: 'testQ', answer: 'testA' },
     { question: 'testQ', answer: 'testA' },

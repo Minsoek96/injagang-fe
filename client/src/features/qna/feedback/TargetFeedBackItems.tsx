@@ -4,13 +4,9 @@ import styled from 'styled-components';
 
 import { feedbackType } from '@/src/entities/feedback';
 
-import {
-  MainButton,
-  ResizeableTextarea,
-  Container,
-} from '@/src/shared/ui';
+import { MainButton, ResizeableTextarea } from '@/src/shared/ui';
 import { useModal } from '@/src/shared/hooks';
-import { V } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 type FeedBackItemsProps = {
   target: string;
@@ -18,7 +14,7 @@ type FeedBackItemsProps = {
   feedbackId: number;
   owner: boolean;
   handleUpdateFeedBack: (feedback: feedbackType.IReviseFeedBack) => void;
-  handleDeleteFeedBack: (id:number) => void;
+  handleDeleteFeedBack: (id: number) => void;
 };
 
 /** FeedBackItems 조회된 피드백 아이템
@@ -49,129 +45,180 @@ function FeedBackItems({
         reviseContent: text,
       });
     }
-    closeReadOnly();
-  };
-
-  const closeReadOnly = () => {
     setIsReadOnly(true);
   };
 
-  const openReadOnly = () => {
-    setIsReadOnly(false);
-  };
-
-  const userEditConfirm = () => {
+  const handleEdit = () => {
     setModal({
-      onAction: openReadOnly,
-      title: '경고',
-      message: '정말 피드백 수정을 원하시나요?',
+      onAction: () => setIsReadOnly(false),
+      title: '피드백 수정',
+      message: '피드백 내용을 수정하시겠습니까?',
     });
   };
 
-  const userDeleteConfirm = () => {
+  const handleDelete = () => {
     setModal({
       onAction: () => handleDeleteFeedBack(feedbackId),
-      title: '경고',
-      message: '정말 피드백 삭제를 원하시나요?',
+      title: '피드백 삭제',
+      message: '정말 이 피드백을 삭제하시겠습니까?',
     });
   };
+
   return (
-    <Container.ArticleCard
-      $size={{
-        width: '100%',
-        height: '100%',
-        flex: 'col',
-        isMedia: true,
-      }}
-    >
-      <CorrectionContainer>
-        <span className="correction_title">피드백 첨부:</span>
-        <p className="correction_sentence">{target}</p>
-      </CorrectionContainer>
-      {isReadOnly ? (
-        <CommentReadOnlyWrapper>
-          <p>{text}</p>
-        </CommentReadOnlyWrapper>
-      ) : (
-        <ResizeableTextarea
-          placeholder="피드백을 입력해주세요."
-          text={text}
-          setText={setText}
-          readOnly={isReadOnly}
-          maxSize={50}
-          sx={{ overflow: 'hidden', minHeight: 'auto' }}
-        />
-      )}
-      <CommentFooter>
-        {owner && (
-          <ControlRightButtons>
-            <MainButton
-              label={isReadOnly ? '편집' : '수정완료'}
-              onClick={isReadOnly ? userEditConfirm : handleUpdate}
-              sx={{ width: '15rem', font: '1.5rem' }}
-            />
-            <MainButton
-              label="삭제"
-              onClick={userDeleteConfirm}
-              sx={{ width: '15rem', font: '1.5rem' }}
-            />
-          </ControlRightButtons>
+    <Container>
+      <Header>
+        <FeedbackLabel>첨삭 피드백</FeedbackLabel>
+        <FeedbackMeta>
+          {owner && <MetaItem>내가 작성한 피드백</MetaItem>}
+        </FeedbackMeta>
+      </Header>
+
+      <TargetWrapper>
+        <TargetLabel>
+          <HighlightIcon />
+          첨삭 대상 문장
+        </TargetLabel>
+        <TargetContent>{target}</TargetContent>
+      </TargetWrapper>
+
+      <FeedbackWrapper>
+        <ContentLabel>
+          <FeedbackIcon />
+          피드백 내용
+        </ContentLabel>
+        {isReadOnly ? (
+          <ReadOnlyContent>{text}</ReadOnlyContent>
+        ) : (
+          <ResizeableTextarea
+            placeholder="피드백을 입력해주세요."
+            text={text}
+            setText={setText}
+            readOnly={isReadOnly}
+            maxSize={50}
+            sx={{ minHeight: 'auto', padding: '1rem' }}
+          />
         )}
-      </CommentFooter>
-    </Container.ArticleCard>
+      </FeedbackWrapper>
+
+      {owner && (
+        <ActionButtons>
+          <MainButton
+            label={isReadOnly ? '수정' : '완료'}
+            onClick={isReadOnly ? handleEdit : handleUpdate}
+            sx={{ width: '12rem' }}
+          />
+          <MainButton
+            label="삭제"
+            onClick={handleDelete}
+            sx={{ width: '12rem' }}
+          />
+        </ActionButtons>
+      )}
+    </Container>
   );
 }
 
 export default FeedBackItems;
 
-const CorrectionContainer = styled.div`
+const Container = styled.div`
   width: 100%;
-  color: ${(props) => props.theme.colors.boardText};
-
-  .correction_title {
-    font-weight: bold;
-    color: red;
-    text-align: left;
-  }
-
-  .correction_sentence {
-    padding: 0.2em;
-    margin-top: 1rem;
-    word-break: break-all;
-    line-height: 1.5;
-    border-left: 0.3em solid ${(props) => props.theme.colors.brandColor};
-    background-color: ${(props) => props.theme.colors.primary};
-    border-radius: 1rem;
-  }
-`;
-
-const CommentFooter = styled.div`
-  margin-top: 15px;
-  width: 100%;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid ${(props) => props.theme.colors.mainLine};
+  border-radius: 1.6rem;
+  transition: all 0.2s ease;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  gap: 2rem;
+
+  &:hover {
+    border-color: ${(props) => props.theme.colors.signatureColor};
+  }
 `;
 
-const CommentReadOnlyWrapper = styled.div`
-  width: 100%;
-  text-align: left;
-  color: ${(props) => props.theme.colors.boardText};
-  margin-top: 1.5rem;
+const Header = styled.div`
+  ${styleMixin.Flex('space-between')};
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid ${(props) => props.theme.colors.mainLine};
+`;
+
+const FeedbackLabel = styled.span`
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: ${(props) => props.theme.colors.text};
+`;
+
+const FeedbackMeta = styled.div`
+  ${styleMixin.Flex('flex-start')}
+  gap: 1.2rem;
+`;
+
+const MetaItem = styled.span`
+  font-size: 1.4rem;
+  color: ${(props) => props.theme.colors.signatureColor};
+`;
+
+const TargetWrapper = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const TargetLabel = styled.div`
+  ${styleMixin.Flex('flex-start')}
+  gap: 0.8rem;
+  color: ${(props) => props.theme.colors.signatureColor};
+  font-weight: 600;
+  margin-bottom: 1rem;
+
+  svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+`;
+
+const ContentLabel = styled(TargetLabel)`
+  margin-bottom: 1.5rem;
+`;
+
+const TargetContent = styled.p`
+  padding: 1.5rem;
+  background: ${(props) => props.theme.colors.primary};
+  border-left: 3px solid ${(props) => props.theme.colors.signatureColor};
   border-radius: 0.8rem;
-  padding: 1em 0.5em;
+  line-height: 1.6;
   word-break: break-all;
-  line-height: 1.5;
 `;
 
-const ControlRightButtons = styled.div`
-  display: flex;
-  button:first-child {
-    margin-right: 5px;
-  }
+const FeedbackWrapper = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const ReadOnlyContent = styled.div`
+  padding: 1.5rem;
+  color: ${(props) => props.theme.colors.boardText};
+  line-height: 1.6;
+  word-break: break-all;
+  background: ${(props) => props.theme.colors.primary};
+  border-radius: 0.8rem;
+`;
+
+const HighlightIcon = styled.div`
+  width: 0.4rem;
+  height: 1.8rem;
+  background: ${(props) => props.theme.colors.signatureColor};
+  border-radius: 2px;
+`;
+
+const FeedbackIcon = styled(HighlightIcon)`
+  background: ${(props) => props.theme.colors.mainLine};
+`;
+
+const ActionButtons = styled.div`
+  ${styleMixin.Flex('flex-end')}
+  gap: 1rem;
 
   @media screen and (max-width: ${V.mediaMobile}) {
     button {
-      width: auto!important;;
+      width: 100% !important;
     }
   }
 `;

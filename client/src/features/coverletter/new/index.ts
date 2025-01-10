@@ -1,1 +1,1 @@
-export { default as CoverLetterCreator } from './CoverLetterCreator';
+export { default as CoverLetterCreator } from './ui/CoverLetterCreator';

@@ -1,4 +1,4 @@
-import { S } from '@/src/entities/coverLetter';
+import { S } from '@/src/entities/qnaboard';
 
 type CoverLetterDetailItemsProps = {
   answer: string;

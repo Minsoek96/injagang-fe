@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import axios from 'axios';
 
 type Props = {
   children: React.ReactNode;
@@ -18,7 +19,16 @@ function ReactQueryProvider({ children }: Props) {
           refetchOnWindowFocus: false,
           retryOnMount: true,
           refetchOnReconnect: false,
+          throwOnError: true,
           retry: 3,
+        },
+        mutations: {
+          throwOnError: (error: unknown) => {
+            if (axios.isAxiosError(error)) {
+              return error.response?.status === 401;
+            }
+            return false;
+          },
         },
       },
     }),

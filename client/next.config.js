@@ -25,12 +25,22 @@ const nextConfig = {
   },
 
   async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_BACKEND_SERVER_API}/:path*`,
-      },
-    ];
+    // rewrite는 beforeFiles, afterFiles, fallback 세 단계로 나눠서 처리할 수 있다.
+
+    return {
+      beforeFiles: [
+        {
+          source: '/api/test/:path*',
+          destination: '/api/test/:path*',
+        },
+      ],
+      fallback: [
+        {
+          source: '/api/:path*',
+          destination: `${process.env.NEXT_PUBLIC_BACKEND_SERVER_API}/:path*`,
+        },
+      ],
+    };
   },
 };
 

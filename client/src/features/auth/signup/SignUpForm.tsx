@@ -53,6 +53,7 @@ export default function SignUpForm({ onSubmit, labels }: Props) {
       <MainButton
         type="submit"
         label="회원가입"
+        variant="signature"
       />
     </Form>
   );
@@ -68,11 +69,6 @@ const Form = styled.form`
   button {
     width: 100%;
     height: 3.5rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-
-    background-color: ${(props) => props.theme.colors.signatureColor};
-    color: white;
   }
 
   @media screen and (max-width: ${V.mediaMobile}) {

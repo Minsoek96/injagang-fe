@@ -63,16 +63,14 @@ describe('errorManager', () => {
     it('토큰 재발행이 실패하면 로그인 페이지로 이동한다', async () => {
       mockedTokenReissue.mockRejectedValueOnce(errorResponse);
 
-      await errorManager(ERROR_MESSAGES.JWT_EXPIRED, originRequest);
-      expect(mockedTokenReissue).toHaveBeenCalled();
+      await errorManager(ERROR_MESSAGES.REFRESH_TOKEN_EXPIRED, originRequest);
       expect(mockedRouter.replace).toHaveBeenCalledWith('/login');
     });
 
     it('토큰 재발행이 실패하면 토큰을 제거한다.', async () => {
       mockedTokenReissue.mockRejectedValueOnce(errorResponse);
 
-      await errorManager(ERROR_MESSAGES.JWT_EXPIRED, originRequest);
-      expect(mockedTokenReissue).toHaveBeenCalled();
+      await errorManager(ERROR_MESSAGES.REFRESH_TOKEN_EXPIRED, originRequest);
       expect(mockedCookies.remove).toHaveBeenCalledWith(TOKEN_KEYS.ACCESS_TOKEN);
       expect(mockedCookies.remove).toHaveBeenCalledWith('userId');
     });

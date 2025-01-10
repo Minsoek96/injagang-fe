@@ -2,15 +2,14 @@ const defaultTheme = {
   colors: {
     bodyColor: '#F0F2F5',
     primary: '#FDFDFD',
-    signatureColor: '#ff8800',
+    signatureColor: '#0F766E',
     button: '#FDFDFD',
     logo: '#000000',
     text: '#0f1419',
     lightText: '#333333',
-    highlight: '#fff',
 
     svgColor: '#666666',
-    svgOnColor: '#ff8800',
+    svgOnColor: '#0F766E',
     mainLine: 'rgb(219, 220, 223)',
     mainHover: 'rgba(0, 0, 0, 0.1)',
     textArea: '#F0F2F5',
@@ -20,7 +19,14 @@ const defaultTheme = {
     dropBoxColor: '#2e2e2e',
     brandColor: '#e00000',
     boardText: '#0f1419',
-    highlightColor: '#ff8800',
+
+    highlight: '#145853ec', // 인터뷰 마커
+    highlightColor: '#144b4667', // 글자 형광 마크
+    signatureText: '#FFFFFF',
+    signatureHover: '#29a197',
+
+    emptyGray: '#666666',
+    dark: '#0f1419',
   },
 };
 export default defaultTheme;

@@ -27,7 +27,7 @@ describe('StepMarker', () => {
   it('currentStep이 index보다 클 때 완료된 스타일이 적용된다.', () => {
     renderStepMarker(1, 0);
     const marker = screen.getByTestId('marker');
-    expect(marker).toHaveStyleRule('background-color', '#ff8800');
+    expect(marker).toHaveStyleRule('background-color', '#0F766E');
     expect(marker).toHaveStyleRule('color', '#0f1419');
   });
 

@@ -94,11 +94,16 @@ export default function InterviewRecordingQueue({
       <RecordingControls>
         {recordStatus === 'pending' ? (
           <>
-            <MainButton onClick={startInterviewRecord} label="면접녹화시작" />
+            <MainButton
+              onClick={startInterviewRecord}
+              label="면접녹화시작"
+              variant="signature"
+            />
             <MainButton
               onClick={() => setInterviewMode('result')}
               label="결과보기"
               disabled={!storeChunks.length}
+              variant="signature"
             />
           </>
         ) : (
@@ -152,6 +157,7 @@ const RecordingControls = styled.div`
   button {
     font-size: 1.8rem;
     background-color: ${(props) => props.theme.colors.signatureColor};
+    color: white;
   }
 
   @media screen and (max-width: ${V.mediaMobile}) {

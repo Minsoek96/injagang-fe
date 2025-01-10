@@ -46,10 +46,9 @@ const Wrapper = styled.div`
   > textarea {
     margin-top: 1rem;
     background-color: white;
-    color: black;
 
     &:focus {
-      border: 0.3em solid #6b7a90;
+      border: 1px solid ${(props) => props.theme.colors.signatureColor};
     }
   }
 `;

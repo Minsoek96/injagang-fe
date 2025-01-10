@@ -8,14 +8,14 @@ function RunningLoader() {
         <Runner>
           <StickMan>
             {/* Head */}
-            <circle cx="15" cy="8" r="6" fill="#ff8800" />
+            <circle cx="15" cy="8" r="6" fill="#22C55E" />
             {/* Body */}
             <line
               x1="15"
               y1="14"
               x2="15"
               y2="28"
-              stroke="#ff8800"
+              stroke="#22C55E"
               strokeWidth="3"
               strokeLinecap="round"
             />
@@ -26,7 +26,7 @@ function RunningLoader() {
                 y1="18"
                 x2="8"
                 y2="24"
-                stroke="#ff8800"
+                stroke="#22C55E"
                 strokeWidth="3"
                 strokeLinecap="round"
               />
@@ -35,7 +35,7 @@ function RunningLoader() {
                 y1="18"
                 x2="22"
                 y2="24"
-                stroke="#ff8800"
+                stroke="#22C55E"
                 strokeWidth="3"
                 strokeLinecap="round"
               />
@@ -44,7 +44,7 @@ function RunningLoader() {
                 y1="28"
                 x2="8"
                 y2="36"
-                stroke="#ff8800"
+                stroke="#22C55E"
                 strokeWidth="3"
                 strokeLinecap="round"
               />
@@ -53,7 +53,7 @@ function RunningLoader() {
                 y1="28"
                 x2="22"
                 y2="36"
-                stroke="#ff8800"
+                stroke="#22C55E"
                 strokeWidth="3"
                 strokeLinecap="round"
               />

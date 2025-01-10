@@ -1,4 +1,4 @@
-interface IQnaList {
+export interface IQnaList {
   question: string;
   answer: string;
 }
@@ -12,7 +12,8 @@ interface ICoverLetterBase {
   owner: boolean;
 }
 
-export interface IWriteCoverLetter extends ICoverLetterBase {
+export interface IWriteCoverLetter {
+  title: string,
   qnaList: IQnaList[];
 }
 

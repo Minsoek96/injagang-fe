@@ -15,14 +15,14 @@ function LoginPage() {
         <IconContainer>
           <IconWrapper>
             <IconBackground>
-              <IoDocumentTextOutline size="2.5rem" color="#ff8800" />
+              <IoDocumentTextOutline />
             </IconBackground>
             <IconText>자기소개서</IconText>
           </IconWrapper>
 
           <IconWrapper>
             <IconBackground>
-              <IoPeopleOutline size="2.5rem" color="#ff8800" />
+              <IoPeopleOutline />
             </IconBackground>
             <IconText>모의면접</IconText>
           </IconWrapper>
@@ -78,6 +78,11 @@ const IconBackground = styled.div`
   border-radius: 1rem;
   background-color: #ffffff;
   border: 1px solid #f0f0f0;
+
+  svg {
+    color: ${(props) => props.theme.colors.signatureColor};
+    font-size: 2.5rem;
+  }
 `;
 
 const IconWrapper = styled.div`
