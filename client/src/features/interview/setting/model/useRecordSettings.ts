@@ -20,7 +20,7 @@ export default function useRecordSettings() {
 
   const showErrorModal = useCallback(() => {
     setModal({
-      title: 'Warring',
+      title: 'Warning',
       message: '디바이스 연결에 실패했습니다 ㅜㅜ',
     });
     initDevices();
@@ -32,7 +32,7 @@ export default function useRecordSettings() {
     videoId: videoDevice?.deviceId,
   });
 
-  const FetchSettingDevices = useCallback(async () => {
+  const fetchSettingDevices = useCallback(async () => {
     try {
       const { audioDevices, videoDevices } = await getDevices();
       setAudioLabels(audioDevices);
@@ -43,9 +43,9 @@ export default function useRecordSettings() {
   }, []);
 
   useEffect(() => {
-    FetchSettingDevices();
+    fetchSettingDevices();
     const handleFetchDevices = () => {
-      FetchSettingDevices();
+      fetchSettingDevices();
     };
     navigator.mediaDevices.addEventListener('devicechange', handleFetchDevices);
     return () =>

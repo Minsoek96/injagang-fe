@@ -11,13 +11,13 @@ const errorManager = async (
   originRequest: AxiosRequestConfig,
   error: AxiosError,
 ) => {
-  switch (message) {
-  case ERROR_MESSAGES.JWT_EXPIRED:
-    jwtExpired(originRequest);
-    break;
-  default:
-    unauthorized(error);
-    break;
+  try {
+    if (message === ERROR_MESSAGES.JWT_EXPIRED) {
+      return await jwtExpired(originRequest);
+    }
+    return unauthorized(error);
+  } catch (e) {
+    return Promise.reject(e);
   }
 };
 
@@ -25,9 +25,6 @@ const errorManager = async (
 const unauthorized = (error: AxiosError) => {
   removeCookies();
   return Promise.reject(error);
-  // if (typeof window !== 'undefined') {
-  //   Router.replace('/login');
-  // }
 };
 
 /** jwt 검증 함수  */
@@ -37,10 +34,11 @@ const jwtExpired = async (originRequest: AxiosRequestConfig) => {
     if (response) {
       const { access } = response.data;
       setCookies({ accessToken: access });
-      await reRequest(originRequest);
+      return await reRequest(originRequest);
     }
+    throw new Error('토큰 재발급 응답이 없습니다');
   } catch (error) {
-    // errorManager처리 순환을 위한 캐치만
+    return Promise.reject(error);
   }
 };
 
