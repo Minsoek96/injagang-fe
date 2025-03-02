@@ -26,7 +26,9 @@ export default function useRecordSettings() {
     initDevices();
   }, []);
 
-  const { videoRef, handleRecord, getDevices } = useMediaRecord({
+  const {
+    videoRef, handleRecord, getDevices,
+  } = useMediaRecord({
     onError: () => showErrorModal(),
     audioId: audioDevice?.deviceId,
     videoId: videoDevice?.deviceId,
@@ -47,6 +49,7 @@ export default function useRecordSettings() {
     const handleFetchDevices = () => {
       fetchSettingDevices();
     };
+
     navigator.mediaDevices.addEventListener('devicechange', handleFetchDevices);
     return () =>
       navigator.mediaDevices.removeEventListener(
