@@ -7,11 +7,11 @@ const context = describe;
 describe('ExpectedQuestionList', () => {
   const mockHandleCheckList = jest.fn();
 
-  const renderComponent = (mockCheckList: number[]) => {
+  const renderComponent = (mockCheckList: number[], isEmpty = false) => {
     render(
       <TestProvider>
         <ExpectedQuestionList
-          questions={sampleResponseQuestions}
+          questions={isEmpty ? [] : sampleResponseQuestions}
           checkList={mockCheckList}
           handleCheckList={mockHandleCheckList}
         />
@@ -32,6 +32,17 @@ describe('ExpectedQuestionList', () => {
         const checkbox = item.querySelector('input[type="checkbox"]');
         expect(checkbox).toBeChecked();
       });
+    });
+  });
+
+  context('선택 되었지만 리스트가 존재하지 않는 경우', () => {
+    it('사용자에게 메시지를 알려야 한다.', () => {
+      const mockEmptyList = [0];
+      renderComponent(mockEmptyList, true);
+
+      const searchText = '선택된 리스트가 존재하지 않습니다.';
+
+      expect(screen.getByText(new RegExp(searchText))).toBeInTheDocument();
     });
   });
 

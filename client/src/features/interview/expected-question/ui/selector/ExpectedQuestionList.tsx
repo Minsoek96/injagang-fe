@@ -22,6 +22,13 @@ function ExpectedQuestionList({
   checkList,
   handleCheckList,
 }: ExpectedQuestionListProps) {
+  if (!questions.length) {
+    return (
+      <Container>
+        <EmptyText>선택된 리스트가 존재하지 않습니다.!!!</EmptyText>
+      </Container>
+    );
+  }
   return (
     <Container>
       {questions
@@ -45,4 +52,15 @@ const Container = styled.ul`
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+`;
+
+const EmptyText = styled.p`
+  ${styleMixin.Column()}
+  height: 100%;
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: ${(props) => props.theme.colors.emptyGray};
 `;
