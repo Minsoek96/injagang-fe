@@ -11,6 +11,7 @@ interface ErrorBoundaryState {
   errorData: typeof ERROR_CODE[keyof typeof ERROR_CODE] | null;
 }
 
+const isDevelopment = process.env.NODE_ENV === 'development';
 class GlobalErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryState> {
   constructor(props: PropsWithChildren) {
     super(props);
@@ -19,6 +20,9 @@ class GlobalErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryStat
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     if (error instanceof AxiosError) {
+      if (isDevelopment) {
+        console.error(error);
+      }
       const serverErrorCode = error?.response?.data?.code;
       const httpErrorCode = error?.response?.status;
       const axiosErrorCode = error?.code;
