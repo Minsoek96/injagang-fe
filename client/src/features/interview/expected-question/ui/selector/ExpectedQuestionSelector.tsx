@@ -63,7 +63,7 @@ function ExpectedQuestionSelector() {
         renderFallback={(_, onReset) => (
           <ErrorFallback>
             <h3>잠시만요!</h3>
-            <p>컴포넌트를 불러오는 중 문제가 발생했습니다.</p>
+            <p>질문을 불러오는 중 문제가 발생했습니다.</p>
             <p>불편을 끼쳐 죄송합니다.🙇‍♂️🙇‍♂️🙇‍♂️</p>
             <MainButton onClick={onReset} label="다시 시도" variant="signature" />
           </ErrorFallback>

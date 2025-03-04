@@ -15,8 +15,6 @@ interface CoverLetterProps {
  * @param essayId : 선택된 자소서 아이디
  */
 function CoverLetterDetail({ essayId }: CoverLetterProps) {
-  const { data: coverLetterDetail } = coverLetterQueries.useFetchDetailCoverLetter(essayId);
-
   if (essayId === 0) {
     return (
       <div>
@@ -25,6 +23,9 @@ function CoverLetterDetail({ essayId }: CoverLetterProps) {
       </div>
     );
   }
+
+  const { data: coverLetterDetail } = coverLetterQueries.useFetchDetailCoverLetter(essayId);
+
   return (
     <S.container>
       {coverLetterDetail && (

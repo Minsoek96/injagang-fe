@@ -4,10 +4,14 @@ import { boardType, boardMutation } from '@/src/entities/qnaboard';
 
 import {
   Container,
+  ErrorBoundary,
+  ErrorFallback,
+  Spinner,
 } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 import { usePageRouter } from '@/src/shared/hooks';
 
+import { Suspense } from 'react';
 import QuestionCreateForm from './QuestionCreateForm';
 
 function QuestionComposer() {
@@ -21,7 +25,21 @@ function QuestionComposer() {
 
   return (
     <ComposerContainer>
-      <QuestionCreateForm onSubmit={onSubmit} />
+      <ErrorBoundary
+        renderFallback={(_, onReset) => (
+          <ErrorFallback
+            title="데이터를 불러올 수 없습니다."
+            message={
+              '자소서 데이터를 불러오는 과정에서 문제가 발생했습니다. \n 잠시 후 다시 시도해 주세요.'
+            }
+            onReset={onReset}
+          />
+        )}
+      >
+        <Suspense fallback={<Spinner />}>
+          <QuestionCreateForm onSubmit={onSubmit} />
+        </Suspense>
+      </ErrorBoundary>
     </ComposerContainer>
   );
 }
