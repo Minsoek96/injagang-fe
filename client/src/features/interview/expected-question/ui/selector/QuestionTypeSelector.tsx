@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { ComboBox } from '@/src/shared/ui/combobox';
 
-import { interviewType, useQuestionStore } from '@/src/entities/interview_question';
+import {
+  interviewType,
+  useQuestionStore,
+} from '@/src/entities/interview_question';
 import { V } from '@/src/shared/styles';
-import { useEffect, useState } from 'react';
 
 const InterViewSelectData = [
   { title: interviewType.QuestionType.CS, id: 'qeustion_1' },
@@ -22,19 +24,12 @@ interface IQuestionSelectorProps {
  * @param onReset : 질문 체크 해제
  */
 function QuestionTypeSelector({ onReset }: IQuestionSelectorProps) {
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setError(true);
-    }, 5000);
-  }, []);
   const { selectedType, setSelectedType } = useQuestionStore();
   const onChangeType = (type: interviewType.QuestionType | string) => {
     onReset();
     setSelectedType(type);
   };
-  if (error) throw Error('에러 발생');
+
   return (
     <Container>
       <ComboBox
