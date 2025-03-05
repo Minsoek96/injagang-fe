@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { styled } from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import { useModal } from '@/src/shared/hooks';
+import { useModal, useVoiceRecognition } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/ui';
 
+import { useRecordInfoStore } from '@/src/entities/interview_question';
 import useInterviewRecorder from '../model/useInterviewRecorder';
 import ScriptTextArea from './ScriptTextArea';
 import VideoHeader from './RecordingStatusHeader';
@@ -42,6 +43,14 @@ export default function InterviewRecordingQueue({
     storeChunks,
   } = useInterviewRecorder();
 
+  const {
+    voiceText,
+    startVoiceRecognition,
+    stopVoiceRecognition,
+  } = useVoiceRecognition();
+
+  const { setCurScript } = useRecordInfoStore();
+
   /** 메시지를 표시하고, 면접을 처음부터 다시 진행 설정 */
   const onCompleteMsg = () => {
     setModal({
@@ -56,6 +65,8 @@ export default function InterviewRecordingQueue({
   const endInterviewRecord = () => {
     setIsScriptView(false);
     handleRecordRemove();
+    stopVoiceRecognition();
+    setCurScript(voiceText);
     onChangeIndex(currentIndex + 1);
   };
 
@@ -75,7 +86,10 @@ export default function InterviewRecordingQueue({
     if (isSpeaking) return;
 
     await readCurrentScript();
-    if (videoRef.current) handleRecord();
+    if (videoRef.current) {
+      handleRecord();
+      startVoiceRecognition();
+    }
   };
 
   return (
