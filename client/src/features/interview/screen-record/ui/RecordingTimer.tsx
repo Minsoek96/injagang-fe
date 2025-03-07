@@ -25,7 +25,7 @@ export default function RecordingTimer({ isRunning }: Props) {
   );
 
   useEffect(() => {
-    if (!isRunning && time > 8) {
+    if (!isRunning && time > 6) {
       setCurTimer(formatTime.mmss(time));
       setTime(0);
     }

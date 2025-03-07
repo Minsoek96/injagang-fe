@@ -1,18 +1,23 @@
 import { create } from 'zustand';
 
+// TODOS : 스토어 분리 생각하기!!!
 type RecordInfo = {
   script: string;
   timer: string;
+  voiceScript: string;
 };
 
 type InterviewMode = 'pending' | 'record' | 'result';
 
 type State = {
+  // API 관련 상태
   interviewMode: InterviewMode;
   recordedChunks: Blob[];
   audioDevice: MediaDeviceInfo | null;
   videoDevice: MediaDeviceInfo | null;
+  // 유저 관련 상태
   recordInfoList: RecordInfo[];
+  curVoiceScript: string;
   curScript: string;
   curTimer: string;
 };
@@ -23,6 +28,7 @@ type Action = {
 
   setCurTimer: (timer: string) => void;
   setCurScript: (script: string) => void;
+  setCurVoiceScript: (voice: string) => void;
   initCurinfos: () => void;
 
   setAudioDevice: (devices: MediaDeviceInfo) => void;
@@ -41,20 +47,22 @@ type Action = {
  * recordInfoList : "유저가 녹화한 순서별 스크립트 기록"
  * curScript: "현재 녹화 입력 대본 기록"
  * curTimer: "현재 녹화 타이머 기록"
+ * curVoiceScript: "현재 완료된 음성 기록"
  */
-
 const useRecordInfoStore = create<State & Action>((set) => ({
   interviewMode: 'record',
   audioDevice: null,
   videoDevice: null,
   curScript: '',
   curTimer: '',
+  curVoiceScript: '',
   recordInfoList: [],
   recordedChunks: [],
 
   setCurTimer: (curTimer: string) => set({ curTimer }),
   setCurScript: (curScript: string) => set({ curScript }),
-  initCurinfos: () => set({ curTimer: '', curScript: '' }),
+  setCurVoiceScript: (curVoiceScript: string) => set({ curVoiceScript }),
+  initCurinfos: () => set({ curTimer: '', curScript: '', curVoiceScript: '' }),
 
   addRecordInfo: (newInfo: RecordInfo) => {
     set((state) => ({

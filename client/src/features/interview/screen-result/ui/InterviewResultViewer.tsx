@@ -37,6 +37,7 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
     counter,
   });
 
+  // TODO:
   return (
     <InterViewResultContainer>
       <RecordNavigation
@@ -50,6 +51,7 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
       <ResultControlsWrapper>
         <RecordingDetails
           question={question[counter]}
+          voiceScript={recordInfoList[counter]?.voiceScript || '발음 인식이 진행되지 않았습니다.'}
           script={recordInfoList[counter]?.script || '작성한 대본이 없습니다.'}
           timer={recordInfoList[counter]?.timer || '00:00'}
         />

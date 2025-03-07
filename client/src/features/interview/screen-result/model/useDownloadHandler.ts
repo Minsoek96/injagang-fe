@@ -5,6 +5,7 @@ type Props = {
   recordInfoList: {
     script: string;
     timer: string;
+    voiceScript: string;
   }[];
   question: string[];
   counter: number;
@@ -15,12 +16,13 @@ export function useDownloadHandler({
 }: Props) {
   const downloadScript = () => {
     if (!recordInfoList[counter]) return;
-    const { script, timer } = recordInfoList[counter];
+    const { script, timer, voiceScript } = recordInfoList[counter];
 
     const recordInfoBlob = new Blob(
       [
         `질문내용 : ${question[counter]}\n`,
         `작성한 대본 : ${script || '없음'}\n`,
+        `발음 확인 : ${voiceScript || '없음'}\n`,
         `녹화시간 : ${timer || '00:00'}\n`,
       ],
       { type: 'text/plain;charset=utf-8' },

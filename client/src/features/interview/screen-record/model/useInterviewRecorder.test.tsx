@@ -29,6 +29,7 @@ describe('useInterviewRecorder 훅 테스트', () => {
       setRecordedChunks: mockSetRecordedChunks,
       curScript: 'test script',
       curTimer: '00:01',
+      curVoiceScript: 'voice script',
       addRecordInfo: mockAddRecordInfo,
       initCurinfos: mockInitCurinfos,
       setInterviewMode: mockSetInterviewMode,
@@ -71,6 +72,7 @@ describe('useInterviewRecorder 훅 테스트', () => {
     expect(mockAddRecordInfo).toHaveBeenCalledWith({
       timer: '00:01',
       script: 'test script',
+      voiceScript: 'voice script',
     });
     expect(mockInitCurinfos).toHaveBeenCalled();
   });

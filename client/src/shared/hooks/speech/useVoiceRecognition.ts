@@ -36,7 +36,8 @@ const useVoiceRecognition = () => {
     if (!currentResult.isFinal) {
       setIntermediateVoiceText(currentResult[0].transcript);
     } else {
-      setVoiceText((prev) => `${prev} ${currentResult[0].transcript}`);
+      setVoiceText((prev) => `${prev} ${currentResult[0].transcript}
+`);
       setIntermediateVoiceText('');
     }
   }, []);

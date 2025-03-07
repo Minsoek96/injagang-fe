@@ -21,6 +21,7 @@ export default function useInterviewRecorder() {
     setRecordedChunks,
     curScript,
     curTimer,
+    curVoiceScript,
     addRecordInfo,
     initCurinfos,
     setInterviewMode,
@@ -46,15 +47,20 @@ export default function useInterviewRecorder() {
     setRecordedChunks(recordedChunks);
   }, [recordedChunks]);
 
+  // TODOS  : 여기도 정리 필요, 복잡함
   useEffect(() => {
     const recordingResults = () => {
-      addRecordInfo({ timer: curTimer ?? '', script: curScript ?? '' });
+      addRecordInfo({
+        timer: curTimer ?? '',
+        script: curScript ?? '',
+        voiceScript: curVoiceScript ?? '',
+      });
       initCurinfos();
     };
     if (recordStatus === 'pending' && curTimer) {
       recordingResults();
     }
-  }, [curTimer, curScript, addRecordInfo, initCurinfos, recordStatus]);
+  }, [curTimer, curScript, addRecordInfo, initCurinfos, recordStatus, curVoiceScript]);
 
   return {
     videoRef,

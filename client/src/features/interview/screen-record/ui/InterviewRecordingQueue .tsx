@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { styled } from 'styled-components';
 
@@ -49,7 +49,7 @@ export default function InterviewRecordingQueue({
     stopVoiceRecognition,
   } = useVoiceRecognition();
 
-  const { setCurScript } = useRecordInfoStore();
+  const { setCurVoiceScript } = useRecordInfoStore();
 
   /** 메시지를 표시하고, 면접을 처음부터 다시 진행 설정 */
   const onCompleteMsg = () => {
@@ -61,12 +61,15 @@ export default function InterviewRecordingQueue({
     });
   };
 
+  useEffect(() => {
+    setCurVoiceScript(voiceText);
+  }, [voiceText]);
+
   /** 면접 종료 */
   const endInterviewRecord = () => {
     setIsScriptView(false);
     handleRecordRemove();
     stopVoiceRecognition();
-    setCurScript(voiceText);
     onChangeIndex(currentIndex + 1);
   };
 
