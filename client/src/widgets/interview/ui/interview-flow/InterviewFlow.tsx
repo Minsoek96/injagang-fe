@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {
   useIntvContentStore,
   useIntvPlaylistStore,
-  useRecordInfoStore,
+  useIntvRecordStore,
 } from '@/src/entities/interview_question';
 
 import { Container } from '@/src/shared/ui';
@@ -18,13 +18,13 @@ export default function InterviewFlow() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
   // TODO : 통합 스토어정리
-  const { interviewMode } = useRecordInfoStore();
-  const { clearRecordCotents } = useIntvContentStore();
+  const { interviewMode } = useIntvRecordStore();
+  const { clearRecordContents } = useIntvContentStore();
 
   const { userPlayList } = useIntvPlaylistStore();
   const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
 
-  useEffect(() => () => clearRecordCotents(), []);
+  useEffect(() => () => clearRecordContents(), []);
 
   const renderComponent = () => {
     switch (interviewMode) {

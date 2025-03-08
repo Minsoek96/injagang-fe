@@ -1,12 +1,12 @@
 import { renderHook, act } from '@testing-library/react';
 
-import { useDeviceStore, useIntvContentStore, useRecordInfoStore } from '@/src/entities/interview_question';
+import { useDeviceStore, useIntvContentStore, useIntvRecordStore } from '@/src/entities/interview_question';
 import { useMediaRecord } from '@/src/shared/hooks';
 
 import useInterviewRecorder from './useInterviewRecorder';
 
 jest.mock('@/src/entities/interview_question', () => ({
-  useRecordInfoStore: jest.fn(),
+  useIntvRecordStore: jest.fn(),
   useDeviceStore: jest.fn(),
   useIntvContentStore: jest.fn(),
 }));
@@ -36,11 +36,11 @@ describe('useInterviewRecorder 훅 테스트', () => {
       curScript: 'test script',
       curTimer: '00:01',
       curVoiceScript: 'voice script',
-      addRecordContents: mockAddRecordContents,
+      addRecordContent: mockAddRecordContents,
       clearCurContent: mockClearCurContent,
     });
 
-    (useRecordInfoStore as unknown as jest.Mock).mockReturnValue({
+    (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
       setRecordedChunks: mockSetRecordedChunks,
       setInterviewMode: mockSetInterviewMode,
       recordedChunks: [],

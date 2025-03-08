@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { MdOutlineFileDownload, MdOutlineReplay } from 'react-icons/md';
 
-import { useIntvContentStore, useRecordInfoStore } from '@/src/entities/interview_question';
+import { useIntvContentStore, useIntvRecordStore } from '@/src/entities/interview_question';
 
 import { HideSvg } from '@/src/shared/ui';
 import { useCounter } from '@/src/shared/hooks';
@@ -22,7 +22,7 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
   const {
     recordedChunks: video,
     setInterviewMode,
-  } = useRecordInfoStore();
+  } = useIntvRecordStore();
   const {
     recordContents,
   } = useIntvContentStore();

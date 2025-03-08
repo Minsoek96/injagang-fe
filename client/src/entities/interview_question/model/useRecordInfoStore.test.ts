@@ -31,7 +31,7 @@ describe('useIntvContentStore', () => {
         timer: '00:05',
         voiceScript: 'voiceScript',
       };
-      act(() => useIntvContentStore.getState().addRecordContents(testInfo));
+      act(() => useIntvContentStore.getState().addRecordContent(testInfo));
       const { recordContents } = renderRecordHook();
       expect(recordContents[0]).toBe(testInfo);
     });

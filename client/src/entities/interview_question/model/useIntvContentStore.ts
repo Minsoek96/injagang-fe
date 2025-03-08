@@ -14,8 +14,8 @@ type State = {
 };
 
 type Action = {
-  addRecordContents: (content: RecordContent) => void;
-  clearRecordCotents: () => void;
+  addRecordContent: (content: RecordContent) => void;
+  clearRecordContents: () => void;
 
   // 현재 콘텐츠 관련 액션
   setCurScript: (script: string) => void;
@@ -39,12 +39,12 @@ const useIntvContentStore = create<State & Action>((set) => ({
   curVoiceScript: '',
 
   // 액션 - 기록 목록
-  addRecordContents: (newContent: RecordContent) => {
+  addRecordContent: (newContent: RecordContent) => {
     set((state) => ({
       recordContents: [...state.recordContents, newContent],
     }));
   },
-  clearRecordCotents: () => set({ recordContents: [] }),
+  clearRecordContents: () => set({ recordContents: [] }),
 
   // 액션 - 현재 콘텐츠
   setCurScript: (curScript: string) => set({ curScript }),

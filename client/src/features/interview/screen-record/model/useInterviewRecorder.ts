@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import {
   useDeviceStore,
   useIntvContentStore,
-  useRecordInfoStore,
+  useIntvRecordStore,
 } from '@/src/entities/interview_question';
 import { useMediaRecord } from '@/src/shared/hooks';
 
@@ -23,16 +23,15 @@ import { useMediaRecord } from '@/src/shared/hooks';
 export default function useInterviewRecorder() {
   const {
     setRecordedChunks,
-
     setInterviewMode,
     recordedChunks: storeChunks,
-  } = useRecordInfoStore();
+  } = useIntvRecordStore();
 
   const {
     curScript,
     curTimer,
     curVoiceScript,
-    addRecordContents,
+    addRecordContent,
     clearCurContent,
   } = useIntvContentStore();
 
@@ -58,7 +57,7 @@ export default function useInterviewRecorder() {
   // TODOS  : 여기도 정리 필요, 복잡함
   useEffect(() => {
     const recordingResults = () => {
-      addRecordContents({
+      addRecordContent({
         timer: curTimer ?? '',
         script: curScript ?? '',
         voiceScript: curVoiceScript ?? '',
@@ -71,7 +70,7 @@ export default function useInterviewRecorder() {
   }, [
     curTimer,
     curScript,
-    addRecordContents,
+    addRecordContent,
     clearCurContent,
     recordStatus,
     curVoiceScript,
