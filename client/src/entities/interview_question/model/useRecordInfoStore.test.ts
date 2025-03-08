@@ -29,6 +29,7 @@ describe('useRecordInfoStore', () => {
       const testInfo = {
         script: 'testScript',
         timer: '00:05',
+        voiceScript: 'voiceScript',
       };
       act(() => useRecordInfoStore.getState().addRecordInfo(testInfo));
       const { recordInfoList } = renderRecordHook();

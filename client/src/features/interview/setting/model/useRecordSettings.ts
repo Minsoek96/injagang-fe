@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useDeviceStore } from '@/src/entities/interview_question';
 
 import { useMediaRecord, useModal } from '@/src/shared/hooks';
 
@@ -15,15 +15,15 @@ export default function useRecordSettings() {
     setVideoDevice,
     audioDevice,
     videoDevice,
-    initDevices,
-  } = useRecordInfoStore();
+    resetDevices,
+  } = useDeviceStore();
 
   const showErrorModal = useCallback(() => {
     setModal({
       title: 'Warning',
       message: '디바이스 연결에 실패했습니다 ㅜㅜ',
     });
-    initDevices();
+    resetDevices();
   }, []);
 
   const {
@@ -40,7 +40,7 @@ export default function useRecordSettings() {
       setAudioLabels(audioDevices);
       setVideoLabels(videoDevices);
     } catch (error) {
-      initDevices();
+      resetDevices();
     }
   }, []);
 

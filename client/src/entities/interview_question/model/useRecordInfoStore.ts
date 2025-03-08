@@ -13,8 +13,6 @@ type State = {
   // API 관련 상태
   interviewMode: InterviewMode;
   recordedChunks: Blob[];
-  audioDevice: MediaDeviceInfo | null;
-  videoDevice: MediaDeviceInfo | null;
   // 유저 관련 상태
   recordInfoList: RecordInfo[];
   curVoiceScript: string;
@@ -30,10 +28,6 @@ type Action = {
   setCurScript: (script: string) => void;
   setCurVoiceScript: (voice: string) => void;
   initCurinfos: () => void;
-
-  setAudioDevice: (devices: MediaDeviceInfo) => void;
-  setVideoDevice: (devices: MediaDeviceInfo) => void;
-  initDevices: () => void;
 
   setRecordedChunks: (chunk: Blob[]) => void;
   setInterviewMode: (mode: InterviewMode) => void;
@@ -51,8 +45,6 @@ type Action = {
  */
 const useRecordInfoStore = create<State & Action>((set) => ({
   interviewMode: 'record',
-  audioDevice: null,
-  videoDevice: null,
   curScript: '',
   curTimer: '',
   curVoiceScript: '',
@@ -71,10 +63,6 @@ const useRecordInfoStore = create<State & Action>((set) => ({
   },
   initRecordInfoList: () =>
     set({ recordInfoList: [], recordedChunks: [], interviewMode: 'record' }),
-
-  setAudioDevice: (device: MediaDeviceInfo) => set({ audioDevice: device }),
-  setVideoDevice: (device: MediaDeviceInfo) => set({ videoDevice: device }),
-  initDevices: () => set({ audioDevice: null, videoDevice: null }),
 
   setRecordedChunks: (recordedChunks: Blob[]) => {
     set((state) => ({

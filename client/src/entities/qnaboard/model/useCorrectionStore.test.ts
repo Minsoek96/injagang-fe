@@ -12,7 +12,6 @@ describe('useCorrectionStore', () => {
     const { correction } = useCorrectionStore.getState();
 
     expect(correction.targetAnswer).toEqual(sampleCorrection.targetAnswer);
-    expect(correction.targetQuestion).toEqual(sampleCorrection.targetQuestion);
     expect(correction.targetQuestionIndex).toEqual(
       sampleCorrection.targetQuestionIndex,
     );

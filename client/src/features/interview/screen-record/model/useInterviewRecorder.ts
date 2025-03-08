@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useDeviceStore, useRecordInfoStore } from '@/src/entities/interview_question';
 import { useMediaRecord } from '@/src/shared/hooks';
 
 /**
@@ -26,9 +26,9 @@ export default function useInterviewRecorder() {
     initCurinfos,
     setInterviewMode,
     recordedChunks: storeChunks,
-    audioDevice,
-    videoDevice,
   } = useRecordInfoStore();
+
+  const { audioDevice, videoDevice } = useDeviceStore();
 
   const {
     videoRef,
