@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
 import {
-  useQuestionStore,
+  useIntvPlaylistStore,
   useRecordInfoStore,
 } from '@/src/entities/interview_question';
 
@@ -50,7 +50,7 @@ const InterviewFlow = dynamic(
 );
 
 function Interview() {
-  const { initUserPlayList, userPlayList } = useQuestionStore();
+  const { initUserPlayList, userPlayList } = useIntvPlaylistStore();
   const { videoDevice, audioDevice, initDevices } = useRecordInfoStore();
   const {
     handleDecrease: moveToPrevPage,

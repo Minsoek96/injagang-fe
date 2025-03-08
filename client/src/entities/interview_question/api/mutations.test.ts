@@ -9,7 +9,7 @@ import {
   sampleResponseRandomQ,
 } from '@/fixutures/entities/intervew_question';
 
-import useQuestionStore from '@/src/entities/interview_question/model/useQuestionStore';
+import useIntvPlaylistStore from '@/src/entities/interview_question/model/useIntvPlaylistStore';
 
 import { useToast } from '@/src/shared/hooks';
 
@@ -96,7 +96,7 @@ describe('useFetchRandomQuestion', () => {
       const { result } = testFetchRandomQuestion();
 
       await waitFor(() => result.current.isSuccess);
-      const { result: store } = renderHook(() => useQuestionStore());
+      const { result: store } = renderHook(() => useIntvPlaylistStore());
       const extractionRandomQuestions = sampleResponseRandomQ.map(
         (item) => item.questions,
       );

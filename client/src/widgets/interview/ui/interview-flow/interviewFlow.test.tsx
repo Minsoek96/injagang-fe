@@ -6,7 +6,7 @@ import { useRecordInfoStore } from '@/src/entities/interview_question';
 import InterviewFlow from './InterviewFlow';
 
 jest.mock('@/src/entities/interview_question', () => ({
-  useQuestionStore: jest.fn(() => ({
+  useIntvPlaylistStore: jest.fn(() => ({
     userPlayList: [
       { id: 1, question: '첫 번째 질문' },
       { id: 2, question: '두 번째 질문' },

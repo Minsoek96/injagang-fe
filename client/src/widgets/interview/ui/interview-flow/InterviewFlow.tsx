@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import {
-  useQuestionStore,
+  useIntvPlaylistStore,
   useRecordInfoStore,
 } from '@/src/entities/interview_question';
 
@@ -18,7 +18,7 @@ export default function InterviewFlow() {
 
   const { interviewMode, initRecordInfoList } = useRecordInfoStore();
 
-  const { userPlayList } = useQuestionStore();
+  const { userPlayList } = useIntvPlaylistStore();
   const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
 
   useEffect(() => () => initRecordInfoList(), []);

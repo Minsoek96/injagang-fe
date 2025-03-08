@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 
 import {
   interviewQueries,
-  useQuestionStore,
+  useIntvPlaylistStore,
   interviewMutation,
 } from '@/src/entities/interview_question';
 
@@ -18,7 +18,7 @@ import ActionButtons from './ActionButtons';
 
 function ExpectedQuestionSelector() {
   const { setModal } = useModal();
-  const { setUserPlayList } = useQuestionStore();
+  const { setUserPlayList } = useIntvPlaylistStore();
   const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions();
   const { mutate: deleteQuestions } = interviewMutation.useDeleteInterViewQ();
 
