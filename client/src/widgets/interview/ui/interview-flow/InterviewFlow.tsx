@@ -17,7 +17,6 @@ import { InterviewResultViewer, InterviewRecordingQueue } from '@/src/features/i
 export default function InterviewFlow() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
-  // TODO : 통합 스토어정리
   const { interviewMode } = useIntvRecordStore();
   const { clearRecordContents } = useIntvContentStore();
 

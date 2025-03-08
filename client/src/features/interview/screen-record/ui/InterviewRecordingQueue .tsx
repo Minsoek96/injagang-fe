@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 
 import { styled } from 'styled-components';
 
+import { useIntvContentStore } from '@/src/entities/interview_question';
+
 import { styleMixin, V } from '@/src/shared/styles';
 import { useModal, useVoiceRecognition } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/ui';
 
-import { useIntvContentStore } from '@/src/entities/interview_question';
 import useInterviewRecorder from '../model/useInterviewRecorder';
 import ScriptTextArea from './ScriptTextArea';
 import VideoHeader from './RecordingStatusHeader';
