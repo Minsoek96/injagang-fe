@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 
-import { useDeviceStore, useRecordInfoStore } from '@/src/entities/interview_question';
+import {
+  useDeviceStore,
+  useIntvContentStore,
+  useRecordInfoStore,
+} from '@/src/entities/interview_question';
 import { useMediaRecord } from '@/src/shared/hooks';
 
 /**
@@ -19,14 +23,18 @@ import { useMediaRecord } from '@/src/shared/hooks';
 export default function useInterviewRecorder() {
   const {
     setRecordedChunks,
-    curScript,
-    curTimer,
-    curVoiceScript,
-    addRecordInfo,
-    initCurinfos,
+
     setInterviewMode,
     recordedChunks: storeChunks,
   } = useRecordInfoStore();
+
+  const {
+    curScript,
+    curTimer,
+    curVoiceScript,
+    addRecordContents,
+    clearCurContent,
+  } = useIntvContentStore();
 
   const { audioDevice, videoDevice } = useDeviceStore();
 
@@ -50,17 +58,24 @@ export default function useInterviewRecorder() {
   // TODOS  : 여기도 정리 필요, 복잡함
   useEffect(() => {
     const recordingResults = () => {
-      addRecordInfo({
+      addRecordContents({
         timer: curTimer ?? '',
         script: curScript ?? '',
         voiceScript: curVoiceScript ?? '',
       });
-      initCurinfos();
+      clearCurContent();
     };
     if (recordStatus === 'pending' && curTimer) {
       recordingResults();
     }
-  }, [curTimer, curScript, addRecordInfo, initCurinfos, recordStatus, curVoiceScript]);
+  }, [
+    curTimer,
+    curScript,
+    addRecordContents,
+    clearCurContent,
+    recordStatus,
+    curVoiceScript,
+  ]);
 
   return {
     videoRef,

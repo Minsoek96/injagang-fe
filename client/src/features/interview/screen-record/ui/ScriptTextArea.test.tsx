@@ -4,12 +4,12 @@ import {
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useIntvContentStore } from '@/src/entities/interview_question';
 
 import ScriptTextArea from './ScriptTextArea';
 
 jest.mock('@/src/entities/interview_question', () => ({
-  useRecordInfoStore: jest.fn(),
+  useIntvContentStore: jest.fn(),
 }));
 
 const renderComponent = () =>
@@ -23,7 +23,7 @@ describe('ScriptTextArea', () => {
   const mockSetCurScript = jest.fn();
 
   beforeEach(() => {
-    (useRecordInfoStore as unknown as jest.Mock).mockReturnValue({
+    (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
       setCurScript: mockSetCurScript,
     });
   });

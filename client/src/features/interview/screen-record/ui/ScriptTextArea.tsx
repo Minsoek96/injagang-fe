@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { ResizeableTextarea } from '@/src/shared/ui';
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useIntvContentStore } from '@/src/entities/interview_question';
 import { useDebounce } from '@/src/shared/hooks';
 
 export default function ScriptTextArea() {
-  const { setCurScript } = useRecordInfoStore();
+  const { setCurScript } = useIntvContentStore();
   const [text, setText] = useState<string>('');
   const debounceValue = useDebounce(text, 500);
 

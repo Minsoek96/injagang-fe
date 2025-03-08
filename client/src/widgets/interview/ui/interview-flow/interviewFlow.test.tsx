@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import TestProvider from '@/fixutures/TestProvider';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useIntvContentStore, useRecordInfoStore } from '@/src/entities/interview_question';
 
 import InterviewFlow from './InterviewFlow';
 
@@ -12,9 +12,13 @@ jest.mock('@/src/entities/interview_question', () => ({
       { id: 2, question: '두 번째 질문' },
     ],
   })),
+  // TODO : 통합 스토어 처리
   useRecordInfoStore: jest.fn(() => ({
     interviewMode: 'record',
-    initRecordInfoList: jest.fn(),
+  })),
+
+  useIntvContentStore: jest.fn(() => ({
+    clearRecordCotents: jest.fn(),
   })),
 }));
 
@@ -81,7 +85,10 @@ describe('InterviewFlow 컴포넌트', () => {
       beforeEach(() => {
         (useRecordInfoStore as unknown as jest.Mock).mockReturnValue({
           interviewMode: 'record',
-          initRecordInfoList: jest.fn(),
+        });
+
+        (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
+          clearRecordCotents: jest.fn(),
         });
       });
 
@@ -99,7 +106,10 @@ describe('InterviewFlow 컴포넌트', () => {
       beforeEach(() => {
         (useRecordInfoStore as unknown as jest.Mock).mockReturnValue({
           interviewMode: 'result',
-          initRecordInfoList: jest.fn(),
+        });
+
+        (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
+          clearRecordCotents: jest.fn(),
         });
       });
 
@@ -117,7 +127,10 @@ describe('InterviewFlow 컴포넌트', () => {
       beforeEach(() => {
         (useRecordInfoStore as unknown as jest.Mock).mockReturnValue({
           interviewMode: 'unknow',
-          initRecordInfoList: jest.fn(),
+        });
+
+        (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
+          clearRecordCotents: jest.fn(),
         });
       });
 
@@ -131,18 +144,21 @@ describe('InterviewFlow 컴포넌트', () => {
 
   describe('언마운트 시 동작', () => {
     it('initRecordInfoList를 호출한다', () => {
-      const mockInitRecordInfoList = jest.fn();
+      const mockClearRecordContents = jest.fn();
 
       (useRecordInfoStore as unknown as jest.Mock).mockReturnValue({
         interviewMode: 'record',
-        initRecordInfoList: mockInitRecordInfoList,
+      });
+
+      (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
+        clearRecordCotents: mockClearRecordContents,
       });
 
       const { unmount } = renderComponent();
 
       unmount();
 
-      expect(mockInitRecordInfoList).toHaveBeenCalled();
+      expect(mockClearRecordContents).toHaveBeenCalled();
     });
   });
 });

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import {
+  useIntvContentStore,
   useIntvPlaylistStore,
   useRecordInfoStore,
 } from '@/src/entities/interview_question';
@@ -16,12 +17,14 @@ import { InterviewResultViewer, InterviewRecordingQueue } from '@/src/features/i
 export default function InterviewFlow() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
-  const { interviewMode, initRecordInfoList } = useRecordInfoStore();
+  // TODO : 통합 스토어정리
+  const { interviewMode } = useRecordInfoStore();
+  const { clearRecordCotents } = useIntvContentStore();
 
   const { userPlayList } = useIntvPlaylistStore();
   const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
 
-  useEffect(() => () => initRecordInfoList(), []);
+  useEffect(() => () => clearRecordCotents(), []);
 
   const renderComponent = () => {
     switch (interviewMode) {

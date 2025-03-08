@@ -2,7 +2,7 @@ import { saveAs } from 'file-saver';
 
 type Props = {
   video: Blob[];
-  recordInfoList: {
+  recordContents: {
     script: string;
     timer: string;
     voiceScript: string;
@@ -12,11 +12,11 @@ type Props = {
 };
 
 export function useDownloadHandler({
-  video, recordInfoList, question, counter,
+  video, recordContents, question, counter,
 }: Props) {
   const downloadScript = () => {
-    if (!recordInfoList[counter]) return;
-    const { script, timer, voiceScript } = recordInfoList[counter];
+    if (!recordContents[counter]) return;
+    const { script, timer, voiceScript } = recordContents[counter];
 
     const recordInfoBlob = new Blob(
       [

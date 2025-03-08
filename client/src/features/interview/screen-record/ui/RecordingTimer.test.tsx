@@ -1,7 +1,7 @@
 import { render, screen, act } from '@testing-library/react';
 import TestProvider from '@/fixutures/TestProvider';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useIntvContentStore } from '@/src/entities/interview_question';
 
 import RecordingTimer from './RecordingTimer';
 
@@ -9,7 +9,7 @@ jest.mock('@/src/entities/interview_question', () => {
   const actualHooks = jest.requireActual('@/src/entities/interview_question');
   return {
     ...actualHooks,
-    useRecordInfoStore: jest.fn(),
+    useIntvContentStore: jest.fn(),
   };
 });
 
@@ -28,7 +28,7 @@ describe('RecordingTimer 컴포넌트 테스트', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockSetCurTimer = jest.fn();
-    (useRecordInfoStore as unknown as jest.Mock).mockReturnValue({
+    (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
       setCurTimer: mockSetCurTimer,
     });
   });

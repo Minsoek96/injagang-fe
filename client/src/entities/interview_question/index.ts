@@ -7,3 +7,4 @@ export * as interviewType from './model/type';
 export { default as useIntvPlaylistStore } from './model/useIntvPlaylistStore';
 export { default as useRecordInfoStore } from './model/useRecordInfoStore';
 export { default as useDeviceStore } from './model/useDeviceStore';
+export { default as useIntvContentStore } from './model/useIntvContentStore';

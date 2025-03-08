@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { LuTimerReset } from 'react-icons/lu';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useIntvContentStore } from '@/src/entities/interview_question';
 import { styleMixin } from '@/src/shared/styles';
 import { useInterval } from '@/src/shared/hooks';
 import { formatTime } from '@/src/shared/utils';
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function RecordingTimer({ isRunning }: Props) {
-  const { setCurTimer } = useRecordInfoStore();
+  const { setCurTimer } = useIntvContentStore();
   const [time, setTime] = useState(0);
 
   useInterval(

@@ -22,7 +22,7 @@ describe('useDownloadHandler', () => {
       const { result } = renderHook(() =>
         useDownloadHandler({
           video: mockVideo,
-          recordInfoList: mockRecordInfoList,
+          recordContents: mockRecordInfoList,
           question: mockQuestions,
           counter: 0,
         }));
@@ -45,7 +45,7 @@ describe('useDownloadHandler', () => {
       const { result } = renderHook(() =>
         useDownloadHandler({
           video: mockVideo,
-          recordInfoList: [],
+          recordContents: [],
           question: mockQuestions,
           counter: 0,
         }));
@@ -66,7 +66,7 @@ describe('useDownloadHandler', () => {
       const { result } = renderHook(() =>
         useDownloadHandler({
           video: [],
-          recordInfoList: mockRecordInfoList,
+          recordContents: mockRecordInfoList,
           question: mockQuestions,
           counter: 0,
         }));
