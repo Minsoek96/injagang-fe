@@ -50,7 +50,7 @@ export default function InterviewRecordingQueue({
     stopVoiceRecognition,
   } = useVoiceRecognition();
 
-  const { setCurVoiceScript } = useIntvContentStore();
+  const { setCurVoiceScript, isVoiceTranscription } = useIntvContentStore();
 
   /** 메시지를 표시하고, 면접을 처음부터 다시 진행 설정 */
   const onCompleteMsg = () => {
@@ -63,14 +63,17 @@ export default function InterviewRecordingQueue({
   };
 
   useEffect(() => {
+    if (!isVoiceTranscription) return;
     setCurVoiceScript(voiceText);
-  }, [voiceText]);
+  }, [voiceText, isVoiceTranscription]);
 
   /** 면접 종료 */
   const endInterviewRecord = () => {
     setIsScriptView(false);
     handleRecordRemove();
-    stopVoiceRecognition();
+    if (isVoiceTranscription) {
+      stopVoiceRecognition();
+    }
     onChangeIndex(currentIndex + 1);
   };
 
@@ -92,7 +95,7 @@ export default function InterviewRecordingQueue({
     await readCurrentScript();
     if (videoRef.current) {
       handleRecord();
-      startVoiceRecognition();
+      isVoiceTranscription && startVoiceRecognition();
     }
   };
 

@@ -1,5 +1,6 @@
 import { ExplanationContent } from '@/src/shared/ui';
 
+import VoiceTranscriptionToggle from '@/src/features/interview/setting/ui/VoiceTranscriptionToggle';
 import useRecordSettings from '../model/useRecordSettings';
 import VideoSettingPlayer from './VideoPlayer';
 import DevicesSelector from './DevicesSelector';
@@ -34,6 +35,7 @@ export default function InterViewRecordSetting() {
         audioLabels={audioLabels}
         videoLabels={videoLabels}
       />
+      <VoiceTranscriptionToggle />
     </>
   );
 }

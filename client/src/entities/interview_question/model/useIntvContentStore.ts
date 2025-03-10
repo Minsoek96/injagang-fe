@@ -11,6 +11,7 @@ type State = {
   curScript: string;
   curTimer: string;
   curVoiceScript: string;
+  isVoiceTranscription: boolean;
 };
 
 type Action = {
@@ -22,6 +23,7 @@ type Action = {
   setCurTimer: (timer: string) => void;
   setCurVoiceScript: (voice: string) => void;
   clearCurContent: () => void;
+  toggleVoiceTranscription: () => void;
 };
 
 /**
@@ -37,6 +39,7 @@ const useIntvContentStore = create<State & Action>((set) => ({
   curScript: '',
   curTimer: '',
   curVoiceScript: '',
+  isVoiceTranscription: false,
 
   // 액션 - 기록 목록
   addRecordContent: (newContent: RecordContent) => {
@@ -56,6 +59,9 @@ const useIntvContentStore = create<State & Action>((set) => ({
       curScript: '',
       curVoiceScript: '',
     }),
+  toggleVoiceTranscription: () => set((state) => ({
+    isVoiceTranscription: !state.isVoiceTranscription,
+  })),
 }));
 
 export default useIntvContentStore;
