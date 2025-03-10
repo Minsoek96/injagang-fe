@@ -74,6 +74,12 @@ const useVoiceRecognition = () => {
     }
   }, []);
 
+  // 음성 인식 지원 여부
+  const checkSpeechRecognitionSupport = useCallback(() => {
+    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    return !!SpeechRecognitionAPI;
+  }, []);
+
   useEffect(() => {
     const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -104,6 +110,7 @@ const useVoiceRecognition = () => {
     intermediateVoiceText,
     startVoiceRecognition,
     stopVoiceRecognition,
+    checkSpeechRecognitionSupport,
   };
 };
 
