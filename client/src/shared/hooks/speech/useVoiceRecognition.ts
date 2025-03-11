@@ -77,6 +77,12 @@ const useVoiceRecognition = () => {
   // 음성 인식 지원 여부
   const checkSpeechRecognitionSupport = useCallback(() => {
     const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const isEdge = navigator.userAgent.indexOf('Edg') !== -1;
+    if (isEdge) {
+      return false;
+    }
+
     return !!SpeechRecognitionAPI;
   }, []);
 
