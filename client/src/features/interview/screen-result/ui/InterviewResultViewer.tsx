@@ -46,7 +46,7 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
         onCounterDecrease={handleDecrease}
         onCounterIncrease={handleIncrease}
         counter={counter}
-        progressStatus={`${counter + 1}/${question.length}`}
+        questionLen={question.length}
         lastVideo={video.length - 1}
       />
       <RecordPlayer currentVideoChunk={video[counter]} />
