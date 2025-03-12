@@ -1,11 +1,13 @@
+import { Fragment } from 'react';
+
 import styled from 'styled-components';
 
 import { useForm } from 'react-hook-form';
 
+import { RandomQuestionType } from '@/src/features/interview/random-quetsion/model/type';
+
 import { InputField, MainButton } from '@/src/shared/ui';
 import { keys } from '@/src/shared/utils';
-import { RandomQuestionType } from '@/src/features/interview/random-quetsion/model/type';
-import { Fragment } from 'react';
 
 type Props = {
   labels: {
@@ -17,7 +19,9 @@ type Props = {
 };
 
 function RadomQuestionForm({ labels, onSubmit }: Props) {
-  const { register, handleSubmit } = useForm<RandomQuestionType>({
+  const {
+    register, handleSubmit, formState: { errors }, setError, clearErrors,
+  } = useForm<RandomQuestionType>({
     defaultValues: {
       CS: 0,
       SITUATION: 0,
@@ -26,8 +30,27 @@ function RadomQuestionForm({ labels, onSubmit }: Props) {
     },
   });
 
+  const handleFormSubmit = (data: RandomQuestionType) => {
+    const totalQuestions = Object.values(data).reduce((acc, cur) => acc + (cur || 0), 0);
+
+    if (totalQuestions === 0) {
+      setError('root', {
+        type: 'custom',
+        message: '최소 하나 이상의 질문을 선택해주세요.',
+      });
+      return;
+    }
+    clearErrors('root');
+    onSubmit(data);
+  };
+
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(handleFormSubmit)}>
+      <FormDescription>각 항목별 필요한 질문 개수를 입력해주세요. (최소 하나 이상)</FormDescription>
+
+      {errors.root && (
+        <ErrorMessage>{errors.root.message}</ErrorMessage>
+      )}
       {labels.map((field, index) => (
         <Fragment key={keys(field.key, index)}>
           <InputField
@@ -62,4 +85,19 @@ const Form = styled.form`
   label {
     color: ${(prop) => prop.theme.colors.text}
   }
+`;
+
+const FormDescription = styled.p`
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: ${({ theme }) => theme.colors.text};
+  text-align: center;
+`;
+
+const ErrorMessage = styled.div`
+  color: ${(props) => props.theme.colors.red};
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  text-align: center;
+  font-weight: 500;
 `;

@@ -77,7 +77,7 @@ const Form = styled.form`
 `;
 
 const ErrorMessage = styled.div`
-  color: ${(props) => props.theme.colors.brandColor};
+  color: ${(props) => props.theme.colors.red};
   font-size: 1.2rem;
   margin-block: 1rem;
   padding-left: 0.25rem;
