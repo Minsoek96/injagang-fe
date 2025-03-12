@@ -129,7 +129,7 @@ const useMediaRecord = ({
       mediaRecorderRef.current = null;
       clearStreamRef();
     }
-  }, [stopMediaTracks]);
+  }, [stopMediaTracks, clearStreamRef]);
 
   /** 녹화를 일시정지한다. */
   const handlePauseRecord = useCallback(() => {
@@ -156,7 +156,7 @@ const useMediaRecord = ({
 
       clearStreamRef();
     },
-    [stopMediaTracks],
+    [stopMediaTracks, clearStreamRef],
   );
 
   return {

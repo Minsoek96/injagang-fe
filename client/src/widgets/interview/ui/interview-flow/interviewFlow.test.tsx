@@ -85,6 +85,7 @@ describe('InterviewFlow 컴포넌트', () => {
       beforeEach(() => {
         (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
           interviewMode: 'record',
+          clearRecordStates: jest.fn(),
         });
 
         (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
@@ -106,6 +107,7 @@ describe('InterviewFlow 컴포넌트', () => {
       beforeEach(() => {
         (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
           interviewMode: 'result',
+          clearRecordStates: jest.fn(),
         });
 
         (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
@@ -127,6 +129,7 @@ describe('InterviewFlow 컴포넌트', () => {
       beforeEach(() => {
         (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
           interviewMode: 'unknow',
+          clearRecordStates: jest.fn(),
         });
 
         (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
@@ -145,9 +148,11 @@ describe('InterviewFlow 컴포넌트', () => {
   describe('언마운트 시 동작', () => {
     it('initRecordInfoList를 호출한다', () => {
       const mockClearRecordContents = jest.fn();
+      const mockClearRecordStates = jest.fn();
 
       (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
         interviewMode: 'record',
+        clearRecordStates: mockClearRecordStates,
       });
 
       (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
@@ -159,6 +164,7 @@ describe('InterviewFlow 컴포넌트', () => {
       unmount();
 
       expect(mockClearRecordContents).toHaveBeenCalled();
+      expect(mockClearRecordStates).toHaveBeenCalled();
     });
   });
 });

@@ -17,13 +17,16 @@ import { InterviewResultViewer, InterviewRecordingQueue } from '@/src/features/i
 export default function InterviewFlow() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
-  const { interviewMode } = useIntvRecordStore();
+  const { interviewMode, clearRecordStates } = useIntvRecordStore();
   const { clearRecordContents } = useIntvContentStore();
 
   const { userPlayList } = useIntvPlaylistStore();
   const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
 
-  useEffect(() => () => clearRecordContents(), []);
+  useEffect(() => () => {
+    clearRecordContents();
+    clearRecordStates();
+  }, []);
 
   const renderComponent = () => {
     switch (interviewMode) {

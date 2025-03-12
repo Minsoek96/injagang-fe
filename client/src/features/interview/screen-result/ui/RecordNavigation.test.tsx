@@ -1,4 +1,5 @@
 import TestProvider from '@/fixutures/TestProvider';
+
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import RecordNavigation from './RecordNavigation';
@@ -43,17 +44,17 @@ describe('RecordNavigation', () => {
   });
 
   context('질문 인덱스 표시', () => {
-    it('첫 번째 사이클의 질문 번호가  표시된다', () => {
+    it('첫 번째 사이클의 질문 번호가 표시된다', () => {
       renderComponent({ counter: 2 });
       expect(screen.getByText('3/5 (1회차)')).toBeInTheDocument();
     });
 
-    it('두 번째 사이클의 질문 번호가  표시된다', () => {
+    it('두 번째 사이클의 질문 번호가 표시된다', () => {
       renderComponent({ counter: 7 });
       expect(screen.getByText('3/5 (2회차)')).toBeInTheDocument();
     });
 
-    it('세 번째 사이클의 질문 번호가  표시된다', () => {
+    it('세 번째 사이클의 질문 번호가 표시된다', () => {
       renderComponent({ counter: 12 });
       expect(screen.getByText('3/5 (3회차)')).toBeInTheDocument();
     });
