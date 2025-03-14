@@ -43,10 +43,23 @@ type MockSpeech = {
   speak: jest.Mock
 }
 
+type MockSpeechRecognition = {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  maxAlternatives: number;
+  onresult: ((event: unknown) => void) | null;
+  onerror: ((event: unknown) => void) | null;
+  onend: (() => void) | null;
+  start: jest.Mock;
+  stop: jest.Mock;
+}
+
 export {
   type MockMediaRecorder,
   type MockStream,
   type MockHTMLVideoElement,
   type MockUtterance,
   type MockSpeech,
+  type MockSpeechRecognition,
 };
