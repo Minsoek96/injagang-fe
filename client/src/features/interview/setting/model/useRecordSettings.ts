@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useDeviceStore } from '@/src/entities/interview_question';
 
 import { useMediaRecord, useModal } from '@/src/shared/hooks';
 
@@ -15,38 +15,41 @@ export default function useRecordSettings() {
     setVideoDevice,
     audioDevice,
     videoDevice,
-    initDevices,
-  } = useRecordInfoStore();
+    resetDevices,
+  } = useDeviceStore();
 
   const showErrorModal = useCallback(() => {
     setModal({
-      title: 'Warring',
+      title: 'Warning',
       message: '디바이스 연결에 실패했습니다 ㅜㅜ',
     });
-    initDevices();
+    resetDevices();
   }, []);
 
-  const { videoRef, handleRecord, getDevices } = useMediaRecord({
+  const {
+    videoRef, handleRecord, getDevices,
+  } = useMediaRecord({
     onError: () => showErrorModal(),
     audioId: audioDevice?.deviceId,
     videoId: videoDevice?.deviceId,
   });
 
-  const FetchSettingDevices = useCallback(async () => {
+  const fetchSettingDevices = useCallback(async () => {
     try {
       const { audioDevices, videoDevices } = await getDevices();
       setAudioLabels(audioDevices);
       setVideoLabels(videoDevices);
     } catch (error) {
-      initDevices();
+      resetDevices();
     }
   }, []);
 
   useEffect(() => {
-    FetchSettingDevices();
+    fetchSettingDevices();
     const handleFetchDevices = () => {
-      FetchSettingDevices();
+      fetchSettingDevices();
     };
+
     navigator.mediaDevices.addEventListener('devicechange', handleFetchDevices);
     return () =>
       navigator.mediaDevices.removeEventListener(

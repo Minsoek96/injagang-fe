@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "lint": "tsc --noEmit && eslint --fix --ext .js,.jsx,.ts,.tsx .",
     "analyze": "cross-env ANALYZE=true next build",
     "test": "jest",
     "watch:test": "jest --watchAll"

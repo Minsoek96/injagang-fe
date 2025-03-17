@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { MdOutlineFileDownload, MdOutlineReplay } from 'react-icons/md';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useIntvContentStore, useIntvRecordStore } from '@/src/entities/interview_question';
 
 import { HideSvg } from '@/src/shared/ui';
 import { useCounter } from '@/src/shared/hooks';
@@ -20,10 +20,12 @@ type Props = {
 
 export default function InterviewResultViewer({ question, currentIdx }: Props) {
   const {
-    recordInfoList,
     recordedChunks: video,
     setInterviewMode,
-  } = useRecordInfoStore();
+  } = useIntvRecordStore();
+  const {
+    recordContents,
+  } = useIntvContentStore();
 
   const { counter, handleDecrease, handleIncrease } = useCounter({
     maxCounter: video.length,
@@ -32,26 +34,28 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
 
   const { downloadVideo } = useDownloadHandler({
     video,
-    recordInfoList,
+    recordContents,
     question,
     counter,
   });
 
+  // TODO:
   return (
     <InterViewResultContainer>
       <RecordNavigation
         onCounterDecrease={handleDecrease}
         onCounterIncrease={handleIncrease}
         counter={counter}
-        progressStatus={`${counter + 1}/${question.length}`}
+        questionLen={question.length}
         lastVideo={video.length - 1}
       />
       <RecordPlayer currentVideoChunk={video[counter]} />
       <ResultControlsWrapper>
         <RecordingDetails
           question={question[counter]}
-          script={recordInfoList[counter]?.script || '작성한 대본이 없습니다.'}
-          timer={recordInfoList[counter]?.timer || '00:00'}
+          voiceScript={recordContents[counter]?.voiceScript || '발음 인식이 진행되지 않았습니다.'}
+          script={recordContents[counter]?.script || '작성한 대본이 없습니다.'}
+          timer={recordContents[counter]?.timer || '00:00'}
         />
       </ResultControlsWrapper>
       <ButtonSection>

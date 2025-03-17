@@ -8,7 +8,7 @@ type Props = {
   onCounterDecrease: () => void;
   onCounterIncrease: () => void;
   counter: number;
-  progressStatus: string;
+  questionLen: number;
   lastVideo: number;
 };
 
@@ -16,9 +16,16 @@ export default function RecordNavigation({
   onCounterDecrease,
   onCounterIncrease,
   counter,
-  progressStatus,
+  questionLen,
   lastVideo,
 }: Props) {
+  // 사용자가 반복 녹화를 진행하는 경우
+  const cycleCount = Math.floor(counter / questionLen) + 1;
+  const currentQuestionIndex = Math.min(counter % questionLen, questionLen - 1);
+  const questionProgress = `${
+    currentQuestionIndex + 1
+  }/${questionLen} (${cycleCount}회차)`;
+
   return (
     <Controller>
       <MainButton
@@ -29,7 +36,7 @@ export default function RecordNavigation({
       />
       <StatusSection>
         <StatusLabel>진행현황:</StatusLabel>
-        <StatusText>{progressStatus}</StatusText>
+        <StatusText>{questionProgress}</StatusText>
       </StatusSection>
       <MainButton
         label={<MdArrowForwardIos />}

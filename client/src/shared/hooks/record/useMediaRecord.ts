@@ -23,6 +23,10 @@ const useMediaRecord = ({
 
   /** 사용자 디바이스 정보를 조회. */
   const getDevices = useCallback(async () => {
+    await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: true,
+    });
     const devices = await navigator.mediaDevices.enumerateDevices();
     const audioDevices = devices.filter(
       (device) => device.kind === 'audioinput',
@@ -125,7 +129,7 @@ const useMediaRecord = ({
       mediaRecorderRef.current = null;
       clearStreamRef();
     }
-  }, [stopMediaTracks]);
+  }, [stopMediaTracks, clearStreamRef]);
 
   /** 녹화를 일시정지한다. */
   const handlePauseRecord = useCallback(() => {
@@ -152,7 +156,7 @@ const useMediaRecord = ({
 
       clearStreamRef();
     },
-    [stopMediaTracks],
+    [stopMediaTracks, clearStreamRef],
   );
 
   return {
@@ -162,6 +166,7 @@ const useMediaRecord = ({
     handleResumeRecord,
     handleRecordRemove,
     getDevices,
+    getUserAccess,
     recordStatus,
     recordedChunks,
   };

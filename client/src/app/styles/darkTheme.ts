@@ -19,7 +19,7 @@ const darkTheme: Theme = {
     modalBody: '#ffffffbe',
 
     dropBoxColor: '#fff',
-    brandColor: '#e00000',
+    red: '#e00000',
     boardText: '#B8B8B8',
     highlightColor: '#FFC375',
 

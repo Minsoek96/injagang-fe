@@ -6,19 +6,19 @@ import {
   sampleType,
 } from '@/fixutures/entities/intervew_question';
 
-import useQuestionStore from '@/src/entities/interview_question/model/useQuestionStore';
+import useIntvPlaylistStore from '@/src/entities/interview_question/model/useIntvPlaylistStore';
 
 import { getInterViewQuestionList } from './apis';
 import { useFetchQuestions } from './queries';
 
 jest.mock('./apis');
-jest.mock('@/src/entities/interview_question/model/useQuestionStore');
+jest.mock('@/src/entities/interview_question/model/useIntvPlaylistStore');
 
 describe('useFetchQuestions', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    (useQuestionStore as unknown as jest.Mock).mockReturnValue({
+    (useIntvPlaylistStore as unknown as jest.Mock).mockReturnValue({
       selectedType: sampleType,
     });
 

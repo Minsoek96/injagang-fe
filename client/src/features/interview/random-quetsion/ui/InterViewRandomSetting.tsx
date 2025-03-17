@@ -8,7 +8,7 @@ import {
 import { styleMixin } from '@/src/shared/styles';
 
 import { useCallback, useMemo } from 'react';
-import RandomQuestionForm from './RadomQuestionForm';
+import RandomQuestionForm from './RandomQuestionForm';
 import { RandomQuestionType } from '../model/type';
 
 function InterViewRandomSetting() {

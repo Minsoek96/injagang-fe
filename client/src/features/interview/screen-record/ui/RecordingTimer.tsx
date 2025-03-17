@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { LuTimerReset } from 'react-icons/lu';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useIntvContentStore } from '@/src/entities/interview_question';
 import { styleMixin } from '@/src/shared/styles';
 import { useInterval } from '@/src/shared/hooks';
 import { formatTime } from '@/src/shared/utils';
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function RecordingTimer({ isRunning }: Props) {
-  const { setCurTimer } = useRecordInfoStore();
+  const { setCurTimer } = useIntvContentStore();
   const [time, setTime] = useState(0);
 
   useInterval(
@@ -24,6 +24,11 @@ export default function RecordingTimer({ isRunning }: Props) {
     isRunning ? 1000 : null,
   );
 
+  /**
+   * TODO : 스피칭 끊기면 isRuning이 아닌 상태가 된다.
+   * isRuning을 끊겼을 때 타임이 넉넉하지 않으면 currentTime이 초기화가 발생한다.
+   */
+  // TODO : 스피칭이 끊기면 isRuning이 아닌 상태가 된다.
   useEffect(() => {
     if (!isRunning && time > 8) {
       setCurTimer(formatTime.mmss(time));

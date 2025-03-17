@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import {
-  useQuestionStore,
-  useRecordInfoStore,
+  useIntvContentStore,
+  useIntvPlaylistStore,
+  useIntvRecordStore,
 } from '@/src/entities/interview_question';
 
 import { Container } from '@/src/shared/ui';
@@ -16,12 +17,16 @@ import { InterviewResultViewer, InterviewRecordingQueue } from '@/src/features/i
 export default function InterviewFlow() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
-  const { interviewMode, initRecordInfoList } = useRecordInfoStore();
+  const { interviewMode, clearRecordStates } = useIntvRecordStore();
+  const { clearRecordContents } = useIntvContentStore();
 
-  const { userPlayList } = useQuestionStore();
+  const { userPlayList } = useIntvPlaylistStore();
   const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
 
-  useEffect(() => () => initRecordInfoList(), []);
+  useEffect(() => () => {
+    clearRecordContents();
+    clearRecordStates();
+  }, []);
 
   const renderComponent = () => {
     switch (interviewMode) {

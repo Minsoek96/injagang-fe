@@ -1,3 +1,4 @@
+import { keys } from '@/src/shared/utils';
 import { useId } from 'react';
 import styled, { CSSProperties } from 'styled-components';
 
@@ -49,8 +50,8 @@ function ComboBox<T>({
         <option value="" disabled>
           {placeholder}
         </option>
-        {items.map((item) => (
-          <option key={itemToId(item)} value={itemToId(item)}>
+        {items.map((item, idx) => (
+          <option key={keys(itemToId(item), idx)} value={itemToId(item)}>
             {itemToText(item)}
           </option>
         ))}

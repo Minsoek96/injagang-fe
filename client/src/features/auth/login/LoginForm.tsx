@@ -96,7 +96,7 @@ const FieldWrapper = styled.div`
 `;
 
 const ErrorMessage = styled.div`
-  color: ${(props) => props.theme.colors.brandColor};
+  color: ${(props) => props.theme.colors.red};
   font-size: 1.2rem;
   margin-top: 0.5rem;
   padding-left: 0.25rem;

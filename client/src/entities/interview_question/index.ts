@@ -4,5 +4,7 @@ export * as interviewQueries from './api/queries';
 export { default as queryKeys } from './api/queryKeys';
 
 export * as interviewType from './model/type';
-export { default as useQuestionStore } from './model/useQuestionStore';
-export { default as useRecordInfoStore } from './model/useRecordInfoStore';
+export { default as useIntvPlaylistStore } from './model/useIntvPlaylistStore';
+export { default as useIntvRecordStore } from './model/useIntvRecordStore';
+export { default as useDeviceStore } from './model/useDeviceStore';
+export { default as useIntvContentStore } from './model/useIntvContentStore';

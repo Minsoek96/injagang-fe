@@ -13,31 +13,21 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { Container } from '@/src/shared/ui';
 import { usePageRouter } from '@/src/shared/hooks';
 
-import { useEffect, useState } from 'react';
 import useCoverLetterManager from '../model/useCoverLetterManager';
 import EditForm from './edit-form/EditForm';
 
 export default function CoverLetterCreator() {
-  const [error, setError] = useState<boolean>(false);
   const router = useRouter();
   const { id } = router.query;
   const { moveCoverLetterMainPage } = usePageRouter();
   const { changeCoverLetter, deleteCoverLetter } = useCoverLetterManager();
   const { data: coverLetter } = coverLetterQueries.useFetchDetailCoverLetter(Number(id));
 
-  useEffect(() => {
-    setTimeout(() => {
-      setError(true);
-    }, 5000);
-  }, []);
-
   /** field 반영 */
   const onSubmit: SubmitHandler<coverLetterType.ICoverLetter> = (data) => {
     const { title, qnaList } = data;
     changeCoverLetter(Number(id), title, qnaList);
   };
-
-  if (error) throw Error('알 수 없는 에러');
 
   return (
     <CoverLetterCreatorContainer>

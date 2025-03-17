@@ -1,4 +1,4 @@
-import Router from 'next/router';
+import { AxiosError } from 'axios';
 
 import Cookies from 'js-cookie';
 
@@ -24,7 +24,6 @@ jest.mock('./reRequest', () => ({
 
 describe('errorManager', () => {
   const context = describe;
-  const mockedRouter = Router as jest.Mocked<typeof Router>;
   const mockedCookies = Cookies as jest.Mocked<typeof Cookies>;
   const mockedTokenReissue = tokenReissue as jest.Mock;
   const mockedReRequest = reRequest as jest.Mock;
@@ -40,48 +39,78 @@ describe('errorManager', () => {
       headers: {},
     },
     config: originRequest,
-  };
+  } as unknown as AxiosError;
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   context('오류 메시지가 JWT_EXPIRED일 때', () => {
-    it('jwtExpired를 호출하고 토큰 재발행이 성공해야 한다', async () => {
+    it('토큰을 재발급하고 성공적으로 재요청해야 한다', async () => {
       const newTokenValue = 'new_access_token';
+      const reRequestResponse = { data: { success: true } };
 
       mockedTokenReissue.mockResolvedValueOnce({
         data: { access: newTokenValue },
       });
+      mockedReRequest.mockResolvedValueOnce(reRequestResponse);
 
-      await errorManager(ERROR_MESSAGES.JWT_EXPIRED, originRequest);
+      const result = await errorManager(ERROR_MESSAGES.JWT_EXPIRED, originRequest, errorResponse);
 
       expect(mockedTokenReissue).toHaveBeenCalled();
       expect(mockedReRequest).toHaveBeenCalledWith(originRequest);
+
+      expect(result).toEqual(reRequestResponse);
     });
 
-    it('토큰 재발행이 실패하면 로그인 페이지로 이동한다', async () => {
+    it('토큰 재발급에 실패하면 오류를 반환하고 쿠키를 제거해야 한다', async () => {
       mockedTokenReissue.mockRejectedValueOnce(errorResponse);
 
-      await errorManager(ERROR_MESSAGES.REFRESH_TOKEN_EXPIRED, originRequest);
-      expect(mockedRouter.replace).toHaveBeenCalledWith('/login');
-    });
+      await expect(
+        errorManager(ERROR_MESSAGES.REFRESH_TOKEN_EXPIRED, originRequest, errorResponse),
+      ).rejects.toMatchObject(errorResponse);
 
-    it('토큰 재발행이 실패하면 토큰을 제거한다.', async () => {
-      mockedTokenReissue.mockRejectedValueOnce(errorResponse);
-
-      await errorManager(ERROR_MESSAGES.REFRESH_TOKEN_EXPIRED, originRequest);
       expect(mockedCookies.remove).toHaveBeenCalledWith(TOKEN_KEYS.ACCESS_TOKEN);
       expect(mockedCookies.remove).toHaveBeenCalledWith('userId');
+    });
+
+    it('토큰 재발급은 성공했지만 재요청에 실패하면 오류를 반환해야 한다', async () => {
+      const newTokenValue = 'new_access_token';
+      const reRequestError = new Error('토큰 재발급 응답이 없습니다');
+
+      mockedTokenReissue.mockResolvedValueOnce({
+        data: { access: newTokenValue },
+      });
+      mockedReRequest.mockRejectedValueOnce(reRequestError);
+
+      await expect(
+        errorManager(ERROR_MESSAGES.JWT_EXPIRED, originRequest, errorResponse),
+      ).rejects.toBeDefined();
+
+      expect(mockedTokenReissue).toHaveBeenCalled();
+    });
+
+    it('토큰 재발급 응답이 없으면 오류를 반환해야 한다', async () => {
+      mockedTokenReissue.mockResolvedValueOnce(null);
+
+      await expect(
+        errorManager(ERROR_MESSAGES.JWT_EXPIRED, originRequest, errorResponse),
+      ).rejects.toThrow('토큰 재발급 응답이 없습니다');
+
+      expect(mockedTokenReissue).toHaveBeenCalled();
     });
   });
 
   context('오류 메시지가 JWT_EXPIRED가 아닐 때', () => {
-    it('토큰을 제거한다.', () => {
-      errorManager('unknown error', originRequest);
+    it('쿠키를 제거하고 오류를 반환해야 한다', async () => {
+      await expect(
+        errorManager('unknown error', originRequest, errorResponse),
+      ).rejects.toEqual(errorResponse);
 
       expect(mockedCookies.remove).toHaveBeenCalledWith(TOKEN_KEYS.ACCESS_TOKEN);
       expect(mockedCookies.remove).toHaveBeenCalledWith('userId');
+
+      expect(mockedTokenReissue).not.toHaveBeenCalled();
     });
   });
 });

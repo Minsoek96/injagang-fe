@@ -1,12 +1,14 @@
 import { renderHook, act } from '@testing-library/react';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import { useDeviceStore, useIntvContentStore, useIntvRecordStore } from '@/src/entities/interview_question';
 import { useMediaRecord } from '@/src/shared/hooks';
 
 import useInterviewRecorder from './useInterviewRecorder';
 
 jest.mock('@/src/entities/interview_question', () => ({
-  useRecordInfoStore: jest.fn(),
+  useIntvRecordStore: jest.fn(),
+  useDeviceStore: jest.fn(),
+  useIntvContentStore: jest.fn(),
 }));
 
 jest.mock('@/src/shared/hooks', () => ({
@@ -15,26 +17,33 @@ jest.mock('@/src/shared/hooks', () => ({
 
 describe('useInterviewRecorder 훅 테스트', () => {
   let mockSetRecordedChunks: jest.Mock;
-  let mockAddRecordInfo: jest.Mock;
-  let mockInitCurinfos: jest.Mock;
+  let mockAddRecordContents: jest.Mock;
+  let mockClearCurContent: jest.Mock;
   let mockSetInterviewMode: jest.Mock;
 
   beforeEach(() => {
     mockSetRecordedChunks = jest.fn();
-    mockAddRecordInfo = jest.fn();
-    mockInitCurinfos = jest.fn();
+    mockAddRecordContents = jest.fn();
+    mockClearCurContent = jest.fn();
     mockSetInterviewMode = jest.fn();
 
-    (useRecordInfoStore as unknown as jest.Mock).mockReturnValue({
-      setRecordedChunks: mockSetRecordedChunks,
-      curScript: 'test script',
-      curTimer: '00:01',
-      addRecordInfo: mockAddRecordInfo,
-      initCurinfos: mockInitCurinfos,
-      setInterviewMode: mockSetInterviewMode,
-      recordedChunks: [],
+    (useDeviceStore as unknown as jest.Mock).mockReturnValue({
       audioDevice: { deviceId: 'audio1' },
       videoDevice: { deviceId: 'video1' },
+    });
+
+    (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
+      curScript: 'test script',
+      curTimer: '00:01',
+      curVoiceScript: 'voice script',
+      addRecordContent: mockAddRecordContents,
+      clearCurContent: mockClearCurContent,
+    });
+
+    (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
+      setRecordedChunks: mockSetRecordedChunks,
+      setInterviewMode: mockSetInterviewMode,
+      recordedChunks: [],
     });
 
     (useMediaRecord as jest.Mock).mockReturnValue({
@@ -68,10 +77,11 @@ describe('useInterviewRecorder 훅 테스트', () => {
 
     act(() => {});
 
-    expect(mockAddRecordInfo).toHaveBeenCalledWith({
+    expect(mockAddRecordContents).toHaveBeenCalledWith({
       timer: '00:01',
       script: 'test script',
+      voiceScript: 'voice script',
     });
-    expect(mockInitCurinfos).toHaveBeenCalled();
+    expect(mockClearCurContent).toHaveBeenCalled();
   });
 });

@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
 import {
-  useQuestionStore,
-  useRecordInfoStore,
+  useDeviceStore,
+  useIntvPlaylistStore,
 } from '@/src/entities/interview_question';
 
 import { Container, RunningLoader, StepProgressBar } from '@/src/shared/ui';
@@ -50,8 +50,8 @@ const InterviewFlow = dynamic(
 );
 
 function Interview() {
-  const { initUserPlayList, userPlayList } = useQuestionStore();
-  const { videoDevice, audioDevice, initDevices } = useRecordInfoStore();
+  const { initUserPlayList, userPlayList } = useIntvPlaylistStore();
+  const { videoDevice, audioDevice, resetDevices } = useDeviceStore();
   const {
     handleDecrease: moveToPrevPage,
     handleIncrease: moveToNextPage,
@@ -99,7 +99,7 @@ function Interview() {
   useEffect(
     () => () => {
       initUserPlayList();
-      initDevices();
+      resetDevices();
     },
     [],
   );

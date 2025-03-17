@@ -10,7 +10,7 @@ const context = describe;
 
 describe('useDownloadHandler', () => {
   const mockVideo = [new Blob(['test video content'], { type: 'video/mp4' })];
-  const mockRecordInfoList = [{ script: 'Mock Script', timer: '00:30' }];
+  const mockRecordInfoList = [{ script: 'Mock Script', timer: '00:30', voiceScript: 'Mock Voice' }];
   const mockQuestions = ['Mock Question'];
 
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('useDownloadHandler', () => {
       const { result } = renderHook(() =>
         useDownloadHandler({
           video: mockVideo,
-          recordInfoList: mockRecordInfoList,
+          recordContents: mockRecordInfoList,
           question: mockQuestions,
           counter: 0,
         }));
@@ -45,7 +45,7 @@ describe('useDownloadHandler', () => {
       const { result } = renderHook(() =>
         useDownloadHandler({
           video: mockVideo,
-          recordInfoList: [],
+          recordContents: [],
           question: mockQuestions,
           counter: 0,
         }));
@@ -66,7 +66,7 @@ describe('useDownloadHandler', () => {
       const { result } = renderHook(() =>
         useDownloadHandler({
           video: [],
-          recordInfoList: mockRecordInfoList,
+          recordContents: mockRecordInfoList,
           question: mockQuestions,
           counter: 0,
         }));

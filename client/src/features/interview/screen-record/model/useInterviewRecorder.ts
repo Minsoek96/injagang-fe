@@ -1,10 +1,14 @@
 import { useEffect } from 'react';
 
-import { useRecordInfoStore } from '@/src/entities/interview_question';
+import {
+  useDeviceStore,
+  useIntvRecordStore,
+} from '@/src/entities/interview_question';
 import { useMediaRecord } from '@/src/shared/hooks';
+import useIntvContentSaver from '@/src/features/interview/screen-record/model/useIntvContentSaver';
 
 /**
- * useInterviewRecorder : 면접 녹화를 위한 훅
+ * 면접 녹화와 관련된 처리를 담당하는 훅
  *
  * @returns :
  * - videoRef: 비디오 DOM 요소에 대한 참조
@@ -17,18 +21,17 @@ import { useMediaRecord } from '@/src/shared/hooks';
  * - recordStatus: 현재 녹화 상태 ("pending" | "record" | "pause")
  */
 export default function useInterviewRecorder() {
+  // 녹화 관련 제어 정보 저장
   const {
     setRecordedChunks,
-    curScript,
-    curTimer,
-    addRecordInfo,
-    initCurinfos,
     setInterviewMode,
     recordedChunks: storeChunks,
-    audioDevice,
-    videoDevice,
-  } = useRecordInfoStore();
+  } = useIntvRecordStore();
 
+  // 유저가 선택한 디바이스
+  const { audioDevice, videoDevice } = useDeviceStore();
+
+  // 녹화 관련 제어
   const {
     videoRef,
     handleRecord,
@@ -42,19 +45,12 @@ export default function useInterviewRecorder() {
     videoId: videoDevice?.deviceId,
   });
 
+  // 콘텐츠 저장 관리
+  useIntvContentSaver({ recordStatus });
+
   useEffect(() => {
     setRecordedChunks(recordedChunks);
   }, [recordedChunks]);
-
-  useEffect(() => {
-    const recordingResults = () => {
-      addRecordInfo({ timer: curTimer ?? '', script: curScript ?? '' });
-      initCurinfos();
-    };
-    if (recordStatus === 'pending' && curTimer) {
-      recordingResults();
-    }
-  }, [curTimer, curScript, addRecordInfo, initCurinfos, recordStatus]);
 
   return {
     videoRef,

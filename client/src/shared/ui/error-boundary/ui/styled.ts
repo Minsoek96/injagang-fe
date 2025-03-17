@@ -37,6 +37,7 @@ const S = {
   errorMessage: styled.p`
     margin: 0;
     font-size: 1.4rem;
+    white-space: pre-line;
   `,
 
   buttonContainer: styled.div`

@@ -11,3 +11,4 @@ export { default as useInterval } from './interval/useInterval';
 export { default as useCounter } from './counter/useCounter';
 export { default as usePageRouter } from './router/usePageRouter';
 export { default as useAutoSave } from './autosave/useAutoSave';
+export { default as useVoiceRecognition } from './speech/useVoiceRecognition';

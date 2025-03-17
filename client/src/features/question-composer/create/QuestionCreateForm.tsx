@@ -9,6 +9,7 @@ import {
   MainButton, Container, Spinner, UnInput,
 } from '@/src/shared/ui';
 
+import { Suspense } from 'react';
 import CoverLetterDetail from './CoverLetterDetail';
 import CoverLetterSelector from './CoverLetterSelector';
 
@@ -74,7 +75,9 @@ function QuestionCreateForm({ onSubmit }: Props) {
         />
       </Container.ArticleCard>
       <Container.ArticleCard $size={{ width: '100%', height: '87dvh' }}>
-        <CoverLetterDetail essayId={watch('essayId')} />
+        <Suspense fallback={<Spinner />}>
+          <CoverLetterDetail essayId={watch('essayId')} />
+        </Suspense>
       </Container.ArticleCard>
     </>
   );

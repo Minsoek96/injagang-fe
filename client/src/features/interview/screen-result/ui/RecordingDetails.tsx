@@ -4,10 +4,13 @@ import { styleMixin, V } from '@/src/shared/styles';
 type Props = {
  question: string;
  script: string;
+ voiceScript: string;
  timer: string;
 };
 
-export default function RecordingDetails({ question, script, timer }: Props) {
+export default function RecordingDetails({
+  question, script, timer, voiceScript,
+}: Props) {
   return (
     <Wrapper>
       <ContentSection>
@@ -18,6 +21,11 @@ export default function RecordingDetails({ question, script, timer }: Props) {
       <ContentSection>
         <Label>스크립트</Label>
         <Content>{script}</Content>
+      </ContentSection>
+
+      <ContentSection>
+        <Label>음성 스크립트</Label>
+        <Content>{voiceScript}</Content>
       </ContentSection>
 
       <TimerSection>

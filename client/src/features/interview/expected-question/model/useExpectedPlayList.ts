@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { useAuthStore } from '@/src/entities/auth';
-import { useQuestionStore, interviewMutation } from '@/src/entities/interview_question';
+import { useIntvPlaylistStore, interviewMutation } from '@/src/entities/interview_question';
 
 import { useModal } from '@/src/shared/hooks';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
@@ -13,7 +13,7 @@ const useExpetedPlayList = () => {
     initUserPlayList,
     removePlayItem,
     setUserPlayList,
-  } = useQuestionStore();
+  } = useIntvPlaylistStore();
 
   const { mutate: dispatchAddQuestions } = interviewMutation.useAddInterViewQ();
 

@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { styled } from 'styled-components';
 
+import { useIntvContentStore } from '@/src/entities/interview_question';
+
 import { styleMixin, V } from '@/src/shared/styles';
-import { useModal } from '@/src/shared/hooks';
+import { useModal, useVoiceRecognition } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/ui';
 
 import useInterviewRecorder from '../model/useInterviewRecorder';
@@ -42,6 +44,14 @@ export default function InterviewRecordingQueue({
     storeChunks,
   } = useInterviewRecorder();
 
+  const {
+    voiceText,
+    startVoiceRecognition,
+    stopVoiceRecognition,
+  } = useVoiceRecognition();
+
+  const { setCurVoiceScript, isVoiceTranscription } = useIntvContentStore();
+
   /** 메시지를 표시하고, 면접을 처음부터 다시 진행 설정 */
   const onCompleteMsg = () => {
     setModal({
@@ -52,10 +62,18 @@ export default function InterviewRecordingQueue({
     });
   };
 
+  useEffect(() => {
+    if (!isVoiceTranscription) return;
+    setCurVoiceScript(voiceText);
+  }, [voiceText, isVoiceTranscription]);
+
   /** 면접 종료 */
   const endInterviewRecord = () => {
     setIsScriptView(false);
     handleRecordRemove();
+    if (isVoiceTranscription) {
+      stopVoiceRecognition();
+    }
     onChangeIndex(currentIndex + 1);
   };
 
@@ -75,7 +93,10 @@ export default function InterviewRecordingQueue({
     if (isSpeaking) return;
 
     await readCurrentScript();
-    if (videoRef.current) handleRecord();
+    if (videoRef.current) {
+      handleRecord();
+      isVoiceTranscription && startVoiceRecognition();
+    }
   };
 
   return (

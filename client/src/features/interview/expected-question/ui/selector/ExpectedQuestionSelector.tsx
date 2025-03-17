@@ -4,26 +4,31 @@ import { styled } from 'styled-components';
 
 import {
   interviewQueries,
-  useQuestionStore,
+  useIntvPlaylistStore,
   interviewMutation,
 } from '@/src/entities/interview_question';
 
 import { useCheckList, useModal } from '@/src/shared/hooks';
-import { Container } from '@/src/shared/ui';
+import { Container, ErrorBoundary, MainButton } from '@/src/shared/ui';
 
+import { styleMixin } from '@/src/shared/styles';
 import QuestionTypeSelector from './QuestionTypeSelector';
 import ExpectedQuestionList from './ExpectedQuestionList';
 import ActionButtons from './ActionButtons';
 
 function ExpectedQuestionSelector() {
   const { setModal } = useModal();
-  const { setUserPlayList } = useQuestionStore();
+  const { setUserPlayList } = useIntvPlaylistStore();
   const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions();
   const { mutate: deleteQuestions } = interviewMutation.useDeleteInterViewQ();
 
   /** 체크리스트 상태 관리 */
   const {
-    checkList, handleAllCheck, handleCheckList, isAllCheck, clearCheckList,
+    checkList,
+    handleAllCheck,
+    handleCheckList,
+    isAllCheck,
+    clearCheckList,
   } = useCheckList(interViewQuestionList);
 
   /** 선택된 질문 추가 함수 */
@@ -54,18 +59,29 @@ function ExpectedQuestionSelector() {
       $size={{ height: '60rem', width: '100%', flex: 'Col' }}
     >
       <Header>Questions by Type</Header>
-      <QuestionTypeSelector onReset={clearCheckList} />
-      <ExpectedQuestionList
-        questions={interViewQuestionList}
-        checkList={checkList}
-        handleCheckList={handleCheckList}
-      />
-      <ActionButtons
-        onAdd={addQuestions}
-        isAllChecked={isAllCheck}
-        onRemove={removeQuestions}
-        onChecked={handleAllCheck}
-      />
+      <ErrorBoundary
+        renderFallback={(_, onReset) => (
+          <ErrorFallback>
+            <h3>잠시만요!</h3>
+            <p>질문을 불러오는 중 문제가 발생했습니다.</p>
+            <p>불편을 끼쳐 죄송합니다.🙇‍♂️🙇‍♂️🙇‍♂️</p>
+            <MainButton onClick={onReset} label="다시 시도" variant="signature" />
+          </ErrorFallback>
+        )}
+      >
+        <QuestionTypeSelector onReset={clearCheckList} />
+        <ExpectedQuestionList
+          questions={interViewQuestionList}
+          checkList={checkList}
+          handleCheckList={handleCheckList}
+        />
+        <ActionButtons
+          onAdd={addQuestions}
+          isAllChecked={isAllCheck}
+          onRemove={removeQuestions}
+          onChecked={handleAllCheck}
+        />
+      </ErrorBoundary>
     </Container.ArticleCard>
   );
 }
@@ -76,4 +92,27 @@ const Header = styled.h1`
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 2rem;
+`;
+
+const ErrorFallback = styled.div`
+  ${styleMixin.Column()}
+  width: 100%;
+  height: 100%;
+  padding: 3rem;
+  border-radius: 0.8rem;
+  background-color: ${(props) => props.theme.colors.primary};
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  gap: 2rem;
+
+  p {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
 `;

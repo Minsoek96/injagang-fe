@@ -13,6 +13,10 @@ describe('InterViewRandomSetting', () => {
     );
   };
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('모든 입력 필드와 버튼이 렌더링 된다.', () => {
     renderComponent();
 
@@ -23,5 +27,11 @@ describe('InterViewRandomSetting', () => {
     expect(
       screen.getByRole('button', { name: '질문 불러오기' }),
     ).toBeInTheDocument();
+  });
+
+  it('필드 메시지가 출력된다.', () => {
+    renderComponent();
+
+    expect(screen.getByText(/최소 하나 이상/)).toBeInTheDocument();
   });
 });

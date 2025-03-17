@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { ComboBox } from '@/src/shared/ui/combobox';
 
-import { interviewType, useQuestionStore } from '@/src/entities/interview_question';
+import {
+  interviewType,
+  useIntvPlaylistStore,
+} from '@/src/entities/interview_question';
 import { V } from '@/src/shared/styles';
 
 const InterViewSelectData = [
@@ -21,11 +24,12 @@ interface IQuestionSelectorProps {
  * @param onReset : 질문 체크 해제
  */
 function QuestionTypeSelector({ onReset }: IQuestionSelectorProps) {
-  const { selectedType, setSelectedType } = useQuestionStore();
+  const { selectedType, setSelectedType } = useIntvPlaylistStore();
   const onChangeType = (type: interviewType.QuestionType | string) => {
     onReset();
     setSelectedType(type);
   };
+
   return (
     <Container>
       <ComboBox

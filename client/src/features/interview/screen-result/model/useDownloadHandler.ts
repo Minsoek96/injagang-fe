@@ -2,25 +2,27 @@ import { saveAs } from 'file-saver';
 
 type Props = {
   video: Blob[];
-  recordInfoList: {
+  recordContents: {
     script: string;
     timer: string;
+    voiceScript: string;
   }[];
   question: string[];
   counter: number;
 };
 
 export function useDownloadHandler({
-  video, recordInfoList, question, counter,
+  video, recordContents, question, counter,
 }: Props) {
   const downloadScript = () => {
-    if (!recordInfoList[counter]) return;
-    const { script, timer } = recordInfoList[counter];
+    if (!recordContents[counter]) return;
+    const { script, timer, voiceScript } = recordContents[counter];
 
     const recordInfoBlob = new Blob(
       [
         `질문내용 : ${question[counter]}\n`,
         `작성한 대본 : ${script || '없음'}\n`,
+        `발음 확인 : ${voiceScript || '없음'}\n`,
         `녹화시간 : ${timer || '00:00'}\n`,
       ],
       { type: 'text/plain;charset=utf-8' },

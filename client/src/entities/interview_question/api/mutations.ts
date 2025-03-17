@@ -7,7 +7,7 @@ import {
   IResponseRandom,
 } from '@/src/entities/interview_question/model/type';
 
-import useQuestionStore from '@/src/entities/interview_question/model/useQuestionStore';
+import useIntvPlaylistStore from '@/src/entities/interview_question/model/useIntvPlaylistStore';
 
 import { useToast } from '@/src/shared/hooks';
 import {
@@ -26,7 +26,7 @@ import interview from './queryKeys';
 /** 랜덤 면접 질문리스트 요청 */
 const useFetchRandomQuestion = () => {
   const { showToast } = useToast();
-  const { setUserPlayList } = useQuestionStore();
+  const { setUserPlayList } = useIntvPlaylistStore();
 
   return useMutation({
     mutationFn: (random: IRandomQuestions[]) =>

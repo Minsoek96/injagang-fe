@@ -55,7 +55,7 @@ describe('useMediaRecord 훅', () => {
   });
 
   describe('장치 가져오기', () => {
-    it('장치를 가져올 수 있어야 한다.', async () => {
+    it('권한을 요청하고 장치를 가져올 수 있어야 한다.', async () => {
       const mockDevices = [
         { kind: 'audioinput', deviceId: 'audio1' },
         { kind: 'videoinput', deviceId: 'video1' },
@@ -65,6 +65,7 @@ describe('useMediaRecord 훅', () => {
       const { result } = renderHook(() => useMediaRecord({}));
       const devices = await result.current.getDevices();
 
+      expect(mockGetUserMedia).toHaveBeenCalled();
       expect(devices.audioDevices).toHaveLength(1);
       expect(devices.videoDevices).toHaveLength(1);
     });

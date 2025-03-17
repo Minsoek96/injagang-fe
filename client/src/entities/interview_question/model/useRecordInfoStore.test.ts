@@ -1,17 +1,17 @@
 import { act } from '@testing-library/react';
 
-import useRecordInfoStore from './useRecordInfoStore';
+import useIntvContentStore from './useIntvContentStore';
 
 const context = describe;
-describe('useRecordInfoStore', () => {
+describe('useIntvContentStore', () => {
   const renderRecordHook = () => {
-    const states = useRecordInfoStore.getState();
+    const states = useIntvContentStore.getState();
     return states;
   };
 
   it('현재 녹화의 타이머를 기록한다..', () => {
     const sampleTimer = '00:05';
-    act(() => useRecordInfoStore.getState().setCurTimer(sampleTimer));
+    act(() => useIntvContentStore.getState().setCurTimer(sampleTimer));
 
     const { curTimer } = renderRecordHook();
     expect(curTimer).toBe(sampleTimer);
@@ -19,7 +19,7 @@ describe('useRecordInfoStore', () => {
 
   it('현재 녹화의 대본을 기록한다.', () => {
     const smapleScript = 'testScript';
-    act(() => useRecordInfoStore.getState().setCurScript(smapleScript));
+    act(() => useIntvContentStore.getState().setCurScript(smapleScript));
     const { curScript } = renderRecordHook();
     expect(curScript).toBe(smapleScript);
   });
@@ -29,10 +29,11 @@ describe('useRecordInfoStore', () => {
       const testInfo = {
         script: 'testScript',
         timer: '00:05',
+        voiceScript: 'voiceScript',
       };
-      act(() => useRecordInfoStore.getState().addRecordInfo(testInfo));
-      const { recordInfoList } = renderRecordHook();
-      expect(recordInfoList[0]).toBe(testInfo);
+      act(() => useIntvContentStore.getState().addRecordContent(testInfo));
+      const { recordContents } = renderRecordHook();
+      expect(recordContents[0]).toBe(testInfo);
     });
   });
 });
