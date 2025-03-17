@@ -33,6 +33,10 @@ const nextConfig = {
           source: '/api/test/:path*',
           destination: '/api/test/:path*',
         },
+        {
+          source: '/api/interview-feedback/:path*',
+          destination: '/api/interview-feedback/:path*',
+        },
       ],
       fallback: [
         {
