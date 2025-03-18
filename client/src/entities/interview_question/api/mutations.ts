@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   IAddQuestions,
   IDeleteQuestions,
+  IntvFeedback,
   IRandomQuestions,
   IResponseRandom,
 } from '@/src/entities/interview_question/model/type';
@@ -19,6 +20,7 @@ import {
 import {
   addInterViewQuestion,
   deleteInterViewQuestion,
+  getIntvFeedback,
   getRandomQuestions,
 } from './apis';
 import interview from './queryKeys';
@@ -89,4 +91,26 @@ const useAddInterViewQ = () => {
   });
 };
 
-export { useFetchRandomQuestion, useDeleteInterViewQ, useAddInterViewQ };
+/** 면접 질문 피드백 요청 */
+const useGetIntvFeedback = () => {
+  const { showToast } = useToast();
+
+  return useMutation({
+    mutationFn: (list: IntvFeedback) => getIntvFeedback(list),
+
+    onSuccess: () => {
+      showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.ADDED_INTERVIEW_QUESTION);
+    },
+
+    onError: () => {
+      showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.ADDED_INTERVIEW_QUESTION);
+    },
+  });
+};
+
+export {
+  useFetchRandomQuestion,
+  useDeleteInterViewQ,
+  useAddInterViewQ,
+  useGetIntvFeedback,
+};

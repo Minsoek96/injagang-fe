@@ -1,13 +1,14 @@
 import {
   IAddQuestions,
   IDeleteQuestions,
+  IntvFeedback,
   IQuestion,
   IRandomQuestions,
   QuestionType,
 } from '@/src/entities/interview_question/model/type';
 
 import { fetcher, METHOD } from '@/src/shared/utils';
-import { QUESTIONS_APIS } from '@/src/shared/config/apis';
+import { NEXT_APIS, QUESTIONS_APIS } from '@/src/shared/config/apis';
 
 // FIXME : 잘못된 예외처리 사용중 수정해야함
 const getInterViewQuestionList = async (
@@ -28,9 +29,14 @@ const deleteInterViewQuestion = async (questionPayload: IDeleteQuestions) =>
 const getRandomQuestions = async (randomPayload: IRandomQuestions[]) =>
   fetcher(METHOD.POST, QUESTIONS_APIS.RANDOM_API, randomPayload);
 
+const getIntvFeedback = async (qnaPayload: IntvFeedback) => {
+  fetcher(METHOD.POST, NEXT_APIS.FEDD_API, qnaPayload);
+};
+
 export {
   getInterViewQuestionList,
   addInterViewQuestion,
   deleteInterViewQuestion,
   getRandomQuestions,
+  getIntvFeedback,
 };

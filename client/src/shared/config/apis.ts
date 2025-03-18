@@ -46,6 +46,10 @@ const TEMPLATE_APIS = {
   DELTE_API: '/template/',
 };
 
+const NEXT_APIS = {
+  FEDD_API: '/interview-feedback',
+};
+
 export {
   SERVER,
   AUTH_APIS,
@@ -54,4 +58,5 @@ export {
   FEED_APIS,
   QUESTIONS_APIS,
   TEMPLATE_APIS,
+  NEXT_APIS,
 };

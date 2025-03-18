@@ -35,3 +35,8 @@ export interface IQuestion {
   id: number;
   questions: string;
 }
+
+export interface IntvFeedback {
+  question: string;
+  answer: string;
+}
