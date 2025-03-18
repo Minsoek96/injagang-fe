@@ -22,4 +22,15 @@ describe('interviewResultViewer', () => {
     fireEvent.click(studioButton);
     expect(interviewMode).toBe('record');
   });
+
+  it('피드백 분석 요청 버튼을 클릭하면 모달이 출력된다', () => {
+    render(
+      <TestProvider>
+        <InterviewResultViewer question={mockQuestion} currentIdx={1} />
+      </TestProvider>,
+    );
+
+    const aiButton = screen.getByText(/피드백 분석/);
+    expect(aiButton).toBeInTheDocument();
+  });
 });

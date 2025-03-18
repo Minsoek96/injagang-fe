@@ -1,13 +1,19 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { MdOutlineFileDownload, MdOutlineReplay } from 'react-icons/md';
+import { AiOutlineFileSearch } from 'react-icons/ai';
 
-import { useIntvContentStore, useIntvRecordStore } from '@/src/entities/interview_question';
+import {
+  useIntvContentStore,
+  useIntvRecordStore,
+} from '@/src/entities/interview_question';
 
 import { HideSvg } from '@/src/shared/ui';
 import { useCounter } from '@/src/shared/hooks';
 import { styleMixin } from '@/src/shared/styles';
 
+import IntvFeedbackModal from './IntvFeedbackModal';
 import RecordNavigation from './RecordNavigation';
 import RecordPlayer from './RecordPlayer';
 import RecordingDetails from './RecordingDetails';
@@ -19,13 +25,9 @@ type Props = {
 };
 
 export default function InterviewResultViewer({ question, currentIdx }: Props) {
-  const {
-    recordedChunks: video,
-    setInterviewMode,
-  } = useIntvRecordStore();
-  const {
-    recordContents,
-  } = useIntvContentStore();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { recordedChunks: video, setInterviewMode } = useIntvRecordStore();
+  const { recordContents } = useIntvContentStore();
 
   const { counter, handleDecrease, handleIncrease } = useCounter({
     maxCounter: video.length,
@@ -38,6 +40,10 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
     question,
     counter,
   });
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   // TODO:
   return (
@@ -53,7 +59,10 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
       <ResultControlsWrapper>
         <RecordingDetails
           question={question[counter]}
-          voiceScript={recordContents[counter]?.voiceScript || '발음 인식이 진행되지 않았습니다.'}
+          voiceScript={
+            recordContents[counter]?.voiceScript
+            || '발음 인식이 진행되지 않았습니다.'
+          }
           script={recordContents[counter]?.script || '작성한 대본이 없습니다.'}
           timer={recordContents[counter]?.timer || '00:00'}
         />
@@ -66,12 +75,25 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
           sx={{ fontSize: '3.5rem' }}
         />
         <HideSvg
+          Logo={<AiOutlineFileSearch />}
+          label="피드백 분석 요청"
+          onClick={() => setIsOpen(true)}
+          sx={{ fontSize: '3.5rem' }}
+        />
+        <HideSvg
           Logo={<MdOutlineReplay />}
           label="면접장으로"
           onClick={() => setInterviewMode('record')}
           sx={{ fontSize: '3.5rem' }}
         />
       </ButtonSection>
+      <IntvFeedbackModal
+        isOpen={isOpen}
+        onClose={handleClose}
+        question={question[counter]}
+        script={recordContents[counter]?.script}
+        voiceScript={recordContents[counter]?.voiceScript}
+      />
     </InterViewResultContainer>
   );
 }
