@@ -1,9 +1,11 @@
 import { useState } from 'react';
+
 import styled from 'styled-components';
+
+import { interviewMutation } from '@/src/entities/interview_question';
 
 import { MainButton, Modal } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
-import { useGetIntvFeedback } from '@/src/entities/interview_question/api/mutations';
 
 type Props = {
   isOpen: boolean;
@@ -11,6 +13,7 @@ type Props = {
   question?: string;
   voiceScript?: string;
   script?: string;
+  counter: number;
 };
 
 /**
@@ -26,17 +29,20 @@ export default function IntvFeedbackModal({
   question = '',
   voiceScript = '',
   script = '',
+  counter,
 }: Props) {
-  const { mutate: requestFeedback } = useGetIntvFeedback();
+  const { mutateAsync: requestFeedback, isPending } = interviewMutation.useGetIntvFeedback();
+
   const [selectedSource, setSelectedSource] = useState<'voice' | 'script'>(
     'voice',
   );
   const [errorMsg, setErrorMsg] = useState<string>('');
 
-  const handleRequestFeedback = () => {
+  const handleRequestFeedback = async () => {
     const qnaPayload = {
       question,
       answer: selectedSource === 'voice' ? voiceScript : script,
+      counter,
     };
     const isPayloadValid = qnaPayload.question.trim() && qnaPayload.answer.trim();
 
@@ -45,8 +51,12 @@ export default function IntvFeedbackModal({
       return;
     }
 
-    requestFeedback(qnaPayload);
-    onClose();
+    try {
+      await requestFeedback(qnaPayload);
+      onClose();
+    } catch (error) {
+      setErrorMsg('피드백 분석 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
   };
 
   return (
@@ -109,9 +119,10 @@ export default function IntvFeedbackModal({
         <ButtonContainer>
           <MainButton label="취소" onClick={onClose} variant="outline" />
           <MainButton
-            label="피드백 요청"
+            label={isPending ? '분석 중...' : '피드백 요청'}
             onClick={handleRequestFeedback}
             variant="signature"
+            disabled={isPending}
           />
         </ButtonContainer>
       </Modal.Actions>
@@ -128,6 +139,7 @@ const ModalTitle = styled.h2`
 
 const ContentContainer = styled.div`
   ${styleMixin.Column()}
+  color: ${(props) => props.theme.colors.dark};
   width: 100%;
   gap: 2rem;
   padding: 1rem 0;
@@ -168,17 +180,17 @@ const TextBox = styled.div`
   min-height: 8rem;
   max-height: 15rem;
   overflow-y: auto;
-  background-color: ${(props) => props.theme.colors.bodyColor};
+  background-color: ${(props) => props.theme.colors.highlightColor};
   border-radius: 0.8rem;
   padding: 1.5rem;
-  font-size: 1.5rem;
-  line-height: 1.5;
+  font-size: 1.6rem;
+  line-height: 1.6;
   white-space: pre-wrap;
 `;
 
 const InfoText = styled.p`
   font-size: 1.4rem;
-  color: ${(props) => props.theme.colors.lightText};
+  color: ${(props) => props.theme.colors.emptyGray};
   margin-top: 1rem;
   text-align: center;
 `;

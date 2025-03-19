@@ -59,12 +59,7 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
       <ResultControlsWrapper>
         <RecordingDetails
           question={question[counter]}
-          voiceScript={
-            recordContents[counter]?.voiceScript
-            || '발음 인식이 진행되지 않았습니다.'
-          }
-          script={recordContents[counter]?.script || '작성한 대본이 없습니다.'}
-          timer={recordContents[counter]?.timer || '00:00'}
+          recordContents={recordContents[counter] ?? {}}
         />
       </ResultControlsWrapper>
       <ButtonSection>
@@ -93,6 +88,7 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
         question={question[counter]}
         script={recordContents[counter]?.script}
         voiceScript={recordContents[counter]?.voiceScript}
+        counter={counter}
       />
     </InterViewResultContainer>
   );
