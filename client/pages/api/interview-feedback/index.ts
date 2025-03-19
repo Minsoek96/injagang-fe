@@ -35,16 +35,14 @@ export default async function handler(
     당신은 기술 면접 피드백을 제공하는 전문가입니다. 다음 답변의 강점과 개선점을 분석하여 간결하게 JSON 형태로만 응답하세요.
 
     다음은 기술 면접 질문과 답변입니다. 답변의 강점과 개선점을 분석하여 JSON 형태로 제공해주세요.
-    강점과 개선점은 각각 2~6개로 구성해주세요. 코드 예시는 포함되지 않습니다.
+    강점과 개선점은 각각 2~6개로 구성해주세요. 코드 예시에 대한 내용은 포함되지 않습니다.
 
     질문: ${question}
     답변: ${answer}
 
     다음 JSON 형식으로만 응답해주세요:
-    {
       "strengths": ["강점1", "강점2", "..."],
       "improvements": ["개선점1", "개선점2", "..."]
-    }
     `;
 
     const response = await anthropic.messages.create({
@@ -59,9 +57,21 @@ export default async function handler(
       ],
     });
 
+    const textBlock = response.content.find((block) => block.type === 'text');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const textContent = textBlock ? (textBlock as any).text : '';
+
+    let parsedData;
+    try {
+      parsedData = JSON.parse(textContent);
+    } catch (parseError) {
+      console.error('응답 데이터 파싱 중 오류:', parseError);
+      parsedData = { strengths: [], improvements: [] };
+    }
+
     return res.status(200).json({
-      rawResponse: response,
-      usage: response.usage,
+      strengths: parsedData.strengths || [],
+      improvements: parsedData.improvements || [],
     });
   } catch (error) {
     console.error('피드백 요청 처리 중 오류:', error);

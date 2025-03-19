@@ -14,7 +14,12 @@ import { NEXT_APIS, QUESTIONS_APIS } from '@/src/shared/config/apis';
 const getInterViewQuestionList = async (
   queryString: QuestionType | string,
 ): Promise<IQuestion[]> =>
-  fetcher(METHOD.GET, `${QUESTIONS_APIS.GET_API}?${queryString === 'ALL' ? '' : `questionType=${queryString}`}`)
+  fetcher(
+    METHOD.GET,
+    `${QUESTIONS_APIS.GET_API}?${
+      queryString === 'ALL' ? '' : `questionType=${queryString}`
+    }`,
+  )
     .then((res) => res.data)
     .catch((error) => console.error(error));
 
@@ -29,8 +34,12 @@ const deleteInterViewQuestion = async (questionPayload: IDeleteQuestions) =>
 const getRandomQuestions = async (randomPayload: IRandomQuestions[]) =>
   fetcher(METHOD.POST, QUESTIONS_APIS.RANDOM_API, randomPayload);
 
-const getIntvFeedback = async (qnaPayload: IntvFeedback) => {
-  fetcher(METHOD.POST, NEXT_APIS.FEDD_API, qnaPayload);
+const getIntvFeedback = async (
+  qnaPayload: IntvFeedback,
+): Promise<{ strengths: string[]; improvements: string[] }> => {
+  const response = await fetcher(METHOD.POST, NEXT_APIS.FEDD_API, qnaPayload);
+
+  return response.data;
 };
 
 export {
