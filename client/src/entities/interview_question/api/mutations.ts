@@ -17,6 +17,7 @@ import {
   TOAST_MODE,
 } from '@/src/shared/const';
 
+import useIntvContentStore from '@/src/entities/interview_question/model/useIntvContentStore';
 import {
   addInterViewQuestion,
   deleteInterViewQuestion,
@@ -94,12 +95,17 @@ const useAddInterViewQ = () => {
 /** 면접 질문 피드백 요청 */
 const useGetIntvFeedback = () => {
   const { showToast } = useToast();
+  const { updateRecordContent } = useIntvContentStore();
 
   return useMutation({
-    mutationFn: (list: IntvFeedback) => getIntvFeedback(list),
+    mutationFn: (list: IntvFeedback & { counter: number}) => getIntvFeedback(list),
 
-    onSuccess: () => {
+    onSuccess: (
+      data: { strengths: string[]; improvements: string[] },
+      variables,
+    ) => {
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.ADDED_INTERVIEW_QUESTION);
+      updateRecordContent(variables.counter, data);
     },
 
     onError: () => {
