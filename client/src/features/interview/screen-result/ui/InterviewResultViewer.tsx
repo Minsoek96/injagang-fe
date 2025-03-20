@@ -16,7 +16,7 @@ import { styleMixin } from '@/src/shared/styles';
 import IntvFeedbackModal from './IntvFeedbackModal';
 import RecordNavigation from './RecordNavigation';
 import RecordPlayer from './RecordPlayer';
-import RecordingDetails from './RecordingDetails';
+import { RecordingDetails } from './content-detail';
 import { useDownloadHandler } from '../model/useDownloadHandler';
 
 type Props = {

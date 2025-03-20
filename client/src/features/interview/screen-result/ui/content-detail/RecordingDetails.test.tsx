@@ -1,6 +1,8 @@
 import TestProvider from '@/fixutures/TestProvider';
-import RecordingDetails from '@/src/features/interview/screen-result/ui/RecordingDetails';
+
 import { render, screen } from '@testing-library/react';
+
+import RecordingDetails from './RecordingDetails';
 
 describe('RecordingDetails', () => {
   it('영상 콘텐츠 정보가 렌더링 된다', () => {
