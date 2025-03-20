@@ -7,16 +7,16 @@ import FeedbackItems from './FeedbackItems';
 type Props = {
   strengths: string[];
   improvements: string[];
-  rating?: string;
+  rating: string;
 };
 
-export default function FeedbackResult({ strengths, improvements, rating = '' }: Props) {
+export default function FeedbackResult({ strengths, improvements, rating }: Props) {
   return (
     <FeedbackContainer>
       <FeedbackWrapper>
         <CategoryLabel>
-          평점 :
-          {rating}
+          등급:
+          <span>{rating}</span>
         </CategoryLabel>
       </FeedbackWrapper>
       <FeedbackItems itemList={strengths} label="강점" type="strengths" />
@@ -43,10 +43,15 @@ const CategoryLabel = styled.div`
   align-items: center;
   font-size: 1.6rem;
   font-weight: 500;
-  color: ${(props) => props.theme.colors.text};
-  margin-bottom: 1rem;
-  padding-bottom: 0.8rem;
+  padding-bottom: 1rem;
   border-bottom: 1px dashed ${(props) => props.theme.colors.mainLine};
+
+  span {
+    font-size: 1.8rem;
+    color: ${(props) => props.theme.colors.signatureColor};
+    margin-left: 0.5rem;
+    padding-bottom: 0.2rem;
+  }
 
   @media screen and (max-width: ${V.mediaMobile}) {
     font-size: 1.4rem;

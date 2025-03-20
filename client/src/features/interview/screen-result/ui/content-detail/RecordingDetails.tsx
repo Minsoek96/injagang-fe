@@ -1,20 +1,8 @@
 import { styled } from 'styled-components';
 
+import { interviewType } from '@/src/entities/interview_question';
 import { styleMixin, V } from '@/src/shared/styles';
 import FeedbackResult from './FeedbackResult';
-
-type RecordContent = {
-  script: string;
-  timer: string;
-  voiceScript: string;
-  strengths: string[];
-  improvements: string[];
-};
-
-type Props = {
-  question: string;
-  recordContents: RecordContent;
-};
 
 type ContentProps = {
   title: string;
@@ -33,9 +21,14 @@ function Section({ title, children }: ContentProps) {
   );
 }
 
+type Props = {
+  question: string;
+  recordContents: interviewType.RecordContent;
+};
+
 /**
  * 유저의 녹화 정보 상세 결과
- *
+*
  * @param question - 녹화 질문
  * @param recordContent - 유저가 입력한 자료들
  */
@@ -46,6 +39,7 @@ export default function RecordingDetails({ question, recordContents }: Props) {
     timer,
     strengths = [],
     improvements = [],
+    rating = '',
   } = recordContents;
 
   return (
@@ -74,7 +68,7 @@ export default function RecordingDetails({ question, recordContents }: Props) {
           <Label>피드백 요청 결과</Label>
           <Divider />
         </SectionHeader>
-        <FeedbackResult strengths={strengths} improvements={improvements} />
+        <FeedbackResult strengths={strengths} improvements={improvements} rating={rating} />
       </FeedbackSection>
     </Wrapper>
   );

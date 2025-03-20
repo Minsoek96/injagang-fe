@@ -79,12 +79,13 @@ export default async function handler(
       parsedData = JSON.parse(textContent);
     } catch (parseError) {
       console.error('응답 데이터 파싱 중 오류:', parseError);
-      parsedData = { strengths: [], improvements: [] };
+      parsedData = { strengths: [], improvements: [], overall_rating: '' };
     }
 
     return res.status(200).json({
       strengths: parsedData.strengths || [],
       improvements: parsedData.improvements || [],
+      rating: parsedData.overall_rating || '',
     });
   } catch (error) {
     console.error('피드백 요청 처리 중 오류:', error);

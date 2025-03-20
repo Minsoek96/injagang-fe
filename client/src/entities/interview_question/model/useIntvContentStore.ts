@@ -1,12 +1,6 @@
 import { create } from 'zustand';
 
-type RecordContent = {
-  script: string;
-  timer: string;
-  voiceScript: string;
-  strengths: string[];
-  improvements: string[];
-};
+import { RecordContent } from './type';
 
 type State = {
   recordContents: RecordContent[];

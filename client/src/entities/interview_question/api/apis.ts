@@ -36,7 +36,7 @@ const getRandomQuestions = async (randomPayload: IRandomQuestions[]) =>
 
 const getIntvFeedback = async (
   qnaPayload: IntvFeedback,
-): Promise<{ strengths: string[]; improvements: string[] }> => {
+): Promise<{ strengths: string[]; improvements: string[], rating: string }> => {
   const response = await fetcher(METHOD.POST, NEXT_APIS.FEDD_API, qnaPayload);
 
   return response.data;

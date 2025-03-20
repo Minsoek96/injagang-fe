@@ -13,6 +13,7 @@ describe('RecordingDetails', () => {
       voiceScript: 'Mock Voice Script',
       strengths: [''],
       improvements: [''],
+      rating: '',
     };
 
     render(

@@ -101,7 +101,7 @@ const useGetIntvFeedback = () => {
     mutationFn: (list: IntvFeedback & { counter: number}) => getIntvFeedback(list),
 
     onSuccess: (
-      data: { strengths: string[]; improvements: string[] },
+      data: { strengths: string[]; improvements: string[], rating: string },
       variables,
     ) => {
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.ADDED_INTERVIEW_QUESTION);
