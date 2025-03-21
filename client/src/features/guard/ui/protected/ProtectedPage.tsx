@@ -8,6 +8,8 @@ import { ERROR_MESSAGES, TOAST_MODE } from '@/src/shared/const';
 import { useAuthStore } from '@/src/entities/auth';
 import { getCookies } from '@/src/shared/utils';
 
+import { GlobalLoading } from '@/src/shared/ui';
+
 export default function ProtectedPage() {
   const router = useRouter();
 
@@ -23,5 +25,6 @@ export default function ProtectedPage() {
       router.replace('/login');
     }
   }, []);
-  return null;
+
+  return <GlobalLoading text="보호된 페이지 접근을 위해 사용자 인증을 확인 중입니다" />;
 }
