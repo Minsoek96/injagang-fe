@@ -10,7 +10,18 @@ type Props = {
   rating: string;
 };
 
-export default function FeedbackResult({ strengths, improvements, rating }: Props) {
+export default function FeedbackResult({
+  strengths,
+  improvements,
+  rating,
+}: Props) {
+  if (!rating || !strengths || !improvements) {
+    return (
+      <p>
+        피드백 분석 기록이 없습니다. 첫 피드백을 요청하시려면 하단의 돋보기 아이콘을 눌러주세요.
+      </p>
+    );
+  }
   return (
     <FeedbackContainer>
       <FeedbackWrapper>

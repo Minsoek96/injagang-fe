@@ -30,7 +30,7 @@ describe('interviewResultViewer', () => {
       </TestProvider>,
     );
 
-    const aiButton = screen.getByText(/피드백 분석/);
+    const aiButton = screen.getByText(/피드백 분석 요청/);
     expect(aiButton).toBeInTheDocument();
   });
 });

@@ -1,63 +1,40 @@
-import { useState } from 'react';
-
 import styled from 'styled-components';
 
-import { interviewMutation } from '@/src/entities/interview_question';
+import { interviewType } from '@/src/entities/interview_question';
 
-import { MainButton, Modal } from '@/src/shared/ui';
+import { MainButton, Modal, RadioGroup } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
+
+import { useIntvFeedback } from '../model';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  question?: string;
-  voiceScript?: string;
-  script?: string;
+  question: string;
+  recordContent: interviewType.RecordContent;
   counter: number;
 };
-
-/**
- * TODO : screen-result 에서 기능 분리?
- * FSD 원칙 고려
- * 기능 분리 생각하기
- * mutation 결과 값 처리 방법 생각하기
- *  */
 
 export default function IntvFeedbackModal({
   isOpen,
   onClose,
-  question = '',
-  voiceScript = '',
-  script = '',
+  question,
+  recordContent,
   counter,
 }: Props) {
-  const { mutateAsync: requestFeedback, isPending } = interviewMutation.useGetIntvFeedback();
-
-  const [selectedSource, setSelectedSource] = useState<'voice' | 'script'>(
-    'voice',
-  );
-  const [errorMsg, setErrorMsg] = useState<string>('');
-
-  const handleRequestFeedback = async () => {
-    const qnaPayload = {
-      question,
-      answer: selectedSource === 'voice' ? voiceScript : script,
-      counter,
-    };
-    const isPayloadValid = qnaPayload.question.trim() && qnaPayload.answer.trim();
-
-    if (!isPayloadValid) {
-      setErrorMsg('질문와 답변이 비어있는 경우 피드백을 요청할 수 없습니다.');
-      return;
-    }
-
-    try {
-      await requestFeedback(qnaPayload);
-      onClose();
-    } catch (error) {
-      setErrorMsg('피드백 분석 중 오류가 발생했습니다. 다시 시도해주세요.');
-    }
-  };
+  const {
+    errorMsg,
+    selectedSource,
+    changeSelectedSource,
+    isPending,
+    handleRequestFeedback,
+    getSelectedText,
+  } = useIntvFeedback({
+    recordContent,
+    counter,
+    onClose,
+    question,
+  });
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -71,29 +48,17 @@ export default function IntvFeedbackModal({
           </Section>
           <Section>
             <SectionTitle>분석 소스 선택</SectionTitle>
-            <RadioGroup>
-              <RadioOption>
-                <input
-                  type="radio"
-                  id="voice-script"
-                  name="analysis-source"
-                  checked={selectedSource === 'voice'}
-                  onChange={() => setSelectedSource('voice')}
-                />
-                <label htmlFor="voice-script">음성 스크립트 기반 분석</label>
-              </RadioOption>
-              <RadioOption>
-                <input
-                  type="radio"
-                  id="written-script"
-                  name="analysis-source"
-                  checked={selectedSource === 'script'}
-                  onChange={() => setSelectedSource('script')}
-                />
-                <label htmlFor="written-script">
-                  작성한 스크립트 기반 분석
-                </label>
-              </RadioOption>
+            <RadioGroup
+              name="analysis-source"
+              value={selectedSource}
+              onChange={changeSelectedSource}
+            >
+              <RadioGroup.Option value="voice">
+                음성 스크립트 기반 분석
+              </RadioGroup.Option>
+              <RadioGroup.Option value="script">
+                작성한 스크립트 기반 분석
+              </RadioGroup.Option>
             </RadioGroup>
           </Section>
 
@@ -104,9 +69,7 @@ export default function IntvFeedbackModal({
 
           <Section>
             <SectionTitle>응답 내용 (선택한 소스)</SectionTitle>
-            <TextBox>
-              {selectedSource === 'voice' ? voiceScript : script}
-            </TextBox>
+            <TextBox>{getSelectedText}</TextBox>
           </Section>
 
           <InfoText>
@@ -153,26 +116,6 @@ const SectionTitle = styled.h3`
   font-size: 1.8rem;
   font-weight: 500;
   margin-bottom: 1rem;
-`;
-
-const RadioGroup = styled.div`
-  ${styleMixin.Column('', 'flex-start')}
-  gap: 1rem;
-`;
-
-const RadioOption = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  input[type="radio"] {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  label {
-    font-size: 1.6rem;
-  }
 `;
 
 const TextBox = styled.div`

@@ -17,7 +17,7 @@ import IntvFeedbackModal from './IntvFeedbackModal';
 import RecordNavigation from './RecordNavigation';
 import RecordPlayer from './RecordPlayer';
 import { RecordingDetails } from './content-detail';
-import { useDownloadHandler } from '../model/useDownloadHandler';
+import { useDownloadHandler } from '../model';
 
 type Props = {
   question: string[];
@@ -86,8 +86,7 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
         isOpen={isOpen}
         onClose={handleClose}
         question={question[counter]}
-        script={recordContents[counter]?.script}
-        voiceScript={recordContents[counter]?.voiceScript}
+        recordContent={recordContents[counter] ?? {}}
         counter={counter}
       />
     </InterViewResultContainer>
