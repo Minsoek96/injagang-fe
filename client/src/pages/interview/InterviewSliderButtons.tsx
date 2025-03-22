@@ -11,7 +11,6 @@ type Props = {
   rule: boolean;
 };
 
-// TODO : BACK버튼 제어 생각해보기
 export default function InterviewSliderButtons({
   moveToNextPage,
   moveToPrevPage,

@@ -13,7 +13,7 @@ import { Container, RunningLoader, StepProgressBar } from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
 import {
-  InterviewMenual,
+  InterviewLobby,
   ExpectedQuestionLayout,
 } from '@/src/widgets/interview';
 
@@ -49,6 +49,14 @@ const InterviewFlow = dynamic(
   },
 );
 
+type IntvSteps = {
+  render: React.ReactNode,
+  subTitle: string,
+  title: string,
+  rule: boolean | null,
+  id: string,
+}
+
 function Interview() {
   const { initUserPlayList, userPlayList } = useIntvPlaylistStore();
   const { videoDevice, audioDevice, resetDevices } = useDeviceStore();
@@ -58,9 +66,9 @@ function Interview() {
     counter: currentStep,
   } = useCounter({ minCounter: 0, maxCounter: 5 });
 
-  const renderComponent = [
+  const interviewSteps:IntvSteps[] = [
     {
-      render: <InterviewMenual />,
+      render: <InterviewLobby />,
       subTitle: 'NextStage => (면접 설정)',
       title: '면접 대기',
       rule: null,
@@ -104,20 +112,22 @@ function Interview() {
     [],
   );
 
+  const currentStepData = interviewSteps[currentStep];
+
   return (
     <InterViewStyle>
       <StepProgressBar
-        stepList={renderComponent}
+        stepList={interviewSteps}
         currentStep={currentStep}
         itemToText={(value) => value.title}
         itemToid={(value) => value.id}
       />
-      <RenderComponent>{renderComponent[currentStep].render}</RenderComponent>
+      <RenderStep>{currentStepData.render}</RenderStep>
       <InterviewSliderButtons
         moveToNextPage={moveToNextPage}
         moveToPrevPage={moveToPrevPage}
-        curPageLabel={renderComponent[currentStep].subTitle}
-        rule={renderComponent[currentStep].rule ?? true}
+        curPageLabel={currentStepData.subTitle}
+        rule={currentStepData.rule ?? true}
         currentStep={currentStep}
       />
     </InterViewStyle>
@@ -131,7 +141,7 @@ const InterViewStyle = styled.div`
   width: 100%;
 `;
 
-const RenderComponent = styled(Container.ItemBase)`
+const RenderStep = styled(Container.ItemBase)`
   ${styleMixin.Column('flex-start')}
   width: 100%;
   font-family: ${V.malgunGothic};
