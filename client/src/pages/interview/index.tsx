@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
 import dynamic from 'next/dynamic';
 
@@ -58,15 +59,28 @@ type IntvSteps = {
 }
 
 function Interview() {
-  const { initUserPlayList, userPlayList } = useIntvPlaylistStore();
-  const { videoDevice, audioDevice, resetDevices } = useDeviceStore();
+  const { initUserPlayList, userPlayList } = useIntvPlaylistStore(
+    useShallow((state) => ({
+      initUserPlayList: state.initUserPlayList,
+      userPlayList: state.userPlayList,
+    })),
+  );
+
+  const { videoDevice, audioDevice, resetDevices } = useDeviceStore(
+    useShallow((state) => ({
+      videoDevice: state.videoDevice,
+      audioDevice: state.audioDevice,
+      resetDevices: state.resetDevices,
+    })),
+  );
+
   const {
     handleDecrease: moveToPrevPage,
     handleIncrease: moveToNextPage,
     counter: currentStep,
   } = useCounter({ minCounter: 0, maxCounter: 5 });
 
-  const interviewSteps:IntvSteps[] = [
+  const interviewSteps:IntvSteps[] = useMemo(() => [
     {
       render: <InterviewLobby />,
       subTitle: 'NextStage => (면접 설정)',
@@ -102,7 +116,7 @@ function Interview() {
       rule: currentStep === 5,
       id: 'Step_05',
     },
-  ];
+  ], [userPlayList.length, videoDevice, audioDevice, currentStep]);
 
   useEffect(
     () => () => {

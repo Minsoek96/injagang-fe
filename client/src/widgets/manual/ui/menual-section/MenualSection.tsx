@@ -16,7 +16,7 @@ export default function Section({ ...props }: ManualData) {
 
   return (
     <SectionContainer ref={targetItemRef} $isVisible={isVisible}>
-      <TextGroup>
+      <TextGroup tabIndex={0}>
         <Title>{main}</Title>
         <SubTitle>{sub}</SubTitle>
       </TextGroup>

@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { devtools } from 'zustand/middleware';
+
 type InterviewMode = 'pending' | 'record' | 'result';
 
 type State = {
@@ -19,21 +21,32 @@ type Action = {
  * - interviewMode: 현재 인터뷰 모드 상태 ('pending', 'record', 'result')
  * - recordedChunks: 현재 녹화된 Blob 데이터
  */
-const useIntvRecordStore = create<State & Action>((set) => ({
-  interviewMode: 'record',
-  recordedChunks: [],
+const useIntvRecordStore = create<State & Action>()(
+  devtools(
+    (set) => ({
+      interviewMode: 'record',
+      recordedChunks: [],
 
-  // 액션
-  setRecordedChunks: (chunks: Blob[]) => {
-    set((state) => ({
-      recordedChunks: [...state.recordedChunks, ...chunks],
-    }));
-  },
-  setInterviewMode: (mode: InterviewMode) => set({ interviewMode: mode }),
-  clearRecordStates: () => set({
-    recordedChunks: [],
-    interviewMode: 'record',
-  }),
-}));
+      setRecordedChunks: (chunks: Blob[]) =>
+        set(
+          (state) => ({
+            recordedChunks: [...state.recordedChunks, ...chunks],
+          }),
+        ),
 
+      setInterviewMode: (mode: InterviewMode) =>
+        set(
+          { interviewMode: mode },
+        ),
+
+      clearRecordStates: () =>
+        set(
+          {
+            recordedChunks: [],
+            interviewMode: 'record',
+          },
+        ),
+    }),
+  ),
+);
 export default useIntvRecordStore;
