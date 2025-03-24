@@ -55,7 +55,7 @@ const showToastMock = jest.fn();
 const context = describe;
 
 const setupMocks = () => {
-  (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock });
+  (useRouter as jest.Mock).mockReturnValue({ replace: replaceMock, query: { } });
   (useToast as jest.Mock).mockReturnValue({
     showToast: showToastMock,
   });
