@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   IAddQuestions,
   IDeleteQuestions,
+  IntvFeedback,
   IRandomQuestions,
   IResponseRandom,
 } from '@/src/entities/interview_question/model/type';
@@ -16,9 +17,11 @@ import {
   TOAST_MODE,
 } from '@/src/shared/const';
 
+import useIntvContentStore from '@/src/entities/interview_question/model/useIntvContentStore';
 import {
   addInterViewQuestion,
   deleteInterViewQuestion,
+  getIntvFeedback,
   getRandomQuestions,
 } from './apis';
 import interview from './queryKeys';
@@ -89,4 +92,31 @@ const useAddInterViewQ = () => {
   });
 };
 
-export { useFetchRandomQuestion, useDeleteInterViewQ, useAddInterViewQ };
+/** 면접 질문 피드백 요청 */
+const useGetIntvFeedback = () => {
+  const { showToast } = useToast();
+  const { updateRecordContent } = useIntvContentStore();
+
+  return useMutation({
+    mutationFn: (list: IntvFeedback & { counter: number}) => getIntvFeedback(list),
+
+    onSuccess: (
+      data: { strengths: string[]; improvements: string[], rating: string },
+      variables,
+    ) => {
+      showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.ADDED_INTERVIEW_QUESTION);
+      updateRecordContent(variables.counter, data);
+    },
+
+    onError: () => {
+      showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.ADDED_INTERVIEW_QUESTION);
+    },
+  });
+};
+
+export {
+  useFetchRandomQuestion,
+  useDeleteInterViewQ,
+  useAddInterViewQ,
+  useGetIntvFeedback,
+};

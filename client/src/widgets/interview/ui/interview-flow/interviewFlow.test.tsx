@@ -1,7 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import TestProvider from '@/fixutures/TestProvider';
 
-import { useIntvContentStore, useIntvRecordStore } from '@/src/entities/interview_question';
+import {
+  useIntvContentStore,
+  useIntvRecordStore,
+} from '@/src/entities/interview_question';
 
 import InterviewFlow from './InterviewFlow';
 
@@ -17,9 +20,7 @@ jest.mock('@/src/entities/interview_question', () => ({
     interviewMode: 'record',
   })),
 
-  useIntvContentStore: jest.fn(() => ({
-    clearRecordContents: jest.fn(),
-  })),
+  useIntvContentStore: jest.fn(() => jest.fn()),
 }));
 
 jest.mock('@/src/shared/hooks', () => ({
@@ -88,9 +89,9 @@ describe('InterviewFlow 컴포넌트', () => {
           clearRecordStates: jest.fn(),
         });
 
-        (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
-          clearRecordContents: jest.fn(),
-        });
+        (useIntvContentStore as unknown as jest.Mock).mockReturnValue(
+          jest.fn(),
+        );
       });
 
       it('InterviewRecordingQueue를 렌더링한다', () => {
@@ -110,9 +111,9 @@ describe('InterviewFlow 컴포넌트', () => {
           clearRecordStates: jest.fn(),
         });
 
-        (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
-          clearRecordContents: jest.fn(),
-        });
+        (useIntvContentStore as unknown as jest.Mock).mockReturnValue(
+          jest.fn(),
+        );
       });
 
       it('InterviewResultViewer를 렌더링한다', () => {
@@ -132,9 +133,9 @@ describe('InterviewFlow 컴포넌트', () => {
           clearRecordStates: jest.fn(),
         });
 
-        (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
-          clearRecordContents: jest.fn(),
-        });
+        (useIntvContentStore as unknown as jest.Mock).mockReturnValue(
+          jest.fn(),
+        );
       });
 
       it('아무것도 렌더링하지 않는다', () => {
@@ -155,9 +156,9 @@ describe('InterviewFlow 컴포넌트', () => {
         clearRecordStates: mockClearRecordStates,
       });
 
-      (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
-        clearRecordContents: mockClearRecordContents,
-      });
+      (useIntvContentStore as unknown as jest.Mock).mockReturnValue(
+        mockClearRecordContents,
+      );
 
       const { unmount } = renderComponent();
 

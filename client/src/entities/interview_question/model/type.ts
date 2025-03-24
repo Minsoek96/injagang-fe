@@ -35,3 +35,17 @@ export interface IQuestion {
   id: number;
   questions: string;
 }
+
+export interface IntvFeedback {
+  question: string;
+  answer: string;
+}
+
+export type RecordContent = {
+  script: string;
+  timer: string;
+  voiceScript: string;
+  strengths?: string[];
+  improvements?: string[];
+  rating?: string
+};

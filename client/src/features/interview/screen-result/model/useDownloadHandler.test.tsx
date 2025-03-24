@@ -1,6 +1,8 @@
-import { renderHook, act } from '@testing-library/react';
 import { saveAs } from 'file-saver';
-import { useDownloadHandler } from './useDownloadHandler';
+
+import { renderHook, act } from '@testing-library/react';
+
+import useDownloadHandler from './useDownloadHandler';
 
 jest.mock('file-saver', () => ({
   saveAs: jest.fn(),
@@ -10,7 +12,9 @@ const context = describe;
 
 describe('useDownloadHandler', () => {
   const mockVideo = [new Blob(['test video content'], { type: 'video/mp4' })];
-  const mockRecordInfoList = [{ script: 'Mock Script', timer: '00:30', voiceScript: 'Mock Voice' }];
+  const mockRecordInfoList = [
+    { script: 'Mock Script', timer: '00:30', voiceScript: 'Mock Voice' },
+  ];
   const mockQuestions = ['Mock Question'];
 
   beforeEach(() => {

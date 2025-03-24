@@ -9,7 +9,7 @@ import {
 } from 'web-vitals';
 
 import { Layout } from '@/src/app/layout/index';
-import GlobalLoading from './GlobalLoading';
+import { GlobalLoading } from '@/src/shared/ui';
 
 const LOADING_DELAY = 500;
 const isDevelopment = process.env.NODE_ENV === 'development';

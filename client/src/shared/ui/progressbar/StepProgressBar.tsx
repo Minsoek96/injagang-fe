@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 import StepMarker from '@/src/shared/ui/progressbar/StepMarker';
+import { memo } from 'react';
+
+const MemoStepMarker = memo(StepMarker);
 
 type Props<T> = {
   stepList: T[];
@@ -18,7 +21,7 @@ function StepProgressBar<T>({
   return (
     <ProgressBar>
       {stepList.map((step, index) => (
-        <StepMarker
+        <MemoStepMarker
           key={itemToid(step)}
           stepTitle={itemToText(step)}
           index={index}

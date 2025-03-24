@@ -11,7 +11,7 @@ type Props = {
   counter: number;
 };
 
-export function useDownloadHandler({
+export default function useDownloadHandler({
   video, recordContents, question, counter,
 }: Props) {
   const downloadScript = () => {

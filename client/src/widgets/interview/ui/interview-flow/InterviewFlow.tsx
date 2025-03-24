@@ -11,22 +11,36 @@ import {
 import { Container } from '@/src/shared/ui';
 import { useWebSpeech } from '@/src/shared/hooks';
 
-import { InterviewResultViewer, InterviewRecordingQueue } from '@/src/features/interview';
+import {
+  InterviewResultViewer,
+  InterviewRecordingQueue,
+} from '@/src/features/interview';
 
 /** 영상 녹화 메인 컴포넌트 */
 export default function InterviewFlow() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
-  const { interviewMode, clearRecordStates } = useIntvRecordStore();
-  const { clearRecordContents } = useIntvContentStore();
+  const { interviewMode, clearRecordStates } = useIntvRecordStore((state) => ({
+    interviewMode: state.interviewMode,
+    clearRecordStates: state.clearRecordStates,
+  }));
 
-  const { userPlayList } = useIntvPlaylistStore();
+  const clearRecordContents = useIntvContentStore(
+    (state) => state.clearRecordContents,
+  );
+
+  const { userPlayList } = useIntvPlaylistStore((state) => ({
+    userPlayList: state.userPlayList,
+  }));
   const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
 
-  useEffect(() => () => {
-    clearRecordContents();
-    clearRecordStates();
-  }, []);
+  useEffect(
+    () => () => {
+      clearRecordContents();
+      clearRecordStates();
+    },
+    [],
+  );
 
   const renderComponent = () => {
     switch (interviewMode) {
@@ -41,7 +55,10 @@ export default function InterviewFlow() {
       );
     case 'result':
       return (
-        <InterviewResultViewer question={speechData} currentIdx={curIndex - 1} />
+        <InterviewResultViewer
+          question={speechData}
+          currentIdx={curIndex - 1}
+        />
       );
     default:
       return null;

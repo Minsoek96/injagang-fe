@@ -1,10 +1,6 @@
 import { create } from 'zustand';
 
-type RecordContent = {
-  script: string;
-  timer: string;
-  voiceScript: string;
-};
+import { RecordContent } from './type';
 
 type State = {
   recordContents: RecordContent[];
@@ -16,6 +12,10 @@ type State = {
 
 type Action = {
   addRecordContent: (content: RecordContent) => void;
+  updateRecordContent: (
+    idx: number,
+    partialContent: Partial<RecordContent>
+  ) => void;
   clearRecordContents: () => void;
 
   // 현재 콘텐츠 관련 액션
@@ -47,6 +47,22 @@ const useIntvContentStore = create<State & Action>((set) => ({
       recordContents: [...state.recordContents, newContent],
     }));
   },
+
+  updateRecordContent: (
+    idx: number,
+    partialContent: Partial<RecordContent>,
+  ) => {
+    set((state) => {
+      const updatedContents = [...state.recordContents];
+
+      updatedContents[idx] = {
+        ...updatedContents[idx],
+        ...partialContent,
+      };
+      return { recordContents: updatedContents };
+    });
+  },
+
   clearRecordContents: () => set({ recordContents: [] }),
 
   // 액션 - 현재 콘텐츠
@@ -59,9 +75,10 @@ const useIntvContentStore = create<State & Action>((set) => ({
       curScript: '',
       curVoiceScript: '',
     }),
-  toggleVoiceTranscription: () => set((state) => ({
-    isVoiceTranscription: !state.isVoiceTranscription,
-  })),
+  toggleVoiceTranscription: () =>
+    set((state) => ({
+      isVoiceTranscription: !state.isVoiceTranscription,
+    })),
 }));
 
 export default useIntvContentStore;

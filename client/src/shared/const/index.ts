@@ -44,6 +44,8 @@ export const ERROR_MESSAGES = {
   GET_RANDOMQUESTION: '랜덤 질문을 불러오지 못했습니다.',
   ADDED_INTERVIEW_QUESTION: '인터뷰 질문을 등록하지 못했습니다.',
   DELETED_INTERVIEW_QUESTION: '인터뷰 질문을 삭제하지 못했습니다.',
+
+  FEED_INTV: '나의 피드백 요청 분석이 실패하였습니다.',
 };
 
 export const SUCCESS_MESSAGES = {
@@ -69,6 +71,8 @@ export const SUCCESS_MESSAGES = {
   UPDATED_FEED: '나의 댓글을 성공적으로 수정을 하였습니다.,',
   ADDED_FEED: '댓글 등록을 하였습니다.',
   DELETE_FEED: '댓글 삭제를 하였습니다.',
+
+  FEED_INTV: '나의 피드백 요청 분석이 완료되었습니다.',
 
   GET_RANDOMQUESTION: (index:number) => `${index}개의 랜덤 질문을 셋팅하였습니다.`,
   ADDED_INTERVIEW_QUESTION: '인터뷰 질문을 성공적으로 등록하였습니다.',

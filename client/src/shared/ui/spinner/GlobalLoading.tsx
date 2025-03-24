@@ -1,14 +1,19 @@
 import { styled } from 'styled-components';
 
 import { blink, styleMixin } from '@/src/shared/styles';
-import { RunningLoader } from '@/src/shared/ui';
+import RunningLoader from './RunningLoader';
 
-export default function GlobalLoading() {
+type Props = {
+  text?: string;
+};
+export default function GlobalLoading({
+  text = '페이지를 가져오는 중 입니다.',
+}: Props) {
   return (
     <Overlay>
       <RunningLoader />
       <LoadingText>
-        <MainText>페이지를 가져오는 중 입니다</MainText>
+        <MainText>{text}</MainText>
         <DotAnimation>..</DotAnimation>
       </LoadingText>
     </Overlay>

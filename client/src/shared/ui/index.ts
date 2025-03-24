@@ -14,5 +14,7 @@ export * from './explanation';
 export * from './uncontrolled';
 export * from './error-boundary';
 export * from './checkbox';
+export * from './modal';
+export * from './radio';
 
 // TODO : uncontrolled UI Controller 활용에 대한 검토
