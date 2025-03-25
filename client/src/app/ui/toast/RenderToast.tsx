@@ -1,9 +1,10 @@
-import { useToast } from '@/src/shared/hooks';
 import { styled } from 'styled-components';
+
+import { useToastStore } from '@/src/shared/store';
 import ToastItem from './ToastItem';
 
 export default function RenderToast() {
-  const { toastList } = useToast();
+  const toastList = useToastStore((state) => state.toastList);
 
   return (
     <ToastContainer>
