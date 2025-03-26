@@ -1,7 +1,6 @@
-import {
-  renderHook, act,
-} from '@testing-library/react';
+import { renderHook, act } from '@testing-library/react';
 
+import { useToastStore } from '@/src/shared/store';
 import useToast from './useToast';
 
 const uniqueId = 'unique-id';
@@ -19,7 +18,7 @@ describe('useToast 훅', () => {
         result.current.showToast();
       });
 
-      const { toastList } = result.current;
+      const { toastList } = useToastStore.getState();
 
       const expectedToast = {
         id: uniqueId,
@@ -40,7 +39,7 @@ describe('useToast 훅', () => {
         result.current.showToast('Success', 'Toast message');
       });
 
-      const { toastList } = result.current;
+      const { toastList } = useToastStore.getState();
       const expectedToast = {
         id: uniqueId,
         mode: 'Success',
@@ -61,7 +60,7 @@ describe('useToast 훅', () => {
         result.current.showToast('Error', 'Error message');
       });
 
-      const { toastList } = result.current;
+      const { toastList } = useToastStore.getState();
 
       expect(toastList).toHaveLength(1);
 
@@ -69,7 +68,7 @@ describe('useToast 훅', () => {
         jest.runAllTimers();
       });
 
-      const { toastList: updatedToastList } = result.current;
+      const { toastList: updatedToastList } = useToastStore.getState();
 
       expect(updatedToastList).toHaveLength(0);
     });
