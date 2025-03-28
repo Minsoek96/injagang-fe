@@ -34,6 +34,16 @@ const useFetchSignin = () => {
   const { setUserId } = useAuthStore();
   const { showToast } = useToast();
   const router = useRouter();
+  const { returnUrl } = router.query;
+
+  const redirectToReturnUrl = () => {
+    if (returnUrl) {
+      router.replace(decodeURIComponent(returnUrl as string));
+    } else {
+      router.replace('/');
+    }
+  };
+
   const mutate = useMutation({
     mutationFn: (loginData: ISignin) =>
       login(loginData).then((res) => res.data),
@@ -42,8 +52,9 @@ const useFetchSignin = () => {
       const { access, userId } = data;
       setCookies({ accessToken: access, userId });
       setUserId(userId);
-      router.replace('/');
+      redirectToReturnUrl();
     },
+
     onError: () => {
       showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.DOESN_T_MATCH);
     },

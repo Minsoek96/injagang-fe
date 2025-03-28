@@ -1,15 +1,16 @@
 import { styled } from 'styled-components';
 
 import { BiMessageError } from 'react-icons/bi';
-import { useModalStore } from '@/src/shared/store';
 
 import { MainButton, Modal } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
+import { useModalAction, useModalState } from '@/src/shared/store';
 
 const MODAL_CLOSE_DELAY = 50;
 
 export default function RenderModal() {
-  const { isModalOpen, modalState, closeModal } = useModalStore();
+  const { closeModal } = useModalAction();
+  const { modalState, isModalOpen } = useModalState();
 
   if (!modalState) {
     return null;
