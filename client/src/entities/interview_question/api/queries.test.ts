@@ -18,11 +18,13 @@ describe('useFetchQuestions', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    (useIntvPlaylistStore as unknown as jest.Mock).mockReturnValue({
-      selectedType: sampleType,
-    });
+    (useIntvPlaylistStore as unknown as jest.Mock).mockImplementation(
+      (selector) => selector({ selectedType: sampleType }),
+    );
 
-    (getInterViewQuestionList as jest.Mock).mockResolvedValue(sampleResponseQuestions);
+    (getInterViewQuestionList as jest.Mock).mockResolvedValue(
+      sampleResponseQuestions,
+    );
   });
 
   it('유저가 조회한 타입의 면접 리스트를 조회한다.', async () => {

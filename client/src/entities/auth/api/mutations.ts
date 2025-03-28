@@ -31,7 +31,7 @@ import {
 } from './apis';
 
 const useFetchSignin = () => {
-  const { setUserId } = useAuthStore();
+  const setUserId = useAuthStore((state) => state.setUserId);
   const { showToast } = useToast();
   const router = useRouter();
   const { returnUrl } = router.query;
@@ -64,7 +64,8 @@ const useFetchSignin = () => {
 
 const useFetchCheckOut = () => {
   const { showToast } = useToast();
-  const { nickName, initCurrentUser } = useAuthStore();
+  const nickName = useAuthStore((state) => state.nickName);
+  const initCurrentUser = useAuthStore((state) => state.initCurrentUser);
 
   const { accessToken } = getCookies();
 
@@ -96,7 +97,7 @@ const useFetchCheckOut = () => {
 
 const useFetchUserInfo = () => {
   const { showToast } = useToast();
-  const { setUserInfo } = useAuthStore();
+  const setUserInfo = useAuthStore((state) => state.setUserInfo);
 
   return useMutation({
     mutationFn: () => authInfo(),
@@ -118,7 +119,8 @@ const useFetchUserInfo = () => {
 
 const useChangeNick = () => {
   const { showToast } = useToast();
-  const { setUserInfo, role } = useAuthStore();
+  const setUserInfo = useAuthStore((state) => state.setUserInfo);
+  const role = useAuthStore((state) => state.role);
   return useMutation({
     mutationFn: (changeNickname: string) =>
       nickChange({ changeNickname }).then(() => {}),

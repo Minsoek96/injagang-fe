@@ -40,7 +40,7 @@ const useReviseFeed = (targetId: number) => {
 /** 댓글 작성 */
 const useWriteFeed = () => {
   const { showToast } = useToast();
-  const { targetFeed } = useFeedStore();
+  const targetFeed = useFeedStore((state) => state.targetFeed);
   const queryClient = useQueryClient();
 
   return useMutation({
