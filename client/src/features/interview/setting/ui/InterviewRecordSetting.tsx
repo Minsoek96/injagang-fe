@@ -1,9 +1,9 @@
 import { ExplanationContent } from '@/src/shared/ui';
 
-import VoiceTranscriptionToggle from '@/src/features/interview/setting/ui/VoiceTranscriptionToggle';
 import useRecordSettings from '../model/useRecordSettings';
-import VideoSettingPlayer from './VideoPlayer';
-import DevicesSelector from './DevicesSelector';
+import { VoiceTranscriptionToggle } from './voice-transcription';
+import { VideoPlayer } from './player';
+import { DevicesSelector } from './device-selector';
 
 export default function InterViewRecordSetting() {
   const {
@@ -26,7 +26,7 @@ export default function InterViewRecordSetting() {
           '3. 조용하고 방해받지 않는 환경에서 면접을 추천드립니다.',
         ]}
       />
-      <VideoSettingPlayer videoRef={videoRef} />
+      <VideoPlayer videoRef={videoRef} />
       <DevicesSelector
         selectedAudio={audioDevice}
         selectedVideo={videoDevice}

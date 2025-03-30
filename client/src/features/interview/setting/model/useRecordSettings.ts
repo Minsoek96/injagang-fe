@@ -46,15 +46,12 @@ export default function useRecordSettings() {
 
   useEffect(() => {
     fetchSettingDevices();
-    const handleFetchDevices = () => {
-      fetchSettingDevices();
-    };
 
-    navigator.mediaDevices.addEventListener('devicechange', handleFetchDevices);
+    navigator.mediaDevices.addEventListener('devicechange', fetchSettingDevices);
     return () =>
       navigator.mediaDevices.removeEventListener(
         'devicechange',
-        handleFetchDevices,
+        fetchSettingDevices,
       );
   }, []);
 
@@ -62,7 +59,7 @@ export default function useRecordSettings() {
     if (!!audioDevice && !!videoDevice) {
       handleRecord();
     }
-  }, [audioDevice, videoDevice]);
+  }, [audioDevice, videoDevice, handleRecord]);
 
   return {
     videoRef,
