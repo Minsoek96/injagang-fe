@@ -13,7 +13,7 @@ import roomDark from '@/public/assets/roomout.webp';
 export default function InterviewLobby() {
   const [tipIndex, setTipIndex] = useState(0);
 
-  const { isDark } = useThemeStore();
+  const isDark = useThemeStore((state) => state.isDark);
   const roomImage = isDark ? roomWhite : roomDark;
 
   const welcomeMessages = [

@@ -20,9 +20,8 @@ jest.mock('@/src/entities/interview_question', () => {
 const mockQuestionTypeSelector = jest.fn();
 
 // QuestionTypeSelector 모킹
-jest.mock('./QuestionTypeSelector', () => ({
-  __esModule: true,
-  default: () => mockQuestionTypeSelector(),
+jest.mock('./question-type-selector', () => ({
+  QuestionTypeSelector: () => mockQuestionTypeSelector(),
 }));
 
 const context = describe;

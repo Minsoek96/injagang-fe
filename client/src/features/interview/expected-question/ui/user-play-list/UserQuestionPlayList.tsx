@@ -10,7 +10,7 @@ import useExpetedPlayList from '../../model/useExpectedPlayList';
 
 function UserQuestionPlayList() {
   const {
-    userPlayList, handleRemoveText, handleAddText, roleAction,
+    userPlayList, removeQuestion, addQuestion, roleAction,
   } = useExpetedPlayList();
   return (
     <Container.ArticleCard
@@ -22,13 +22,13 @@ function UserQuestionPlayList() {
           <UserQuestionPlayListItem
             key={keys(question, idx)}
             item={question}
-            handleRemoveText={handleRemoveText}
+            handleRemoveText={removeQuestion}
           />
         ))}
       </ItemContainer>
       <QuestionAdder
         playListLen={userPlayList.length}
-        handleAddQuestion={handleAddText}
+        handleAddQuestion={addQuestion}
         handleConfirmQuestion={roleAction}
       />
     </Container.ArticleCard>

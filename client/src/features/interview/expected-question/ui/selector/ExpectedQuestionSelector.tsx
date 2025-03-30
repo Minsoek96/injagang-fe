@@ -10,15 +10,17 @@ import {
 
 import { useCheckList, useModal } from '@/src/shared/hooks';
 import { Container, ErrorBoundary, MainButton } from '@/src/shared/ui';
-
 import { styleMixin } from '@/src/shared/styles';
-import QuestionTypeSelector from './QuestionTypeSelector';
-import ExpectedQuestionList from './ExpectedQuestionList';
-import ActionButtons from './ActionButtons';
+
+import { QuestionTypeSelector } from './question-type-selector';
+import { ExpectedQuestionList } from './expected-question-list';
+import { ActionButtons } from './action-button';
 
 function ExpectedQuestionSelector() {
   const { setModal } = useModal();
-  const { setUserPlayList } = useIntvPlaylistStore();
+  const setUserPlayList = useIntvPlaylistStore(
+    (state) => state.setUserPlayList,
+  );
   const { data: interViewQuestionList = [] } = interviewQueries.useFetchQuestions();
   const { mutate: deleteQuestions } = interviewMutation.useDeleteInterViewQ();
 
@@ -36,6 +38,11 @@ function ExpectedQuestionSelector() {
     const selectedQuestions = interViewQuestionList.filter((question) =>
       checkList.includes(question.id));
     const questionTexts = selectedQuestions.map((item) => item.questions);
+
+    if (!questionTexts.length) {
+      return;
+    }
+
     setUserPlayList(questionTexts);
   }, [interViewQuestionList, checkList]);
 
@@ -65,7 +72,11 @@ function ExpectedQuestionSelector() {
             <h3>잠시만요!</h3>
             <p>질문을 불러오는 중 문제가 발생했습니다.</p>
             <p>불편을 끼쳐 죄송합니다.🙇‍♂️🙇‍♂️🙇‍♂️</p>
-            <MainButton onClick={onReset} label="다시 시도" variant="signature" />
+            <MainButton
+              onClick={onReset}
+              label="다시 시도"
+              variant="signature"
+            />
           </ErrorFallback>
         )}
       >

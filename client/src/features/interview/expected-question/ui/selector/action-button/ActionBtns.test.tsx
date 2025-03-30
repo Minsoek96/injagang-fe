@@ -17,7 +17,9 @@ describe('ActionButtons 컴포넌트', () => {
   const mockOnAdd = jest.fn();
 
   const renderComponent = (role: string, isAllChecked = false) => {
-    (useAuthStore as unknown as jest.Mock).mockReturnValue({ role });
+    (useAuthStore as unknown as jest.Mock).mockImplementation((selector) => selector({
+      role,
+    }));
 
     render(
       <TestProvider>

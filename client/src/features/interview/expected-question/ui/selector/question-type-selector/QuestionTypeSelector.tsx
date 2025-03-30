@@ -24,7 +24,9 @@ interface IQuestionSelectorProps {
  * @param onReset : 질문 체크 해제
  */
 function QuestionTypeSelector({ onReset }: IQuestionSelectorProps) {
-  const { selectedType, setSelectedType } = useIntvPlaylistStore();
+  const selectedType = useIntvPlaylistStore((state) => state.selectedType);
+  const setSelectedType = useIntvPlaylistStore((state) => state.setSelectedType);
+
   const onChangeType = (type: interviewType.QuestionType | string) => {
     onReset();
     setSelectedType(type);

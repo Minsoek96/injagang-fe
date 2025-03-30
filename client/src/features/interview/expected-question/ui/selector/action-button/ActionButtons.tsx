@@ -23,7 +23,7 @@ function ActionButtons({
   isAllChecked,
   onAdd,
 }: ActionBtnProps) {
-  const { role } = useAuthStore();
+  const role = useAuthStore((state) => state.role);
   const isAdmin = role === 'ADMIN' ? 'ADMIN' : 'USER';
 
   const btnConfig = {
