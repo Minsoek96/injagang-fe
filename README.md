@@ -8,17 +8,24 @@
 
 ## 배포 주소
 
-[배포링크](https://injagang-fe.vercel.app/)   
+[배포링크](https://www.injagang.shop)   
 TEST 계정 : test@test.com  
 TEST 비번 : password
 
+<br/>
+
 ## 목차
 
-1. [팀원 소개](#팀원-소개)
+1. [팀원 소개](#-팀원-소개)
 2. [사이트 특징](#사이트-특징)
 3. [서비스 기대 효과](#서비스-기대-효과)
-4. [ERD](#erd)
-5. [주요 기능](#주요-기능)
+4. [주요 아키텍처](#주요-아키텍처)
+   - [프로젝트-구조](#프로젝트-구조-feature-sliced-design)
+   - [통신-구조](#통신-구조)
+   - [에러처리-구조](#에러처리-구조)
+   - [인증-라우터](#인증-라우터)
+   - [ERD](#erd)
+6. [주요 기능](#주요-기능)
    - [자소서-첨부-게시](#자소서-첨부-게시)
    - [면접-녹화-셋팅](#면접-녹화-셋팅)
    - [자소서-첨삭-피드백](#자소서-첨삭-피드백)
@@ -26,7 +33,7 @@ TEST 비번 : password
    - [페이지-접근-권한-통제](#페이지-접근-권한-통제)
    - [테마-설정](#테마-설정)
    - [ADMIN](#관리자-페이지)
-6. [Tech Stack](#tech-stack)
+7. [Tech Stack](#tech-stack)
 
 <br/>
 
@@ -35,13 +42,11 @@ TEST 비번 : password
 | 백민석(FE)                                                                                       | 황재환(BE)                                                                                 |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | <img src="https://avatars.githubusercontent.com/u/125581005?s=64&v=4" width="300" height="300"/> | <img src="https://avatars.githubusercontent.com/u/58110333?v=4" width="300" height="300"/> |
-| https://github.com/Minsoek96?tab=repositories                                                    | https://github.com/HwangJaeHwan                                                            |
+| [Minsoek96](https://github.com/Minsoek96?tab=repositories)                                                    | [HwangJaeHwan](https://github.com/HwangJaeHwan)                                                            |
 
 <br/>
 
 ## 사이트 특징
-
-<br/>
 
 **기업별 자소서 템플릿 제공**
 
@@ -58,7 +63,7 @@ TEST 비번 : password
 > 실제 면접에서 자주 접하는 다양한 질문 유형을 제공하여,  
 > 여러 상황에 효과적으로 대처할 수 있는 능력을 키울 수 있습니다.
 
-## 서비스 기대 효과
+### 서비스 기대 효과
 
 - 체계적인 면접 연습을 통해 자신감 향상
 - 유저 간 자소서 피드백으로 품질 향상
@@ -67,13 +72,92 @@ TEST 비번 : password
 
 <br/>
 
-## ERD
+## 주요 아키텍처
 
+### 프로젝트 구조 (Feature Sliced Design)
+
+**pages :  프로젝트 페이지내 첫 렌더링 화면 관련**
+- 페이지 내 첫 화면 구성을 관리
+- 페이지 전체의 상태 정리
+
+**app : 프로젝트 전체의 전역적인 관련**
+- `layout`  : 프로젝트 루트 레이아웃
+- `provider` : 전역 프로바이더
+- `style` : 프로젝트 전체 스타일 설정 관련
+- `ui` : app 레이아웃에서 사용하는 UI
+
+**widgets : 독립적인 UI 및 기능 컴포넌트 조합**
+- `board` : 게시판 관련 레이아웃
+- `header` : 헤더
+- `interview` : 인터뷰 기능 컴포넌트 흐름 관리
+- `manual` : 메인 페이지 소개
+- `template` :  템플릿 페이지 흐름 관리
+
+**features : 프로젝트 도메인 기능 관리**
+- `auth` : 인증 관련 로그인 및 회원가입 기능
+- `coverletter` : 자기소개서 관련 기능
+- `feedback-composer` : 게시판 피드백 작성 관련 기능
+- `guard` :  페이지 접근 권한 관련 기능
+- `interview` :  인터뷰 관련 기능
+- `myprofile` : 프로필 관련 기능
+- `qna` : 게시판 관련 기능
+- `question-composer` : 자기소개서 첨부 작성 관련 기능
+- `template` : 어드민 페이지 템플릿 관련
+
+**entities : 프로젝트 내 서비스 도메인 연결**
+- `auth` : 인증 관련 도메인 연결, 상태
+- `coverLetter` : 자기소개서 관련 도메인 연결 , 상태
+- `feedback` : 피드백 관련 도메인 연결, 상태
+- `interview_question` : 면접 질문 도메인 연결, 상태
+- `qnaboard` : 게시판 관련 도메인 연결 , 상태
+- `template` : 어드민 템플릿 관련 도메인 연결 , 상태
+
+**shared : 프로적트 전역내의 공통적인 사항 ( 특정 도메인을 나타내진 않음 )**
+- `apis` : 클라이언트 api 통신 관련
+- `config` : entities와 연결 포인트 관리
+- `const` : 프로젝트 상수 관리
+- `hooks` : 공용 훅
+- `store` : 토스트, 모달 같은 공용 스토어
+- `styles` : 프로젝트 전체에서 재사용되는 스타일 관련
+- `types` : 공용타입
+- `ui` : 공용 UI키트
+- `utils` : 공용 유틸
+
+### 라우팅 구조
+
+| 경로 | 설명 |
+|------|------|
+| `/` | 홈 |
+| `/login` | 로그인 |
+| `/join` | 회원가입 |
+| `/myProfile` | 프로필 |
+| `/coverLetter` | 자기소개서 목록 |
+| `/coverLetter/new` | 자기소개서 작성 |
+| `/coverLetter/[id]/edit` | 자기소개서 수정 |
+| `/interview` | 인터뷰 |
+| `/qna/list` | Q&A 목록 |
+| `/qna/detail/[id]` | Q&A 상세 |
+| `/qna/edit/[id]` | Q&A 수정 |
+| `/qna/question` | Q&A 작성 |
+| `/admin` | 관리자 |
+| `/api/interview-feedback` | 인터뷰 피드백 Anthropic API |
+| `/api/test-errors/[type]` | 에러 테스트 API |
+| `/test` | 에러 테스트 |
+| `/404` | 오류 페이지 |
+
+### 통신 구조
+![network](https://github.com/user-attachments/assets/9818824c-cfec-40e7-95fa-a1d1650065a4)
+
+### 에러처리 구조
+![error](https://github.com/user-attachments/assets/dba4b8bc-7d45-49c2-b40d-e9885a17eb60)
+
+### 인증 라우터 
+![authRouter](https://github.com/user-attachments/assets/5e7ff79e-50e3-48e3-bdbb-ae209f95c227)
+
+### ERD
 ![인자강 디비 구조도](https://github.com/HwangJaeHwan/Injagang/assets/58110333/769886ad-0006-484d-a6ad-c5b128a8ea55)
 
 ## 주요 기능
-
----
 
 ### 자소서 첨부 게시
 
