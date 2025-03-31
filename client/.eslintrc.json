@@ -88,6 +88,18 @@
       "error",
       { "allowShortCircuit": true, "allowTernary": true }
     ],
-    "no-restricted-exports": "off"
+    "no-restricted-exports": "off",
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "@/src/shared/hooks",
+            "importNames": ["useWhyDidYouRender"],
+            "message": "이 훅은 개발 환경에서만 사용해야 합니다. 프로덕션 빌드 전에 제거하세요."
+          }
+        ]
+      }
+    ]
   }
 }
