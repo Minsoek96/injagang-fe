@@ -20,18 +20,14 @@ import {
 export default function InterviewFlow() {
   const [curIndex, setCurIndex] = useState<number>(0);
 
-  const { interviewMode, clearRecordStates } = useIntvRecordStore((state) => ({
-    interviewMode: state.interviewMode,
-    clearRecordStates: state.clearRecordStates,
-  }));
+  const interviewMode = useIntvRecordStore((state) => state.interviewMode);
+  const clearRecordStates = useIntvRecordStore((state) => state.clearRecordStates);
 
   const clearRecordContents = useIntvContentStore(
     (state) => state.clearRecordContents,
   );
 
-  const { userPlayList } = useIntvPlaylistStore((state) => ({
-    userPlayList: state.userPlayList,
-  }));
+  const userPlayList = useIntvPlaylistStore((state) => state.userPlayList);
   const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
 
   useEffect(

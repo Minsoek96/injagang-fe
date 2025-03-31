@@ -74,6 +74,16 @@ const renderComponent = () => {
   return util;
 };
 
+const mockUseIntvContentStore = (mode : string) => {
+  (useIntvRecordStore as unknown as jest.Mock).mockImplementation((selector) => selector({
+    interviewMode: mode,
+    clearRecordStates: jest.fn(),
+  }));
+  (useIntvContentStore as unknown as jest.Mock).mockReturnValue(
+    jest.fn(),
+  );
+};
+
 const context = describe;
 
 describe('InterviewFlow 컴포넌트', () => {
@@ -84,14 +94,7 @@ describe('InterviewFlow 컴포넌트', () => {
   describe('렌더링 시나리오', () => {
     context('녹화 모드일 때', () => {
       beforeEach(() => {
-        (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
-          interviewMode: 'record',
-          clearRecordStates: jest.fn(),
-        });
-
-        (useIntvContentStore as unknown as jest.Mock).mockReturnValue(
-          jest.fn(),
-        );
+        mockUseIntvContentStore('record');
       });
 
       it('InterviewRecordingQueue를 렌더링한다', () => {
@@ -106,14 +109,7 @@ describe('InterviewFlow 컴포넌트', () => {
 
     context('결과 모드일 때', () => {
       beforeEach(() => {
-        (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
-          interviewMode: 'result',
-          clearRecordStates: jest.fn(),
-        });
-
-        (useIntvContentStore as unknown as jest.Mock).mockReturnValue(
-          jest.fn(),
-        );
+        mockUseIntvContentStore('result');
       });
 
       it('InterviewResultViewer를 렌더링한다', () => {
@@ -128,14 +124,7 @@ describe('InterviewFlow 컴포넌트', () => {
 
     context('예외 모드일 때', () => {
       beforeEach(() => {
-        (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
-          interviewMode: 'unknow',
-          clearRecordStates: jest.fn(),
-        });
-
-        (useIntvContentStore as unknown as jest.Mock).mockReturnValue(
-          jest.fn(),
-        );
+        mockUseIntvContentStore('unknown');
       });
 
       it('아무것도 렌더링하지 않는다', () => {
@@ -151,10 +140,10 @@ describe('InterviewFlow 컴포넌트', () => {
       const mockClearRecordContents = jest.fn();
       const mockClearRecordStates = jest.fn();
 
-      (useIntvRecordStore as unknown as jest.Mock).mockReturnValue({
+      (useIntvRecordStore as unknown as jest.Mock).mockImplementation((selector) => selector({
         interviewMode: 'record',
         clearRecordStates: mockClearRecordStates,
-      });
+      }));
 
       (useIntvContentStore as unknown as jest.Mock).mockReturnValue(
         mockClearRecordContents,
