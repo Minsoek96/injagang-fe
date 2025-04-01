@@ -77,11 +77,7 @@ describe('useInterviewRecorder 훅 테스트', () => {
 
     act(() => {});
 
-    expect(mockAddRecordContents).toHaveBeenCalledWith({
-      timer: '00:01',
-      script: 'test script',
-      voiceScript: 'voice script',
-    });
+    expect(mockAddRecordContents).toHaveBeenCalled();
     expect(mockClearCurContent).toHaveBeenCalled();
   });
 });

@@ -1,27 +1,31 @@
 import styled from 'styled-components';
 
-import { interviewType } from '@/src/entities/interview_question';
+import { interviewType, useIntvContentStore } from '@/src/entities/interview_question';
 
 import { MainButton, Modal, RadioGroup } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 
+import { useCallback } from 'react';
 import { useIntvFeedback } from '../../model';
 
 type Props = {
-  isOpen: boolean;
-  onClose: () => void;
   question: string;
   recordContent: interviewType.RecordContent;
   counter: number;
 };
 
 export default function IntvFeedbackModal({
-  isOpen,
-  onClose,
   question,
   recordContent,
   counter,
 }: Props) {
+  const setFeedModalOpen = useIntvContentStore((state) => state.setFeedModalOpen);
+  const isOpen = useIntvContentStore((state) => state.isFeedModalOpen);
+
+  const onCloseModal = useCallback(() => {
+    setFeedModalOpen(false);
+  }, []);
+
   const {
     errorMsg,
     selectedSource,
@@ -32,12 +36,12 @@ export default function IntvFeedbackModal({
   } = useIntvFeedback({
     recordContent,
     counter,
-    onClose,
+    onClose: onCloseModal,
     question,
   });
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onCloseModal}>
       <Modal.Header>
         <ModalTitle>피드백 분석 검토</ModalTitle>
       </Modal.Header>
@@ -80,7 +84,7 @@ export default function IntvFeedbackModal({
       </Modal.Content>
       <Modal.Actions>
         <ButtonContainer>
-          <MainButton label="취소" onClick={onClose} variant="outline" />
+          <MainButton label="취소" onClick={onCloseModal} variant="outline" />
           <MainButton
             label={isPending ? '분석 중...' : '피드백 요청'}
             onClick={handleRequestFeedback}

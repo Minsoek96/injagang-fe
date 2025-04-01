@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -22,18 +21,13 @@ type Props = {
 };
 
 export default function InterviewResultViewer({ question, currentIdx }: Props) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { recordedChunks: video } = useIntvRecordStore();
-  const { recordContents } = useIntvContentStore();
+  const recordContents = useIntvContentStore((state) => state.recordContents);
 
   const { counter, handleDecrease, handleIncrease } = useCounter({
     maxCounter: video.length,
     initCounter: currentIdx,
   });
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
 
   const resultState: ResultStateProps = {
     video,
@@ -62,12 +56,9 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
       <ButtonSection>
         <FooterActionPanel
           resultState={resultState}
-          openFeedModal={() => setIsOpen(true)}
         />
       </ButtonSection>
       <IntvFeedbackModal
-        isOpen={isOpen}
-        onClose={handleClose}
         question={question[counter]}
         recordContent={recordContents[counter] ?? {}}
         counter={counter}

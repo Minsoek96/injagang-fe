@@ -7,21 +7,15 @@ type Props = {
 };
 const useIntvContentSaver = ({ recordStatus }: Props) => {
   const {
-    curScript,
     curTimer,
-    curVoiceScript,
     addRecordContent,
     clearCurContent,
   } = useIntvContentStore();
 
   const recordingContent = useCallback(() => {
-    addRecordContent({
-      timer: curTimer ?? '',
-      script: curScript ?? '',
-      voiceScript: curVoiceScript ?? '',
-    });
+    addRecordContent();
     clearCurContent();
-  }, [curScript, curTimer, curVoiceScript, addRecordContent, clearCurContent]);
+  }, []);
 
   useEffect(() => {
     if (recordStatus === 'pending' && curTimer) {

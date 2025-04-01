@@ -1,4 +1,4 @@
-import { useIntvRecordStore } from '@/src/entities/interview_question';
+import { useIntvContentStore, useIntvRecordStore } from '@/src/entities/interview_question';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import { MdOutlineFileDownload, MdOutlineReplay } from 'react-icons/md';
 
@@ -8,10 +8,10 @@ import { ResultStateProps, useDownloadHandler } from '../../model';
 
 type Props = {
     resultState : ResultStateProps;
-  openFeedModal: () => void;
 };
 
-export default function FooterActionPanel({ resultState, openFeedModal }: Props) {
+export default function FooterActionPanel({ resultState }: Props) {
+  const setFeedModal = useIntvContentStore((state) => state.setFeedModalOpen);
   const setInterviewMode = useIntvRecordStore(
     (state) => state.setInterviewMode,
   );
@@ -27,7 +27,7 @@ export default function FooterActionPanel({ resultState, openFeedModal }: Props)
       <HideSvg
         Logo={<AiOutlineFileSearch />}
         label="피드백 분석 요청"
-        onClick={openFeedModal}
+        onClick={() => setFeedModal(true)}
         sx={{ fontSize: '3.5rem' }}
       />
       <HideSvg
