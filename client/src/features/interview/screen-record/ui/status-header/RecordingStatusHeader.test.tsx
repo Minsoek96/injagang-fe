@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import RecordingStatusHeader from '@/src/features/interview/screen-record/ui/RecordingStatusHeader';
+import RecordingStatusHeader from './RecordingStatusHeader';
 
 describe('RecordingStatusHeader', () => {
   const renderComponent = (

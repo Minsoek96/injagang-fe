@@ -9,9 +9,9 @@ import { useModal, useVoiceRecognition } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/ui';
 
 import useInterviewRecorder from '../model/useInterviewRecorder';
-import ScriptTextArea from './ScriptTextArea';
-import VideoHeader from './RecordingStatusHeader';
-import RecordActionButtons from './RecordActionButtons';
+import { ScriptTextArea } from './script-textarea';
+import { RecordingStatusHeader } from './status-header';
+import { RecordActionButtons } from './record-action-button';
 
 type Props = {
   currentIndex: number;
@@ -101,7 +101,7 @@ export default function InterviewRecordingQueue({
 
   return (
     <Container>
-      <VideoHeader
+      <RecordingStatusHeader
         isRecord={recordStatus === 'record'}
         isSpeaking={isSpeaking}
         currentQuestion={speechData[currentIndex]}
