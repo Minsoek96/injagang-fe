@@ -5,7 +5,7 @@ import { interviewType } from '@/src/entities/interview_question';
 import { MainButton, Modal, RadioGroup } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 
-import { useIntvFeedback } from '../model';
+import { useIntvFeedback } from '../../model';
 
 type Props = {
   isOpen: boolean;

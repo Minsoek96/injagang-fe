@@ -1,23 +1,20 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { MdOutlineFileDownload, MdOutlineReplay } from 'react-icons/md';
-import { AiOutlineFileSearch } from 'react-icons/ai';
-
 import {
   useIntvContentStore,
   useIntvRecordStore,
 } from '@/src/entities/interview_question';
 
-import { HideSvg } from '@/src/shared/ui';
 import { useCounter } from '@/src/shared/hooks';
 import { styleMixin } from '@/src/shared/styles';
 
-import IntvFeedbackModal from './IntvFeedbackModal';
-import RecordNavigation from './RecordNavigation';
-import RecordPlayer from './RecordPlayer';
+import { IntvFeedbackModal } from './feedback-modal';
+import { RecordNavigation } from './record-navigation';
+import { RecordPlayer } from './record-player';
 import { RecordingDetails } from './content-detail';
-import { useDownloadHandler } from '../model';
+import { FooterActionPanel } from './footer-panel';
+import { ResultStateProps } from '../model';
 
 type Props = {
   question: string[];
@@ -26,7 +23,7 @@ type Props = {
 
 export default function InterviewResultViewer({ question, currentIdx }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { recordedChunks: video, setInterviewMode } = useIntvRecordStore();
+  const { recordedChunks: video } = useIntvRecordStore();
   const { recordContents } = useIntvContentStore();
 
   const { counter, handleDecrease, handleIncrease } = useCounter({
@@ -34,15 +31,15 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
     initCounter: currentIdx,
   });
 
-  const { downloadVideo } = useDownloadHandler({
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const resultState: ResultStateProps = {
     video,
     recordContents,
     question,
     counter,
-  });
-
-  const handleClose = () => {
-    setIsOpen(false);
   };
 
   // TODO:
@@ -63,23 +60,9 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
         />
       </ResultControlsWrapper>
       <ButtonSection>
-        <HideSvg
-          Logo={<MdOutlineFileDownload />}
-          label="다운로드"
-          onClick={downloadVideo}
-          sx={{ fontSize: '3.5rem' }}
-        />
-        <HideSvg
-          Logo={<AiOutlineFileSearch />}
-          label="피드백 분석 요청"
-          onClick={() => setIsOpen(true)}
-          sx={{ fontSize: '3.5rem' }}
-        />
-        <HideSvg
-          Logo={<MdOutlineReplay />}
-          label="면접장으로"
-          onClick={() => setInterviewMode('record')}
-          sx={{ fontSize: '3.5rem' }}
+        <FooterActionPanel
+          resultState={resultState}
+          openFeedModal={() => setIsOpen(true)}
         />
       </ButtonSection>
       <IntvFeedbackModal
