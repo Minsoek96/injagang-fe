@@ -6,26 +6,25 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { useModal } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/ui';
 
-import { useInterviewRecorder, useIntvSpeechToText } from '../model';
-import { ScriptTextArea } from './script-textarea';
 import { RecordingStatusHeader } from './status-header';
+import { ScriptTextArea } from './script-textarea';
 import { RecordActionButtons } from './record-action-button';
+
+import {
+  useInterviewRecorder,
+  useIntvNarration,
+  useIntvSpeechToText,
+} from '../model';
 
 type Props = {
   currentIndex: number;
   onChangeIndex: (index: number) => void;
-  speechData: string[];
-  readingTheScript: (index: number) => Promise<void>;
 };
 
 export default function InterviewRecordingQueue({
   currentIndex,
   onChangeIndex,
-  readingTheScript,
-  speechData,
 }: Props) {
-  const isComplete = currentIndex >= speechData.length;
-
   const [isScriptView, setIsScriptView] = useState<boolean>(false);
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
 
@@ -42,8 +41,10 @@ export default function InterviewRecordingQueue({
     storeChunks,
   } = useInterviewRecorder();
 
+  const { narrationState, startNarration } = useIntvNarration();
   const { beginSpeechToText, endSpeechToText } = useIntvSpeechToText();
 
+  const isComplete = currentIndex >= narrationState.length;
   /** 메시지를 표시하고, 면접을 처음부터 다시 진행 설정 */
   const onCompleteMsg = () => {
     setModal({
@@ -65,7 +66,7 @@ export default function InterviewRecordingQueue({
   /** 스크립트를 읽고 상태를 업데이트 */
   const readCurrentScript = async (): Promise<void> => {
     setIsSpeaking(true);
-    await readingTheScript(currentIndex);
+    await startNarration(currentIndex);
     setIsSpeaking(false);
   };
 
@@ -89,9 +90,9 @@ export default function InterviewRecordingQueue({
       <RecordingStatusHeader
         isRecord={recordStatus === 'record'}
         isSpeaking={isSpeaking}
-        currentQuestion={speechData[currentIndex]}
+        currentQuestion={narrationState[currentIndex]}
       />
-      <PlayerWrapper ref={videoRef} autoPlay muted playsInline />
+      <VideoPlayer ref={videoRef} autoPlay muted playsInline />
       {isScriptView && (
         <ScriptView>
           <ScriptTextArea />
@@ -133,7 +134,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const PlayerWrapper = styled.video`
+const VideoPlayer = styled.video`
   margin-block: 1.5rem;
   width: 100%;
   height: 90%;
@@ -181,3 +182,27 @@ const RecordingControls = styled.div`
     }
   }
 `;
+
+// // 주요 상태들
+// useWhyDidYouRender(
+//   'RecordingQueue',
+//   {
+//     currentIndex,
+//     isScriptView,
+//     isSpeaking,
+//     recordStatus,
+//     narrationState,
+//     isComplete,
+//   },
+//   {
+//     onChangeIndex,
+//     handlePauseRecord,
+//     handleRecordRemove,
+//     handleRecord,
+//     handleResumeRecord,
+//     setInterviewMode,
+//     beginSpeechToText,
+//     endSpeechToText,
+//     startNarration,
+//   },
+// );

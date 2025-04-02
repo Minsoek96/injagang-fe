@@ -37,9 +37,9 @@ export default function RecordingDetails({ question, recordContents }: Props) {
     script,
     voiceScript,
     timer,
-    strengths = [],
-    improvements = [],
-    rating = '',
+    strengths = null,
+    improvements = null,
+    rating = null,
   } = recordContents;
 
   return (

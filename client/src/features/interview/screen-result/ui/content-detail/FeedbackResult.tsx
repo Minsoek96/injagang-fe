@@ -5,9 +5,9 @@ import { V } from '@/src/shared/styles';
 import FeedbackItems from './FeedbackItems';
 
 type Props = {
-  strengths: string[];
-  improvements: string[];
-  rating: string;
+  strengths: string[] | null;
+  improvements: string[] | null;
+  rating: string | null;
 };
 
 export default function FeedbackResult({
@@ -18,7 +18,8 @@ export default function FeedbackResult({
   if (!rating || !strengths || !improvements) {
     return (
       <p>
-        피드백 분석 기록이 없습니다. 첫 피드백을 요청하시려면 하단의 돋보기 아이콘을 눌러주세요.
+        피드백 분석 기록이 없습니다. 첫 피드백을 요청하시려면 하단의 돋보기
+        아이콘을 눌러주세요.
       </p>
     );
   }

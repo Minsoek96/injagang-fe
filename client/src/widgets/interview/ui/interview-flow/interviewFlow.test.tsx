@@ -9,58 +9,31 @@ import {
 import InterviewFlow from './InterviewFlow';
 
 jest.mock('@/src/entities/interview_question', () => ({
-  useIntvPlaylistStore: jest.fn(() => ({
-    userPlayList: [
-      { id: 1, question: '첫 번째 질문' },
-      { id: 2, question: '두 번째 질문' },
-    ],
-  })),
-  // TODO : 통합 스토어 처리
-  useIntvRecordStore: jest.fn(() => ({
-    interviewMode: 'record',
-  })),
-
-  useIntvContentStore: jest.fn(() => jest.fn()),
-}));
-
-jest.mock('@/src/shared/hooks', () => ({
-  useWebSpeech: () => ({
-    readingTheScript: true,
-    speechData: ['테스트 질문1', '테스트 질문2', '테스트 질문3'],
-  }),
+  useIntvRecordStore: jest.fn(),
+  useIntvContentStore: jest.fn(),
 }));
 
 jest.mock('@/src/features/interview', () => ({
   InterviewRecordingQueue: ({
     currentIndex,
-    speechData,
   }: {
     currentIndex: number;
-    speechData: string[];
   }) => (
     <div data-testid="recording-queue">
       현재 인덱스:
       {' '}
       {currentIndex}
-      질문:
-      {' '}
-      {speechData[currentIndex]}
     </div>
   ),
   InterviewResultViewer: ({
-    currentIdx,
-    question,
+    currentIndex,
   }: {
-    currentIdx: number;
-    question: string[];
+    currentIndex: number;
   }) => (
     <div data-testid="result-viewer">
       현재 인덱스:
       {' '}
-      {currentIdx}
-      질문:
-      {' '}
-      {question[currentIdx + 1]}
+      {currentIndex}
     </div>
   ),
 }));
@@ -85,7 +58,6 @@ const mockUseIntvContentStore = (mode : string) => {
 };
 
 const context = describe;
-
 describe('InterviewFlow 컴포넌트', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -103,7 +75,6 @@ describe('InterviewFlow 컴포넌트', () => {
         const recordingQueue = screen.getByTestId('recording-queue');
         expect(recordingQueue).toBeInTheDocument();
         expect(recordingQueue).toHaveTextContent('현재 인덱스: 0');
-        expect(recordingQueue).toHaveTextContent('질문: 테스트 질문');
       });
     });
 
@@ -118,7 +89,6 @@ describe('InterviewFlow 컴포넌트', () => {
         const resultViewer = screen.getByTestId('result-viewer');
         expect(resultViewer).toBeInTheDocument();
         expect(resultViewer).toHaveTextContent('현재 인덱스: -1');
-        expect(resultViewer).toHaveTextContent('질문: 테스트 질문');
       });
     });
 
@@ -136,7 +106,7 @@ describe('InterviewFlow 컴포넌트', () => {
   });
 
   describe('언마운트 시 동작', () => {
-    it('initRecordInfoList를 호출한다', () => {
+    it('상태 정리 함수들을 호출한다', () => {
       const mockClearRecordContents = jest.fn();
       const mockClearRecordStates = jest.fn();
 

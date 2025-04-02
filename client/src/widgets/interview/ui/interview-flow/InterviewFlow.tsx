@@ -4,12 +4,10 @@ import styled from 'styled-components';
 
 import {
   useIntvContentStore,
-  useIntvPlaylistStore,
   useIntvRecordStore,
 } from '@/src/entities/interview_question';
 
 import { Container } from '@/src/shared/ui';
-import { useWebSpeech } from '@/src/shared/hooks';
 
 import {
   InterviewResultViewer,
@@ -18,18 +16,19 @@ import {
 
 /** 영상 녹화 메인 컴포넌트 */
 export default function InterviewFlow() {
-  const [curIndex, setCurIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const interviewMode = useIntvRecordStore((state) => state.interviewMode);
-  const clearRecordStates = useIntvRecordStore((state) => state.clearRecordStates);
 
+  // 촬영 정보 초기화
+  const clearRecordStates = useIntvRecordStore(
+    (state) => state.clearRecordStates,
+  );
+
+  // 콘텐츠 정보 초기화
   const clearRecordContents = useIntvContentStore(
     (state) => state.clearRecordContents,
   );
-
-  // TODO: 추출하기 쓸데 없는 리렌더링 유발 원인
-  const userPlayList = useIntvPlaylistStore((state) => state.userPlayList);
-  const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
 
   useEffect(
     () => () => {
@@ -44,19 +43,12 @@ export default function InterviewFlow() {
     case 'record':
       return (
         <InterviewRecordingQueue
-          currentIndex={curIndex}
-          speechData={speechData}
-          readingTheScript={readingTheScript}
-          onChangeIndex={setCurIndex}
+          currentIndex={currentIndex}
+          onChangeIndex={setCurrentIndex}
         />
       );
     case 'result':
-      return (
-        <InterviewResultViewer
-          question={speechData}
-          currentIdx={curIndex - 1}
-        />
-      );
+      return <InterviewResultViewer currentIndex={currentIndex - 1} />;
     default:
       return null;
     }
@@ -83,3 +75,9 @@ const RecordContainer = styled(Container.ArticleCard)`
   border: none;
   padding: 0;
 `;
+
+// useWhyDidYouRender(
+//   'IntvFlow',
+//   { interviewMode, currentIndex },
+//   { setCurrentIndex, clearRecordContents, clearRecordStates },
+// );

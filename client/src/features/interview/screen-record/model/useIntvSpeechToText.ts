@@ -26,27 +26,17 @@ const useIntvSpeechToText = () => {
     setCurVoiceScript(voiceText);
   }, [voiceText, voiceTranscriptionEnable, setCurVoiceScript]);
 
+  // 스피치 변환 시작
   const beginSpeechToText = useCallback(() => {
     if (!voiceTranscriptionEnable) return;
     startVoiceRecognition();
   }, [voiceTranscriptionEnable, startVoiceRecognition]);
 
+  // 스피치 변환 종료
   const endSpeechToText = useCallback(() => {
     if (!voiceTranscriptionEnable) return;
     stopVoiceRecognition();
   }, [voiceTranscriptionEnable, stopVoiceRecognition]);
-
-  // useWhyDidYouRender(
-  //   'useInvSpeechToText',
-  //   { voiceText, voiceTranscriptionEnable },
-  //   {
-  //     setCurVoiceScript,
-  //     startVoiceRecognition,
-  //     stopVoiceRecognition,
-  //     beginSpeechToText,
-  //     endSpeechToText,
-  //   },
-  // );
 
   return {
     beginSpeechToText,
@@ -55,3 +45,15 @@ const useIntvSpeechToText = () => {
 };
 
 export default useIntvSpeechToText;
+
+// useWhyDidYouRender(
+//   'useInvSpeechToText',
+//   { voiceText, voiceTranscriptionEnable },
+//   {
+//     setCurVoiceScript,
+//     startVoiceRecognition,
+//     stopVoiceRecognition,
+//     beginSpeechToText,
+//     endSpeechToText,
+//   },
+// );

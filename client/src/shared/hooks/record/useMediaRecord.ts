@@ -112,7 +112,7 @@ const useMediaRecord = ({
       onError();
       handleRecordRemove();
     }
-  }, [getUserAccess, handleDataAvailable, onError]);
+  }, []);
 
   /** 녹화 장비를 제거한다. */
   const stopMediaTracks = useCallback((stream: MediaStream) => {

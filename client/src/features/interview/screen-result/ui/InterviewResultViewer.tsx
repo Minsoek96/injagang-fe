@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import {
   useIntvContentStore,
+  useIntvPlaylistStore,
   useIntvRecordStore,
 } from '@/src/entities/interview_question';
 
@@ -16,23 +17,23 @@ import { FooterActionPanel } from './footer-panel';
 import { type ResultStateProps } from '../model';
 
 type Props = {
-  question: string[];
-  currentIdx: number;
+  currentIndex: number;
 };
 
-export default function InterviewResultViewer({ question, currentIdx }: Props) {
+export default function InterviewResultViewer({ currentIndex }: Props) {
+  const questions = useIntvPlaylistStore((state) => state.userPlayList);
   const video = useIntvRecordStore((state) => state.recordedChunks);
   const recordContents = useIntvContentStore((state) => state.recordContents);
 
   const { counter, handleDecrease, handleIncrease } = useCounter({
     maxCounter: video.length,
-    initCounter: currentIdx,
+    initCounter: currentIndex,
   });
 
   const resultState: ResultStateProps = {
     video,
     recordContents,
-    question,
+    question: questions,
     counter,
   };
 
@@ -43,13 +44,13 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
         onCounterDecrease={handleDecrease}
         onCounterIncrease={handleIncrease}
         counter={counter}
-        questionLen={question.length}
+        questionLen={questions.length}
         lastVideo={video.length - 1}
       />
       <RecordPlayer currentVideoChunk={video[counter]} />
       <ResultControlsWrapper>
         <RecordingDetails
-          question={question[counter]}
+          question={questions[counter]}
           recordContents={recordContents[counter] ?? {}}
         />
       </ResultControlsWrapper>
@@ -59,7 +60,7 @@ export default function InterviewResultViewer({ question, currentIdx }: Props) {
         />
       </ButtonSection>
       <IntvFeedbackModal
-        question={question[counter]}
+        question={questions[counter]}
         recordContent={recordContents[counter] ?? {}}
         counter={counter}
       />
