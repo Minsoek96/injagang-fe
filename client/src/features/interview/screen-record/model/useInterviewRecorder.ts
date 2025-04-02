@@ -39,7 +39,7 @@ export default function useInterviewRecorder() {
     handleResumeRecord,
     handleRecordRemove,
     recordStatus,
-    recordedChunks,
+    recordedChunks: currentChunks,
   } = useMediaRecord({
     audioId: audioDevice?.deviceId,
     videoId: videoDevice?.deviceId,
@@ -49,8 +49,8 @@ export default function useInterviewRecorder() {
   useIntvContentSaver({ recordStatus });
 
   useEffect(() => {
-    setRecordedChunks(recordedChunks);
-  }, [recordedChunks]);
+    setRecordedChunks(currentChunks);
+  }, [currentChunks]);
 
   return {
     videoRef,

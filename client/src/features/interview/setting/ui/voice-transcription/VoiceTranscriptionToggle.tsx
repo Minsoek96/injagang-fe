@@ -5,7 +5,7 @@ import { useModal, useVoiceRecognition } from '@/src/shared/hooks';
 import { CheckBox } from '@/src/shared/ui';
 
 export default function VoiceRecordChecker() {
-  const { isVoiceTranscription, toggleVoiceTranscription } = useIntvContentStore();
+  const { voiceTranscriptionEnable, toggleVoiceTranscription } = useIntvContentStore();
   const { checkSpeechRecognitionSupport } = useVoiceRecognition();
   const { setModal } = useModal();
 
@@ -24,7 +24,7 @@ export default function VoiceRecordChecker() {
     <div style={{ marginBottom: '20px' }}>
       <CheckBox
         label="발음 체크"
-        checked={isVoiceTranscription}
+        checked={voiceTranscriptionEnable}
         onChange={handleToggle}
       />
     </div>

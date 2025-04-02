@@ -8,7 +8,7 @@ type State = {
   curTimer: string;
   curVoiceScript: string;
   isFeedModalOpen: boolean;
-  isVoiceTranscription: boolean;
+  voiceTranscriptionEnable: boolean;
 };
 
 type Action = {
@@ -41,7 +41,7 @@ const useIntvContentStore = create<State & Action>((set) => ({
   curScript: '',
   curTimer: '',
   curVoiceScript: '',
-  isVoiceTranscription: false,
+  voiceTranscriptionEnable: false,
   isFeedModalOpen: false,
 
   // 액션 - 기록 목록
@@ -91,7 +91,7 @@ const useIntvContentStore = create<State & Action>((set) => ({
     }),
   toggleVoiceTranscription: () =>
     set((state) => ({
-      isVoiceTranscription: !state.isVoiceTranscription,
+      voiceTranscriptionEnable: !state.voiceTranscriptionEnable,
     })),
 
   setFeedModalOpen: (isShow: boolean) =>

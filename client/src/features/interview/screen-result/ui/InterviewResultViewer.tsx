@@ -13,7 +13,7 @@ import { RecordNavigation } from './record-navigation';
 import { RecordPlayer } from './record-player';
 import { RecordingDetails } from './content-detail';
 import { FooterActionPanel } from './footer-panel';
-import { ResultStateProps } from '../model';
+import { type ResultStateProps } from '../model';
 
 type Props = {
   question: string[];
@@ -21,7 +21,7 @@ type Props = {
 };
 
 export default function InterviewResultViewer({ question, currentIdx }: Props) {
-  const { recordedChunks: video } = useIntvRecordStore();
+  const video = useIntvRecordStore((state) => state.recordedChunks);
   const recordContents = useIntvContentStore((state) => state.recordContents);
 
   const { counter, handleDecrease, handleIncrease } = useCounter({

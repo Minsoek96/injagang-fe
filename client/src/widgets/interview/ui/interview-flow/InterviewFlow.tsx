@@ -27,6 +27,7 @@ export default function InterviewFlow() {
     (state) => state.clearRecordContents,
   );
 
+  // TODO: 추출하기 쓸데 없는 리렌더링 유발 원인
   const userPlayList = useIntvPlaylistStore((state) => state.userPlayList);
   const { readingTheScript, speechData } = useWebSpeech(userPlayList, 3000);
 
