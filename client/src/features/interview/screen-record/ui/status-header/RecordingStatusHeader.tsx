@@ -1,40 +1,58 @@
 import { styled } from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
+import { RecordStatus } from '@/src/shared/types';
 
 import RecordingTimer from './RecordingTimer';
 
 type Props = {
-  isRecord: boolean;
-  isSpeaking: boolean;
+  recordStatus: RecordStatus;
+  isNarration: boolean;
   currentQuestion: string;
 };
 
 export default function RecordingStatusHeader({
-  isRecord,
-  isSpeaking,
+  recordStatus,
+  isNarration,
   currentQuestion,
 }: Props) {
+  const isRecording = recordStatus === 'record';
+
   return (
     <RecordingStatusWrapper>
       <StatusSection>
-        <RecordingStateLabel $isRecording={isRecord}>
-          <StatusDot $isRecording={isRecord} />
-          {isRecord ? '녹화중' : '대기상태'}
+        <RecordingStateLabel $isRecording={isRecording}>
+          <StatusDot $isRecording={isRecording} />
+          {getStatusLabel(recordStatus)}
         </RecordingStateLabel>
       </StatusSection>
 
-      <SpeakingStatusMessage $isBlock={isSpeaking || isRecord}>
-        {isSpeaking
+      <SpeakingStatusMessage $isBlock={isNarration || isRecording}>
+        {isNarration
           ? '타이머가 3초가 되면 스피칭이 진행됩니다.'
-          : isRecord && currentQuestion}
+          : isRecording && currentQuestion}
       </SpeakingStatusMessage>
 
       <TimerSection>
-        <RecordingTimer isRunning={isRecord || isSpeaking} />
+        <RecordingTimer recordStatus={recordStatus} isNarration={isNarration} />
       </TimerSection>
     </RecordingStatusWrapper>
   );
+}
+
+// 상태에 따른 라벨 반환 함수
+function getStatusLabel(status: RecordStatus): string {
+  switch (status) {
+  case 'record':
+    return '녹화중';
+  case 'pause':
+    return '일시정지';
+  case 'end':
+    return '녹화완료';
+  case 'pending':
+  default:
+    return '대기상태';
+  }
 }
 
 const RecordingStatusWrapper = styled.header`

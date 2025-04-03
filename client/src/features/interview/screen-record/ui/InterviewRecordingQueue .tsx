@@ -30,7 +30,7 @@ export default function InterviewRecordingQueue({
   onChangeIndex,
 }: Props) {
   const [isScriptView, setIsScriptView] = useState<boolean>(false);
-  const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
+  const [isNarration, setIsNarration] = useState<boolean>(false);
 
   const { setModal } = useModal();
 
@@ -62,16 +62,16 @@ export default function InterviewRecordingQueue({
   /** 면접 종료 */
   const endInterviewRecord = () => {
     setIsScriptView(false);
-    handleRecordRemove();
     endSpeechToText();
+    handleRecordRemove();
     onChangeIndex(currentIndex + 1);
   };
 
   /** 스크립트를 읽고 상태를 업데이트 */
   const readCurrentScript = async (): Promise<void> => {
-    setIsSpeaking(true);
+    setIsNarration(true);
     await startNarration(currentIndex);
-    setIsSpeaking(false);
+    setIsNarration(false);
   };
 
   /** 면접 질문 스피칭 */
@@ -80,7 +80,7 @@ export default function InterviewRecordingQueue({
       onCompleteMsg();
       return;
     }
-    if (isSpeaking) return;
+    if (isNarration) return;
 
     await readCurrentScript();
     if (videoRef.current) {
@@ -92,14 +92,14 @@ export default function InterviewRecordingQueue({
   return (
     <Container>
       <MemoizedRecordingStatusHeader
-        isRecord={recordStatus === 'record'}
-        isSpeaking={isSpeaking}
+        recordStatus={recordStatus}
+        isNarration={isNarration}
         currentQuestion={narrationState[currentIndex]}
       />
       <VideoPlayer ref={videoRef} autoPlay muted playsInline />
       {isScriptView && <MemoizedScriptTextArea />}
       <RecordingControls>
-        {recordStatus === 'pending' ? (
+        {recordStatus === 'pending' || recordStatus === 'end' ? (
           <>
             <MainButton
               onClick={startInterviewRecord}

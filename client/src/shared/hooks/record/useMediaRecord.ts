@@ -17,7 +17,7 @@ const useMediaRecord = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [recordStatus, setRecordStatus] = useState<
-    'pending' | 'record' | 'pause'
+    'pending' | 'record' | 'pause' | 'end'
   >('pending');
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
 
@@ -125,7 +125,7 @@ const useMediaRecord = ({
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
       stopMediaTracks(mediaRecorderRef.current.stream);
-      setRecordStatus('pending');
+      setRecordStatus('end');
       mediaRecorderRef.current = null;
       clearStreamRef();
     }

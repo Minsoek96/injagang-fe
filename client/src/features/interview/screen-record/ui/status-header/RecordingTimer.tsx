@@ -5,17 +5,23 @@ import styled from 'styled-components';
 import { LuTimerReset } from 'react-icons/lu';
 
 import { useIntvContentStore } from '@/src/entities/interview_question';
+
 import { styleMixin } from '@/src/shared/styles';
 import { useInterval } from '@/src/shared/hooks';
 import { formatTime } from '@/src/shared/utils';
+import { RecordStatus } from '@/src/shared/types';
 
 type Props = {
-  isRunning: boolean;
+  recordStatus: RecordStatus;
+  isNarration: boolean;
 };
 
-export default function RecordingTimer({ isRunning }: Props) {
-  const { setCurTimer } = useIntvContentStore();
+export default function RecordingTimer({ recordStatus, isNarration }: Props) {
   const [time, setTime] = useState(0);
+  const isRunning = isNarration || recordStatus === 'record';
+
+  const commitContent = useIntvContentStore((state) => state.commitContent);
+  const setCurTimer = useIntvContentStore((state) => state.setCurTimer);
 
   useInterval(
     () => {
@@ -24,17 +30,13 @@ export default function RecordingTimer({ isRunning }: Props) {
     isRunning ? 1000 : null,
   );
 
-  /**
-   * TODO : 스피칭 끊기면 isRuning이 아닌 상태가 된다.
-   * isRuning을 끊겼을 때 타임이 넉넉하지 않으면 currentTime이 초기화가 발생한다.
-   */
-  // TODO : 스피칭이 끊기면 isRuning이 아닌 상태가 된다.
   useEffect(() => {
-    if (!isRunning && time > 8) {
+    if (recordStatus === 'end' && time > 0) {
       setCurTimer(formatTime.mmss(time));
+      commitContent();
       setTime(0);
     }
-  }, [isRunning, setCurTimer, time]);
+  }, [setCurTimer, time, recordStatus, commitContent]);
 
   return (
     <Container>
