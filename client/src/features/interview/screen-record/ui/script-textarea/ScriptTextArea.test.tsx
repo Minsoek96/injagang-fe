@@ -23,9 +23,9 @@ describe('ScriptTextArea', () => {
   const mockSetCurScript = jest.fn();
 
   beforeEach(() => {
-    (useIntvContentStore as unknown as jest.Mock).mockReturnValue({
+    (useIntvContentStore as unknown as jest.Mock).mockImplementation((selector) => selector({
       setCurScript: mockSetCurScript,
-    });
+    }));
   });
 
   it('대본 작성 텍스트가 렌더링 된다.', () => {

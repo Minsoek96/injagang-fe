@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 import { styled } from 'styled-components';
 
@@ -20,6 +20,10 @@ type Props = {
   currentIndex: number;
   onChangeIndex: (index: number) => void;
 };
+
+const MemoizedRecordingStatusHeader = memo(RecordingStatusHeader);
+const MemoizedScriptTextArea = memo(ScriptTextArea);
+const MemoizedRecordActionButtons = memo(RecordActionButtons);
 
 export default function InterviewRecordingQueue({
   currentIndex,
@@ -87,17 +91,13 @@ export default function InterviewRecordingQueue({
 
   return (
     <Container>
-      <RecordingStatusHeader
+      <MemoizedRecordingStatusHeader
         isRecord={recordStatus === 'record'}
         isSpeaking={isSpeaking}
         currentQuestion={narrationState[currentIndex]}
       />
       <VideoPlayer ref={videoRef} autoPlay muted playsInline />
-      {isScriptView && (
-        <ScriptView>
-          <ScriptTextArea />
-        </ScriptView>
-      )}
+      {isScriptView && <MemoizedScriptTextArea />}
       <RecordingControls>
         {recordStatus === 'pending' ? (
           <>
@@ -114,7 +114,7 @@ export default function InterviewRecordingQueue({
             />
           </>
         ) : (
-          <RecordActionButtons
+          <MemoizedRecordActionButtons
             isRecordPaused={recordStatus === 'pause'}
             handleEndRecord={endInterviewRecord}
             handlePauseRecord={handlePauseRecord}
@@ -144,19 +144,6 @@ const VideoPlayer = styled.video`
   border-radius: 0.8rem;
 `;
 
-const ScriptView = styled.div`
-  z-index: 100;
-  position: absolute;
-  transform: translate(-50%);
-  left: 50%;
-  width: 50%;
-  bottom: 10%;
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    display: none;
-  }
-`;
-
 const RecordingControls = styled.div`
   ${styleMixin.Flex()};
   width: 100%;
@@ -183,7 +170,7 @@ const RecordingControls = styled.div`
   }
 `;
 
-// // 주요 상태들
+// // // 주요 상태들
 // useWhyDidYouRender(
 //   'RecordingQueue',
 //   {
@@ -204,5 +191,6 @@ const RecordingControls = styled.div`
 //     beginSpeechToText,
 //     endSpeechToText,
 //     startNarration,
+//     endInterviewRecord,
 //   },
 // );
