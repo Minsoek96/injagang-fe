@@ -35,7 +35,7 @@ describe('useIntvContentStore', () => {
         useIntvContentStore.getState().setCurTimer(mockData.timer);
         useIntvContentStore.getState().setCurVoiceScript(mockData.voiceScript);
       });
-      act(() => useIntvContentStore.getState().addRecordContent());
+      act(() => useIntvContentStore.getState().commitContent());
       const { recordContents } = renderRecordHook();
       expect(recordContents[0]).toEqual(expect.objectContaining(mockData));
     });

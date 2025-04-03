@@ -12,7 +12,7 @@ type State = {
 };
 
 type Action = {
-  addRecordContent: () => void;
+  commitContent: () => void;
   updateRecordContent: (
     idx: number,
     partialContent: Partial<RecordContent>
@@ -23,7 +23,6 @@ type Action = {
   setCurScript: (script: string) => void;
   setCurTimer: (timer: string) => void;
   setCurVoiceScript: (voice: string) => void;
-  clearCurContent: () => void;
   toggleVoiceTranscription: () => void;
   setFeedModalOpen: (isOpen: boolean) => void;
 };
@@ -45,7 +44,7 @@ const useIntvContentStore = create<State & Action>((set) => ({
   isFeedModalOpen: false,
 
   // 액션 - 기록 목록
-  addRecordContent: () => {
+  commitContent: () => {
     set((state) => {
       const newContent: RecordContent = {
         script: state.curScript,
@@ -58,6 +57,10 @@ const useIntvContentStore = create<State & Action>((set) => ({
 
       return {
         recordContents: [...state.recordContents, newContent],
+        // 현재 입력된 콘텐츠 정리
+        curTimer: '',
+        curScript: '',
+        curVoiceScript: '',
       };
     });
   },
@@ -83,12 +86,6 @@ const useIntvContentStore = create<State & Action>((set) => ({
   setCurScript: (curScript: string) => set({ curScript }),
   setCurTimer: (curTimer: string) => set({ curTimer }),
   setCurVoiceScript: (curVoiceScript: string) => set({ curVoiceScript }),
-  clearCurContent: () =>
-    set({
-      curTimer: '',
-      curScript: '',
-      curVoiceScript: '',
-    }),
   toggleVoiceTranscription: () =>
     set((state) => ({
       voiceTranscriptionEnable: !state.voiceTranscriptionEnable,
