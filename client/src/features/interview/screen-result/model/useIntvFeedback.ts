@@ -28,10 +28,13 @@ const useIntvFeedback = ({
   );
   const { voiceScript = '', script = '', rating = '' } = recordContent;
 
-  const getSelectedText = useMemo<string>(
-    () => (selectedSource === 'voice' ? voiceScript : script),
-    [selectedSource, voiceScript, script],
-  );
+  const getSelectedText = useMemo<string>(() => {
+    const voiceContent = voiceScript.length
+      ? voiceScript
+      : '음성 변환 기록이 없습니다.';
+    const scriptContent = script.length ? script : '작성한 대본이 없습니다.';
+    return selectedSource === 'voice' ? voiceContent : scriptContent;
+  }, [selectedSource, voiceScript, script]);
 
   const changeSelectedSource = useCallback((value: 'voice' | 'script') => {
     setSelectedSource(value);
@@ -41,7 +44,8 @@ const useIntvFeedback = ({
   const validRules = useMemo(
     () => [
       {
-        check: () => !(question.trim() && getSelectedText.trim()),
+        check: () =>
+          !(question.trim() && (voiceScript.trim() || script.trim())),
         message: '질문와 답변이 비어있는 경우 피드백을 요청할 수 없습니다.',
       },
       {
@@ -49,11 +53,11 @@ const useIntvFeedback = ({
         message: '30자 이상의 소스만 분석할 수 있습니다.',
       },
       {
-        check: () => rating.trim() !== '',
+        check: () => !!(rating && rating.trim() !== ''),
         message: '이미 AI 분석 요청 결과가 존재합니다.',
       },
     ],
-    [getSelectedText, question, rating],
+    [getSelectedText, question, rating, voiceScript, script],
   );
 
   const handleRequestFeedback = useCallback(async () => {
