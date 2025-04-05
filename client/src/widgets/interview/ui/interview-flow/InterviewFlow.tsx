@@ -7,12 +7,12 @@ import {
   useIntvRecordStore,
 } from '@/src/entities/interview_question';
 
-import { Container } from '@/src/shared/ui';
-
 import {
   InterviewResultViewer,
   InterviewRecordingQueue,
 } from '@/src/features/interview';
+
+import { Container } from '@/src/shared/ui';
 
 /** 영상 녹화 메인 컴포넌트 */
 export default function InterviewFlow() {
@@ -77,7 +77,15 @@ const RecordContainer = styled(Container.ArticleCard)`
 `;
 
 // useWhyDidYouRender(
-//   'IntvFlow',
-//   { interviewMode, currentIndex },
-//   { setCurrentIndex, clearRecordContents, clearRecordStates },
+//   'InterviewFlow',
+//   {
+//     currentIndex,
+//     interviewMode,
+//   },
+//   {
+//     setCurrentIndex,
+//     clearRecordStates,
+//     clearRecordContents,
+//     renderComponent,
+//   },
 // );

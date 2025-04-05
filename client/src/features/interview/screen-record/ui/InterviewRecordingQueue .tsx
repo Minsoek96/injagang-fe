@@ -170,13 +170,12 @@ const RecordingControls = styled.div`
   }
 `;
 
-// // // 주요 상태들
 // useWhyDidYouRender(
-//   'RecordingQueue',
+//   'InterviewRecordingQueue',
 //   {
 //     currentIndex,
 //     isScriptView,
-//     isSpeaking,
+//     isNarration,
 //     recordStatus,
 //     narrationState,
 //     isComplete,
@@ -192,5 +191,8 @@ const RecordingControls = styled.div`
 //     endSpeechToText,
 //     startNarration,
 //     endInterviewRecord,
+//     readCurrentScript,
+//     startInterviewRecord,
+//     onCompleteMsg,
 //   },
 // );

@@ -5,6 +5,11 @@ import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
 import {
+  InterviewLobby,
+  ExpectedQuestionLayout,
+} from '@/src/widgets/interview';
+
+import {
   useDeviceStore,
   useIntvPlaylistStore,
 } from '@/src/entities/interview_question';
@@ -12,10 +17,6 @@ import {
 import { Container, RunningLoader, StepProgressBar } from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
-import {
-  InterviewLobby,
-  ExpectedQuestionLayout,
-} from '@/src/widgets/interview';
 
 import InterviewSliderButtons from './InterviewSliderButtons';
 
@@ -120,7 +121,6 @@ function Interview() {
   );
 
   const currentStepData = interviewSteps[currentStep];
-
   return (
     <InterViewStyle>
       <StepProgressBar
@@ -154,3 +154,21 @@ const RenderStep = styled(Container.ItemBase)`
   font-family: ${V.malgunGothic};
   margin-top: 5rem;
 `;
+
+// useWhyDidYouRender(
+//   'InterviewStepsComponent',
+//   {
+//     userPlayList,
+//     videoDevice,
+//     audioDevice,
+//     currentStep,
+//     interviewSteps,
+//     currentStepData,
+//   },
+//   {
+//     initUserPlayList,
+//     resetDevices,
+//     moveToPrevPage,
+//     moveToNextPage,
+//   },
+// );

@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import styled from 'styled-components';
 
 import {
@@ -37,20 +39,24 @@ export default function InterviewResultViewer({ currentIndex }: Props) {
     counter,
   };
 
-  // TODO:
+  const { currentQuestion, questionProgress } = useMemo(
+    () => getQuestionProgress(counter, questions),
+    [counter, questions],
+  );
+
   return (
     <InterViewResultContainer>
       <RecordNavigation
         onCounterDecrease={handleDecrease}
         onCounterIncrease={handleIncrease}
         counter={counter}
-        questionLen={questions.length}
+        questionProgress={questionProgress}
         lastVideo={video.length - 1}
       />
       <RecordPlayer currentVideoChunk={video[counter]} />
       <ResultControlsWrapper>
         <RecordingDetails
-          question={questions[counter]}
+          question={currentQuestion}
           recordContents={recordContents[counter] ?? {}}
         />
       </ResultControlsWrapper>
@@ -60,7 +66,7 @@ export default function InterviewResultViewer({ currentIndex }: Props) {
         />
       </ButtonSection>
       <IntvFeedbackModal
-        question={questions[counter]}
+        question={currentQuestion}
         recordContent={recordContents[counter] ?? {}}
         counter={counter}
       />
@@ -95,3 +101,23 @@ const ButtonSection = styled.div`
   box-shadow: 0 -4px 6px -1px rgba(63, 24, 24, 0.1);
   z-index: 100;
 `;
+
+/**
+ * 질문 진행 상태 관련 유틸 함수
+ *
+ * @param counter : 현재 진행 스텝
+ * @param questions : question 질문 모음
+ * @returns 질문 진행 관련 정보 객체
+ */
+function getQuestionProgress(counter:number, questions:string[]) {
+  const questionLen = questions.length;
+  const cycleCount = Math.floor(counter / questionLen) + 1;
+  const currentQuestionIndex = Math.min(counter % questionLen, questionLen - 1);
+  const currentQuestion = questions[currentQuestionIndex];
+  const questionProgress = `${currentQuestionIndex + 1}/${questionLen} (${cycleCount}회차)`;
+
+  return {
+    currentQuestion,
+    questionProgress,
+  };
+}

@@ -14,7 +14,7 @@ describe('RecordNavigation', () => {
     onCounterDecrease: mockDecrease,
     onCounterIncrease: mockIncrease,
     counter: 0,
-    questionLen: 5,
+    questionProgress: '1/5 (1회차)',
     lastVideo: 4,
   };
 
@@ -45,17 +45,17 @@ describe('RecordNavigation', () => {
 
   context('질문 인덱스 표시', () => {
     it('첫 번째 사이클의 질문 번호가 표시된다', () => {
-      renderComponent({ counter: 2 });
+      renderComponent({ counter: 2, questionProgress: '3/5 (1회차)' });
       expect(screen.getByText('3/5 (1회차)')).toBeInTheDocument();
     });
 
     it('두 번째 사이클의 질문 번호가 표시된다', () => {
-      renderComponent({ counter: 7 });
+      renderComponent({ counter: 7, questionProgress: '3/5 (2회차)' });
       expect(screen.getByText('3/5 (2회차)')).toBeInTheDocument();
     });
 
     it('세 번째 사이클의 질문 번호가 표시된다', () => {
-      renderComponent({ counter: 12 });
+      renderComponent({ counter: 12, questionProgress: '3/5 (3회차)' });
       expect(screen.getByText('3/5 (3회차)')).toBeInTheDocument();
     });
   });
