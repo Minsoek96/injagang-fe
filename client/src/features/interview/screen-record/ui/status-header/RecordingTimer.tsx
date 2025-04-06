@@ -19,7 +19,6 @@ type Props = {
 export default function RecordingTimer({ recordStatus, isNarration }: Props) {
   const [time, setTime] = useState(0);
   const isRunning = isNarration || recordStatus === 'record';
-
   const commitContent = useIntvContentStore((state) => state.commitContent);
   const setCurTimer = useIntvContentStore((state) => state.setCurTimer);
 
@@ -31,12 +30,12 @@ export default function RecordingTimer({ recordStatus, isNarration }: Props) {
   );
 
   useEffect(() => {
-    if (recordStatus === 'end' && time > 0) {
+    if (!isNarration && recordStatus === 'end' && time > 0) {
       setCurTimer(formatTime.mmss(time));
       commitContent();
       setTime(0);
     }
-  }, [setCurTimer, time, recordStatus, commitContent]);
+  }, [setCurTimer, time, recordStatus, commitContent, isNarration]);
 
   return (
     <Container>
