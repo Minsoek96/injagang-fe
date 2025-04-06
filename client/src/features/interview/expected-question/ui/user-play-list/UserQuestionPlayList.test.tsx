@@ -25,8 +25,8 @@ describe('UserQuestionPlayList', () => {
     jest.clearAllMocks();
     (useExpetedPlayList as jest.Mock).mockReturnValue({
       userPlayList: ['Question 1', 'Question 2'],
-      handleAddText: mockHandleAddText,
-      handleRemoveText: mockHandleRemoveText,
+      addQuestion: mockHandleAddText,
+      removeQuestion: mockHandleRemoveText,
       roleAction: mockRoleAction,
     });
   });

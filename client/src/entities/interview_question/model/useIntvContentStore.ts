@@ -7,11 +7,12 @@ type State = {
   curScript: string;
   curTimer: string;
   curVoiceScript: string;
-  isVoiceTranscription: boolean;
+  isFeedModalOpen: boolean;
+  voiceTranscriptionEnable: boolean;
 };
 
 type Action = {
-  addRecordContent: (content: RecordContent) => void;
+  commitContent: () => void;
   updateRecordContent: (
     idx: number,
     partialContent: Partial<RecordContent>
@@ -22,8 +23,8 @@ type Action = {
   setCurScript: (script: string) => void;
   setCurTimer: (timer: string) => void;
   setCurVoiceScript: (voice: string) => void;
-  clearCurContent: () => void;
   toggleVoiceTranscription: () => void;
+  setFeedModalOpen: (isOpen: boolean) => void;
 };
 
 /**
@@ -39,13 +40,29 @@ const useIntvContentStore = create<State & Action>((set) => ({
   curScript: '',
   curTimer: '',
   curVoiceScript: '',
-  isVoiceTranscription: false,
+  voiceTranscriptionEnable: false,
+  isFeedModalOpen: false,
 
   // 액션 - 기록 목록
-  addRecordContent: (newContent: RecordContent) => {
-    set((state) => ({
-      recordContents: [...state.recordContents, newContent],
-    }));
+  commitContent: () => {
+    set((state) => {
+      const newContent: RecordContent = {
+        script: state.curScript,
+        timer: state.curTimer,
+        voiceScript: state.curVoiceScript,
+        strengths: null,
+        improvements: null,
+        rating: null,
+      };
+
+      return {
+        recordContents: [...state.recordContents, newContent],
+        // 현재 입력된 콘텐츠 정리
+        curTimer: '',
+        curScript: '',
+        curVoiceScript: '',
+      };
+    });
   },
 
   updateRecordContent: (
@@ -69,16 +86,13 @@ const useIntvContentStore = create<State & Action>((set) => ({
   setCurScript: (curScript: string) => set({ curScript }),
   setCurTimer: (curTimer: string) => set({ curTimer }),
   setCurVoiceScript: (curVoiceScript: string) => set({ curVoiceScript }),
-  clearCurContent: () =>
-    set({
-      curTimer: '',
-      curScript: '',
-      curVoiceScript: '',
-    }),
   toggleVoiceTranscription: () =>
     set((state) => ({
-      isVoiceTranscription: !state.isVoiceTranscription,
+      voiceTranscriptionEnable: !state.voiceTranscriptionEnable,
     })),
+
+  setFeedModalOpen: (isShow: boolean) =>
+    set(() => ({ isFeedModalOpen: isShow })),
 }));
 
 export default useIntvContentStore;

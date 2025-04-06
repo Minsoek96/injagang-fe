@@ -1,91 +1,72 @@
-import { useState } from 'react';
-import styled from 'styled-components';
+import { useMemo } from 'react';
 
-import { MdOutlineFileDownload, MdOutlineReplay } from 'react-icons/md';
-import { AiOutlineFileSearch } from 'react-icons/ai';
+import styled from 'styled-components';
 
 import {
   useIntvContentStore,
+  useIntvPlaylistStore,
   useIntvRecordStore,
 } from '@/src/entities/interview_question';
 
-import { HideSvg } from '@/src/shared/ui';
 import { useCounter } from '@/src/shared/hooks';
 import { styleMixin } from '@/src/shared/styles';
 
-import IntvFeedbackModal from './IntvFeedbackModal';
-import RecordNavigation from './RecordNavigation';
-import RecordPlayer from './RecordPlayer';
+import { IntvFeedbackModal } from './feedback-modal';
+import { RecordNavigation } from './record-navigation';
+import { RecordPlayer } from './record-player';
 import { RecordingDetails } from './content-detail';
-import { useDownloadHandler } from '../model';
+import { FooterActionPanel } from './footer-panel';
+import { type ResultStateProps } from '../model';
 
 type Props = {
-  question: string[];
-  currentIdx: number;
+  currentIndex: number;
 };
 
-export default function InterviewResultViewer({ question, currentIdx }: Props) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { recordedChunks: video, setInterviewMode } = useIntvRecordStore();
-  const { recordContents } = useIntvContentStore();
+export default function InterviewResultViewer({ currentIndex }: Props) {
+  const questions = useIntvPlaylistStore((state) => state.userPlayList);
+  const video = useIntvRecordStore((state) => state.recordedChunks);
+  const recordContents = useIntvContentStore((state) => state.recordContents);
 
   const { counter, handleDecrease, handleIncrease } = useCounter({
     maxCounter: video.length,
-    initCounter: currentIdx,
+    initCounter: currentIndex,
   });
 
-  const { downloadVideo } = useDownloadHandler({
+  const resultState: ResultStateProps = {
     video,
     recordContents,
-    question,
+    question: questions,
     counter,
-  });
-
-  const handleClose = () => {
-    setIsOpen(false);
   };
 
-  // TODO:
+  const { currentQuestion, questionProgress } = useMemo(
+    () => getQuestionProgress(counter, questions),
+    [counter, questions],
+  );
+
   return (
     <InterViewResultContainer>
       <RecordNavigation
         onCounterDecrease={handleDecrease}
         onCounterIncrease={handleIncrease}
         counter={counter}
-        questionLen={question.length}
+        questionProgress={questionProgress}
         lastVideo={video.length - 1}
       />
       <RecordPlayer currentVideoChunk={video[counter]} />
       <ResultControlsWrapper>
         <RecordingDetails
-          question={question[counter]}
+          question={currentQuestion}
           recordContents={recordContents[counter] ?? {}}
         />
       </ResultControlsWrapper>
       <ButtonSection>
-        <HideSvg
-          Logo={<MdOutlineFileDownload />}
-          label="다운로드"
-          onClick={downloadVideo}
-          sx={{ fontSize: '3.5rem' }}
-        />
-        <HideSvg
-          Logo={<AiOutlineFileSearch />}
-          label="피드백 분석 요청"
-          onClick={() => setIsOpen(true)}
-          sx={{ fontSize: '3.5rem' }}
-        />
-        <HideSvg
-          Logo={<MdOutlineReplay />}
-          label="면접장으로"
-          onClick={() => setInterviewMode('record')}
-          sx={{ fontSize: '3.5rem' }}
+        <FooterActionPanel
+          resultState={resultState}
         />
       </ButtonSection>
       <IntvFeedbackModal
-        isOpen={isOpen}
-        onClose={handleClose}
-        question={question[counter]}
+        question={currentQuestion}
         recordContent={recordContents[counter] ?? {}}
         counter={counter}
       />
@@ -120,3 +101,23 @@ const ButtonSection = styled.div`
   box-shadow: 0 -4px 6px -1px rgba(63, 24, 24, 0.1);
   z-index: 100;
 `;
+
+/**
+ * 질문 진행 상태 관련 유틸 함수
+ *
+ * @param counter : 현재 진행 스텝
+ * @param questions : question 질문 모음
+ * @returns 질문 진행 관련 정보 객체
+ */
+function getQuestionProgress(counter:number, questions:string[]) {
+  const questionLen = questions.length;
+  const cycleCount = Math.floor(counter / questionLen) + 1;
+  const currentQuestionIndex = Math.min(counter % questionLen, questionLen - 1);
+  const currentQuestion = questions[currentQuestionIndex];
+  const questionProgress = `${currentQuestionIndex + 1}/${questionLen} (${cycleCount}회차)`;
+
+  return {
+    currentQuestion,
+    questionProgress,
+  };
+}

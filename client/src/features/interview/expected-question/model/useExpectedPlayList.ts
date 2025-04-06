@@ -7,21 +7,20 @@ import { useModal } from '@/src/shared/hooks';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
 
 const useExpetedPlayList = () => {
-  const {
-    selectedType,
-    userPlayList,
-    initUserPlayList,
-    removePlayItem,
-    setUserPlayList,
-  } = useIntvPlaylistStore();
+  const selectedType = useIntvPlaylistStore((state) => state.selectedType);
+  const userPlayList = useIntvPlaylistStore((state) => state.userPlayList);
+  const initUserPlayList = useIntvPlaylistStore((state) => state.initUserPlayList);
+  const removePlayItem = useIntvPlaylistStore((state) => state.removePlayItem);
+  const setUserPlayList = useIntvPlaylistStore((state) => state.setUserPlayList);
+
+  const role = useAuthStore((state) => state.role);
 
   const { mutate: dispatchAddQuestions } = interviewMutation.useAddInterViewQ();
 
-  const { role } = useAuthStore();
   const { setModal } = useModal();
 
   /** 입력한 텍스트 리스트에 추가 */
-  const handleAddText = useCallback(
+  const addQuestion = useCallback(
     (text: string) => {
       if (text === '') {
         setModal({
@@ -36,12 +35,12 @@ const useExpetedPlayList = () => {
   );
 
   /** 현재 리스트에서 삭제 */
-  const handleRemoveText = useCallback((item: string) => {
+  const removeQuestion = useCallback((item: string) => {
     removePlayItem(item);
   }, []);
 
   /** ADMIN 인터뷰리스트 추가 */
-  const handleSubmit = useCallback(() => {
+  const submitQuestions = useCallback(() => {
     if (selectedType === 'ALL') {
       setModal({
         title: MODAL_MESSAGES.WARNING,
@@ -57,12 +56,12 @@ const useExpetedPlayList = () => {
     initUserPlayList();
   }, [userPlayList, selectedType]);
 
-  const roleAction = role === 'ADMIN' ? handleSubmit : initUserPlayList;
+  const roleAction = role === 'ADMIN' ? submitQuestions : initUserPlayList;
 
   return {
     userPlayList,
-    handleRemoveText,
-    handleAddText,
+    removeQuestion,
+    addQuestion,
     roleAction,
   };
 };

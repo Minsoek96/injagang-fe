@@ -23,7 +23,7 @@ jest.mock('@/public/assets/roomout.webp', () => '/roomdark-mock');
 
 const context = describe;
 const renderComponent = (isDark = false) => {
-  (useThemeStore as unknown as jest.Mock).mockImplementation(() => ({
+  (useThemeStore as unknown as jest.Mock).mockImplementation((selector) => selector({
     isDark,
   }));
   render(

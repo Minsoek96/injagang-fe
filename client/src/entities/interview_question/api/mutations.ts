@@ -29,7 +29,7 @@ import interview from './queryKeys';
 /** 랜덤 면접 질문리스트 요청 */
 const useFetchRandomQuestion = () => {
   const { showToast } = useToast();
-  const { setUserPlayList } = useIntvPlaylistStore();
+  const setUserPlayList = useIntvPlaylistStore((state) => state.setUserPlayList);
 
   return useMutation({
     mutationFn: (random: IRandomQuestions[]) =>
@@ -95,7 +95,7 @@ const useAddInterViewQ = () => {
 /** 면접 질문 피드백 요청 */
 const useGetIntvFeedback = () => {
   const { showToast } = useToast();
-  const { updateRecordContent } = useIntvContentStore();
+  const updateRecordContent = useIntvContentStore((state) => state.updateRecordContent);
 
   return useMutation({
     mutationFn: (list: IntvFeedback & { counter: number}) => getIntvFeedback(list),

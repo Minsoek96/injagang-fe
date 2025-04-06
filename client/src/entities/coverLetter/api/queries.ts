@@ -7,7 +7,7 @@ import coverLetter from './querykeys';
 
 /** 자기소개서 목록 조회 */
 const useFetchCoverLetter = () => {
-  const { nickName } = useAuthStore();
+  const nickName = useAuthStore((state) => state.nickName);
   return useQuery({
     queryKey: coverLetter.list(nickName),
     queryFn: () => getCoverLetter(),

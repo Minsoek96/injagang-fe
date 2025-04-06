@@ -45,7 +45,7 @@ export type RecordContent = {
   script: string;
   timer: string;
   voiceScript: string;
-  strengths?: string[];
-  improvements?: string[];
-  rating?: string
+  strengths?: string[] | null;
+  improvements?: string[] | null;
+  rating?: string | null;
 };

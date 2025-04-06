@@ -1,19 +1,10 @@
 import { saveAs } from 'file-saver';
 
-type Props = {
-  video: Blob[];
-  recordContents: {
-    script: string;
-    timer: string;
-    voiceScript: string;
-  }[];
-  question: string[];
-  counter: number;
-};
+import { ResultStateProps } from './types';
 
 export default function useDownloadHandler({
   video, recordContents, question, counter,
-}: Props) {
+}: ResultStateProps) {
   const downloadScript = () => {
     if (!recordContents[counter]) return;
     const { script, timer, voiceScript } = recordContents[counter];

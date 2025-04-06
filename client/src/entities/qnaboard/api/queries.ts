@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import useBoardStore from '@/src/entities/qnaboard/model/useBoardStore';
+import { useShallow } from 'zustand/react/shallow';
 import { getBoardList, getDetailBoard } from './apis';
 
 import board from './queryKeys';
@@ -9,7 +10,11 @@ import board from './queryKeys';
 const useFetchBoardList = () => {
   const {
     curPageNum, boardType, boardSearch,
-  } = useBoardStore();
+  } = useBoardStore(useShallow((state) => ({
+    curPageNum: state.curPageNum,
+    boardType: state.boardType,
+    boardSearch: state.boardSearch,
+  })));
 
   return useQuery({
     queryKey: board.lists(curPageNum, boardType, boardSearch),

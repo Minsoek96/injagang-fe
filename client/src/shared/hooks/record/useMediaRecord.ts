@@ -17,7 +17,7 @@ const useMediaRecord = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [recordStatus, setRecordStatus] = useState<
-    'pending' | 'record' | 'pause'
+    'pending' | 'record' | 'pause' | 'end'
   >('pending');
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
 
@@ -112,7 +112,7 @@ const useMediaRecord = ({
       onError();
       handleRecordRemove();
     }
-  }, [getUserAccess, handleDataAvailable, onError]);
+  }, []);
 
   /** 녹화 장비를 제거한다. */
   const stopMediaTracks = useCallback((stream: MediaStream) => {
@@ -125,7 +125,7 @@ const useMediaRecord = ({
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
       stopMediaTracks(mediaRecorderRef.current.stream);
-      setRecordStatus('pending');
+      setRecordStatus('end');
       mediaRecorderRef.current = null;
       clearStreamRef();
     }

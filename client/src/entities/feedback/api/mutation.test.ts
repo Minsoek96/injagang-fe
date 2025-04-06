@@ -132,9 +132,8 @@ describe('mutations', () => {
   context('뮤테이션 성공한 경우', () => {
     beforeEach(() => {
       setupMocks();
-      (useFeedStore as unknown as jest.Mock).mockReturnValue({
-        targetFeed: 1001,
-      });
+      (useFeedStore as unknown as jest.Mock).mockImplementation((selector) =>
+        selector({ targetFeed: 1001 }));
     });
 
     afterEach(() => {

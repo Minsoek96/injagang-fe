@@ -1,35 +1,36 @@
-import { useEffect, useState } from 'react';
+import { memo, useState } from 'react';
 
 import { styled } from 'styled-components';
 
-import { useIntvContentStore } from '@/src/entities/interview_question';
-
 import { styleMixin, V } from '@/src/shared/styles';
-import { useModal, useVoiceRecognition } from '@/src/shared/hooks';
+import { useModal } from '@/src/shared/hooks';
 import { MainButton } from '@/src/shared/ui';
 
-import useInterviewRecorder from '../model/useInterviewRecorder';
-import ScriptTextArea from './ScriptTextArea';
-import VideoHeader from './RecordingStatusHeader';
-import RecordActionButtons from './RecordActionButtons';
+import { RecordingStatusHeader } from './status-header';
+import { ScriptTextArea } from './script-textarea';
+import { RecordActionButtons } from './record-action-button';
+
+import {
+  useInterviewRecorder,
+  useIntvNarration,
+  useIntvSpeechToText,
+} from '../model';
 
 type Props = {
   currentIndex: number;
   onChangeIndex: (index: number) => void;
-  speechData: string[];
-  readingTheScript: (index: number) => Promise<void>;
 };
+
+const MemoizedRecordingStatusHeader = memo(RecordingStatusHeader);
+const MemoizedScriptTextArea = memo(ScriptTextArea);
+const MemoizedRecordActionButtons = memo(RecordActionButtons);
 
 export default function InterviewRecordingQueue({
   currentIndex,
   onChangeIndex,
-  readingTheScript,
-  speechData,
 }: Props) {
-  const isComplete = currentIndex >= speechData.length;
-
   const [isScriptView, setIsScriptView] = useState<boolean>(false);
-  const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
+  const [isNarration, setIsNarration] = useState<boolean>(false);
 
   const { setModal } = useModal();
 
@@ -44,14 +45,10 @@ export default function InterviewRecordingQueue({
     storeChunks,
   } = useInterviewRecorder();
 
-  const {
-    voiceText,
-    startVoiceRecognition,
-    stopVoiceRecognition,
-  } = useVoiceRecognition();
+  const { narrationState, startNarration } = useIntvNarration();
+  const { beginSpeechToText, endSpeechToText } = useIntvSpeechToText();
 
-  const { setCurVoiceScript, isVoiceTranscription } = useIntvContentStore();
-
+  const isComplete = currentIndex >= narrationState.length;
   /** 메시지를 표시하고, 면접을 처음부터 다시 진행 설정 */
   const onCompleteMsg = () => {
     setModal({
@@ -62,26 +59,19 @@ export default function InterviewRecordingQueue({
     });
   };
 
-  useEffect(() => {
-    if (!isVoiceTranscription) return;
-    setCurVoiceScript(voiceText);
-  }, [voiceText, isVoiceTranscription]);
-
   /** 면접 종료 */
   const endInterviewRecord = () => {
     setIsScriptView(false);
+    endSpeechToText();
     handleRecordRemove();
-    if (isVoiceTranscription) {
-      stopVoiceRecognition();
-    }
     onChangeIndex(currentIndex + 1);
   };
 
   /** 스크립트를 읽고 상태를 업데이트 */
   const readCurrentScript = async (): Promise<void> => {
-    setIsSpeaking(true);
-    await readingTheScript(currentIndex);
-    setIsSpeaking(false);
+    setIsNarration(true);
+    await startNarration(currentIndex);
+    setIsNarration(false);
   };
 
   /** 면접 질문 스피칭 */
@@ -90,30 +80,26 @@ export default function InterviewRecordingQueue({
       onCompleteMsg();
       return;
     }
-    if (isSpeaking) return;
+    if (isNarration) return;
 
     await readCurrentScript();
     if (videoRef.current) {
       handleRecord();
-      isVoiceTranscription && startVoiceRecognition();
+      beginSpeechToText();
     }
   };
 
   return (
     <Container>
-      <VideoHeader
-        isRecord={recordStatus === 'record'}
-        isSpeaking={isSpeaking}
-        currentQuestion={speechData[currentIndex]}
+      <MemoizedRecordingStatusHeader
+        recordStatus={recordStatus}
+        isNarration={isNarration}
+        currentQuestion={narrationState[currentIndex]}
       />
-      <PlayerWrapper ref={videoRef} autoPlay muted playsInline />
-      {isScriptView && (
-        <ScriptView>
-          <ScriptTextArea />
-        </ScriptView>
-      )}
+      <VideoPlayer ref={videoRef} autoPlay muted playsInline />
+      {isScriptView && <MemoizedScriptTextArea />}
       <RecordingControls>
-        {recordStatus === 'pending' ? (
+        {recordStatus === 'pending' || recordStatus === 'end' ? (
           <>
             <MainButton
               onClick={startInterviewRecord}
@@ -128,7 +114,7 @@ export default function InterviewRecordingQueue({
             />
           </>
         ) : (
-          <RecordActionButtons
+          <MemoizedRecordActionButtons
             isRecordPaused={recordStatus === 'pause'}
             handleEndRecord={endInterviewRecord}
             handlePauseRecord={handlePauseRecord}
@@ -148,7 +134,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const PlayerWrapper = styled.video`
+const VideoPlayer = styled.video`
   margin-block: 1.5rem;
   width: 100%;
   height: 90%;
@@ -156,19 +142,6 @@ const PlayerWrapper = styled.video`
   z-index: 1;
   background-color: ${(props) => props.theme.colors.primary};
   border-radius: 0.8rem;
-`;
-
-const ScriptView = styled.div`
-  z-index: 100;
-  position: absolute;
-  transform: translate(-50%);
-  left: 50%;
-  width: 50%;
-  bottom: 10%;
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    display: none;
-  }
 `;
 
 const RecordingControls = styled.div`
@@ -196,3 +169,30 @@ const RecordingControls = styled.div`
     }
   }
 `;
+
+// useWhyDidYouRender(
+//   'InterviewRecordingQueue',
+//   {
+//     currentIndex,
+//     isScriptView,
+//     isNarration,
+//     recordStatus,
+//     narrationState,
+//     isComplete,
+//   },
+//   {
+//     onChangeIndex,
+//     handlePauseRecord,
+//     handleRecordRemove,
+//     handleRecord,
+//     handleResumeRecord,
+//     setInterviewMode,
+//     beginSpeechToText,
+//     endSpeechToText,
+//     startNarration,
+//     endInterviewRecord,
+//     readCurrentScript,
+//     startInterviewRecord,
+//     onCompleteMsg,
+//   },
+// );

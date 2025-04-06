@@ -1,6 +1,10 @@
 import { renderHook, act } from '@testing-library/react';
 
-import { useDeviceStore, useIntvContentStore, useIntvRecordStore } from '@/src/entities/interview_question';
+import {
+  useDeviceStore,
+  useIntvContentStore,
+  useIntvRecordStore,
+} from '@/src/entities/interview_question';
 import { useMediaRecord } from '@/src/shared/hooks';
 
 import useInterviewRecorder from './useInterviewRecorder';
@@ -65,23 +69,5 @@ describe('useInterviewRecorder 훅 테스트', () => {
     });
 
     expect(mockSetInterviewMode).toHaveBeenCalledWith('record');
-  });
-
-  it('recordStatus가 pending일 때 addRecordInfo와 initCurinfos를 호출해야 한다', () => {
-    (useMediaRecord as jest.Mock).mockReturnValueOnce({
-      ...useMediaRecord({}),
-      recordStatus: 'pending',
-    });
-
-    renderHook(() => useInterviewRecorder());
-
-    act(() => {});
-
-    expect(mockAddRecordContents).toHaveBeenCalledWith({
-      timer: '00:01',
-      script: 'test script',
-      voiceScript: 'voice script',
-    });
-    expect(mockClearCurContent).toHaveBeenCalled();
   });
 });

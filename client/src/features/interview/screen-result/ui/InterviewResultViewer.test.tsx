@@ -9,11 +9,10 @@ describe('interviewResultViewer', () => {
   global.URL.createObjectURL = jest.fn(() => 'mock-video-url');
   global.URL.revokeObjectURL = jest.fn();
 
-  const mockQuestion = ['Mock Question 1', 'Mock Question 2', 'Mock Question 3'];
   it('면접장 버튼을 클릭하면 모드가 변경된다.', () => {
     render(
       <TestProvider>
-        <InterviewResultViewer question={mockQuestion} currentIdx={1} />
+        <InterviewResultViewer currentIndex={1} />
       </TestProvider>,
     );
 
@@ -26,7 +25,7 @@ describe('interviewResultViewer', () => {
   it('피드백 분석 요청 버튼을 클릭하면 모달이 출력된다', () => {
     render(
       <TestProvider>
-        <InterviewResultViewer question={mockQuestion} currentIdx={1} />
+        <InterviewResultViewer currentIndex={1} />
       </TestProvider>,
     );
 

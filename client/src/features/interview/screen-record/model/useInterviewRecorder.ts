@@ -5,7 +5,6 @@ import {
   useIntvRecordStore,
 } from '@/src/entities/interview_question';
 import { useMediaRecord } from '@/src/shared/hooks';
-import useIntvContentSaver from '@/src/features/interview/screen-record/model/useIntvContentSaver';
 
 /**
  * 면접 녹화와 관련된 처리를 담당하는 훅
@@ -39,18 +38,15 @@ export default function useInterviewRecorder() {
     handleResumeRecord,
     handleRecordRemove,
     recordStatus,
-    recordedChunks,
+    recordedChunks: currentChunks,
   } = useMediaRecord({
     audioId: audioDevice?.deviceId,
     videoId: videoDevice?.deviceId,
   });
 
-  // 콘텐츠 저장 관리
-  useIntvContentSaver({ recordStatus });
-
   useEffect(() => {
-    setRecordedChunks(recordedChunks);
-  }, [recordedChunks]);
+    setRecordedChunks(currentChunks);
+  }, [currentChunks]);
 
   return {
     videoRef,

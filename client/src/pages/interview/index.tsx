@@ -1,9 +1,13 @@
-import { useEffect, useMemo } from 'react';
-import { useShallow } from 'zustand/react/shallow';
+import { memo, useEffect, useMemo } from 'react';
 
 import dynamic from 'next/dynamic';
 
 import styled from 'styled-components';
+
+import {
+  InterviewLobby,
+  ExpectedQuestionLayout,
+} from '@/src/widgets/interview';
 
 import {
   useDeviceStore,
@@ -13,10 +17,6 @@ import {
 import { Container, RunningLoader, StepProgressBar } from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
-import {
-  InterviewLobby,
-  ExpectedQuestionLayout,
-} from '@/src/widgets/interview';
 
 import InterviewSliderButtons from './InterviewSliderButtons';
 
@@ -50,6 +50,8 @@ const InterviewFlow = dynamic(
   },
 );
 
+const MemoizedExpectedQuestionLayout = memo(ExpectedQuestionLayout);
+
 type IntvSteps = {
   render: React.ReactNode,
   subTitle: string,
@@ -59,20 +61,12 @@ type IntvSteps = {
 }
 
 function Interview() {
-  const { initUserPlayList, userPlayList } = useIntvPlaylistStore(
-    useShallow((state) => ({
-      initUserPlayList: state.initUserPlayList,
-      userPlayList: state.userPlayList,
-    })),
-  );
+  const userPlayList = useIntvPlaylistStore((state) => state.userPlayList);
+  const initUserPlayList = useIntvPlaylistStore((state) => state.initUserPlayList);
 
-  const { videoDevice, audioDevice, resetDevices } = useDeviceStore(
-    useShallow((state) => ({
-      videoDevice: state.videoDevice,
-      audioDevice: state.audioDevice,
-      resetDevices: state.resetDevices,
-    })),
-  );
+  const videoDevice = useDeviceStore((state) => state.videoDevice);
+  const audioDevice = useDeviceStore((state) => state.audioDevice);
+  const resetDevices = useDeviceStore((state) => state.resetDevices);
 
   const {
     handleDecrease: moveToPrevPage,
@@ -89,7 +83,7 @@ function Interview() {
       id: 'Step_01',
     },
     {
-      render: <ExpectedQuestionLayout />,
+      render: <MemoizedExpectedQuestionLayout />,
       subTitle: 'Next Step...',
       title: '면접 질문 선택',
       rule: null,
@@ -127,7 +121,6 @@ function Interview() {
   );
 
   const currentStepData = interviewSteps[currentStep];
-
   return (
     <InterViewStyle>
       <StepProgressBar
@@ -161,3 +154,21 @@ const RenderStep = styled(Container.ItemBase)`
   font-family: ${V.malgunGothic};
   margin-top: 5rem;
 `;
+
+// useWhyDidYouRender(
+//   'InterviewStepsComponent',
+//   {
+//     userPlayList,
+//     videoDevice,
+//     audioDevice,
+//     currentStep,
+//     interviewSteps,
+//     currentStepData,
+//   },
+//   {
+//     initUserPlayList,
+//     resetDevices,
+//     moveToPrevPage,
+//     moveToNextPage,
+//   },
+// );

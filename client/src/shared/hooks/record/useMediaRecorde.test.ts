@@ -134,7 +134,7 @@ describe('useMediaRecord 훅', () => {
       expect(mockMediaRecorder.resume).toHaveBeenCalled();
     });
 
-    it('녹화를 삭제할 수 있어야 한다.', async () => {
+    it('녹화를 종료할 수 있어야 한다.', async () => {
       const { result } = renderHook(() => useMediaRecord({}));
 
       await act(async () => {
@@ -145,7 +145,7 @@ describe('useMediaRecord 훅', () => {
         result.current.handleRecordRemove();
       });
 
-      expect(result.current.recordStatus).toBe('pending');
+      expect(result.current.recordStatus).toBe('end');
       expect(mockMediaRecorder.stop).toHaveBeenCalled();
     });
   });

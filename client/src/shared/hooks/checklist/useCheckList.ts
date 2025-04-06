@@ -17,7 +17,7 @@ const useCheckList = <T extends { id: number }>(
 
   const clearCheckList = useCallback(() => {
     setCheckList([]);
-  }, [targetList, checkList]);
+  }, []);
 
   const handleAllCheck = useCallback(() => {
     const shouldUncheckAll = checkList.length === targetList.length;
@@ -26,7 +26,7 @@ const useCheckList = <T extends { id: number }>(
     } else {
       setCheckList(targetList.map((item) => item.id));
     }
-  }, [targetList, checkList]);
+  }, [targetList, checkList, clearCheckList]);
 
   const handleCheckList = useCallback((id: number) => {
     setCheckList((prev) => {

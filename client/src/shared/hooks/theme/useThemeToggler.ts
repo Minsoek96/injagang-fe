@@ -8,7 +8,8 @@ type StoraTheme = {
 }
 const storage = new LocalStorageManager('theme');
 const useThemeToggler = (): [boolean, () => void] => {
-  const { isDark: currentMode, changeThemeMode } = useThemeStore();
+  const currentMode = useThemeStore((state) => state.isDark);
+  const changeThemeMode = useThemeStore((state) => state.changeThemeMode);
 
   const ChangeToggleTheme = useCallback(() => {
     const saveValue = { theme: !currentMode };
