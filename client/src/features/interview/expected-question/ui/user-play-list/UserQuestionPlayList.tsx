@@ -1,33 +1,27 @@
 import styled from 'styled-components';
 
 import { Container } from '@/src/shared/ui';
-import { styleMixin } from '@/src/shared/styles';
-import { keys } from '@/src/shared/utils';
 
-import QuestionAdder from './QuestionAdder';
-import UserQuestionPlayListItem from './UserQuestionPlayListItem';
+import { CustomQuestionControls } from './custom-controls';
+import { PlayListContent } from './question-list';
 import useExpetedPlayList from '../../model/useExpectedPlayList';
 
 function UserQuestionPlayList() {
   const {
     userPlayList, removeQuestion, addQuestion, roleAction,
   } = useExpetedPlayList();
+
   return (
     <Container.ArticleCard
       $size={{ height: '60rem', width: '100%', flex: 'Col' }}
     >
       <Header>Play List</Header>
-      <ItemContainer>
-        {userPlayList?.map((question, idx) => (
-          <UserQuestionPlayListItem
-            key={keys(question, idx)}
-            item={question}
-            handleRemoveText={removeQuestion}
-          />
-        ))}
-      </ItemContainer>
-      <QuestionAdder
-        playListLen={userPlayList.length}
+      <PlayListContent
+        userPlayList={userPlayList}
+        removeQuestion={removeQuestion}
+      />
+      <CustomQuestionControls
+        playListLen={userPlayList ? userPlayList.length : 0}
         handleAddQuestion={addQuestion}
         handleConfirmQuestion={roleAction}
       />
@@ -36,14 +30,6 @@ function UserQuestionPlayList() {
 }
 
 export default UserQuestionPlayList;
-
-const ItemContainer = styled.ul`
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-  margin-block: 1rem;
-  ${styleMixin.ScrollBar}
-`;
 
 const Header = styled.h1`
   font-size: 3rem;

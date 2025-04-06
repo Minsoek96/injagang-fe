@@ -10,7 +10,7 @@ interface AddTextInputProps {
   handleConfirmQuestion: () => void;
   playListLen: number;
 }
-function QuestionAdder({
+function CustomQuestionControls({
   handleAddQuestion,
   handleConfirmQuestion,
   playListLen,
@@ -36,12 +36,12 @@ function QuestionAdder({
       <ButtonContainer>
         <MainButton
           label="추가"
-          sx={{ width: '6.3rem', font: '1rem' }}
+          sx={{ width: '6.5rem', font: '1rem' }}
           onClick={handleAddText}
         />
         <MainButton
           label="비우기"
-          sx={{ width: '6.3rem', font: '1rem' }}
+          sx={{ width: '7rem', font: '1rem' }}
           disabled={!playListLen}
           onClick={handleConfirmQuestion}
         />
@@ -50,7 +50,7 @@ function QuestionAdder({
   );
 }
 
-export default QuestionAdder;
+export default CustomQuestionControls;
 
 const AddTextInputStyle = styled.div`
   ${styleMixin.Flex()};

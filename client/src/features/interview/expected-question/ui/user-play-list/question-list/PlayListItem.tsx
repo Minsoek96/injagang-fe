@@ -1,6 +1,8 @@
 import { memo, useState } from 'react';
+
 import styled from 'styled-components';
 import { BiTrash } from 'react-icons/bi';
+
 import { HideSvg } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
@@ -9,7 +11,7 @@ type AddQuestionItemProps = {
   handleRemoveText: (question: string) => void;
 };
 
-function UserQuestionPlayListItem({
+function PlayListItem({
   item,
   handleRemoveText,
 }: AddQuestionItemProps) {
@@ -40,7 +42,7 @@ function UserQuestionPlayListItem({
   );
 }
 
-export default memo(UserQuestionPlayListItem);
+export default memo(PlayListItem);
 
 const AddQuestionItemStyle = styled.li<{ $isRemoving: boolean }>`
   ${styleMixin.Flex('space-between', 'center')}

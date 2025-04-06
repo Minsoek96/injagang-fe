@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-import UserQuestionPlayListItem from './UserQuestionPlayListItem';
+import PlayListItem from './PlayListItem';
 
 describe('UserQuestionPlayListItem', () => {
   const mockHandleRemoveText = jest.fn();
@@ -9,7 +9,7 @@ describe('UserQuestionPlayListItem', () => {
   const renderComponent = () => {
     render(
       <TestProvider>
-        <UserQuestionPlayListItem
+        <PlayListItem
           item="테스트 질문"
           handleRemoveText={mockHandleRemoveText}
         />
