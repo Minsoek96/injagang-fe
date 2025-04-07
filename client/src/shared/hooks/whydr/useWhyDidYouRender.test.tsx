@@ -15,6 +15,7 @@ describe('useWhyDidYouRender', () => {
     log: jest.spyOn(console, 'log'),
     group: jest.spyOn(console, 'group'),
     groupEnd: jest.spyOn(console, 'groupEnd'),
+    table: jest.spyOn(console, 'table'),
   };
   beforeEach(() => {
     jest.clearAllMocks();
@@ -26,6 +27,7 @@ describe('useWhyDidYouRender', () => {
     capture.log.mockImplementation();
     capture.group.mockImplementation();
     capture.groupEnd.mockImplementation();
+    capture.table.mockImplementation();
   });
 
   context('초기 렌더링 시', () => {
@@ -45,11 +47,8 @@ describe('useWhyDidYouRender', () => {
       const button = screen.getByRole('button');
       fireEvent.click(button);
 
-      expect(capture.log.mock.calls[0][1]).toEqual({
+      expect(capture.table.mock.calls[0][0]).toEqual({
         value: { 이전: 0, 현재: 1 },
-      });
-      expect(capture.log.mock.calls[1][1]).toEqual({
-        counter: { 이전: 0, 현재: 1 },
       });
     });
 
@@ -57,7 +56,7 @@ describe('useWhyDidYouRender', () => {
       const { rerender } = renderComponent(0, 3);
       rerender(<MockComponent initValue={0} mockValue={5} isMemo={false} />);
 
-      expect(capture.log).toHaveBeenCalledWith('변경된 state:', {
+      expect(capture.table.mock.calls[0][0]).toEqual({
         mockValue: { 이전: 3, 현재: 5 },
       });
     });
@@ -68,22 +67,18 @@ describe('useWhyDidYouRender', () => {
       const { rerender } = renderComponent(0, 0);
       rerender(<MockComponent initValue={0} mockValue={0} />);
 
-      const actionLog = capture.log.mock.calls.find(
-        (call: string[]) => call[0] === '변경된 action:',
-      );
-      expect(actionLog[1].handleIncrease).toEqual({
-        이전: expect.any(Function),
-        현재: expect.any(Function),
+      expect(capture.table.mock.calls[0][0]).toEqual({
+        handleIncrease: {
+          이전: expect.any(Function),
+          현재: expect.any(Function),
+        },
       });
     });
 
     it('메모이제이션된 action값은 기록되지 않는다.', () => {
       const { rerender } = renderComponent(0, 0, true);
       rerender(<MockComponent initValue={0} mockValue={0} isMemo />);
-      const actionLog = capture.log.mock.calls.find(
-        (call: string[]) => call[0] === '변경된 action:',
-      );
-      expect(actionLog).toBeUndefined();
+      expect(capture.table).not.toHaveBeenCalled();
     });
   });
 
@@ -91,12 +86,7 @@ describe('useWhyDidYouRender', () => {
     it('부모로 인한 리렌더링임을 유추하여 기록한다.', () => {
       const { rerender } = renderComponent(0, 0, true);
       rerender(<MockComponent initValue={0} mockValue={5} isMemo />);
-      const parentRerenderLog = capture.log.mock.calls.find(
-        (call: string[]) =>
-          call[0]
-          === '[렌더] Child - state/action 변경 없음 (부모 리렌더링)',
-      );
-      expect(parentRerenderLog).toBeTruthy();
+      expect(capture.log.mock.calls[0][0]).toMatch(/부모 리렌더링/);
     });
   });
 
