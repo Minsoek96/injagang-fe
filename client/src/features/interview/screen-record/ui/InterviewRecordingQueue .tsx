@@ -71,7 +71,10 @@ export default function InterviewRecordingQueue({
   const readCurrentScript = async (): Promise<void> => {
     setIsNarration(true);
     await startNarration(currentIndex);
-    setIsNarration(false);
+    // 안정적인 컨텐츠 저장 시점을 위한
+    setTimeout(() => {
+      setIsNarration(false);
+    }, 500);
   };
 
   /** 면접 질문 스피칭 */

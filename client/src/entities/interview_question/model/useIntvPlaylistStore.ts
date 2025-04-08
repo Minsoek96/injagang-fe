@@ -27,6 +27,9 @@ const useIntvPlaylistStore = create<State & Action>((set) => ({
       const { userPlayList } = state;
       // 현재 userPlayList에 없는 새로운 항목만 필터링
       const newItems = list.filter((item) => !userPlayList.includes(item));
+      if (newItems.length === 0) {
+        return state;
+      }
       return {
         userPlayList: [...userPlayList, ...newItems],
       };
