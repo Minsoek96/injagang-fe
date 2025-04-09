@@ -44,9 +44,12 @@ export default function useInterviewRecorder() {
     videoId: videoDevice?.deviceId,
   });
 
+  // 녹화 완료 시 청크 데이터를 저장하여 동기화 목적
   useEffect(() => {
-    setRecordedChunks(currentChunks);
-  }, [currentChunks]);
+    if (recordStatus === 'end') {
+      setRecordedChunks(currentChunks);
+    }
+  }, [currentChunks, recordStatus]);
 
   return {
     videoRef,

@@ -111,6 +111,8 @@ const useMediaRecord = ({
     } catch (error) {
       onError();
       handleRecordRemove();
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      throw new Error(`녹화 초기화 실패: ${errorMsg}`);
     }
   }, []);
 

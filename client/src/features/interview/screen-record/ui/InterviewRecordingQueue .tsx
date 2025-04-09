@@ -59,6 +59,17 @@ export default function InterviewRecordingQueue({
     });
   };
 
+  /** 녹화시 발생한 에러 처리 */
+  const handleRecordingSetupError = () => {
+    setIsScriptView(false);
+    setIsNarration(false);
+    setModal({
+      title: 'Warning',
+      message:
+        '녹화 진행 중 예기치 않은 문제가 발생했습니다. 다시 시도해 주세요.',
+    });
+  };
+
   /** 면접 종료 */
   const endInterviewRecord = () => {
     setIsScriptView(false);
@@ -71,10 +82,6 @@ export default function InterviewRecordingQueue({
   const readCurrentScript = async (): Promise<void> => {
     setIsNarration(true);
     await startNarration(currentIndex);
-    // 안정적인 컨텐츠 저장 시점을 위한
-    setTimeout(() => {
-      setIsNarration(false);
-    }, 500);
   };
 
   /** 면접 질문 스피칭 */
@@ -83,12 +90,16 @@ export default function InterviewRecordingQueue({
       onCompleteMsg();
       return;
     }
-    if (isNarration) return;
 
-    await readCurrentScript();
-    if (videoRef.current) {
-      handleRecord();
+    if (isNarration || !videoRef.current) return;
+
+    try {
+      await readCurrentScript();
+      await handleRecord();
+      setIsNarration(false);
       beginSpeechToText();
+    } catch {
+      handleRecordingSetupError();
     }
   };
 
@@ -112,7 +123,7 @@ export default function InterviewRecordingQueue({
             <MainButton
               onClick={() => setInterviewMode('result')}
               label="결과보기"
-              disabled={!storeChunks.length}
+              disabled={!storeChunks.length || isNarration}
               variant="signature"
             />
           </>
