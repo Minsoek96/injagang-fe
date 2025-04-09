@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import {
   useDeviceStore,
   useIntvRecordStore,
@@ -38,18 +36,13 @@ export default function useInterviewRecorder() {
     handleResumeRecord,
     handleRecordRemove,
     recordStatus,
-    recordedChunks: currentChunks,
   } = useMediaRecord({
     audioId: audioDevice?.deviceId,
     videoId: videoDevice?.deviceId,
+    onDataAvailable: (chunks) => {
+      setRecordedChunks(chunks);
+    },
   });
-
-  // 녹화 완료 시 청크 데이터를 저장하여 동기화 목적
-  useEffect(() => {
-    if (recordStatus === 'end') {
-      setRecordedChunks(currentChunks);
-    }
-  }, [currentChunks, recordStatus]);
 
   return {
     videoRef,

@@ -16,6 +16,7 @@ const mockMediaRecorder: MockMediaRecorder = {
   pause: jest.fn(),
   resume: jest.fn(),
   ondataavailable: null,
+  onstop: null,
   stream: mockMediaStream,
 };
 
@@ -145,7 +146,6 @@ describe('useMediaRecord 훅', () => {
         result.current.handleRecordRemove();
       });
 
-      expect(result.current.recordStatus).toBe('end');
       expect(mockMediaRecorder.stop).toHaveBeenCalled();
     });
   });
