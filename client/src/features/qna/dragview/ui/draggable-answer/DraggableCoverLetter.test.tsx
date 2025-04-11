@@ -1,13 +1,12 @@
 import { render, screen } from '@testing-library/react';
 
-import AnswerDragItem from '@/src/features/qna/dragview/AnswerDragItem';
-
 import { emptySelectedText, sampleSelectedText } from '@/fixutures/entities/qnaboard';
 import TestProvider from '@/fixutures/TestProvider';
+import DraggableCoverLetter from './DraggableCoverLetter';
 
 const context = describe;
 
-describe('AnswerDragItem', () => {
+describe('DraggableCoverLetter', () => {
   const testList = {
     question: 'test_question',
     answer: 'test_answer',
@@ -19,7 +18,7 @@ describe('AnswerDragItem', () => {
   const renderComponent = (isSelected: boolean) => {
     render(
       <TestProvider>
-        <AnswerDragItem
+        <DraggableCoverLetter
           list={testList}
           onSelect={mockSelect}
           onRemove={mockRemove}

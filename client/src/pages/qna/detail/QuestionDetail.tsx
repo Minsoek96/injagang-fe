@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { styled } from 'styled-components';
 
 import { QuestionDetailView } from '@/src/features/qna/detail';
-import { AnswerDragCoverLetter } from '@/src/features/qna/dragview';
+import { DraggableCoverLetterView } from '@/src/features/qna/dragview';
 
 import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 
@@ -52,7 +52,7 @@ export default function QuestionDetail() {
           width: '100%', height: '100%', isMedia: true,
         }}
       >
-        <AnswerDragCoverLetter />
+        <DraggableCoverLetterView />
       </ArticleCard>
     </DetailContainer>
   );

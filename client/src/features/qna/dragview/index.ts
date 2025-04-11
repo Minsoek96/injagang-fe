@@ -1,1 +1,1 @@
-export { default as AnswerDragCoverLetter } from './AnswerDragCoverLetter';
+export { default as DraggableCoverLetterView } from './ui/DraggableCoverLetterView';

@@ -1,8 +1,9 @@
 import TestProvider from '@/fixutures/TestProvider';
-import DraggableAnswer from '@/src/features/qna/dragview/DraggableAnswer';
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+
+import DraggableAnswer from './DraggableAnswer';
 
 describe('DraggableAnswer', () => {
   const mockSelect = jest.fn();

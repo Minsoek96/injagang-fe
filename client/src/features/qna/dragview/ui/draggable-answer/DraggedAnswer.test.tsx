@@ -1,11 +1,12 @@
 import TestProvider from '@/fixutures/TestProvider';
-import DraggedAnswer from '@/src/features/qna/dragview/DraggedAnswer';
 
 import { defaultTheme } from '@/src/app/styles';
 
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+
+import DraggedAnswer from './DraggedAnswer';
 
 const context = describe;
 describe('DraggedAnswer', () => {

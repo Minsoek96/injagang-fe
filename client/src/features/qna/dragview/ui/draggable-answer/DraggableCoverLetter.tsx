@@ -1,7 +1,6 @@
-import { memo } from 'react';
-
 import { boardType, S } from '@/src/entities/qnaboard';
 
+import { useCallback } from 'react';
 import DraggableAnswerText from './DraggableAnswer';
 import DraggedAnswer from './DraggedAnswer';
 
@@ -19,7 +18,7 @@ interface AnswerDragItemProps {
  * @param onRemove - 선택 드래그 상태 삭제
  * @param selectedText - 선택된 텍스트의 정보
  */
-function AnswerDragItem({
+function DraggableCoverLetter({
   list,
   onSelect,
   onRemove,
@@ -34,9 +33,9 @@ function AnswerDragItem({
     selectedText.end,
     answer.length,
   );
-  const handleSelect = () => {
+  const handleSelect = useCallback(() => {
     onSelect(qnaId, answer);
-  };
+  }, [qnaId, answer, onSelect]);
 
   return (
     <S.detailItmes>
@@ -61,4 +60,4 @@ function AnswerDragItem({
   );
 }
 
-export default memo(AnswerDragItem);
+export default DraggableCoverLetter;
