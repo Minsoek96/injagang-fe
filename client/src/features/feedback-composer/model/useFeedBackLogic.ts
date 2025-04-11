@@ -11,7 +11,8 @@ const useFeedBackLogic = () => {
   const textRef = useRef<HTMLTextAreaElement>(null);
   const { setModal } = useModal();
 
-  const { correction, initCorrection } = useCorrectionStore();
+  const correction = useCorrectionStore((state) => state.correction);
+  const initCorrection = useCorrectionStore((state) => state.initCorrection);
 
   const { mutate: writeFeedBack } = feedbackMutation.useWriteFeed();
 

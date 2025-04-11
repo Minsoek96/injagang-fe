@@ -1,6 +1,6 @@
 import { sampleResponseFeed } from '@/fixutures/entities/feed';
 import TestProvider from '@/fixutures/TestProvider';
-import { feedbackQueries } from '@/src/entities/feedback';
+import { feedbackQueries, useFeedStore } from '@/src/entities/feedback';
 import { IGetFeedBack } from '@/src/entities/feedback/model/type';
 
 import TargetFeedBackView from '@/src/features/qna/feedback/TargetFeedBackView';
@@ -13,6 +13,7 @@ jest.mock('@/src/entities/feedback', () => {
     feedbackQueries: {
       useFetchFeedBackList: jest.fn(),
     },
+    useFeedStore: jest.fn(),
   };
 });
 
@@ -29,9 +30,12 @@ describe('TargetFeedBackView', () => {
   });
 
   const renderComponent = (isTarget: boolean = false) => {
+    (useFeedStore as unknown as jest.Mock).mockImplementation((selector) => selector({
+      targetFeed: isTarget ? 10001 : 0,
+    }));
     render(
       <TestProvider>
-        <TargetFeedBackView targetFeed={isTarget ? 10001 : 0} />
+        <TargetFeedBackView />
       </TestProvider>,
     );
   };

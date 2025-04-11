@@ -32,13 +32,13 @@ describe('useFeedBackLogic', () => {
   const mockClear = jest.fn();
 
   const setMockCorrection = (mockCorrection: string = '') => {
-    (useCorrectionStore as unknown as jest.Mock).mockReturnValue({
+    (useCorrectionStore as unknown as jest.Mock).mockImplementation((selector) => selector({
       correction: {
         targetAnswer: mockCorrection,
         targetQuestionIndex: 10001,
       },
       initCorrection: mockClear,
-    });
+    }));
   };
 
   beforeEach(() => {

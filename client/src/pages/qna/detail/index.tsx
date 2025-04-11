@@ -39,7 +39,6 @@ type AnswerProps = {
 };
 
 function Answer({ dehydratedState }: AnswerProps) {
-  const targetFeed = useFeedStore((state) => state.targetFeed);
   const initTargetFeed = useFeedStore((state) => state.initTargetFeed);
 
   const initCorrection = useCorrectionStore((state) => state.initCorrection);
@@ -57,7 +56,7 @@ function Answer({ dehydratedState }: AnswerProps) {
       <HydrationBoundary state={dehydratedState}>
         <QuestionDetail />
         <FeedBackComposer />
-        <TargetFeedBackView targetFeed={targetFeed} />
+        <TargetFeedBackView />
       </HydrationBoundary>
     </ViewStyle>
   );
