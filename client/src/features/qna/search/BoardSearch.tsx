@@ -15,7 +15,9 @@ const typeList = [
 
 /** 유저가 검색하는 타입와 검색어를 관리 */
 function BoardSearch() {
-  const { setBoardType, setBoardSearch } = useBoardStore();
+  const setBoardType = useBoardStore((state) => state.setBoardType);
+  const setBoardSearch = useBoardStore((state) => state.setBoardSearch);
+
   const [search, setSearch] = useState('');
   const [type, setType] = useState('');
   const debounceSearch = useDebounce(search);

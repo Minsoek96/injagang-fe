@@ -15,7 +15,6 @@ import { styleMixin } from '@/src/shared/styles';
 const QuestionDetail = dynamic(
   () => import('./QuestionDetail'),
   {
-    ssr: false,
     loading: () => <Spinner />,
   },
 );
@@ -23,7 +22,6 @@ const QuestionDetail = dynamic(
 const FeedBackComposer = dynamic(
   () => import('@/src/features/feedback-composer/FeedBackComposer'),
   {
-    ssr: false,
     loading: () => <Spinner />,
   },
 );

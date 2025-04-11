@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import { useBoardStore } from '@/src/entities/qnaboard';
+import { boardQueries } from '@/src/entities/qnaboard';
 
 import { Container, ResizeableTextarea } from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
@@ -12,7 +12,11 @@ import CorrectionView from './CorrectionView';
 import FeedBackFooter from './FeedBackFooter';
 
 function FeedBackComposer() {
-  const { questionIds } = useBoardStore();
+  const {
+    data: boardList,
+  } = boardQueries.useFetchCurrentBoardDetail();
+
+  const questionIds = boardList?.qnaList.map((item) => item.qnaId);
 
   const {
     textRef,
@@ -50,7 +54,7 @@ function FeedBackComposer() {
       <FeedBackFooter
         handleSubmit={handleSubmit}
         handleClear={correctionClear}
-        qnaIdList={questionIds}
+        qnaIdList={questionIds ?? []}
       />
     </ComposerContainer>
   );

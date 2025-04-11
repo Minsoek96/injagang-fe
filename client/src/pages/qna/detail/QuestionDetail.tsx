@@ -1,31 +1,19 @@
-import { useEffect } from 'react';
-
 import { styled } from 'styled-components';
 
 import { QuestionDetailView } from '@/src/features/qna/detail';
 import { DraggableCoverLetterView } from '@/src/features/qna/dragview';
 
-import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
+import { boardQueries } from '@/src/entities/qnaboard';
 
 import { Container, RunningLoader } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
 export default function QuestionDetail() {
-  const setQuestionIds = useBoardStore((state) => state.setQuestionIds);
-
   const {
     data: boardList,
     isLoading,
     isError,
   } = boardQueries.useFetchCurrentBoardDetail();
-
-  /** 보드 상태를 조회한 후 피드백 검색기 생성 */
-  useEffect(() => {
-    if (boardList) {
-      const questions = boardList.qnaList.map((item) => item.qnaId);
-      setQuestionIds(questions);
-    }
-  }, [boardList]);
 
   if (isLoading) {
     return (

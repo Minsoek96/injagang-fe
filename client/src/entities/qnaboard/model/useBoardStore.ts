@@ -6,7 +6,6 @@ type EditBoardProps = {
 };
 
 type State = {
-  questionIds: number[];
   boardSearch: string;
   boardType: string;
   curPageNum: number;
@@ -15,7 +14,6 @@ type State = {
 };
 
 type Action = {
-  setQuestionIds: (list: number[]) => void;
   setBoardSearch: (search: string) => void;
   initBoardSearch: () => void;
   setBoardType: (type: string) => void;
@@ -23,6 +21,17 @@ type Action = {
   setTotalPage: (page: number) => void;
   setEditBoardState: (boardState: EditBoardProps) => void;
   initEditBoardState: () => void;
+};
+
+const initialState: State = {
+  boardSearch: '',
+  boardType: '',
+  curPageNum: 1,
+  totalPage: 1,
+  editBoardState: {
+    title: '',
+    content: '',
+  },
 };
 
 /**
@@ -34,17 +43,8 @@ type Action = {
  * editBoardContent : 유저가 수정 요청하는 보드 정보
  */
 const useBoardStore = create<State & Action>((set) => ({
-  questionIds: [],
-  boardSearch: '',
-  boardType: '',
-  curPageNum: 1,
-  totalPage: 1,
-  editBoardState: {
-    title: '',
-    content: '',
-  },
+  ...initialState,
 
-  setQuestionIds: (list: number[]) => set({ questionIds: list }),
   setBoardSearch: (search: string) => set({ boardSearch: search }),
   setBoardType: (type: string) => set({ boardType: type }),
   initBoardSearch: () => set({ boardSearch: '', boardType: '' }),

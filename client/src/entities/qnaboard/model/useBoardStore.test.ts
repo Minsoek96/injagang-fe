@@ -1,16 +1,8 @@
 import { act } from '@testing-library/react';
 
-import { sampleQuestionIds } from '@/fixutures/entities/qnaboard';
-
 import useBoardStore from './useBoardStore';
 
 describe('useBoardStore', () => {
-  it('게시판 첨삭 댓글 조회를 위한 1 대 1 매칭될 첨삭 질문Ids를 저장한다.', () => {
-    act(() => useBoardStore.getState().setQuestionIds(sampleQuestionIds));
-    const { questionIds } = useBoardStore.getState();
-    expect(questionIds).toEqual(sampleQuestionIds);
-  });
-
   it('유저가 검색한 서칭을 저장한다.', () => {
     const searchValue = 'test';
     act(() => useBoardStore.getState().setBoardSearch(searchValue));

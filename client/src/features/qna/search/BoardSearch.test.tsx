@@ -26,10 +26,10 @@ describe('BoardSearch Component', () => {
   };
 
   beforeEach(() => {
-    (useBoardStore as unknown as jest.Mock).mockReturnValue({
+    (useBoardStore as unknown as jest.Mock).mockImplementation((selector) => selector({
       setBoardType: mockSetBoardType,
       setBoardSearch: mockSetBoardSearch,
-    });
+    }));
   });
 
   afterEach(() => {
