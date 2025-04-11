@@ -9,20 +9,20 @@ import { AnswerDragCoverLetter } from '@/src/features/qna/dragview';
 
 import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 
-import { Container } from '@/src/shared/ui';
+import { Container, RunningLoader } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
 export default function QuestionDetail() {
   const router = useRouter();
   const boardId = router.query;
 
-  const { setQuestionIds } = useBoardStore();
+  const setQuestionIds = useBoardStore((state) => state.setQuestionIds);
 
   const {
     data: boardList,
     isLoading,
     isError,
-  } = boardQueries.useFetchBoardDetail(Number(boardId.id));
+  } = boardQueries.useFetchCurrentBoardDetail();
 
   /** 보드 상태를 조회한 후 피드백 검색기 생성 */
   useEffect(() => {
@@ -32,7 +32,16 @@ export default function QuestionDetail() {
     }
   }, [boardList]);
 
-  if (isLoading) return <p>게시글을 받아오는중입니다.</p>;
+  if (isLoading) {
+    return (
+      <Container.ArticleCard
+        $size={{ width: '100%', height: '100%', isMedia: true }}
+      >
+        <RunningLoader />
+        <p>자소서 상세 정보를 가져오는 중이에요.</p>
+      </Container.ArticleCard>
+    );
+  }
 
   if (isError || !boardList) return <p>오류가 발생했습니다.</p>;
 
@@ -57,7 +66,7 @@ export default function QuestionDetail() {
           width: '100%', height: '100%', isMedia: true,
         }}
       >
-        <AnswerDragCoverLetter boardId={Number(boardId.id)} />
+        <AnswerDragCoverLetter />
       </ArticleCard>
     </DetailContainer>
   );

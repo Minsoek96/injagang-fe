@@ -6,20 +6,13 @@ import AnswerDragItem from './AnswerDragItem';
 
 import useDragCorrection from './model/useDragCorrection';
 
-/** AnswerDragCoverLetter 드래그 자소서 메인
- *
- * @param boardId - 보드 아이디
- */
-type AnswerProps = {
-  boardId: number;
-};
-
-function AnswerDragCoverLetter({ boardId }: AnswerProps) {
+/** AnswerDragCoverLetter 드래그 자소서 메인 */
+function AnswerDragCoverLetter() {
   const {
     handleCorrection, selectedText, removeCorrection,
   } = useDragCorrection();
 
-  const { data: boardList } = boardQueries.useFetchBoardDetail(boardId);
+  const { data: boardList } = boardQueries.useFetchCurrentBoardDetail();
 
   return (
     <Container>

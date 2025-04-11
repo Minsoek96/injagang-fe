@@ -41,8 +41,10 @@ type AnswerProps = {
 };
 
 function Answer({ dehydratedState }: AnswerProps) {
-  const { initTargetFeed, targetFeed } = useFeedStore();
-  const { initCorrection } = useCorrectionStore();
+  const targetFeed = useFeedStore((state) => state.targetFeed);
+  const initTargetFeed = useFeedStore((state) => state.initTargetFeed);
+
+  const initCorrection = useCorrectionStore((state) => state.initCorrection);
 
   useEffect(
     () => () => {
