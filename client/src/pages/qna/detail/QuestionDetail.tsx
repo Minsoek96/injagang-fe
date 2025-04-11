@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 
-import { useRouter } from 'next/router';
-
 import { styled } from 'styled-components';
 
 import { QuestionDetailView } from '@/src/features/qna/detail';
@@ -13,9 +11,6 @@ import { Container, RunningLoader } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
 export default function QuestionDetail() {
-  const router = useRouter();
-  const boardId = router.query;
-
   const setQuestionIds = useBoardStore((state) => state.setQuestionIds);
 
   const {
@@ -45,21 +40,12 @@ export default function QuestionDetail() {
 
   if (isError || !boardList) return <p>오류가 발생했습니다.</p>;
 
-  const {
-    owner, title, nickname, content,
-  } = boardList;
   return (
     <DetailContainer>
       <Container.ArticleCard
         $size={{ width: '100%', height: '100%', isMedia: true }}
       >
-        <QuestionDetailView
-          owner={owner}
-          title={title}
-          content={content}
-          boardId={Number(boardId.id)}
-          nickname={nickname}
-        />
+        <QuestionDetailView />
       </Container.ArticleCard>
       <ArticleCard
         $size={{

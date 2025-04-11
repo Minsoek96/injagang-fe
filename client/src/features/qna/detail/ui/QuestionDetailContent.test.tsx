@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 
-import QuestionDetailView from '@/src/features/qna/detail/QuestionDetailView';
-
 import TestProvider from '@/fixutures/TestProvider';
+import { boardQueries } from '@/src/entities/qnaboard';
+import QuestionDetailContent from './QuestionDetailContent';
 
 const context = describe;
 
@@ -11,6 +11,16 @@ jest.mock('next/router', () => ({
   replace: jest.fn(),
 }));
 
+jest.mock('@/src/entities/qnaboard', () => {
+  const actualModule = jest.requireActual('@/src/entities/qnaboard');
+  return {
+    ...actualModule,
+    boardQueries: {
+      useFetchCurrentBoardDetail: jest.fn(),
+    },
+  };
+});
+
 describe('QuestionDetailView', () => {
   const mockTitle = 'Test-title';
   const mockContent = 'Test-Content';
@@ -18,15 +28,20 @@ describe('QuestionDetailView', () => {
   const mockId = 10001;
 
   const renderComponent = (owner: boolean) => {
+    (boardQueries.useFetchCurrentBoardDetail as jest.Mock).mockReturnValue({
+      data: {
+        owner,
+        title: mockTitle,
+        content: mockContent,
+        nickname: mockNick,
+      },
+      boardId: mockId,
+      isLoading: false,
+    });
+
     render(
       <TestProvider>
-        <QuestionDetailView
-          owner={owner}
-          title={mockTitle}
-          content={mockContent}
-          boardId={mockId}
-          nickname={mockNick}
-        />
+        <QuestionDetailContent />
       </TestProvider>,
     );
   };

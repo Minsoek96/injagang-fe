@@ -1,7 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import EditMenuBar from '@/src/features/qna/detail/EditMenuBar';
 import TestProvider from '@/fixutures/TestProvider';
+
+import MenuBar from './MenuBar';
 
 const context = describe;
 
@@ -10,7 +11,7 @@ jest.mock('next/router', () => ({
   replace: jest.fn(),
 }));
 
-describe('EditMenuBar', () => {
+describe('MenuBar', () => {
   const mockBoardId = 1001;
   const mockContent = 'Test-Content';
   const mockTitle = 'Test-Title';
@@ -18,7 +19,7 @@ describe('EditMenuBar', () => {
   const renderComponent = () => {
     render(
       <TestProvider>
-        <EditMenuBar boardId={mockBoardId} title={mockTitle} content={mockContent} />
+        <MenuBar boardId={mockBoardId} title={mockTitle} content={mockContent} />
       </TestProvider>,
     );
   };

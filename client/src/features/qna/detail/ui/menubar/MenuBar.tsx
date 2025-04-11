@@ -23,7 +23,7 @@ type EditMenuBarProps = {
  * @param content - 질문
  * @param title - 제목
  */
-function EditMenuBar({ boardId, content, title }: EditMenuBarProps) {
+function MenuBar({ boardId, content, title }: EditMenuBarProps) {
   const [tagPosition, setTagPosition] = useState(false);
 
   const { editConfirm, deleteConfirm } = useDetailMenu({
@@ -37,7 +37,7 @@ function EditMenuBar({ boardId, content, title }: EditMenuBarProps) {
   };
 
   return (
-    <MyComponentStyle>
+    <Container>
       <HideSvg
         Logo={<BiDotsVerticalRounded />}
         label={tagPosition ? 'OFF' : 'ON'}
@@ -51,13 +51,13 @@ function EditMenuBar({ boardId, content, title }: EditMenuBarProps) {
           onClick={editConfirm}
         />
       </MenuWrapper>
-    </MyComponentStyle>
+    </Container>
   );
 }
 
-export default EditMenuBar;
+export default MenuBar;
 
-const MyComponentStyle = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;

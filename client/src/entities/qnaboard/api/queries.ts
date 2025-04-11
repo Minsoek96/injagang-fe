@@ -36,10 +36,15 @@ const useFetchCurrentBoardDetail = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  return useQuery({
+  const queryResult = useQuery({
     queryKey: board.detail(Number(id)),
     queryFn: () => getDetailBoard(Number(id)),
     enabled: !!id,
   });
+
+  return {
+    ...queryResult,
+    boardId: Number(id),
+  };
 };
 export { useFetchBoardDetail, useFetchBoardList, useFetchCurrentBoardDetail };

@@ -1,1 +1,1 @@
-export { default as QuestionDetailView } from './QuestionDetailView';
+export { default as QuestionDetailView } from './ui/QuestionDetailContent';
