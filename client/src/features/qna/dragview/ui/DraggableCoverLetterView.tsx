@@ -12,7 +12,7 @@ import { useDragCorrection } from '../model';
  * 첨부된 자소서에 드래그 기능을 부여하여
  * 사용자가 텍스트를 선택하고 첨삭할 수 있게 해주는 컴포넌트
  */
-function DraggableCoverLetterView() {
+export default function DraggableCoverLetterView() {
   const {
     handleCorrection, selectedText, removeCorrection,
   } = useDragCorrection();
@@ -35,8 +35,6 @@ function DraggableCoverLetterView() {
     </Container>
   );
 }
-
-export default DraggableCoverLetterView;
 
 const Container = styled(S.container)`
   width: 100%;

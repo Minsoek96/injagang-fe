@@ -14,7 +14,7 @@ type ActionProps = {
 };
 
 /** 피드백 관련 액션을 수행 (비우기, 작성) */
-export default function ActionBtns({ btnInfos }: ActionProps) {
+export default function ActionButtons({ btnInfos }: ActionProps) {
   return (
     <ControlRightButtons>
       {btnInfos.map((info) => (

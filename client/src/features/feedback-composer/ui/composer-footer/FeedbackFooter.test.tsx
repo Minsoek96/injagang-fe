@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import FeedBackFooter from '@/src/features/feedback-composer/FeedBackFooter';
+import FeedbackFooter from './FeedbackFooter';
 
-describe('FeedBackFooter', () => {
+describe('FeedbackFooter', () => {
   const mockQnaList = Array.from({ length: 5 }, (_, idx) => 10001 + idx);
   const mockClear = jest.fn();
   const mockSubmit = jest.fn();
@@ -12,7 +12,7 @@ describe('FeedBackFooter', () => {
   const renderComponents = () => {
     render(
       <TestProvider>
-        <FeedBackFooter
+        <FeedbackFooter
           qnaIdList={mockQnaList}
           handleClear={mockClear}
           handleSubmit={mockSubmit}

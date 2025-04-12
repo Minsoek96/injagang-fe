@@ -6,10 +6,10 @@ import { V } from '@/src/shared/styles';
 import { MainButton } from '@/src/shared/ui';
 
 type Props = {
-    qnaIdList: number[];
-}
+  qnaIdList: number[];
+};
 
-export default function FeedBackViewButtons({ qnaIdList }:Props) {
+export default function FeedbackTab({ qnaIdList }: Props) {
   const { targetFeed, setTargetFeed } = useFeedStore();
   return (
     <FeedBackViewBtns>

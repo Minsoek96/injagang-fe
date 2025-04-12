@@ -1,13 +1,16 @@
 import TestProvider from '@/fixutures/TestProvider';
+
 import { useFeedStore } from '@/src/entities/feedback';
-import FeedBackViewButtons from '@/src/features/feedback-composer/FeedBackViewButton';
+
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
 
+import FeedbackTab from './FeedbackTab';
+
 jest.mock('@/src/entities/feedback');
 
-describe('FeedBackViewButtons', () => {
+describe('FeedbackTab', () => {
   const qnaIdList = Array.from({ length: 5 }, (_, index) => 10001 + index);
   const mockTarget = qnaIdList[3];
   const setTargetFeedMock = jest.fn();
@@ -15,7 +18,7 @@ describe('FeedBackViewButtons', () => {
   const renderComponent = () => {
     render(
       <TestProvider>
-        <FeedBackViewButtons qnaIdList={qnaIdList} />
+        <FeedbackTab qnaIdList={qnaIdList} />
       </TestProvider>,
     );
   };

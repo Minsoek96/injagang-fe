@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-import FeedBackComposer from '@/src/features/feedback-composer/FeedBackComposer';
+
 import { boardQueries } from '@/src/entities/qnaboard';
+
+import FeedbackComposer from './FeedbackComposer';
 
 jest.mock('@/src/entities/qnaboard', () => {
   const actualModule = jest.requireActual('@/src/entities/qnaboard');
@@ -14,7 +16,7 @@ jest.mock('@/src/entities/qnaboard', () => {
   };
 });
 
-describe('FeedBackComposer', () => {
+describe('FeedbackComposer', () => {
   const renderComponent = () => {
     (boardQueries.useFetchCurrentBoardDetail as jest.Mock).mockReturnValue({
       data: {
@@ -23,7 +25,7 @@ describe('FeedBackComposer', () => {
     });
     render(
       <TestProvider>
-        <FeedBackComposer />
+        <FeedbackComposer />
       </TestProvider>,
     );
   };

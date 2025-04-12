@@ -1,4 +1,6 @@
-import { useState, useCallback, useRef } from 'react';
+import {
+  useState, useCallback, useRef, useMemo,
+} from 'react';
 
 import { useCorrectionStore } from '@/src/entities/qnaboard';
 import { feedbackMutation } from '@/src/entities/feedback';
@@ -6,7 +8,7 @@ import { feedbackMutation } from '@/src/entities/feedback';
 import { useModal } from '@/src/shared/hooks';
 import { MODAL_MESSAGES } from '@/src/shared/const';
 
-const useFeedBackLogic = () => {
+const useFeedBack = () => {
   const [feedbackContent, setFeedbackContent] = useState<string>('');
   const textRef = useRef<HTMLTextAreaElement>(null);
   const { setModal } = useModal();
@@ -16,11 +18,11 @@ const useFeedBackLogic = () => {
 
   const { mutate: writeFeedBack } = feedbackMutation.useWriteFeed();
 
-  const CORRECTION_MIN = feedbackContent.length < 30;
+  const CORRECTION_MIN = feedbackContent.trim().length < 30;
   const EMPTY_CORRECTION = correction.targetAnswer === '';
 
-  // Warring 모달
-  const handleWarring = useCallback((message: string) => {
+  // Warning 모달
+  const handleWarning = useCallback((message: string) => {
     setModal({
       title: MODAL_MESSAGES.WARNING,
       message,
@@ -40,21 +42,21 @@ const useFeedBackLogic = () => {
   }, []);
 
   // 검증 규칙과 각 규칙에 따라 수행할 작업 정의
-  const correctionRules = [
+  const correctionRules = useMemo(() => [
     {
       rule: EMPTY_CORRECTION,
-      modal: () => handleWarring('첨삭 내용을 등록해주세요.'),
+      modal: () => handleWarning('첨삭 내용을 등록해주세요.'),
       action: () => {},
     },
     {
       rule: CORRECTION_MIN,
-      modal: () => handleWarring('피드백은 30자 이상 작성해주세요.'),
+      modal: () => handleWarning('피드백은 30자 이상 작성해주세요.'),
       action: () => focusTextArea(),
     },
-  ];
+  ], [EMPTY_CORRECTION, CORRECTION_MIN, handleWarning, focusTextArea]);
 
   // 선택된 규칙을 검증하는 함수
-  const correctionValidation = () => {
+  const correctionValidation = useCallback(() => {
     const isValid = correctionRules.some((target) => {
       if (target.rule) {
         target.action();
@@ -64,7 +66,7 @@ const useFeedBackLogic = () => {
       return false;
     });
     return isValid;
-  };
+  }, [correctionRules]);
 
   const handleSubmit = useCallback(() => {
     const isValid = correctionValidation();
@@ -96,4 +98,4 @@ const useFeedBackLogic = () => {
   };
 };
 
-export default useFeedBackLogic;
+export default useFeedBack;

@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
-import CorrectionView from '@/src/features/feedback-composer/CorrectionView';
+
+import CorrectionView from './CorrectionView';
 
 describe('CorrectionView', () => {
   const renderComponent = (answer: string) => {

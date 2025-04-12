@@ -1,20 +1,19 @@
 import styled from 'styled-components';
 
-import FeedBackViewButtons from '@/src/features/feedback-composer/FeedBackViewButton';
+import FeedbackTab from './FeedbackTab';
+import ActionButtons from './ActionButtons';
 
-import ActionBtns from './ActionBtns';
-
-interface FeedBackFooterProps {
+type Props = {
   handleClear: () => void;
   handleSubmit: () => void;
   qnaIdList: number[];
 }
 
-function FeedBackFooter({
+function FeedbackFooter({
   handleClear,
   handleSubmit,
   qnaIdList,
-}: FeedBackFooterProps) {
+}: Props) {
   const btnInfos = [
     { id: 'btn-01', text: '비우기', onClick: handleClear },
     { id: 'btn-02', text: '작성', onClick: handleSubmit },
@@ -22,13 +21,13 @@ function FeedBackFooter({
 
   return (
     <CommentFooter>
-      <FeedBackViewButtons qnaIdList={qnaIdList} />
-      <ActionBtns btnInfos={btnInfos} />
+      <FeedbackTab qnaIdList={qnaIdList} />
+      <ActionButtons btnInfos={btnInfos} />
     </CommentFooter>
   );
 }
 
-export default FeedBackFooter;
+export default FeedbackFooter;
 
 const CommentFooter = styled.div`
   margin-top: 15px;

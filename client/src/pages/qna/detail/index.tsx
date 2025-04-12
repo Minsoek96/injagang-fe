@@ -19,8 +19,8 @@ const QuestionDetail = dynamic(
   },
 );
 
-const FeedBackComposer = dynamic(
-  () => import('@/src/features/feedback-composer/FeedBackComposer'),
+const FeedbackComposer = dynamic(
+  () => import('@/src/features/feedback-composer/ui/FeedbackComposer'),
   {
     loading: () => <Spinner />,
   },
@@ -40,7 +40,6 @@ type AnswerProps = {
 
 function Answer({ dehydratedState }: AnswerProps) {
   const initTargetFeed = useFeedStore((state) => state.initTargetFeed);
-
   const initCorrection = useCorrectionStore((state) => state.initCorrection);
 
   useEffect(
@@ -55,7 +54,7 @@ function Answer({ dehydratedState }: AnswerProps) {
     <ViewStyle>
       <HydrationBoundary state={dehydratedState}>
         <QuestionDetail />
-        <FeedBackComposer />
+        <FeedbackComposer />
         <TargetFeedBackView />
       </HydrationBoundary>
     </ViewStyle>

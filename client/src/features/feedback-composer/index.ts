@@ -1,1 +1,1 @@
-export { default as FeedBackComposer } from './FeedBackComposer';
+export { default as FeedbackComposer } from './ui/FeedbackComposer';

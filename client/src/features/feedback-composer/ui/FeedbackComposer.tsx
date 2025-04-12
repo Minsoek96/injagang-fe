@@ -7,9 +7,9 @@ import { boardQueries } from '@/src/entities/qnaboard';
 import { Container, ResizeableTextarea } from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
 
-import useFeedBackLogic from './model/useFeedBackLogic';
-import CorrectionView from './CorrectionView';
-import FeedBackFooter from './FeedBackFooter';
+import { CorrectionView } from './correction-view';
+import { FeedbackFooter } from './composer-footer';
+import { useFeedback } from '../model';
 
 function FeedBackComposer() {
   const {
@@ -25,7 +25,7 @@ function FeedBackComposer() {
     handleChangeFeedBack,
     handleSubmit,
     correctionClear,
-  } = useFeedBackLogic();
+  } = useFeedback();
 
   useEffect(() => {
     if (selectedCorrection.targetQuestionIndex) {
@@ -51,7 +51,7 @@ function FeedBackComposer() {
         ref={textRef}
         maxSize={50}
       />
-      <FeedBackFooter
+      <FeedbackFooter
         handleSubmit={handleSubmit}
         handleClear={correctionClear}
         qnaIdList={questionIds ?? []}

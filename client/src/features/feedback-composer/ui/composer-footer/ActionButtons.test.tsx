@@ -4,9 +4,9 @@ import {
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import ActionBtns from '@/src/features/feedback-composer/ActionBtns';
+import ActionButtons from './ActionButtons';
 
-describe('ActionBtns', () => {
+describe('ActionButtons', () => {
   const firstActionMock = jest.fn();
   const secondActionMock = jest.fn();
   const btnInfos = [
@@ -16,7 +16,7 @@ describe('ActionBtns', () => {
   const renderComponent = () => {
     render(
       <TestProvider>
-        <ActionBtns btnInfos={btnInfos} />
+        <ActionButtons btnInfos={btnInfos} />
       </TestProvider>,
     );
   };

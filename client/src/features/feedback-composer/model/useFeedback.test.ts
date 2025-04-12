@@ -4,11 +4,10 @@ import TestProvider from '@/fixutures/TestProvider';
 
 import { useCorrectionStore } from '@/src/entities/qnaboard';
 
-import useFeedBackLogic from '@/src/features/feedback-composer/model/useFeedBackLogic';
-
 import { MODAL_MESSAGES } from '@/src/shared/const';
 import { useModal } from '@/src/shared/hooks';
 import { feedbackMutation } from '@/src/entities/feedback';
+import useFeedBack from './useFeedback';
 
 jest.mock('@/src/shared/hooks', () => {
   const actualHooks = jest.requireActual('@/src/shared/hooks');
@@ -41,6 +40,14 @@ describe('useFeedBackLogic', () => {
     }));
   };
 
+  const renderMockHook = () => {
+    const hook = renderHook(() => useFeedBack(), {
+      wrapper: TestProvider,
+    });
+
+    return hook;
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -56,9 +63,7 @@ describe('useFeedBackLogic', () => {
     it('피드백 작성을 요청하고 상태를 초기화한다.', async () => {
       const validAnswer = '유효한'.repeat(10);
       setMockCorrection('test');
-      const { result } = renderHook(() => useFeedBackLogic(), {
-        wrapper: TestProvider,
-      });
+      const { result } = renderMockHook();
 
       await act(() => {
         result.current.setFeedbackContent(validAnswer);
@@ -83,9 +88,7 @@ describe('useFeedBackLogic', () => {
     it('첨삭된 내용이 없으면 경고메시지를 전달한다.', () => {
       setMockCorrection();
 
-      const { result } = renderHook(() => useFeedBackLogic(), {
-        wrapper: TestProvider,
-      });
+      const { result } = renderMockHook();
 
       act(() => {
         result.current.handleSubmit();
@@ -99,9 +102,8 @@ describe('useFeedBackLogic', () => {
 
     it('피드백 내용이 30이하인 경우 경고 메시지를 전달한다.', () => {
       setMockCorrection('test');
-      const { result } = renderHook(() => useFeedBackLogic(), {
-        wrapper: TestProvider,
-      });
+
+      const { result } = renderMockHook();
 
       act(() => {
         result.current.handleSubmit();
