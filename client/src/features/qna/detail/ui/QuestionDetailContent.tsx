@@ -11,7 +11,7 @@ export default function QuestionDetailContent() {
   const {
     data: boardList,
     boardId,
-  } = boardQueries.useFetchCurrentBoardDetail();
+  } = boardQueries.useFetchCurrentBoardDetail(true);
 
   const {
     owner, title, nickname, content,

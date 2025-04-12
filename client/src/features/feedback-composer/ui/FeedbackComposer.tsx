@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect, useMemo } from 'react';
 
 import styled from 'styled-components';
 
@@ -11,12 +11,22 @@ import { CorrectionView } from './correction-view';
 import { FeedbackFooter } from './composer-footer';
 import { useFeedback } from '../model';
 
-function FeedBackComposer() {
-  const {
-    data: boardList,
-  } = boardQueries.useFetchCurrentBoardDetail();
+const MemoizedCorrectionView = memo(CorrectionView);
 
-  const questionIds = boardList?.qnaList.map((item) => item.qnaId);
+/**
+ * 피드백 작성기 컴포넌트
+ *
+ * - 선택된 텍스트 내용 표시 (CorrectionView)
+ * - 탭 별로 다른 피드백 뷰 제공으로 여러 첨삭 내용을 정리
+ * - 제출 및 초기화 기능이 포함된 푸터
+ */
+function FeedBackComposer() {
+  const { data: boardList } = boardQueries.useFetchCurrentBoardDetail();
+
+  const questionIds = useMemo(
+    () => boardList?.qnaList.map((item) => item.qnaId),
+    [boardList],
+  );
 
   const {
     textRef,
@@ -41,9 +51,7 @@ function FeedBackComposer() {
         isMedia: true,
       }}
     >
-      <CorrectionView
-        targetAnswer={selectedCorrection.targetAnswer}
-      />
+      <MemoizedCorrectionView targetAnswer={selectedCorrection.targetAnswer} />
       <ResizeableTextarea
         placeholder="피드백을 작성해주세요."
         text={feedbackContent}

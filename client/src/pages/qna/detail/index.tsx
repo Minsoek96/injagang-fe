@@ -13,7 +13,7 @@ import { Spinner } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 
 const QuestionDetail = dynamic(
-  () => import('./QuestionDetail'),
+  () => import('@/src/widgets/qna/ui/detail-layout/QuestionDetailLayout'),
   {
     loading: () => <Spinner />,
   },
