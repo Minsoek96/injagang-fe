@@ -18,7 +18,7 @@ function TargetFeedBackView() {
   const { mutate: updateFeed } = feedbackMutation.useReviseFeed(targetFeed);
   const { mutate: deleteFeed } = feedbackMutation.useDeleteFeed(targetFeed);
 
-  if (!feedbackList?.length) {
+  if (!feedbackList || !feedbackList.length) {
     return (
       <FeedBackViewStyle>
         <EmptyFeedBackTitle>
