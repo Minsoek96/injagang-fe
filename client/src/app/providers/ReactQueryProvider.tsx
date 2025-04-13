@@ -20,7 +20,12 @@ function ReactQueryProvider({ children }: Props) {
           retryOnMount: true,
           refetchOnReconnect: false,
           throwOnError: true,
-          retry: 3,
+          retry: (count, error) => {
+            if (axios.isAxiosError(error) && error.response?.status === 401) {
+              return false;
+            }
+            return count > 2;
+          },
         },
         mutations: {
           throwOnError: (error: unknown) => {
