@@ -9,7 +9,8 @@ type Props = {
 export default function RequireLogin({ onReset }:Props) {
   const handleClick = () => {
     onReset();
-    window.location.href = '/login';
+    const returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
+    window.location.href = `/login?returnUrl=${returnUrl}`;
   };
 
   return (
