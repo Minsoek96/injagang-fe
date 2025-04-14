@@ -9,7 +9,6 @@ type State = {
   boardSearch: string;
   boardType: string;
   curPageNum: number;
-  totalPage: number;
   editBoardState: EditBoardProps;
 };
 
@@ -18,7 +17,6 @@ type Action = {
   initBoardSearch: () => void;
   setBoardType: (type: string) => void;
   setCurPageNum: (update: (prev: number) => number) => void;
-  setTotalPage: (page: number) => void;
   setEditBoardState: (boardState: EditBoardProps) => void;
   initEditBoardState: () => void;
 };
@@ -27,7 +25,6 @@ const initialState: State = {
   boardSearch: '',
   boardType: '',
   curPageNum: 1,
-  totalPage: 1,
   editBoardState: {
     title: '',
     content: '',
@@ -52,7 +49,6 @@ const useBoardStore = create<State & Action>((set) => ({
     set((state) => ({
       curPageNum: update(state.curPageNum),
     })),
-  setTotalPage: (page: number) => set({ totalPage: page }),
   setEditBoardState: (boardState: EditBoardProps) =>
     set({
       editBoardState: boardState,

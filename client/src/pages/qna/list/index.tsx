@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { DehydratedState, HydrationBoundary } from '@tanstack/react-query';
 
 import styled from 'styled-components';
-
 import { MdOutlineModeEditOutline } from 'react-icons/md';
 
 import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
@@ -14,21 +13,21 @@ import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 import { MainButton } from '@/src/shared/ui/button';
 import { styleMixin, V } from '@/src/shared/styles';
 
+import { Container } from '@/src/shared/ui';
 import {
   HEAD_ITEM,
   ID_KEY,
   ROUTE_TEMPLATE,
   TABLE_KEYS,
-} from '@/src/pages/qna/list/const';
-import { Container } from '@/src/shared/ui';
+} from './const';
 
 const BoardListView = dynamic(
   () => import('@/src/widgets/board/ui/list-layout/BoardListLayout'),
   { ssr: false },
 );
 
-const PagiNation = dynamic(
-  () => import('@/src/features/qna/pagination/PagiNation'),
+const PageNavigator = dynamic(
+  () => import('@/src/features/qna/pagination/PageNavigator'),
   {
     ssr: false,
   },
@@ -47,15 +46,9 @@ type ListProps = {
 
 function List({ dehydratedState }: ListProps) {
   const router = useRouter();
-  const { data } = boardQueries.useFetchBoardList();
-  const { initBoardSearch, setTotalPage } = useBoardStore();
-
-  useEffect(() => {
-    if (data?.boardInfos) {
-      const total = data.totalPage;
-      setTotalPage(total);
-    }
-  }, [data]);
+  const { data: boardList } = boardQueries.useFetchBoardList();
+  const initBoardSearch = useBoardStore((state) => state.initBoardSearch);
+  const totalPage = useMemo(() => boardList?.totalPage, [boardList]);
 
   useEffect(
     () => () => {
@@ -85,13 +78,13 @@ function List({ dehydratedState }: ListProps) {
           />
         </BoardHeader>
         <BoardListView
-          boardInfos={data?.boardInfos || []}
+          boardInfos={boardList?.boardInfos || []}
           idKey={ID_KEY}
           headItem={HEAD_ITEM}
           tableKey={TABLE_KEYS}
           route={ROUTE_TEMPLATE}
         />
-        <PagiNation maxButtonNum={8} />
+        <PageNavigator pageLimit={8} totalPage={totalPage ?? 0} />
       </HydrationBoundary>
     </ListStyle>
   );

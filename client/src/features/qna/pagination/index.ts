@@ -1,1 +1,1 @@
-export { default as PagiNation } from './PagiNation';
+export { default as PageNavigator } from './PageNavigator';

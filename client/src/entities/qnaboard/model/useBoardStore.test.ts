@@ -24,13 +24,6 @@ describe('useBoardStore', () => {
     expect(curPageNum).toEqual(pagenum);
   });
 
-  it('전체 페이지 넘버를 저장한다.', () => {
-    const totalnum = 100000;
-    act(() => useBoardStore.getState().setTotalPage(totalnum));
-    const { totalPage } = useBoardStore.getState();
-    expect(totalPage).toEqual(totalnum);
-  });
-
   it('검색 정보를 초기화한다.', () => {
     act(() => useBoardStore.getState().initBoardSearch());
     const { boardSearch, boardType } = useBoardStore.getState();

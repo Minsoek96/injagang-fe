@@ -5,41 +5,44 @@ import styled from 'styled-components';
 import { MainButton } from '@/src/shared/ui/button';
 import { styleMixin, V } from '@/src/shared/styles';
 
-import usePagiNation from './model/usePagiNation';
+import usePagiNation from './model/usePagination';
 
 type Props = {
-  maxButtonNum: number;
+  pageLimit: number;
+  totalPage: number;
 }
 /** 페이지 네이션 버튼을 렌더하는 함수 */
-function PagiNation({ maxButtonNum }:Props) {
+function PageNavigator({ pageLimit, totalPage }:Props) {
   const {
     curPageNum,
-    handlePageClick,
-    handlePrevClick,
-    handleNextClick,
+    handlePageSelect,
+    handlePrvePage,
+    handleNextPage,
     visiblePageNumbers,
-  } = usePagiNation(maxButtonNum);
+    hasNext,
+    hasPrev,
+  } = usePagiNation(pageLimit, totalPage);
 
   return (
     <Container>
-      <MainButton label="<" onClick={handlePrevClick} disabled={curPageNum === 1} />
+      <MainButton label="<" onClick={handlePrvePage} disabled={!hasPrev} />
       <PageButtonContainer>
         {visiblePageNumbers.map((pageNum) => (
           <MainButton
             key={pageNum}
             label={pageNum}
             isActive={pageNum === curPageNum}
-            onClick={() => handlePageClick(pageNum)}
+            onClick={() => handlePageSelect(pageNum)}
             sx={{ marginInline: '.2rem' }}
           />
         ))}
       </PageButtonContainer>
-      <MainButton label=">" onClick={handleNextClick} disabled={curPageNum === visiblePageNumbers.length} />
+      <MainButton label=">" onClick={handleNextPage} disabled={!hasNext} />
     </Container>
   );
 }
 
-export default memo(PagiNation);
+export default memo(PageNavigator);
 
 const Container = styled.div`
  ${styleMixin.Flex()}
