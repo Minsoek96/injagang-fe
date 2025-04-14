@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 
 import styled from 'styled-components';
 
@@ -31,7 +31,6 @@ const TargetFeedBackView = dynamic(
   () => import('@/src/features/qna/feedback/TargetFeedBackView'),
   {
     ssr: false,
-    loading: () => <Spinner />,
   },
 );
 
@@ -58,14 +57,18 @@ function Answer({ dehydratedState }: AnswerProps) {
           renderFallback={(error, reset) =>
             ErrorFallback(error, reset, '게시글을 조회 중 문제가 발생했습니다.')}
         >
-          <QuestionDetail />
+          <Suspense fallback={<Spinner message="게시글을 조회 중 입니다." />}>
+            <QuestionDetail />
+            <FeedbackComposer />
+          </Suspense>
         </ErrorBoundary>
-        <FeedbackComposer />
         <ErrorBoundary
           renderFallback={(error, reset) =>
             ErrorFallback(error, reset, '피드백을 조회 중 문제가 발생했습니다.')}
         >
-          <TargetFeedBackView />
+          <Suspense fallback={<Spinner message="피드백을 조회 중 입니다." />}>
+            <TargetFeedBackView />
+          </Suspense>
         </ErrorBoundary>
       </HydrationBoundary>
     </ViewStyle>

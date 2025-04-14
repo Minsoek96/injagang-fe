@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import useBoardStore from '@/src/entities/qnaboard/model/useBoardStore';
 import { useShallow } from 'zustand/react/shallow';
@@ -35,16 +35,21 @@ const useFetchBoardDetail = (id: number) =>
 const useFetchCurrentBoardDetail = () => {
   const router = useRouter();
   const { id } = router.query;
+  const boardId = Number(id);
 
-  const queryResult = useQuery({
-    queryKey: board.detail(Number(id)),
-    queryFn: () => getDetailBoard(Number(id)),
-    enabled: !!id,
+  const queryResult = useSuspenseQuery({
+    queryKey: board.detail(boardId),
+    queryFn: () => {
+      if (!boardId) {
+        return Promise.resolve(null);
+      }
+      return getDetailBoard(boardId);
+    },
   });
 
   return {
     ...queryResult,
-    boardId: Number(id),
+    boardId,
   };
 };
 export { useFetchBoardDetail, useFetchBoardList, useFetchCurrentBoardDetail };

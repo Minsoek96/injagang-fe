@@ -25,12 +25,12 @@ describe('queries', () => {
     });
   });
 
-  it('유저의 선택된 번호가 없으면 조회하지 않는다', async () => {
-    const { result } = renderHook(() => useFetchFeedBackList(sampleTargetId), {
+  it('유저의 선택된 번호가 없으면 null을 반환한다.', async () => {
+    const { result } = renderHook(() => useFetchFeedBackList(0), {
       wrapper: TestProvider,
     });
     await waitFor(() => {
-      expect(result.current.data).not.toEqual({ data: sampleResponseFeed });
+      expect(result.current.data).toEqual(null);
     });
   });
 });
