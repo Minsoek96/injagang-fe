@@ -1,25 +1,40 @@
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import useBoardStore from '@/src/entities/qnaboard/model/useBoardStore';
-import { useShallow } from 'zustand/react/shallow';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { getBoardList, getDetailBoard } from './apis';
 
 import board from './queryKeys';
 
-/** 선택된 페이지 넘버 게시판목록 조회 */
+/** 선택된 페이지 넘버 게시판목록 조회
+ *
+ * - type 또는 searchSearch가 비어있으면 키값 변화 방지
+ */
 const useFetchBoardList = () => {
-  const {
-    curPageNum, boardType, boardSearch,
-  } = useBoardStore(useShallow((state) => ({
-    curPageNum: state.curPageNum,
-    boardType: state.boardType,
-    boardSearch: state.boardSearch,
-  })));
+  const curPageNum = useBoardStore((state) => state.curPageNum);
+  const boardType = useBoardStore((state) => state.boardType);
+  const boardSearch = useBoardStore((state) => state.boardSearch);
+
+  const queryParams = useMemo(() => {
+    const isFiltered = Boolean(boardType && boardSearch);
+    const validType = isFiltered ? boardType : '';
+    const validSearchTerm = isFiltered ? boardSearch : '';
+    return {
+      type: validType,
+      searchTerm: validSearchTerm,
+      page: curPageNum,
+    };
+  }, [boardType, boardSearch, curPageNum]);
 
   return useQuery({
-    queryKey: board.lists(curPageNum, boardType, boardSearch),
-    queryFn: () => getBoardList(curPageNum, boardType, boardSearch),
+    queryKey: board.lists(
+      queryParams.page,
+      queryParams.type,
+      queryParams.searchTerm,
+    ),
+    queryFn: () =>
+      getBoardList(queryParams.page, queryParams.type, queryParams.searchTerm),
     placeholderData: (previousData) => previousData,
   });
 };
