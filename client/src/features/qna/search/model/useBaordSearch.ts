@@ -7,6 +7,12 @@ const SEARCH_TYPES = {
 } as const;
 
 type SearchTypeKey = keyof typeof SEARCH_TYPES;
+type SearchTypeValue = (typeof SEARCH_TYPES)[SearchTypeKey];
+
+const REVERSE_SEARCH_TYPES: Record<SearchTypeValue, SearchTypeKey> = {
+  title: '제목',
+  writer: '작성자',
+};
 
 const useBoardSearch = () => {
   const boardType = useBoardStore((state) => state.boardType);
@@ -24,20 +30,28 @@ const useBoardSearch = () => {
     [setBoardType],
   );
 
-  const changeSearchTerm = useCallback((newSearchTerm: string) => {
-    if (!newSearchTerm.length) {
-      return;
-    }
-    setBoardSearch(newSearchTerm);
-  }, [setBoardSearch]);
+  const changeSearchTerm = useCallback(
+    (newSearchTerm: string) => {
+      if (!newSearchTerm.length) {
+        return;
+      }
+      setBoardSearch(newSearchTerm);
+    },
+    [setBoardSearch],
+  );
 
   const availableSearchTypes = useMemo(
-    () =>
-    Object.keys(SEARCH_TYPES) as SearchTypeKey[],
+    () => Object.keys(SEARCH_TYPES) as SearchTypeKey[],
     [],
   );
 
+  const displaySearchType = useMemo(
+    () => REVERSE_SEARCH_TYPES[boardType as 'title' | 'writer'] ?? '',
+    [boardType],
+  );
+
   return {
+    displaySearchType,
     boardType,
     boardSearch,
     availableSearchTypes,

@@ -12,14 +12,18 @@ describe('useBoardSearch', () => {
   const setBoardType = jest.fn();
   const setBoardSearch = jest.fn();
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+  const mockBoardStore = (type: string = '', search: string = '') => {
     (useBoardStore as unknown as jest.Mock).mockImplementation((selector) => selector({
       setBoardType,
       setBoardSearch,
-      boardType: '',
-      boardSearch: '',
+      boardType: type,
+      boardSearch: search,
     }));
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockBoardStore();
   });
 
   context('검색 타입을 변경하면', () => {
@@ -67,6 +71,26 @@ describe('useBoardSearch', () => {
       expect(result.current.boardSearch).toBe('');
       act(() => result.current.changeSearchTerm(''));
       expect(setBoardSearch).not.toHaveBeenCalled();
+    });
+  });
+
+  context('검색 타입 역변환', () => {
+    it('타입이 tittle이면 제목으로 변환한다.', () => {
+      mockBoardStore('title');
+      const { result } = renderHook(() => useBoardSearch());
+      expect(result.current.displaySearchType).toBe('제목');
+    });
+
+    it('타입이 writer이면 작성자로 변환한다.', () => {
+      mockBoardStore('writer');
+      const { result } = renderHook(() => useBoardSearch());
+      expect(result.current.displaySearchType).toBe('작성자');
+    });
+
+    it('그외 타입이면 " "로 변환한다.', () => {
+      mockBoardStore('tester');
+      const { result } = renderHook(() => useBoardSearch());
+      expect(result.current.displaySearchType).toBe('');
     });
   });
 });
