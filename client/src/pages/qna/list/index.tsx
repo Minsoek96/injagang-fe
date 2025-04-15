@@ -1,19 +1,16 @@
-import { useEffect, useMemo } from 'react';
-
+import { memo, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 
 import { DehydratedState, HydrationBoundary } from '@tanstack/react-query';
 
 import styled from 'styled-components';
-import { MdOutlineModeEditOutline } from 'react-icons/md';
 
 import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 
-import { MainButton } from '@/src/shared/ui/button';
 import { styleMixin, V } from '@/src/shared/styles';
+import { Container, Spinner } from '@/src/shared/ui';
 
-import { Container } from '@/src/shared/ui';
+import { CreateQuestionButton } from './ui';
 import {
   HEAD_ITEM,
   ID_KEY,
@@ -23,30 +20,28 @@ import {
 
 const BoardListView = dynamic(
   () => import('@/src/widgets/board/ui/list-layout/BoardListLayout'),
-  { ssr: false },
 );
 
 const PageNavigator = dynamic(
   () => import('@/src/features/qna/pagination/PageNavigator'),
+);
+
+const BoardSearchBar = dynamic(
+  () => import('@/src/features/qna/search/ui/BoardSearchBar'),
   {
     ssr: false,
   },
 );
 
-const BoardSearch = dynamic(
-  () => import('@/src/features/qna/search/BoardSearch'),
-  {
-    ssr: false,
-  },
-);
+const MemoizedBoardListView = memo(BoardListView);
+const MemoizedPageNavigator = memo(PageNavigator);
 
 type ListProps = {
   dehydratedState: DehydratedState;
 };
 
 function List({ dehydratedState }: ListProps) {
-  const router = useRouter();
-  const { data: boardList } = boardQueries.useFetchBoardList();
+  const { data: boardList, isLoading } = boardQueries.useFetchBoardList();
   const initBoardSearch = useBoardStore((state) => state.initBoardSearch);
   const totalPage = useMemo(() => boardList?.totalPage, [boardList]);
 
@@ -57,42 +52,33 @@ function List({ dehydratedState }: ListProps) {
     [],
   );
 
+  if (!boardList && isLoading) {
+    return <Spinner message="게시글을 불러오는 중입니다." />;
+  }
+
   return (
-    <ListStyle>
-      <HydrationBoundary state={dehydratedState}>
+    <HydrationBoundary state={dehydratedState}>
+      <ListContainer>
         <BoardHeader>
-          <BoardSearch />
-          <MainButton
-            label={(
-              <span>
-                <MdOutlineModeEditOutline />
-                글쓰기
-              </span>
-            )}
-            onClick={() => router.push('/qna/question')}
-            sx={{
-              fontSize: '1.5rem',
-              padding: '1rem 2rem',
-              height: '100%',
-            }}
-          />
+          <BoardSearchBar />
+          <CreateQuestionButton />
         </BoardHeader>
-        <BoardListView
+        <MemoizedBoardListView
           boardInfos={boardList?.boardInfos || []}
           idKey={ID_KEY}
           headItem={HEAD_ITEM}
           tableKey={TABLE_KEYS}
           route={ROUTE_TEMPLATE}
         />
-        <PageNavigator pageLimit={8} totalPage={totalPage ?? 0} />
-      </HydrationBoundary>
-    </ListStyle>
+        <MemoizedPageNavigator pageLimit={8} totalPage={totalPage ?? 0} />
+      </ListContainer>
+    </HydrationBoundary>
   );
 }
 
 export default List;
 
-const ListStyle = styled.div`
+const ListContainer = styled.div`
   ${styleMixin.Column('flex-start', 'center')}
   width: 100%;
 `;
@@ -104,7 +90,6 @@ const BoardHeader = styled(Container.ItemBase)`
 
   @media screen and (max-width: ${V.mediaMobile}) {
     button {
-      font-size: 1.3rem !important;
       width: 10rem;
 
       svg {

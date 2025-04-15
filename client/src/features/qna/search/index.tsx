@@ -1,1 +1,1 @@
-export { default as BoardSearch } from './BoardSearch';
+export { BoardSearchBar } from './ui';
