@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 import { Controller, useForm } from 'react-hook-form';
@@ -9,9 +10,8 @@ import {
   MainButton, Container, Spinner, UnInput,
 } from '@/src/shared/ui';
 
-import { Suspense } from 'react';
-import CoverLetterDetail from './CoverLetterDetail';
-import CoverLetterSelector from './CoverLetterSelector';
+import { CoverLetterDetail } from './coverletter-preview';
+import { CoverLetterSelector } from './coverletter-selector';
 
 const MarkdownEditor = dynamic(
   () => import('@/src/shared/ui/markdown/MarkdownEditor'),

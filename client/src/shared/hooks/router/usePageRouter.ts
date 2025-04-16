@@ -30,7 +30,7 @@ export default function usePageRouter() {
   }, []);
 
   const moveBoardQuestionPage = useCallback(() => {
-    router.push('qna/question');
+    router.push('/qna/question');
   }, []);
 
   const moveBoardEditPage = useCallback((boardId: number) => {
