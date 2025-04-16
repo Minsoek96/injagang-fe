@@ -4,7 +4,7 @@ import {
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import QuestionEditForm from '@/src/features/question-composer/edit/QuestionEditForm';
+import QuestionEditForm from './QuestionEditForm';
 
 const context = describe;
 describe('QuestionEditForm', () => {

@@ -65,11 +65,11 @@ function QuestionEditForm<T extends FieldValues>({ onSubmit, defaultValues }: Pr
       <MainButton
         label="수정완료"
         onClick={handleSubmit(onSubmit)}
+        variant="signature"
         sx={{
           width: '100%',
           minHeight: '4rem',
           fontSize: '1.6rem',
-          backgroundColor: '#ff8800',
         }}
       />
     </Container.ArticleCard>
