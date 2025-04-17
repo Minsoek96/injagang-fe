@@ -10,6 +10,7 @@ import { boardQueries, useBoardStore } from '@/src/entities/qnaboard';
 import { styleMixin, V } from '@/src/shared/styles';
 import { Container, Spinner } from '@/src/shared/ui';
 
+import { useRouter } from 'next/router';
 import { CreateQuestionButton } from './ui';
 import {
   HEAD_ITEM,
@@ -41,13 +42,23 @@ type ListProps = {
 };
 
 function List({ dehydratedState }: ListProps) {
+  const router = useRouter();
   const { data: boardList, isLoading } = boardQueries.useFetchBoardList();
   const initBoardSearch = useBoardStore((state) => state.initBoardSearch);
   const totalPage = useMemo(() => boardList?.totalPage, [boardList]);
 
   useEffect(
-    () => () => {
-      initBoardSearch();
+    () => {
+      const handleRouteChangeStart = (url: string) => {
+        const currentPath = router.asPath;
+        if (url !== currentPath) {
+          initBoardSearch();
+        }
+      };
+      router.events.on('routeChangeStart', handleRouteChangeStart);
+      return () => {
+        router.events.off('routeChangeStart', handleRouteChangeStart);
+      };
     },
     [],
   );
