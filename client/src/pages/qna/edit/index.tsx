@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { useRouter } from 'next/router';
 
 import styled from 'styled-components';
@@ -10,7 +8,7 @@ import { boardMutation, boardType, useBoardStore } from '@/src/entities/qnaboard
 
 import { styleMixin, V } from '@/src/shared/styles';
 import { usePageRouter } from '@/src/shared/hooks';
-import { Container } from '@/src/shared/ui';
+import { Container, Spinner } from '@/src/shared/ui';
 
 function QuestinEdit() {
   const router = useRouter();
@@ -19,6 +17,8 @@ function QuestinEdit() {
   const { moveBoardDetailPage } = usePageRouter();
 
   const editBoardState = useBoardStore((state) => state.editBoardState);
+  const setEditBoardState = useBoardStore((state) => state.setEditBoardState);
+  const initEditBoardState = useBoardStore((state) => state.initEditBoardState);
 
   const defaultValues = {
     changeTitle: editBoardState.title,
@@ -27,13 +27,24 @@ function QuestinEdit() {
   };
 
   const onSubmit = (data: boardType.IReviseQnaBoard) => {
-    reviseBoard(data);
-    moveBoardDetailPage(Number(boardId));
+    reviseBoard(data, {
+      onSuccess: () => {
+        initEditBoardState();
+        moveBoardDetailPage(Number(boardId));
+      },
+      onError: () => {
+        const boardState = {
+          title: data.changeTitle,
+          content: data.changeContent,
+        };
+        setEditBoardState(boardState);
+      },
+    });
   };
 
-  const initEditBoardState = useBoardStore((state) => state.initEditBoardState);
-
-  useEffect(() => () => { initEditBoardState(); }, []);
+  if (!defaultValues.changeTitle && !defaultValues.changeContent && !defaultValues.boardId) {
+    return <Spinner />;
+  }
 
   return (
     <ComposerContainer>
