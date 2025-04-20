@@ -7,7 +7,7 @@ import roomDark from '@/public/assets/roomout.webp';
 import { styleMixin, V } from '@/src/shared/styles';
 import { useThemeStore } from '@/src/shared/store';
 
-import { WellcomeContent } from './wellcome';
+import WellcomeContent from './WellcomeContent';
 
 export default function InterviewLobby() {
   const isDark = useThemeStore((state) => state.isDark);

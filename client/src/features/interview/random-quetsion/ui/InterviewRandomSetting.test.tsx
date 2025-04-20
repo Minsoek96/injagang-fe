@@ -2,13 +2,13 @@ import { render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
 
-import InterViewRandomSetting from './InterViewRandomSetting';
+import InterviewRandomSetting from './InterviewRandomSetting';
 
-describe('InterViewRandomSetting', () => {
+describe('InterviewRandomSetting', () => {
   const renderComponent = () => {
     render(
       <TestProvider>
-        <InterViewRandomSetting />
+        <InterviewRandomSetting />
       </TestProvider>,
     );
   };

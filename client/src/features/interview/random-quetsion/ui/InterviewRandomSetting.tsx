@@ -12,7 +12,7 @@ import { styleMixin } from '@/src/shared/styles';
 import RandomQuestionForm from './RandomQuestionForm';
 import { RandomQuestionType } from '../model/type';
 
-function InterViewRandomSetting() {
+function InterviewRandomSetting() {
   const { mutate: getRandomQustions } = interviewMutation.useFetchRandomQuestion();
 
   const labels = useMemo(() => [
@@ -68,7 +68,7 @@ function InterViewRandomSetting() {
   );
 }
 
-export default InterViewRandomSetting;
+export default InterviewRandomSetting;
 
 const Container = styled.div`
   ${styleMixin.Column()}
