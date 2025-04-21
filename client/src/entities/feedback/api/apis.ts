@@ -19,6 +19,5 @@ export const reviseFeedBack = async (feedBackPayload: IReviseFeedBack) =>
 export const writeFeedBack = async (feedbackPayload: IWriteFeedBack) =>
   fetcher(METHOD.POST, FEED_APIS.WRITE_API, feedbackPayload);
 
-export const deleteFeedBack = async (feedbackId: number) => {
+export const deleteFeedBack = async (feedbackId: number) =>
   fetcher(METHOD.DELETE, `${FEED_APIS.DELETE_API}${feedbackId}`);
-};
