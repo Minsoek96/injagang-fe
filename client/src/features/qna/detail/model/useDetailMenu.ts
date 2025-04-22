@@ -13,7 +13,7 @@ export function useDetailMenu({ boardId, content, title }: UseDetailMenuProps) {
   const { setModal } = useModal();
   const { moveBoardEditPage, moveBoardMainPage } = usePageRouter();
   const { mutate: deleteBoard } = boardMutation.useDeleteBoard();
-  const { setEditBoardState } = useBoardStore();
+  const setEditBoardState = useBoardStore((state) => state.setEditBoardState);
 
   // 보드 삭제 처리
   const handleRemoveBoard = useCallback(() => {

@@ -4,16 +4,27 @@ import { Container } from '@/src/shared/ui';
 import BoardList from './BoardList';
 
 type Props<T> = {
-  boardInfos: T[]
+  boardInfos: T[];
   idKey: string;
   headItem: string[];
   tableKey: string[];
-  route: string
-}
+  route: string;
+};
 
 function BoardListLayout<T>({
-  boardInfos, idKey, headItem, tableKey, route,
-}:Props<T>) {
+  boardInfos,
+  idKey,
+  headItem,
+  tableKey,
+  route,
+}: Props<T>) {
+  // useWhyDidYouRender('BoardLayout', {
+  //   boardInfos,
+  //   idKey,
+  //   headItem,
+  //   tableKey,
+  //   route,
+  // });
   return (
     <BoardListViewStyle>
       <BoardList

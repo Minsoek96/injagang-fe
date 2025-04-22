@@ -12,7 +12,7 @@ import { BRAND } from '@/src/shared/const';
 import { navList } from '../consts';
 
 export default function Header() {
-  const { role } = useAuthStore();
+  const role = useAuthStore((state) => state.role);
   return (
     <HeaderContainer>
       <Wrapper>

@@ -6,12 +6,14 @@ type Props = {
   audioId?: string;
   videoId?: string;
   onError?: () => void;
+  onDataAvailable?: (chunks: Blob[]) => void;
 };
 
 const useMediaRecord = ({
   audioId = '',
   videoId = '',
   onError = () => {},
+  onDataAvailable = () => {},
 }: Props) => {
   const streamRef = useRef<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -73,7 +75,12 @@ const useMediaRecord = ({
   /** 녹화 데이터를 기록 */
   const handleDataAvailable = useCallback((e: BlobEvent) => {
     if (e.data.size > 0) {
-      setRecordedChunks((prev) => [...prev, e.data]);
+      const newChunks = [...recordedChunks, e.data];
+      setRecordedChunks(newChunks);
+
+      if (onDataAvailable) {
+        onDataAvailable(newChunks);
+      }
     }
   }, []);
 
@@ -111,6 +118,8 @@ const useMediaRecord = ({
     } catch (error) {
       onError();
       handleRecordRemove();
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      throw new Error(`녹화 초기화 실패: ${errorMsg}`);
     }
   }, []);
 
@@ -123,10 +132,13 @@ const useMediaRecord = ({
   /** 녹화를 완료. */
   const handleRecordRemove = useCallback(() => {
     if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.onstop = () => {
+        setRecordStatus('end');
+        mediaRecorderRef.current = null;
+      };
+      // 스탑 호출
       mediaRecorderRef.current.stop();
       stopMediaTracks(mediaRecorderRef.current.stream);
-      setRecordStatus('end');
-      mediaRecorderRef.current = null;
       clearStreamRef();
     }
   }, [stopMediaTracks, clearStreamRef]);

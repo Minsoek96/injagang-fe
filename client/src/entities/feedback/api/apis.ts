@@ -11,8 +11,7 @@ export const getFeedBackList = async (
   targetId: number,
 ): Promise<IGetFeedBack[]> =>
   fetcher(METHOD.GET, `${FEED_APIS.GET_API}${targetId}`)
-    .then((res) => res.data)
-    .catch((error) => console.error(error));
+    .then((res) => res.data);
 
 export const reviseFeedBack = async (feedBackPayload: IReviseFeedBack) =>
   fetcher(METHOD.PATCH, FEED_APIS.REVISE_API, feedBackPayload);
@@ -20,6 +19,5 @@ export const reviseFeedBack = async (feedBackPayload: IReviseFeedBack) =>
 export const writeFeedBack = async (feedbackPayload: IWriteFeedBack) =>
   fetcher(METHOD.POST, FEED_APIS.WRITE_API, feedbackPayload);
 
-export const deleteFeedBack = async (feedbackId: number) => {
+export const deleteFeedBack = async (feedbackId: number) =>
   fetcher(METHOD.DELETE, `${FEED_APIS.DELETE_API}${feedbackId}`);
-};

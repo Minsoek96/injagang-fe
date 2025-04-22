@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import {
   useDeviceStore,
   useIntvRecordStore,
@@ -38,15 +36,13 @@ export default function useInterviewRecorder() {
     handleResumeRecord,
     handleRecordRemove,
     recordStatus,
-    recordedChunks: currentChunks,
   } = useMediaRecord({
     audioId: audioDevice?.deviceId,
     videoId: videoDevice?.deviceId,
+    onDataAvailable: (chunks) => {
+      setRecordedChunks(chunks);
+    },
   });
-
-  useEffect(() => {
-    setRecordedChunks(currentChunks);
-  }, [currentChunks]);
 
   return {
     videoRef,

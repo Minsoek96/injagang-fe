@@ -62,7 +62,6 @@ type IntvSteps = {
 
 function Interview() {
   const userPlayList = useIntvPlaylistStore((state) => state.userPlayList);
-  const initUserPlayList = useIntvPlaylistStore((state) => state.initUserPlayList);
 
   const videoDevice = useDeviceStore((state) => state.videoDevice);
   const audioDevice = useDeviceStore((state) => state.audioDevice);
@@ -114,7 +113,6 @@ function Interview() {
 
   useEffect(
     () => () => {
-      initUserPlayList();
       resetDevices();
     },
     [],

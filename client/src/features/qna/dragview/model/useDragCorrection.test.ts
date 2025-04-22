@@ -46,10 +46,10 @@ describe('useDragCorrection', () => {
       setModal: mockSetModal,
     });
 
-    (useCorrectionStore as unknown as jest.Mock).mockReturnValue({
+    (useCorrectionStore as unknown as jest.Mock).mockImplementation((selector) => selector({
       initCorrection: initCorrectionMock,
       setCorrection: setCorrectionMock,
-    });
+    }));
   });
 
   context('선택된 텍스트가 원본에 포함되는 경우', () => {
@@ -60,6 +60,20 @@ describe('useDragCorrection', () => {
       const { result } = setupHook();
 
       const originText = '이 텍스트는 선택된 텍스트를 포함한다.';
+      act(() => {
+        result.current.handleCorrection(1, originText);
+      });
+
+      expect(result.current.selectedText.selectedText).toBe(selectionText);
+    });
+
+    it('정규화 필터링을 통과하고 첨삭내용을 업데이트 한다.', () => {
+      const selectionText = '선택된 텍스트';
+      setupSelectionMock(selectionText);
+
+      const { result } = setupHook();
+
+      const originText = '이 텍스트는\n선택된   텍스트를\n포함한다.';
       act(() => {
         result.current.handleCorrection(1, originText);
       });

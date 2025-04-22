@@ -12,6 +12,7 @@ type MockMediaRecorder = {
   pause: jest.Mock;
   resume: jest.Mock;
   ondataavailable: ((event: BlobEvent) => void) | null;
+  onstop: (() => void) | null;
   stream: MockStream;
 };
 

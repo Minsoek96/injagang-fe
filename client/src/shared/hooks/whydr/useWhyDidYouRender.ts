@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef } from 'react';
 
 /**
@@ -9,15 +8,18 @@ import { useEffect, useRef } from 'react';
  * @param state - 추적할 state (선택적)
  * @param action - 추적할 action (선택적)
  */
-const useWhyDidYouRender = (
-  componentName: string,
-  state: Record<string, unknown> = {},
-  action: Record<string, unknown> = {},
-) => {
+const useWhyDidYouRender = <
+S extends Record<string, unknown> = Record<string, unknown>,
+A extends Record<string, unknown> = Record<string, unknown>
+>(
+    componentName: string,
+    state: S = {} as S,
+    action: A = {} as A,
+  ) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
   const isFirstRender = useRef(true);
-  const prevStateRef = useRef<Record<string, any>>({});
-  const prevActionRef = useRef<Record<string, any>>({});
+  const prevStateRef = useRef<S>({} as S);
+  const prevActionRef = useRef<A>({} as A);
 
   useEffect(() => {
     if (!isDevelopment) {
@@ -32,12 +34,12 @@ const useWhyDidYouRender = (
     }
 
     // 변경된 state 찾기
-    const changedState: Record<string, any> = {};
+    const changedState: Record<string, { 이전: unknown; 현재: unknown }> = {};
     let hasStateChanged = false;
 
     if (state && typeof state === 'object') {
       Object.keys(state).forEach((key) => {
-        if (state[key] !== prevStateRef.current[key]) {
+        if (!Object.is(state[key], prevStateRef.current[key])) {
           changedState[key] = {
             이전: prevStateRef.current[key],
             현재: state[key],
@@ -48,12 +50,12 @@ const useWhyDidYouRender = (
     }
 
     // 변경된 action 찾기
-    const changedAction: Record<string, any> = {};
+    const changedAction: Record<string, { 이전: unknown; 현재: unknown }> = {};
     let hasActionChanged = false;
 
     if (action && typeof action === 'object') {
       Object.keys(action).forEach((key) => {
-        if (action[key] !== prevActionRef.current[key]) {
+        if (!Object.is(action[key], prevActionRef.current[key])) {
           changedAction[key] = {
             이전: prevActionRef.current[key],
             현재: action[key],
@@ -65,25 +67,36 @@ const useWhyDidYouRender = (
 
     // 변경사항 출력
     if (hasStateChanged || hasActionChanged) {
-      console.group(`[렌더] ${componentName}`);
+      console.group(`%c[렌더] ${componentName}`, 'color: #e91e63; font-weight: bold; font-size: 16px;');
 
       if (hasStateChanged) {
-        console.log('변경된 state:', changedState);
+        console.log(
+          '%c변경된 state:',
+          'color: #8321f3ff; font-weight: bold; font-size: 14px',
+        );
+
+        console.table(changedState);
       }
 
       if (hasActionChanged) {
-        console.log('변경된 action:', changedAction);
+        console.log(
+          '%c변경된 action:',
+          'color: #ff9800; font-weight: bold; font-size: 14px',
+        );
+
+        console.table(changedAction);
       }
 
       console.groupEnd();
     } else {
       console.log(
-        `[렌더] ${componentName} - state/action 변경 없음 (부모 리렌더링)`,
+        `%c[렌더] ${componentName} - state/action 변경 없음 (부모 리렌더링)`,
+        'color: #4e4e4e; font-weight: bold; font-size: 16px;',
       );
     }
 
-    prevStateRef.current = state ? { ...state } : {};
-    prevActionRef.current = action ? { ...action } : {};
+    prevStateRef.current = { ...state };
+    prevActionRef.current = { ...action };
   });
 };
 

@@ -17,16 +17,23 @@ export const initialState: boardType.SelectedText = {
 const useDragCorrection = () => {
   const { setModal } = useModal();
 
-  const { setCorrection, initCorrection } = useCorrectionStore();
+  const setCorrection = useCorrectionStore((state) => state.setCorrection);
+  const initCorrection = useCorrectionStore((state) => state.initCorrection);
 
   const [selectedText, setSelectedText] = useState<boardType.SelectedText>(initialState);
 
   // 선택된 텍스트가 원본 텍스트에 포함되어있는지 검증하는 함수
   const validateSelectedText = (originText: string) => {
     const selection = window.getSelection();
-    const selected = selection?.toString();
-    const check = originText.includes(selected || '!&!');
-    return check ? selected : check;
+    if (!selection) {
+      return false;
+    }
+
+    const selected = selection.toString();
+    const normalizedOrigin = originText.replace(/\s+/g, ' ');
+    const normalizedSelected = selected.replace(/\s+/g, ' ');
+
+    return normalizedOrigin.includes(normalizedSelected) ? selected : false;
   };
 
   /** 첨삭 내용을 전달 받는 함수 */
@@ -39,8 +46,10 @@ const useDragCorrection = () => {
       }
 
       const selectedCorrection = validateSelectedText(originText);
-      selectedCorrection
-        && changeCorrection(selectedCorrection, targetId);
+
+      if (selectedCorrection) {
+        changeCorrection(selectedCorrection, targetId);
+      }
     },
     [selectedText],
   );

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import {
+  IGetFeedBack,
   IReviseFeedBack,
   IWriteFeedBack,
 } from '@/src/entities/feedback/model/type';
@@ -46,13 +47,55 @@ const useWriteFeed = () => {
   return useMutation({
     mutationFn: (feed: IWriteFeedBack) => writeFeedBack(feed),
 
+    onMutate: async (newFeed) => {
+      await queryClient.cancelQueries({ queryKey: feedback.list(targetFeed) });
+
+      const previousFeedbacks = queryClient.getQueryData(
+        feedback.list(targetFeed),
+      );
+      const tempId = `temp-${Date.now()}`;
+
+      queryClient.setQueryData(
+        feedback.list(targetFeed),
+        (old: IGetFeedBack[] | undefined) => {
+          if (!old || !Array.isArray(old)) {
+            return [
+              {
+                feedbackId: tempId,
+                target: targetFeed,
+                content: newFeed.feedbackContent,
+                owner: true,
+              },
+            ];
+          }
+
+          return [
+            {
+              feedbackId: tempId,
+              target: targetFeed,
+              content: newFeed.feedbackContent,
+              owner: true,
+            },
+            ...old,
+          ];
+        },
+      );
+
+      return { previousFeedbacks };
+    },
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: feedback.list(targetFeed) });
-
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.ADDED_FEED);
     },
 
-    onError: () => {
+    onError: (err, newFeed, context) => {
+      if (context?.previousFeedbacks) {
+        queryClient.setQueryData(
+          feedback.list(targetFeed),
+          context.previousFeedbacks,
+        );
+      }
       showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.ADDED_FEED);
     },
   });
@@ -66,12 +109,39 @@ const useDeleteFeed = (targetId: number) => {
   return useMutation({
     mutationFn: (feedId: number) => deleteFeedBack(feedId),
 
+    onMutate: async (feedId) => {
+      await queryClient.cancelQueries({ queryKey: feedback.list(targetId) });
+
+      const previousFeedbacks = queryClient.getQueryData(
+        feedback.list(targetId),
+      );
+
+      queryClient.setQueryData(
+        feedback.list(targetId),
+        (old: IGetFeedBack[] | undefined) => {
+          if (!old || !Array.isArray(old)) {
+            return [];
+          }
+
+          return old.filter((item) => item.feedbackId !== feedId);
+        },
+      );
+
+      return { previousFeedbacks };
+    },
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: feedback.list(targetId) });
       showToast(TOAST_MODE.SUCCESS, SUCCESS_MESSAGES.DELETE_FEED);
     },
 
-    onError: () => {
+    onError: (err, feedId, context) => {
+      if (context?.previousFeedbacks) {
+        queryClient.setQueryData(
+          feedback.list(targetId),
+          context.previousFeedbacks,
+        );
+      }
       showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.DELETE_FEED);
     },
   });

@@ -4,12 +4,14 @@ import { useRouter } from 'next/router';
 
 export default function usePageRouter() {
   const router = useRouter();
+
   /** 자소서 수정 페이지 이동 */
   const moveCoverLetterEditPage = useCallback((essayId: number) => {
     router.push({
       pathname: `/coverLetter/${essayId}/edit`,
     });
   }, []);
+
   /** 자소서 메인 페이지 이동 */
   const moveCoverLetterMainPage = useCallback(() => {
     router.push({
@@ -27,6 +29,10 @@ export default function usePageRouter() {
     router.replace({ pathname: '/qna/list' });
   }, []);
 
+  const moveBoardQuestionPage = useCallback(() => {
+    router.push('/qna/question');
+  }, []);
+
   const moveBoardEditPage = useCallback((boardId: number) => {
     router.replace(`/qna/edit/${boardId}`);
   }, []);
@@ -35,12 +41,14 @@ export default function usePageRouter() {
   const moveSignupPage = useCallback(() => {
     router.push({ pathname: '/join' });
   }, []);
+
   return {
     moveCoverLetterEditPage,
     moveCoverLetterMainPage,
     moveBoardEditPage,
     moveBoardDetailPage,
     moveBoardMainPage,
+    moveBoardQuestionPage,
     moveSignupPage,
   };
 }

@@ -37,6 +37,9 @@ jest.mock('@/src/entities/feedback/model/useFeedStore');
 const replaceMock = jest.fn();
 const showToastMock = jest.fn();
 const mockInvalidateQueries = jest.fn();
+const mockCancelQueries = jest.fn();
+const mockGetQueryData = jest.fn();
+const mockSetQueryData = jest.fn();
 
 jest.mock('@tanstack/react-query', () => {
   const actualModule = jest.requireActual('@tanstack/react-query');
@@ -44,6 +47,9 @@ jest.mock('@tanstack/react-query', () => {
     ...actualModule,
     useQueryClient: jest.fn(() => ({
       invalidateQueries: mockInvalidateQueries,
+      cancelQueries: mockCancelQueries,
+      getQueryData: mockGetQueryData,
+      setQueryData: mockSetQueryData,
     })),
   };
 });
