@@ -1,64 +1,54 @@
 import styled, { keyframes } from 'styled-components';
-import { styleMixin } from '@/src/shared/styles';
+
+import { styleMixin, V } from '@/src/shared/styles';
 
 function RunningLoader() {
   return (
     <LoadingWrapper>
       <RunTrack>
         <Runner>
-          <StickMan>
-            {/* Head */}
-            <circle cx="15" cy="8" r="6" fill="#22C55E" />
-            {/* Body */}
-            <line
-              x1="15"
-              y1="14"
-              x2="15"
-              y2="28"
+          <Ghost>
+            {/* 유령 본체 */}
+            <path
+              d="M20,5 C10,5 5,12 5,20 C5,35 5,50 5,55 C5,55 7,53 10,55 C13,57 15,60 20,57 C25,60 27,57 30,55 C33,53 35,55 35,55 C35,55 35,35 35,20 C35,12 30,5 20,5 Z"
+              fill="#22C55E"
+              opacity="0.4"
+            />
+
+            {/* 유령 외곽선 */}
+            <path
+              d="M20,5 C10,5 5,12 5,20 C5,35 5,50 5,55 C5,55 7,53 10,55 C13,57 15,60 20,57 C25,60 27,57 30,55 C33,53 35,55 35,55 C35,55 35,35 35,20 C35,12 30,5 20,5 Z"
+              fill="none"
               stroke="#22C55E"
-              strokeWidth="3"
+              strokeWidth="1.5"
+            />
+
+            {/* 유령 눈 */}
+            <circle cx="15" cy="20" r="3" fill="#ffffff" opacity="0.8" />
+            <circle cx="25" cy="20" r="3" fill="#ffffff" opacity="0.8" />
+
+            {/* 유령 입 */}
+            <path
+              d="M15,30 C18,33 22,30 25,30"
+              stroke="#ffffff"
+              strokeOpacity="0.8"
+              strokeWidth="6"
+              fill="none"
               strokeLinecap="round"
             />
-            {/* Arms and Legs */}
-            <g>
-              <line
-                x1="15"
-                y1="18"
-                x2="8"
-                y2="24"
-                stroke="#22C55E"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-              <line
-                x1="15"
-                y1="18"
-                x2="22"
-                y2="24"
-                stroke="#22C55E"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-              <line
-                x1="15"
-                y1="28"
-                x2="8"
-                y2="36"
-                stroke="#22C55E"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-              <line
-                x1="15"
-                y1="28"
-                x2="22"
-                y2="36"
-                stroke="#22C55E"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-            </g>
-          </StickMan>
+
+            {/* 바통 */}
+            <rect
+              x="25"
+              y="5"
+              width="25"
+              height="4"
+              rx="1.5"
+              fill="#FFFFFF"
+              opacity="0.7"
+              transform="rotate(105, 30, 20)"
+            />
+          </Ghost>
         </Runner>
       </RunTrack>
     </LoadingWrapper>
@@ -92,23 +82,25 @@ const LoadingWrapper = styled.div`
 const RunTrack = styled.div`
   position: relative;
   width: 100%;
-  height: 80px;
-  border-radius: 8px;
-  overflow: hidden;
+  height: 15rem;
 `;
 
 const Runner = styled.div`
   position: absolute;
   bottom: 20px;
-  animation: ${run} 3s linear infinite;
+  animation: ${run} 6s linear infinite;
+
+  @media screen and (max-width: ${V.mediaTablet}){
+    animation: ${run} 2s linear infinite;
+  }
 `;
 
-const StickMan = styled.svg.attrs({
-  width: '30',
-  height: '40',
-  viewBox: '0 0 30 40',
+const Ghost = styled.svg.attrs({
+  width: '80',
+  height: '80',
+  viewBox: '0 0 40 60',
 })`
-  animation: ${move} 0.5s ease-in-out infinite;
+  animation: ${move} 1s ease-in-out infinite;
 `;
 
 export default RunningLoader;
