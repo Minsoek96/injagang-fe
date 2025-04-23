@@ -41,15 +41,16 @@ const TextGroup = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 3.2rem;
+  color: ${(props) => props.theme.colors.text};
+  font-size: 3.4rem;
   font-weight: 700;
 
   @media (max-width: ${V.mediaTablet}) {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   @media (max-width: ${V.mediaMobile}) {
-    font-size: 2rem;
+    font-size: 2.6rem;
   }
 `;
 
@@ -57,6 +58,7 @@ const SubTitle = styled.h3`
   font-size: 2.2rem;
   font-weight: 600;
   letter-spacing: 0.05em;
+  margin-bottom: 4rem;
   color: ${(props) => props.theme.colors.lightText};
 
   &::before,
@@ -71,6 +73,6 @@ const SubTitle = styled.h3`
   }
 
   @media (max-width: ${V.mediaMobile}) {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 `;
