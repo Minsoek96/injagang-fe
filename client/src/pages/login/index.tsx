@@ -9,8 +9,8 @@ function LoginPage() {
   return (
     <Container>
       <Wrapper>
-        <PageTitle lang="en">INJAGANG</PageTitle>
-        <PageSubTitle>인터뷰와 자소서를 강하게</PageSubTitle>
+        <PageTitle lang="en">RelayMentor</PageTitle>
+        <PageSubTitle>다음 주자를 위한 첫걸음, 지금 로그인하세요.</PageSubTitle>
 
         <IconContainer>
           <IconWrapper>

@@ -8,8 +8,8 @@ function SignupPage() {
   return (
     <Container>
       <Wrapper>
-        <PageTitle>INJAGANG</PageTitle>
-        <PageSubTitle>인터뷰와 자소서를 강하게</PageSubTitle>
+        <PageTitle>RelayMentor</PageTitle>
+        <PageSubTitle>당신의 경험이 누군가의 성공으로 이어집니다.</PageSubTitle>
         <SignUp />
       </Wrapper>
     </Container>
