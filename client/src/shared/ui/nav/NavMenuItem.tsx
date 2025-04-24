@@ -12,7 +12,10 @@ interface MainMenuItemProps {
 }
 
 export default function NavMenuItem({
-  title, path, icon, keyword,
+  title,
+  path,
+  icon,
+  keyword,
 }: MainMenuItemProps) {
   const pathname = usePathname();
   const isSelected = pathname?.startsWith(keyword);
@@ -34,14 +37,13 @@ const Container = styled.li<{ $isSelected: boolean }>`
   justify-content: center;
   align-items: center;
   height: inherit;
-  width: 10rem;
   list-style: none;
   position: relative;
   cursor: pointer;
 
   /* 밑줄 */
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -54,7 +56,10 @@ const Container = styled.li<{ $isSelected: boolean }>`
 
   svg {
     transition: fill 0.3s ease-in-out;
-    fill: ${(props) => (props.$isSelected ? props.theme.colors.svgOnColor : props.theme.colors.svgColor)};
+    fill: ${(props) =>
+    (props.$isSelected
+      ? props.theme.colors.svgOnColor
+      : props.theme.colors.svgColor)};
 
     &:hover {
       transform: scale(1.1);
@@ -72,8 +77,8 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   color: white;
 
-
   > i {
+    margin-inline: 2rem;
   }
 
   > span {
@@ -81,8 +86,8 @@ const MenuWrapper = styled.div`
     top: 0;
     margin-top: 5rem;
     display: none;
-    padding: .5em;
-    background-color: rgb(0,0,0,0.55);
+    padding: 0.5em;
+    background-color: rgb(0, 0, 0, 0.55);
     white-space: nowrap;
   }
 

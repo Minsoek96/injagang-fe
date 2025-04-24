@@ -71,7 +71,7 @@ function Dropdown({ children }: DropdownProps) {
     <DropdownContext.Provider value={value}>
       <div
         ref={containerRef}
-        style={{ position: 'relative', display: 'inline-block' }}
+        style={{ position: 'relative', display: 'inline-block', cursor: 'pointer' }}
       >
         {children}
       </div>

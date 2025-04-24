@@ -17,7 +17,7 @@ export default function Header() {
     <HeaderContainer>
       <Wrapper>
         <BrandLogo title={BRAND.title} path="/" />
-        <NavMenuList navList={navList} />
+        <NavMenuList navList={navList} isHome />
         {role === null ? <LoginMenuItem /> : <UserDropdown />}
       </Wrapper>
     </HeaderContainer>
@@ -27,16 +27,17 @@ export default function Header() {
 const HeaderContainer = styled.header`
   z-index: 9999;
   position: fixed;
+  padding-inline: 1rem;
   top: 0;
   ${styleMixin.Flex()}
   width: 100%;
-  height: 6.5rem;
+  height: 5.5rem;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
-  border-bottom: 0.15em solid ${(props) => props.theme.colors.mainLine};
+  border-bottom: 0.1em solid ${(props) => props.theme.colors.mainLine};
 
   svg {
-    font-size: 3.5rem;
+    font-size: 3.4rem;
     color: ${({ theme }) => theme.colors.svgColor};
   }
 `;
@@ -51,6 +52,5 @@ const Wrapper = styled.div`
     > a:first-child {
       display: none;
     }
-    justify-content: center;
   }
 `;

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { styled } from 'styled-components';
 
-import { GrUserSettings } from 'react-icons/gr';
+import { RiListSettingsLine } from 'react-icons/ri';
 
 import { useLogout } from '@/src/features/auth';
 import { useThemeToggler } from '@/src/shared/hooks';
@@ -22,7 +22,7 @@ function UserDropdown() {
   return (
     <Dropdown>
       <Dropdown.Trigger>
-        <GrUserSettings />
+        <RiListSettingsLine />
       </Dropdown.Trigger>
       <Dropdown.Menu style={{ right: 0 }}>
         <Container>
