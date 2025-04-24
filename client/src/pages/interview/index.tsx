@@ -5,11 +5,6 @@ import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
 import {
-  InterviewLobby,
-  ExpectedQuestionLayout,
-} from '@/src/widgets/interview';
-
-import {
   useDeviceStore,
   useIntvPlaylistStore,
 } from '@/src/entities/interview_question';
@@ -18,19 +13,23 @@ import { Container, RunningLoader, StepProgressBar } from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
 
-import InterviewSliderButtons from './InterviewSliderButtons';
+import {
+  InterviewLobby,
+  ExpectedQuestionLayout,
+  InterviewSliderButtons,
+} from './ui';
 
-const InterViewRandomSetting = dynamic(
+const InterviewRandomSetting = dynamic(
   () =>
     import(
-      '@/src/features/interview/random-quetsion/ui/InterViewRandomSetting'
+      '@/src/features/interview/random-quetsion/ui/InterviewRandomSetting'
     ),
   {
     ssr: false,
   },
 );
 
-const InterViewRecordSetting = dynamic(
+const InterviewRecordSetting = dynamic(
   () => import('@/src/features/interview/setting/ui/InterviewRecordSetting'),
   {
     ssr: false,
@@ -38,7 +37,7 @@ const InterViewRecordSetting = dynamic(
 );
 
 const InterviewFlow = dynamic(
-  () => import('@/src/widgets/interview/ui/interview-flow/InterviewFlow'),
+  () => import('./ui/interview-flow/InterviewFlow'),
   {
     ssr: false,
     loading: () => (
@@ -89,14 +88,14 @@ function Interview() {
       id: 'Step_02',
     },
     {
-      render: <InterViewRandomSetting />,
+      render: <InterviewRandomSetting />,
       subTitle: userPlayList.length ? 'Next Step...' : '질문 설정은 필수...',
       title: '랜덤 질문 선택',
       rule: !!userPlayList.length,
       id: 'Step_03',
     },
     {
-      render: <InterViewRecordSetting />,
+      render: <InterviewRecordSetting />,
       subTitle: 'Next Step ...',
       title: '녹화 환경 설정',
       rule: !!videoDevice && !!audioDevice,
@@ -120,7 +119,7 @@ function Interview() {
 
   const currentStepData = interviewSteps[currentStep];
   return (
-    <InterViewStyle>
+    <InterviewStyle>
       <StepProgressBar
         stepList={interviewSteps}
         currentStep={currentStep}
@@ -135,13 +134,13 @@ function Interview() {
         rule={currentStepData.rule ?? true}
         currentStep={currentStep}
       />
-    </InterViewStyle>
+    </InterviewStyle>
   );
 }
 
 export default Interview;
 
-const InterViewStyle = styled.div`
+const InterviewStyle = styled.div`
   ${styleMixin.Column('flex-start')}
   width: 100%;
 `;

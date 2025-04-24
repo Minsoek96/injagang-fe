@@ -19,7 +19,7 @@ const StyledLink = styled(Link)`
   align-items: center;
   text-decoration: none;
   color: ${(props) => props.theme.colors.signatureColor};
-  font-size: 3.2rem;
+  font-size: 3rem;
   font-weight: 600;
   transition: color 0.3s ease, transform 0.3s ease;
 

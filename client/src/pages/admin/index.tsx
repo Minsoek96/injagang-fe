@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
-import { ExpectedQuestionLayout } from '@/src/widgets/interview';
-
 import { styleMixin } from '@/src/shared/styles';
 
+// TODO : 수정필요
+import { ExpectedQuestionLayout } from '@/src/pages/interview/ui';
+
 import { useAuthStore, useAuth } from '@/src/entities/auth';
-import Template from './template/Template';
+
+import { Template } from './ui';
 
 function AdminPage() {
   useAuth();

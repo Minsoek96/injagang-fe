@@ -6,7 +6,7 @@ import { DraggableCoverLetterView } from '@/src/features/qna/dragview';
 import { Container } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
-export default function QuestionDetail() {
+export default function QuestionCoverLetterView() {
   return (
     <DetailContainer>
       <Container.ArticleCard

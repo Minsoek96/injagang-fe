@@ -33,6 +33,6 @@ const ImageContainer = styled.div`
     border-radius: 0.8em;
     max-width: 100%;
     height: auto;
-    max-height: 45rem;
+    max-height: 50rem;
   }
 `;

@@ -24,19 +24,19 @@ const explanationList: string[] = [
  */
 function ExpectedQuestionLayout() {
   return (
-    <InterViewListViewStyle>
+    <InterviewListViewStyle>
       <ExplanationContent explanationList={explanationList} />
       <SwitchContainer>
         <ExpectedQuestionSelector />
         <UserQuestionPlayList />
       </SwitchContainer>
-    </InterViewListViewStyle>
+    </InterviewListViewStyle>
   );
 }
 
 export default ExpectedQuestionLayout;
 
-const InterViewListViewStyle = styled.div`
+const InterviewListViewStyle = styled.div`
   width: 100%;
 `;
 

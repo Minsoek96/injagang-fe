@@ -1,5 +1,5 @@
 export const BRAND = {
-  title: 'INJAGANG',
+  title: 'RelayMentor',
 };
 
 export const ERROR_MESSAGES = {

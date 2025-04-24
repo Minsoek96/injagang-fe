@@ -13,8 +13,8 @@ import { ErrorBoundary, MainButton, Spinner } from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 import { ArticleCard } from '@/src/shared/ui/container/Container';
 
-const QuestionDetail = dynamic(
-  () => import('@/src/widgets/qna/ui/detail-layout/QuestionDetailLayout'),
+const QuestionCoverLetterView = dynamic(
+  () => import('./ui/QuestionCoverLetterView'),
   {
     loading: () => <Spinner />,
   },
@@ -58,7 +58,7 @@ function Answer({ dehydratedState }: AnswerProps) {
             ErrorFallback(error, reset, '게시글을 조회 중 문제가 발생했습니다.')}
         >
           <Suspense fallback={<Spinner message="게시글을 조회 중 입니다." />}>
-            <QuestionDetail />
+            <QuestionCoverLetterView />
             <FeedbackComposer />
           </Suspense>
         </ErrorBoundary>

@@ -4,11 +4,13 @@ import { NavMenuItem } from '@/src/shared/ui/nav';
 
 export default function LoginMenuItem() {
   return (
-    <NavMenuItem
-      icon={<BiLogIn />}
-      title="Login"
-      path="/login"
-      keyword="/login"
-    />
+    <ul>
+      <NavMenuItem
+        icon={<BiLogIn />}
+        title="Login"
+        path="/login"
+        keyword="/login"
+      />
+    </ul>
   );
 }
