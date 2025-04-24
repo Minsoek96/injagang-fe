@@ -31,8 +31,12 @@ const menual: ManualData[] = [
 function Manual() {
   return (
     <ManualContainer>
-      {menual.map((item) => (
-        <Section key={item.id} {...item} />
+      {menual.map((item, idx) => (
+        <Section
+          key={item.id}
+          isLastSection={idx === menual.length - 1}
+          {...item}
+        />
       ))}
     </ManualContainer>
   );
