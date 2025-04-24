@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { GoFile } from 'react-icons/go';
 
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 import {
   useCoverLetterStore,
   coverLetterQueries,
@@ -21,21 +21,22 @@ function CoverLetterList() {
 
   if (!coverLetters?.length) {
     return (
-      <S.container>
+      <Cotainer>
         <S.emptyContainer>
           <GoFile />
           <S.emptyTitle>작성된 자소서가 없습니다.</S.emptyTitle>
           <S.emptyText>새로운 자기소개서를 작성해보세요</S.emptyText>
         </S.emptyContainer>
-      </S.container>
+      </Cotainer>
     );
   }
 
   return (
-    <S.container>
+    <Cotainer>
       <ListHeader>
-        <ListTitle>자기소개서 목록</ListTitle>
+        <ListTitle>차례</ListTitle>
       </ListHeader>
+      <Divider />
       <ListContent>
         {coverLetters?.map((item) => (
           <CoverLetterItem
@@ -45,16 +46,38 @@ function CoverLetterList() {
           />
         ))}
       </ListContent>
-    </S.container>
+    </Cotainer>
   );
 }
 
 export default CoverLetterList;
 
+const Cotainer = styled.div`
+  ${styleMixin.Column('flex-start', 'flex-start')}
+  width: 100%;
+  height: 100%;
+  background: ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.mainLine};
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-left: 1.5rem solid ${(props) => props.theme.colors.signatureColor};
+  box-shadow: ${V.boxShadow1};
+  ${styleMixin.ScrollBar}
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+  }
+`;
+
 const ListHeader = styled.div`
   width: 100%;
   padding: 1.2rem 1.6rem;
-  border-bottom: 1px solid ${(props) => props.theme.colors.mainLine};
+`;
+
+const Divider = styled.div`
+  margin: 0 auto;
+  width: calc(100% - 1rem);
+  background-color: ${(props) => props.theme.colors.mainLine};
+  height: 1px;
 `;
 
 const ListTitle = styled.h2`

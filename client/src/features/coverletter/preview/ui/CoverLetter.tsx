@@ -1,70 +1,126 @@
-import { Suspense } from 'react';
-
-import { useRouter } from 'next/router';
-
-import { BiPlus } from 'react-icons/bi';
+import { Suspense, useRef, useState } from 'react';
 
 import styled from 'styled-components';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import {
-  Container, MainButton, Spinner, ErrorBoundary,
-} from '@/src/shared/ui';
+import { Container, Spinner, ErrorBoundary } from '@/src/shared/ui';
 
 import CoverLetterListFallback from '@/src/features/coverletter/preview/ui/coverletter-list/CoverLetterListFallback';
-import CoverLetterGuide from './coverletter-guide/CoverLetterGuide';
+
+import { Header } from './coverletter-header';
 import CoverLetterList from './coverletter-list/CoverLetterList';
 import CoverLetterPreView from './coverletter-preview/CoverLetterPreView';
 
-/** 유저 자소서 선택 페이지 */
+/** 유저 자소서 선택 페이지
+ *
+ * TODOS
+ * - 모바일 버전 섹션 범위 수정 하기
+ * - 최적화 하기
+ * - 현재 컴포넌트의 성향은 page에 가까운 영역 수정하기
+ * - resize 조절 컴포넌트 분리하기 (widgets ?)
+ * - 자소설 : 책와 유사한 디자인 컨셉 수정하기
+*/
 function CoverLetter() {
-  const router = useRouter();
-  const headerTitle = '나의 자기소개서 목록';
-  const moveCreationPage = '/coverLetter/new';
+  const headerTitle = '나의 자소설';
+
+  const [isDragging, setIsDragging] = useState(false);
+  const [expendedPanel] = useState<'left' | 'right' | null>(
+    null,
+  );
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const leftPanelRef = useRef<HTMLDivElement | null>(null);
+  const rightPanelRef = useRef<HTMLDivElement | null>(null);
+
+  const dragResizePenel = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging || expendedPanel) {
+      return;
+    }
+
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const newLeftWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
+
+    if (newLeftWidth >= 20 && newLeftWidth <= 80) {
+      if (leftPanelRef.current && rightPanelRef.current) {
+        leftPanelRef.current.style.width = `${newLeftWidth}%`;
+        rightPanelRef.current.style.width = `${100 - newLeftWidth}%`;
+      }
+    }
+  };
+
+  const dragResizeEnd = () => {
+    setIsDragging(false);
+  };
 
   return (
     <>
-      <ListHeader>
-        <HeaderTitle>{headerTitle}</HeaderTitle>
-        <MainButton
-          onClick={() => router.push(moveCreationPage)}
-          label={(
-            <>
-              <BiPlus />
-              {' '}
-              새로 작성하기
-            </>
-          )}
-          variant="ghost"
-          sx={{ fontSize: '1.8rem', color: 'black' }}
-        />
-      </ListHeader>
-      <CoverLetterContainer>
-        <ErrorBoundary
-          renderFallback={(error, onReset) => (
-            <CoverLetterListFallback onReset={onReset} />
-          )}
-        >
-          <Suspense fallback={<Spinner />}>
-            <CoverLetterList />
-          </Suspense>
-        </ErrorBoundary>
-        <CoverLetterPreView />
-        <CoverLetterGuide />
-      </CoverLetterContainer>
+      <Header title={headerTitle} />
+      <BookContainer
+        ref={containerRef}
+        onMouseMove={dragResizePenel}
+        onMouseUp={dragResizeEnd}
+        onMouseLeave={dragResizeEnd}
+      >
+        <CoverLetterContainer>
+          <BookLeftPannel
+            ref={leftPanelRef}
+          >
+            <ErrorBoundary
+              renderFallback={(error, onReset) => (
+                <CoverLetterListFallback onReset={onReset} />
+              )}
+            >
+              <Suspense fallback={<Spinner />}>
+                <CoverLetterList />
+              </Suspense>
+            </ErrorBoundary>
+          </BookLeftPannel>
+          <BookCenter
+            onMouseDown={(e) => {
+              e.stopPropagation();
+              setIsDragging(true);
+            }}
+          >
+            <Divider />
+          </BookCenter>
+
+          <BookRightPannel ref={rightPanelRef}>
+            <CoverLetterPreView />
+          </BookRightPannel>
+        </CoverLetterContainer>
+      </BookContainer>
     </>
   );
 }
 
 export default CoverLetter;
 
+const BookContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const BookRightPannel = styled.div`
+  will-change: width;
+  width: 100%;
+  transform: translateZ(0);
+`;
+
+const BookLeftPannel = styled.div`
+  will-change: width;
+  width: 100%;
+  transform: translateZ(0);
+`;
+
 const CoverLetterContainer = styled(Container.ItemBase)`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 3rem;
+  display: flex;
   width: 100%;
   color: ${(props) => props.theme.colors.text};
-  height: 100%;
+  height: 65rem;
 
   @media screen and (max-width: ${V.mediaTablet}) {
     ${styleMixin.Column('flex-start', 'flex-start')}
@@ -72,28 +128,20 @@ const CoverLetterContainer = styled(Container.ItemBase)`
   }
 `;
 
-const ListHeader = styled.div`
-  ${styleMixin.Flex('space-between')}
-  margin-bottom: 1.5rem;
-  text-align: start;
+const Divider = styled.div`
   width: 100%;
+  height: 5rem;
+  background-color: ${(props) => props.theme.colors.primary};
+`;
+
+const BookCenter = styled.div`
+  cursor: col-resize;
+  ${styleMixin.Column()};
+  height: 100%;
+  min-width: 0.5rem;
+  max-width: 0.5rem;
   background-color: ${(props) => props.theme.colors.highlightColor};
-  padding: 1.8rem 1.25rem;
-  border-radius: 0.5rem;
-  position: relative;
-  letter-spacing: -0.02em;
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    padding: 0.8rem 0.5rem;
-  }
+  border-radius: 1rem;
 `;
 
-const HeaderTitle = styled.p`
-  font-size: 2.5rem;
-  font-weight: 400;
-  color: ${(props) => props.theme.colors.signatureText};
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    font-size: 1.8rem;
-  }
-`;
+// rgba(15, 118, 110, 0.3);

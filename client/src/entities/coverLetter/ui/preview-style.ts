@@ -9,7 +9,8 @@ const PreviewStyle = {
     background: ${(props) => props.theme.colors.primary};
     background-color: transparent;
     border: 1px solid ${(props) => props.theme.colors.mainLine};
-    border-radius: 1.2rem;
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
     box-shadow: ${V.boxShadow1};
     overflow-y: auto;
     ${styleMixin.ScrollBar}
