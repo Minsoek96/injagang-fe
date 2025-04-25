@@ -8,8 +8,8 @@ import { useCoverLetterStore } from '@/src/entities/coverLetter';
 import { useAuthStore } from '@/src/entities/auth';
 
 function CoverLetterPage() {
-  const { initCoverLetter } = useCoverLetterStore();
-  const { role } = useAuthStore();
+  const initCoverLetter = useCoverLetterStore((state) => state.initCoverLetter);
+  const role = useAuthStore((state) => state.role);
 
   useEffect(
     () => () => {

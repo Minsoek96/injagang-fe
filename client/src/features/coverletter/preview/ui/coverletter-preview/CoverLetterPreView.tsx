@@ -14,7 +14,7 @@ import CoverLetterPreViewItem from './CoverLetterPreViewItem';
  * - 유저가 선택한 자소서의 질문 리스트를 출력
  */
 function CoverLetterPreView() {
-  const { selectedCoverLetter } = useCoverLetterStore();
+  const selectedCoverLetter = useCoverLetterStore((state) => state.selectedCoverLetter);
 
   if (!selectedCoverLetter.questions.length) {
     return (

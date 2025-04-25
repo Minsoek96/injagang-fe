@@ -7,9 +7,9 @@ import { Container, Spinner, ErrorBoundary } from '@/src/shared/ui';
 
 import CoverLetterListFallback from '@/src/features/coverletter/preview/ui/coverletter-list/CoverLetterListFallback';
 
+import CoverLetterDetailLayout from '@/src/features/coverletter/detail/CoverLetterDetailLayout';
 import { Header } from './coverletter-header';
 import CoverLetterList from './coverletter-list/CoverLetterList';
-import CoverLetterPreView from './coverletter-preview/CoverLetterPreView';
 
 /** 유저 자소서 선택 페이지
  *
@@ -19,14 +19,12 @@ import CoverLetterPreView from './coverletter-preview/CoverLetterPreView';
  * - 현재 컴포넌트의 성향은 page에 가까운 영역 수정하기
  * - resize 조절 컴포넌트 분리하기 (widgets ?)
  * - 자소설 : 책와 유사한 디자인 컨셉 수정하기
-*/
+ */
 function CoverLetter() {
   const headerTitle = '나의 자소설';
 
   const [isDragging, setIsDragging] = useState(false);
-  const [expendedPanel] = useState<'left' | 'right' | null>(
-    null,
-  );
+  const [expendedPanel] = useState<'left' | 'right' | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const leftPanelRef = useRef<HTMLDivElement | null>(null);
   const rightPanelRef = useRef<HTMLDivElement | null>(null);
@@ -66,9 +64,7 @@ function CoverLetter() {
         onMouseLeave={dragResizeEnd}
       >
         <CoverLetterContainer>
-          <BookLeftPannel
-            ref={leftPanelRef}
-          >
+          <BookLeftPannel ref={leftPanelRef}>
             <ErrorBoundary
               renderFallback={(error, onReset) => (
                 <CoverLetterListFallback onReset={onReset} />
@@ -89,7 +85,9 @@ function CoverLetter() {
           </BookCenter>
 
           <BookRightPannel ref={rightPanelRef}>
-            <CoverLetterPreView />
+            <Suspense fallback={<Spinner />}>
+              <CoverLetterDetailLayout />
+            </Suspense>
           </BookRightPannel>
         </CoverLetterContainer>
       </BookContainer>
@@ -121,7 +119,6 @@ const CoverLetterContainer = styled(Container.ItemBase)`
   width: 100%;
   color: ${(props) => props.theme.colors.text};
   height: 65rem;
-
   @media screen and (max-width: ${V.mediaTablet}) {
     ${styleMixin.Column('flex-start', 'flex-start')}
     gap:1rem;

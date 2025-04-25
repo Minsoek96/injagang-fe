@@ -49,7 +49,7 @@ describe('CoverLetterItem', () => {
       const container = searchItem.closest('li');
 
       expect(searchItem).toBeInTheDocument();
-      expect(container).toHaveStyle(`background: ${defaultTheme.colors.highlightColor}`);
+      expect(container).toHaveStyle(`background: ${defaultTheme.colors.signatureColor}4A`);
     });
 
     it('자소서 상세보기 아이콘버튼이 렌더링된다.', () => {

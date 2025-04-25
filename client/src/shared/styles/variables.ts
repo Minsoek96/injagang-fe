@@ -6,6 +6,7 @@ const V = {
 
   // fontFamily
   malgunGothic: '"Malgun Gothic", sans-serif',
+  serif: 'sans-serif',
 
   // Box Widths
   mdBoxWidth: '100rem',

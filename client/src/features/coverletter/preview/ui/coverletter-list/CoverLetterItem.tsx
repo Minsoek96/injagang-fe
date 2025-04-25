@@ -1,15 +1,11 @@
 import styled from 'styled-components';
-
 import { BiEditAlt, BiFile } from 'react-icons/bi';
 
-import {
-  coverLetterType,
-  useCoverLetterStore,
-} from '@/src/entities/coverLetter';
+import { coverLetterType, useCoverLetterStore } from '@/src/entities/coverLetter';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import usePageRouter from '@/src/shared/hooks/router/usePageRouter';
 import { MainButton } from '@/src/shared/ui';
+import { usePageRouter } from '@/src/shared/hooks/router';
 
 interface CoverLetterItemsProps {
   item: coverLetterType.ICoverLetters;
@@ -18,17 +14,16 @@ interface CoverLetterItemsProps {
 
 function CoverLetterItem({ item, selectedCoverLetter }: CoverLetterItemsProps) {
   const { moveCoverLetterEditPage } = usePageRouter();
-  const { setCoverLetter } = useCoverLetterStore();
+  const setCoverLetter = useCoverLetterStore((state) => state.setCoverLetter);
+  const isSelectedItem = selectedCoverLetter.essayId === item.essayId;
 
   const changeSeleted = (newList: coverLetterType.ICoverLetters) => {
     if (newList === selectedCoverLetter) return;
     setCoverLetter(newList);
   };
 
-  const isSelectedItem = selectedCoverLetter.essayId === item.essayId;
-
   return (
-    <CoverLetterItemsContainer $isActive={isSelectedItem}>
+    <Container $isActive={isSelectedItem}>
       <ItemContainer onClick={() => changeSeleted(item)}>
         <FileIconWrapper>
           <BiFile />
@@ -41,45 +36,59 @@ function CoverLetterItem({ item, selectedCoverLetter }: CoverLetterItemsProps) {
           </ItemInfo>
         </ItemWrapper>
       </ItemContainer>
+
       {isSelectedItem && (
         <MainButton
           onClick={() => moveCoverLetterEditPage(item.essayId)}
-          label={<BiEditAlt />}
-          sx={{ fontSize: '2.5rem', fontWeight: 500, paddingRight: '.5rem' }}
+          label={(
+            <>
+              <BiEditAlt style={{ fontSize: '2.5rem' }} />
+              Edit
+            </>
+          )}
+          sx={{ fontSize: '2rem', fontWeight: 500, padding: '.2rem' }}
           variant="ghost"
         />
       )}
-    </CoverLetterItemsContainer>
+    </Container>
   );
 }
 
 export default CoverLetterItem;
 
-const CoverLetterItemsContainer = styled.li<{ $isActive: boolean }>`
+const Container = styled.li<{ $isActive: boolean }>`
   ${styleMixin.Flex('space-between', 'center')}
-  padding-block: 1.2rem 1.6rem;
   width: 100%;
+  height: 6.5rem;
+  padding: 1rem 1.6rem;
+  border-radius: 8px;
   background-color: ${({ $isActive, theme }) =>
-    ($isActive ? theme.colors.highlightColor : 'transparent')};
-  border-radius: 12px;
-  transition: all 0.3s ease;
+    ($isActive ? `${theme.colors.signatureColor}1A` : 'transparent')};
   color: ${({ $isActive, theme }) =>
     ($isActive ? theme.colors.dark : theme.colors.emptyGray)};
+  transition: all 0.3s ease;
+  opacity: ${({ $isActive }) => ($isActive ? 1 : 0.6)};
+  line-height: 1.1;
+  overflow: hidden;
   cursor: pointer;
 
   svg {
-    fill: ${({ $isActive, theme }) => ($isActive ? theme.colors.dark : theme.colors.emptyGray)};
+    font-size: 3.2rem;
+    fill: ${({ $isActive, theme }) =>
+    ($isActive ? theme.colors.signatureColor : theme.colors.emptyGray)};
   }
 
   &:hover {
-    background-color: ${({ $isActive, theme }) =>
-    ($isActive ? theme.colors.highlightColor : theme.colors.mainHover)};
+    background-color: ${({ theme }) => `${theme.colors.signatureColor}4A`};
+  }
+
+  button:hover {
+    scale: 1.1;
   }
 
   @media screen and (max-width: ${V.mediaMobile}) {
     padding: 1rem 0.8rem;
   }
-
 `;
 
 const ItemContainer = styled.div`
@@ -111,10 +120,10 @@ const ItemTitle = styled.div`
 `;
 
 const ItemInfo = styled.div`
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 
   span {
-    font-weight: 500;
+    font-weight: 400;
     color: ${(props) => props.theme.colors.signatureColor};
     margin-right: 0.4rem;
   }
