@@ -7,7 +7,7 @@ import { Container, Spinner, ErrorBoundary } from '@/src/shared/ui';
 
 import CoverLetterListFallback from '@/src/features/coverletter/preview/ui/coverletter-list/CoverLetterListFallback';
 
-import CoverLetterDetailLayout from '@/src/features/coverletter/detail/CoverLetterDetailLayout';
+import { CoverLetterDetailLayout } from '@/src/features/coverletter/detail';
 import { Header } from './coverletter-header';
 import CoverLetterList from './coverletter-list/CoverLetterList';
 
