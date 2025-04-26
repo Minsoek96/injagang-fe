@@ -17,14 +17,15 @@ function CoverLetterItem({ item, selectedCoverLetter }: CoverLetterItemsProps) {
   const setCoverLetter = useCoverLetterStore((state) => state.setCoverLetter);
   const isSelectedItem = selectedCoverLetter.essayId === item.essayId;
 
-  const changeSeleted = (newList: coverLetterType.ICoverLetters) => {
+  const changeSeleted = (e:React.MouseEvent, newList: coverLetterType.ICoverLetters) => {
+    e.stopPropagation();
     if (newList === selectedCoverLetter) return;
     setCoverLetter(newList);
   };
 
   return (
     <Container $isActive={isSelectedItem}>
-      <ItemContainer onClick={() => changeSeleted(item)}>
+      <ItemContainer onClick={(e) => changeSeleted(e, item)}>
         <FileIconWrapper>
           <BiFile />
         </FileIconWrapper>
@@ -39,7 +40,10 @@ function CoverLetterItem({ item, selectedCoverLetter }: CoverLetterItemsProps) {
 
       {isSelectedItem && (
         <MainButton
-          onClick={() => moveCoverLetterEditPage(item.essayId)}
+          onClick={(e) => {
+            e.stopPropagation();
+            moveCoverLetterEditPage(item.essayId);
+          }}
           label={(
             <>
               <BiEditAlt style={{ fontSize: '2.5rem' }} />

@@ -1,13 +1,14 @@
-import { Suspense, useRef, useState } from 'react';
-
+import {
+  Suspense, useRef, useState, useCallback,
+} from 'react';
 import styled from 'styled-components';
 
-import { styleMixin, V } from '@/src/shared/styles';
+import { styleMixin } from '@/src/shared/styles';
 import { Container, Spinner, ErrorBoundary } from '@/src/shared/ui';
 
 import CoverLetterListFallback from '@/src/features/coverletter/preview/ui/coverletter-list/CoverLetterListFallback';
-
 import { CoverLetterDetailLayout } from '@/src/features/coverletter/detail';
+
 import { Header } from './coverletter-header';
 import CoverLetterList from './coverletter-list/CoverLetterList';
 
@@ -24,35 +25,76 @@ function CoverLetter() {
   const headerTitle = '나의 자소설';
 
   const [isDragging, setIsDragging] = useState(false);
-  const [expendedPanel] = useState<'left' | 'right' | null>(null);
+  const [expandedPanel, setExpandedPanel] = useState<'left' | 'right' | null>(
+    null,
+  );
+
+  const [panelWidth, setPanelWidth] = useState({
+    leftWidth: 50,
+    rightWidth: 50,
+  });
+
+  const prevWidthsRef = useRef({ left: 50, right: 50 });
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const leftPanelRef = useRef<HTMLDivElement | null>(null);
   const rightPanelRef = useRef<HTMLDivElement | null>(null);
 
-  const dragResizePenel = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging || expendedPanel) {
-      return;
-    }
-
-    const container = containerRef.current;
-    if (!container) {
-      return;
-    }
-
-    const containerRect = container.getBoundingClientRect();
-    const newLeftWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
-
-    if (newLeftWidth >= 20 && newLeftWidth <= 80) {
-      if (leftPanelRef.current && rightPanelRef.current) {
-        leftPanelRef.current.style.width = `${newLeftWidth}%`;
-        rightPanelRef.current.style.width = `${100 - newLeftWidth}%`;
+  // 사이즈 조절 컨트롤
+  const dragResizePenel = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!isDragging || expandedPanel) {
+        return;
       }
-    }
-  };
 
-  const dragResizeEnd = () => {
+      const container = containerRef.current;
+      if (!container) {
+        return;
+      }
+
+      const containerRect = container.getBoundingClientRect();
+      const newLeftWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
+
+      if (newLeftWidth >= 20 && newLeftWidth <= 80) {
+        const newRightWidth = 100 - newLeftWidth;
+        setPanelWidth({
+          leftWidth: newLeftWidth,
+          rightWidth: newRightWidth,
+        });
+
+        prevWidthsRef.current = {
+          left: newLeftWidth,
+          right: newRightWidth,
+        };
+      }
+    },
+    [isDragging, expandedPanel],
+  );
+
+  // 사이즈 조절 시작
+  const dragResizeEnd = useCallback(() => {
     setIsDragging(false);
-  };
+  }, []);
+
+  // 섹션 확장
+  const togglePanelExpansion = useCallback((panel: 'left' | 'right') => {
+    setExpandedPanel((prev) => {
+      if (prev === panel) {
+        setPanelWidth({
+          leftWidth: prevWidthsRef.current.left,
+          rightWidth: prevWidthsRef.current.right,
+        });
+        return null;
+      }
+
+      setPanelWidth({
+        leftWidth: panel === 'left' ? 100 : 0,
+        rightWidth: panel === 'right' ? 100 : 0,
+      });
+
+      return panel;
+    });
+  }, []);
 
   return (
     <>
@@ -64,7 +106,15 @@ function CoverLetter() {
         onMouseLeave={dragResizeEnd}
       >
         <CoverLetterContainer>
-          <BookLeftPannel ref={leftPanelRef}>
+          <BookLeftPanel
+            ref={leftPanelRef}
+            $expandedState={expandedPanel}
+            style={{ width: `${panelWidth.leftWidth}%` }}
+            onDoubleClick={(e) => {
+              e.stopPropagation();
+              togglePanelExpansion('left');
+            }}
+          >
             <ErrorBoundary
               renderFallback={(error, onReset) => (
                 <CoverLetterListFallback onReset={onReset} />
@@ -74,9 +124,11 @@ function CoverLetter() {
                 <CoverLetterList />
               </Suspense>
             </ErrorBoundary>
-          </BookLeftPannel>
+          </BookLeftPanel>
+
           <BookCenter
             onMouseDown={(e) => {
+              e.preventDefault();
               e.stopPropagation();
               setIsDragging(true);
             }}
@@ -84,11 +136,19 @@ function CoverLetter() {
             <Divider />
           </BookCenter>
 
-          <BookRightPannel ref={rightPanelRef}>
+          <BookRightPanel
+            ref={rightPanelRef}
+            $expandedState={expandedPanel}
+            style={{ width: `${panelWidth.rightWidth}%` }}
+            onDoubleClick={(e) => {
+              e.stopPropagation();
+              togglePanelExpansion('right');
+            }}
+          >
             <Suspense fallback={<Spinner />}>
               <CoverLetterDetailLayout />
             </Suspense>
-          </BookRightPannel>
+          </BookRightPanel>
         </CoverLetterContainer>
       </BookContainer>
     </>
@@ -97,21 +157,29 @@ function CoverLetter() {
 
 export default CoverLetter;
 
+type PanelProps = {
+  $expandedState: 'left' | 'right' | null;
+};
+
 const BookContainer = styled.div`
   width: 100%;
   height: 100%;
 `;
 
-const BookRightPannel = styled.div`
+const BookRightPanel = styled.div<PanelProps>`
   will-change: width;
-  width: 100%;
+  overflow: hidden;
   transform: translateZ(0);
+  transition: ${(props) =>
+    (props.$expandedState === null ? 'none' : 'width 0.2s ease-in-out')};
 `;
 
-const BookLeftPannel = styled.div`
+const BookLeftPanel = styled.div<PanelProps>`
   will-change: width;
-  width: 100%;
+  overflow: hidden;
   transform: translateZ(0);
+  transition: ${(props) =>
+    (props.$expandedState === null ? 'none' : 'width 0.2s ease-in-out')};
 `;
 
 const CoverLetterContainer = styled(Container.ItemBase)`
@@ -119,16 +187,13 @@ const CoverLetterContainer = styled(Container.ItemBase)`
   width: 100%;
   color: ${(props) => props.theme.colors.text};
   height: 65rem;
-  @media screen and (max-width: ${V.mediaTablet}) {
-    ${styleMixin.Column('flex-start', 'flex-start')}
-    gap:1rem;
-  }
 `;
 
 const Divider = styled.div`
   width: 100%;
   height: 5rem;
   background-color: ${(props) => props.theme.colors.primary};
+  transition: background-color 0.2s ease;
 `;
 
 const BookCenter = styled.div`
@@ -139,6 +204,13 @@ const BookCenter = styled.div`
   max-width: 0.5rem;
   background-color: ${(props) => props.theme.colors.highlightColor};
   border-radius: 1rem;
-`;
+  transition: background-color 0.2s ease;
 
-// rgba(15, 118, 110, 0.3);
+  &:hover {
+    background-color: ${(props) => props.theme.colors.primary};
+  }
+
+  &:active {
+    background-color: ${(props) => props.theme.colors.primary};
+  }
+`;
