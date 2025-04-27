@@ -1,1 +1,1 @@
-export { default as CoverLetter } from './ui/CoverLetter';
+export { default as CoverLetterListViewer } from './ui/CoverLetterList';

@@ -31,6 +31,16 @@ export default function CoverLetterDetailLayout() {
   return <CoverLetterDetail essayId={essayId} />;
 }
 
+const CoverLetterContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  border: 1px solid ${(props) => props.theme.colors.mainLine};
+  background-color: ${(props) => props.theme.colors.primary};
+  box-shadow: ${V.boxShadow2};
+  overflow-y: auto;
+  ${styleMixin.ScrollBar};
+  padding-left: 2rem;
+`;
 const EmptyStateContainer = styled.div`
   height: 100%;
   ${styleMixin.Column()}
@@ -56,15 +66,4 @@ const EmptyStateSubMessage = styled.p`
   text-align: center;
   font-size: 1.6rem;
   color: ${(props) => props.theme.colors.emptyGray};
-`;
-
-const CoverLetterContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  border: 1px solid ${(props) => props.theme.colors.mainLine};
-  background-color: ${(props) => props.theme.colors.primary};
-  box-shadow: ${V.boxShadow2};
-  overflow-y: auto;
-  ${styleMixin.ScrollBar};
-  padding-left: 2rem;
 `;

@@ -2,22 +2,15 @@ import { styleMixin, V } from '@/src/shared/styles';
 import styled from 'styled-components';
 
 const PreviewStyle = {
-  container: styled.div`
+  baseContainer: styled.div`
     ${styleMixin.Column('flex-start', 'flex-start')}
     width: 100%;
-    max-height: 50rem;
+    height: 100%;
     background: ${(props) => props.theme.colors.primary};
-    background-color: transparent;
     border: 1px solid ${(props) => props.theme.colors.mainLine};
-    border-top-right-radius: 0.2rem;
-    border-bottom-right-radius: 0.2rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
     box-shadow: ${V.boxShadow1};
-    overflow-y: auto;
-    ${styleMixin.ScrollBar}
-
-    @media screen and (max-width: ${V.mediaMobile}) {
-      height: 30rem;
-    }
   `,
 
   emptyContainer: styled.div`
@@ -35,7 +28,7 @@ const PreviewStyle = {
     }
   `,
 
-  emptyTitle: styled.p`
+  emptyTitle: styled.h2`
     font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 0.8rem;

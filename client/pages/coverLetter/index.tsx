@@ -1,1 +1,1 @@
-export { default } from '@/src/pages/coverletter';
+export { default } from '@/src/pages/coverletter/preview';
