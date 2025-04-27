@@ -9,7 +9,7 @@ describe('NavMenuList 컴포넌트 ', () => {
   const renderNavList = (empty?:boolean) => {
     render(
       <TestProvider>
-        <NavMenuList navList={empty ? [] : sampleNavList} />
+        <NavMenuList isHome={false} navList={empty ? [] : sampleNavList} />
       </TestProvider>,
     );
   };
