@@ -8,34 +8,35 @@ const PreviewStyle = {
     height: 100%;
     background: ${(props) => props.theme.colors.primary};
     border: 1px solid ${(props) => props.theme.colors.mainLine};
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
     box-shadow: ${V.boxShadow1};
   `,
 
-  emptyContainer: styled.div`
+  emptyStateContainer: styled.div`
     ${styleMixin.Column('center', 'center')}
     width: 100%;
     height: 100%;
     padding: 2rem;
     text-align: center;
-
-    svg {
-      ${styleMixin.Flex()}
-      font-size: 7rem;
-      margin-bottom: 1.6rem;
-      color: ${(props) => props.theme.colors.emptyGray};
-    }
   `,
 
-  emptyTitle: styled.h2`
-    font-size: 1.8rem;
+  emptyStateIcon: styled.div`
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  `,
+
+  emptyStateMessage: styled.h2`
+    text-align: center;
+    font-size: 2.2rem;
     font-weight: 600;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
+    color: ${(props) => props.theme.colors.signatureColor};
   `,
 
-  emptyText: styled.p`
+  emptyStateSubMessage: styled.p`
+    text-align: center;
     font-size: 1.6rem;
+    color: ${(props) => props.theme.colors.emptyGray};
   `,
 };
 

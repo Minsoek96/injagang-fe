@@ -1,6 +1,9 @@
 import { styled } from 'styled-components';
 
-import { coverLetterQueries } from '@/src/entities/coverLetter';
+import {
+  coverLetterQueries,
+  PreviewStyle as S,
+} from '@/src/entities/coverLetter';
 
 import { styleMixin, V } from '@/src/shared/styles';
 
@@ -31,11 +34,7 @@ export default function CoverLetterDetail({ essayId }: Props) {
   );
 }
 
-const CoverLetterContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  border: 1px solid ${(props) => props.theme.colors.mainLine};
-  background-color: ${(props) => props.theme.colors.primary};
+const CoverLetterContainer = styled(S.baseContainer)`
   box-shadow: ${V.boxShadow2};
   overflow-y: auto;
   ${styleMixin.ScrollBar};

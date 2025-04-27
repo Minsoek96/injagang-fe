@@ -22,11 +22,15 @@ function CoverLetterList() {
   if (!coverLetters?.length) {
     return (
       <Cotainer>
-        <S.emptyContainer>
-          <GoFile />
-          <S.emptyTitle>작성된 자소서가 없습니다.</S.emptyTitle>
-          <S.emptyText>새로운 자기소개서를 작성해보세요</S.emptyText>
-        </S.emptyContainer>
+        <S.emptyStateContainer>
+          <S.emptyStateIcon>
+            <GoFile />
+          </S.emptyStateIcon>
+          <S.emptyStateMessage>작성된 자소서가 없습니다.</S.emptyStateMessage>
+          <S.emptyStateSubMessage>
+            새로운 자기소개서를 작성해보세요
+          </S.emptyStateSubMessage>
+        </S.emptyStateContainer>
       </Cotainer>
     );
   }
@@ -52,12 +56,7 @@ function CoverLetterList() {
 
 export default CoverLetterList;
 
-const Cotainer = styled.div`
-  ${styleMixin.Column('flex-start', 'flex-start')}
-  width: 100%;
-  height: 100%;
-  background: ${(props) => props.theme.colors.primary};
-  border: 1px solid ${(props) => props.theme.colors.mainLine};
+const Cotainer = styled(S.baseContainer)`
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
   border-left: 1.5rem solid ${(props) => props.theme.colors.signatureColor};

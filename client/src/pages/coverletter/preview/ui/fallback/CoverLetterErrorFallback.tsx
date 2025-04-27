@@ -14,11 +14,11 @@ export default function CoverLetterErrorFallback({ onReset, message }: Props) {
   const { title, subTitle } = message;
   return (
     <S.baseContainer>
-      <S.emptyContainer>
-        <S.emptyTitle>{title}</S.emptyTitle>
-        <S.emptyText>{subTitle}</S.emptyText>
+      <S.emptyStateContainer>
+        <S.emptyStateMessage>{title}</S.emptyStateMessage>
+        <S.emptyStateSubMessage>{subTitle}</S.emptyStateSubMessage>
         <MainButton label="새로고침" onClick={onReset} variant="signature" sx={{ marginTop: '1rem' }} />
-      </S.emptyContainer>
+      </S.emptyStateContainer>
     </S.baseContainer>
   );
 }
