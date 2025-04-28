@@ -1,4 +1,6 @@
-import { ComponentPropsWithRef, FormEventHandler } from 'react';
+import {
+  ComponentPropsWithRef, FormEventHandler, useEffect, useRef,
+} from 'react';
 
 import { styled } from 'styled-components';
 
@@ -17,8 +19,11 @@ export default function ResizeableTextarea({
   register,
   ...props
 }: Props) {
-  const handleInput: FormEventHandler<HTMLTextAreaElement> = (e) => {
-    const textarea = e.target as HTMLTextAreaElement;
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const adjustHeight = (element: HTMLTextAreaElement) => {
+    // lint 우회 목적
+    const textarea = element;
     const maxRemSize = maxSize * 10;
     const minRemSize = minSize * 10;
 
@@ -33,11 +38,29 @@ export default function ResizeableTextarea({
     textarea.style.overflowY = newHeight >= maxRemSize ? 'auto' : 'hidden';
   };
 
+  const handleInput: FormEventHandler<HTMLTextAreaElement> = (e) => {
+    adjustHeight(e.target as HTMLTextAreaElement);
+  };
+
+  // textarea에 기본 텍스트가 존재할 경우 초기 높이를 내용에 맞게 자동 조정
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      adjustHeight(textarea);
+    }
+  }, []);
+
+  const { ref: registerRef, ...restRegister } = register;
+
   return (
     <StyledTextarea
       $minSize={minSize}
       onInput={handleInput}
-      {...register}
+      ref={(el) => {
+        registerRef(el);
+        textareaRef.current = el;
+      }}
+      {...restRegister}
       {...props}
     />
   );
