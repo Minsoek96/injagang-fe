@@ -30,7 +30,7 @@ export default function TemplateSelector({ append, reset }: Props) {
 
   return (
     <ComboBox
-      sx={{ maxWidth: '100%', height: '4rem' }}
+      sx={{ maxWidth: '100%', height: '5rem' }}
       label="자소서 선택"
       placeholder="템플릿 선택(선택사항)"
       hideLabel

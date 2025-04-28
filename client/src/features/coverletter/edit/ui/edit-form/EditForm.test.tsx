@@ -71,7 +71,7 @@ describe('EditForm', () => {
     });
     it('답변 문항의 길이가 30 이상이면 submit이 호출된다.', async () => {
       renderCompoent();
-      const answerTextAreas = screen.getAllByPlaceholderText(/답변을 작성해주세요/);
+      const answerTextAreas = screen.getAllByPlaceholderText(/답변을 입력/);
       const repeatedString = 'a'.repeat(31);
 
       answerTextAreas.forEach((answerTextArea) => {

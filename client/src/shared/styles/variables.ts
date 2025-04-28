@@ -15,7 +15,7 @@ const V = {
   // Widths
   smWidth: '30rem',
   mdWidth: '50rem',
-  lgWidth: '80rem',
+  lgWidth: '100rem',
 
   // Item Widths
   smItemWidth: '21rem',

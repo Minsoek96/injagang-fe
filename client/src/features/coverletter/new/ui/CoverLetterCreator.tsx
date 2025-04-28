@@ -9,11 +9,10 @@ import {
 } from '@/src/entities/coverLetter';
 
 import { styleMixin, V } from '@/src/shared/styles';
-import {
-  Container,
-} from '@/src/shared/ui';
+import { Container } from '@/src/shared/ui';
 import { usePageRouter } from '@/src/shared/hooks';
 
+import CreateHeader from '@/src/features/coverletter/new/ui/header/CreateHeader';
 import CreateForm from './create-form/CreateForm';
 
 export default function CoverLetterCreator() {
@@ -37,28 +36,27 @@ export default function CoverLetterCreator() {
 
   return (
     <CoverLetterCreatorContainer>
-      <MainTitle>자기소개서 작성</MainTitle>
-      <CreateForm
-        movePage={moveCoverLetterMainPage}
-        onSubmit={onSubmit}
-      />
+      <CreateHeader title="자소설 쓰기" />
+      <CreatorContainer>
+        <CreateForm movePage={moveCoverLetterMainPage} onSubmit={onSubmit} />
+      </CreatorContainer>
     </CoverLetterCreatorContainer>
   );
 }
 
 const CoverLetterCreatorContainer = styled(Container.ItemBase)`
-  ${styleMixin.Column()}
+  ${styleMixin.Column()};
   width: 100%;
   max-width: ${V.lgWidth};
 `;
 
-const MainTitle = styled.h2`
-  ${styleMixin.Flex('flex-start', 'flex-start')}
+const CreatorContainer = styled.div`
+  ${styleMixin.Column()};
+  padding: 2rem 3rem;
   width: 100%;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 3rem;
-  text-decoration: underline;
-  text-underline-position: under;
-  text-underline-offset: 0;
+  background-color: ${(props) => props.theme.colors.primary};
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-left: 1.5rem solid ${(props) => props.theme.colors.signatureColor};
+  box-shadow: ${V.boxShadow3};
 `;

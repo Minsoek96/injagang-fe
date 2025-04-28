@@ -17,7 +17,7 @@ const defaultTheme = {
     modalBody: '#FDFDFD',
 
     dropBoxColor: '#2e2e2e',
-    red: '#ff4d4f;',
+    red: '#ef4444',
     boardText: '#0f1419',
 
     highlight: '#145853ec', // 인터뷰 마커
