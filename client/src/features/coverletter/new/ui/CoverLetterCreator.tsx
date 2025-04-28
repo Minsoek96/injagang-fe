@@ -7,6 +7,7 @@ import {
   coverLetterType,
   CoverLetterHeader,
   useTempStore,
+  FormStyle as S,
 } from '@/src/entities/coverLetter';
 
 import { styleMixin, V } from '@/src/shared/styles';
@@ -37,9 +38,9 @@ export default function CoverLetterCreator() {
   return (
     <CoverLetterCreatorContainer>
       <CoverLetterHeader title="자소설 쓰기" />
-      <CreatorContainer>
+      <S.formContainer>
         <CreateForm movePage={moveCoverLetterMainPage} onSubmit={onSubmit} />
-      </CreatorContainer>
+      </S.formContainer>
     </CoverLetterCreatorContainer>
   );
 }
@@ -48,15 +49,4 @@ const CoverLetterCreatorContainer = styled(Container.ItemBase)`
   ${styleMixin.Column()};
   width: 100%;
   max-width: ${V.lgWidth};
-`;
-
-const CreatorContainer = styled.div`
-  ${styleMixin.Column()};
-  padding: 2rem 3rem;
-  width: 100%;
-  background-color: ${(props) => props.theme.colors.primary};
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-  border-left: 1.5rem solid ${(props) => props.theme.colors.signatureColor};
-  box-shadow: ${V.boxShadow3};
 `;

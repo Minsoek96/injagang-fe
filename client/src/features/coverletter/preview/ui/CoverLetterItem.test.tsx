@@ -1,16 +1,11 @@
 import { useRouter } from 'next/router';
 
 import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
+  fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
 import { responseCoverLetters } from '@/fixutures/entities/coverLetter';
-
-import { defaultTheme } from '@/src/app/styles';
 
 import {
   coverLetterType,
@@ -30,6 +25,7 @@ const context = describe;
 describe('CoverLetterItem', () => {
   const coverLetterItem = responseCoverLetters[0];
   const diffCoveLetterItem = responseCoverLetters[1];
+  const mockDelete = jest.fn();
 
   const renderComponent = (
     item: coverLetterType.ICoverLetters,
@@ -37,42 +33,47 @@ describe('CoverLetterItem', () => {
   ) => {
     render(
       <TestProvider>
-        <CoverLetterItem item={item} selectedCoverLetter={selectedItem} />
+        <CoverLetterItem item={item} selectedCoverLetter={selectedItem} onDelete={mockDelete} />
       </TestProvider>,
     );
   };
 
   context('유저가 선택한 자소서 아이템이 렌더링 되는 경우', () => {
-    it('하이라이트 효과가 발생한다.', () => {
+    it('하이라이트 효과가 발생한다.', async () => {
       renderComponent(coverLetterItem, coverLetterItem);
       const searchItem = screen.getByText(coverLetterItem.title);
+      fireEvent.click(searchItem);
       const container = searchItem.closest('li');
-
+      await waitFor(() => {
+        expect(container).toHaveStyle('background-color: rgba(15, 118, 110, 0.165)');
+      });
       expect(searchItem).toBeInTheDocument();
-      expect(container).toHaveStyle(`background: ${defaultTheme.colors.signatureColor}4A`);
     });
 
-    it('자소서 상세보기 아이콘버튼이 렌더링된다.', () => {
+    it('자소서 편집 버튼이 렌더링된다.', () => {
       renderComponent(coverLetterItem, coverLetterItem);
-      const detailButton = screen.getByRole('button');
+      const editButton = screen.getByRole('button', { name: /편집/ });
+      const removeButton = screen.getByRole('button', { name: /삭제/ });
 
-      expect(detailButton).toBeInTheDocument();
+      expect(editButton).toBeInTheDocument();
+      expect(removeButton).toBeInTheDocument();
     });
   });
 
   context('선택되지 않은 자소서 아이템이 렌더링 되는 경우', () => {
-    it('상세보기 아이콘버튼이 렌더링되지 않는다.', () => {
+    it('버튼그룹이 비활성화 된다.', () => {
       renderComponent(coverLetterItem, diffCoveLetterItem);
-      const detailButton = screen.queryByRole('button');
+      const editButton = screen.getByRole('button', { name: /편집/ });
+      const removeButton = screen.getByRole('button', { name: /삭제/ });
 
-      expect(detailButton).not.toBeInTheDocument();
+      expect(editButton).toBeDisabled();
+      expect(removeButton).toBeDisabled();
     });
 
     it('폰트 컬러가 그레이 계열의 색상으로 렌더링 된다.', () => {
       renderComponent(coverLetterItem, diffCoveLetterItem);
       const searchItem = screen.getByText(coverLetterItem.title);
       const container = searchItem.closest('li');
-
       expect(searchItem).toBeInTheDocument();
       expect(container).toHaveStyle('color:#666666');
     });
@@ -92,12 +93,12 @@ describe('CoverLetterItem', () => {
     });
   });
 
-  context('상세보기를 클릭하는 경우', () => {
+  context('편집 버튼을 클릭하는 경우', () => {
     it('편집 페이지로 이동한다..', () => {
       const { push } = useRouter();
       renderComponent(coverLetterItem, coverLetterItem);
-      const editItem = screen.getByRole('button');
-      fireEvent.click(editItem);
+      const editButton = screen.getByRole('button', { name: /편집/ });
+      fireEvent.click(editButton);
       expect(push).toHaveBeenCalledWith({
         pathname: '/coverLetter/10000/edit',
       });

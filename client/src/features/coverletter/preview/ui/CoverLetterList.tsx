@@ -7,6 +7,7 @@ import {
   useCoverLetterStore,
   coverLetterQueries,
   PreviewStyle as S,
+  coverLetterMutation,
 } from '@/src/entities/coverLetter';
 
 import CoverLetterItem from './CoverLetterItem';
@@ -17,6 +18,7 @@ import CoverLetterItem from './CoverLetterItem';
  */
 function CoverLetterList() {
   const { data: coverLetters } = coverLetterQueries.useFetchCoverLetter();
+  const { mutate: removeCoverLetter } = coverLetterMutation.useDeleteCoverLetter();
   const { selectedCoverLetter } = useCoverLetterStore();
 
   if (!coverLetters?.length) {
@@ -47,6 +49,7 @@ function CoverLetterList() {
             key={item.essayId}
             item={item}
             selectedCoverLetter={selectedCoverLetter}
+            onDelete={removeCoverLetter}
           />
         ))}
       </ListContent>

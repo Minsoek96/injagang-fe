@@ -7,7 +7,8 @@ const FormStyle = {
     ${styleMixin.Column()};
     padding: 2rem 3rem;
     width: 100%;
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.secondary};
+    border: 1px solid ${(props) => props.theme.colors.mainLine};
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     border-left: 1.5rem solid ${(props) => props.theme.colors.signatureColor};

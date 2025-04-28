@@ -85,7 +85,7 @@ const Container = styled.div`
   width: 100%;
   padding: 2.4rem 2rem;
   margin: 2rem 0;
-  background: ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.secondary};
   border: 1px solid ${(props) => props.theme.colors.mainLine};
   border-radius: 16px;
   border-left: 4px solid ${(props) => props.theme.colors.signatureColor};

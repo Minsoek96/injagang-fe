@@ -41,12 +41,18 @@ function CoverLetterPage() {
                       onReset={onReset}
                       message={{
                         title: '앗! 자소설 조회에 실패했어요.😅',
-                        subTitle: '일시적인 오류일 수 있으니 다시 시도해 주세요',
+                        subTitle:
+                          '일시적인 오류일 수 있으니 다시 시도해 주세요',
                       }}
                     />
                   )}
                 >
-                  <Suspense fallback={<Spinner message="당신의 자소설을 가져오는 중 입니다." />}>
+                  <Suspense
+                    fallback={
+                      <Spinner message="당신의 자소설을 가져오는 중 입니다." />
+                    }
+                  >
+                    {/* 메인 컴포넌트 */}
                     <CoverLetterListViewer />
                   </Suspense>
                 </ErrorBoundary>
@@ -61,12 +67,18 @@ function CoverLetterPage() {
                       onReset={onReset}
                       message={{
                         title: '앗! 당신의 인생의 페이지 조회에 실패했어요.😅',
-                        subTitle: '일시적인 오류일 수 있으니 다시 시도해 주세요',
+                        subTitle:
+                          '일시적인 오류일 수 있으니 다시 시도해 주세요',
                       }}
                     />
                   )}
                 >
-                  <Suspense fallback={<Spinner message="당신의 페이지를 가져오는 중 입니다." />}>
+                  <Suspense
+                    fallback={
+                      <Spinner message="당신의 페이지를 가져오는 중 입니다." />
+                    }
+                  >
+                    {/* 메인 컴포넌트 */}
                     <CoverLetterDetailLayout />
                   </Suspense>
                 </ErrorBoundary>

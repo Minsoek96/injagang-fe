@@ -18,7 +18,6 @@ import { useModal } from '@/src/shared/hooks';
 
 type Props = {
   onSubmit: (data: coverLetterType.ICoverLetter) => void;
-  onDelete: () => void;
   movePage: () => void;
   coverLetters: coverLetterType.ICoverLetterDetail | undefined;
 };
@@ -34,12 +33,7 @@ type Props = {
  * @param templateList - 템플릿 리스트
  */
 
-export default function EditForm({
-  movePage,
-  onSubmit,
-  onDelete,
-  coverLetters,
-}: Props) {
+export default function EditForm({ movePage, onSubmit, coverLetters }: Props) {
   const { setModal } = useModal();
   const {
     register,
@@ -128,13 +122,6 @@ export default function EditForm({
             label="뒤로가기"
             variant="signature"
             onClick={movePage}
-          />
-          <MainButton
-            type="button"
-            label="삭제하기"
-            variant="signature"
-            sx={{ fontSize: '1.7rem' }}
-            onClick={onDelete}
           />
           <MainButton type="submit" label="수정완료" variant="signature" />
         </S.controllerWrapper>

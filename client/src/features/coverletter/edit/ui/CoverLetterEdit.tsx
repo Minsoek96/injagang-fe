@@ -22,7 +22,7 @@ export default function CoverLetterCreator() {
   const router = useRouter();
   const { id } = router.query;
   const { moveCoverLetterMainPage } = usePageRouter();
-  const { changeCoverLetter, deleteCoverLetter } = useCoverLetterManager();
+  const { changeCoverLetter } = useCoverLetterManager();
   const { data: coverLetter } = coverLetterQueries.useFetchDetailCoverLetter(
     Number(id),
   );
@@ -41,7 +41,6 @@ export default function CoverLetterCreator() {
           movePage={moveCoverLetterMainPage}
           onSubmit={onSubmit}
           coverLetters={coverLetter}
-          onDelete={() => deleteCoverLetter(Number(id))}
         />
       </S.formContainer>
     </CoverLetterCreatorContainer>

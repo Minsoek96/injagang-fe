@@ -1,9 +1,11 @@
 import Theme from './theme';
 
+// TODO : 다크 모드 관련 디자인 색상이 가독성 떨어짐 개선 필요
 const darkTheme: Theme = {
   colors: {
     bodyColor: 'RGB(24, 25, 26)',
     primary: '#242526',
+    secondary: 'transparent',
     signatureColor: '#ff8800',
     button: '#444',
     logo: '#ffffff',

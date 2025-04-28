@@ -1,7 +1,9 @@
+// TODO : 중복되는 색상 너무 많음 한번 정리하기
 const defaultTheme = {
   colors: {
     bodyColor: '#F0F2F5',
     primary: '#FDFDFD',
+    secondary: '#FDFDFD',
     signatureColor: '#0F766E',
     button: '#FDFDFD',
     logo: '#000000',

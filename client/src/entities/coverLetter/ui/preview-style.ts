@@ -6,7 +6,7 @@ const PreviewStyle = {
     ${styleMixin.Column('flex-start', 'flex-start')}
     width: 100%;
     height: 100%;
-    background: ${(props) => props.theme.colors.primary};
+    background: ${(props) => props.theme.colors.secondary};
     border: 1px solid ${(props) => props.theme.colors.mainLine};
     box-shadow: ${V.boxShadow1};
   `,
