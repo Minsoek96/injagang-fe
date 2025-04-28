@@ -54,7 +54,8 @@ export default function CoverLetterItem<
           register={register(`qnaList.${index}.question` as Path<T>)}
           placeholder="질문을 입력해주세요."
           maxSize={10}
-          style={{ resize: 'vertical', minHeight: '5.5rem' }}
+          minSize={5.5}
+          style={{ resize: 'vertical' }}
         />
       </FormGroup>
 
@@ -63,8 +64,9 @@ export default function CoverLetterItem<
         <UnResizeableTextarea
           register={register(`qnaList.${index}.answer` as Path<T>)}
           placeholder="답변을 입력해주세요."
-          maxSize={30}
-          style={{ minHeight: '15rem', resize: 'vertical' }}
+          maxSize={80}
+          minSize={15}
+          style={{ resize: 'vertical' }}
         />
         <LenCount $isShort={watchedValue.length < 30}>
           {watchedValue.length}
@@ -137,9 +139,7 @@ const LenCount = styled.div<{ $isShort: boolean }>`
   ${styleMixin.Flex('flex-end', 'center')};
   font-size: 1.2rem;
   color: ${(props) =>
-    (props.$isShort
-      ? props.theme.colors.red
-      : props.theme.colors.text)};
+    (props.$isShort ? props.theme.colors.red : props.theme.colors.text)};
   margin-top: 0.5rem;
 `;
 

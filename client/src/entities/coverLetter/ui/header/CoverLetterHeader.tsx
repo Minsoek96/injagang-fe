@@ -9,7 +9,7 @@ type Props ={
     title: string;
 }
 
-export default function CreateHeader({ title }: Props) {
+export default function CoverLetterHeader({ title }: Props) {
   const { moveCoverLetterMainPage } = usePageRouter();
   return (
     <HeaderWrapper>

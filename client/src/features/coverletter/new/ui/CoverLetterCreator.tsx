@@ -5,6 +5,7 @@ import { SubmitHandler } from 'react-hook-form';
 import {
   coverLetterMutation,
   coverLetterType,
+  CoverLetterHeader,
   useTempStore,
 } from '@/src/entities/coverLetter';
 
@@ -12,7 +13,6 @@ import { styleMixin, V } from '@/src/shared/styles';
 import { Container } from '@/src/shared/ui';
 import { usePageRouter } from '@/src/shared/hooks';
 
-import CreateHeader from '@/src/features/coverletter/new/ui/header/CreateHeader';
 import CreateForm from './create-form/CreateForm';
 
 export default function CoverLetterCreator() {
@@ -36,7 +36,7 @@ export default function CoverLetterCreator() {
 
   return (
     <CoverLetterCreatorContainer>
-      <CreateHeader title="자소설 쓰기" />
+      <CoverLetterHeader title="자소설 쓰기" />
       <CreatorContainer>
         <CreateForm movePage={moveCoverLetterMainPage} onSubmit={onSubmit} />
       </CreatorContainer>

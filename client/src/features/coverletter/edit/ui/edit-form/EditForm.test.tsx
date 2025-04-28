@@ -51,7 +51,7 @@ describe('EditForm', () => {
       const deleteButton = screen.getByText('삭제하기');
       const backButton = screen.getByText('뒤로가기');
       const reviseButton = screen.getByText('수정완료');
-      const addButton = screen.getByText('리스트 추가');
+      const addButton = screen.getByText('문항 추가하기');
       expect(deleteButton).toBeInTheDocument();
       expect(backButton).toBeInTheDocument();
       expect(reviseButton).toBeInTheDocument();

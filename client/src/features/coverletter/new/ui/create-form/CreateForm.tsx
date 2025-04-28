@@ -7,10 +7,11 @@ import {
   CoverLetterItem,
   coverLetterModel,
   coverLetterType,
+  FormStyle as S,
 } from '@/src/entities/coverLetter';
 
 import { MainButton, UnInput, ErrorBoundary } from '@/src/shared/ui';
-import { styleMixin, V } from '@/src/shared/styles';
+import { V } from '@/src/shared/styles';
 import { getFirstErrorMessage } from '@/src/shared/utils/check/getFirstErrorMessage';
 import { useModal } from '@/src/shared/hooks';
 
@@ -79,26 +80,26 @@ export default function CreateForm({ movePage, onSubmit }: Props) {
 
   return (
     <>
-      <FormHeader>
-        <CoverLetterTitle>자소설 제목</CoverLetterTitle>
+      <S.formHeader>
+        <S.coverletterTitle>자소설 제목</S.coverletterTitle>
         <FormSubtitle>
           인생의
           <span>새로운 챕터</span>
           를 시작하세요
         </FormSubtitle>
-      </FormHeader>
+      </S.formHeader>
 
-      <CoverLetterForm onSubmit={handleSubmit(onSubmit, onError)}>
-        <TitleInputWrapper>
+      <S.coverletterForm onSubmit={handleSubmit(onSubmit, onError)}>
+        <S.titleInputWrapper>
           <UnInput
             register={register('title')}
             placeholder="자기소개서 제목을 입력해주세요."
             style={{ width: '100%', marginBottom: '1.5rem', height: '5rem' }}
           />
-        </TitleInputWrapper>
+        </S.titleInputWrapper>
 
         <TemplateSection>
-          <SectionTitle>템플릿 선택</SectionTitle>
+          <S.sectionTitle>템플릿 선택</S.sectionTitle>
           <ErrorBoundary
             renderFallback={(error, onReset) => (
               <TemplateSelectorFallback onReset={onReset} />
@@ -140,7 +141,7 @@ export default function CreateForm({ movePage, onSubmit }: Props) {
           />
         </QuestionsSection>
 
-        <ControllerWrapper>
+        <S.controllerWrapper>
           <MainButton
             type="submit"
             label="뒤로가기"
@@ -148,17 +149,11 @@ export default function CreateForm({ movePage, onSubmit }: Props) {
             onClick={movePage}
           />
           <MainButton type="submit" label="작성완료" variant="signature" />
-        </ControllerWrapper>
-      </CoverLetterForm>
+        </S.controllerWrapper>
+      </S.coverletterForm>
     </>
   );
 }
-
-const FormHeader = styled.div`
-  text-align: start;
-  width: 100%;
-  margin-bottom: 2.5rem;
-`;
 
 const FormSubtitle = styled.p`
   font-size: 1.4rem;
@@ -169,41 +164,6 @@ const FormSubtitle = styled.p`
   span {
     font-family: ${V.serif};
     border-bottom: 2.5px solid ${(props) => props.theme.colors.signatureColor};
-  }
-`;
-
-const CoverLetterForm = styled.form`
-  ${styleMixin.Column()}
-  width: 100%;
-  gap: 2.5rem;
-`;
-
-const CoverLetterTitle = styled.h2`
-  font-family: ${V.serif};
-  font-weight: 600;
-  color: ${(props) => props.theme.colors.signatureColor};
-  font-size: 2.8rem;
-  margin-bottom: 0.8rem;
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    font-size: 2.4rem;
-  }
-`;
-
-const TitleInputWrapper = styled.div`
-  width: 100%;
-
-  input {
-    border-radius: 8px;
-    font-size: 1.6rem;
-    padding: 1.5rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-
-    &:focus {
-      border-color: ${(props) => props.theme.colors.signatureColor};
-      box-shadow: 0 0 0 3px
-        ${(props) => `${props.theme.colors.signatureColor}20`};
-    }
   }
 `;
 
@@ -230,22 +190,4 @@ const QuestionList = styled.div`
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 2rem;
-`;
-
-const ControllerWrapper = styled.div`
-  margin-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-
-  button {
-    font-size: 1.8rem;
-    padding: 1.2rem 2.5rem;
-    border-radius: 8px;
-
-    @media screen and (max-width: ${V.mediaMobile}) {
-      font-size: 1.6rem;
-      padding: 1rem 1.8rem;
-    }
-  }
 `;

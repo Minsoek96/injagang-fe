@@ -1,5 +1,3 @@
-import { styled } from 'styled-components';
-
 import { v4 as uuid4 } from 'uuid';
 
 import { useFieldArray, useForm } from 'react-hook-form';
@@ -11,10 +9,10 @@ import {
   CoverLetterItem,
   coverLetterModel,
   coverLetterType,
+  FormStyle as S,
 } from '@/src/entities/coverLetter';
 
-import { HideSvg, MainButton, UnInput } from '@/src/shared/ui';
-import { styleMixin, V } from '@/src/shared/styles';
+import { MainButton, UnInput } from '@/src/shared/ui';
 import { getFirstErrorMessage } from '@/src/shared/utils/check/getFirstErrorMessage';
 import { useModal } from '@/src/shared/hooks';
 
@@ -87,63 +85,60 @@ export default function EditForm({
   };
 
   return (
-    <CoverLetterForm onSubmit={handleSubmit(onSubmit, onError)}>
-      <UnInput
-        register={register('title')}
-        placeholder="자소서제목"
-        style={{ width: '100%', marginBottom: '1.5rem' }}
-      />
-      {fields.map((field, index) => (
-        <CoverLetterItem
-          key={field.id}
-          register={register}
-          index={index}
-          remove={onRemove}
-          control={control}
-        />
-      ))}
-      <HideSvg
-        label="리스트 추가"
-        onClick={addQustion}
-        Logo={<BiPlus />}
-        sx={{ fontSize: '3.5rem', margin: '1rem' }}
-      />
-      <ControllerBtns>
+    <>
+      <S.formHeader>
+        <S.coverletterTitle>자소설 수정</S.coverletterTitle>
+      </S.formHeader>
+      <S.coverletterForm onSubmit={handleSubmit(onSubmit, onError)}>
+        <S.titleInputWrapper>
+          <UnInput
+            register={register('title')}
+            placeholder="자소서제목"
+            style={{ width: '100%' }}
+          />
+        </S.titleInputWrapper>
+
+        {fields.map((field, index) => (
+          <CoverLetterItem
+            key={field.id}
+            register={register}
+            index={index}
+            remove={onRemove}
+            control={control}
+          />
+        ))}
         <MainButton
-          type="button"
-          label="뒤로가기"
-          variant="signature"
-          onClick={movePage}
+          label={(
+            <>
+              <BiPlus size={24} />
+              <span>문항 추가하기</span>
+            </>
+          )}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            addQustion();
+          }}
+          variant="dashed"
+          sx={{ width: '100%' }}
         />
-        <MainButton
-          type="button"
-          label="삭제하기"
-          variant="signature"
-          sx={{ fontSize: '1.7rem' }}
-          onClick={onDelete}
-        />
-        <MainButton type="submit" label="수정완료" variant="signature" />
-      </ControllerBtns>
-    </CoverLetterForm>
+        <S.controllerWrapper>
+          <MainButton
+            type="button"
+            label="뒤로가기"
+            variant="signature"
+            onClick={movePage}
+          />
+          <MainButton
+            type="button"
+            label="삭제하기"
+            variant="signature"
+            sx={{ fontSize: '1.7rem' }}
+            onClick={onDelete}
+          />
+          <MainButton type="submit" label="수정완료" variant="signature" />
+        </S.controllerWrapper>
+      </S.coverletterForm>
+    </>
   );
 }
-
-const CoverLetterForm = styled.form`
-  ${styleMixin.Column()}
-  width: 100%;
-`;
-
-const ControllerBtns = styled.div`
-  margin-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-
-  button {
-    font-size: 1.8rem;
-
-    @media screen and (max-width: ${V.mediaMobile}) {
-      font-size: 1.6rem;
-    }
-  }
-`;
