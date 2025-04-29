@@ -33,6 +33,7 @@ function CoverLetterPage() {
         <>
           <Header title={headerTitle} />
           <ResizableSplitPanel>
+            <ResizableSplitPanel.ExpanderButton />
             <CoverLetterContainer>
               <ResizableSplitPanel.LeftPanel>
                 <ErrorBoundary

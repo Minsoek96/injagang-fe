@@ -1,10 +1,17 @@
 import React, {
-  createContext, ReactNode, useCallback, useContext,
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
 } from 'react';
 
 import { styled } from 'styled-components';
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
+import {
+  LiaAngleDoubleLeftSolid,
+  LiaAngleDoubleRightSolid,
+} from 'react-icons/lia';
 import useResizablePanel from '../model/useResizablePanel';
 
 type ContextType = ReturnType<typeof useResizablePanel>;
@@ -34,9 +41,7 @@ type Props = {
  */
 function ResizableSplitPanel({ children }: Props) {
   const resizeablePanelProps = useResizablePanel();
-  const {
-    panelRefs, dragResizeEnd, dragResizePanel,
-  } = resizeablePanelProps;
+  const { panelRefs, dragResizeEnd, dragResizePanel } = resizeablePanelProps;
   return (
     <ResizeablePanelContext.Provider value={resizeablePanelProps}>
       <BookContainer
@@ -56,6 +61,45 @@ function ResizableSplitPanel({ children }: Props) {
 type PanelProps = {
   children: ReactNode;
 };
+
+function PanelExpander() {
+  const { togglePanelExpansion, expandedPanel } = useResizablePanelContext();
+
+  const handleLeftClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      togglePanelExpansion('left');
+    },
+    [togglePanelExpansion],
+  );
+
+  const handleRightClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      togglePanelExpansion('right');
+    },
+    [togglePanelExpansion],
+  );
+
+  return (
+    <ButtonGroup>
+      <CircleWrapper
+        onClick={handleLeftClick}
+        role="button"
+        $isActive={expandedPanel === 'left'}
+      >
+        <LiaAngleDoubleLeftSolid />
+      </CircleWrapper>
+      <CircleWrapper
+        onClick={handleRightClick}
+        role="button"
+        $isActive={expandedPanel === 'right'}
+      >
+        <LiaAngleDoubleRightSolid />
+      </CircleWrapper>
+    </ButtonGroup>
+  );
+}
 
 function LeftPanel({ children }: PanelProps) {
   const {
@@ -94,7 +138,7 @@ function RightPanel({ children }: PanelProps) {
   return (
     <BookRightPanel
       ref={(el) => {
-        panelRefs.current.left = el;
+        panelRefs.current.right = el;
       }}
       style={{ width: `${panelWidth.rightWidth}%` }}
       onDoubleClick={panelDubleClick}
@@ -166,8 +210,45 @@ const BookCenter = styled.div`
   }
 `;
 
+const ButtonGroup = styled.div`
+  ${styleMixin.Flex()};
+  gap: 3rem;
+  margin-bottom: 2rem;
+`;
+
+const CircleWrapper = styled.div<{ $isActive: boolean }>`
+  ${styleMixin.Flex()};
+  border-radius: 50%;
+  background-color: ${({ theme, $isActive }) =>
+    ($isActive
+      ? theme.colors.signatureColor
+      : `${theme.colors.signatureColor}5A`)};
+  padding: 0.4rem;
+  box-shadow: ${V.boxShadow2};
+  transition: 0.5s all ease-in;
+  cursor: pointer;
+
+  svg {
+    font-size: 3rem;
+    color: white;
+  }
+
+  &:hover {
+    background-color: ${(props) => `${props.theme.colors.signatureColor}`};
+  }
+
+  &:first-child:hover {
+    transform: translateX(-10px);
+  }
+
+  &:nth-child(2):hover {
+    transform: translateX(10px);
+  }
+`;
+
 ResizableSplitPanel.LeftPanel = LeftPanel;
 ResizableSplitPanel.RightPanel = RightPanel;
 ResizableSplitPanel.Center = Center;
+ResizableSplitPanel.ExpanderButton = PanelExpander;
 
 export default ResizableSplitPanel;
