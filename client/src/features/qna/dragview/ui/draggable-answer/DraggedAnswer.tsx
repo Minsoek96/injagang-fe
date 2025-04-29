@@ -28,7 +28,7 @@ function DraggedAnswer({
   return (
     <Wrapper onClick={handleRemoveCorrection}>
       {startText}
-      <SeletedTextWrapper>{selectedText}</SeletedTextWrapper>
+      <SelectedTextWrapper>{selectedText}</SelectedTextWrapper>
       {endText}
     </Wrapper>
   );
@@ -38,11 +38,11 @@ export default DraggedAnswer;
 
 const Wrapper = styled.p``;
 
-const SeletedTextWrapper = styled.span`
+const SelectedTextWrapper = styled.span`
   padding-bottom: 0.3em;
   padding-inline: 0.3em;
-  background-color: ${(props) => props.theme.colors.highlightColor};
+  background-color: ${(props) => props.theme.colors.marker};
   opacity: 0.8;
-  color: black !important;
+  color: ${(props) => props.theme.colors.markerText} !important;
   border-radius: 0.5rem;
 `;

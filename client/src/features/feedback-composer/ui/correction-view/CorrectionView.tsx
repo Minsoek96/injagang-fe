@@ -12,9 +12,9 @@ function CorrectionView({ targetAnswer }: CorrectionViewProps) {
       <CorrectionTitle>
         현재 선택된 문장 :
         {' '}
-        {!targetAnswer && emptyMessage }
+        {!targetAnswer && emptyMessage}
       </CorrectionTitle>
-      <Sentenc>{targetAnswer}</Sentenc>
+      <Sentenc $isActive={!!targetAnswer.length}>{targetAnswer}</Sentenc>
     </CorrectionContainer>
   );
 }
@@ -31,9 +31,14 @@ const CorrectionTitle = styled.span`
   text-align: left;
 `;
 
-const Sentenc = styled.p`
-  padding: 0.2em;
+const Sentenc = styled.p<{ $isActive: boolean }>`
   margin-top: 1rem;
-  word-break: break-all;
+  padding: 0.4rem 1.2rem;
+  color: ${(props) => props.theme.colors.boardText};
+  border: ${({ theme, $isActive }) =>
+    ($isActive ? `2px dashed ${theme.colors.highlightLine}` : 'none')};
   line-height: 1.8;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;

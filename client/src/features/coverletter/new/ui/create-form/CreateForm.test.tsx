@@ -64,14 +64,14 @@ describe('CreateForm', () => {
   context('렌더링 테스트', () => {
     it('대표 자소서 입력란이 렌더링된다.', () => {
       renderCompoent();
-      expect(screen.getByPlaceholderText('자소서제목')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText(/자기소개서 제목/)).toBeInTheDocument();
     });
 
     it('각 버튼이 렌더링된다.', () => {
       renderCompoent();
       const backButton = screen.getByText('뒤로가기');
       const reviseButton = screen.getByText('작성완료');
-      const addButton = screen.getByText('리스트 추가');
+      const addButton = screen.getByText(/문항 추가/);
       expect(backButton).toBeInTheDocument();
       expect(reviseButton).toBeInTheDocument();
       expect(addButton).toBeInTheDocument();

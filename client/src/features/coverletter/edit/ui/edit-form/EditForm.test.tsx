@@ -11,7 +11,6 @@ const context = describe;
 // TODO : 테스트코드 수정하기
 describe('EditForm', () => {
   const mockSubmit = jest.fn();
-  const mockDelete = jest.fn();
   const mockMove = jest.fn();
 
   const renderCompoent = () => {
@@ -19,7 +18,6 @@ describe('EditForm', () => {
       <TestProvider>
         <EditForm
           onSubmit={mockSubmit}
-          onDelete={mockDelete}
           movePage={mockMove}
           coverLetters={responseDetailCoverLetter}
         />
@@ -48,11 +46,9 @@ describe('EditForm', () => {
 
     it('각 버튼이 렌더링된다.', () => {
       renderCompoent();
-      const deleteButton = screen.getByText('삭제하기');
       const backButton = screen.getByText('뒤로가기');
       const reviseButton = screen.getByText('수정완료');
-      const addButton = screen.getByText('리스트 추가');
-      expect(deleteButton).toBeInTheDocument();
+      const addButton = screen.getByText('문항 추가하기');
       expect(backButton).toBeInTheDocument();
       expect(reviseButton).toBeInTheDocument();
       expect(addButton).toBeInTheDocument();
@@ -71,7 +67,7 @@ describe('EditForm', () => {
     });
     it('답변 문항의 길이가 30 이상이면 submit이 호출된다.', async () => {
       renderCompoent();
-      const answerTextAreas = screen.getAllByPlaceholderText(/답변을 작성해주세요/);
+      const answerTextAreas = screen.getAllByPlaceholderText(/답변을 입력/);
       const repeatedString = 'a'.repeat(31);
 
       answerTextAreas.forEach((answerTextArea) => {
@@ -88,13 +84,6 @@ describe('EditForm', () => {
   });
 
   context('버튼 테스트', () => {
-    it('삭제완료 버튼을 클릭하면 mockDelete가 호출된다.', () => {
-      renderCompoent();
-      const deleteButton = screen.getByText('삭제하기');
-      fireEvent.click(deleteButton);
-      expect(mockDelete).toHaveBeenCalled();
-    });
-
     it('뒤로가기 버튼을 클릭하면 mockMove가 호출된다.', () => {
       renderCompoent();
       const moveButton = screen.getByText('뒤로가기');

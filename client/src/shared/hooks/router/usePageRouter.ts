@@ -19,6 +19,12 @@ export default function usePageRouter() {
     });
   }, []);
 
+  const moveCoverLetterCreatePage = useCallback(() => {
+    router.push({
+      pathname: '/coverLetter/new',
+    });
+  }, []);
+
   /** 게시판 상세 페이지 */
   const moveBoardDetailPage = useCallback((boardId: number) => {
     router.replace(`/qna/detail/${boardId}`);
@@ -43,6 +49,7 @@ export default function usePageRouter() {
   }, []);
 
   return {
+    moveCoverLetterCreatePage,
     moveCoverLetterEditPage,
     moveCoverLetterMainPage,
     moveBoardEditPage,

@@ -31,7 +31,7 @@ const InputFieldStyle = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  color: #333333;
+  color:  ${(props) => props.theme.colors.lightText};
   margin-bottom: 1rem;
 `;
 
@@ -43,7 +43,7 @@ const Label = styled.label`
 const Input = styled.input`
   height: 3.5rem;
   padding: 0 1rem;
-  border: 1px solid #f0f0f0;
+  border: 1.6px solid ${(props) => props.theme.colors.mainLine};
   border-radius: 0.5rem;
   transition: all 0.2s ease;
 

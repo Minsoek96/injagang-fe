@@ -2,46 +2,41 @@ import { styleMixin, V } from '@/src/shared/styles';
 import styled from 'styled-components';
 
 const PreviewStyle = {
-  container: styled.div`
+  baseContainer: styled.div`
     ${styleMixin.Column('flex-start', 'flex-start')}
     width: 100%;
-    max-height: 50rem;
-    background: ${(props) => props.theme.colors.primary};
-    background-color: transparent;
+    height: 100%;
+    background: ${(props) => props.theme.colors.secondary};
     border: 1px solid ${(props) => props.theme.colors.mainLine};
-    border-radius: 1.2rem;
     box-shadow: ${V.boxShadow1};
-    overflow-y: auto;
-    ${styleMixin.ScrollBar}
-
-    @media screen and (max-width: ${V.mediaMobile}) {
-      height: 30rem;
-    }
   `,
 
-  emptyContainer: styled.div`
+  emptyStateContainer: styled.div`
     ${styleMixin.Column('center', 'center')}
     width: 100%;
     height: 100%;
     padding: 2rem;
     text-align: center;
-
-    svg {
-      ${styleMixin.Flex()}
-      font-size: 7rem;
-      margin-bottom: 1.6rem;
-      color: ${(props) => props.theme.colors.emptyGray};
-    }
   `,
 
-  emptyTitle: styled.p`
-    font-size: 1.8rem;
+  emptyStateIcon: styled.div`
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  `,
+
+  emptyStateMessage: styled.h2`
+    text-align: center;
+    font-size: 2.2rem;
     font-weight: 600;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
+    color: ${(props) => props.theme.colors.signatureColor};
   `,
 
-  emptyText: styled.p`
+  emptyStateSubMessage: styled.p`
+    text-align: center;
     font-size: 1.6rem;
+    color: ${(props) => props.theme.colors.emptyGray};
   `,
 };
 

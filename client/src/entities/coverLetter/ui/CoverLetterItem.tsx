@@ -1,15 +1,17 @@
 import { styled } from 'styled-components';
-
 import {
-  Control, Path, PathValue, UseFormRegister, useWatch,
+  Control,
+  Path,
+  PathValue,
+  UseFormRegister,
+  useWatch,
 } from 'react-hook-form';
-
 import { BiX } from 'react-icons/bi';
 
 import { coverLetterType } from '@/src/entities/coverLetter';
-
 import { HideSvg } from '@/src/shared/ui';
 import { UnResizeableTextarea } from '@/src/shared/ui/uncontrolled';
+import { styleMixin, V } from '@/src/shared/styles';
 
 type Props<T extends coverLetterType.IWriteCoverLetter> = {
   register: UseFormRegister<T>;
@@ -18,25 +20,10 @@ type Props<T extends coverLetterType.IWriteCoverLetter> = {
   remove: (index: number) => void;
 };
 
-/**
- * CoverLetterItem는 자기소개서 항목을 생성하는 UI를 구성합니다.
- *
- * 이 컴포넌트는 다음 기능을 제공합니다:
- * - 질문과 답변을 입력하는 텍스트 영역
- * - 질문 및 답변의 글자 수 표시
- * - 항목 삭제 기능
- *
- * @param index - 현재 항목의 인덱스
- * @param register - react-hook-form의 register 함수
- * @param control - react-hook-form의 control 객체
- * @param remove - 항목을 삭제하는 함수
- */
-
-export default function CoverLetterItem<T extends coverLetterType.IWriteCoverLetter>({
-  index,
-  register,
-  remove,
-  control,
+export default function CoverLetterItem<
+  T extends coverLetterType.IWriteCoverLetter
+>({
+  index, register, remove, control,
 }: Props<T>) {
   const watchedValue = useWatch({
     control,
@@ -45,50 +32,119 @@ export default function CoverLetterItem<T extends coverLetterType.IWriteCoverLet
   }) as string;
 
   return (
-    <ItemsContainer>
-      <HideSvg
-        label="삭제"
-        Logo={<BiX />}
-        onClick={() => remove(index)}
-        sx={{
-          position: 'absolute',
-          right: 1,
-          top: 1,
-          fontSize: '2em',
-        }}
-      />
-      <UnResizeableTextarea
-        register={register(`qnaList.${index}.question` as Path<T>)}
-        placeholder="질문을 작성해주세요."
-        maxSize={10}
-        style={{ resize: 'vertical', minHeight: '5.5rem' }}
-      />
-      <UnResizeableTextarea
-        register={register(`qnaList.${index}.answer` as Path<T>)}
-        placeholder="답변을 작성해주세요."
-        maxSize={30}
-        style={{ minHeight: '15rem', resize: 'vertical' }}
-      />
-      {`글자수 : ${watchedValue.length}/500`}
-    </ItemsContainer>
+    <Container>
+      <HeaderWrapper>
+        <QuestionNumber>{index + 1}</QuestionNumber>
+        <HideSvg
+          label="삭제"
+          Logo={<BiX />}
+          onClick={() => remove(index)}
+          sx={{
+            position: 'absolute',
+            top: 2,
+            right: 2,
+            fontSize: '3rem',
+          }}
+        />
+      </HeaderWrapper>
+
+      <FormGroup>
+        <FormLabel>질문</FormLabel>
+        <UnResizeableTextarea
+          register={register(`qnaList.${index}.question` as Path<T>)}
+          placeholder="질문을 입력해주세요."
+          maxSize={10}
+          minSize={5.5}
+          style={{ resize: 'vertical' }}
+        />
+      </FormGroup>
+
+      <FormGroup>
+        <FormLabel>답변</FormLabel>
+        <UnResizeableTextarea
+          register={register(`qnaList.${index}.answer` as Path<T>)}
+          placeholder="답변을 입력해주세요."
+          maxSize={80}
+          minSize={15}
+          style={{ resize: 'vertical' }}
+        />
+        <LenCount $isShort={watchedValue.length < 30}>
+          {watchedValue.length}
+          /500자
+          {watchedValue.length < 30 && (
+            <RequiredNote>(최소 30자 이상 입력)</RequiredNote>
+          )}
+        </LenCount>
+      </FormGroup>
+    </Container>
   );
 }
 
-const ItemsContainer = styled.div`
+const Container = styled.div`
   position: relative;
   width: 100%;
-  padding: 2.5rem 1.8rem;
+  padding: 2.4rem 2rem;
   margin: 2rem 0;
-  background: ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.secondary};
   border: 1px solid ${(props) => props.theme.colors.mainLine};
   border-radius: 16px;
+  border-left: 4px solid ${(props) => props.theme.colors.signatureColor};
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
+
   &:has(textarea:focus) {
     border-color: ${(props) => props.theme.colors.signatureColor};
+    box-shadow: 0 0 0 0.5rem ${(props) => props.theme.colors.signatureColor}40;
   }
 
-  textarea:focus {
-    color: ${(props) => props.theme.colors.dark};
-    background-color: ${(props) => props.theme.colors.highlightColor};
+  textarea {
+    &:focus {
+      border-color: ${(props) => props.theme.colors.signatureColor};
+    }
   }
+`;
+
+const HeaderWrapper = styled.div`
+  ${styleMixin.Flex('space-between')}
+  margin-bottom: 1.5rem;
+`;
+
+const QuestionNumber = styled.span`
+  position: absolute;
+  top: 1.5rem;
+  left: -1.7rem;
+  ${styleMixin.Flex()}
+  width: 3rem;
+  height: 3rem;
+  color: white;
+  background-color: ${(props) => props.theme.colors.signatureColor};
+  font-weight: 600;
+  border-radius: 50%;
+  border: 1px solid ${(props) => props.theme.colors.primary};
+`;
+
+const FormGroup = styled.div`
+  margin-bottom: 2rem;
+`;
+
+const FormLabel = styled.div`
+  font-family: ${V.serif};
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  color: ${(props) => props.theme.colors.signatureColor};
+`;
+
+const LenCount = styled.div<{ $isShort: boolean }>`
+  ${styleMixin.Flex('flex-end', 'center')};
+  font-size: 1.2rem;
+  color: ${(props) =>
+    (props.$isShort ? props.theme.colors.red : props.theme.colors.text)};
+  margin-top: 0.5rem;
+`;
+
+const RequiredNote = styled.span`
+  margin-left: 0.5rem;
+  font-style: italic;
+  font-size: 1.4rem;
 `;

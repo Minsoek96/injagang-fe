@@ -44,7 +44,7 @@ describe('MainButton', () => {
       const afterButton = screen.getByRole('button');
       expect(afterButton).toHaveStyleRule(
         'background-color',
-        defaultTheme.colors.button,
+        defaultTheme.colors.defaultButton,
       );
     });
 

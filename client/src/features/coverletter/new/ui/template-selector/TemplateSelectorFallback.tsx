@@ -9,7 +9,7 @@ type Props = {
 export default function TemplateSelectorFallback({ onReset }: Props) {
   return (
     <FallbackContainer>
-      <Message>템플릿 목록을 불러오는 중 문제가 발생했습니다</Message>
+      <Message>템플릿 목록을 불러오는 중 문제가 발생했습니다.</Message>
       <MainButton
         label="재시도"
         onClick={onReset}
@@ -23,10 +23,16 @@ const FallbackContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.8rem;
+  height: 5rem;
+  padding: 0.8rem 1rem;
   border: 1px solid ${(props) => props.theme.colors.mainLine};
   border-radius: 0.4rem;
-  background-color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => `${props.theme.colors.signatureColor}20`};
+  font-weight: 400;
+
+  button {
+    color : ${(props) => props.theme.colors.signatureColor}
+  }
 `;
 
 const Message = styled.span`

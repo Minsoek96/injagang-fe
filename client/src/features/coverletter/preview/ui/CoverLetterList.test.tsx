@@ -46,7 +46,7 @@ describe('CoverLetterList', () => {
     });
 
     renderComponent();
-    const emptyText = screen.getByText(/작성된 자소서가 없습니다./);
+    const emptyText = screen.getByText(/작성된 자소설이 없습니다./);
     expect(emptyText).toBeInTheDocument();
   });
 });

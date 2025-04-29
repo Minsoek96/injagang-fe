@@ -132,7 +132,7 @@ const ModalHeaderContainer = styled.header`
   height: 6rem;
   padding: 0 2.4rem;
   background-color: ${(props) => props.theme.colors.signatureColor};
-  border-bottom: 1px solid ${(props) => props.theme.colors.highlight};
+  border-bottom: 1px solid ${(props) => props.theme.colors.highlightLine};
 `;
 
 const ModalContentContainer = styled.div`

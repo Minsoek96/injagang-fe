@@ -23,10 +23,26 @@ const buttonVariants = {
     }
   `,
 
+  // 실선 테두리 버튼, 호버시 연한 시그니처 색상 적용
+  dashed: css`
+    background-color: transparent;
+    border: 0.1em dashed ${(props) => props.theme.colors.signatureColor};
+    color: ${(props) => props.theme.colors.signatureColor};
+
+    &:hover {
+      background-color: ${(props) => `${props.theme.colors.signatureColor}20`};
+      transform: translateY(-2px);
+    }
+
+    &:active {
+    transform: translateY(0);
+  }
+  `,
+
   // isActive 상태에 따라 배경색이 변경되는 기본 버튼
   default: css<{ $isActive: boolean }>`
     background-color: ${({ $isActive, theme }) =>
-    ($isActive ? theme.colors.signatureColor : theme.colors.button)};
+    ($isActive ? theme.colors.signatureColor : theme.colors.defaultButton)};
     color: ${(props) => props.theme.colors.text};
     border: 0.1em solid ${(props) => props.theme.colors.mainLine};
 

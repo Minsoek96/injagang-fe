@@ -97,6 +97,11 @@
             "name": "@/src/shared/hooks",
             "importNames": ["useWhyDidYouRender"],
             "message": "이 훅은 개발 환경에서만 사용해야 합니다. 프로덕션 빌드 전에 제거하세요."
+          },
+          {
+            "name": "@/src/shared/ui",
+            "importNames": ["ErrorBoundaryTest", "SuspenseTest"],
+            "message": "해당 UI는 개발 환경에서만 사용해야 합니다. 프로덕션 빌드 전에 제거하세요."
           }
         ]
       }

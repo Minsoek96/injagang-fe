@@ -77,7 +77,7 @@ const IconBackground = styled.div`
   height: 5rem;
   border-radius: 1rem;
   background-color: #ffffff;
-  border: 1px solid #f0f0f0;
+  border: 1px solid ${(props) => props.theme.colors.mainLine};
 
   svg {
     color: ${(props) => props.theme.colors.signatureColor};
@@ -94,7 +94,7 @@ const IconText = styled.p`
   margin-top: 1rem;
   color: ${(props) => props.theme.colors.lightText};
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.2rem;
   letter-spacing: -0.01em;
 `;
 

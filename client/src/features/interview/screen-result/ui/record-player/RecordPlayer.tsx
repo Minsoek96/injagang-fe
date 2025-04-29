@@ -60,8 +60,8 @@ const VideoLoaderContainer = styled.div`
   max-height: 50rem;
   min-height: 30rem;
   background-color: ${(props) => props.theme.colors.primary};
-  border-top: 1px dashed ${(props) => props.theme.colors.highlightColor};
-  border-bottom: 1px dashed ${(props) => props.theme.colors.highlightColor};
+  border-top: 1px dashed ${(props) => props.theme.colors.highlightLine};
+  border-bottom: 1px dashed ${(props) => props.theme.colors.highlightLine};
   border-radius: 0.8rem;
   padding: 2rem;
 `;

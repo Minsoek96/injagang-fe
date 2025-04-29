@@ -11,6 +11,7 @@ const S = {
     color: ${(props) => props.theme.colors.boardText};
     word-break: break-all;
     overflow-x: hidden;
+    padding: 1rem;
   `,
 
   mainTitle: styled.h2`
@@ -46,7 +47,10 @@ const S = {
 
   answerContainer: styled.div`
     letter-spacing: 1.25px;
-    line-height: 1.6;
+    line-height: 1.8;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    word-break: break-word;
     > span {
       color: ${(props) => props.theme.colors.signatureColor};
     }

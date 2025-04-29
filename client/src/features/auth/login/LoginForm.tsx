@@ -76,7 +76,7 @@ export default function LoginForm({
 const Form = styled.form<{ $shakeTrigger: boolean }>`
   width: 40rem;
   padding: 2rem;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.primary};
   border: 1px solid ${(props) => props.theme.colors.mainLine};
   border-radius: 1rem;
 
