@@ -40,7 +40,7 @@ const PageTitle = styled.h1`
 `;
 
 const PageSubTitle = styled.p`
-  color: #666666;
+  color: ${(props) => props.theme.colors.lightText};
   font-weight: 400;
   font-size: 1.5rem;
   margin-bottom: 4rem;

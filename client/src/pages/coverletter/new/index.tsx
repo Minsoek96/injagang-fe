@@ -1,25 +1,34 @@
-import { Suspense } from 'react';
-
 import { styled } from 'styled-components';
 
 import { CoverLetterCreator } from '@/src/features/coverletter/new';
 
-import { styleMixin } from '@/src/shared/styles';
-import { Spinner } from '@/src/shared/ui';
+import { styleMixin, V } from '@/src/shared/styles';
+import {
+  Container,
+} from '@/src/shared/ui';
+import { CoverLetterHeader } from '@/src/entities/coverLetter';
 
 function CoverLetterCreaterPage() {
+  const title = '자소설 쓰기';
   return (
-    <CoverLetterStyle>
-      <Suspense fallback={<Spinner />}>
+    <PageContainer>
+      <CoverLetterCreatorSection>
+        <CoverLetterHeader title={title} />
         <CoverLetterCreator />
-      </Suspense>
-    </CoverLetterStyle>
+      </CoverLetterCreatorSection>
+    </PageContainer>
   );
 }
 
 export default CoverLetterCreaterPage;
 
-const CoverLetterStyle = styled.div`
+const PageContainer = styled.div`
   ${styleMixin.Column('flex-start')}
   width: 100%;
+`;
+
+const CoverLetterCreatorSection = styled(Container.ItemBase)`
+  ${styleMixin.Column()};
+  width: 100%;
+  max-width: ${V.lgWidth};
 `;

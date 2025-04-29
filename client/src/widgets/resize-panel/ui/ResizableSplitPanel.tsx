@@ -197,7 +197,7 @@ const BookCenter = styled.div`
   height: 100%;
   min-width: 0.5rem;
   max-width: 0.5rem;
-  background-color: ${(props) => props.theme.colors.highlightColor};
+  background-color: ${(props) => props.theme.colors.highlightLine};
   border-radius: 1rem;
   transition: background-color 0.2s ease;
 

@@ -28,9 +28,9 @@ function CoverLetterList() {
           <S.emptyStateIcon>
             <GoFile />
           </S.emptyStateIcon>
-          <S.emptyStateMessage>작성된 자소서가 없습니다.</S.emptyStateMessage>
+          <S.emptyStateMessage>작성된 자소설이 없습니다.</S.emptyStateMessage>
           <S.emptyStateSubMessage>
-            새로운 자기소개서를 작성해보세요
+            당신의 이야기를 작성해보세요
           </S.emptyStateSubMessage>
         </S.emptyStateContainer>
       </Cotainer>
@@ -64,15 +64,22 @@ const Cotainer = styled(S.baseContainer)`
   border-bottom-left-radius: 1rem;
   border-left: 1.5rem solid ${(props) => props.theme.colors.signatureColor};
   box-shadow: ${V.boxShadow1};
-  ${styleMixin.ScrollBar}
 
   @media screen and (max-width: ${V.mediaMobile}) {
   }
 `;
 
 const ListHeader = styled.div`
+  position: sticky;
+  top: 0;
   width: 100%;
+  margin-bottom: 2rem;
   padding: 1.2rem 1.6rem;
+`;
+
+const ListTitle = styled.h2`
+  font-size: 1.6rem;
+  font-weight: 600;
 `;
 
 const Divider = styled.div`
@@ -82,11 +89,6 @@ const Divider = styled.div`
   height: 1px;
 `;
 
-const ListTitle = styled.h2`
-  font-size: 1.6rem;
-  font-weight: 600;
-`;
-
 const ListContent = styled.ul`
   ${styleMixin.Column('flex-start', 'flex-start')}
   ${styleMixin.ScrollBar}
@@ -94,4 +96,7 @@ const ListContent = styled.ul`
   height: 100%;
   padding: 0.8rem;
   gap: 0.4rem;
+
+  overflow-x:auto;
+  ${styleMixin.hideScrollbarStyle};
 `;

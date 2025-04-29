@@ -44,7 +44,7 @@ describe('DraggedAnswer', () => {
     it('선택단어는 하이라이트 효과를 낸다.', () => {
       renderComponent();
       const searchSelected = screen.getByText(new RegExp(selectedText));
-      expect(searchSelected).toHaveStyle(`background: ${defaultTheme.colors.highlightColor}`);
+      expect(searchSelected).toHaveStyle(`background: ${defaultTheme.colors.marker}`);
     });
 
     it('끝 단어가 렌더링된다.', () => {

@@ -10,11 +10,17 @@ import {
   FormStyle as S,
 } from '@/src/entities/coverLetter';
 
-import { MainButton, UnInput, ErrorBoundary } from '@/src/shared/ui';
+import {
+  MainButton,
+  UnInput,
+  ErrorBoundary,
+  Spinner,
+} from '@/src/shared/ui';
 import { V } from '@/src/shared/styles';
 import { getFirstErrorMessage } from '@/src/shared/utils/check/getFirstErrorMessage';
 import { useModal } from '@/src/shared/hooks';
 
+import { Suspense } from 'react';
 import useProgressCoverLetter from '../../model/useProgressCoverLetter';
 import TemplateSelectorFallback from '../template-selector/TemplateSelectorFallback';
 import TemplateSelector from '../template-selector/TemplateSelector';
@@ -105,7 +111,9 @@ export default function CreateForm({ movePage, onSubmit }: Props) {
               <TemplateSelectorFallback onReset={onReset} />
             )}
           >
-            <TemplateSelector append={append} reset={reset} />
+            <Suspense fallback={<Spinner />}>
+              <TemplateSelector append={append} reset={reset} />
+            </Suspense>
           </ErrorBoundary>
         </TemplateSection>
 

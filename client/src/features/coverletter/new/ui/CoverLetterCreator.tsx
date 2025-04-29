@@ -1,17 +1,12 @@
-import { styled } from 'styled-components';
-
 import { SubmitHandler } from 'react-hook-form';
 
 import {
   coverLetterMutation,
   coverLetterType,
-  CoverLetterHeader,
   useTempStore,
   FormStyle as S,
 } from '@/src/entities/coverLetter';
 
-import { styleMixin, V } from '@/src/shared/styles';
-import { Container } from '@/src/shared/ui';
 import { usePageRouter } from '@/src/shared/hooks';
 
 import CreateForm from './create-form/CreateForm';
@@ -36,17 +31,8 @@ export default function CoverLetterCreator() {
   };
 
   return (
-    <CoverLetterCreatorContainer>
-      <CoverLetterHeader title="자소설 쓰기" />
-      <S.formContainer>
-        <CreateForm movePage={moveCoverLetterMainPage} onSubmit={onSubmit} />
-      </S.formContainer>
-    </CoverLetterCreatorContainer>
+    <S.formContainer>
+      <CreateForm movePage={moveCoverLetterMainPage} onSubmit={onSubmit} />
+    </S.formContainer>
   );
 }
-
-const CoverLetterCreatorContainer = styled(Container.ItemBase)`
-  ${styleMixin.Column()};
-  width: 100%;
-  max-width: ${V.lgWidth};
-`;

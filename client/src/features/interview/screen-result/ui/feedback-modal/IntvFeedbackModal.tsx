@@ -127,7 +127,7 @@ const TextBox = styled.div`
   min-height: 8rem;
   max-height: 15rem;
   overflow-y: auto;
-  background-color: ${(props) => props.theme.colors.highlightColor};
+  background-color: ${(props) => `${props.theme.colors.signatureColor}4A`};
   border-radius: 0.8rem;
   padding: 1.5rem;
   font-size: 1.6rem;

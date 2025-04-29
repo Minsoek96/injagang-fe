@@ -42,7 +42,7 @@ const buttonVariants = {
   // isActive 상태에 따라 배경색이 변경되는 기본 버튼
   default: css<{ $isActive: boolean }>`
     background-color: ${({ $isActive, theme }) =>
-    ($isActive ? theme.colors.signatureColor : theme.colors.button)};
+    ($isActive ? theme.colors.signatureColor : theme.colors.defaultButton)};
     color: ${(props) => props.theme.colors.text};
     border: 0.1em solid ${(props) => props.theme.colors.mainLine};
 

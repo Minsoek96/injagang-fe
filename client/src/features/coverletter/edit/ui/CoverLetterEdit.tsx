@@ -1,18 +1,13 @@
 import { useRouter } from 'next/router';
 
-import { styled } from 'styled-components';
-
 import { SubmitHandler } from 'react-hook-form';
 
 import {
   coverLetterType,
   coverLetterQueries,
   FormStyle as S,
-  CoverLetterHeader,
 } from '@/src/entities/coverLetter';
 
-import { styleMixin, V } from '@/src/shared/styles';
-import { Container } from '@/src/shared/ui';
 import { usePageRouter } from '@/src/shared/hooks';
 
 import useCoverLetterManager from '../model/useCoverLetterManager';
@@ -34,21 +29,12 @@ export default function CoverLetterCreator() {
   };
 
   return (
-    <CoverLetterCreatorContainer>
-      <CoverLetterHeader title="자소설 편집" />
-      <S.formContainer>
-        <EditForm
-          movePage={moveCoverLetterMainPage}
-          onSubmit={onSubmit}
-          coverLetters={coverLetter}
-        />
-      </S.formContainer>
-    </CoverLetterCreatorContainer>
+    <S.formContainer>
+      <EditForm
+        movePage={moveCoverLetterMainPage}
+        onSubmit={onSubmit}
+        coverLetters={coverLetter}
+      />
+    </S.formContainer>
   );
 }
-
-const CoverLetterCreatorContainer = styled(Container.ItemBase)`
-  ${styleMixin.Column()}
-  width: 100%;
-  max-width: ${V.lgWidth};
-`;

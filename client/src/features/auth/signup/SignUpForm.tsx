@@ -62,8 +62,8 @@ export default function SignUpForm({ onSubmit, labels }: Props) {
 const Form = styled.form`
   width: 40rem;
   padding: 2rem;
-  background-color: #ffffff;
-  border: 1px solid #f0f0f0;
+  background-color: ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.mainLine};
   border-radius: 1rem;
 
   button {

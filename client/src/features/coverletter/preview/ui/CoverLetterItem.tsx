@@ -95,6 +95,7 @@ const Container = styled.li<{ $isActive: boolean }>`
   ${styleMixin.Flex('space-between', 'center')}
   width: 100%;
   height: 7rem;
+  min-height: 7rem;
   padding: 1rem 1.6rem;
   border-radius: 12px;
   background-color: ${({ $isActive, theme }) =>

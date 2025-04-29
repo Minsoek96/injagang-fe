@@ -31,6 +31,7 @@ const ScrollBar = css`
     border-radius: 0.5rem;
   }
 `;
+
 const hideScrollbarStyle = css`
   -ms-overflow-style: none;
   scrollbar-width: none;
