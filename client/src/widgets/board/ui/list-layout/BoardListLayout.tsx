@@ -1,6 +1,3 @@
-import styled from 'styled-components';
-
-import { Container } from '@/src/shared/ui';
 import BoardList from './BoardList';
 
 type Props<T> = {
@@ -26,21 +23,14 @@ function BoardListLayout<T>({
   //   route,
   // });
   return (
-    <BoardListViewStyle>
-      <BoardList
-        headItem={headItem}
-        boardInfos={boardInfos ?? []}
-        idKey={idKey as keyof T}
-        displayKeys={tableKey as (keyof T)[]}
-        route={route}
-      />
-    </BoardListViewStyle>
+    <BoardList
+      headItem={headItem}
+      boardInfos={boardInfos ?? []}
+      idKey={idKey as keyof T}
+      displayKeys={tableKey as (keyof T)[]}
+      route={route}
+    />
   );
 }
 
 export default BoardListLayout;
-
-const BoardListViewStyle = styled(Container.ItemBase)`
-  margin-block: 3rem;
-  max-width: 100%;
-`;

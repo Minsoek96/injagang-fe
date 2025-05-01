@@ -2,6 +2,7 @@ import { useBoardStore } from '@/src/entities/qnaboard';
 import { useCallback, useMemo } from 'react';
 
 const SEARCH_TYPES = {
+  전체: 'all',
   제목: 'title',
   작성자: 'writer',
 } as const;
@@ -10,6 +11,7 @@ type SearchTypeKey = keyof typeof SEARCH_TYPES;
 type SearchTypeValue = (typeof SEARCH_TYPES)[SearchTypeKey];
 
 const REVERSE_SEARCH_TYPES: Record<SearchTypeValue, SearchTypeKey> = {
+  all: '전체',
   title: '제목',
   writer: '작성자',
 };
@@ -46,7 +48,7 @@ const useBoardSearch = () => {
   );
 
   const displaySearchType = useMemo(
-    () => REVERSE_SEARCH_TYPES[boardType as 'title' | 'writer'] ?? '',
+    () => REVERSE_SEARCH_TYPES[boardType as 'all'|'title' | 'writer'] ?? '',
     [boardType],
   );
 

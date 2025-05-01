@@ -54,7 +54,7 @@ describe('useBoardSearch', () => {
 
     it('사용 가능한 검색 타입은 제목 | 작성자 이다', () => {
       const { result } = renderHook(() => useBoardSearch());
-      expect(result.current.availableSearchTypes).toEqual(['제목', '작성자']);
+      expect(result.current.availableSearchTypes).toEqual(['전체', '제목', '작성자']);
     });
   });
 

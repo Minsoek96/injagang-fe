@@ -19,6 +19,7 @@ export default function CreateQuestionButton() {
         padding: '1rem 2rem',
         height: '100%',
       }}
+      variant="signature"
     />
   );
 }

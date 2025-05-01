@@ -13,10 +13,7 @@ import { Container, Spinner } from '@/src/shared/ui';
 import { useRouter } from 'next/router';
 import { CreateQuestionButton } from './ui';
 import {
-  HEAD_ITEM,
-  ID_KEY,
-  ROUTE_TEMPLATE,
-  TABLE_KEYS,
+  HEAD_ITEM, ID_KEY, ROUTE_TEMPLATE, TABLE_KEYS,
 } from './const';
 
 const BoardListView = dynamic(
@@ -45,23 +42,21 @@ function List({ dehydratedState }: ListProps) {
   const router = useRouter();
   const { data: boardList, isLoading } = boardQueries.useFetchBoardList();
   const initBoardSearch = useBoardStore((state) => state.initBoardSearch);
+
   const totalPage = useMemo(() => boardList?.totalPage, [boardList]);
 
-  useEffect(
-    () => {
-      const handleRouteChangeStart = (url: string) => {
-        const currentPath = router.asPath;
-        if (url !== currentPath) {
-          initBoardSearch();
-        }
-      };
-      router.events.on('routeChangeStart', handleRouteChangeStart);
-      return () => {
-        router.events.off('routeChangeStart', handleRouteChangeStart);
-      };
-    },
-    [],
-  );
+  useEffect(() => {
+    const handleRouteChangeStart = (url: string) => {
+      const currentPath = router.asPath;
+      if (url !== currentPath) {
+        initBoardSearch();
+      }
+    };
+    router.events.on('routeChangeStart', handleRouteChangeStart);
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChangeStart);
+    };
+  }, []);
 
   if (!boardList && isLoading) {
     return <Spinner message="게시글을 불러오는 중입니다." />;
@@ -89,23 +84,25 @@ function List({ dehydratedState }: ListProps) {
 
 export default List;
 
-const ListContainer = styled.div`
+const ListContainer = styled(Container.ItemBase)`
   ${styleMixin.Column('flex-start', 'center')}
+  gap : 2rem;
   width: 100%;
+
+  > * {
+    max-width: ${V.lgWidth};
+  }
 `;
 
-const BoardHeader = styled(Container.ItemBase)`
-  ${styleMixin.Flex('flex-end')}
-  max-width: 100%;
-  height: 4rem;
+const BoardHeader = styled.div`
+  ${styleMixin.Flex('space-between', 'center')};
+  width: 100%;
 
   @media screen and (max-width: ${V.mediaMobile}) {
+    ${styleMixin.Column()};
+    gap: 0.4rem;
     button {
-      width: 10rem;
-
-      svg {
-        display: none;
-      }
+      width: 100%;
     }
   }
 `;

@@ -7,6 +7,7 @@ export default function TypeSelector() {
   return (
     <ComboBox
       label="검색"
+      placeholder="선택"
       hideLabel
       selectedItem={displaySearchType}
       items={availableSearchTypes}

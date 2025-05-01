@@ -2,7 +2,7 @@ import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import useBoardStore from '@/src/entities/qnaboard/model/useBoardStore';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { getBoardList, getDetailBoard } from './apis';
 
 import board from './queryKeys';
@@ -16,7 +16,21 @@ const useFetchBoardList = () => {
   const boardType = useBoardStore((state) => state.boardType);
   const boardSearch = useBoardStore((state) => state.boardSearch);
 
+  const isAllType = useCallback(
+    (type: string) => type === 'all',
+    [],
+  );
+
   const queryParams = useMemo(() => {
+    // 'all' 타입인 경우 쿼리키 기본값 유지
+    if (isAllType(boardType)) {
+      return {
+        type: '',
+        searchTerm: '',
+        page: curPageNum,
+      };
+    }
+
     const isFiltered = Boolean(boardType && boardSearch);
     const validType = isFiltered ? boardType : '';
     const validSearchTerm = isFiltered ? boardSearch : '';
@@ -25,7 +39,7 @@ const useFetchBoardList = () => {
       searchTerm: validSearchTerm,
       page: curPageNum,
     };
-  }, [boardType, boardSearch, curPageNum]);
+  }, [boardType, boardSearch, curPageNum, isAllType]);
 
   return useQuery({
     queryKey: board.lists(
