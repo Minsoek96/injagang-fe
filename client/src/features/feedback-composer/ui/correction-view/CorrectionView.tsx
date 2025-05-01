@@ -1,3 +1,4 @@
+import { styleMixin } from '@/src/shared/styles';
 import styled from 'styled-components';
 
 interface CorrectionViewProps {
@@ -14,7 +15,7 @@ function CorrectionView({ targetAnswer }: CorrectionViewProps) {
         {' '}
         {!targetAnswer && emptyMessage}
       </CorrectionTitle>
-      <Sentenc $isActive={!!targetAnswer.length}>{targetAnswer}</Sentenc>
+      <Sentenc $isActive={!!targetAnswer.length}>{targetAnswer.trim()}</Sentenc>
     </CorrectionContainer>
   );
 }
@@ -32,6 +33,7 @@ const CorrectionTitle = styled.span`
 `;
 
 const Sentenc = styled.p<{ $isActive: boolean }>`
+<<<<<<< HEAD
   margin-top: 1rem;
   padding: 0.4rem 1.2rem;
   color: ${(props) => props.theme.colors.boardText};
@@ -41,4 +43,14 @@ const Sentenc = styled.p<{ $isActive: boolean }>`
   white-space: pre-line;
   overflow-wrap: break-word;
   word-break: break-word;
+=======
+  ${styleMixin.ReadableText};
+  margin-block: 1.2rem;
+  padding: 1rem 1.4rem;
+  color: ${(props) => props.theme.colors.boardText};
+  border: ${({ theme, $isActive }) =>
+    ($isActive ? `2px dashed ${theme.colors.highlightLine}` : 'none')};
+  border-left: none;
+  border-right: none;
+>>>>>>> 6b8f612 (refact : qna 관련 가독성 스타일 개선)
 `;

@@ -47,10 +47,7 @@ const S = {
 
   answerContainer: styled.div`
     letter-spacing: 1.25px;
-    line-height: 1.8;
-    white-space: pre-line;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    ${styleMixin.ReadableText};
     > span {
       color: ${(props) => props.theme.colors.signatureColor};
     }

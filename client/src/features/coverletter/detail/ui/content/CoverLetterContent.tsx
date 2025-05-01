@@ -60,8 +60,5 @@ const QuestionText = styled.h2`
 const AnswerText = styled.p`
   font-family: ${V.serif};
   font-size: 1.4rem;
-  line-height: 1.8;
-  white-space: pre-line;
-  overflow-wrap: break-word;
-  word-break: break-word;
+  ${styleMixin.ReadableText};
 `;

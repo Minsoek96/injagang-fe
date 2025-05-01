@@ -72,4 +72,10 @@ export default FeedBackComposer;
 
 const ComposerContainer = styled(Container.ArticleCard)`
   font-family: ${V.malgunGothic};
+  @media screen and (max-width: ${V.mediaTablet}){
+    border: none;
+    border-top: 2px solid ${(props) => props.theme.colors.mainLine};
+    border-bottom: 2px solid ${(props) => props.theme.colors.mainLine};
+    border-radius: 0;
+  }
 `;

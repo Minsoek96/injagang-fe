@@ -14,14 +14,20 @@ export default function MarkdownPreview({ content }: Props) {
   const htmlContent = mdParser.render(content);
   const sanitizedContent = DOMPurify.sanitize(htmlContent);
 
-  return <Container className="markdown-body" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />;
+  return (
+    <Container
+      className="markdown-body"
+      dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+    />
+  );
 }
 
 const Container = styled.div`
   width: 100%;
-  padding: 1rem;
+  height: 100%;
   background-color: ${(props) => props.theme.colors.bodyColor}!important;
   color: ${(props) => props.theme.colors.boardText}!important;
-  height: 100%;
-  border-radius: 8px;
+  letter-spacing: 1.25px;
+  line-height: 1.8;
+  white-space: pre-line;
 `;

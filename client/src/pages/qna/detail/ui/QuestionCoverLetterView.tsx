@@ -9,11 +9,11 @@ import { styleMixin, V } from '@/src/shared/styles';
 export default function QuestionCoverLetterView() {
   return (
     <DetailContainer>
-      <Container.ArticleCard
+      <ArticleCard
         $size={{ width: '100%', height: '100%', isMedia: true }}
       >
         <QuestionDetailView />
-      </Container.ArticleCard>
+      </ArticleCard>
       <ArticleCard
         $size={{
           width: '100%',
@@ -41,4 +41,10 @@ const DetailContainer = styled(Container.ItemBase)`
 
 const ArticleCard = styled(Container.ArticleCard)`
   max-height: 100%;
+  @media screen and (max-width: ${V.mediaTablet}){
+    border: none;
+    border-top: 2px solid ${(props) => props.theme.colors.mainLine};
+    border-bottom: 2px solid ${(props) => props.theme.colors.mainLine};
+    border-radius: 0;
+  }
 `;

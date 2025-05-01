@@ -9,7 +9,9 @@ import { DehydratedState, HydrationBoundary } from '@tanstack/react-query';
 import { useCorrectionStore } from '@/src/entities/qnaboard';
 import { useFeedStore } from '@/src/entities/feedback';
 
-import { ErrorBoundary, MainButton, Spinner } from '@/src/shared/ui';
+import {
+  ErrorBoundary, MainButton, Spinner,
+} from '@/src/shared/ui';
 import { styleMixin } from '@/src/shared/styles';
 import { ArticleCard } from '@/src/shared/ui/container/Container';
 
@@ -51,8 +53,8 @@ function Answer({ dehydratedState }: AnswerProps) {
   );
 
   return (
-    <ViewStyle>
-      <HydrationBoundary state={dehydratedState}>
+    <HydrationBoundary state={dehydratedState}>
+      <DetailContainer>
         <ErrorBoundary
           renderFallback={(error, reset) =>
             ErrorFallback(error, reset, '게시글을 조회 중 문제가 발생했습니다.')}
@@ -70,8 +72,8 @@ function Answer({ dehydratedState }: AnswerProps) {
             <TargetFeedBackView />
           </Suspense>
         </ErrorBoundary>
-      </HydrationBoundary>
-    </ViewStyle>
+      </DetailContainer>
+    </HydrationBoundary>
   );
 }
 
@@ -85,6 +87,7 @@ function ErrorFallback(_: Error, reset: () => void, message: string) {
         height: '100%',
         isMedia: true,
       }}
+      style={{ marginTop: '2rem' }}
     >
       <ErrorContainer>
         <h3>앗! 문제가 발생했어요.</h3>
@@ -100,7 +103,7 @@ function ErrorFallback(_: Error, reset: () => void, message: string) {
   );
 }
 
-const ViewStyle = styled.div`
+const DetailContainer = styled.div`
   ${styleMixin.Column()}
   color: ${(props) => props.theme.colors.boardText};
   width: 100%;

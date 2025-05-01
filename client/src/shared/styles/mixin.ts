@@ -15,6 +15,14 @@ const Column = (justify = 'center', align = 'center') => css`
   align-items: ${align};
 `;
 
+/** 가독성  텍스트 옵션 */
+const ReadableText = css`
+  line-height: 1.8;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-break: break-word;
+`;
+
 /** 스타일 스크롤바 */
 const ScrollBar = css`
   ::-webkit-scrollbar {
@@ -42,5 +50,5 @@ const hideScrollbarStyle = css`
 `;
 
 export {
-  Flex, Column, ScrollBar, hideScrollbarStyle,
+  Flex, Column, ScrollBar, hideScrollbarStyle, ReadableText,
 };

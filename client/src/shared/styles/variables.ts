@@ -1,7 +1,7 @@
 const V = {
   // device
   mediaMobile: '560px',
-  mediaTablet: '800px',
+  mediaTablet: '1000px',
   mediaWeb: '1300px',
 
   // fontFamily
