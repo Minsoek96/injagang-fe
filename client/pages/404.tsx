@@ -4,7 +4,10 @@ import styled from 'styled-components';
 
 import Link from 'next/link';
 
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
+
+import sorryScreen from '@/public/assets/sorryghost.webp';
+import Image from 'next/image';
 
 const TITLE = {
   main: '404-Page Not Found',
@@ -15,9 +18,18 @@ const TITLE = {
 const Custom404: NextPage = function Custom404() {
   return (
     <Container>
-      <Title>{TITLE.main}</Title>
-      <p>{TITLE.sub}</p>
-      <StyledLink href="/">{TITLE.link}</StyledLink>
+      <Image
+        src={sorryScreen}
+        alt="sorry"
+        width={300}
+        height={300}
+        placeholder="blur"
+      />
+      <TextWrapper>
+        <Title>{TITLE.main}</Title>
+        <p>{TITLE.sub}</p>
+        <StyledLink href="/">{TITLE.link}</StyledLink>
+      </TextWrapper>
     </Container>
   );
 };
@@ -25,9 +37,13 @@ const Custom404: NextPage = function Custom404() {
 export default Custom404;
 
 const Container = styled.div`
-  ${styleMixin.Column('center', 'center')}
+  ${styleMixin.Flex('center', 'center')}
   width: 100%;
   height: 100vh;
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    ${styleMixin.Column('flex-start', 'center')}
+  }
 `;
 
 const Title = styled.h1`
@@ -39,4 +55,8 @@ const StyledLink = styled(Link)`
   font-size: 2rem;
   margin-top: 12px;
   color: red;
+`;
+
+const TextWrapper = styled.div`
+  ${styleMixin.Column('center', 'center')}
 `;
