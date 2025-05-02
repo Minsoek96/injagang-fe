@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { ERROR_MESSAGES, TOAST_MODE } from '@/src/shared/const';
 import { useToast } from '@/src/shared/hooks';
 import { getCookies } from '@/src/shared/utils';
 import { GlobalLoading } from '@/src/shared/ui';
+import { AUTH_ERROR_CODES, ERROR_MESSAGES, TOAST_MODE } from '@/src/shared/const';
 
 export default function ProtectedPage() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function ProtectedPage() {
     if (!accessToken) {
       showToast(TOAST_MODE.ERROR, ERROR_MESSAGES.PROTECTED_PAGE);
       const returnUrl = encodeURIComponent(router.asPath);
-      router.replace(`/login?returnUrl=${returnUrl}`);
+      router.replace(`/login?returnUrl=${returnUrl}&error=${AUTH_ERROR_CODES.ACCESS_DENIED}`);
     }
   }, []);
 
