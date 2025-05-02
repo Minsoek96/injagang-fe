@@ -6,6 +6,11 @@ const ERROR_CODE: ErrorCodeType = {
   default: { code: 'ERROR', message: '알 수 없는 오류가 발생했습니다.' },
 
   // axios error
+  ERR_BAD_RESPONSE: {
+    code: '서버 에러',
+    message: '서버와 연결이 끊겼습니다.',
+  },
+
   ERR_NETWORK: {
     code: '통신 에러',
     message:

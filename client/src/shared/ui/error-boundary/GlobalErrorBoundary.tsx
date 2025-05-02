@@ -48,12 +48,12 @@ class GlobalErrorBoundary extends Component<PropsWithChildren, ErrorBoundaryStat
 
     if (error && errorData?.requireLogin) {
       return (
-        <RequireLogin onReset={this.reset} />
+        <RequireLogin />
       );
     }
     if (error && errorData) {
       return (
-        <ConnectionError onReset={this.reset} />
+        <ConnectionError onReset={this.reset} errorMessage={errorData.message} />
       );
     }
 

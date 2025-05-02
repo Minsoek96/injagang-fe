@@ -1,5 +1,4 @@
 /* eslint-disable no-alert */
-import { BiErrorAlt } from 'react-icons/bi';
 import { MdRefresh } from 'react-icons/md';
 import { FaPhoneAlt } from 'react-icons/fa';
 
@@ -9,19 +8,20 @@ import { S } from './styled';
 
 type Props = {
   onReset: () => void;
+  errorMessage: string;
 };
 
-export default function ConnectionError({ onReset }: Props) {
+export default function ConnectionError({ onReset, errorMessage }: Props) {
   const handleClick = () => {
     onReset();
   };
 
   const copyAdminNumber = () => {
-    const adminNumber = 'admin@gmail.com';
+    const adminNumber = 'https://open.kakao.com/o/sFfutysh';
     navigator.clipboard
       .writeText(adminNumber)
       .then(() => {
-        alert('관리자 연락처가 복사되었습니다.');
+        alert('고객센터 주소가 복사되었습니다.');
       })
       .catch(() => {
         alert(`복사에 실패했습니다. ${adminNumber}를 메모해주세요.`);
@@ -30,9 +30,6 @@ export default function ConnectionError({ onReset }: Props) {
 
   return (
     <S.container>
-      <S.iconWrapper>
-        <BiErrorAlt size={48} />
-      </S.iconWrapper>
       <S.messageContainer>
         <S.errorTitle>페이지내에 문제가 발생했습니다.</S.errorTitle>
         <S.errorMessage>잠시 후 다시 시도 해주세요.</S.errorMessage>
@@ -40,6 +37,12 @@ export default function ConnectionError({ onReset }: Props) {
           정상화가 되지 않으면 관리자에게 문의를 주세요.
         </S.errorMessage>
       </S.messageContainer>
+      <S.errorCauseWrapper>
+        <S.causeMessage>
+          원인:
+          {errorMessage}
+        </S.causeMessage>
+      </S.errorCauseWrapper>
       <S.buttonContainer>
         <MainButton
           onClick={handleClick}
@@ -56,7 +59,7 @@ export default function ConnectionError({ onReset }: Props) {
           label={(
             <>
               <FaPhoneAlt size={18} />
-              <p>관리자 연락처 복사</p>
+              <p>관리자</p>
             </>
           )}
           variant="signature"
