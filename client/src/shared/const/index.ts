@@ -103,3 +103,9 @@ export const TOKEN_KEYS = {
   ACCESS_TOKEN: 'accessToken',
   REFRESH_TOKEN: 'refreshToken',
 };
+
+export const AUTH_ERROR_CODES = {
+  TOKEN_EXPIRED: 'TOKEN_EXPIRED',
+  ACCESS_DENIED: 'ACCESS_DENIED',
+  ADMIN_ONLY: 'ADMIN_ONLY',
+};

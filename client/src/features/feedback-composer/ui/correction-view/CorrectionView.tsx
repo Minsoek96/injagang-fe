@@ -33,17 +33,6 @@ const CorrectionTitle = styled.span`
 `;
 
 const Sentenc = styled.p<{ $isActive: boolean }>`
-<<<<<<< HEAD
-  margin-top: 1rem;
-  padding: 0.4rem 1.2rem;
-  color: ${(props) => props.theme.colors.boardText};
-  border: ${({ theme, $isActive }) =>
-    ($isActive ? `2px dashed ${theme.colors.highlightLine}` : 'none')};
-  line-height: 1.8;
-  white-space: pre-line;
-  overflow-wrap: break-word;
-  word-break: break-word;
-=======
   ${styleMixin.ReadableText};
   margin-block: 1.2rem;
   padding: 1rem 1.4rem;
@@ -52,5 +41,4 @@ const Sentenc = styled.p<{ $isActive: boolean }>`
     ($isActive ? `2px dashed ${theme.colors.highlightLine}` : 'none')};
   border-left: none;
   border-right: none;
->>>>>>> 6b8f612 (refact : qna 관련 가독성 스타일 개선)
 `;

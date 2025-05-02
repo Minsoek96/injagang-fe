@@ -4,6 +4,9 @@ import { IoDocumentTextOutline, IoPeopleOutline } from 'react-icons/io5';
 
 import { Login } from '@/src/features/auth';
 import { styleMixin, V } from '@/src/shared/styles';
+import dynamic from 'next/dynamic';
+
+const AuthErrorDisplay = dynamic(() => import('./ui/AuthErrorDisplay'));
 
 function LoginPage() {
   return (
@@ -28,6 +31,7 @@ function LoginPage() {
           </IconWrapper>
         </IconContainer>
 
+        <AuthErrorDisplay />
         <Login />
       </Wrapper>
     </Container>
@@ -41,8 +45,6 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   ${styleMixin.Column()};
-  align-items: center;
-  justify-content: center;
   width: 100%;
   padding: 2rem;
   z-index: 1;
