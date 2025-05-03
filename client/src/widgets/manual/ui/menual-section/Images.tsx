@@ -1,8 +1,7 @@
+import { keys } from '@/src/shared/utils';
 import Image, { StaticImageData } from 'next/image';
 
 import { styled } from 'styled-components';
-
-import { v4 as uuid4 } from 'uuid';
 
 type Props = {
     imageList: StaticImageData[]
@@ -13,10 +12,11 @@ export default function Images({ imageList }:Props) {
     <ImageContainer>
       {imageList?.map((image, index) => (
         <Image
-          key={uuid4()}
+          key={keys(String(image), index)}
           src={image}
           alt={`${image}-${index}`}
           quality={100}
+          placeholder="blur"
           priority={index === 0}
         />
       ))}
