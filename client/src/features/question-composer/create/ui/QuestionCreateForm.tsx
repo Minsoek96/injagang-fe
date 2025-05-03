@@ -10,6 +10,7 @@ import {
   MainButton, Container, Spinner, UnInput,
 } from '@/src/shared/ui';
 
+import styled from 'styled-components';
 import { CoverLetterDetail } from './coverletter-preview';
 import { CoverLetterSelector } from './coverletter-selector';
 
@@ -46,7 +47,7 @@ function QuestionCreateForm({ onSubmit }: Props) {
 
   return (
     <>
-      <Container.ArticleCard $size={{ width: '100%', height: '87dvh' }}>
+      <ArticleCard $size={{ width: '100%', height: '100%' }}>
         <UnInput
           register={register('title')}
           style={{ width: '100%', marginBottom: '1rem' }}
@@ -73,14 +74,19 @@ function QuestionCreateForm({ onSubmit }: Props) {
             fontSize: '1.6rem',
           }}
         />
-      </Container.ArticleCard>
-      <Container.ArticleCard $size={{ width: '100%', height: '87dvh' }}>
+      </ArticleCard>
+      <ArticleCard $size={{ width: '100%', height: '100%' }}>
         <Suspense fallback={<Spinner />}>
           <CoverLetterDetail essayId={watch('essayId')} />
         </Suspense>
-      </Container.ArticleCard>
+      </ArticleCard>
     </>
   );
 }
 
 export default QuestionCreateForm;
+
+const ArticleCard = styled(Container.ArticleCard)`
+  height: 87dvh;
+  min-height: 40rem;
+`;

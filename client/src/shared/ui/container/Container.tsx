@@ -23,7 +23,7 @@ interface CardProps {
 const ArticleCard = styled.article<CardProps>`
 ${({ $size }) =>
     ($size.flex === 'row' ? styleMixin.Flex() : styleMixin.Column())};
-padding: 1em;
+padding: 1rem;
 color: ${({ theme }) => theme.colors.text};
 width: ${({ $size }) => $size.width || '100%'};
 height: ${({ $size }) => $size.height || '100%'};
