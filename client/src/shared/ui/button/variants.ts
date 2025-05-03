@@ -7,8 +7,10 @@ const buttonVariants = {
     border: none;
     color: ${(props) => props.theme.colors.text};
 
-    &:hover {
-      background-color: ${(props) => props.theme.colors.mainHover}20;
+    &:not(:disabled) {
+      &:hover {
+        background-color: ${(props) => props.theme.colors.mainHover}20;
+      }
     }
   `,
 
@@ -29,14 +31,17 @@ const buttonVariants = {
     border: 0.1em dashed ${(props) => props.theme.colors.signatureColor};
     color: ${(props) => props.theme.colors.signatureColor};
 
-    &:hover {
-      background-color: ${(props) => `${props.theme.colors.signatureColor}20`};
-      transform: translateY(-2px);
+    &:not(:disabled) {
+      &:hover {
+        background-color: ${(props) =>
+    `${props.theme.colors.signatureColor}20`};
+        transform: translateY(-2px);
+      }
     }
 
     &:active {
-    transform: translateY(0);
-  }
+      transform: translateY(0);
+    }
   `,
 
   // isActive 상태에 따라 배경색이 변경되는 기본 버튼
@@ -45,9 +50,10 @@ const buttonVariants = {
     ($isActive ? theme.colors.signatureColor : theme.colors.defaultButton)};
     color: ${(props) => props.theme.colors.text};
     border: 0.1em solid ${(props) => props.theme.colors.mainLine};
-
-    &:hover {
-      background-color: ${(props) => props.theme.colors.mainHover};
+    &:not(:disabled) {
+      &:hover {
+        background-color: ${(props) => props.theme.colors.mainHover};
+      }
     }
   `,
 

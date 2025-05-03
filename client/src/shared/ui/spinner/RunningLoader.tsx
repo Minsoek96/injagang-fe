@@ -96,11 +96,16 @@ const Runner = styled.div`
 `;
 
 const Ghost = styled.svg.attrs({
-  width: '80',
-  height: '80',
   viewBox: '0 0 40 60',
 })`
+  width: 8rem;
+  height: 8rem;
   animation: ${move} 1s ease-in-out infinite;
+
+  @media screen and (max-width: ${V.mediaTablet}){
+    width: 6rem;
+    height: 6rem;
+  }
 `;
 
 export default RunningLoader;
