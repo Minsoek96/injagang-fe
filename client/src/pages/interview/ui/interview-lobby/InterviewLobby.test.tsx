@@ -33,6 +33,8 @@ const renderComponent = (isDark = false) => {
   );
 };
 
+const INIT_TIME = 5000;
+
 const welcomeMessages = [
   'R_M 면접 시뮬레이션에 오신 것을 환영합니다.',
   '맞춤형 질문 세트로 자신만의 면접 환경을 구성해보세요.',
@@ -60,14 +62,14 @@ describe('InterviewLobby', () => {
     });
   });
 
-  context('첫 렌더링 후 3초가 지나면', () => {
+  context('첫 렌더링 후 5초가 지나면', () => {
     it('환영 메시지가 변화한다.', async () => {
       renderComponent();
 
       expect(screen.getByText(welcomeMessages[0])).toBeInTheDocument();
 
       act(() => {
-        jest.advanceTimersByTime(3000);
+        jest.advanceTimersByTime(INIT_TIME);
       });
 
       await waitFor(() => {
@@ -75,7 +77,7 @@ describe('InterviewLobby', () => {
       });
 
       act(() => {
-        jest.advanceTimersByTime(3000);
+        jest.advanceTimersByTime(INIT_TIME);
       });
 
       await waitFor(() => {

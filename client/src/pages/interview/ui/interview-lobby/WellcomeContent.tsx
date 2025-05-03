@@ -18,7 +18,7 @@ export default function WellcomeContent() {
 
   useInterval(() => {
     setTipIndex((prevIndex) => (prevIndex + 1) % welcomeMessages.length);
-  }, 3000);
+  }, 5000);
 
   return <WellcomeCotent>{welcomeMessages[tipIndex]}</WellcomeCotent>;
 }
