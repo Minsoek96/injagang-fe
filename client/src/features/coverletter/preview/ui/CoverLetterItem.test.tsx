@@ -61,13 +61,13 @@ describe('CoverLetterItem', () => {
   });
 
   context('선택되지 않은 자소서 아이템이 렌더링 되는 경우', () => {
-    it('버튼그룹이 비활성화 된다.', () => {
+    it('버튼그룹이 보이지 않는다.', () => {
       renderComponent(coverLetterItem, diffCoveLetterItem);
-      const editButton = screen.getByRole('button', { name: /편집/ });
-      const removeButton = screen.getByRole('button', { name: /삭제/ });
+      const editButton = screen.queryByRole('button', { name: /편집/ });
+      const removeButton = screen.queryByRole('button', { name: /삭제/ });
 
-      expect(editButton).toBeDisabled();
-      expect(removeButton).toBeDisabled();
+      expect(editButton).not.toBeInTheDocument();
+      expect(removeButton).not.toBeInTheDocument();
     });
 
     it('폰트 컬러가 그레이 계열의 색상으로 렌더링 된다.', () => {

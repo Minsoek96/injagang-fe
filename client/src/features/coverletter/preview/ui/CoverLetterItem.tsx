@@ -55,36 +55,38 @@ function CoverLetterItem({
         </ItemWrapper>
       </ItemContainer>
 
-      <ButtonWrapper>
-        <MainButton
-          onClick={(e) => {
-            e.stopPropagation();
-            moveCoverLetterEditPage(item.essayId);
-          }}
-          label={(
-            <>
-              <BiEditAlt />
-              <ButtonLabel>편집</ButtonLabel>
-            </>
-          )}
-          isActive={isSelectedItem}
-          disabled={!isSelectedItem}
-          variant="dashed"
-        />
+      {isSelectedItem && (
+        <ButtonWrapper>
+          <MainButton
+            onClick={(e) => {
+              e.stopPropagation();
+              moveCoverLetterEditPage(item.essayId);
+            }}
+            label={(
+              <>
+                <BiEditAlt />
+                <ButtonLabel>편집</ButtonLabel>
+              </>
+            )}
+            isActive={isSelectedItem}
+            disabled={!isSelectedItem}
+            variant="dashed"
+          />
 
-        <MainButton
-          onClick={handleDelete}
-          isActive={isSelectedItem}
-          disabled={!isSelectedItem}
-          label={(
-            <>
-              <BiTrash />
-              <ButtonLabel>삭제</ButtonLabel>
-            </>
-          )}
-          variant="dashed"
-        />
-      </ButtonWrapper>
+          <MainButton
+            onClick={handleDelete}
+            isActive={isSelectedItem}
+            disabled={!isSelectedItem}
+            label={(
+              <>
+                <BiTrash />
+                <ButtonLabel>삭제</ButtonLabel>
+              </>
+            )}
+            variant="dashed"
+          />
+        </ButtonWrapper>
+      )}
     </Container>
   );
 }

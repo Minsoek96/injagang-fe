@@ -7,7 +7,7 @@ export const schema = z.object({
       question: z.string().trim().min(1, '빈값을 채워주세요.'),
       answer: z
         .string()
-        .min(30, { message: '질문은 30자이상 입력해주세요.' }),
+        .min(30, { message: '답변은 30자이상 입력해주세요.' }),
     }),
   ).min(1, '최소 한개의 문항은 작성해주세요..'),
 });
