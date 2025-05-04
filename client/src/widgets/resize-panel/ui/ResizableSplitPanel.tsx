@@ -41,7 +41,9 @@ type Props = {
  */
 function ResizableSplitPanel({ children }: Props) {
   const resizeablePanelProps = useResizablePanel();
-  const { panelRefs, dragResizeEnd, dragResizePanel } = resizeablePanelProps;
+  const {
+    panelRefs, dragResizeEnd, dragResizePanel, dragResizePanelTouch,
+  } = resizeablePanelProps;
   return (
     <ResizeablePanelContext.Provider value={resizeablePanelProps}>
       <BookContainer
@@ -50,7 +52,8 @@ function ResizableSplitPanel({ children }: Props) {
         }}
         onMouseMove={dragResizePanel}
         onMouseUp={dragResizeEnd}
-        onMouseLeave={dragResizeEnd}
+        onTouchMove={dragResizePanelTouch}
+        onTouchEnd={dragResizeEnd}
       >
         {children}
       </BookContainer>
@@ -150,10 +153,13 @@ function RightPanel({ children }: PanelProps) {
 }
 
 function Center() {
-  const { dragResizeStart } = useResizablePanelContext();
+  const { dragResizeStart, dragResizeStartTouch } = useResizablePanelContext();
 
   return (
-    <BookCenter onMouseDown={dragResizeStart}>
+    <BookCenter
+      onMouseDown={dragResizeStart}
+      onTouchStart={dragResizeStartTouch}
+    >
       <Divider />
     </BookCenter>
   );
@@ -166,6 +172,7 @@ type StylePanelProps = {
 const BookContainer = styled.div`
   width: 100%;
   height: 100%;
+  touch-action: none;
 `;
 
 const BookLeftPanel = styled.div<StylePanelProps>`
@@ -173,7 +180,7 @@ const BookLeftPanel = styled.div<StylePanelProps>`
   overflow: hidden;
   transform: translateZ(0);
   transition: ${(props) =>
-    (props.$expandedState === null ? 'none' : 'width 0.2s ease-in-out')};
+    (props.$expandedState === null ? 'none' : 'width 0.5s ease-in-out')};
 `;
 
 const BookRightPanel = styled.div<StylePanelProps>`
@@ -181,7 +188,7 @@ const BookRightPanel = styled.div<StylePanelProps>`
   overflow: hidden;
   transform: translateZ(0);
   transition: ${(props) =>
-    (props.$expandedState === null ? 'none' : 'width 0.2s ease-in-out')};
+    (props.$expandedState === null ? 'none' : 'width 0.5s ease-in-out')};
 `;
 
 const Divider = styled.div`

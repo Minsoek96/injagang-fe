@@ -15,8 +15,9 @@ const useResizablePanel = () => {
     right: null as HTMLDivElement | null,
   });
 
-  const dragResizePanel = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
+  // 사이즈 조절 공용 핸들러
+  const resizePanel = useCallback(
+    (clientX: number) => {
       if (!isDragging || expandedPanel) {
         return;
       }
@@ -27,7 +28,7 @@ const useResizablePanel = () => {
       }
 
       const containerRect = container.getBoundingClientRect();
-      const newLeftWidth = ((e.clientX - containerRect.left) / containerRect.width) * 100;
+      const newLeftWidth = ((clientX - containerRect.left) / containerRect.width) * 100;
 
       if (newLeftWidth >= 20 && newLeftWidth <= 80) {
         const newRightWidth = 100 - newLeftWidth;
@@ -45,9 +46,29 @@ const useResizablePanel = () => {
     [isDragging, expandedPanel],
   );
 
+  // 마우스 이벤트 핸들러
+  const dragResizePanel = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    resizePanel(e.clientX);
+  }, [resizePanel]);
+
+  // 터치 이벤트 핸들러
+  const dragResizePanelTouch = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      const touch = e.touches[0];
+      resizePanel(touch.clientX);
+    },
+    [resizePanel],
+  );
+
   // 사이즈 조절 시작
   const dragResizeStart = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  }, []);
+
+  // 사이즈 조절 시작 (터치)
+  const dragResizeStartTouch = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setIsDragging(true);
   }, []);
@@ -82,7 +103,9 @@ const useResizablePanel = () => {
     panelWidth,
     panelRefs,
     dragResizePanel,
+    dragResizePanelTouch,
     dragResizeStart,
+    dragResizeStartTouch,
     dragResizeEnd,
     togglePanelExpansion,
   };
