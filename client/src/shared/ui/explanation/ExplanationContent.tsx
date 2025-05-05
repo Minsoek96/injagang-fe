@@ -18,8 +18,9 @@ export default function ExplanationContent({ explanationList }: Props) {
 }
 
 const Explanation = styled.div`
+  word-break: keep-all;
   margin-bottom: 3rem;
-  line-height: 2;
+  line-height: 1.8;
 
   h1 {
     font-size: 2rem;

@@ -1,7 +1,9 @@
+import { keyframes, styled } from 'styled-components';
+
+import { BiArrowBack } from 'react-icons/bi';
+
 import { MainButton } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
-import { BiArrowBack } from 'react-icons/bi';
-import { styled } from 'styled-components';
 
 type Props = {
   moveToPrevPage: () => void;
@@ -34,7 +36,7 @@ export default function InterviewSliderButtons({
         />
       )}
       <MainButton
-        className="Arrow_btn"
+        className="stage-button"
         label={curPageLabel}
         onClick={moveToNextPage}
         sx={{
@@ -53,11 +55,20 @@ const ControlButtons = styled.div`
   margin-top: 2rem;
   width: ${V.lgItemWidth};
   gap: 8px;
-  @media screen and (max-width: 800px) {
-    width: calc(100% - 3rem);
-  }
 
   button {
     height: 4rem;
+  }
+
+  .stage-button {
+    animation: ${(props) => keyframes`
+      0% { border-color: ${props.theme.colors.mainLine} }
+      50% { border-color: ${props.theme.colors.highlightLine}; }
+      100% { border-color: ${props.theme.colors.signatureColor}; }
+    `} 2s ease infinite;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: calc(100% - 3rem);
   }
 `;
