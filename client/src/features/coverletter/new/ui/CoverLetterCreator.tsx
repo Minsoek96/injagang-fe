@@ -15,7 +15,8 @@ export default function CoverLetterCreator() {
   const { moveCoverLetterMainPage } = usePageRouter();
   const { mutate } = coverLetterMutation.useWriteCoverLetter();
 
-  const { setDraft, clearDraft } = useTempStore();
+  const setDraft = useTempStore((state) => state.setDraft);
+  const clearDraft = useTempStore((state) => state.clearDraft);
 
   /** field 반영 */
   const onSubmit: SubmitHandler<coverLetterType.IWriteCoverLetter> = (data) => {

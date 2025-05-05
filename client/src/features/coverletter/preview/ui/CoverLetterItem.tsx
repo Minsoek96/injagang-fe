@@ -103,7 +103,7 @@ const Container = styled.li<{ $isActive: boolean }>`
   background-color: ${({ $isActive, theme }) =>
     ($isActive ? `${theme.colors.signatureColor}1A` : 'transparent')};
   color: ${({ $isActive, theme }) =>
-    ($isActive ? theme.colors.dark : theme.colors.emptyGray)};
+    ($isActive ? theme.colors.text : theme.colors.emptyGray)};
   border-left: ${({ $isActive, theme }) =>
     ($isActive
       ? `4px solid ${theme.colors.signatureColor}`
@@ -176,7 +176,6 @@ const ItemTitle = styled.div`
 
 const ItemInfo = styled.div`
   font-size: 1.4rem;
-
   span {
     font-weight: 500;
     color: ${(props) => props.theme.colors.signatureColor};

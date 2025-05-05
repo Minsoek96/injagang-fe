@@ -1,6 +1,7 @@
 import { boardType, S } from '@/src/entities/qnaboard';
 
 import { useCallback } from 'react';
+import styled from 'styled-components';
 import DraggableAnswerText from './DraggableAnswer';
 import DraggedAnswer from './DraggedAnswer';
 
@@ -43,7 +44,7 @@ function DraggableCoverLetter({
         <span>질문: </span>
         {question}
       </S.questionContainer>
-      <S.answerContainer>
+      <AnswerDragContainer>
         <span>답변: </span>
         {selectedCorrection && isTargetAnswer ? (
           <DraggedAnswer
@@ -55,9 +56,17 @@ function DraggableCoverLetter({
         ) : (
           <DraggableAnswerText answer={answer} onSelect={handleSelect} />
         )}
-      </S.answerContainer>
+      </AnswerDragContainer>
     </S.detailItmes>
   );
 }
 
 export default DraggableCoverLetter;
+
+const AnswerDragContainer = styled(S.answerContainer)`
+  cursor: grab;
+
+  p:active {
+      cursor: grabbing;
+    }
+`;

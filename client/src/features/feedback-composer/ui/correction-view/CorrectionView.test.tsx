@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import TestProvider from '@/fixutures/TestProvider';
 
+import { defaultTheme } from '@/src/app/styles';
 import CorrectionView from './CorrectionView';
 
 describe('CorrectionView', () => {
@@ -23,6 +24,6 @@ describe('CorrectionView', () => {
     renderComponent('');
     const searchAnswer = screen.queryByText(/첨삭된 내용이 없습니다/);
     expect(searchAnswer).toBeInTheDocument();
-    expect(searchAnswer).toHaveStyle({ color: '#ff0000ae', fontWeight: 'bold' });
+    expect(searchAnswer).toHaveStyle({ color: `${defaultTheme.colors.red}`, fontWeight: '600' });
   });
 });
