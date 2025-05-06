@@ -111,7 +111,15 @@ function LeftPanel({ children }: PanelProps) {
 
   const panelDubleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    togglePanelExpansion('left');
+    const target = e.target as HTMLElement;
+    const ignoreSelectors = ['input', 'select', 'li', 'a', '.clickable', '[role="button"]'];
+
+    const shouldIgnore = ignoreSelectors.some((selector) =>
+      target.closest(selector));
+
+    if (!shouldIgnore) {
+      togglePanelExpansion('left');
+    }
   }, []);
 
   return (
@@ -135,7 +143,15 @@ function RightPanel({ children }: PanelProps) {
 
   const panelDubleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    togglePanelExpansion('right');
+    const target = e.target as HTMLElement;
+    const ignoreSelectors = ['input', 'select', 'li', 'a', '[role="button"]'];
+
+    const shouldIgnore = ignoreSelectors.some((selector) =>
+      target.closest(selector));
+
+    if (!shouldIgnore) {
+      togglePanelExpansion('right');
+    }
   }, []);
 
   return (
