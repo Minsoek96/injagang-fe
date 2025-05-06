@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
 import { ExplanationContent } from '@/src/shared/ui';
-import { styleMixin, V } from '@/src/shared/styles';
+import {
+  fadeIn, styleMixin, V,
+} from '@/src/shared/styles';
 
 import {
   ExpectedQuestionSelector,
   UserQuestionPlayList,
 } from '@/src/features/interview/';
+import { ResizableSplitPanel } from '@/src/widgets/resize-panel';
 
 const explanationList: string[] = [
   '면접 질문 설정',
@@ -26,10 +29,19 @@ function ExpectedQuestionLayout() {
   return (
     <InterviewListViewStyle>
       <ExplanationContent explanationList={explanationList} />
-      <SwitchContainer>
-        <ExpectedQuestionSelector />
-        <UserQuestionPlayList />
-      </SwitchContainer>
+      <ResizableSplitPanel>
+        <ButtonWrapper>
+          <ResizableSplitPanel.ExpanderButton />
+        </ButtonWrapper>
+        <SwitchContainer>
+          <ResizableSplitPanel.LeftPanel>
+            <ExpectedQuestionSelector />
+          </ResizableSplitPanel.LeftPanel>
+          <ResizableSplitPanel.RightPanel>
+            <UserQuestionPlayList />
+          </ResizableSplitPanel.RightPanel>
+        </SwitchContainer>
+      </ResizableSplitPanel>
     </InterviewListViewStyle>
   );
 }
@@ -42,9 +54,15 @@ const InterviewListViewStyle = styled.div`
 
 const SwitchContainer = styled.div`
   ${styleMixin.Flex()}
-  max-width: 100%;
-  gap: 25px;
-  @media screen and (max-width: ${V.mediaTablet}) {
-    ${styleMixin.Column()}
+  width: 100%;
+  gap: 1rem;
+`;
+
+const ButtonWrapper = styled.div`
+  display: none;
+
+  @media screen and (max-width: ${V.mediaTablet}){
+    display: block;
+    animation: ${fadeIn} 1s ease-in;
   }
 `;
