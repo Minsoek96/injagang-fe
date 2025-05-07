@@ -44,6 +44,7 @@ function ExpectedQuestionSelector() {
     }
 
     setUserPlayList(questionTexts);
+    clearCheckList();
   }, [interViewQuestionList, checkList]);
 
   /** 선택된 질문 삭제 함수 */
@@ -89,6 +90,7 @@ function ExpectedQuestionSelector() {
         <ActionButtons
           onAdd={addQuestions}
           isAllChecked={isAllCheck}
+          isChecked={!!checkList.length}
           onRemove={removeQuestions}
           onChecked={handleAllCheck}
         />

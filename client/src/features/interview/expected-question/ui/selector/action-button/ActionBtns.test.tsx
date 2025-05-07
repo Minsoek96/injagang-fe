@@ -16,7 +16,7 @@ describe('ActionButtons 컴포넌트', () => {
   const mockOnChecked = jest.fn();
   const mockOnAdd = jest.fn();
 
-  const renderComponent = (role: string, isAllChecked = false) => {
+  const renderComponent = (role: string, isAllChecked = false, isCheckd = true) => {
     (useAuthStore as unknown as jest.Mock).mockImplementation((selector) => selector({
       role,
     }));
@@ -26,6 +26,7 @@ describe('ActionButtons 컴포넌트', () => {
         <ActionButtons
           onRemove={mockOnRemove}
           onChecked={mockOnChecked}
+          isChecked={isCheckd}
           isAllChecked={isAllChecked}
           onAdd={mockOnAdd}
         />
@@ -59,12 +60,12 @@ describe('ActionButtons 컴포넌트', () => {
   context('USER 권한을 가지고 있는 상황이라면', () => {
     it('항목추가 버튼을 렌더링한다', () => {
       renderComponent('USER');
-      expect(screen.getByText('항목추가')).toBeInTheDocument();
+      expect(screen.getByText('질문담기')).toBeInTheDocument();
     });
 
     it('버튼을 클릭하면 onAdd 핸들러를 호출한다', () => {
       renderComponent('USER');
-      const addButton = screen.getByText('항목추가');
+      const addButton = screen.getByText('질문담기');
       fireEvent.click(addButton);
       expect(mockOnAdd).toHaveBeenCalled();
     });

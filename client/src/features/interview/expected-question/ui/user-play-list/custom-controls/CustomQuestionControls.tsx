@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 import styled from 'styled-components';
 
@@ -18,7 +18,8 @@ function CustomQuestionControls({
   const [title, setTitle] = useState<string>('');
   const textRef = useRef<HTMLInputElement>(null);
 
-  const handleAddText = () => {
+  const handleAddText = (e:React.MouseEvent) => {
+    e.stopPropagation();
     handleAddQuestion(title);
     setTitle('');
     textRef.current?.focus();

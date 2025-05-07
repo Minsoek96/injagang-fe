@@ -7,6 +7,7 @@ interface ActionBtnProps {
   onRemove: () => void;
   onChecked: () => void;
   isAllChecked: boolean;
+  isChecked : boolean;
   onAdd: () => void;
 }
 
@@ -21,6 +22,7 @@ function ActionButtons({
   onChecked,
   onRemove,
   isAllChecked,
+  isChecked,
   onAdd,
 }: ActionBtnProps) {
   const role = useAuthStore((state) => state.role);
@@ -33,7 +35,7 @@ function ActionButtons({
     },
     USER: {
       onClick: () => onAdd(),
-      text: '항목추가',
+      text: '질문담기',
     },
   };
 
@@ -41,12 +43,16 @@ function ActionButtons({
     <ActionContainer>
       <MainButton
         label={isAllChecked ? '전체해제' : '전체선택'}
-        onClick={onChecked}
+        onClick={(e) => {
+          e.stopPropagation();
+          onChecked();
+        }}
         sx={{ width: '100%', height: '4rem', marginRight: '.5rem' }}
       />
       <MainButton
         label={btnConfig[isAdmin].text}
         onClick={btnConfig[isAdmin].onClick}
+        disabled={!isChecked}
         sx={{ width: '100%', height: '4rem' }}
       />
     </ActionContainer>

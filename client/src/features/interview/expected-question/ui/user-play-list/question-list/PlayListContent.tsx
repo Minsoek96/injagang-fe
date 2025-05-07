@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 import { keys } from '@/src/shared/utils';
 
+import { PiMusicNotes } from 'react-icons/pi';
 import PlayListItem from './PlayListItem';
 
 type Props = {
@@ -37,7 +38,7 @@ function EmptyList() {
   return (
     <Container>
       <EmptyPlayList>
-        <EmptyIcon>🎧</EmptyIcon>
+        <EmptyIcon><PiMusicNotes /></EmptyIcon>
         <EmptyText>빈 플레이리스트입니다.</EmptyText>
         <EmptySubText>
           추천 질문을 찾아보거나 직접 질문을 작성해 보세요.
