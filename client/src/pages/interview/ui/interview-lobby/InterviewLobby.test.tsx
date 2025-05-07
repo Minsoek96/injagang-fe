@@ -18,8 +18,27 @@ jest.mock('@/src/shared/store', () => ({
   useThemeStore: jest.fn(),
 }));
 
-jest.mock('@/public/assets/roomwhite.webp', () => '/roomwhite-mock');
-jest.mock('@/public/assets/roomout.webp', () => '/roomdark-mock');
+jest.mock('next/image', () => ({
+  __esModule: true,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  default: function Image(props:any) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={props.src || ''}
+        alt={props.alt || ''}
+        width={props.width}
+        height={props.height}
+        style={props.style}
+        className={props.className}
+        {...props}
+      />
+    );
+  },
+}));
+
+jest.mock('@/public/assets/whiteRoom.webp', () => '/roomwhite-mock');
+jest.mock('@/public/assets/darkRoom.webp', () => '/roomdark-mock');
 
 const context = describe;
 const renderComponent = (isDark = false) => {

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { styled } from 'styled-components';
 
-import roomWhite from '@/public/assets/roomwhite.webp';
-import roomDark from '@/public/assets/roomout.webp';
+import roomWhite from '@/public/assets/whiteRoom.webp';
+import roomDark from '@/public/assets/darkRoom.webp';
 
 import { styleMixin, V } from '@/src/shared/styles';
 import { useThemeStore } from '@/src/shared/store';
@@ -23,8 +23,9 @@ export default function InterviewLobby() {
           src={roomImage}
           alt="roomImage"
           priority
-          width={400}
-          height={500}
+          placeholder="blur"
+          width={500}
+          height={300}
           quality={100}
         />
       </LobbyContainer>
@@ -57,6 +58,10 @@ const LobbyContainer = styled.div`
   height: 60rem;
   min-height: 30rem;
 
+  img {
+    position: absolute;
+    bottom: 3rem;
+  }
 
   @media screen and (max-width: ${V.mediaMobile}) {
     display: flex;
