@@ -1,5 +1,4 @@
-import { useCallback, useMemo } from 'react';
-
+import { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -12,8 +11,12 @@ import { styleMixin } from '@/src/shared/styles';
 import RandomQuestionForm from './RandomQuestionForm';
 import { RandomQuestionType } from '../model/type';
 
+const MAX_RANDOM_QUESTIONS = 2;
+
 function InterviewRandomSetting() {
-  const { mutate: getRandomQustions } = interviewMutation.useFetchRandomQuestion();
+  const [submissionCount, setSubmissionCount] = useState<number>(0);
+  const { mutate: getRandomQuestions } = interviewMutation.useFetchRandomQuestion();
+  const isLimited = submissionCount >= MAX_RANDOM_QUESTIONS;
 
   const labels = useMemo(() => [
     {
@@ -40,30 +43,26 @@ function InterviewRandomSetting() {
 
   const onSubmit = useCallback(
     (data: RandomQuestionType) => {
-      const {
-        CS, SITUATION, JOB, PERSONALITY,
-      } = data;
-      const formattedData = [
-        { size: CS, questionType: interviewType.QuestionType.CS },
-        {
-          size: SITUATION,
-          questionType: interviewType.QuestionType.SITUATION,
-        },
-        { size: JOB, questionType: interviewType.QuestionType.JOB },
-        {
-          size: PERSONALITY,
-          questionType: interviewType.QuestionType.PERSONALITY,
-        },
-      ];
+      if (isLimited) return;
 
-      getRandomQustions(formattedData);
-    }
-    , [getRandomQustions],
+      const formattedData = Object.entries(data).map(([type, size]) => ({
+        size: Number(size),
+        questionType: type as interviewType.QuestionType,
+      }));
+
+      getRandomQuestions(formattedData);
+      setSubmissionCount((prev) => prev + 1);
+    },
+    [getRandomQuestions, isLimited],
   );
 
   return (
     <Container>
-      <RandomQuestionForm onSubmit={onSubmit} labels={labels} />
+      <RandomQuestionForm
+        onSubmit={onSubmit}
+        labels={labels}
+        isLimitReached={isLimited}
+      />
     </Container>
   );
 }

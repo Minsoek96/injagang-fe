@@ -25,13 +25,13 @@ describe('InterviewRandomSetting', () => {
     expect(screen.getByLabelText('직무 적합성 질문')).toBeInTheDocument();
     expect(screen.getByLabelText('성격 질문')).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: '질문 불러오기' }),
+      screen.getByRole('button', { name: '랜덤 질문 추가' }),
     ).toBeInTheDocument();
   });
 
   it('필드 메시지가 출력된다.', () => {
     renderComponent();
 
-    expect(screen.getByText(/최소 하나 이상/)).toBeInTheDocument();
+    expect(screen.getByText(/최소 1개/)).toBeInTheDocument();
   });
 });
