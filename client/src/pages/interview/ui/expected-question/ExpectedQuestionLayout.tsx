@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 import { ExplanationContent } from '@/src/shared/ui';
-import {
-  fadeIn, styleMixin, V,
-} from '@/src/shared/styles';
+import { fadeIn, styleMixin, V } from '@/src/shared/styles';
 
 import {
   ExpectedQuestionSelector,
@@ -20,7 +18,9 @@ const explanationList: string[] = [
   '- 랜덤 질문만 원하시면 이 단계를 건너뛰셔도 됩니다',
 ];
 
-/** 인터뷰 질문 설정 레이아웃
+/**
+ * 인터뷰 질문 설정 레이아웃
+ *
  * - ExplanationContent : 사용자 가이드를 표시합니다.
  * - ExpectedQuestionSelecotr : 관리자가 제공하는 질문을 선택
  * - UserQuestionPlayList : 유저가 선택한 질문 + 커스텀 질문
@@ -30,17 +30,22 @@ function ExpectedQuestionLayout() {
     <InterviewListViewStyle>
       <ExplanationContent explanationList={explanationList} />
       <ResizableSplitPanel>
-        <ButtonWrapper>
-          <ResizableSplitPanel.ExpanderButton />
-        </ButtonWrapper>
-        <SwitchContainer>
-          <ResizableSplitPanel.LeftPanel>
-            <ExpectedQuestionSelector />
-          </ResizableSplitPanel.LeftPanel>
-          <ResizableSplitPanel.RightPanel>
-            <UserQuestionPlayList />
-          </ResizableSplitPanel.RightPanel>
-        </SwitchContainer>
+        {(expandedPanel) => (
+          <>
+            <ButtonWrapper>
+              <ResizableSplitPanel.ExpanderButton />
+            </ButtonWrapper>
+            <SwitchContainer>
+              <ResizableSplitPanel.LeftPanel>
+                <ExpectedQuestionSelector />
+              </ResizableSplitPanel.LeftPanel>
+              {expandedPanel === null && <GapDivider />}
+              <ResizableSplitPanel.RightPanel>
+                <UserQuestionPlayList />
+              </ResizableSplitPanel.RightPanel>
+            </SwitchContainer>
+          </>
+        )}
       </ResizableSplitPanel>
     </InterviewListViewStyle>
   );
@@ -55,13 +60,16 @@ const InterviewListViewStyle = styled.div`
 const SwitchContainer = styled.div`
   ${styleMixin.Flex()}
   width: 100%;
-  gap: 1rem;
+`;
+
+const GapDivider = styled.div`
+  width: 1rem;
 `;
 
 const ButtonWrapper = styled.div`
   display: none;
 
-  @media screen and (max-width: ${V.mediaTablet}){
+  @media screen and (max-width: ${V.mediaTablet}) {
     display: block;
     animation: ${fadeIn} 1s ease-in;
   }
