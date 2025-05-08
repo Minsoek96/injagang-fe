@@ -29,7 +29,7 @@ const useResizablePanelContext = () => {
 };
 
 type Props = {
-  children: ReactNode;
+  children: ReactNode | ((expandedPanel: 'left' | 'right' | null) => ReactNode);
 };
 
 /**
@@ -42,7 +42,11 @@ type Props = {
 function ResizableSplitPanel({ children }: Props) {
   const resizeablePanelProps = useResizablePanel();
   const {
-    panelRefs, dragResizeEnd, dragResizePanel, dragResizePanelTouch,
+    panelRefs,
+    dragResizeEnd,
+    dragResizePanel,
+    dragResizePanelTouch,
+    expandedPanel,
   } = resizeablePanelProps;
   return (
     <ResizeablePanelContext.Provider value={resizeablePanelProps}>
@@ -55,7 +59,7 @@ function ResizableSplitPanel({ children }: Props) {
         onTouchMove={dragResizePanelTouch}
         onTouchEnd={dragResizeEnd}
       >
-        {children}
+        {typeof children === 'function' ? children(expandedPanel) : children}
       </BookContainer>
     </ResizeablePanelContext.Provider>
   );
@@ -65,6 +69,11 @@ type PanelProps = {
   children: ReactNode;
 };
 
+/**
+ * 분할된 패널의 완전 확장을 제어
+ *
+ * - 사용자 경험을 위한 버튼 제공
+ */
 function PanelExpander() {
   const { togglePanelExpansion, expandedPanel } = useResizablePanelContext();
 
@@ -104,6 +113,10 @@ function PanelExpander() {
   );
 }
 
+/**
+ * 분할된 패널의 왼쪽 패널
+ *
+ */
 function LeftPanel({ children }: PanelProps) {
   const {
     panelRefs, panelWidth, expandedPanel, togglePanelExpansion,
@@ -112,7 +125,14 @@ function LeftPanel({ children }: PanelProps) {
   const panelDubleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     const target = e.target as HTMLElement;
-    const ignoreSelectors = ['input', 'select', 'li', 'a', '.clickable', '[role="button"]'];
+    const ignoreSelectors = [
+      'input',
+      'select',
+      'li',
+      'a',
+      '.clickable',
+      '[role="button"]',
+    ];
 
     const shouldIgnore = ignoreSelectors.some((selector) =>
       target.closest(selector));
@@ -136,6 +156,10 @@ function LeftPanel({ children }: PanelProps) {
   );
 }
 
+/**
+ * 분할된 패널의 왼쪽 패널
+ *
+ */
 function RightPanel({ children }: PanelProps) {
   const {
     panelRefs, panelWidth, expandedPanel, togglePanelExpansion,
