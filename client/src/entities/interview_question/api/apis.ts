@@ -4,7 +4,7 @@ import {
   IntvFeedback,
   IQuestion,
   IRandomQuestions,
-  QuestionType,
+  QuestionTypeValue,
 } from '@/src/entities/interview_question/model/type';
 
 import { fetcher, METHOD } from '@/src/shared/utils';
@@ -12,7 +12,7 @@ import { NEXT_APIS, QUESTIONS_APIS } from '@/src/shared/config/apis';
 
 // FIXME : 잘못된 예외처리 사용중 수정해야함
 const getInterViewQuestionList = async (
-  queryString: QuestionType | string,
+  queryString: QuestionTypeValue | string,
 ): Promise<IQuestion[]> =>
   fetcher(
     METHOD.GET,

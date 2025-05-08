@@ -21,9 +21,10 @@ describe('InterviewRandomSetting', () => {
     renderComponent();
 
     expect(screen.getByLabelText('CS질문')).toBeInTheDocument();
-    expect(screen.getByLabelText('상황 판단 질문')).toBeInTheDocument();
-    expect(screen.getByLabelText('직무 적합성 질문')).toBeInTheDocument();
-    expect(screen.getByLabelText('성격 질문')).toBeInTheDocument();
+    expect(screen.getByLabelText('프론트엔드 질문')).toBeInTheDocument();
+    expect(screen.getByLabelText('백엔드 질문')).toBeInTheDocument();
+    expect(screen.getByLabelText('상황 질문')).toBeInTheDocument();
+    expect(screen.getByLabelText('직업 공통 질문')).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: '랜덤 질문 추가' }),
     ).toBeInTheDocument();

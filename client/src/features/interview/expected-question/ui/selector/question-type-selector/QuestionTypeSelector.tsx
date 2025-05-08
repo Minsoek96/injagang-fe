@@ -1,19 +1,21 @@
 import styled from 'styled-components';
-import { ComboBox } from '@/src/shared/ui/combobox';
 
 import {
   interviewType,
   useIntvPlaylistStore,
 } from '@/src/entities/interview_question';
+
+import { ComboBox } from '@/src/shared/ui/combobox';
 import { V } from '@/src/shared/styles';
 
-const InterViewSelectData = [
-  { title: interviewType.QuestionType.CS, id: 'qeustion_1' },
-  { title: interviewType.QuestionType.SITUATION, id: 'qeustion_2' },
-  { title: interviewType.QuestionType.JOB, id: 'qeustion_3' },
-  { title: interviewType.QuestionType.PERSONALITY, id: 'qeustion_4' },
-  { title: 'ALL', id: 'qeustion_5' },
-];
+const InterViewSelectData = Object.entries(interviewType.QuestionType).map(
+  ([key, value], index) => ({
+    origin: value,
+    id: `question_${index}`,
+    korean:
+      interviewType.QuestionTypeKr[key as interviewType.QuestionTypeValue],
+  }),
+);
 
 interface IQuestionSelectorProps {
   onReset: () => void;
@@ -25,9 +27,11 @@ interface IQuestionSelectorProps {
  */
 function QuestionTypeSelector({ onReset }: IQuestionSelectorProps) {
   const selectedType = useIntvPlaylistStore((state) => state.selectedType);
-  const setSelectedType = useIntvPlaylistStore((state) => state.setSelectedType);
+  const setSelectedType = useIntvPlaylistStore(
+    (state) => state.setSelectedType,
+  );
 
-  const onChangeType = (type: interviewType.QuestionType | string) => {
+  const onChangeType = (type: interviewType.QuestionTypeValue | string) => {
     onReset();
     setSelectedType(type);
   };
@@ -37,7 +41,7 @@ function QuestionTypeSelector({ onReset }: IQuestionSelectorProps) {
       <ComboBox
         label="질문타입선택"
         hideLabel
-        items={InterViewSelectData.map((item) => item.title)}
+        items={InterViewSelectData.map((item) => item.korean)}
         selectedItem={selectedType}
         itemToId={(item) => item || ''}
         itemToText={(item) => item || ''}

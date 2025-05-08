@@ -18,28 +18,36 @@ function InterviewRandomSetting() {
   const { mutate: getRandomQuestions } = interviewMutation.useFetchRandomQuestion();
   const isLimited = submissionCount >= MAX_RANDOM_QUESTIONS;
 
-  const labels = useMemo(() => [
-    {
-      key: interviewType.QuestionType.CS,
-      label: 'CS질문',
-      type: 'number',
-    },
-    {
-      key: interviewType.QuestionType.SITUATION,
-      label: '상황 판단 질문',
-      type: 'number',
-    },
-    {
-      key: interviewType.QuestionType.JOB,
-      label: '직무 적합성 질문',
-      type: 'number',
-    },
-    {
-      key: interviewType.QuestionType.PERSONALITY,
-      label: '성격 질문',
-      type: 'number',
-    },
-  ], []);
+  const labels = useMemo(
+    () => [
+      {
+        key: interviewType.QuestionType.CS,
+        label: 'CS질문',
+        type: 'number',
+      },
+      {
+        key: interviewType.QuestionType.FRONT,
+        label: '프론트엔드 질문',
+        type: 'number',
+      },
+      {
+        key: interviewType.QuestionType.BACK,
+        label: '백엔드 질문',
+        type: 'number',
+      },
+      {
+        key: interviewType.QuestionType.SITUATION,
+        label: '상황 질문',
+        type: 'number',
+      },
+      {
+        key: interviewType.QuestionType.COMMON,
+        label: '직업 공통 질문',
+        type: 'number',
+      },
+    ],
+    [],
+  );
 
   const onSubmit = useCallback(
     (data: RandomQuestionType) => {
@@ -47,7 +55,7 @@ function InterviewRandomSetting() {
 
       const formattedData = Object.entries(data).map(([type, size]) => ({
         size: Number(size),
-        questionType: type as interviewType.QuestionType,
+        questionType: type as interviewType.QuestionTypeValue,
       }));
 
       getRandomQuestions(formattedData);

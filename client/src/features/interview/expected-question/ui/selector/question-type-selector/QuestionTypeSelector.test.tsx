@@ -21,7 +21,7 @@ describe('QuestionTypeSelector', () => {
     const comboBox = screen.getByLabelText(/질문타입선택/);
     expect(comboBox).toBeInTheDocument();
 
-    fireEvent.change(comboBox, { target: { value: 'JOB' } });
+    fireEvent.change(comboBox, { target: { value: '프론트엔드 질문' } });
 
     await waitFor(() => {
       expect(mockReset).toHaveBeenCalled();

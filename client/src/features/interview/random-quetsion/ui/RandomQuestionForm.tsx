@@ -29,9 +29,10 @@ function RadomQuestionForm({ labels, onSubmit, isLimitReached }: Props) {
   } = useForm<RandomQuestionType>({
     defaultValues: {
       CS: 0,
+      FRONT: 0,
+      BACK: 0,
       SITUATION: 0,
-      JOB: 0,
-      PERSONALITY: 0,
+      COMMON: 0,
     },
   });
 

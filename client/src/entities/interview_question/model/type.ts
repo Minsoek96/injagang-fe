@@ -1,15 +1,33 @@
 // eslint-disable-next-line no-shadow
-export enum QuestionType {
-  CS = 'CS',
-  SITUATION = 'SITUATION',
-  JOB = 'JOB',
-  PERSONALITY = 'PERSONALITY',
-  ALL = 'ALL', // ALL이라는 타입은 API 문서상은 존재하지 않는 예외 타입
-}
+export const QuestionType = {
+  CS: 'CS',
+  FRONT: 'FRONT',
+  BACK: 'BACK',
+  COMMON: 'COMMON',
+  UNIVERSITY: 'UNIVERSITY',
+  SITUATION: 'SITUATION',
+  ALL: 'ALL',
+} as const;
+
+/** 서버 타입 유형 */
+export type QuestionTypeValue = typeof QuestionType[keyof typeof QuestionType];
+
+/** 클라이언트 타입 유형 */
+export type QuestionTypeKrValue = 'CS 질문' | '상황 질문' | '프론트엔드 질문' | '백엔드 질문' | '공통 질문' | '대학 입학 질문' | '전체 유형';
+
+export const QuestionTypeKr: Record<QuestionTypeValue, QuestionTypeKrValue> = {
+  [QuestionType.CS]: 'CS 질문',
+  [QuestionType.SITUATION]: '상황 질문',
+  [QuestionType.FRONT]: '프론트엔드 질문',
+  [QuestionType.BACK]: '백엔드 질문',
+  [QuestionType.COMMON]: '공통 질문',
+  [QuestionType.UNIVERSITY]: '대학 입학 질문',
+  [QuestionType.ALL]: '전체 유형',
+} as const;
 
 export interface IAddQuestions {
   questions: string[];
-  questionType: QuestionType | string;
+  questionType: QuestionTypeValue | string;
 }
 
 export interface IGetQuestion {
@@ -19,7 +37,7 @@ export interface IGetQuestion {
 
 export interface IRandomQuestions {
   size: number;
-  questionType: QuestionType;
+  questionType: QuestionTypeValue;
 }
 
 export interface IDeleteQuestions {
@@ -28,7 +46,7 @@ export interface IDeleteQuestions {
 
 export interface IResponseRandom {
   id: number;
-  questions: QuestionType;
+  questions: QuestionTypeValue;
 }
 
 export interface IQuestion {

@@ -1,8 +1,8 @@
-import { QuestionType } from '@/src/entities/interview_question/model/type';
+import { QuestionTypeValue } from '@/src/entities/interview_question/model/type';
 
 const interview = {
   all: ['interview'],
-  list: (type: QuestionType | string) => [...interview.all, type],
+  list: (type: QuestionTypeValue | string) => [...interview.all, type],
 };
 
 export default interview;

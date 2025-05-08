@@ -11,15 +11,15 @@ const sampleRandomQuestion: IRandomQuestions[] = [
     size: 5,
   },
   {
-    questionType: QuestionType.SITUATION,
+    questionType: QuestionType.FRONT,
     size: 3,
   },
   {
-    questionType: QuestionType.JOB,
+    questionType: QuestionType.BACK,
     size: 3,
   },
   {
-    questionType: QuestionType.PERSONALITY,
+    questionType: QuestionType.COMMON,
     size: 1,
   },
 ];

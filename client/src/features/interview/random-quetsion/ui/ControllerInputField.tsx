@@ -8,7 +8,7 @@ import { InputField } from '@/src/shared/ui';
 import { RandomQuestionType } from '../model/type';
 
 type Props = {
-  name: interviewType.QuestionType;
+  name: interviewType.QuestionTypeValue;
   label: string;
   type: string;
   control: Control<RandomQuestionType, unknown>;
