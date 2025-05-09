@@ -18,7 +18,8 @@ function CustomQuestionControls({
   const [title, setTitle] = useState<string>('');
   const textRef = useRef<HTMLInputElement>(null);
 
-  const handleAddText = (e:React.MouseEvent) => {
+  const handleAddText = (e:React.FormEvent) => {
+    e.preventDefault();
     e.stopPropagation();
     handleAddQuestion(title);
     setTitle('');
@@ -26,7 +27,7 @@ function CustomQuestionControls({
   };
 
   return (
-    <AddTextInputStyle>
+    <AddFormContainer onSubmit={handleAddText}>
       <MainInput
         ref={textRef}
         placeholder="커스텀 질문을 등록해주세요."
@@ -47,13 +48,13 @@ function CustomQuestionControls({
           onClick={handleConfirmQuestion}
         />
       </ButtonContainer>
-    </AddTextInputStyle>
+    </AddFormContainer>
   );
 }
 
 export default CustomQuestionControls;
 
-const AddTextInputStyle = styled.div`
+const AddFormContainer = styled.form`
   ${styleMixin.Flex()};
   width: 100%;
   margin-top: 1rem;
