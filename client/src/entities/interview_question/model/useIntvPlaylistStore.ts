@@ -9,6 +9,7 @@ type State = {
 type Action = {
   setSelectedType: (type: string) => void;
   setUserPlayList: (list: string[]) => void;
+  reorderPlayList: (list: string[]) => void;
   removePlayItem: (targetItem: string) => void;
   initUserPlayList: () => void;
 };
@@ -22,6 +23,7 @@ const initialState: State = {
  *  - userPlayList : 유저가 선택한 타입별 질문
  *  - selectedTypes : 유저가 선택한 타입
  *  - initUserPlayList : 유저가 선택한 타입별 질문 초기화
+ *  - reorderPlayList : 플레이 리스트 순번 교체
  */
 const useIntvPlaylistStore = create<State & Action>()(
   persist(
@@ -41,15 +43,21 @@ const useIntvPlaylistStore = create<State & Action>()(
           };
         }),
 
+      reorderPlayList: (list: string[]) =>
+        set({
+          userPlayList: list,
+        }),
+
       setSelectedType: (type: string) => set({ selectedType: type }),
 
-      removePlayItem: (targetItem: string) => set((state) => {
-        const { userPlayList } = state;
-        const filterItem = userPlayList.filter((item) => item !== targetItem);
-        return {
-          userPlayList: filterItem,
-        };
-      }),
+      removePlayItem: (targetItem: string) =>
+        set((state) => {
+          const { userPlayList } = state;
+          const filterItem = userPlayList.filter((item) => item !== targetItem);
+          return {
+            userPlayList: filterItem,
+          };
+        }),
 
       initUserPlayList: () => set({ userPlayList: [] }),
     }),
