@@ -53,13 +53,6 @@ describe('UserQuestionPlayList', () => {
     expect(mockHandleAddText).toHaveBeenCalledWith('New Question');
   });
 
-  it('질문을 삭제하면 handleRemoveText가 호출되어야 한다', () => {
-    renderComponent();
-
-    const deleteButton = screen.getAllByText('삭제')[0];
-    fireEvent.click(deleteButton);
-  });
-
   it('비우기 버튼 클릭 시 roleAction이 호출되어야 한다', () => {
     renderComponent();
 

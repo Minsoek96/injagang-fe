@@ -1,18 +1,21 @@
+import {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
+import { createPortal } from 'react-dom';
+
 import { styled } from 'styled-components';
-
-import { styleMixin } from '@/src/shared/styles';
-import { keys } from '@/src/shared/utils';
-
 import { PiMusicNotes } from 'react-icons/pi';
 
 import {
   closestCenter,
   DndContext,
   DragEndEvent,
+  DragOverlay,
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
+  DragStartEvent,
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -23,15 +26,18 @@ import {
 
 import { useIntvPlaylistStore } from '@/src/entities/interview_question';
 
-import {
-  useCallback, useEffect, useRef, useState,
-} from 'react';
+import { styleMixin } from '@/src/shared/styles';
+import { keys } from '@/src/shared/utils';
+
 import PlayListItem from './PlayListItem';
 
 type Props = {
   userPlayList: string[];
   removeQuestion: (item: string) => void;
 };
+
+// 삭제 영역 여유 공간
+const CONTAINER_OFFSET = 50;
 
 export default function PlayListContent({
   userPlayList,
@@ -40,21 +46,28 @@ export default function PlayListContent({
   const containerRef = useRef<HTMLUListElement | null>(null);
   const [isOutsideDroppableArea, setIsOutsideDroppableArea] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
+
   const reorderPlayList = useIntvPlaylistStore(
     (state) => state.reorderPlayList,
   );
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!isDragging || !containerRef.current) return;
-    const containerRect = containerRef.current?.getBoundingClientRect();
-    const { clientX, clientY } = e;
-    const outside = clientX < containerRect.left - 50
-        || clientX > containerRect.right + 50
-        || clientY < containerRect.top - 50
-        || clientY > containerRect.bottom + 50;
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!isDragging || !containerRef.current) return;
 
-    setIsOutsideDroppableArea(outside);
-  }, [isDragging]);
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const { clientX, clientY } = e;
+
+      const outside = clientX < containerRect.left - CONTAINER_OFFSET
+        || clientX > containerRect.right + CONTAINER_OFFSET
+        || clientY < containerRect.top - CONTAINER_OFFSET
+        || clientY > containerRect.bottom + CONTAINER_OFFSET;
+
+      setIsOutsideDroppableArea(outside);
+    },
+    [isDragging],
+  );
 
   useEffect(() => {
     if (isDragging) {
@@ -78,30 +91,44 @@ export default function PlayListContent({
     }),
   );
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
+  // 드래그 종료 함수
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const { active, over } = event;
+      const activeItemId = active.id as string;
 
-    if (isOutsideDroppableArea) {
-      removeQuestion(active.id as string);
-    }
+      if (isOutsideDroppableArea) {
+        removeQuestion(activeItemId);
+      } else if (over && active.id !== over.id) {
+        const oldIndex = userPlayList.findIndex(
+          (item) => item === activeItemId,
+        );
+        const newIndex = userPlayList.findIndex((item) => item === over.id);
 
-    if (over && active.id !== over.id) {
-      const oldIndex = userPlayList.findIndex((item) => item === active.id);
-      const newIndex = userPlayList.findIndex((item) => item === over.id);
-      const newItems = arrayMove(userPlayList, oldIndex, newIndex);
-      reorderPlayList(newItems);
-    }
-  };
+        if (oldIndex !== newIndex) {
+          const newItems = arrayMove(userPlayList, oldIndex, newIndex);
+          reorderPlayList(newItems);
+        }
+      }
 
-  const handleDragStart = () => {
+      setIsDragging(false);
+      setActiveId(null);
+      setIsOutsideDroppableArea(false);
+    },
+    [isOutsideDroppableArea, removeQuestion, userPlayList, reorderPlayList],
+  );
+
+  // 드래그 시작 함수
+  const handleDragStart = useCallback((event: DragStartEvent) => {
     setIsDragging(true);
     setIsOutsideDroppableArea(false);
-  };
+    setActiveId(event.active.id as string);
+  }, []);
 
-  const hasPlayList = userPlayList && userPlayList.length > 0;
-  if (!hasPlayList) {
+  if (!userPlayList?.length) {
     return <EmptyList />;
   }
+
   return (
     <Container ref={containerRef}>
       <DndContext
@@ -115,12 +142,18 @@ export default function PlayListContent({
           strategy={verticalListSortingStrategy}
         >
           {userPlayList.map((question, idx) => (
-            <PlayListItem
-              key={keys(question, idx)}
-              item={question}
-            />
+            <PlayListItem key={keys(question, idx)} item={question} />
           ))}
         </SortableContext>
+
+        {isDragging
+          && activeId
+          && createPortal(
+            <DragOverlayStyle>
+              <PlayListItem item={activeId} isDeleteZone={isOutsideDroppableArea} />
+            </DragOverlayStyle>,
+            document.body,
+          )}
       </DndContext>
     </Container>
   );
@@ -141,6 +174,10 @@ function EmptyList() {
     </Container>
   );
 }
+
+const DragOverlayStyle = styled(DragOverlay)`
+  background-color: ${(props) => `${props.theme.colors.signatureColor}3A`};
+`;
 
 const Container = styled.ul`
   padding-right: 0.5rem;

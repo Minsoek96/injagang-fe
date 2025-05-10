@@ -10,9 +10,10 @@ import { styleMixin, V } from '@/src/shared/styles';
 
 type AddQuestionItemProps = {
   item: string;
+  isDeleteZone?: boolean;
 };
 
-function PlayListItem({ item }: AddQuestionItemProps) {
+function PlayListItem({ item, isDeleteZone = false }: AddQuestionItemProps) {
   const {
     attributes,
     listeners,
@@ -26,9 +27,7 @@ function PlayListItem({ item }: AddQuestionItemProps) {
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition:
-      transition
-      || 'transform 350ms cubic-bezier(0.25, 1, 0.5, 1), opacity 200ms ease',
+    transition,
     zIndex: isDragging ? 999 : 'auto',
     opacity: isDragging ? 0.5 : 1,
     touchAction: 'none',
@@ -39,11 +38,13 @@ function PlayListItem({ item }: AddQuestionItemProps) {
       ref={setNodeRef}
       style={{ ...style }}
       $isDragging={isDragging}
+      $isDeleteZone={isDeleteZone}
       {...attributes}
       {...listeners}
     >
       <ContentWrapper>
         <ItemText>{item}</ItemText>
+        {isDeleteZone && <ItemText>Remove</ItemText>}
         <MdDragHandle />
       </ContentWrapper>
     </PlayItemContainer>
@@ -54,12 +55,19 @@ export default memo(PlayListItem);
 
 const PlayItemContainer = styled.li<{
   $isDragging: boolean;
+  $isDeleteZone: boolean;
 }>`
   ${styleMixin.Flex('space-between', 'center')}
   margin-bottom: 1rem;
   line-height: 1.5;
-  border: 0.1em solid ${(props) => props.theme.colors.mainLine};
-  border-left: 2px solid ${(props) => props.theme.colors.signatureColor};
+  border: 0.1em
+    ${({ $isDeleteZone, theme }) =>
+    ($isDeleteZone ? `dashed ${theme.colors.red}` : `solid ${theme.colors.mainLine}`)};
+
+  border-left: 4px solid
+    ${({ $isDeleteZone, theme }) =>
+    ($isDeleteZone ? theme.colors.red : theme.colors.signatureColor)};
+
   border-radius: 5px;
   padding: 0.8em 1em;
   height: 6rem;
@@ -84,7 +92,7 @@ const ContentWrapper = styled.div`
   flex: 1;
   svg {
     font-size: 3rem;
-    color: ${(props) => props.theme.colors.highlightLine}
+    color: ${(props) => props.theme.colors.highlightLine};
   }
 `;
 
