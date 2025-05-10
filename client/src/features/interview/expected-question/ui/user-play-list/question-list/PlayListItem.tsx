@@ -1,23 +1,18 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 
 import styled from 'styled-components';
-import { BiTrash } from 'react-icons/bi';
 import { MdDragHandle } from 'react-icons/md';
 
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-import { HideSvg } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 
 type AddQuestionItemProps = {
   item: string;
-  handleRemoveText: (question: string) => void;
 };
 
-function PlayListItem({ item, handleRemoveText }: AddQuestionItemProps) {
-  const [isRemoving, setIsRemoving] = useState(false);
-
+function PlayListItem({ item }: AddQuestionItemProps) {
   const {
     attributes,
     listeners,
@@ -39,36 +34,18 @@ function PlayListItem({ item, handleRemoveText }: AddQuestionItemProps) {
     touchAction: 'none',
   };
 
-  const handleRemoveClick = () => {
-    setIsRemoving(true);
-  };
-
-  const handleAnimationEnd = () => {
-    if (isRemoving) {
-      handleRemoveText(item);
-    }
-  };
-
   return (
     <PlayItemContainer
       ref={setNodeRef}
       style={{ ...style }}
       $isDragging={isDragging}
-      $isRemoving={isRemoving}
-      onAnimationEnd={handleAnimationEnd}
       {...attributes}
       {...listeners}
     >
       <ContentWrapper>
-        <MdDragHandle />
         <ItemText>{item}</ItemText>
+        <MdDragHandle />
       </ContentWrapper>
-      <HideSvg
-        Logo={<BiTrash />}
-        label="삭제"
-        onClick={handleRemoveClick}
-        sx={{ fontSize: '2.5rem' }}
-      />
     </PlayItemContainer>
   );
 }
@@ -76,7 +53,6 @@ function PlayListItem({ item, handleRemoveText }: AddQuestionItemProps) {
 export default memo(PlayListItem);
 
 const PlayItemContainer = styled.li<{
-  $isRemoving: boolean;
   $isDragging: boolean;
 }>`
   ${styleMixin.Flex('space-between', 'center')}
@@ -98,23 +74,6 @@ const PlayItemContainer = styled.li<{
     cursor: grabbing;
   }
 
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  opacity: ${(props) => (props.$isRemoving ? 0 : 1)};
-  transform: ${(props) => (props.$isRemoving ? 'scale(0.8)' : 'scale(1)')};
-  animation: ${(props) =>
-    (props.$isRemoving ? 'removeAnimation 0.5s forwards' : 'none')};
-
-  @keyframes removeAnimation {
-    0% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-  }
-
   @media screen and (max-width: ${V.mediaMobile}) {
     font-size: 1.4rem;
   }
@@ -125,6 +84,7 @@ const ContentWrapper = styled.div`
   flex: 1;
   svg {
     font-size: 3rem;
+    color: ${(props) => props.theme.colors.highlightLine}
   }
 `;
 

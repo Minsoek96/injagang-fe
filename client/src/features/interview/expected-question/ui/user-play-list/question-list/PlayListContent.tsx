@@ -23,6 +23,9 @@ import {
 
 import { useIntvPlaylistStore } from '@/src/entities/interview_question';
 
+import {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 import PlayListItem from './PlayListItem';
 
 type Props = {
@@ -34,9 +37,33 @@ export default function PlayListContent({
   userPlayList,
   removeQuestion,
 }: Props) {
+  const containerRef = useRef<HTMLUListElement | null>(null);
+  const [isOutsideDroppableArea, setIsOutsideDroppableArea] = useState<boolean>(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
   const reorderPlayList = useIntvPlaylistStore(
     (state) => state.reorderPlayList,
   );
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragging || !containerRef.current) return;
+    const containerRect = containerRef.current?.getBoundingClientRect();
+    const { clientX, clientY } = e;
+    const outside = clientX < containerRect.left - 50
+        || clientX > containerRect.right + 50
+        || clientY < containerRect.top - 50
+        || clientY > containerRect.bottom + 50;
+
+    setIsOutsideDroppableArea(outside);
+  }, [isDragging]);
+
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+    }
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isDragging, handleMouseMove]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -54,6 +81,10 @@ export default function PlayListContent({
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
+    if (isOutsideDroppableArea) {
+      removeQuestion(active.id as string);
+    }
+
     if (over && active.id !== over.id) {
       const oldIndex = userPlayList.findIndex((item) => item === active.id);
       const newIndex = userPlayList.findIndex((item) => item === over.id);
@@ -62,16 +93,22 @@ export default function PlayListContent({
     }
   };
 
+  const handleDragStart = () => {
+    setIsDragging(true);
+    setIsOutsideDroppableArea(false);
+  };
+
   const hasPlayList = userPlayList && userPlayList.length > 0;
   if (!hasPlayList) {
     return <EmptyList />;
   }
   return (
-    <Container>
+    <Container ref={containerRef}>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
+        onDragStart={handleDragStart}
       >
         <SortableContext
           items={userPlayList}
@@ -81,7 +118,6 @@ export default function PlayListContent({
             <PlayListItem
               key={keys(question, idx)}
               item={question}
-              handleRemoveText={removeQuestion}
             />
           ))}
         </SortableContext>
@@ -110,8 +146,8 @@ const Container = styled.ul`
   padding-right: 0.5rem;
   height: 100%;
   width: 100%;
-  overflow-x: hidden;
   margin-block: 1rem;
+  overflow: hidden;
   ${styleMixin.hideScrollbarStyle}
 `;
 
