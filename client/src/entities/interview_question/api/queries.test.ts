@@ -19,7 +19,7 @@ describe('useFetchQuestions', () => {
     jest.clearAllMocks();
 
     (useIntvPlaylistStore as unknown as jest.Mock).mockImplementation(
-      (selector) => selector({ selectedType: sampleType }),
+      (selector) => selector({ selectedType: 'CS 질문' }),
     );
 
     (getInterViewQuestionList as jest.Mock).mockResolvedValue(

@@ -1,11 +1,14 @@
 import { useCallback } from 'react';
 
 import { useAuthStore } from '@/src/entities/auth';
-import { useIntvPlaylistStore, interviewMutation } from '@/src/entities/interview_question';
+import {
+  useIntvPlaylistStore, interviewMutation, interviewType, getQuestionTypeByLabel,
+} from '@/src/entities/interview_question';
 
 import { useModal } from '@/src/shared/hooks';
 import { ERROR_MESSAGES, MODAL_MESSAGES } from '@/src/shared/const';
 
+// TODO : 어드민 기능 분리하기 쓸데없는 리렌더링 유발
 const useExpetedPlayList = () => {
   const selectedType = useIntvPlaylistStore((state) => state.selectedType);
   const userPlayList = useIntvPlaylistStore((state) => state.userPlayList);
@@ -50,7 +53,7 @@ const useExpetedPlayList = () => {
     }
     const addList = {
       questions: userPlayList,
-      questionType: selectedType,
+      questionType: getQuestionTypeByLabel(selectedType as interviewType.QuestionTypeKrValue),
     };
     dispatchAddQuestions(addList);
     initUserPlayList();

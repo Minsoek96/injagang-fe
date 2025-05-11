@@ -6,8 +6,8 @@ import {
   QuestionTypeValue,
 } from '@/src/entities/interview_question/model/type';
 
-import useIntvPlaylistStore from '@/src/entities/interview_question/model/useIntvPlaylistStore';
 import { useMemo } from 'react';
+import useIntvPlaylistStore from '../model/useIntvPlaylistStore';
 import interview from './queryKeys';
 import { getInterViewQuestionList } from './apis';
 import { getQuestionTypeByLabel } from '../util';
@@ -23,9 +23,9 @@ const useFetchQuestions = () => {
 
   return useQuery({
     queryKey: interview.list(questionType),
-    queryFn: () => getInterViewQuestionList(selectedType),
+    queryFn: () => getInterViewQuestionList(questionType),
     enabled: Object.values(QuestionType).includes(
-      selectedType as QuestionTypeValue,
+      questionType as QuestionTypeValue,
     ),
     staleTime: 24 * 60 * 60 * 1000,
   });
