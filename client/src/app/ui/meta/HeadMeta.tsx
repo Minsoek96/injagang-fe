@@ -1,8 +1,16 @@
 import Head from 'next/head';
 
+/**
+ * TODOS
+ * SEO 등록하기
+ * 메타태그 정리하기
+ * 푸터 만들기
+ *
+ */
 export default function HeadMeta() {
   return (
     <Head>
+      <meta name="google-site-verification" content="ZRDweMROze8tJqRfJ43CI5Ii-M9bbwpyy_YYoY7zdqw" />
       <title>RelayMentor | 함께 나아가는 커리어 동반자</title>
       <meta name="description" content="취준생들을 위한 자소서 피드백 커뮤니티와 모의면접 시뮬레이션 플랫폼" />
       {/* <meta
@@ -11,7 +19,7 @@ export default function HeadMeta() {
       /> */}
       <meta
         name="keywords"
-        content="면접 연습, 자소서 피드백, 가상면접, 모의면접, 면접 시뮬레이션, 자소서 첨삭, 취준, 취업준비, 입사지원, 면접질문, 면접 팁, 릴레이멘토"
+        content="면접 연습, 자소서 피드백, 가상면접, 모의면접, 면접 시뮬레이션, 자소서 첨삭, 취준, 취업준비, 면접질문, 면접 팁, 릴레이멘토"
       />
       <meta
         name="Description"
