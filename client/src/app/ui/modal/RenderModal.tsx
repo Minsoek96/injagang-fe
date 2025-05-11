@@ -5,18 +5,34 @@ import { BiMessageError } from 'react-icons/bi';
 import { MainButton, Modal } from '@/src/shared/ui';
 import { styleMixin, V } from '@/src/shared/styles';
 import { useModalAction, useModalState } from '@/src/shared/store';
+import { useCallback, useEffect } from 'react';
 
 const MODAL_CLOSE_DELAY = 50;
 
 export default function RenderModal() {
   const { closeModal } = useModalAction();
   const { modalState, isModalOpen } = useModalState();
-
-  if (!modalState) {
-    return null;
-  }
-
   const { title, message } = modalState;
+
+  const keyHandler = useCallback(
+    (e: KeyboardEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (e.key === 'Escape') {
+        closeModal();
+        return;
+      }
+
+      if (e.key === 'Enter' && modalState.onAction) {
+        closeModal();
+        setTimeout(() => {
+          modalState.onAction?.();
+        }, MODAL_CLOSE_DELAY);
+      }
+    },
+    [modalState, closeModal],
+  );
 
   const handleAction = () => {
     if (!modalState.onAction) return;
@@ -25,6 +41,20 @@ export default function RenderModal() {
       modalState.onAction?.();
     }, MODAL_CLOSE_DELAY);
   };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.addEventListener('keydown', keyHandler);
+    }
+    return () => {
+      document.removeEventListener('keydown', keyHandler);
+    };
+  }, [isModalOpen, keyHandler]);
+
+  if (!modalState) {
+    return null;
+  }
+
   return (
     <Modal isOpen={!!modalState && isModalOpen} onClose={closeModal}>
       <Modal.Header>

@@ -59,8 +59,16 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
 
   useEffect(() => {
     setMounted(true);
-    return () => setMounted(false);
-  }, []);
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      setMounted(false);
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   if (!mounted) return null;
 
@@ -108,6 +116,8 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
   z-index: 1000;
+  overflow: hidden;
+  scroll-behavior: contain;
 `;
 
 const ModalContainer = styled.div`
