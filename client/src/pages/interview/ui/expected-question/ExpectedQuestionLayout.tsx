@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { ExplanationContent } from '@/src/shared/ui';
-import { fadeIn, styleMixin, V } from '@/src/shared/styles';
+import { styleMixin } from '@/src/shared/styles';
 
 import {
   ExpectedQuestionSelector,
@@ -31,20 +31,15 @@ function ExpectedQuestionLayout() {
       <ExplanationContent explanationList={explanationList} />
       <ResizableSplitPanel>
         {(expandedPanel) => (
-          <>
-            <ButtonWrapper>
-              <ResizableSplitPanel.ExpanderButton />
-            </ButtonWrapper>
-            <SwitchContainer>
-              <ResizableSplitPanel.LeftPanel>
-                <ExpectedQuestionSelector />
-              </ResizableSplitPanel.LeftPanel>
-              {expandedPanel === null && <GapDivider />}
-              <ResizableSplitPanel.RightPanel>
-                <UserQuestionPlayList />
-              </ResizableSplitPanel.RightPanel>
-            </SwitchContainer>
-          </>
+          <SwitchContainer>
+            <ResizableSplitPanel.LeftPanel>
+              <ExpectedQuestionSelector />
+            </ResizableSplitPanel.LeftPanel>
+            {expandedPanel === null && <GapDivider />}
+            <ResizableSplitPanel.RightPanel>
+              <UserQuestionPlayList />
+            </ResizableSplitPanel.RightPanel>
+          </SwitchContainer>
         )}
       </ResizableSplitPanel>
     </InterviewListViewStyle>
@@ -63,14 +58,5 @@ const SwitchContainer = styled.div`
 `;
 
 const GapDivider = styled.div`
-  width: 1rem;
-`;
-
-const ButtonWrapper = styled.div`
-  display: none;
-
-  @media screen and (max-width: ${V.mediaTablet}) {
-    display: block;
-    animation: ${fadeIn} 1s ease-in;
-  }
+  width:2rem;
 `;

@@ -6,12 +6,10 @@ import React, {
 } from 'react';
 
 import { styled } from 'styled-components';
-import { styleMixin, V } from '@/src/shared/styles';
-
 import {
-  LiaAngleDoubleLeftSolid,
-  LiaAngleDoubleRightSolid,
-} from 'react-icons/lia';
+  styleMixin, fadeOut,
+} from '@/src/shared/styles';
+
 import useResizablePanel from '../model/useResizablePanel';
 
 type ContextType = ReturnType<typeof useResizablePanel>;
@@ -67,57 +65,14 @@ function ResizableSplitPanel({ children }: Props) {
 
 type PanelProps = {
   children: ReactNode;
+  tooltip?: string;
 };
-
-/**
- * 분할된 패널의 완전 확장을 제어
- *
- * - 사용자 경험을 위한 버튼 제공
- */
-function PanelExpander() {
-  const { togglePanelExpansion, expandedPanel } = useResizablePanelContext();
-
-  const handleLeftClick = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-      togglePanelExpansion('left');
-    },
-    [togglePanelExpansion],
-  );
-
-  const handleRightClick = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-      togglePanelExpansion('right');
-    },
-    [togglePanelExpansion],
-  );
-
-  return (
-    <ButtonGroup>
-      <CircleWrapper
-        onClick={handleLeftClick}
-        role="button"
-        $isActive={expandedPanel === 'left'}
-      >
-        <LiaAngleDoubleLeftSolid />
-      </CircleWrapper>
-      <CircleWrapper
-        onClick={handleRightClick}
-        role="button"
-        $isActive={expandedPanel === 'right'}
-      >
-        <LiaAngleDoubleRightSolid />
-      </CircleWrapper>
-    </ButtonGroup>
-  );
-}
 
 /**
  * 분할된 패널의 왼쪽 패널
  *
  */
-function LeftPanel({ children }: PanelProps) {
+function LeftPanel({ children, tooltip = '더블클릭으로 확장' }: PanelProps) {
   const {
     panelRefs, panelWidth, expandedPanel, togglePanelExpansion,
   } = useResizablePanelContext();
@@ -150,6 +105,7 @@ function LeftPanel({ children }: PanelProps) {
       style={{ width: `${panelWidth.leftWidth}%` }}
       onDoubleClick={panelDubleClick}
       $expandedState={expandedPanel}
+      $tooltip={tooltip}
     >
       {children}
     </BookLeftPanel>
@@ -160,7 +116,7 @@ function LeftPanel({ children }: PanelProps) {
  * 분할된 패널의 왼쪽 패널
  *
  */
-function RightPanel({ children }: PanelProps) {
+function RightPanel({ children, tooltip = '더블클릭으로 확장' }: PanelProps) {
   const {
     panelRefs, panelWidth, expandedPanel, togglePanelExpansion,
   } = useResizablePanelContext();
@@ -186,6 +142,7 @@ function RightPanel({ children }: PanelProps) {
       style={{ width: `${panelWidth.rightWidth}%` }}
       onDoubleClick={panelDubleClick}
       $expandedState={expandedPanel}
+      $tooltip={tooltip}
     >
       {children}
     </BookRightPanel>
@@ -207,6 +164,7 @@ function Center() {
 
 type StylePanelProps = {
   $expandedState: 'left' | 'right' | null;
+  $tooltip: string;
 };
 
 const BookContainer = styled.div`
@@ -216,19 +174,65 @@ const BookContainer = styled.div`
 `;
 
 const BookLeftPanel = styled.div<StylePanelProps>`
-  will-change: width;
+ will-change: width;
   overflow: hidden;
   transform: translateZ(0);
   transition: ${(props) =>
     (props.$expandedState === null ? 'none' : 'width 0.5s ease-in-out')};
+  position: relative;
+  cursor: col-resize;
+
+  /* 사라지는 툴팁 */
+  &::after {
+    content: '${(props) => props.$tooltip}';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: ${(props) => props.theme.colors.highlightLine};
+    color: ${(props) => props.theme.colors.signatureText};
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    opacity: 0;
+    pointer-events: none;
+    animation: ${fadeOut} 5s ease-in-out forwards;
+    animation-play-state: paused;
+  }
+
+  &:hover::after {
+    animation-play-state: running;
+  }
 `;
 
 const BookRightPanel = styled.div<StylePanelProps>`
-  will-change: width;
+ will-change: width;
   overflow: hidden;
   transform: translateZ(0);
   transition: ${(props) =>
     (props.$expandedState === null ? 'none' : 'width 0.5s ease-in-out')};
+  position: relative;
+  cursor: col-resize;
+
+  /* 사라지는 툴팁 */
+  &::after {
+    content: '더블클릭으로 확장';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: ${(props) => props.theme.colors.highlightLine};
+    color: ${(props) => props.theme.colors.signatureText};
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    opacity: 0;
+    pointer-events: none;
+    animation: ${fadeOut} 5s ease-in-out forwards;
+    animation-play-state: paused;
+  }
+
+  &:hover::after {
+    animation-play-state: running;
+  }
 `;
 
 const Divider = styled.div`
@@ -257,45 +261,8 @@ const BookCenter = styled.div`
   }
 `;
 
-const ButtonGroup = styled.div`
-  ${styleMixin.Flex()};
-  gap: 3rem;
-  margin-bottom: 2rem;
-`;
-
-const CircleWrapper = styled.div<{ $isActive: boolean }>`
-  ${styleMixin.Flex()};
-  border-radius: 50%;
-  background-color: ${({ theme, $isActive }) =>
-    ($isActive
-      ? theme.colors.signatureColor
-      : `${theme.colors.signatureColor}5A`)};
-  padding: 0.4rem;
-  box-shadow: ${V.boxShadow2};
-  transition: 0.5s all ease-in;
-  cursor: pointer;
-
-  svg {
-    font-size: 3rem;
-    color: white;
-  }
-
-  &:hover {
-    background-color: ${(props) => `${props.theme.colors.signatureColor}`};
-  }
-
-  &:first-child:hover {
-    transform: translateX(-10px);
-  }
-
-  &:nth-child(2):hover {
-    transform: translateX(10px);
-  }
-`;
-
 ResizableSplitPanel.LeftPanel = LeftPanel;
 ResizableSplitPanel.RightPanel = RightPanel;
 ResizableSplitPanel.Center = Center;
-ResizableSplitPanel.ExpanderButton = PanelExpander;
 
 export default ResizableSplitPanel;
