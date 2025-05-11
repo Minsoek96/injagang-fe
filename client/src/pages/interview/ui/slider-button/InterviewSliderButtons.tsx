@@ -61,6 +61,7 @@ const ControlButtons = styled.div`
   }
 
   .stage-button {
+    border: 2px solid;
     animation: ${(props) => keyframes`
       0% { border-color: ${props.theme.colors.mainLine} }
       50% { border-color: ${props.theme.colors.highlightLine}; }

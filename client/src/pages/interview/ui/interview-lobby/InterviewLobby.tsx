@@ -24,7 +24,7 @@ export default function InterviewLobby() {
           alt="roomImage"
           priority
           placeholder="blur"
-          width={500}
+          width={600}
           height={300}
           quality={100}
         />
