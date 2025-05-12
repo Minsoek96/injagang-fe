@@ -24,7 +24,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-import { useIntvPlaylistStore } from '@/src/entities/interview_question';
+import { S, useIntvPlaylistStore } from '@/src/entities/interview_question';
 
 import { styleMixin } from '@/src/shared/styles';
 import { keys } from '@/src/shared/utils';
@@ -52,12 +52,10 @@ export default function PlayListContent({
     (state) => state.reorderPlayList,
   );
 
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
+  const checkIfOutSide = useCallback(
+    (clientX: number, clientY: number) => {
       if (!isDragging || !containerRef.current) return;
-
       const containerRect = containerRef.current.getBoundingClientRect();
-      const { clientX, clientY } = e;
 
       const outside = clientX < containerRect.left - CONTAINER_OFFSET
         || clientX > containerRect.right + CONTAINER_OFFSET
@@ -69,14 +67,33 @@ export default function PlayListContent({
     [isDragging],
   );
 
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      checkIfOutSide(clientX, clientY);
+    },
+    [checkIfOutSide],
+  );
+
+  const handleTouchMove = useCallback(
+    (e: TouchEvent) => {
+      const touch = e.touches[0];
+      const { clientX, clientY } = touch;
+      checkIfOutSide(clientX, clientY);
+    },
+    [checkIfOutSide],
+  );
+
   useEffect(() => {
     if (isDragging) {
       document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('touchmove', handleTouchMove);
     }
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [isDragging, handleMouseMove]);
+  }, [isDragging, handleMouseMove, handleTouchMove]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -150,7 +167,10 @@ export default function PlayListContent({
           && activeId
           && createPortal(
             <DragOverlayStyle>
-              <PlayListItem item={activeId} isDeleteZone={isOutsideDroppableArea} />
+              <PlayListItem
+                item={activeId}
+                isDeleteZone={isOutsideDroppableArea}
+              />
             </DragOverlayStyle>,
             document.body,
           )}
@@ -161,55 +181,28 @@ export default function PlayListContent({
 
 function EmptyList() {
   return (
-    <Container>
-      <EmptyPlayList>
-        <EmptyIcon>
-          <PiMusicNotes />
-        </EmptyIcon>
-        <EmptyText>빈 플레이리스트입니다.</EmptyText>
-        <EmptySubText>
-          추천 질문을 찾아보거나 직접 질문을 작성해 보세요.
-        </EmptySubText>
-      </EmptyPlayList>
-    </Container>
+    <S.EmptyContainer>
+      <S.EmptyIcon>
+        <PiMusicNotes />
+      </S.EmptyIcon>
+      <S.EmptyText>빈 플레이리스트입니다.</S.EmptyText>
+      <S.EmptySubText>
+        추천 질문을 찾아보거나 직접 질문을 작성해 보세요.
+      </S.EmptySubText>
+    </S.EmptyContainer>
   );
 }
 
 const DragOverlayStyle = styled(DragOverlay)`
   background-color: ${(props) => `${props.theme.colors.signatureColor}3A`};
+  backdrop-filter: blur(1rem);
+  border-radius: 5px;
 `;
 
 const Container = styled.ul`
   padding-right: 0.5rem;
   height: 100%;
   width: 100%;
-  margin-block: 1rem;
-  overflow: hidden;
+  overflow-x: hidden;
   ${styleMixin.hideScrollbarStyle}
-`;
-
-const EmptyPlayList = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: 2rem;
-`;
-
-const EmptyIcon = styled.div`
-  font-size: 4rem;
-  margin-bottom: 1.5rem;
-`;
-
-const EmptyText = styled.p`
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: ${(props) => props.theme.colors.lightText};
-`;
-
-const EmptySubText = styled.p`
-  font-size: 1.4rem;
-  color: ${(props) => props.theme.colors.lightText};
 `;
