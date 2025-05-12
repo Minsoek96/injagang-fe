@@ -6,9 +6,7 @@ import React, {
 } from 'react';
 
 import { styled } from 'styled-components';
-import {
-  styleMixin, fadeOut,
-} from '@/src/shared/styles';
+import { styleMixin, fadeOut } from '@/src/shared/styles';
 
 import useResizablePanel from '../model/useResizablePanel';
 
@@ -174,19 +172,20 @@ const BookContainer = styled.div`
 `;
 
 const BookLeftPanel = styled.div<StylePanelProps>`
- will-change: width;
-  overflow: hidden;
+  will-change: width;
+  overflow: ${(props) => (props.$expandedState === null ? 'visible' : 'hidden')};
   transform: translateZ(0);
   transition: ${(props) =>
     (props.$expandedState === null ? 'none' : 'width 0.5s ease-in-out')};
   position: relative;
-  cursor: col-resize;
+  cursor: ${({ $expandedState }) =>
+    ($expandedState === null ? 'zoom-in' : 'zoom-out')};
 
   /* 사라지는 툴팁 */
   &::after {
-    content: '${(props) => props.$tooltip}';
+    content: "${(props) => props.$tooltip}";
     position: absolute;
-    top: 10px;
+    top: -10px;
     right: 10px;
     background-color: ${(props) => props.theme.colors.highlightLine};
     color: ${(props) => props.theme.colors.signatureText};
@@ -205,19 +204,20 @@ const BookLeftPanel = styled.div<StylePanelProps>`
 `;
 
 const BookRightPanel = styled.div<StylePanelProps>`
- will-change: width;
-  overflow: hidden;
+  will-change: width;
+  overflow: ${(props) => (props.$expandedState === null ? 'visible' : 'hidden')};
   transform: translateZ(0);
   transition: ${(props) =>
     (props.$expandedState === null ? 'none' : 'width 0.5s ease-in-out')};
   position: relative;
-  cursor: col-resize;
+  cursor: ${({ $expandedState }) =>
+    ($expandedState === null ? 'zoom-in' : 'zoom-out')};
 
   /* 사라지는 툴팁 */
   &::after {
-    content: '더블클릭으로 확장';
+    content: "더블클릭으로 확장";
     position: absolute;
-    top: 10px;
+    top: -10px;
     right: 10px;
     background-color: ${(props) => props.theme.colors.highlightLine};
     color: ${(props) => props.theme.colors.signatureText};
