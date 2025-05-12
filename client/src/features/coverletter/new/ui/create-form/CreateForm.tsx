@@ -136,7 +136,7 @@ export default function CreateForm({ movePage, onSubmit }: Props) {
             label={(
               <>
                 <BiPlus size={24} />
-                <span>문항 추가하기</span>
+                <span>질문 추가하기</span>
               </>
             )}
             onClick={(e) => {

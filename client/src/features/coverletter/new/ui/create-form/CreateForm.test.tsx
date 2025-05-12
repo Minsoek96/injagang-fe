@@ -71,7 +71,7 @@ describe('CreateForm', () => {
       renderCompoent();
       const backButton = screen.getByText('뒤로가기');
       const reviseButton = screen.getByText('작성완료');
-      const addButton = screen.getByText(/문항 추가/);
+      const addButton = screen.getByText(/질문 추가/);
       expect(backButton).toBeInTheDocument();
       expect(reviseButton).toBeInTheDocument();
       expect(addButton).toBeInTheDocument();

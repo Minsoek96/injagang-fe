@@ -43,8 +43,6 @@ const ScrollBar = css`
 const hideScrollbarStyle = css`
   -ms-overflow-style: none;
   scrollbar-width: none;
-  overscroll-behavior: contain;
-
   &::-webkit-scrollbar {
     display: none;
   }
