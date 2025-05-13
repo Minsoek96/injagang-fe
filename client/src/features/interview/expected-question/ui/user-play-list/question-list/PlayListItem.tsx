@@ -1,12 +1,14 @@
 import { memo } from 'react';
-
 import styled from 'styled-components';
-import { MdDragHandle } from 'react-icons/md';
+import { RxDragHandleHorizontal } from 'react-icons/rx';
 
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import { styleMixin, V } from '@/src/shared/styles';
+import { S } from '@/src/entities/interview_question';
+
+const { ListItem, ItemText } = S;
 
 type AddQuestionItemProps = {
   item: string;
@@ -44,33 +46,33 @@ function PlayListItem({ item, isDeleteZone = false }: AddQuestionItemProps) {
     >
       <ContentWrapper>
         <ItemText>{item}</ItemText>
-        {isDeleteZone && <ItemText>Remove</ItemText>}
-        <MdDragHandle />
+        {isDeleteZone && <RemoveText>Remove</RemoveText>}
       </ContentWrapper>
+      <IconWrapper>
+        <RxDragHandleHorizontal />
+      </IconWrapper>
     </PlayItemContainer>
   );
 }
 
 export default memo(PlayListItem);
 
-const PlayItemContainer = styled.li<{
+type PlayItemProps = {
   $isDragging: boolean;
   $isDeleteZone: boolean;
-}>`
-  ${styleMixin.Flex('space-between', 'center')}
-  margin-bottom: 1rem;
-  line-height: 1.5;
+};
+
+const PlayItemContainer = styled(ListItem)<PlayItemProps>`
+  position: relative;
   border: 0.1em
     ${({ $isDeleteZone, theme }) =>
-    ($isDeleteZone ? `dashed ${theme.colors.red}` : `solid ${theme.colors.mainLine}`)};
+    ($isDeleteZone
+      ? `dashed ${theme.colors.red}`
+      : `solid ${theme.colors.mainLine}`)};
 
   border-left: 4px solid
     ${({ $isDeleteZone, theme }) =>
     ($isDeleteZone ? theme.colors.red : theme.colors.signatureColor)};
-
-  border-radius: 5px;
-  padding: 0.8em 1em;
-  height: 6rem;
   will-change: transform, opacity;
   cursor: grab;
 
@@ -89,19 +91,24 @@ const PlayItemContainer = styled.li<{
 
 const ContentWrapper = styled.div`
   ${styleMixin.Flex('flex-start', 'center')}
-  flex: 1;
-  svg {
-    font-size: 3rem;
-    color: ${(props) => props.theme.colors.highlightLine};
-  }
+  overflow: hidden;
+  width: calc(100% - 3rem);
 `;
 
-const ItemText = styled.span`
-  padding-inline: 1rem;
-  flex: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const RemoveText = styled.span`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: ${(props) => props.theme.colors.red};
+  font-size: 2rem;
+  font-weight: 600;
+`;
+
+const IconWrapper = styled.div`
+  ${styleMixin.Flex()}
+  position: absolute;
+  right: 0;
+  font-size: 3rem;
+  color: ${(props) => props.theme.colors.highlightLine};
 `;

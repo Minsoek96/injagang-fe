@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 import { MainButton, MainInput } from '@/src/shared/ui';
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 interface AddTextInputProps {
   handleAddQuestion: (title: string) => void;
@@ -38,12 +38,12 @@ function CustomQuestionControls({
       <ButtonContainer>
         <MainButton
           label="추가"
-          sx={{ width: '6.5rem', font: '1rem' }}
+          sx={{ width: '6.5rem' }}
           onClick={handleAddText}
         />
         <MainButton
           label="비우기"
-          sx={{ width: '7rem', font: '1rem' }}
+          sx={{ width: '7rem' }}
           disabled={!playListLen}
           onClick={handleConfirmQuestion}
         />
@@ -58,14 +58,19 @@ const AddFormContainer = styled.form`
   ${styleMixin.Flex()};
   width: 100%;
   margin-top: 1rem;
-  button {
-    margin: auto 2px;
-  }
 `;
 
 const ButtonContainer = styled.div`
   ${styleMixin.Flex()};
   button {
     height: 4rem;
+    margin-left: 4px;
+  }
+
+  @media screen and (max-width: ${V.mediaMobile}){
+    button {
+      font-size: 1.5rem;
+      word-break: keep-all;
+    }
   }
 `;

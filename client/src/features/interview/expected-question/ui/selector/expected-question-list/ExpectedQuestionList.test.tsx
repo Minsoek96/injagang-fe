@@ -40,7 +40,7 @@ describe('ExpectedQuestionList', () => {
       const mockEmptyList = [0];
       renderComponent(mockEmptyList, true);
 
-      const searchText = '선택된 리스트가 존재하지 않습니다.';
+      const searchText = '질문이 존재하지 않습니다';
 
       expect(screen.getByText(new RegExp(searchText))).toBeInTheDocument();
     });

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-
 import { Container } from '@/src/shared/ui';
+
+import { S } from '@/src/entities/interview_question';
 
 import { CustomQuestionControls } from './custom-controls';
 import { PlayListContent } from './question-list';
@@ -15,7 +15,7 @@ function UserQuestionPlayList() {
     <Container.ArticleCard
       $size={{ height: '60rem', width: '100%', flex: 'Col' }}
     >
-      <Header>Play List</Header>
+      <S.Header>Play List</S.Header>
       <PlayListContent
         userPlayList={userPlayList}
         removeQuestion={removeQuestion}
@@ -30,9 +30,3 @@ function UserQuestionPlayList() {
 }
 
 export default UserQuestionPlayList;
-
-const Header = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-`;

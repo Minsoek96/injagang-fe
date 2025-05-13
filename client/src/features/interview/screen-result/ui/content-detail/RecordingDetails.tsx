@@ -136,7 +136,8 @@ const Content = styled.p`
 const ContentCard = styled.div`
   font-size: 1.8rem;
   line-height: 1.6;
-  word-break: keep-all;
+  word-break: break-all;
+  white-space: pre-line;
   color: ${(props) => props.theme.colors.text};
   padding: 1.2rem 1.5rem;
   border-radius: 0.8rem;

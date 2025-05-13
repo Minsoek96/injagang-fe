@@ -6,7 +6,6 @@ import { useIntvContentStore } from '@/src/entities/interview_question';
 
 import { ResizeableTextarea } from '@/src/shared/ui';
 import { useDebounce } from '@/src/shared/hooks';
-import { V } from '@/src/shared/styles';
 
 export default function ScriptTextArea() {
   const setCurScript = useIntvContentStore((state) => state.setCurScript);
@@ -43,10 +42,7 @@ const ScriptView = styled.div`
   position: absolute;
   transform: translate(-50%);
   left: 50%;
-  width: 50%;
+  width: 80%;
+  max-width: 70rem;
   bottom: 10%;
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    display: none;
-  }
 `;

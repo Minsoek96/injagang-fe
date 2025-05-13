@@ -3,12 +3,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { styleMixin } from '@/src/shared/styles';
 
-import dynamic from 'next/dynamic';
+import { DeviceSettings } from './device-setting';
 import { TermsAgreement } from './agreement';
-
-const DeviceSettings = dynamic(() => import('./device-setting/ui/DeviceSettings'), {
-  ssr: false,
-});
 
 export default function InterViewRecordSetting() {
   const [isTermsAccepted, setIsTermAccepted] = useState<boolean>(false);

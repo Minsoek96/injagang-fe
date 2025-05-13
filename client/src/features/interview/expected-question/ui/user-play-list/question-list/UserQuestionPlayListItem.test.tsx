@@ -4,14 +4,11 @@ import TestProvider from '@/fixutures/TestProvider';
 import PlayListItem from './PlayListItem';
 
 describe('UserQuestionPlayListItem', () => {
-  const mockHandleRemoveText = jest.fn();
-
   const renderComponent = () => {
     render(
       <TestProvider>
         <PlayListItem
           item="테스트 질문"
-          handleRemoveText={mockHandleRemoveText}
         />
       </TestProvider>,
     );

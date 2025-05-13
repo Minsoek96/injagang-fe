@@ -6,6 +6,7 @@ import {
   interviewQueries,
   useIntvPlaylistStore,
   interviewMutation,
+  S,
 } from '@/src/entities/interview_question';
 
 import { useCheckList, useModal } from '@/src/shared/hooks';
@@ -66,7 +67,7 @@ function ExpectedQuestionSelector() {
     <Container.ArticleCard
       $size={{ height: '60rem', width: '100%', flex: 'Col' }}
     >
-      <Header>Questions by Type</Header>
+      <S.Header>Questions by Type</S.Header>
       <ErrorBoundary
         renderFallback={(_, onReset) => (
           <ErrorFallback>
@@ -100,12 +101,6 @@ function ExpectedQuestionSelector() {
 }
 
 export default ExpectedQuestionSelector;
-
-const Header = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-`;
 
 const ErrorFallback = styled.div`
   ${styleMixin.Column()}

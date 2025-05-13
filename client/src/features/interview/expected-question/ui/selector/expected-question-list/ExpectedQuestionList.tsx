@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { styleMixin } from '@/src/shared/styles';
-import { interviewType } from '@/src/entities/interview_question';
+import { interviewType, S } from '@/src/entities/interview_question';
 
 import ExpectedQuestionItem from './ExpectedQuestionItem';
 
@@ -25,7 +25,10 @@ function ExpectedQuestionList({
   if (!questions.length) {
     return (
       <Container>
-        <EmptyText>선택된 리스트가 존재하지 않습니다.!!!</EmptyText>
+        <S.EmptyContainer>
+          <S.EmptyText>질문이 존재하지 않습니다.</S.EmptyText>
+          <S.EmptySubText>아직 여기는 백지 상태입니다. 당신의 질문으로 시작해 보세요!</S.EmptySubText>
+        </S.EmptyContainer>
       </Container>
     );
   }
@@ -51,16 +54,5 @@ const Container = styled.ul`
   ${styleMixin.ScrollBar}
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-`;
-
-const EmptyText = styled.p`
-  ${styleMixin.Column()}
-  height: 100%;
-  font-size: 1.8rem;
-  font-weight: 500;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
-  text-decoration-color: ${(props) => props.theme.colors.emptyGray};
+  overflow-y: auto;
 `;

@@ -17,10 +17,10 @@ export default function FeedbackResult({
 }: Props) {
   if (!rating || !strengths || !improvements) {
     return (
-      <p>
-        피드백 분석 기록이 없습니다. 첫 피드백을 요청하시려면 하단의 돋보기
-        아이콘을 눌러주세요.
-      </p>
+      <EmptyLabel>
+        피드백 분석 기록이 없습니다. 첫 피드백을 요청하시려면 하단의
+        돋보기아이콘을 눌러주세요.
+      </EmptyLabel>
     );
   }
   return (
@@ -36,6 +36,18 @@ export default function FeedbackResult({
     </FeedbackContainer>
   );
 }
+
+const EmptyLabel = styled.p`
+  font-size: 1.8rem;
+  font-weight: 400;
+  padding-inline: 0.5rem;
+  word-break: keep-all;
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    font-size: 1.4rem;
+    padding: 1rem 1.2rem;
+  }
+`;
 
 const FeedbackContainer = styled.div`
   display: flex;

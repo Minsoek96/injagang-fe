@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import styled from 'styled-components';
 
-import { V } from '@/src/shared/styles';
+import { S } from '@/src/entities/interview_question';
 
 type InterViewListItemProps = {
   question: string;
@@ -48,27 +48,14 @@ type StyleProps = {
   $checked: boolean;
 };
 
-const CheckedWrapper = styled.li<StyleProps>`
+const CheckedWrapper = styled(S.ListItem)<StyleProps>`
   background-color: ${(props) =>
     (props.$checked ? props.theme.colors.mainHover : 'none')};
   opacity: ${(props) => (props.$checked ? 0.5 : 1)};
-  font-size: 1.8rem;
-
-  border-radius: 0.5rem;
   border: 0.1rem solid ${(props) => props.theme.colors.mainLine};
-  border-left: 0.2em solid ${(props) => props.theme.colors.signatureColor};
+  border-left: 4px solid ${(props) => props.theme.colors.signatureColor};
 
-  display: flex;
-  align-items: center;
-  padding: 0.5em 1em;
-  gap: 0.5rem;
-  margin-bottom: 12px;
-  line-height: 1.4;
   cursor: pointer;
-
-  @media screen and (max-width: ${V.mediaMobile}) {
-    font-size: 1.4rem;
-  }
 `;
 
 const HiddenCheckbox = styled.input`
@@ -78,5 +65,7 @@ const HiddenCheckbox = styled.input`
 const StyledLabel = styled.label`
   cursor: pointer;
   flex: 1;
+  padding-inline: 1rem;
   user-select: none;
+  word-break: break-all;
 `;

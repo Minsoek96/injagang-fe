@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 import { MainButton } from '@/src/shared/ui/button';
 import { useAuthStore } from '@/src/entities/auth';
+import { V } from '@/src/shared/styles';
 
 interface ActionBtnProps {
   onRemove: () => void;
   onChecked: () => void;
   isAllChecked: boolean;
-  isChecked : boolean;
+  isChecked: boolean;
   onAdd: () => void;
 }
 
@@ -47,7 +48,7 @@ function ActionButtons({
           e.stopPropagation();
           onChecked();
         }}
-        sx={{ width: '100%', height: '4rem', marginRight: '.5rem' }}
+        sx={{ width: '100%', height: '4rem', marginRight: '.4rem' }}
       />
       <MainButton
         label={btnConfig[isAdmin].text}
@@ -64,4 +65,11 @@ export default ActionButtons;
 const ActionContainer = styled.div`
   display: flex;
   width: 100%;
+
+  @media screen and (max-width: ${V.mediaMobile}) {
+    button {
+      font-size: 1.5rem;
+      word-break: keep-all;
+    }
+  }
 `;

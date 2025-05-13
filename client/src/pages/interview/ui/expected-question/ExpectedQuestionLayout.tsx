@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { ExplanationContent } from '@/src/shared/ui';
-import { styleMixin } from '@/src/shared/styles';
+import { styleMixin, V } from '@/src/shared/styles';
 
 import {
   ExpectedQuestionSelector,
@@ -58,5 +58,9 @@ const SwitchContainer = styled.div`
 `;
 
 const GapDivider = styled.div`
-  width:2rem;
+  width: 2rem;
+
+  @media screen and (max-width : ${V.mediaMobile}){
+    width: 1rem;
+  }
 `;

@@ -9,15 +9,21 @@ import {
   useIntvPlaylistStore,
 } from '@/src/entities/interview_question';
 
-import { Container, RunningLoader, StepProgressBar } from '@/src/shared/ui';
+import {
+  Container, RunningLoader, Spinner, StepProgressBar,
+} from '@/src/shared/ui';
 import { V, styleMixin } from '@/src/shared/styles';
 import { useCounter } from '@/src/shared/hooks';
 
-import {
-  InterviewLobby,
-  ExpectedQuestionLayout,
-  InterviewSliderButtons,
-} from './ui';
+import { InterviewLobby, InterviewSliderButtons } from './ui';
+
+const ExpectedQuestionLayout = dynamic(
+  () => import('./ui/expected-question/ExpectedQuestionLayout'),
+  {
+    ssr: true,
+    loading: () => <Spinner message="UI를 생성 중입니다." />,
+  },
+);
 
 const InterviewRandomSetting = dynamic(
   () =>
@@ -25,7 +31,8 @@ const InterviewRandomSetting = dynamic(
       '@/src/features/interview/random-quetsion/ui/InterviewRandomSetting'
     ),
   {
-    ssr: false,
+    ssr: true,
+    loading: () => <Spinner message="UI를 생성 중입니다." />,
   },
 );
 
@@ -33,6 +40,7 @@ const InterviewRecordSetting = dynamic(
   () => import('@/src/features/interview/setting/ui/InterviewRecordSetting'),
   {
     ssr: false,
+    loading: () => <Spinner message="UI를 생성 중입니다." />,
   },
 );
 
@@ -52,12 +60,12 @@ const InterviewFlow = dynamic(
 const MemoizedExpectedQuestionLayout = memo(ExpectedQuestionLayout);
 
 type IntvSteps = {
-  render: React.ReactNode,
-  subTitle: string,
-  title: string,
-  rule: boolean | null,
-  id: string,
-}
+  render: React.ReactNode;
+  subTitle: string;
+  title: string;
+  rule: boolean | null;
+  id: string;
+};
 
 function Interview() {
   const userPlayList = useIntvPlaylistStore((state) => state.userPlayList);
@@ -72,43 +80,46 @@ function Interview() {
     counter: currentStep,
   } = useCounter({ minCounter: 0, maxCounter: 5 });
 
-  const interviewSteps:IntvSteps[] = useMemo(() => [
-    {
-      render: <InterviewLobby />,
-      subTitle: 'NextStage => (면접 설정)',
-      title: '면접 대기',
-      rule: null,
-      id: 'Step_01',
-    },
-    {
-      render: <MemoizedExpectedQuestionLayout />,
-      subTitle: 'Next Step...',
-      title: '면접 질문 선택',
-      rule: null,
-      id: 'Step_02',
-    },
-    {
-      render: <InterviewRandomSetting />,
-      subTitle: userPlayList.length ? 'Next Step...' : '질문 설정은 필수...',
-      title: '랜덤 질문 선택',
-      rule: !!userPlayList.length,
-      id: 'Step_03',
-    },
-    {
-      render: <InterviewRecordSetting />,
-      subTitle: 'Next Step ...',
-      title: '녹화 환경 설정',
-      rule: !!videoDevice && !!audioDevice,
-      id: 'Step_04',
-    },
-    {
-      render: <InterviewFlow />,
-      subTitle: '면접 준비 완료',
-      title: '영상 촬영',
-      rule: currentStep === 5,
-      id: 'Step_05',
-    },
-  ], [userPlayList.length, videoDevice, audioDevice, currentStep]);
+  const interviewSteps: IntvSteps[] = useMemo(
+    () => [
+      {
+        render: <InterviewLobby />,
+        subTitle: 'NextStage => (면접 설정)',
+        title: '면접 대기',
+        rule: null,
+        id: 'Step_01',
+      },
+      {
+        render: <MemoizedExpectedQuestionLayout />,
+        subTitle: 'Next Step...',
+        title: '면접 질문 선택',
+        rule: null,
+        id: 'Step_02',
+      },
+      {
+        render: <InterviewRandomSetting />,
+        subTitle: userPlayList.length ? 'Next Step...' : '질문 설정은 필수...',
+        title: '랜덤 질문 선택',
+        rule: !!userPlayList.length,
+        id: 'Step_03',
+      },
+      {
+        render: <InterviewRecordSetting />,
+        subTitle: 'Next Step ...',
+        title: '녹화 환경 설정',
+        rule: !!videoDevice && !!audioDevice,
+        id: 'Step_04',
+      },
+      {
+        render: <InterviewFlow />,
+        subTitle: '면접 준비 완료',
+        title: '영상 촬영',
+        rule: currentStep === 5,
+        id: 'Step_05',
+      },
+    ],
+    [userPlayList.length, videoDevice, audioDevice, currentStep],
+  );
 
   useEffect(
     () => () => {

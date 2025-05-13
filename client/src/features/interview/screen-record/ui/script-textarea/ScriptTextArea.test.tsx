@@ -25,6 +25,7 @@ describe('ScriptTextArea', () => {
   beforeEach(() => {
     (useIntvContentStore as unknown as jest.Mock).mockImplementation((selector) => selector({
       setCurScript: mockSetCurScript,
+      curScript: '',
     }));
   });
 
